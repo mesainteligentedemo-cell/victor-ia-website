@@ -1,0 +1,18 @@
+{
+  "source_video": "video-home-sitioweb_4K.mp4",
+  "source_codec": "hevc",
+  "source_resolution": [
+    2160,
+    3840
+  ],
+  "source_fps": 24.0,
+  "source_duration_s": 10.042,
+  "frame_count": 241,
+  "frame_format": "webp",
+  "frame_quality": 75,
+  "frame_width": 1280,
+  "effective_fps": 24.0,
+  "filename_pattern": "frame-{:04d}.webp",
+  "first_frame": "frame-0001.webp",
+  "last_frame": "frame-0241.webp"
+}

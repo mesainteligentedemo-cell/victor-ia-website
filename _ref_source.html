@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Influence IA · Awards 2027 · Intelligence, refined.</title>
+  <meta name="description" content="La inteligencia artificial que define la próxima era de los negocios en México y Latinoamérica. Influence IA Awards 2027.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #0E0F12;
+      --ink2: #1a1b1f;
+      --muted: rgba(14,15,18,0.45);
+      --rule: rgba(14,15,18,0.09);
+      --lime: #FFAA17;
+      --warm: #F8F7F5; /* warm off-white background */
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--warm);
+      color: var(--ink);
+      cursor: none;
+      overflow-x: hidden;
+    }
+
+    /* ── Marble: fixed, pans top→bottom on scroll ── */
+    .bg-marble {
+      position: fixed;
+      inset: 0;
+      background-image: url('./bg.png');
+      background-size: cover;
+      background-position: 50% 0%;
+      background-repeat: no-repeat;
+      z-index: 0;
+      /* Warm tint to match immersive-g palette */
+      filter: sepia(0.04) brightness(1.02);
+    }
+
+    /* ── Reveal overlay — canvas handles this on desktop ── */
+    /* On mobile: semi-transparent so marble shows through always */
+    .reveal-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      display: block;
+    }
+
+    /* ── Custom cursor ── */
+    .cursor {
+      position: fixed;
+      width: 5px;
+      height: 5px;
+      background: var(--ink);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+    }
+    .cursor-ring {
+      position: fixed;
+      width: 32px;
+      height: 32px;
+      border: 1px solid rgba(14,15,18,0.3);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: width 0.35s ease, height 0.35s ease;
+    }
+
+    /* ── Content ── */
+    .content {
+      position: relative;
+      z-index: 2;
+      animation: fadeUp 1.6s cubic-bezier(0.16,1,0.3,1) 0.1s both;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.8rem 3.5rem;
+    }
+    .nav-logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 0.82rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--lime); }
+    .nav-link {
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      opacity: 0.5;
+      transition: opacity 0.25s;
+      border-bottom: 1px solid transparent;
+    }
+    .nav-link:hover { opacity: 1; border-bottom-color: currentColor; }
+
+    /* ── Shared section styles ── */
+    .section {
+      padding: clamp(5rem, 12vh, 9rem) clamp(1.8rem, 5vw, 3.5rem);
+    }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.62rem;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+    .eyebrow::before {
+      content: '';
+      display: block;
+      width: 2rem;
+      height: 1px;
+      background: currentColor;
+    }
+
+    .display {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(2.8rem, 7vw, 7rem);
+      font-weight: 400;
+      line-height: 0.92;
+      letter-spacing: -0.025em;
+      color: var(--ink);
+    }
+    .display em { font-style: italic; }
+
+    .body-text {
+      font-size: clamp(0.9rem, 1.6vw, 1.1rem);
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--ink);
+      opacity: 0.62;
+      max-width: 52ch;
+    }
+    .body-text strong { font-weight: 500; opacity: 1; }
+
+    .rule { height: 1px; background: var(--rule); margin: 0 clamp(1.8rem, 5vw, 3.5rem); }
+
+    /* ── CTA button ── */
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--ink);
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      padding: 1.1rem 2.5rem;
+      transition: background 0.3s, color 0.3s, gap 0.25s;
+    }
+    .cta:hover { background: var(--lime); color: var(--ink); gap: 1.5rem; }
+
+    /* ── Hero ── */
+    .hero {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: clamp(2rem,5vh,4rem) clamp(1.8rem, 5vw, 3.5rem);
+      padding-top: 0;
+    }
+    .hero-inner {
+      max-width: 1000px;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+    .hero-headline {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(4rem, 10vw, 9.5rem);
+      font-weight: 400;
+      line-height: 0.88;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+    }
+    .hero-headline em { font-style: italic; }
+
+    /* ── Service grid ── */
+    .srv-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+    }
+    .srv-card {
+      padding: 2.2rem 1.8rem;
+      background: transparent;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      min-height: 200px;
+    }
+    .srv-card.wide { grid-column: span 2; }
+    .srv-num {
+      font-size: 0.58rem;
+      letter-spacing: 0.25em;
+      opacity: 0.25;
+      text-transform: uppercase;
+    }
+    .srv-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(1.1rem, 2vw, 1.45rem);
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -0.015em;
+    }
+    .srv-body {
+      font-size: 0.8rem;
+      line-height: 1.65;
+      opacity: 0.48;
+      font-weight: 300;
+      max-width: 28ch;
+      margin-top: auto;
+    }
+
+    /* ── Vertical list ── */
+    .vert-list { display: flex; flex-direction: column; gap: 0; }
+    .vert-item {
+      display: flex;
+      align-items: baseline;
+      gap: 3rem;
+      padding: 2.2rem 0;
+      border-bottom: 1px solid var(--rule);
+      text-decoration: none;
+      color: var(--ink);
+      transition: opacity 0.25s;
+    }
+    .vert-item:first-child { border-top: 1px solid var(--rule); }
+    .vert-item:hover { opacity: 0.5; }
+    .vert-num {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      opacity: 0.3;
+      min-width: 2.5rem;
+    }
+    .vert-label {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(1.5rem, 4vw, 3.2rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      flex: 1;
+    }
+    .vert-label em { font-style: italic; }
+    .vert-summary {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      opacity: 0.35;
+      text-transform: uppercase;
+      min-width: 200px;
+      text-align: right;
+    }
+
+    /* ── Process steps ── */
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+    }
+    .process-step {
+      padding: 2rem 1.6rem;
+      background: transparent;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    .step-num {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.4rem;
+      font-style: italic;
+      opacity: 0.2;
+    }
+    .step-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.3rem;
+      font-weight: 400;
+      letter-spacing: -0.015em;
+    }
+    .step-body {
+      font-size: 0.72rem;
+      line-height: 1.6;
+      opacity: 0.45;
+      font-weight: 300;
+      margin-top: auto;
+    }
+
+    /* ── Cap grid (4 cols) ── */
+    .cap-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+    }
+    .cap-card {
+      padding: 2rem 1.6rem;
+      background: transparent;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    .cap-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.3rem;
+      font-weight: 400;
+      letter-spacing: -0.015em;
+      line-height: 1.1;
+    }
+    .cap-body {
+      font-size: 0.72rem;
+      line-height: 1.65;
+      opacity: 0.45;
+      font-weight: 300;
+    }
+
+    /* ── Mode cards (3 cols) ── */
+    .mode-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+    }
+
+    /* ── Dashboard stats ── */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+    }
+    .stat-card {
+      padding: 2rem 1.6rem;
+      background: transparent;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .stat-label {
+      font-size: 0.58rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      opacity: 0.32;
+    }
+    .stat-value {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+    .stat-delta {
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.3;
+    }
+
+    /* ── Executive list ── */
+    .exec-list { display: flex; flex-direction: column; }
+    .exec-item {
+      display: flex;
+      gap: 2.5rem;
+      padding: 2.5rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .exec-item:first-child { border-top: 1px solid var(--rule); }
+    .exec-item-num {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: 1rem;
+      opacity: 0.2;
+      padding-top: 0.25rem;
+      min-width: 2rem;
+    }
+    .exec-item-body { display: flex; flex-direction: column; gap: 0.5rem; }
+    .exec-item-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+    }
+    .exec-item-desc {
+      font-size: 0.85rem;
+      line-height: 1.65;
+      opacity: 0.5;
+      font-weight: 300;
+      max-width: 52ch;
+    }
+
+    /* ── Tech items (2 cols) ── */
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+    }
+
+    /* ── Stack pills ── */
+    .stack-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 2rem;
+    }
+    .stack-pill {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      padding: 0.4rem 0.9rem;
+      border: 1px solid var(--rule);
+      opacity: 0.6;
+      text-transform: uppercase;
+    }
+    .stack-note {
+      font-size: 0.6rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      opacity: 0.3;
+      margin-top: 1.5rem;
+      max-width: 60ch;
+      line-height: 1.8;
+    }
+
+    /* ── Marcas ── */
+    .marcas-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+    }
+    .marca-card {
+      padding: 3.5rem 2.5rem;
+      background: transparent;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 3rem;
+      min-height: 280px;
+    }
+    .marca-tag { font-size: 0.6rem; letter-spacing: 0.28em; text-transform: uppercase; opacity: 0.38; }
+    .marca-name {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(2rem, 4.5vw, 4rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+    .marca-status {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--ink);
+      opacity: 0.4;
+    }
+    .marca-status .dot {
+      width: 5px; height: 5px; border-radius: 50%; background: currentColor;
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:0.3} 50%{opacity:1} }
+
+    /* ── Quote ── */
+    .quote-wrap {
+      padding: clamp(5rem,12vh,9rem) clamp(1.8rem,5vw,3.5rem);
+      text-align: center;
+    }
+    .quote-mark {
+      font-family: 'Instrument Serif', serif;
+      font-size: 4rem;
+      line-height: 1;
+      opacity: 0.07;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    .quote-text {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: clamp(1.5rem, 3.5vw, 2.6rem);
+      line-height: 1.45;
+      max-width: 700px;
+      margin: 0 auto 1.5rem;
+    }
+    .quote-attr { font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; opacity: 0.28; }
+
+    /* ── Footer ── */
+    footer {
+      padding: clamp(3rem,8vh,6rem) clamp(1.8rem,5vw,3.5rem) clamp(2rem,4vh,3rem);
+      border-top: 1px solid var(--rule);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto 4rem;
+    }
+    .footer-col { display: flex; flex-direction: column; gap: 0.8rem; }
+    .footer-label { font-size: 0.58rem; letter-spacing: 0.3em; text-transform: uppercase; opacity: 0.28; }
+    .footer-text { font-size: 0.88rem; line-height: 1.7; opacity: 0.65; }
+    .footer-text a { color: inherit; text-decoration: none; opacity: 0.9; border-bottom: 1px solid currentColor; }
+    .footer-text a:hover { opacity: 0.5; }
+    .footer-base {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 2rem;
+      border-top: 1px solid var(--rule);
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0.25;
+      max-width: 1200px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    /* ── Only letters — all structural lines/borders removed ── */
+    .rule { display: none; }
+    .srv-grid, .cap-grid, .process-grid, .stat-grid,
+    .mode-grid, .tech-grid, .marcas-grid {
+      background: transparent;
+      border: none;
+      gap: 2.5rem;
+    }
+    .vert-item, .vert-item:first-child,
+    .exec-item, .exec-item:first-child { border: none; }
+    footer { border-top: none; }
+    .footer-base { border-top: none; }
+    .stack-pill { border: none; }
+
+    /* ── Responsive ── */
+    @media (max-width: 960px) {
+      .srv-grid { grid-template-columns: repeat(2, 1fr); }
+      .srv-card.wide { grid-column: span 2; }
+      .cap-grid { grid-template-columns: repeat(2, 1fr); }
+      .process-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: repeat(2, 1fr); }
+      .vert-summary { display: none; }
+    }
+
+    @media (max-width: 640px) {
+      body { cursor: default; }
+      .cursor, .cursor-ring { display: none; }
+      nav { padding: 1.4rem 1.6rem; }
+      .section { padding: clamp(3.5rem,8vh,6rem) 1.6rem; }
+      .rule { margin: 0 1.6rem; }
+      .hero { padding: clamp(2rem,5vh,4rem) 1.6rem; }
+      .srv-grid, .cap-grid { grid-template-columns: 1fr; }
+      .srv-card.wide { grid-column: span 1; }
+      .process-grid { grid-template-columns: 1fr; }
+      .stat-grid { grid-template-columns: repeat(2, 1fr); }
+      .tech-grid { grid-template-columns: 1fr; }
+      .mode-grid { grid-template-columns: 1fr; }
+      .marcas-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .vert-item { flex-direction: column; gap: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Marble background — pans on scroll via JS -->
+  <div class="bg-marble" id="bgMarble"></div>
+
+  <!-- Canvas overlay — organic reveal effect -->
+  <canvas class="reveal-canvas" id="revealCanvas"></canvas>
+
+  <!-- Custom cursor (desktop only) -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <div class="content">
+
+    <!-- ── NAV ── -->
+    <nav>
+      <a href="https://victor-ia.com.mx" class="nav-logo">
+        Influence<span>&thinsp;—&thinsp;</span>IA
+      </a>
+      <a href="https://meetings.hubspot.com/pablo-solar" class="nav-link">Agenda una llamada</a>
+    </nav>
+
+    <!-- ── 01 · HERO ── -->
+    <section class="hero">
+      <div class="hero-inner">
+        <p class="eyebrow">Influence IA · Awards 2027 · México</p>
+        <h1 class="hero-headline">
+          Intelligence,<br><em>refined.</em>
+        </h1>
+        <p class="body-text">
+          La inteligencia artificial que define la próxima era de los negocios
+          en México y Latinoamérica.
+          <br><br>
+          <strong>Cinco disciplinas. Un studio. Una visión.</strong>
+        </p>
+        <div>
+          <a href="https://meetings.hubspot.com/pablo-solar" class="cta">
+            Agenda una conversación &nbsp;→
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="rule"></div>
+
+    <!-- ── 02 · CAPACIDADES ── -->
+    <section class="section">
+      <div class="section-inner">
+        <p class="eyebrow">02 / Capacidades · 08 demos diferentes</p>
+        <h2 class="display" style="margin-bottom:3rem;">
+          Cada capacidad<br><em>responde distinto.</em>
+        </h2>
+        <div class="srv-grid">
+          <div class="srv-card wide">
+            <span class="srv-num">/01</span>
+            <p class="srv-title">AI Agents que cierran ventas<br><em style="font-family:'Instrument Serif',serif;font-style:italic;">mientras duermes.</em></p>
+            <p class="srv-body">Agentes conversacionales con memoria persistente. Califican leads, agendan calls, integran HubSpot/Salesforce.</p>
+          </div>
+          <div class="srv-card">
+            <span class="srv-num">/02</span>
+            <p class="srv-title">Automation</p>
+            <p class="srv-body">Workflows backend custom, integraciones API, sincronización de tools.</p>
+          </div>
+          <div class="srv-card">
+            <span class="srv-num">/03</span>
+            <p class="srv-title">Immersive Web</p>
+            <p class="srv-body">WebGL, R3F, scroll-driven canvas, sound design integrado.</p>
+          </div>
+          <div class="srv-card wide">
+            <span class="srv-num">/04</span>
+            <p class="srv-title">AI Video · Higgsfield,<br>Seedance, custom shaders.</p>
+            <p class="srv-body">Videos cinematográficos generados con IA + post-procesamiento profesional.</p>
+          </div>
+          <div class="srv-card">
+            <span class="srv-num">/05</span>
+            <p class="srv-title">Custom Software</p>
+            <p class="srv-body">Apps, dashboards, internal tools.</p>
+          </div>
+          <div class="srv-card">
+            <span class="srv-num">/06</span>
+            <p class="srv-title">CRM Systems</p>
+            <p class="srv-body">HubSpot, Salesforce, Notion implementados full-stack.</p>
+          </div>
+          <div class="srv-card">
+            <span class="srv-num">/07</span>
+            <p class="srv-title">3D · Renders</p>
+            <p class="srv-body">Visualización de producto, motion graphics, R3F interactivos.</p>
+          </div>
+          <div class="srv-card">
+            <span class="srv-num">/08</span>
+            <p class="srv-title">Brand Training</p>
+            <p class="srv-body">Víctor-IA · capacitación corporativa hands-on en IA.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="rule"></div>
+
+    <!-- ── 03 · VERTICALES ── -->
+    <section class="section">
+      <div class="section-inner">
+        <p class="eyebrow">Cinco disciplinas · un studio</p>
+        <h2 class="display" style="margin-bottom:3rem;">
+          Un studio. <em>Cinco<br>maneras</em> de construir.
+        </h2>
+        <div class="vert-list">
+          <div class="vert-item">
+            <span class="vert-num">01</span>
+            <span class="vert-label">Intelligence<br><em>Architecture</em></span>
+            <span class="vert-summary">Sistemas antes que estructuras.</span>
+          </div>
+          <div class="vert-item">
+            <span class="vert-num">02</span>
+            <span class="vert-label">Cine &amp;<br><em>Commercials IA</em></span>
+            <span class="vert-summary">Personajes que existen. Mundos que lo aparentan.</span>
+          </div>
+          <div class="vert-item">
+            <span class="vert-num">03</span>
+            <span class="vert-label">Ecosistema<br><em>Víctor</em></span>
+            <span class="vert-summary">Capacitación que se mide. Analítica que se entiende.</span>
+          </div>
+          <div class="vert-item">
+            <span class="vert-num">04</span>
+            <span class="vert-label">Executive<br><em>Tech Setup</em></span>
+            <span class="vert-summary">Para quien ya no tiene tiempo.</span>
+          </div>
+          <div class="vert-item">
+            <span class="vert-num">05</span>
+            <span class="vert-label">Ingeniería &amp;<br><em>Automation</em></span>
+            <span class="vert-summary">Infraestructura para flujos de IA.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="rule"></div>
+
+    <!-- ── 04 · INTELLIGENCE ARCHITECTURE ── -->
+    <section class="section">
+      <div class="section-inner">
+        <p class="eyebrow">· 01 · Intelligence Architecture</p>
+        <h2 class="display" style="margin-bottom:1.5rem;">
+          Sistemas <em>antes</em><br>que estructuras.
+        </h2>
+        <p class="body-text" style="margin-bottom:3.5rem;">
+          Diseñamos la arquitectura digital que tu organización va a habitar.
+          Plano por plano. Sin inventos. Sin atajos.
+        </p>
+        <p class="eyebrow" style="margin-bottom:1.5rem;">Proceso · 05 fases</p>
+        <h3 class="display" style="font-size:clamp(1.5rem,3vw,2.2rem);margin-bottom:2rem;opacity:0.65;">
+          <em>Cada plano se traza dos veces.</em>
+        </h3>
+        <div class="process-grid">
+          <div class="process-step">
+            <span class="step-num">01</span>
+            <h4 class="step-title">Audit</h4>
+            <p class="step-body">Levantamos lo que ya existe. Sin asumir.</p>
+          </div>
+          <div class="process-step">
+            <span class="step-num">02</span>
+            <h4 class="step-title">Plano</h4>
+            <p class="step-body">Trazamos la arquitectura objetivo · ref0.</p>
+          </div>
+          <div class="process-step">
+            <span class="step-num">03</span>
+            <h4 class="step-title">Build</h4>
+            <p class="step-body">Construimos por capas · sin saltar pasos.</p>
+          </div>
+          <div class="process-step">
+            <span class="step-num">04</span>
+            <h4 class="step-title">Stress</h4>
+            <p class="step-body">Probamos al límite antes de declarar listo.</p>
+          </div>
+          <div class="process-step">
+            <span class="step-num">05</span>
+            <h4 class="step-title">Handoff</h4>
+            <p class="step-body">Te entregamos la documentación completa.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="rule"></div>
+
+    <!-- ── 05 · CINE & COMMERCIALS IA ── -->
+    <section class="section">
+      <div class="section-inner">
+        <p class="eyebrow">· 02 · Cine &amp; Commercials IA</p>
+        <h2 class="display" style="margin-bottom:1.5rem;">
+          Personajes que <em>existen.</em><br>
+          Mundos que lo <em>aparentan.</em>
+        </h2>
+        <p class="body-text" style="margin-bottom:3.5rem;">
+          Producción audiovisual cinematográfica con IA.
+          Solo SFX. Sin música genérica. Sin voces de stock. Sin blur.
+        </p>
+        <p class="eyebrow" style="margin-bottom:2rem;">El brazo creativo-visual.</p>
+        <div class="cap-grid">
+          <div class="cap-card">
+            <h4 class="cap-title">Personajes<br>consistentes</h4>
+            <p class="cap-body">Identity preserved frame por frame, escena por escena.</p>
+          </div>
+          <div class="cap-card">
+            <h4 class="cap-title">Mundos<br>hiperrealistas</h4>
+            <p class="cap-body">Locaciones que no existen · que parecen rodadas.</p>
+          </div>
+          <div class="cap-card">
+            <h4 class="cap-title">Grading<br>cinemático</h4>
+            <p class="cap-body">Color y atmósfera que pasa por cine, no por feed.</p>
+          </div>
+          <div class="cap-card">
+            <h4 class="cap-title">Solo<br>SFX</h4>
+            <p class="cap-body">Audio diseñado · cero música genérica · cero voces innecesarias.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="rule"></div>
+
+    <!-- ── 06 · ECOSISTEMA VÍCTOR ── -->
+    <section class="section">
+      <div class="section-inner">
+        <p class="eyebrow">· 03 · Ecosistema Víctor</p>
+        <h2 class="display" style="margin-bottom:1.5rem;">
+          Capacitación que se <em>mide.</em><br>
+          Analítica que se <em>entiende.</em>
+        </h2>
+        <p class="body-text" style="margin-bottom:3.5rem;">
+          Reportes semanales, seguimiento de empleados, y dashboards live.
+          El stack interno que gestiona el aprendizaje de tu organización.
+        </p>
+        <p class="eyebrow" style="margin-bottom:2rem;">Tres formas de aprender.</p>
+        <div class="mode-grid" style="margin-bottom:1px;">
+          <div class="cap-card">
+            <h4 class="cap-title"><em style="font-family:'Instrument Serif',serif;font-style:italic;">Live</em></h4>
+            <p class="cap-body">Sesiones en vivo · cohort de 8-12 personas · feedback inmediato.</p>
+          </div>
+          <div class="cap-card">
+            <h4 class="cap-title"><em style="font-family:'Instrument Serif',serif;font-style:italic;">Async</em></h4>
+            <p class="cap-body">Módulos auto-paced · al ritmo de cada quien · con check-ins semanales.</p>
+          </div>
+          <div class="cap-card">
+            <h4 class="cap-title"><em style="font-family:'Instrument Serif',serif;font-style:italic;">Custom</em></h4>
+            <p class="cap-body">Programa hecho a la medida · auditando los workflows reales del equipo.</p>
+          </div>
+        </div>
+        <p class="eyebrow" style="margin-top:3rem;margin-bottom:1rem;">Dashboard preview · datos demo</p>
+        <h3 class="display" style="font-size:clamp(1.3rem,2.5vw,2rem);margin-bottom:1.5rem;opacity:0.6;">
+          <em>Lo que ves cuando entras.</em>
+        </h3>
+        <div class="stat-grid">
+          <div class="stat-card">
+            <p class="stat-label">Empleados activos</p>
+            <p class="stat-value">248</p>
+            <p class="stat-delta">+12 vs sem ant</p>
+          </div>
+          <div class="stat-card">
+            <p class="stat-label">Módulos completados</p>
+            <p class="stat-value">1,420</p>
+            <p class="stat-delta">+184</p>
+          </div>
+          <div class="stat-card">
+            <p class="stat-label">Engagement promedio</p>
+            <p class="stat-value">87%</p>
+            <p class="stat-delta">+4 pts</p>
+          </div>
+          <div class="stat-card">
+            <p class="stat-label">NPS interno</p>
+            <p class="stat-value">+62</p>
+            <p class="stat-delta">estable</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="rule"></div>
+
+    <!-- ── 07 · EXECUTIVE TECH SETUP ── -->
+    <section class="section">
+      <div class="section-inner">
+        <p class="eyebrow">· 04 · Executive Tech Setup</p>
+        <h2 class="display" style="margin-bottom:1.5rem;">
+          Para quien ya<br><em>no</em> tiene tiempo.
+        </h2>
+        <p class="body-text" style="margin-bottom:1rem;">
+          Configuración personalizada de flujos de IA para directores y CEOs.
+          Acceso por aplicación. Onboarding privado. Discreción total.
+        </p>
+        <p class="body-text" style="margin-bottom:3.5rem;opacity:0.38;font-size:0.85rem;">
+          Trabajamos con un máximo de 12 ejecutivos por trimestre.
+          Respuesta en 48 horas si calzas con el cohort.
+        </p>
+        <p class="eyebrow" style="margin-bottom:1.5rem;">Lo que se diseña en privado.</p>
+        <div class="exec-list" style="max-width:760px;">
+          <div class="exec-item">
+            <span class="exec-item-num">01</span>
+            <div class="exec-item-body">
+              <h4 class="exec-item-title">Workflow personalization</h4>
+              <p class="exec-item-desc">Cada flujo de IA · cada agente · cada automatización · diseñado para cómo TÚ trabajas.</p>
+            </div>
+          </div>
+          <div class="exec-item">
+            <span class="exec-item-num">02</span>
+            <div class="exec-item-body">
+              <h4 class="exec-item-title">Private LLM</h4>
+              <p class="exec-item-desc">Modelos privados con tu data · sin que nada salga del dispositivo o del perímetro de tu empresa.</p>
+            </div>
+          </div>
+          <div class="exec-item">
+            <span class="exec-item-num">03</span>
+            <div class="exec-item-body">
+              <h4 class="exec-item-title">Executive briefings</h4>
+              <p class="exec-item-desc">Sesiones 1:1 · cada 2 semanas · audit del estado del setup + nuevas capacidades.</p>
+            </div>
+          </div>
+          <div class="exec-item">
+            <span class="exec-item-num">04</span>
+            <div class="exec-item-body">
+              <h4 class="exec-item-title">Private rituals</h4>
+              <p class="exec-item-desc">Setups de hardware · ergonomía · audio · ambiente · todo calibrado a tu rutina.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="rule"></div>
+
+    <!-- ── 08 · INGENIERÍA & AUTOMATION ── -->
+    <section class="section">
+      <div class="section-inner">
+        <p class="eyebrow">· 05 · Ingeniería &amp; Automation</p>
+        <h2 class="display" style="margin-bottom:1.5rem;">
+          No hacemos posts.<br><em>Construimos</em> la infraestructura.
+        </h2>
+        <p class="body-text" style="margin-bottom:3.5rem;">
+          Setups de equipos para flujos de IA · analítica de datos · prompt engineering · pauta digital.
+          La arquitectura técnica que escala lo que ya funciona.
+        </p>
+        <p class="eyebrow" style="margin-bottom:2rem;">Lo que sabemos hacer.</p>
+        <div class="tech-grid" style="margin-bottom:2.5rem;">
+          <div class="cap-card">
+            <h4 class="cap-title">IA flows</h4>
+            <p class="cap-body">Agentes · automation pipelines · n8n · HubSpot integrations · custom edge functions.</p>
+          </div>
+          <div class="cap-card">
+            <h4 class="cap-title">Data analytics</h4>
+            <p class="cap-body">Supabase · pipelines de eventos · dashboards · cohort analysis · attribution.</p>
+          </div>
+          <div class="cap-card">
+            <h4 class="cap-title">Prompt engineering</h4>
+            <p class="cap-body">Sistemas de prompts versionados · tests reproducibles · evals con datasets.</p>
+          </div>
+          <div class="cap-card">
+            <h4 class="cap-title">Pauta digital</h4>
+            <p class="cap-body">Setups de Meta · Google Ads · LinkedIn · medición pixel-perfect · attribution multi-touch.</p>
+          </div>
+        </div>
+        <p class="eyebrow" style="margin-bottom:1rem;">Stack · transparente</p>
+        <div class="stack-list">
+          <span class="stack-pill">n8n</span>
+          <span class="stack-pill">HubSpot</span>
+          <span class="stack-pill">Supabase</span>
+          <span class="stack-pill">OpenAI</span>
+          <span class="stack-pill">Anthropic</span>
+          <span class="stack-pill">Higgsfield</span>
+          <span class="stack-pill">Vercel</span>
+          <span class="stack-pill">Cloudflare</span>
+          <span class="stack-pill">Stripe</span>
+          <span class="stack-pill">Twilio</span>
+        </div>
+        <p class="stack-note">
+          · No ofrecemos administración de redes sociales ·
+          nos enfocamos en la arquitectura de la conversión ·
+        </p>
+      </div>
+    </section>
+
+    <div class="rule"></div>
+
+    <!-- ── 09 · MARCAS ── -->
+    <section class="section">
+      <div class="section-inner">
+        <p class="eyebrow">03 / Portfolio · 02 marcas</p>
+        <h2 class="display" style="margin-bottom:3rem;">
+          Pasa el cursor<br>para <em>revelar.</em>
+        </h2>
+        <div class="marcas-grid">
+          <div class="marca-card">
+            <div>
+              <p class="marca-tag">Brand training · Live</p>
+              <p class="marca-name">Influence IA</p>
+            </div>
+            <a href="https://victor-ia.com.mx" target="_blank" rel="noopener" class="marca-status">
+              <span class="dot"></span>
+              victor-ia.com.mx &nbsp;↗
+            </a>
+          </div>
+          <div class="marca-card">
+            <div>
+              <p class="marca-tag">Digital architecture · Q3 2026</p>
+              <p class="marca-name">Intelligence<br>Architecture</p>
+            </div>
+            <span class="marca-status">
+              <span class="dot" style="opacity:0.4;"></span>
+              Coming Q3 2026
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── QUOTE ── -->
+    <div class="quote-wrap">
+      <span class="quote-mark">"</span>
+      <p class="quote-text">
+        La inteligencia no es lo que sabes.<br>
+        Es lo que haces cuando no sabes qué hacer.
+      </p>
+      <p class="quote-attr">Víctor-IA · victor-ia.com.mx</p>
+    </div>
+
+    <!-- ── FOOTER ── -->
+    <footer>
+      <div class="footer-grid">
+        <div class="footer-col">
+          <span class="footer-label">Studio</span>
+          <span class="footer-text">
+            Playa del Carmen<br>Quintana Roo · México
+          </span>
+        </div>
+        <div class="footer-col">
+          <span class="footer-label">Clientes</span>
+          <span class="footer-text">
+            CDMX · MTY · GDL<br>Miami · Madrid · NYC
+          </span>
+        </div>
+        <div class="footer-col">
+          <span class="footer-label">Marcas</span>
+          <span class="footer-text">
+            <a href="https://victor-ia.com.mx" target="_blank" rel="noopener">Influence IA ↗</a><br>
+            Intelligence Arch. · soon
+          </span>
+        </div>
+        <div class="footer-col">
+          <span class="footer-label">Contacto</span>
+          <span class="footer-text">
+            <a href="mailto:hello@victor-ia.com.mx">hello@victor-ia.com.mx</a><br>
+            <a href="https://wa.me/5219842353159" target="_blank" rel="noopener">WhatsApp ↗</a>
+          </span>
+        </div>
+      </div>
+      <div class="footer-base">
+        <span>Made with · Higgsfield Cinema · WebGL · n8n · Anthropic · GSAP · Lenis</span>
+        <span>© 2026 VÍCTOR-IA · v3 INTERACTIVE</span>
+      </div>
+    </footer>
+
+  </div><!-- /content -->
+
+  <script>
+    /* ── Scroll → marble pans top-to-bottom ── */
+    const bgMarble = document.getElementById('bgMarble');
+    function updateMarbleScroll() {
+      const progress = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      bgMarble.style.backgroundPositionY = (progress * 100) + '%';
+    }
+    window.addEventListener('scroll', updateMarbleScroll, { passive: true });
+    updateMarbleScroll();
+
+    /* ── Canvas reveal ── */
+    const canvas = document.getElementById('revealCanvas');
+    const ctx    = canvas.getContext('2d');
+    const WARM   = '248, 247, 245';
+    const isMobile = !window.matchMedia('(hover: hover)').matches;
+
+    /* ── MOBILE: water-trail reveal ── */
+    /* The finger opens a path through the white. The path glows for 1 s,
+       then dissolves gracefully over 1.1 s. Non-uniform, organic, luxury.  */
+    if (isMobile) {
+      canvas.width  = window.innerWidth;
+      canvas.height = window.innerHeight;
+      window.addEventListener('resize', () => {
+        canvas.width  = window.innerWidth;
+        canvas.height = window.innerHeight;
+      });
+
+      const lerp = (a, b, t) => a + (b - a) * t;
+
+      /* ── Tuning ──────────────────────────────────────────────────────── */
+      const BASE_R     = 20;   /* base core radius — 2× finger contact feel   */
+      const STEP_PX    = 6;    /* spacing between trail stamps (px)            */
+      const HOLD_MS    = 1000; /* max hold when moving slowly                  */
+      const FADE_MS    = 1100; /* fade-out duration after hold expires          */
+      const MAX_V      = 1.8;  /* px/ms — at this speed hold collapses to 0    */
+      const MAX_PTS    = 900;  /* safety cap                                   */
+      /* ─────────────────────────────────────────────────────────────────── */
+
+      /* Each stamp: { x, y, t, r, hold }
+         hold varies per-stamp based on swipe velocity                        */
+      let trail = [];
+      let isTouching  = false;
+      let lastStampX  = null, lastStampY = null;
+      let lastStampT  = null;
+      let velocity    = 0;     /* smoothed px/ms                              */
+
+      /* Live finger position — lerp'd for smooth spring feel */
+      let tx = window.innerWidth * 0.5, ty = window.innerHeight * 0.5;
+      let fx = tx, fy = ty;
+      let liveA = 0;
+
+      function stamp(x, y, hold) {
+        const r  = BASE_R * (0.74 + Math.random() * 0.54);
+        const jx = (Math.random() - 0.5) * 5;
+        const jy = (Math.random() - 0.5) * 5;
+        trail.push({ x: x + jx, y: y + jy, t: performance.now(), r, hold });
+        if (trail.length > MAX_PTS) trail.splice(0, trail.length - MAX_PTS);
+      }
+
+      /* Erase a soft organic spot — solid core + feathered halo */
+      function eraseSpot(x, y, r, a) {
+        const halo = r * 2.1; /* halo always 2× core, gives the "water width" */
+
+        /* Solid core */
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(0,0,0,${a})`;
+        ctx.fill();
+
+        /* Feathered edge — no sharp ring, purely organic */
+        const g = ctx.createRadialGradient(x, y, r, x, y, halo);
+        g.addColorStop(0,    `rgba(0,0,0,${a * 0.88})`);
+        g.addColorStop(0.38, `rgba(0,0,0,${a * 0.50})`);
+        g.addColorStop(0.72, `rgba(0,0,0,${a * 0.13})`);
+        g.addColorStop(1,    'rgba(0,0,0,0)');
+        ctx.beginPath();
+        ctx.arc(x, y, halo, 0, Math.PI * 2);
+        ctx.fillStyle = g;
+        ctx.fill();
+      }
+
+      function drawMobile() {
+        const now = performance.now();
+        const maxAge = HOLD_MS + FADE_MS;
+
+        /* Prune expired stamps */
+        while (trail.length && now - trail[0].t >= maxAge) trail.shift();
+
+        /* Spring-track the live finger */
+        fx = lerp(fx, tx, isTouching ? 0.20 : 0.08);
+        fy = lerp(fy, ty, isTouching ? 0.20 : 0.08);
+        liveA = lerp(liveA, isTouching ? 1 : 0, isTouching ? 0.18 : 0.05);
+
+        /* Render */
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = `rgba(${WARM}, 1)`;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.globalCompositeOperation = 'destination-out';
+
+        /* Trail — each stamp uses its own hold time (velocity-dependent) */
+        for (const p of trail) {
+          const age = now - p.t;
+          const a   = age < p.hold
+            ? 1.0
+            : 1.0 - (age - p.hold) / FADE_MS;
+          if (a > 0.005) eraseSpot(p.x, p.y, p.r, a);
+        }
+
+        /* Live finger dot — always on top while touching */
+        if (liveA > 0.005) eraseSpot(fx, fy, BASE_R, liveA);
+
+        ctx.globalCompositeOperation = 'source-over';
+
+        requestAnimationFrame(drawMobile);
+      }
+      drawMobile();
+
+      document.addEventListener('touchstart', e => {
+        isTouching = true;
+        const t = e.touches[0];
+        tx = t.clientX; ty = t.clientY;
+        fx = tx; fy = ty;
+        lastStampX = tx; lastStampY = ty;
+        lastStampT = performance.now();
+        velocity = 0;
+        stamp(tx, ty, HOLD_MS);
+      }, { passive: true });
+
+      document.addEventListener('touchmove', e => {
+        const t   = e.touches[0];
+        const nx  = t.clientX, ny = t.clientY;
+        tx = nx; ty = ny;
+
+        const dist = Math.hypot(nx - lastStampX, ny - lastStampY);
+        if (dist >= STEP_PX) {
+          const now  = performance.now();
+          const dt   = Math.max(now - lastStampT, 1);
+          /* Smooth velocity — slow swipe keeps full hold, fast swipe kills it */
+          velocity = lerp(velocity, dist / dt, 0.35);
+          const hold = Math.max(0, HOLD_MS * (1 - Math.min(1, velocity / MAX_V)));
+
+          const steps = Math.ceil(dist / STEP_PX);
+          for (let i = 1; i <= steps; i++) {
+            const f = i / steps;
+            stamp(lastStampX + (nx - lastStampX) * f,
+                  lastStampY + (ny - lastStampY) * f,
+                  hold);
+          }
+          lastStampX = nx; lastStampY = ny;
+          lastStampT = now;
+        }
+      }, { passive: true });
+
+      document.addEventListener('touchend',    () => { isTouching = false; lastStampX = lastStampY = lastStampT = null; velocity = 0; }, { passive: true });
+      document.addEventListener('touchcancel', () => { isTouching = false; lastStampX = lastStampY = lastStampT = null; velocity = 0; }, { passive: true });
+
+    /* ── DESKTOP: same water-trail logic as mobile, driven by mousemove ── */
+    } else {
+      canvas.width  = window.innerWidth;
+      canvas.height = window.innerHeight;
+      window.addEventListener('resize', () => {
+        canvas.width  = window.innerWidth;
+        canvas.height = window.innerHeight;
+      });
+
+      const lerp = (a, b, t) => a + (b - a) * t;
+
+      /* Same tuning as mobile — subtle, water-like */
+      const D_BASE_R  = 18;
+      const D_STEP    = 6;
+      const D_HOLD    = 900;
+      const D_FADE    = 1000;
+      const D_MAX_V   = 2.2;   /* px/ms — fast mouse = instant close */
+      const D_MAX_PTS = 900;
+
+      let dTrail      = [];
+      let isMoving    = false;
+      let moveTimeout = null;
+      let dLastX = null, dLastY = null, dLastT = null;
+      let dVel   = 0;
+      let dlx = window.innerWidth * 0.5, dly = window.innerHeight * 0.5;
+      let dmx = dlx, dmy = dly;
+      let dLiveA = 0;
+
+      function dStamp(x, y, hold) {
+        const r  = D_BASE_R * (0.74 + Math.random() * 0.54);
+        const jx = (Math.random() - 0.5) * 4;
+        const jy = (Math.random() - 0.5) * 4;
+        dTrail.push({ x: x + jx, y: y + jy, t: performance.now(), r, hold });
+        if (dTrail.length > D_MAX_PTS) dTrail.splice(0, dTrail.length - D_MAX_PTS);
+      }
+
+      function dEraseSpot(x, y, r, a) {
+        const halo = r * 2.1;
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(0,0,0,${a})`;
+        ctx.fill();
+        const g = ctx.createRadialGradient(x, y, r, x, y, halo);
+        g.addColorStop(0,    `rgba(0,0,0,${a * 0.88})`);
+        g.addColorStop(0.38, `rgba(0,0,0,${a * 0.50})`);
+        g.addColorStop(0.72, `rgba(0,0,0,${a * 0.13})`);
+        g.addColorStop(1,    'rgba(0,0,0,0)');
+        ctx.beginPath();
+        ctx.arc(x, y, halo, 0, Math.PI * 2);
+        ctx.fillStyle = g;
+        ctx.fill();
+      }
+
+      function drawDesktop() {
+        const now    = performance.now();
+        const maxAge = D_HOLD + D_FADE;
+        while (dTrail.length && now - dTrail[0].t >= maxAge) dTrail.shift();
+
+        dlx  = lerp(dlx, dmx, isMoving ? 0.22 : 0.08);
+        dly  = lerp(dly, dmy, isMoving ? 0.22 : 0.08);
+        dLiveA = lerp(dLiveA, isMoving ? 1 : 0, isMoving ? 0.18 : 0.05);
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = `rgba(${WARM}, 1)`;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.globalCompositeOperation = 'destination-out';
+        for (const p of dTrail) {
+          const age = now - p.t;
+          const a   = age < p.hold ? 1.0 : 1.0 - (age - p.hold) / D_FADE;
+          if (a > 0.005) dEraseSpot(p.x, p.y, p.r, a);
+        }
+        if (dLiveA > 0.005) dEraseSpot(dlx, dly, D_BASE_R, dLiveA);
+        ctx.globalCompositeOperation = 'source-over';
+
+        requestAnimationFrame(drawDesktop);
+      }
+      drawDesktop();
+
+      document.addEventListener('mousemove', e => {
+        const nx = e.clientX, ny = e.clientY;
+        isMoving = true;
+        clearTimeout(moveTimeout);
+        moveTimeout = setTimeout(() => { isMoving = false; }, 120);
+
+        dmx = nx; dmy = ny;
+        document.getElementById('cursor').style.cssText     = `left:${nx}px;top:${ny}px`;
+        document.getElementById('cursorRing').style.cssText = `left:${nx}px;top:${ny}px`;
+
+        if (dLastX === null) { dLastX = nx; dLastY = ny; dLastT = performance.now(); return; }
+
+        const dist = Math.hypot(nx - dLastX, ny - dLastY);
+        if (dist >= D_STEP) {
+          const now = performance.now();
+          const dt  = Math.max(now - dLastT, 1);
+          dVel = lerp(dVel, dist / dt, 0.35);
+          const hold = Math.max(0, D_HOLD * (1 - Math.min(1, dVel / D_MAX_V)));
+          const steps = Math.ceil(dist / D_STEP);
+          for (let i = 1; i <= steps; i++) {
+            const f = i / steps;
+            dStamp(dLastX + (nx - dLastX) * f, dLastY + (ny - dLastY) * f, hold);
+          }
+          dLastX = nx; dLastY = ny; dLastT = now;
+        }
+      });
+
+      const ring = document.getElementById('cursorRing');
+      document.querySelectorAll('a, button').forEach(el => {
+        el.addEventListener('mouseenter', () => { ring.style.width = ring.style.height = '52px'; });
+        el.addEventListener('mouseleave', () => { ring.style.width = ring.style.height = '32px'; });
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,1630 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VICTOR IA — Inteligencia que trabaja para ti</title>
+  <meta name="description" content="Agencia de inteligencia artificial. Agentes autónomos, sitios cinematográficos, automatización y video con IA.">
+  <meta name="theme-color" content="#F8F7F5">
+  <meta property="og:title" content="VICTOR IA — Inteligencia que trabaja para ti">
+  <meta property="og:description" content="Agencia de inteligencia artificial. Agentes autónomos, sitios cinematográficos, automatización y video con IA.">
+  <meta property="og:url" content="https://victor-ia-website.vercel.app">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:   #0E0F12;
+      --ink2:  #1a1b1f;
+      --muted: rgba(14,15,18,0.45);
+      --rule:  rgba(14,15,18,0.09);
+      --amber: #FFAA17;
+      --warm:  #F8F7F5;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--warm);
+      color: var(--ink);
+      cursor: none;
+      overflow-x: hidden;
+    }
+
+    .bg-marble {
+      position: fixed; inset: 0;
+      background-image: url('assets/bg-light.jpg');
+      background-size: cover;
+      background-position: 50% 0%;
+      background-repeat: no-repeat;
+      z-index: 0;
+      filter: sepia(0.04) brightness(1.02);
+    }
+
+    .reveal-canvas {
+      position: fixed; inset: 0;
+      z-index: 1; pointer-events: none;
+    }
+
+    .cursor {
+      position: fixed; width: 5px; height: 5px;
+      background: var(--ink); border-radius: 50%;
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%,-50%);
+    }
+    .cursor-ring {
+      position: fixed; width: 32px; height: 32px;
+      border: 1px solid rgba(14,15,18,0.3); border-radius: 50%;
+      pointer-events: none; z-index: 9998;
+      transform: translate(-50%,-50%);
+      transition: width 0.35s ease, height 0.35s ease;
+    }
+
+    .content {
+      position: relative; z-index: 2;
+      animation: fadeUp 1.6s cubic-bezier(0.16,1,0.3,1) 0.1s both;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed; inset: 0 0 auto 0; z-index: 50;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.8rem 3.5rem;
+    }
+    .nav-logo {
+      font-family: 'Space Grotesk', sans-serif; font-weight: 600;
+      font-size: 0.82rem; letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--ink); text-decoration: none;
+    }
+    .nav-logo span { color: var(--amber); }
+    .nav-right { display: flex; align-items: center; gap: 2.5rem; }
+    .nav-link {
+      font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--ink); text-decoration: none; opacity: 0.5;
+      transition: opacity 0.25s; border-bottom: 1px solid transparent;
+      background: none; border-top: none; border-left: none; border-right: none;
+      font-family: inherit; cursor: none; padding: 0;
+    }
+    .nav-link:hover { opacity: 1; border-bottom-color: currentColor; }
+
+    /* ── Services panel ── */
+    #svc-panel {
+      position: fixed; inset: 0; z-index: 48;
+      background: var(--warm); opacity: 0;
+      pointer-events: none; transition: opacity 0.35s ease;
+      overflow-y: auto;
+    }
+    #svc-panel.open { opacity: 1; pointer-events: auto; }
+    .svc-panel-inner {
+      max-width: 900px; margin: 0 auto;
+      padding: clamp(6rem,14vh,10rem) clamp(1.8rem,5vw,3.5rem) 4rem;
+    }
+    .svc-panel-eyebrow {
+      font-size: 0.6rem; letter-spacing: 0.38em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 1.5rem; display: flex; gap: 1rem; align-items: center;
+    }
+    .svc-panel-eyebrow::before { content:''; display:block; width:2rem; height:1px; background:currentColor; }
+    .svc-panel-title {
+      font-family: 'Instrument Serif', serif; font-size: clamp(2rem,5vw,4rem);
+      font-weight: 400; letter-spacing: -0.02em; margin-bottom: 3rem; line-height: 1;
+    }
+    .svc-panel-title em { font-style: italic; }
+    .svc-panel-grid {
+      display: grid; grid-template-columns: repeat(2,1fr); gap: 0;
+    }
+    .svc-panel-item {
+      display: flex; align-items: baseline; gap: 1.2rem;
+      padding: 1.4rem 0; border-bottom: 1px solid var(--rule);
+      text-decoration: none; color: var(--ink);
+      transition: opacity 0.2s;
+    }
+    .svc-panel-item:nth-child(odd) { padding-right: 2rem; }
+    .svc-panel-item:nth-child(even) { padding-left: 2rem; border-left: 1px solid var(--rule); }
+    .svc-panel-item:hover { opacity: 0.5; }
+    .svc-panel-n { font-size: 0.58rem; letter-spacing: 0.2em; opacity: 0.3; min-width: 1.8rem; }
+    .svc-panel-name { font-family: 'Instrument Serif', serif; font-size: 1.05rem; line-height: 1.2; }
+    .svc-panel-close {
+      position: absolute; top: 1.8rem; right: 3.5rem;
+      font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
+      background: none; border: none; cursor: none; font-family: inherit;
+      color: var(--ink); opacity: 0.5; transition: opacity 0.2s;
+    }
+    .svc-panel-close:hover { opacity: 1; }
+
+    /* ── Shared sections ── */
+    .section { padding: clamp(5rem,12vh,9rem) clamp(1.8rem,5vw,3.5rem); }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+
+    .eyebrow {
+      display: flex; align-items: center; gap: 1rem;
+      font-size: 0.62rem; letter-spacing: 0.38em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 2rem;
+    }
+    .eyebrow::before { content:''; display:block; width:2rem; height:1px; background:currentColor; }
+
+    .display {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(2.8rem,7vw,7rem); font-weight: 400;
+      line-height: 0.92; letter-spacing: -0.025em; color: var(--ink);
+    }
+    .display em { font-style: italic; }
+
+    .body-text {
+      font-size: clamp(0.9rem,1.6vw,1.1rem); font-weight: 300;
+      line-height: 1.8; color: var(--ink); opacity: 0.62; max-width: 52ch;
+    }
+    .body-text strong { font-weight: 500; opacity: 1; }
+
+    .cta {
+      display: inline-flex; align-items: center; gap: 1rem;
+      background: var(--ink); color: #fff; text-decoration: none;
+      font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase;
+      padding: 1.1rem 2.5rem; transition: background 0.3s, color 0.3s, gap 0.25s;
+    }
+    .cta:hover { background: var(--amber); color: var(--ink); gap: 1.5rem; }
+
+    /* ── Hero ── */
+    .hero {
+      min-height: 100svh; display: flex; flex-direction: column;
+      justify-content: flex-end;
+      padding: clamp(2rem,5vh,4rem) clamp(1.8rem,5vw,3.5rem); padding-top: 0;
+    }
+    .hero-inner { max-width: 1000px; display: flex; flex-direction: column; gap: 2.5rem; }
+    .hero-headline {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(4rem,10vw,9.5rem); font-weight: 400;
+      line-height: 0.88; letter-spacing: -0.03em; color: var(--ink);
+    }
+    .hero-headline em { font-style: italic; }
+
+    /* ── Grids ── */
+    .srv-grid  { display: grid; grid-template-columns: repeat(4,1fr); gap: 2.5rem; }
+    .cap-grid  { display: grid; grid-template-columns: repeat(4,1fr); gap: 2.5rem; }
+    .mode-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2.5rem; }
+    .stat-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2.5rem; }
+    .tech-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 2.5rem; }
+    .process-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 2.5rem; }
+    .marcas-grid  { display: grid; grid-template-columns: repeat(2,1fr); gap: 2.5rem; }
+
+    .srv-card { display: flex; flex-direction: column; gap: 1rem; min-height: 200px; }
+    .srv-card.wide { grid-column: span 2; }
+    .srv-num { font-size: 0.58rem; letter-spacing: 0.25em; opacity: 0.25; text-transform: uppercase; }
+    .srv-title {
+      font-family: 'Instrument Serif', serif; font-size: clamp(1.1rem,2vw,1.45rem);
+      font-weight: 400; line-height: 1.15; letter-spacing: -0.015em;
+    }
+    .srv-body { font-size: 0.8rem; line-height: 1.65; opacity: 0.48; font-weight: 300; max-width: 28ch; margin-top: auto; }
+
+    .vert-list { display: flex; flex-direction: column; gap: 0; }
+    .vert-item {
+      display: flex; align-items: baseline; gap: 3rem;
+      padding: 2.2rem 0; border-bottom: 1px solid var(--rule);
+      text-decoration: none; color: var(--ink); transition: opacity 0.25s;
+    }
+    .vert-item:first-child { border-top: 1px solid var(--rule); }
+    .vert-item:hover { opacity: 0.5; }
+    .vert-num { font-size: 0.6rem; letter-spacing: 0.2em; opacity: 0.3; min-width: 2.5rem; }
+    .vert-label {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(1.5rem,4vw,3.2rem); font-weight: 400;
+      letter-spacing: -0.02em; line-height: 1; flex: 1;
+    }
+    .vert-label em { font-style: italic; }
+    .vert-summary { font-size: 0.75rem; letter-spacing: 0.12em; opacity: 0.35; text-transform: uppercase; min-width: 200px; text-align: right; }
+
+    .process-step { display: flex; flex-direction: column; gap: 0.8rem; }
+    .step-num { font-family: 'Instrument Serif', serif; font-size: 1.4rem; font-style: italic; opacity: 0.2; }
+    .step-title { font-family: 'Instrument Serif', serif; font-size: 1.3rem; font-weight: 400; letter-spacing: -0.015em; }
+    .step-body { font-size: 0.72rem; line-height: 1.6; opacity: 0.45; font-weight: 300; margin-top: auto; }
+
+    .cap-card { display: flex; flex-direction: column; gap: 0.8rem; }
+    .cap-title { font-family: 'Instrument Serif', serif; font-size: 1.3rem; font-weight: 400; letter-spacing: -0.015em; line-height: 1.1; }
+    .cap-body { font-size: 0.72rem; line-height: 1.65; opacity: 0.45; font-weight: 300; }
+
+    .stat-card { display: flex; flex-direction: column; gap: 0.5rem; }
+    .stat-label { font-size: 0.58rem; letter-spacing: 0.25em; text-transform: uppercase; opacity: 0.32; }
+    .stat-value { font-family: 'Instrument Serif', serif; font-size: clamp(2rem,4vw,3.2rem); font-weight: 400; letter-spacing: -0.02em; line-height: 1; }
+    .stat-delta { font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.3; }
+
+    .exec-list { display: flex; flex-direction: column; }
+    .exec-item { display: flex; gap: 2.5rem; padding: 2.5rem 0; border-bottom: 1px solid var(--rule); }
+    .exec-item:first-child { border-top: 1px solid var(--rule); }
+    .exec-item-num { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 1rem; opacity: 0.2; padding-top: 0.25rem; min-width: 2rem; }
+    .exec-item-body { display: flex; flex-direction: column; gap: 0.5rem; }
+    .exec-item-title { font-family: 'Instrument Serif', serif; font-size: clamp(1.2rem,2.5vw,1.7rem); font-weight: 400; letter-spacing: -0.02em; line-height: 1.05; }
+    .exec-item-desc { font-size: 0.85rem; line-height: 1.65; opacity: 0.5; font-weight: 300; max-width: 52ch; }
+
+    .stack-list { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 2rem; }
+    .stack-pill { font-size: 0.7rem; letter-spacing: 0.12em; padding: 0.4rem 0.9rem; opacity: 0.6; text-transform: uppercase; }
+    .stack-note { font-size: 0.6rem; letter-spacing: 0.28em; text-transform: uppercase; opacity: 0.3; margin-top: 1.5rem; max-width: 60ch; line-height: 1.8; }
+
+    .marca-card {
+      display: flex; flex-direction: column; justify-content: space-between;
+      gap: 3rem; min-height: 280px; padding: 3.5rem 2.5rem;
+    }
+    .marca-tag { font-size: 0.6rem; letter-spacing: 0.28em; text-transform: uppercase; opacity: 0.38; }
+    .marca-name { font-family: 'Instrument Serif', serif; font-size: clamp(2rem,4.5vw,4rem); font-weight: 400; letter-spacing: -0.02em; line-height: 1; }
+    .marca-status { display: flex; align-items: center; gap: 0.6rem; font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; text-decoration: none; color: var(--ink); opacity: 0.4; }
+    .marca-status .dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; animation: pulse 2.5s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:0.3} 50%{opacity:1} }
+
+    .quote-wrap { padding: clamp(5rem,12vh,9rem) clamp(1.8rem,5vw,3.5rem); text-align: center; }
+    .quote-mark { font-family: 'Instrument Serif', serif; font-size: 4rem; line-height: 1; opacity: 0.07; display: block; margin-bottom: 0.5rem; }
+    .quote-text { font-family: 'Instrument Serif', serif; font-style: italic; font-size: clamp(1.5rem,3.5vw,2.6rem); line-height: 1.45; max-width: 700px; margin: 0 auto 1.5rem; }
+    .quote-attr { font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; opacity: 0.28; }
+
+    footer { padding: clamp(3rem,8vh,6rem) clamp(1.8rem,5vw,3.5rem) clamp(2rem,4vh,3rem); border-top: 1px solid var(--rule); }
+    .footer-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2rem; max-width: 1200px; margin: 0 auto 4rem; }
+    .footer-col { display: flex; flex-direction: column; gap: 0.8rem; }
+    .footer-label { font-size: 0.58rem; letter-spacing: 0.3em; text-transform: uppercase; opacity: 0.28; }
+    .footer-text { font-size: 0.88rem; line-height: 1.7; opacity: 0.65; }
+    .footer-text a { color: inherit; text-decoration: none; opacity: 0.9; border-bottom: 1px solid currentColor; }
+    .footer-text a:hover { opacity: 0.5; }
+    .footer-base { display: flex; justify-content: space-between; align-items: center; padding-top: 2rem; border-top: 1px solid var(--rule); font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.25; max-width: 1200px; margin: 0 auto; flex-wrap: wrap; gap: 0.5rem; }
+
+    /* ── Responsive ── */
+    @media (max-width: 960px) {
+      .srv-grid, .cap-grid, .stat-grid { grid-template-columns: repeat(2,1fr); }
+      .srv-card.wide { grid-column: span 2; }
+      .process-grid { grid-template-columns: repeat(2,1fr); }
+      .footer-grid { grid-template-columns: repeat(2,1fr); }
+      .vert-summary { display: none; }
+      .svc-panel-grid { grid-template-columns: 1fr; }
+      .svc-panel-item:nth-child(even) { padding-left: 0; border-left: none; }
+    }
+    @media (max-width: 640px) {
+      body { cursor: default; }
+      .cursor, .cursor-ring { display: none; }
+      nav { padding: 1.2rem 1.4rem; }
+      .nav-right { gap: 1rem; }
+      /* Hide long CTA on tiny screens, keep Servicios */
+      .nav-right a.nav-link { display: none; }
+      .svc-panel-close { right: 1.4rem; top: 1.2rem; }
+      .svc-panel-inner { padding-top: 5rem; }
+      .section { padding: clamp(3rem,7vh,5.5rem) 1.4rem; }
+      .hero { padding: clamp(1.5rem,4vh,3rem) 1.4rem; padding-top: 0; }
+      .hero-headline { font-size: clamp(3rem,12vw,5rem); line-height: 0.92; }
+      .srv-grid, .cap-grid { grid-template-columns: 1fr; }
+      .srv-card.wide { grid-column: span 1; }
+      .process-grid, .mode-grid { grid-template-columns: 1fr; }
+      .stat-grid { grid-template-columns: repeat(2,1fr); }
+      .tech-grid, .marcas-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .vert-item { flex-direction: column; gap: 0.5rem; }
+      .display { font-size: clamp(2.2rem,9vw,4rem); }
+      .marca-card { min-height: 200px; padding: 2rem 1.5rem; }
+      .exec-list { max-width: 100% !important; }
+    }
+
+    /* ── Landscape mobile: hero fits one screen ── */
+    @media (max-height: 500px) and (orientation: landscape) {
+      .hero { min-height: 100svh; padding-bottom: 2rem; }
+      .hero-headline { font-size: clamp(2.5rem,8vw,4.5rem); }
+      .hero-inner { gap: 1.2rem; }
+      .body-text { font-size: 0.85rem; line-height: 1.6; }
+      .cta { padding: 0.8rem 1.8rem; font-size: 0.65rem; }
+      nav { padding: 1rem 1.6rem; }
+    }
+
+    /* ── View Transitions (MPA, Chrome 126+) ── */
+    @view-transition { navigation: auto; }
+    ::view-transition-old(root) { animation: vt-out 0.4s cubic-bezier(0.4,0,1,1) both; }
+    ::view-transition-new(root) { animation: vt-in  0.4s cubic-bezier(0,0,0.2,1) both; }
+    @keyframes vt-out { from{opacity:1} to{opacity:0} }
+    @keyframes vt-in  { from{opacity:0} to{opacity:1} }
+
+    /* ── Loader ── */
+    #loader {
+      position: fixed; inset: 0; z-index: 2000;
+      background: var(--warm);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1);
+    }
+    #loader.hidden { opacity: 0; pointer-events: none; }
+    .loader-wordmark {
+      font-family: 'Instrument Serif', Georgia, serif; font-style: italic;
+      font-size: clamp(2.8rem,7vw,5.5rem); font-weight: 400;
+      letter-spacing: -0.025em; color: var(--ink); line-height: 1;
+      margin-bottom: 2.2rem; user-select: none;
+    }
+    .loader-wordmark b { font-style: normal; font-weight: 600; font-family: 'Space Grotesk',sans-serif; font-size: 0.55em; letter-spacing: 0.28em; text-transform: uppercase; color: var(--amber); vertical-align: middle; }
+    .loader-status {
+      font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 2.2rem; min-height: 1em;
+      transition: opacity 0.3s ease;
+    }
+    .loader-track {
+      width: clamp(160px,28vw,260px); height: 1px;
+      background: var(--rule); position: relative; overflow: hidden;
+    }
+    .loader-fill {
+      position: absolute; left: 0; top: 0; height: 100%;
+      background: var(--ink); width: 0%;
+      transition: width 0.08s linear;
+    }
+    .loader-pct {
+      font-size: 0.52rem; letter-spacing: 0.22em;
+      color: var(--muted); margin-top: 0.9rem;
+      font-variant-numeric: tabular-nums; opacity: 0.45;
+    }
+
+    /* ── Cursor label ── */
+    .cursor-label {
+      position: fixed; pointer-events: none; z-index: 9997;
+      font-size: 0.52rem; letter-spacing: 0.24em; text-transform: uppercase;
+      color: var(--ink); opacity: 0;
+      transform: translate(-50%, 22px);
+      transition: opacity 0.18s ease;
+      white-space: nowrap; user-select: none;
+    }
+    .cursor-label.show { opacity: 0.65; }
+
+    /* ── Kinetic hero words ── */
+    .hero-word {
+      display: inline-block;
+      opacity: 0; transform: translateY(28px);
+      transition: opacity 0.85s cubic-bezier(0.16,1,0.3,1),
+                  transform 0.85s cubic-bezier(0.16,1,0.3,1);
+    }
+    .hero-word.on { opacity: 1; transform: translateY(0); }
+
+    /* ── Awards strip ── */
+    .awards-strip {
+      padding: clamp(3rem,6vh,5rem) clamp(1.8rem,5vw,3.5rem);
+      border-top: 1px solid var(--rule); max-width: 1200px; margin: 0 auto;
+    }
+    .awards-eye {
+      font-size: 0.55rem; letter-spacing: 0.32em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 1.2rem; display: flex;
+      align-items: center; gap: 0.8rem;
+    }
+    .awards-eye::before { content:''; display:block; width:1.5rem; height:1px; background:currentColor; }
+    .awards-row {
+      display: flex; flex-wrap: wrap; align-items: baseline;
+      gap: 0.4rem 0;
+      font-family: 'Instrument Serif', serif; font-style: italic;
+      font-size: clamp(1.4rem,3.5vw,2.8rem); letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    .awards-name { color: var(--ink); padding: 0 0.6rem; }
+    .awards-dot { color: var(--amber); font-style: normal; font-family: 'Space Grotesk',sans-serif; font-size: 0.7em; opacity: 0.6; }
+
+    /* ── Void mode (easter egg — triple-click logo) ── */
+    body.void-mode { --ink:#E8E7E5; --muted:rgba(232,231,229,0.45); --rule:rgba(232,231,229,0.08); background:#070809; }
+    body.void-mode .bg-marble { filter: brightness(0.06) contrast(2.8); }
+    .void-badge {
+      position: fixed; bottom: 1.2rem; right: 1.5rem; z-index: 100;
+      font-size: 0.5rem; letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--muted); opacity: 0; pointer-events: none;
+      transition: opacity 0.6s; user-select: none;
+    }
+    body.void-mode .void-badge { opacity: 1; }
+
+    /* ── C-tier details ── */
+    ::selection { background: var(--amber); color: var(--ink); }
+    .stat-value  { font-variant-numeric: tabular-nums; }
+    .display, .hero-headline { font-optical-sizing: auto; }
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--amber); outline-offset: 4px;
+    }
+    .skip-link {
+      position: fixed; top: -100%; left: 1rem; z-index: 9999;
+      background: var(--ink); color: #fff;
+      padding: 0.5rem 1.2rem; font-size: 0.7rem; letter-spacing: 0.1em;
+      text-decoration: none; transition: top 0.2s;
+    }
+    .skip-link:focus { top: 1rem; }
+
+    /* ── Reduced motion ── */
+    @media (prefers-reduced-motion: reduce) {
+      .hero-word, .loader-fill { transition: none; }
+      @view-transition { navigation: none; }
+      * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+      .hero-word { opacity: 1; transform: none; }
+    }
+
+    /* ════════════════════════════════════════════
+       APPLE-CALIBER SCROLL — v9.5 additions
+    ════════════════════════════════════════════ */
+
+    /* ── Lenis overrides ── */
+    html.lenis, html.lenis body { height: auto; }
+    .lenis.lenis-smooth { scroll-behavior: auto !important; }
+
+    /* ── Scroll progress bar (top, 1px) ── */
+    .scroll-prog { position: fixed; top: 0; left: 0; right: 0; height: 1px; z-index: 300; }
+    .scroll-prog-fill { height: 100%; background: var(--amber); width: 0%; transition: width 0.08s linear; }
+
+    /* ── Frame scrub section ── */
+    .scrub-zone { height: 360vh; position: relative; }
+    .scrub-sticky {
+      position: sticky; top: 0;
+      height: 100svh; overflow: hidden;
+      background: #08090D;
+    }
+    .scrub-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    .scrub-overlay {
+      position: absolute; inset: 0; z-index: 2; pointer-events: none;
+      background:
+        linear-gradient(to top, rgba(8,9,13,0.78) 0%, rgba(8,9,13,0.32) 38%, transparent 62%),
+        linear-gradient(to bottom, rgba(8,9,13,0.45) 0%, transparent 18%);
+    }
+    .scrub-text-wrap {
+      position: absolute; bottom: clamp(3rem,8vh,6rem);
+      left: clamp(1.8rem,5vw,3.5rem); max-width: 680px;
+    }
+    .scrub-panel {
+      position: absolute; bottom: 0; left: 0;
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.65s cubic-bezier(0.16,1,0.3,1),
+                  transform 0.65s cubic-bezier(0.16,1,0.3,1);
+      pointer-events: none;
+    }
+    .scrub-panel.active { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    .scrub-ey {
+      font-size: 0.6rem; letter-spacing: 0.32em; text-transform: uppercase;
+      color: rgba(248,247,245,0.5); display: block; margin-bottom: 1rem;
+    }
+    .scrub-hl {
+      font-family: 'Instrument Serif', serif; font-weight: 400;
+      font-size: clamp(2.5rem,6.5vw,5.5rem); letter-spacing: -0.03em;
+      line-height: 0.91; color: #F8F7F5; font-optical-sizing: auto;
+    }
+    .scrub-hl em { font-style: italic; }
+    .scrub-pbar {
+      position: absolute; right: clamp(1.8rem,3vw,3rem); top: 50%;
+      transform: translateY(-50%);
+      width: 1px; height: 100px; background: rgba(248,247,245,0.1); z-index: 3;
+    }
+    .scrub-pbar-fill { width: 100%; background: rgba(255,170,23,0.65); height: 0%; }
+    .scrub-ctr {
+      position: absolute; right: clamp(1.8rem,3vw,3rem);
+      bottom: clamp(1.5rem,3vh,2.5rem);
+      font-size: 0.5rem; letter-spacing: 0.22em;
+      color: rgba(248,247,245,0.28); z-index: 3; font-variant-numeric: tabular-nums;
+    }
+    .scrub-scroll-hint {
+      position: absolute; bottom: clamp(1.5rem,3vh,2.5rem);
+      left: 50%; transform: translateX(-50%);
+      font-size: 0.52rem; letter-spacing: 0.28em; text-transform: uppercase;
+      color: rgba(248,247,245,0.3); z-index: 3; white-space: nowrap;
+      animation: hint-pulse 2.5s ease-in-out infinite;
+    }
+    @keyframes hint-pulse { 0%,100%{opacity:0.3} 50%{opacity:0.8} }
+    @media (max-width: 640px) {
+      .scrub-hl { font-size: clamp(2rem,9vw,3.5rem); }
+      .scrub-pbar, .scrub-ctr { display: none; }
+    }
+
+    /* ── Sound button ── */
+    .sound-btn {
+      display: flex; align-items: center; gap: 0.4rem;
+      font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--ink); background: none; border: none; cursor: none;
+      font-family: inherit; padding: 0; opacity: 0.38; transition: opacity 0.25s;
+    }
+    .sound-btn:hover { opacity: 1; }
+    .sound-btn.on { opacity: 0.85; color: var(--ink); }
+    .sound-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; opacity: 0.4; transition: opacity 0.3s; }
+    .sound-btn.on .sound-dot { opacity: 1; background: var(--amber); }
+    @media (max-width: 768px) { .sound-btn { display: none; } }
+
+    /* ── Section reveals (IntersectionObserver driven) ── */
+    .rev-up {
+      opacity: 0; transform: translateY(28px);
+      transition:
+        opacity  0.85s cubic-bezier(0.16,1,0.3,1) var(--d,0ms),
+        transform 0.85s cubic-bezier(0.16,1,0.3,1) var(--d,0ms);
+    }
+    .rev-up.in { opacity: 1; transform: translateY(0); }
+
+    .rev-wipe {
+      clip-path: inset(0 0 100% 0);
+      transition: clip-path 0.9s cubic-bezier(0.16,1,0.3,1) var(--d,0ms);
+    }
+    .rev-wipe.in { clip-path: inset(0 0 0% 0); }
+
+    /* ── Magnetic buttons ── */
+    .cta, .svc-panel-item { will-change: transform; }
+
+    /* ── Card 3D tilt ── */
+    .srv-card, .cap-card, .stat-card, .marca-card, .process-step {
+      will-change: transform;
+      transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+    }
+
+    /* ── Stat counter ── */
+    .stat-value { font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Saltar al contenido</a>
+
+  <!-- Loader (RANK 1) -->
+  <div id="loader" role="status" aria-label="Cargando VICTOR IA">
+    <p class="loader-wordmark">Victor<b>&thinsp;—&thinsp;IA</b></p>
+    <p class="loader-status" id="loader-status">Calibrando éter</p>
+    <div class="loader-track" aria-hidden="true"><div class="loader-fill" id="loader-fill"></div></div>
+    <p class="loader-pct" id="loader-pct" aria-hidden="true">000</p>
+  </div>
+
+  <div class="bg-marble" id="bgMarble"></div>
+  <canvas class="reveal-canvas" id="revealCanvas"></canvas>
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+  <div class="cursor-label" id="cursor-label" aria-hidden="true"></div>
+  <div class="void-badge" aria-hidden="true">void mode · triple-click logo</div>
+
+  <!-- Services panel -->
+  <div id="svc-panel" aria-hidden="true" role="dialog" aria-label="Todos los servicios">
+    <button class="svc-panel-close" id="svc-panel-close" type="button" aria-label="Cerrar">✕ Cerrar</button>
+    <div class="svc-panel-inner">
+      <p class="svc-panel-eyebrow">18 servicios · VICTOR IA</p>
+      <h2 class="svc-panel-title">Elige tu <em>servicio.</em></h2>
+      <div class="svc-panel-grid" id="svc-panel-grid"></div>
+    </div>
+  </div>
+
+  <div class="scroll-prog" aria-hidden="true"><div class="scroll-prog-fill" id="scrollProgFill"></div></div>
+
+  <div class="content" id="main-content">
+
+    <!-- Nav -->
+    <nav>
+      <a href="/" class="nav-logo">VICTOR<span>&thinsp;—&thinsp;</span>IA</a>
+      <div class="nav-right">
+        <button class="nav-link" id="nav-svc-btn" type="button">Servicios</button>
+        <a href="https://meetings.hubspot.com/pablo-solar" class="nav-link">Agenda una llamada</a>
+        <button class="sound-btn" id="soundBtn" type="button" aria-label="Activar sonido ambiental">
+          <span class="sound-dot"></span>
+          <span>Sonido</span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- 01 · Hero -->
+    <section class="hero">
+      <div class="hero-inner">
+        <p class="eyebrow">VICTOR IA · Playa del Carmen, México</p>
+        <h1 class="hero-headline" id="hero-hl">
+          <span class="hero-word">Inteligencia</span><br>
+          <em><span class="hero-word" style="transition-delay:0.18s">que trabaja.</span></em>
+        </h1>
+        <p class="body-text">
+          La agencia de IA que construye lo que tu empresa necesita para la próxima era.<br><br>
+          <strong>18 servicios. Un studio. Resultados medibles.</strong>
+        </p>
+        <div>
+          <a href="https://meetings.hubspot.com/pablo-solar" class="cta">
+            Agenda una conversación &nbsp;→
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCRUB — Apple AirPods–style scroll sequence (241 frames) -->
+    <section class="scrub-zone" id="scrubZone" aria-label="Reel de capacidades">
+      <div class="scrub-sticky" id="scrubSticky">
+        <canvas class="scrub-canvas" id="scrubCanvas" aria-hidden="true"></canvas>
+        <div class="scrub-overlay" aria-hidden="true">
+          <div class="scrub-text-wrap">
+            <div class="scrub-panel active" data-at="0">
+              <span class="scrub-ey">VICTOR IA · 2026</span>
+              <h2 class="scrub-hl">Inteligencia<br><em>que construye.</em></h2>
+            </div>
+            <div class="scrub-panel" data-at="0.34">
+              <span class="scrub-ey">18 servicios · Un studio</span>
+              <h2 class="scrub-hl">Sistemas antes<br><em>que estructuras.</em></h2>
+            </div>
+            <div class="scrub-panel" data-at="0.67">
+              <span class="scrub-ey">Playa del Carmen · México</span>
+              <h2 class="scrub-hl">La próxima era<br><em>empieza aquí.</em></h2>
+            </div>
+          </div>
+          <div class="scrub-pbar" aria-hidden="true"><div class="scrub-pbar-fill" id="scrubBarFill"></div></div>
+          <div class="scrub-ctr" id="scrubCtr" aria-hidden="true">001 / 241</div>
+          <div class="scrub-scroll-hint" aria-hidden="true">↓ scroll</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 · Capacidades -->
+    <section class="section">
+      <div class="section-inner">
+        <p class="eyebrow">02 / Capacidades principales</p>
+        <h2 class="display" style="margin-bottom:3rem;">
+          Cada capacidad<br><em>responde distinto.</em>
+        </h2>
+        <div class="srv-grid">
+          <div class="srv-card wide">
+            <span class="srv-num">/01</span>
+            <p class="srv-title">AI Agents que cierran ventas<br><em style="font-family:'Instrument Serif',serif;font-style:italic;">mientras duermes.</em></p>
+            <p class="srv-body">Agentes conversacionales con memoria persistente. Califican leads, agendan calls, integran HubSpot y WhatsApp.</p>
+          </div>
+          <div class="srv-card">
+            <span class="srv-num">/02</span>
+            <p class="srv-title">Automatización de Procesos</p>
+            <p class="srv-body">Workflows backend custom, integraciones API, sincronización de herramientas.</p>
+          </div>
+          <div class="srv-card">
+            <span class="srv-num">/03</span>
+            <p class="srv-title">Sitios Cinematográficos</p>
+            <p class="srv-body">WebGL, scroll-driven, animaciones de alto impacto. Tu declaración de guerra al mercado.</p>
+          </div>
+          <div class="srv-card wide">
+            <span class="srv-num">/04</span>
+            <p class="srv-title">AI Video · Higgsfield,<br>Runway, Seedance, LTX.</p>
+            <p class="srv-body">Videos cinematográficos generados con IA + post-procesamiento profesional. Solo SFX.</p>
+          </div>
+          <div class="srv-card">
+            <span class="srv-num">/05</span>
+            <p class="srv-title">Modelos 3D & Renders</p>
+            <p class="srv-body">Visualizaciones fotorrealistas, configuradores interactivos, motion graphics.</p>
+          </div>
+          <div class="srv-card">
+            <span class="srv-num">/06</span>
+            <p class="srv-title">CRM & Intelligence Arch.</p>
+            <p class="srv-body">HubSpot, Salesforce, sistemas inmobiliarios y timeshare implementados full-stack.</p>
+          </div>
+          <div class="srv-card">
+            <span class="srv-num">/07</span>
+            <p class="srv-title">Data Analytics & BI</p>
+            <p class="srv-body">Dashboards ejecutivos en tiempo real. Decisiones con datos, no con intuición.</p>
+          </div>
+          <div class="srv-card">
+            <span class="srv-num">/08</span>
+            <p class="srv-title">Capacitación Corporativa</p>
+            <p class="srv-body">Formación de equipos con agentes de IA entrenados en tus procesos.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 · Verticales -->
+    <section class="section">
+      <div class="section-inner">
+        <p class="eyebrow">Cinco disciplinas · un studio</p>
+        <h2 class="display" style="margin-bottom:3rem;">
+          Un studio. <em>Cinco<br>maneras</em> de construir.
+        </h2>
+        <div class="vert-list">
+          <a href="service.html?s=09" class="vert-item">
+            <span class="vert-num">01</span>
+            <span class="vert-label">Agentes de IA<br><em>Voz & Texto</em></span>
+            <span class="vert-summary">Ventas y soporte 24/7 sin parar.</span>
+          </a>
+          <a href="service.html?s=06" class="vert-item">
+            <span class="vert-num">02</span>
+            <span class="vert-label">Video &amp;<br><em>Producción IA</em></span>
+            <span class="vert-summary">Cinematografía que detiene el scroll.</span>
+          </a>
+          <a href="service.html?s=12" class="vert-item">
+            <span class="vert-num">03</span>
+            <span class="vert-label">Intelligence<br><em>Architecture</em></span>
+            <span class="vert-summary">Sistemas antes que estructuras.</span>
+          </a>
+          <a href="service.html?s=15" class="vert-item">
+            <span class="vert-num">04</span>
+            <span class="vert-label">Ciberseguridad<br><em>&amp; IA On-Premise</em></span>
+            <span class="vert-summary">Tu información nunca sale de tu red.</span>
+          </a>
+          <a href="service.html?s=13" class="vert-item">
+            <span class="vert-num">05</span>
+            <span class="vert-label">Estrategia<br><em>Integral 360°</em></span>
+            <span class="vert-summary">Un equipo, todos los frentes cubiertos.</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 · Agentes IA -->
+    <section class="section">
+      <div class="section-inner">
+        <p class="eyebrow">· 01 · Agentes de IA con Voz y Texto</p>
+        <h2 class="display" style="margin-bottom:1.5rem;">
+          El equipo que <em>nunca</em><br>para de cerrar.
+        </h2>
+        <p class="body-text" style="margin-bottom:3.5rem;">
+          Asistentes conversacionales para ventas, soporte, RRHH y operaciones disponibles 24/7 en WhatsApp, teléfono y web. Hablan como tu mejor vendedor, conocen tu empresa al 100% y nunca descansan.
+        </p>
+        <p class="eyebrow" style="margin-bottom:1.5rem;">Proceso · 05 fases</p>
+        <div class="process-grid">
+          <div class="process-step">
+            <span class="step-num">01</span>
+            <h4 class="step-title">Audit</h4>
+            <p class="step-body">Levantamos los flujos y objeciones reales de tu equipo de ventas.</p>
+          </div>
+          <div class="process-step">
+            <span class="step-num">02</span>
+            <h4 class="step-title">Diseño</h4>
+            <p class="step-body">Arquitectura de conversación y guiones entrenados en tu empresa.</p>
+          </div>
+          <div class="process-step">
+            <span class="step-num">03</span>
+            <h4 class="step-title">Build</h4>
+            <p class="step-body">Desarrollo del agente con voz, memoria persistente e integraciones.</p>
+          </div>
+          <div class="process-step">
+            <span class="step-num">04</span>
+            <h4 class="step-title">Test</h4>
+            <p class="step-body">Pruebas con escenarios reales antes de salir al mercado.</p>
+          </div>
+          <div class="process-step">
+            <span class="step-num">05</span>
+            <h4 class="step-title">Deploy</h4>
+            <p class="step-body">Lanzamiento + monitoreo + mejora continua basada en datos.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 · Video IA -->
+    <section class="section">
+      <div class="section-inner">
+        <p class="eyebrow">· 02 · Video &amp; Producción Audiovisual IA</p>
+        <h2 class="display" style="margin-bottom:1.5rem;">
+          Spots que <em>paralizan.</em><br>
+          Videos que <em>venden.</em>
+        </h2>
+        <p class="body-text" style="margin-bottom:3.5rem;">
+          Producción audiovisual cinematográfica con IA. Spots, reels, documentales de marca. Higgsfield, Runway, LTX Studio + dirección creativa de nivel cine.
+        </p>
+        <p class="eyebrow" style="margin-bottom:2rem;">El brazo creativo-visual.</p>
+        <div class="cap-grid">
+          <div class="cap-card">
+            <h4 class="cap-title">Personajes<br>consistentes</h4>
+            <p class="cap-body">Identity preserved frame por frame, escena por escena.</p>
+          </div>
+          <div class="cap-card">
+            <h4 class="cap-title">Mundos<br>hiperrealistas</h4>
+            <p class="cap-body">Locaciones que no existen · que parecen rodadas en 35mm.</p>
+          </div>
+          <div class="cap-card">
+            <h4 class="cap-title">Grading<br>cinemático</h4>
+            <p class="cap-body">Color y atmósfera que pasa por cine, no por feed.</p>
+          </div>
+          <div class="cap-card">
+            <h4 class="cap-title">Solo<br>SFX</h4>
+            <p class="cap-body">Audio diseñado · cero música genérica · cero voces innecesarias.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 · Intelligence Architecture -->
+    <section class="section">
+      <div class="section-inner">
+        <p class="eyebrow">· 03 · Intelligence Architecture Inmobiliaria</p>
+        <h2 class="display" style="margin-bottom:1.5rem;">
+          Sistemas <em>antes</em><br>que estructuras.
+        </h2>
+        <p class="body-text" style="margin-bottom:3.5rem;">
+          Sistema especializado para desarrolladoras, brokerages y timeshare: agentes de ventas que califican leads, CRM conectado, reportes automáticos y Agente de Reactivación de Bases Muertas.
+        </p>
+        <p class="eyebrow" style="margin-bottom:2rem;">Tres modos de operación.</p>
+        <div class="mode-grid">
+          <div class="cap-card">
+            <h4 class="cap-title"><em style="font-family:'Instrument Serif',serif;font-style:italic;">Captación</em></h4>
+            <p class="cap-body">Agente califica leads entrantes en WhatsApp y web · 24/7 · sin intervención humana.</p>
+          </div>
+          <div class="cap-card">
+            <h4 class="cap-title"><em style="font-family:'Instrument Serif',serif;font-style:italic;">Reactivación</em></h4>
+            <p class="cap-body">Bases muertas contactadas con mensajes personalizados según historial · entrega leads calientes.</p>
+          </div>
+          <div class="cap-card">
+            <h4 class="cap-title"><em style="font-family:'Instrument Serif',serif;font-style:italic;">Seguimiento</em></h4>
+            <p class="cap-body">Pipeline automatizado · recordatorios · seguimiento post-visita · cierre asistido.</p>
+          </div>
+        </div>
+        <div class="stat-grid" style="margin-top:3rem;">
+          <div class="stat-card">
+            <p class="stat-label">Leads calificados</p>
+            <p class="stat-value">3.2×</p>
+            <p class="stat-delta">más que ventas manual</p>
+          </div>
+          <div class="stat-card">
+            <p class="stat-label">Bases reactivadas</p>
+            <p class="stat-value">68%</p>
+            <p class="stat-delta">respuesta en 48h</p>
+          </div>
+          <div class="stat-card">
+            <p class="stat-label">Tiempo de cierre</p>
+            <p class="stat-value">−40%</p>
+            <p class="stat-delta">ciclo de venta</p>
+          </div>
+          <div class="stat-card">
+            <p class="stat-label">Costo por lead</p>
+            <p class="stat-value">−55%</p>
+            <p class="stat-delta">vs campañas tradicionales</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 · Executive Tech -->
+    <section class="section">
+      <div class="section-inner">
+        <p class="eyebrow">· 04 · Executive Tech Setup</p>
+        <h2 class="display" style="margin-bottom:1.5rem;">
+          Para quien ya<br><em>no</em> tiene tiempo.
+        </h2>
+        <p class="body-text" style="margin-bottom:1rem;">
+          Configuración personalizada de flujos de IA para directores y CEOs. Acceso por aplicación. Onboarding privado. Discreción total.
+        </p>
+        <p class="body-text" style="margin-bottom:3.5rem;opacity:0.38;font-size:0.85rem;">
+          Trabajamos con un máximo de 12 ejecutivos por trimestre. Respuesta en 48 horas si calzas con el cohort.
+        </p>
+        <div class="exec-list" style="max-width:760px;">
+          <div class="exec-item">
+            <span class="exec-item-num">01</span>
+            <div class="exec-item-body">
+              <h4 class="exec-item-title">Workflow personalization</h4>
+              <p class="exec-item-desc">Cada flujo de IA · cada agente · cada automatización · diseñado para cómo TÚ trabajas.</p>
+            </div>
+          </div>
+          <div class="exec-item">
+            <span class="exec-item-num">02</span>
+            <div class="exec-item-body">
+              <h4 class="exec-item-title">Private LLM</h4>
+              <p class="exec-item-desc">Modelos privados con tu data · sin que nada salga del dispositivo o del perímetro de tu empresa.</p>
+            </div>
+          </div>
+          <div class="exec-item">
+            <span class="exec-item-num">03</span>
+            <div class="exec-item-body">
+              <h4 class="exec-item-title">Executive briefings</h4>
+              <p class="exec-item-desc">Sesiones 1:1 · cada 2 semanas · audit del estado del setup + nuevas capacidades.</p>
+            </div>
+          </div>
+          <div class="exec-item">
+            <span class="exec-item-num">04</span>
+            <div class="exec-item-body">
+              <h4 class="exec-item-title">Private rituals</h4>
+              <p class="exec-item-desc">Setups de hardware · ergonomía · audio · ambiente · todo calibrado a tu rutina.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 08 · Ingeniería -->
+    <section class="section">
+      <div class="section-inner">
+        <p class="eyebrow">· 05 · Ingeniería &amp; Automatización</p>
+        <h2 class="display" style="margin-bottom:1.5rem;">
+          No hacemos posts.<br><em>Construimos</em> la infraestructura.
+        </h2>
+        <p class="body-text" style="margin-bottom:3.5rem;">
+          Setups de equipos para flujos de IA · analítica de datos · prompt engineering · pauta digital. La arquitectura técnica que escala lo que ya funciona.
+        </p>
+        <div class="tech-grid" style="margin-bottom:2.5rem;">
+          <div class="cap-card">
+            <h4 class="cap-title">IA flows</h4>
+            <p class="cap-body">Agentes · automation pipelines · n8n · HubSpot integrations · custom edge functions.</p>
+          </div>
+          <div class="cap-card">
+            <h4 class="cap-title">Data analytics</h4>
+            <p class="cap-body">Supabase · pipelines de eventos · dashboards · cohort analysis · attribution.</p>
+          </div>
+          <div class="cap-card">
+            <h4 class="cap-title">Prompt engineering</h4>
+            <p class="cap-body">Sistemas de prompts versionados · tests reproducibles · evals con datasets.</p>
+          </div>
+          <div class="cap-card">
+            <h4 class="cap-title">Pauta digital</h4>
+            <p class="cap-body">Meta · Google Ads · LinkedIn · medición pixel-perfect · attribution multi-touch.</p>
+          </div>
+        </div>
+        <p class="eyebrow" style="margin-bottom:1rem;">Stack · transparente</p>
+        <div class="stack-list">
+          <span class="stack-pill">n8n</span>
+          <span class="stack-pill">HubSpot</span>
+          <span class="stack-pill">Supabase</span>
+          <span class="stack-pill">OpenAI</span>
+          <span class="stack-pill">Anthropic</span>
+          <span class="stack-pill">Higgsfield</span>
+          <span class="stack-pill">Runway</span>
+          <span class="stack-pill">ElevenLabs</span>
+          <span class="stack-pill">Vercel</span>
+          <span class="stack-pill">Cloudflare</span>
+          <span class="stack-pill">Stripe</span>
+          <span class="stack-pill">Twilio</span>
+        </div>
+        <p class="stack-note">· No ofrecemos administración de redes sociales · nos enfocamos en la arquitectura de la conversión ·</p>
+      </div>
+    </section>
+
+    <!-- 09 · Portfolio -->
+    <section class="section">
+      <div class="section-inner">
+        <p class="eyebrow">03 / Portfolio activo</p>
+        <h2 class="display" style="margin-bottom:3rem;">
+          Pasa el cursor<br>para <em>revelar.</em>
+        </h2>
+        <div class="marcas-grid">
+          <div class="marca-card">
+            <div>
+              <p class="marca-tag">Intelligence Architecture · Live</p>
+              <p class="marca-name">Influence IA</p>
+            </div>
+            <a href="https://victor-ia.com.mx" target="_blank" rel="noopener" class="marca-status">
+              <span class="dot"></span>
+              victor-ia.com.mx &nbsp;↗
+            </a>
+          </div>
+          <div class="marca-card">
+            <div>
+              <p class="marca-tag">Inmobiliario Lujo · Quintana Roo</p>
+              <p class="marca-name">Costa<br>Negra</p>
+            </div>
+            <span class="marca-status">
+              <span class="dot" style="opacity:0.4;"></span>
+              Proyecto activo · 2026
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quote -->
+    <div class="quote-wrap">
+      <span class="quote-mark">"</span>
+      <p class="quote-text">
+        La inteligencia no es lo que sabes.<br>
+        Es lo que haces cuando no sabes qué hacer.
+      </p>
+      <p class="quote-attr">VÍCTOR-IA · victor-ia.com.mx</p>
+    </div>
+
+    <!-- Awards strip (RANK 6) -->
+    <div class="awards-strip" aria-label="Premios web 2026">
+      <p class="awards-eye">Submitting · 2026</p>
+      <div class="awards-row">
+        <span class="awards-name">Awwwards</span>
+        <span class="awards-dot">·</span>
+        <span class="awards-name">CSS Design Awards</span>
+        <span class="awards-dot">·</span>
+        <span class="awards-name">FWA</span>
+        <span class="awards-dot">·</span>
+        <span class="awards-name">Lovie</span>
+        <span class="awards-dot">·</span>
+        <span class="awards-name">Webby</span>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-grid">
+        <div class="footer-col">
+          <span class="footer-label">Studio</span>
+          <span class="footer-text">Playa del Carmen<br>Quintana Roo · México</span>
+        </div>
+        <div class="footer-col">
+          <span class="footer-label">Clientes</span>
+          <span class="footer-text">CDMX · MTY · GDL<br>Miami · Madrid · NYC</span>
+        </div>
+        <div class="footer-col">
+          <span class="footer-label">Servicios</span>
+          <span class="footer-text">
+            <a href="service.html?s=09">Agentes de IA ↗</a><br>
+            <a href="service.html?s=12">Intelligence Arch. ↗</a>
+          </span>
+        </div>
+        <div class="footer-col">
+          <span class="footer-label">Contacto</span>
+          <span class="footer-text">
+            <a href="mailto:hello@victor-ia.com.mx">hello@victor-ia.com.mx</a><br>
+            <a href="https://wa.me/5219842353159" target="_blank" rel="noopener">WhatsApp ↗</a>
+          </span>
+        </div>
+      </div>
+      <div class="footer-base">
+        <span>Made with · Higgsfield · n8n · Anthropic · ElevenLabs · Vercel</span>
+        <span>© 2026 VÍCTOR-IA · Playa del Carmen</span>
+      </div>
+    </footer>
+
+  </div><!-- /content -->
+
+  <script>
+  (function(){
+    /* ── Services panel ── */
+    var SVCS = [
+      {id:'01',title:'Sitios Web Cinematográficos & Apps'},
+      {id:'02',title:'Mini Videojuegos Corporativos'},
+      {id:'03',title:'Modelos 3D de Producto y Arquitectura'},
+      {id:'04',title:'Configuradores 3D Interactivos'},
+      {id:'05',title:'UI/UX Inclusivo'},
+      {id:'06',title:'Video y Producción Audiovisual'},
+      {id:'07',title:'Avatar Digital Corporativo'},
+      {id:'08',title:'Upgrade de Branding'},
+      {id:'09',title:'Agentes de IA con Voz y Texto'},
+      {id:'10',title:'Automatización de Procesos'},
+      {id:'11',title:'IA por Departamento'},
+      {id:'12',title:'Intelligence Architecture Inmobiliaria'},
+      {id:'13',title:'Estrategia Integral 360°'},
+      {id:'14',title:'Data Analytics & Business Intelligence'},
+      {id:'15',title:'Ciberseguridad & IA On-Premise'},
+      {id:'16',title:'Integraciones entre Sistemas'},
+      {id:'17',title:'Capacitaciones Corporativas'},
+      {id:'18',title:'Consultoría en Transformación Digital'}
+    ];
+    var grid = document.getElementById('svc-panel-grid');
+    SVCS.forEach(function(s){
+      var a = document.createElement('a');
+      a.href = 'service.html?s=' + s.id;
+      a.className = 'svc-panel-item';
+      a.innerHTML = '<span class="svc-panel-n">'+s.id+'</span><span class="svc-panel-name">'+s.title+'</span>';
+      grid.appendChild(a);
+    });
+
+    var panel = document.getElementById('svc-panel');
+    document.getElementById('nav-svc-btn').addEventListener('click', function(){
+      panel.classList.add('open');
+      panel.setAttribute('aria-hidden','false');
+    });
+    document.getElementById('svc-panel-close').addEventListener('click', function(){
+      panel.classList.remove('open');
+      panel.setAttribute('aria-hidden','true');
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key==='Escape') { panel.classList.remove('open'); panel.setAttribute('aria-hidden','true'); }
+    });
+
+    /* ── Marble scroll pan ── */
+    var bgMarble = document.getElementById('bgMarble');
+    function updateScroll(){
+      var p = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      bgMarble.style.backgroundPositionY = (p*100)+'%';
+    }
+    window.addEventListener('scroll', updateScroll, {passive:true});
+    updateScroll();
+
+    /* ── Canvas water-trail reveal ── */
+    var canvas = document.getElementById('revealCanvas');
+    var ctx    = canvas.getContext('2d');
+    var WARM   = '248,247,245';
+    var isMobile = !window.matchMedia('(hover:hover)').matches;
+
+    function resize(){ canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    window.addEventListener('resize', resize); resize();
+
+    var lerp = function(a,b,t){ return a+(b-a)*t; };
+
+    if(isMobile){
+      var BASE_R=34, STEP_PX=5, HOLD_MS=1500, FADE_MS=1400, MAX_V=1.8, MAX_PTS=900;
+      var trail=[], isTouching=false, lastX=null, lastY=null, lastT=null, vel=0;
+      var tx2=window.innerWidth*.5, ty2=window.innerHeight*.5, fx=tx2, fy=ty2, liveA=0;
+
+      function stamp(x,y,hold){ var r=BASE_R*(0.74+Math.random()*0.54); trail.push({x:x+(Math.random()-.5)*5, y:y+(Math.random()-.5)*5, t:performance.now(), r:r, hold:hold}); if(trail.length>MAX_PTS) trail.splice(0,trail.length-MAX_PTS); }
+      function erase(x,y,r,a){ var halo=r*2.1; ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fillStyle='rgba(0,0,0,'+a+')'; ctx.fill(); var g=ctx.createRadialGradient(x,y,r,x,y,halo); g.addColorStop(0,'rgba(0,0,0,'+(a*.88)+')'); g.addColorStop(.38,'rgba(0,0,0,'+(a*.5)+')'); g.addColorStop(.72,'rgba(0,0,0,'+(a*.13)+')'); g.addColorStop(1,'rgba(0,0,0,0)'); ctx.beginPath(); ctx.arc(x,y,halo,0,Math.PI*2); ctx.fillStyle=g; ctx.fill(); }
+      function draw(){ var now=performance.now(), maxAge=HOLD_MS+FADE_MS; while(trail.length&&now-trail[0].t>=maxAge) trail.shift(); fx=lerp(fx,tx2,isTouching?.20:.08); fy=lerp(fy,ty2,isTouching?.20:.08); liveA=lerp(liveA,isTouching?1:0,isTouching?.18:.05); ctx.clearRect(0,0,canvas.width,canvas.height); ctx.fillStyle='rgba('+WARM+',1)'; ctx.fillRect(0,0,canvas.width,canvas.height); ctx.globalCompositeOperation='destination-out'; for(var i=0;i<trail.length;i++){ var p=trail[i],age=now-p.t,a=age<p.hold?1:1-(age-p.hold)/FADE_MS; if(a>.005) erase(p.x,p.y,p.r,a); } if(liveA>.005) erase(fx,fy,BASE_R,liveA); ctx.globalCompositeOperation='source-over'; requestAnimationFrame(draw); }
+      draw();
+      document.addEventListener('touchstart',function(e){ isTouching=true; var t=e.touches[0]; tx2=t.clientX; ty2=t.clientY; fx=tx2; fy=ty2; lastX=tx2; lastY=ty2; lastT=performance.now(); vel=0; stamp(tx2,ty2,HOLD_MS); },{passive:true});
+      document.addEventListener('touchmove',function(e){ var t=e.touches[0],nx=t.clientX,ny=t.clientY; tx2=nx; ty2=ny; var dist=Math.hypot(nx-lastX,ny-lastY); if(dist>=STEP_PX){ var now=performance.now(),dt=Math.max(now-lastT,1); vel=lerp(vel,dist/dt,.35); var hold=Math.max(0,HOLD_MS*(1-Math.min(1,vel/MAX_V))); var steps=Math.ceil(dist/STEP_PX); for(var i=1;i<=steps;i++){ var f=i/steps; stamp(lastX+(nx-lastX)*f,lastY+(ny-lastY)*f,hold); } lastX=nx; lastY=ny; lastT=now; } },{passive:true});
+      document.addEventListener('touchend',function(){ isTouching=false; lastX=lastY=lastT=null; vel=0; },{passive:true});
+    } else {
+      var D_BASE=30, D_STEP=5, D_HOLD=1400, D_FADE=1200, D_MAX_V=2.2, D_MAX_PTS=900;
+      var dTrail=[], isMoving=false, moveTo=null, dLX=null, dLY=null, dLT=null, dVel=0;
+      var dlx=window.innerWidth*.5, dly=window.innerHeight*.5, dmx=dlx, dmy=dly, dLiveA=0;
+      var cur=document.getElementById('cursor'), ring=document.getElementById('cursorRing');
+
+      function dStamp(x,y,hold){ var r=D_BASE*(0.74+Math.random()*0.54); dTrail.push({x:x+(Math.random()-.5)*4, y:y+(Math.random()-.5)*4, t:performance.now(), r:r, hold:hold}); if(dTrail.length>D_MAX_PTS) dTrail.splice(0,dTrail.length-D_MAX_PTS); }
+      function dErase(x,y,r,a){ var halo=r*2.1; ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fillStyle='rgba(0,0,0,'+a+')'; ctx.fill(); var g=ctx.createRadialGradient(x,y,r,x,y,halo); g.addColorStop(0,'rgba(0,0,0,'+(a*.88)+')'); g.addColorStop(.38,'rgba(0,0,0,'+(a*.5)+')'); g.addColorStop(.72,'rgba(0,0,0,'+(a*.13)+')'); g.addColorStop(1,'rgba(0,0,0,0)'); ctx.beginPath(); ctx.arc(x,y,halo,0,Math.PI*2); ctx.fillStyle=g; ctx.fill(); }
+      function dDraw(){ var now=performance.now(),maxAge=D_HOLD+D_FADE; while(dTrail.length&&now-dTrail[0].t>=maxAge) dTrail.shift(); dlx=lerp(dlx,dmx,isMoving?.22:.08); dly=lerp(dly,dmy,isMoving?.22:.08); dLiveA=lerp(dLiveA,isMoving?1:0,isMoving?.18:.05); ctx.clearRect(0,0,canvas.width,canvas.height); ctx.fillStyle='rgba('+WARM+',1)'; ctx.fillRect(0,0,canvas.width,canvas.height); ctx.globalCompositeOperation='destination-out'; for(var i=0;i<dTrail.length;i++){ var p=dTrail[i],age=now-p.t,a=age<p.hold?1:1-(age-p.hold)/D_FADE; if(a>.005) dErase(p.x,p.y,p.r,a); } if(dLiveA>.005) dErase(dlx,dly,D_BASE,dLiveA); ctx.globalCompositeOperation='source-over'; requestAnimationFrame(dDraw); }
+      dDraw();
+
+      document.addEventListener('mousemove',function(e){
+        var nx=e.clientX, ny=e.clientY;
+        isMoving=true; clearTimeout(moveTo); moveTo=setTimeout(function(){ isMoving=false; },120);
+        dmx=nx; dmy=ny;
+        if(cur) cur.style.cssText='left:'+nx+'px;top:'+ny+'px';
+        if(ring) ring.style.cssText='left:'+nx+'px;top:'+ny+'px';
+        if(dLX===null){ dLX=nx; dLY=ny; dLT=performance.now(); return; }
+        var dist=Math.hypot(nx-dLX,ny-dLY);
+        if(dist>=D_STEP){ var now=performance.now(),dt=Math.max(now-dLT,1); dVel=lerp(dVel,dist/dt,.35); var hold=Math.max(0,D_HOLD*(1-Math.min(1,dVel/D_MAX_V))); var steps=Math.ceil(dist/D_STEP); for(var i=1;i<=steps;i++){ var f=i/steps; dStamp(dLX+(nx-dLX)*f,dLY+(ny-dLY)*f,hold); } dLX=nx; dLY=ny; dLT=now; }
+      });
+
+      document.querySelectorAll('a, button').forEach(function(el){
+        el.addEventListener('mouseenter',function(){ if(ring){ ring.style.width='52px'; ring.style.height='52px'; } });
+        el.addEventListener('mouseleave',function(){ if(ring){ ring.style.width='32px'; ring.style.height='32px'; } });
+      });
+    }
+  })();
+  </script>
+
+  <!-- Lenis smooth scroll -->
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
+  <!-- Apple-caliber scroll: Lenis · frame scrub · reveals · sound · tilt · magnetic -->
+  <script>
+  (function(){
+    'use strict';
+
+    /* ═══════════════════════════════════════
+       1. LENIS SMOOTH SCROLL
+    ═══════════════════════════════════════ */
+    var lenis;
+    if (typeof Lenis !== 'undefined') {
+      lenis = new Lenis({
+        duration: 1.35,
+        easing: function(t){ return Math.min(1, 1.001 - Math.pow(2, -10*t)); },
+        smoothTouch: false,
+        touchMultiplier: 1.8,
+        lerp: null,
+      });
+      function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }
+      requestAnimationFrame(raf);
+    }
+
+    /* ═══════════════════════════════════════
+       2. SCROLL PROGRESS BAR
+    ═══════════════════════════════════════ */
+    var progFill = document.getElementById('scrollProgFill');
+    var bgMarble = document.getElementById('bgMarble');
+    function onScroll(){
+      var p = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      if (progFill) progFill.style.width = (p*100) + '%';
+    }
+    window.addEventListener('scroll', onScroll, {passive:true});
+
+    /* ═══════════════════════════════════════
+       3. FRAME SCRUB (241 frames, Apple style)
+    ═══════════════════════════════════════ */
+    var scrubZone   = document.getElementById('scrubZone');
+    var scrubCanvas = document.getElementById('scrubCanvas');
+    var scrubBarFill = document.getElementById('scrubBarFill');
+    var scrubCtr     = document.getElementById('scrubCtr');
+    var scrubPanels  = document.querySelectorAll('.scrub-panel');
+    var NFRAMES = 241, FRAMES_DIR = 'assets/frames/', PRELOAD_N = 32;
+    var images = new Array(NFRAMES);
+    var loaded = 0, firstReady = false, scrubReady = false;
+    var scrubTarget = 0, scrubCurrent = 0, scrubLast = -1;
+    var activePanel = 0;
+
+    function pad(n){ return String(n).padStart(4,'0'); }
+    function frameUrl(i){ return FRAMES_DIR + 'frame-' + pad(i+1) + '.webp'; }
+
+    function loadFrame(i, eager){
+      var img = new Image();
+      if (eager && 'fetchPriority' in img) img.fetchPriority = 'high';
+      img.decoding = 'async';
+      img.onload = function(){
+        loaded++;
+        if (i === 0 && !firstReady){
+          firstReady = true;
+          resizeScrub();
+          drawScrubFrame(0);
+        }
+        if (!scrubReady && loaded / NFRAMES >= 0.88){ scrubReady = true; }
+      };
+      img.onerror = function(){ loaded++; };
+      img.src = frameUrl(i);
+      images[i] = img;
+    }
+
+    for (var pi = 0; pi < PRELOAD_N; pi++) loadFrame(pi, true);
+    function lazyLoadRest(){
+      var i = PRELOAD_N;
+      function next(){
+        if (i >= NFRAMES) return;
+        loadFrame(i++, false);
+        if (window.requestIdleCallback){ requestIdleCallback(next, {timeout:80}); }
+        else { setTimeout(next, 6); }
+      }
+      next();
+    }
+    if (window.requestIdleCallback){ requestIdleCallback(lazyLoadRest); }
+    else { setTimeout(lazyLoadRest, 100); }
+
+    var scrubCtx;
+    if (scrubCanvas){ scrubCtx = scrubCanvas.getContext('2d', {alpha:false}); }
+
+    function resizeScrub(){
+      if (!scrubCanvas || !scrubCtx) return;
+      var rect = scrubCanvas.getBoundingClientRect();
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      scrubCanvas.width  = Math.round(rect.width  * dpr);
+      scrubCanvas.height = Math.round(rect.height * dpr);
+      scrubCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      if (firstReady) drawScrubFrame(scrubLast < 0 ? 0 : scrubLast);
+    }
+    window.addEventListener('resize', function(){ clearTimeout(resizeScrub._t); resizeScrub._t = setTimeout(resizeScrub, 100); });
+    if (scrubCanvas) resizeScrub();
+
+    function drawCover(img){
+      if (!scrubCtx || !scrubCanvas) return;
+      var dpr = Math.min(window.devicePixelRatio||1, 2);
+      var cw = scrubCanvas.width/dpr, ch = scrubCanvas.height/dpr;
+      var iw = img.naturalWidth||img.width, ih = img.naturalHeight||img.height;
+      if (!iw || !ih) return;
+      var ratio = Math.max(cw/iw, ch/ih);
+      var w = iw*ratio, h = ih*ratio;
+      scrubCtx.fillStyle = '#08090D';
+      scrubCtx.fillRect(0,0,cw,ch);
+      scrubCtx.drawImage(img, (cw-w)/2, (ch-h)/2, w, h);
+    }
+
+    function drawScrubFrame(idx){
+      if (!scrubCtx) return;
+      idx = Math.max(0, Math.min(NFRAMES-1, idx));
+      if (idx === scrubLast) return;
+      var img = images[idx];
+      if (img && img.complete && img.naturalWidth){
+        drawCover(img); scrubLast = idx;
+      } else {
+        for (var d=1; d<25; d++){
+          if (images[idx-d] && images[idx-d].complete && images[idx-d].naturalWidth){ drawCover(images[idx-d]); scrubLast=idx-d; break; }
+          if (images[idx+d] && images[idx+d].complete && images[idx+d].naturalWidth){ drawCover(images[idx+d]); scrubLast=idx+d; break; }
+        }
+      }
+    }
+
+    function getScrubProgress(){
+      if (!scrubZone) return 0;
+      var rect = scrubZone.getBoundingClientRect();
+      var track = scrubZone.offsetHeight - window.innerHeight;
+      if (track <= 0) return 0;
+      return Math.max(0, Math.min(1, -rect.top / track));
+    }
+
+    function updatePanels(p){
+      var newActive = 0;
+      scrubPanels.forEach(function(panel, i){
+        var at = parseFloat(panel.dataset.at || 0);
+        if (p >= at) newActive = i;
+      });
+      if (newActive !== activePanel){
+        scrubPanels.forEach(function(p,i){ p.classList.toggle('active', i===newActive); });
+        activePanel = newActive;
+      }
+    }
+
+    function scrubTick(){
+      var p = getScrubProgress();
+      scrubTarget = p;
+      scrubCurrent += (scrubTarget - scrubCurrent) * 0.18;
+      if (Math.abs(scrubTarget - scrubCurrent) < 0.0004) scrubCurrent = scrubTarget;
+
+      if (firstReady){
+        var idx = Math.min(Math.floor(scrubCurrent * (NFRAMES-1)), NFRAMES-1);
+        drawScrubFrame(idx);
+        if (scrubBarFill) scrubBarFill.style.height = (p*100) + '%';
+        if (scrubCtr) scrubCtr.textContent = String(idx+1).padStart(3,'0') + ' / 241';
+        updatePanels(p);
+      }
+      requestAnimationFrame(scrubTick);
+    }
+    requestAnimationFrame(scrubTick);
+
+    /* ═══════════════════════════════════════
+       4. SECTION REVEALS (IntersectionObserver)
+    ═══════════════════════════════════════ */
+    if ('IntersectionObserver' in window){
+      var ioReveal = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if (entry.isIntersecting){
+            entry.target.classList.add('in');
+            ioReveal.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -48px 0px' });
+
+      /* Headings: wipe reveal */
+      document.querySelectorAll('.display, .eyebrow').forEach(function(el){
+        if (!el.closest('.hero') && !el.closest('.scrub-zone')){
+          el.classList.add('rev-wipe');
+          ioReveal.observe(el);
+        }
+      });
+
+      /* Cards & process steps: stagger up */
+      var staggerSel = '.srv-card, .cap-card, .stat-card, .process-step, .exec-item, .stack-pill, .marca-card';
+      document.querySelectorAll(staggerSel).forEach(function(el, i){
+        el.classList.add('rev-up');
+        el.style.setProperty('--d', (i % 5) * 90 + 'ms');
+        ioReveal.observe(el);
+      });
+
+      /* Vertical list items */
+      document.querySelectorAll('.vert-item').forEach(function(el, i){
+        el.classList.add('rev-up');
+        el.style.setProperty('--d', i * 70 + 'ms');
+        ioReveal.observe(el);
+      });
+
+      /* Footer cols */
+      document.querySelectorAll('.footer-col').forEach(function(el, i){
+        el.classList.add('rev-up');
+        el.style.setProperty('--d', i * 80 + 'ms');
+        ioReveal.observe(el);
+      });
+    }
+
+    /* ═══════════════════════════════════════
+       5. STAT COUNTER ANIMATION
+    ═══════════════════════════════════════ */
+    var statDefs = [
+      { sel: '.stat-card:nth-child(1) .stat-value', from: 0, to: 3.2,  fmt: function(v){ return v.toFixed(1)+'×'; } },
+      { sel: '.stat-card:nth-child(2) .stat-value', from: 0, to: 68,   fmt: function(v){ return Math.round(v)+'%'; } },
+      { sel: '.stat-card:nth-child(3) .stat-value', from: 0, to: 40,   fmt: function(v){ return '−'+Math.round(v)+'%'; } },
+      { sel: '.stat-card:nth-child(4) .stat-value', from: 0, to: 55,   fmt: function(v){ return '−'+Math.round(v)+'%'; } },
+    ];
+    var statTriggered = false;
+    if ('IntersectionObserver' in window){
+      var ioStats = new IntersectionObserver(function(entries){
+        if (!entries[0].isIntersecting || statTriggered) return;
+        statTriggered = true;
+        ioStats.disconnect();
+        statDefs.forEach(function(def){
+          var el = document.querySelector(def.sel);
+          if (!el) return;
+          var t0 = performance.now();
+          var DUR = 1600;
+          function tick(){
+            var p = Math.min(1, (performance.now()-t0)/DUR);
+            var eased = 1 - Math.pow(1-p, 3);
+            el.textContent = def.fmt(def.from + (def.to-def.from)*eased);
+            if (p < 1) requestAnimationFrame(tick);
+          }
+          requestAnimationFrame(tick);
+        });
+      }, { threshold: 0.5 });
+      var statsSection = document.querySelector('.stat-grid');
+      if (statsSection) ioStats.observe(statsSection);
+    }
+
+    /* ═══════════════════════════════════════
+       6. MAGNETIC CTA BUTTONS
+    ═══════════════════════════════════════ */
+    document.querySelectorAll('.cta').forEach(function(btn){
+      var tx = 0, ty = 0;
+      btn.addEventListener('mousemove', function(e){
+        var rect = btn.getBoundingClientRect();
+        var cx = rect.left + rect.width/2, cy = rect.top + rect.height/2;
+        tx = (e.clientX - cx) * 0.22;
+        ty = (e.clientY - cy) * 0.22;
+        btn.style.transition = 'transform 0.12s ease, background 0.3s, color 0.3s, gap 0.25s';
+        btn.style.transform = 'translate('+tx+'px,'+ty+'px)';
+      });
+      btn.addEventListener('mouseleave', function(){
+        btn.style.transition = 'transform 0.55s cubic-bezier(0.16,1,0.3,1), background 0.3s, color 0.3s, gap 0.25s';
+        btn.style.transform = 'translate(0,0)';
+      });
+    });
+
+    /* ═══════════════════════════════════════
+       7. CARD 3D TILT
+    ═══════════════════════════════════════ */
+    document.querySelectorAll('.srv-card, .cap-card, .stat-card, .marca-card, .process-step').forEach(function(card){
+      card.style.perspective = '800px';
+      card.addEventListener('mousemove', function(e){
+        var rect = card.getBoundingClientRect();
+        var dx = (e.clientX - rect.left - rect.width/2)  / (rect.width/2);
+        var dy = (e.clientY - rect.top  - rect.height/2) / (rect.height/2);
+        card.style.transition = 'transform 0.1s ease';
+        card.style.transform = 'perspective(800px) rotateX('+(-dy*3.5)+'deg) rotateY('+( dx*3.5)+'deg) translateZ(8px)';
+      });
+      card.addEventListener('mouseleave', function(){
+        card.style.transition = 'transform 0.6s cubic-bezier(0.16,1,0.3,1)';
+        card.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) translateZ(0)';
+      });
+    });
+
+    /* ═══════════════════════════════════════
+       8. SOUND DESIGN (Web Audio API, opt-in)
+    ═══════════════════════════════════════ */
+    var soundBtn  = document.getElementById('soundBtn');
+    var soundOn   = false;
+    var audioCtx  = null;
+    var masterGain, oscA, oscB, lfoOsc, lfoGain;
+
+    function initAudio(){
+      if (audioCtx) return;
+      audioCtx   = new (window.AudioContext || window.webkitAudioContext)();
+      masterGain = audioCtx.createGain(); masterGain.gain.value = 0;
+      masterGain.connect(audioCtx.destination);
+
+      /* Ambient: two detuned sines (55Hz + 82.5Hz perfect fifth) */
+      oscA = audioCtx.createOscillator(); oscA.type = 'sine'; oscA.frequency.value = 55;
+      oscB = audioCtx.createOscillator(); oscB.type = 'sine'; oscB.frequency.value = 82.5;
+
+      /* LFO for slow frequency wobble */
+      lfoOsc  = audioCtx.createOscillator(); lfoOsc.frequency.value = 0.18;
+      lfoGain = audioCtx.createGain();       lfoGain.gain.value = 6;
+      lfoOsc.connect(lfoGain);
+      lfoGain.connect(oscA.frequency);
+      lfoGain.connect(oscB.frequency);
+
+      var gainA = audioCtx.createGain(); gainA.gain.value = 0.55;
+      var gainB = audioCtx.createGain(); gainB.gain.value = 0.35;
+      oscA.connect(gainA); gainA.connect(masterGain);
+      oscB.connect(gainB); gainB.connect(masterGain);
+      oscA.start(); oscB.start(); lfoOsc.start();
+    }
+
+    function playTap(freq, dur){
+      if (!soundOn || !audioCtx) return;
+      var o = audioCtx.createOscillator(), g = audioCtx.createGain();
+      o.type = 'sine'; o.frequency.value = freq || 440;
+      o.connect(g); g.connect(audioCtx.destination);
+      g.gain.setValueAtTime(0.06, audioCtx.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + (dur||0.018));
+      o.start(audioCtx.currentTime); o.stop(audioCtx.currentTime + (dur||0.018));
+    }
+
+    if (soundBtn){
+      soundBtn.addEventListener('click', function(){
+        if (!audioCtx) initAudio();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        soundOn = !soundOn;
+        masterGain.gain.linearRampToValueAtTime(soundOn ? 0.1 : 0, audioCtx.currentTime + 0.8);
+        soundBtn.classList.toggle('on', soundOn);
+        playTap(soundOn ? 660 : 440, 0.02);
+      });
+    }
+
+    /* Add tap sounds to CTAs and nav links */
+    document.querySelectorAll('.cta').forEach(function(el){
+      el.addEventListener('click', function(){ playTap(880, 0.025); });
+      el.addEventListener('mouseenter', function(){ playTap(660, 0.015); });
+    });
+    document.querySelectorAll('.nav-link, .vert-item').forEach(function(el){
+      el.addEventListener('mouseenter', function(){ playTap(440, 0.012); });
+    });
+
+    /* ═══════════════════════════════════════
+       9. CURSOR SECTION LABEL UPDATE
+    ═══════════════════════════════════════ */
+    var sectionLabels = [
+      { id: 'main-content', label: null },
+    ];
+    var sections = document.querySelectorAll('.section');
+    sections.forEach(function(sec){
+      var ey = sec.querySelector('.eyebrow');
+      if (ey){
+        var txt = ey.textContent.replace(/^\d+\s*\/\s*/, '').trim().split('·')[0].trim();
+        sectionLabels.push({ el: sec, label: txt });
+      }
+    });
+
+    if ('IntersectionObserver' in window){
+      var curLabelEl = document.getElementById('cursor-label');
+      var ioSec = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if (entry.isIntersecting && curLabelEl && entry.target._secLabel){
+            /* Only update if no hover label is active */
+            if (!curLabelEl.classList.contains('show')){
+              curLabelEl.textContent = entry.target._secLabel;
+            }
+          }
+        });
+      }, { threshold: 0.5 });
+      sections.forEach(function(sec){
+        var ey = sec.querySelector('.eyebrow');
+        if (ey){
+          sec._secLabel = ey.textContent.split('·')[0].replace(/\d+\s*\/\s*/,'').trim().substring(0,18);
+          ioSec.observe(sec);
+        }
+      });
+    }
+
+  })();
+  </script>
+
+  <!-- Awards / loader / cursor-label / easter eggs -->
+  <script>
+  (function(){
+    /* ── Console egg (RANK 5) ── */
+    console.log('%c V I C T O R  —  I A ', 'background:#FFAA17;color:#0E0F12;font-size:16px;font-weight:700;padding:8px 20px;font-family:serif;letter-spacing:0.2em');
+    console.log('%cAgencia de Inteligencia Artificial · Playa del Carmen, Quintana Roo, México', 'color:#0E0F12;font-size:11px;font-family:monospace');
+    console.log('%chello@victor-ia.com.mx  ·  victor-ia.com.mx', 'color:#CC8800;font-size:11px;font-family:monospace');
+    console.log('%c─────────────────────────────────────────', 'color:#0E0F12;opacity:0.2;font-family:monospace');
+
+    /* ── Loader (RANK 1) ── */
+    var fill    = document.getElementById('loader-fill');
+    var status  = document.getElementById('loader-status');
+    var pct     = document.getElementById('loader-pct');
+    var loader  = document.getElementById('loader');
+    var msgs    = ['Calibrando éter','Playa del Carmen · QR','Iniciando inteligencia','Revelando mármol'];
+    var p = 0, si = 0, t0 = performance.now(), MIN_MS = 1800;
+
+    function tick(){
+      p = Math.min(p + Math.random() * 3.5 + 1.2, 96);
+      fill.style.width = p + '%';
+      pct.textContent  = String(Math.round(p)).padStart(3,'0');
+      var next = Math.floor(p / 25);
+      if(next > si && next < msgs.length){ si = next; fadeStatus(msgs[si]); }
+      if(p < 96){ setTimeout(tick, 35 + Math.random()*35); }
+      else {
+        var wait = Math.max(0, MIN_MS - (performance.now() - t0));
+        setTimeout(done, wait);
+      }
+    }
+    function fadeStatus(msg){
+      status.style.opacity='0';
+      setTimeout(function(){ status.textContent=msg; status.style.opacity='1'; }, 220);
+    }
+    function done(){
+      fill.style.width='100%'; pct.textContent='100';
+      setTimeout(function(){
+        loader.classList.add('hidden');
+        setTimeout(function(){
+          loader.style.display='none';
+          revealHero();
+        }, 700);
+      }, 280);
+    }
+    tick();
+
+    /* ── Kinetic hero (RANK 4) ── */
+    function revealHero(){
+      document.querySelectorAll('.hero-word').forEach(function(w){ w.classList.add('on'); });
+    }
+
+    /* ── Cursor contextual labels (RANK 2) ── */
+    var label = document.getElementById('cursor-label');
+    if(label && window.matchMedia('(hover:hover)').matches){
+      var lx = 0, ly = 0;
+      document.addEventListener('mousemove', function(e){
+        lx = e.clientX; ly = e.clientY;
+        label.style.left = lx + 'px';
+        label.style.top  = ly + 'px';
+      });
+      function getLabelText(el){
+        if(!el) return null;
+        var tag = el.tagName.toLowerCase();
+        if(tag === 'a'){
+          var href = el.getAttribute('href') || '';
+          if(el.classList.contains('cta')) return 'Agenda';
+          if(href.indexOf('service') > -1) return 'Ver servicio';
+          if(href.indexOf('http') === 0)   return 'Visitar';
+          return 'Explorar';
+        }
+        if(tag === 'button'){
+          if(el.id === 'nav-svc-btn') return 'Servicios';
+          if(el.id === 'svc-panel-close') return 'Cerrar';
+          return 'Abrir';
+        }
+        return null;
+      }
+      document.addEventListener('mouseover', function(e){
+        var t = e.target.closest('a,button');
+        var txt = getLabelText(t);
+        if(txt){ label.textContent = txt; label.classList.add('show'); }
+      });
+      document.addEventListener('mouseout', function(e){
+        if(e.target.closest('a,button')) label.classList.remove('show');
+      });
+    }
+
+    /* ── Void mode easter egg (RANK 5) — triple-click logo ── */
+    var logo = document.querySelector('.nav-logo');
+    var cc = 0, ct;
+    if(logo){
+      logo.addEventListener('click', function(){
+        cc++;
+        clearTimeout(ct);
+        ct = setTimeout(function(){ cc=0; }, 500);
+        if(cc >= 3){
+          document.body.classList.toggle('void-mode');
+          cc = 0;
+        }
+      });
+    }
+
+  })();
+  </script>
+</body>
+</html>

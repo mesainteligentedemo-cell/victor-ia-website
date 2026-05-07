@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 — No existe en este universo · VICTOR IA</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#F8F7F5">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink:   #0E0F12;
+      --muted: rgba(14,15,18,0.45);
+      --rule:  rgba(14,15,18,0.09);
+      --amber: #FFAA17;
+      --warm:  #F8F7F5;
+    }
+    html, body {
+      height: 100%; overflow: hidden;
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--warm);
+      color: var(--ink);
+      cursor: none;
+      -webkit-font-smoothing: antialiased;
+    }
+    @media (pointer: coarse) { body { cursor: default; } }
+
+    .bg-marble {
+      position: fixed; inset: 0; z-index: 0;
+      background-image: url('assets/bg-light.jpg');
+      background-size: cover;
+      background-position: 50% 30%;
+      background-repeat: no-repeat;
+      filter: sepia(0.04) brightness(0.92);
+    }
+    .reveal-canvas {
+      position: fixed; inset: 0; z-index: 1; pointer-events: none;
+    }
+    .cursor { position: fixed; width: 5px; height: 5px; background: var(--ink); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); }
+    .cursor-ring { position: fixed; width: 32px; height: 32px; border: 1px solid rgba(14,15,18,0.3); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: width 0.35s ease, height 0.35s ease; }
+    @media (max-width: 640px) { .cursor, .cursor-ring { display: none; } body { cursor: default; } }
+
+    .fog {
+      position: fixed; inset: 0; z-index: 2; pointer-events: none;
+      background:
+        radial-gradient(ellipse 70% 70% at 50% 50%,
+          rgba(248,247,245,0.55) 0%,
+          rgba(248,247,245,0.20) 55%,
+          transparent 80%),
+        linear-gradient(to top,
+          rgba(248,247,245,0.82) 0%,
+          rgba(248,247,245,0.35) 30%,
+          transparent 60%);
+    }
+
+    .content {
+      position: fixed; inset: 0; z-index: 10;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: clamp(2rem,6vw,5rem);
+      animation: fadeUp 1.2s cubic-bezier(0.16,1,0.3,1) 0.1s both;
+    }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+
+    .err-code {
+      font-family: 'Instrument Serif', serif; font-style: italic;
+      font-size: clamp(6rem,18vw,16rem); font-weight: 400;
+      line-height: 0.88; letter-spacing: -0.04em; color: var(--ink);
+      opacity: 0.08; user-select: none;
+      position: absolute; pointer-events: none;
+    }
+    .err-msg {
+      font-family: 'Instrument Serif', serif; font-style: italic;
+      font-size: clamp(1.3rem,3.5vw,2.4rem); font-weight: 400;
+      line-height: 1.3; letter-spacing: -0.02em; color: var(--ink);
+      margin-bottom: 0.8rem; position: relative; z-index: 1;
+    }
+    .err-sub {
+      font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 3rem; position: relative; z-index: 1;
+    }
+    .err-cta {
+      display: inline-flex; align-items: center; gap: 1rem;
+      background: var(--ink); color: #fff; text-decoration: none;
+      font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase;
+      padding: 1rem 2.2rem;
+      transition: background 0.3s, color 0.3s, gap 0.25s;
+      position: relative; z-index: 1;
+    }
+    .err-cta:hover { background: var(--amber); color: var(--ink); gap: 1.5rem; }
+    .err-cta:focus-visible { outline: 2px solid var(--amber); outline-offset: 4px; }
+
+    .err-footer {
+      position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
+      font-size: 0.55rem; letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--muted); z-index: 10; white-space: nowrap;
+    }
+
+    ::selection { background: var(--amber); color: var(--ink); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .content { animation: none; opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-marble"></div>
+  <canvas class="reveal-canvas" id="revealCanvas"></canvas>
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <div class="fog"></div>
+
+  <div class="content">
+    <p class="err-code" aria-hidden="true">404</p>
+    <h1 class="err-msg">Esta página no existe<br>en este universo.</h1>
+    <p class="err-sub">VICTOR IA · victor-ia.com.mx</p>
+    <a href="index.html" class="err-cta">Volver al inicio &nbsp;→</a>
+  </div>
+
+  <p class="err-footer">404 · Playa del Carmen, México</p>
+
+  <script>
+  (function(){
+    var canvas = document.getElementById('revealCanvas');
+    var ctx    = canvas.getContext('2d');
+    var WARM   = '248,247,245';
+    var isMobile = !window.matchMedia('(hover:hover)').matches;
+
+    function resize(){ canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    window.addEventListener('resize', resize); resize();
+
+    var lerp = function(a,b,t){ return a+(b-a)*t; };
+
+    if(isMobile){
+      var BASE_R=34, STEP_PX=5, HOLD_MS=1500, FADE_MS=1400, MAX_V=1.8, MAX_PTS=900;
+      var trail=[], isTouching=false, lastX=null, lastY=null, lastT=null, vel=0;
+      var tx=window.innerWidth*.5, ty=window.innerHeight*.5, fx=tx, fy=ty, liveA=0;
+      function stamp(x,y,hold){ var r=BASE_R*(0.74+Math.random()*0.54); trail.push({x:x+(Math.random()-.5)*5,y:y+(Math.random()-.5)*5,t:performance.now(),r:r,hold:hold}); if(trail.length>MAX_PTS) trail.splice(0,trail.length-MAX_PTS); }
+      function erase(x,y,r,a){ var halo=r*2.1; ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fillStyle='rgba(0,0,0,'+a+')'; ctx.fill(); var g=ctx.createRadialGradient(x,y,r,x,y,halo); g.addColorStop(0,'rgba(0,0,0,'+(a*.88)+')'); g.addColorStop(.38,'rgba(0,0,0,'+(a*.5)+')'); g.addColorStop(.72,'rgba(0,0,0,'+(a*.13)+')'); g.addColorStop(1,'rgba(0,0,0,0)'); ctx.beginPath(); ctx.arc(x,y,halo,0,Math.PI*2); ctx.fillStyle=g; ctx.fill(); }
+      function drawM(){ var now=performance.now(),maxAge=HOLD_MS+FADE_MS; while(trail.length&&now-trail[0].t>=maxAge) trail.shift(); fx=lerp(fx,tx,isTouching?.20:.08); fy=lerp(fy,ty,isTouching?.20:.08); liveA=lerp(liveA,isTouching?1:0,isTouching?.18:.05); ctx.clearRect(0,0,canvas.width,canvas.height); ctx.fillStyle='rgba('+WARM+',1)'; ctx.fillRect(0,0,canvas.width,canvas.height); ctx.globalCompositeOperation='destination-out'; for(var i=0;i<trail.length;i++){ var p=trail[i],age=now-p.t,a=age<p.hold?1:1-(age-p.hold)/FADE_MS; if(a>.005) erase(p.x,p.y,p.r,a); } if(liveA>.005) erase(fx,fy,BASE_R,liveA); ctx.globalCompositeOperation='source-over'; requestAnimationFrame(drawM); }
+      drawM();
+      document.addEventListener('touchstart',function(e){ isTouching=true; var t=e.touches[0]; tx=t.clientX; ty=t.clientY; fx=tx; fy=ty; lastX=tx; lastY=ty; lastT=performance.now(); vel=0; stamp(tx,ty,HOLD_MS); },{passive:true});
+      document.addEventListener('touchmove',function(e){ var t=e.touches[0],nx=t.clientX,ny=t.clientY; tx=nx; ty=ny; var dist=Math.hypot(nx-lastX,ny-lastY); if(dist>=STEP_PX){ var now=performance.now(),dt=Math.max(now-lastT,1); vel=lerp(vel,dist/dt,.35); var hold=Math.max(0,HOLD_MS*(1-Math.min(1,vel/MAX_V))); var steps=Math.ceil(dist/STEP_PX); for(var i=1;i<=steps;i++){ var f=i/steps; stamp(lastX+(nx-lastX)*f,lastY+(ny-lastY)*f,hold); } lastX=nx; lastY=ny; lastT=now; } },{passive:true});
+      document.addEventListener('touchend',function(){ isTouching=false; lastX=lastY=lastT=null; vel=0; },{passive:true});
+    } else {
+      var D_BASE=30, D_STEP=5, D_HOLD=1400, D_FADE=1200, D_MAX_V=2.2, D_MAX_PTS=900;
+      var dTrail=[], isMoving=false, moveTo=null, dLX=null, dLY=null, dLT=null, dVel=0;
+      var dlx=window.innerWidth*.5, dly=window.innerHeight*.5, dmx=dlx, dmy=dly, dLiveA=0;
+      var cur=document.getElementById('cursor'), ring=document.getElementById('cursorRing');
+      function dStamp(x,y,hold){ var r=D_BASE*(0.74+Math.random()*0.54); dTrail.push({x:x+(Math.random()-.5)*4,y:y+(Math.random()-.5)*4,t:performance.now(),r:r,hold:hold}); if(dTrail.length>D_MAX_PTS) dTrail.splice(0,dTrail.length-D_MAX_PTS); }
+      function dErase(x,y,r,a){ var halo=r*2.1; ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fillStyle='rgba(0,0,0,'+a+')'; ctx.fill(); var g=ctx.createRadialGradient(x,y,r,x,y,halo); g.addColorStop(0,'rgba(0,0,0,'+(a*.88)+')'); g.addColorStop(.38,'rgba(0,0,0,'+(a*.5)+')'); g.addColorStop(.72,'rgba(0,0,0,'+(a*.13)+')'); g.addColorStop(1,'rgba(0,0,0,0)'); ctx.beginPath(); ctx.arc(x,y,halo,0,Math.PI*2); ctx.fillStyle=g; ctx.fill(); }
+      function dDraw(){ var now=performance.now(),maxAge=D_HOLD+D_FADE; while(dTrail.length&&now-dTrail[0].t>=maxAge) dTrail.shift(); dlx=lerp(dlx,dmx,isMoving?.22:.08); dly=lerp(dly,dmy,isMoving?.22:.08); dLiveA=lerp(dLiveA,isMoving?1:0,isMoving?.18:.05); ctx.clearRect(0,0,canvas.width,canvas.height); ctx.fillStyle='rgba('+WARM+',1)'; ctx.fillRect(0,0,canvas.width,canvas.height); ctx.globalCompositeOperation='destination-out'; for(var i=0;i<dTrail.length;i++){ var p=dTrail[i],age=now-p.t,a=age<p.hold?1:1-(age-p.hold)/D_FADE; if(a>.005) dErase(p.x,p.y,p.r,a); } if(dLiveA>.005) dErase(dlx,dly,D_BASE,dLiveA); ctx.globalCompositeOperation='source-over'; requestAnimationFrame(dDraw); }
+      dDraw();
+      document.addEventListener('mousemove',function(e){
+        var nx=e.clientX, ny=e.clientY;
+        isMoving=true; clearTimeout(moveTo); moveTo=setTimeout(function(){ isMoving=false; },120);
+        dmx=nx; dmy=ny;
+        if(cur) cur.style.cssText='left:'+nx+'px;top:'+ny+'px';
+        if(ring) ring.style.cssText='left:'+nx+'px;top:'+ny+'px';
+        if(dLX===null){ dLX=nx; dLY=ny; dLT=performance.now(); return; }
+        var dist=Math.hypot(nx-dLX,ny-dLY);
+        if(dist>=D_STEP){ var now=performance.now(),dt=Math.max(now-dLT,1); dVel=lerp(dVel,dist/dt,.35); var hold=Math.max(0,D_HOLD*(1-Math.min(1,dVel/D_MAX_V))); var steps=Math.ceil(dist/D_STEP); for(var i=1;i<=steps;i++){ var f=i/steps; dStamp(dLX+(nx-dLX)*f,dLY+(ny-dLY)*f,hold); } dLX=nx; dLY=ny; dLT=now; }
+      });
+      document.querySelectorAll('a, button').forEach(function(el){
+        el.addEventListener('mouseenter',function(){ if(ring){ ring.style.width='52px'; ring.style.height='52px'; } });
+        el.addEventListener('mouseleave',function(){ if(ring){ ring.style.width='32px'; ring.style.height='32px'; } });
+      });
+    }
+  })();
+  </script>
+</body>
+</html>

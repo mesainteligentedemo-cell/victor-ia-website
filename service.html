@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="page-title">VICTOR IA — Servicio</title>
+  <meta name="description" content="VICTOR IA — Inteligencia que trabaja para ti.">
+  <meta name="theme-color" content="#F8F7F5">
+  <meta property="og:site_name" content="VICTOR IA">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --warm:     #F8F7F5;
+      --ink:      #0E0F12;
+      --muted:    rgba(14,15,18,0.45);
+      --rule:     rgba(14,15,18,0.09);
+      --amber-dk: #CC8800;
+    }
+    html, body {
+      height: 100%; overflow: hidden;
+      background: var(--warm);
+      font-family: 'Space Grotesk', sans-serif;
+      color: var(--ink); cursor: none;
+      -webkit-font-smoothing: antialiased;
+    }
+    @media (max-width: 767px) { html, body { overflow: auto; } }
+    @media (pointer: coarse) { body { cursor: default; } }
+
+    /* ── Marble background ── */
+    #svc-bg {
+      position: fixed; inset: 0; z-index: 0;
+      background-size: cover;
+      background-position: 50% 30%;
+      background-repeat: no-repeat;
+      filter: sepia(0.04) brightness(1.02);
+    }
+
+    /* ── Canvas reveal ── */
+    #revealCanvas {
+      position: fixed; inset: 0; z-index: 1; pointer-events: none;
+    }
+
+    /* ── Permanent content fog — always readable, regardless of canvas ── */
+    #svc-fog {
+      position: fixed; inset: 0; z-index: 9; pointer-events: none;
+      background:
+        linear-gradient(to right,
+          rgba(248,247,245,0.82) 0%,
+          rgba(248,247,245,0.55) 38%,
+          rgba(248,247,245,0.18) 58%,
+          transparent 72%),
+        linear-gradient(to top,
+          rgba(248,247,245,0.78) 0%,
+          rgba(248,247,245,0.45) 28%,
+          transparent 55%);
+    }
+
+    /* ── Cursor ── */
+    .cursor { position: fixed; width: 5px; height: 5px; background: var(--ink); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); }
+    .cursor-ring { position: fixed; width: 32px; height: 32px; border: 1px solid rgba(14,15,18,0.3); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: width 0.35s ease, height 0.35s ease; }
+    @media (max-width: 640px) { .cursor, .cursor-ring { display: none; } }
+
+    /* ── Nav ── */
+    .svc-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+      padding: 0 clamp(1.5rem,4vw,3rem);
+      height: 60px; display: flex; align-items: center; justify-content: space-between;
+      background: linear-gradient(to bottom, rgba(248,247,245,0.85) 0%, transparent 100%);
+    }
+    .svc-back {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--ink); text-decoration: none; opacity: 0.6; transition: opacity 0.2s;
+    }
+    .svc-back:hover { opacity: 1; }
+    .svc-back svg { width: 16px; height: 16px; }
+    .svc-nav-cta {
+      font-size: 0.62rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--amber-dk); text-decoration: none;
+      border: 1px solid rgba(204,136,0,0.35); padding: 0.5rem 1.1rem;
+      transition: background 0.25s;
+    }
+    .svc-nav-cta:hover { background: rgba(204,136,0,0.08); }
+
+    /* ── Main layout ── */
+    .svc-main {
+      position: fixed; inset: 0; z-index: 10;
+      display: grid; grid-template-columns: 1fr;
+      align-items: end;
+      padding: 60px clamp(1.5rem,5vw,3rem) clamp(3rem,8vh,5rem);
+      pointer-events: none;
+    }
+    @media (min-width: 900px) {
+      .svc-main { grid-template-columns: 1fr 280px; align-items: stretch; gap: 2rem; }
+    }
+
+    /* ── Content ── */
+    .svc-content {
+      pointer-events: auto;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      max-width: 580px;
+    }
+    .svc-eyebrow {
+      font-size: 0.6rem; letter-spacing: 0.32em; text-transform: uppercase;
+      color: var(--amber-dk); margin-bottom: 1rem; display: block;
+    }
+    .svc-title {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-size: clamp(28px,6vw,58px); font-weight: 400; font-style: italic;
+      line-height: 1.12; letter-spacing: -0.02em; color: var(--ink);
+      margin-bottom: 1.5rem;
+      text-shadow: 0 0 40px rgba(248,247,245,1), 0 0 80px rgba(248,247,245,0.9);
+    }
+    .svc-brief {
+      font-size: clamp(14px,2vw,17px); font-weight: 300;
+      color: var(--muted); line-height: 1.65; margin-bottom: 1rem;
+      text-shadow: 0 0 24px rgba(248,247,245,1), 0 0 48px rgba(248,247,245,0.8);
+    }
+    .svc-desc { max-height: 0; overflow: hidden; transition: max-height 0.6s cubic-bezier(0.16,1,0.3,1); }
+    .svc-desc.open { max-height: 40vh; overflow-y: auto; }
+    .svc-desc p { font-size: 13px; color: var(--muted); line-height: 1.75; margin-bottom: 0.85rem; }
+    .svc-read-more {
+      font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--ink); border-bottom: 1px solid var(--rule);
+      padding-bottom: 2px; cursor: pointer; display: inline-block;
+      margin-bottom: 1.75rem; background: none; border-top: none;
+      border-left: none; border-right: none; font-family: inherit;
+      transition: border-color 0.2s;
+    }
+    .svc-read-more:hover { border-bottom-color: var(--ink); }
+    .svc-cta {
+      display: inline-flex; align-items: center; gap: 0.75rem;
+      padding: 0.85rem 2rem; border: 1px solid var(--ink); background: none;
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--ink); text-decoration: none; position: relative; overflow: hidden;
+      align-self: flex-start; pointer-events: auto; transition: color 0.35s;
+    }
+    .svc-cta::before { content:''; position:absolute; inset:0; background:var(--ink); transform:translateX(-101%); transition:transform 0.4s cubic-bezier(0.16,1,0.3,1); }
+    .svc-cta:hover::before { transform: translateX(0); }
+    .svc-cta span, .svc-cta svg { position: relative; z-index: 1; }
+    .svc-cta:hover { color: var(--warm); }
+    .svc-cta svg { width: 18px; height: 9px; }
+
+    /* ── Sidebar ── */
+    .svc-sidebar { display: none; pointer-events: auto; flex-direction: column; justify-content: center; gap: 0; border-left: 1px solid var(--rule); padding-left: 1.5rem; overflow-y: auto; align-self: center; max-height: calc(100vh - 120px); background: rgba(248,247,245,0.72); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 1.5rem; border-radius: 2px; }
+    @media (min-width: 900px) { .svc-sidebar { display: flex; } }
+    .svc-side-link { display: flex; align-items: baseline; gap: 0.6rem; padding: 0.45rem 0; border-bottom: 1px solid transparent; transition: border-color 0.2s; text-decoration: none; color: var(--ink); }
+    .svc-side-link:hover, .svc-side-link.active { border-bottom-color: var(--rule); }
+    .svc-side-n { font-size: 0.5rem; color: var(--amber-dk); letter-spacing: 0.14em; min-width: 16px; flex-shrink: 0; }
+    .svc-side-name { font-size: 0.68rem; font-weight: 400; color: var(--muted); line-height: 1.3; transition: color 0.2s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px; }
+    .svc-side-link:hover .svc-side-name, .svc-side-link.active .svc-side-name { color: var(--ink); }
+    .svc-side-link.active .svc-side-name { font-weight: 600; }
+
+    /* ── Footer label ── */
+    .svc-footer-label { position: fixed; bottom: 1.25rem; right: clamp(1.5rem,4vw,3rem); z-index: 10; font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); pointer-events: none; }
+
+    /* ── Prev/Next ── */
+    .svc-prevnext { position: fixed; bottom: 1.25rem; left: 50%; transform: translateX(-50%); z-index: 10; display: flex; gap: 1rem; align-items: center; pointer-events: auto; }
+    .svc-prev, .svc-next { font-size: 0.56rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); transition: color 0.2s; cursor: pointer; background: none; border: none; font-family: inherit; padding: 0; }
+    .svc-prev:hover, .svc-next:hover { color: var(--ink); }
+    .svc-prevnext-sep { font-size: 10px; color: var(--rule); }
+
+    /* ── Nav dots ── */
+    .svc-dots { position: fixed; bottom: 1.25rem; left: clamp(1.5rem,4vw,3rem); z-index: 10; display: flex; gap: 6px; align-items: center; pointer-events: none; }
+    .svc-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--rule); transition: background 0.25s; }
+    .svc-dot.active { background: var(--ink); }
+
+    /* ── Mobile portrait ── */
+    @media (max-width: 767px) {
+      .svc-main {
+        position: relative; padding-top: 80px;
+        min-height: 100vh; align-items: flex-end;
+        padding-bottom: 5rem;
+      }
+      .svc-title { font-size: clamp(26px,7vw,40px); margin-bottom: 1rem; }
+      .svc-brief { font-size: 15px; margin-bottom: 0.75rem; }
+      .svc-desc.open { max-height: none; overflow: visible; }
+      .svc-footer-label { display: none; }
+      .svc-dots { display: none; }
+      .svc-prevnext { bottom: 1rem; }
+      #svc-fog {
+        background:
+          linear-gradient(to top,
+            rgba(248,247,245,0.92) 0%,
+            rgba(248,247,245,0.65) 30%,
+            rgba(248,247,245,0.20) 55%,
+            transparent 70%),
+          linear-gradient(to right,
+            rgba(248,247,245,0.60) 0%,
+            transparent 60%);
+      }
+    }
+
+    /* ── Mobile landscape ── */
+    @media (max-width: 900px) and (orientation: landscape) {
+      html, body { overflow: auto; }
+      .svc-main {
+        position: relative; padding-top: 65px;
+        min-height: 100vh; align-items: flex-end;
+        padding-bottom: 4rem;
+        grid-template-columns: 1fr;
+      }
+      .svc-title { font-size: clamp(20px,4.5vw,32px); margin-bottom: 0.75rem; }
+      .svc-brief { font-size: 13px; line-height: 1.5; margin-bottom: 0.6rem; }
+      .svc-read-more { margin-bottom: 1rem; }
+      .svc-cta { padding: 0.65rem 1.5rem; font-size: 0.6rem; }
+      .svc-sidebar { display: none !important; }
+      .svc-dots { display: none; }
+      .svc-prevnext { bottom: 0.75rem; }
+      .svc-footer-label { display: none; }
+      #svc-fog {
+        background:
+          linear-gradient(to top,
+            rgba(248,247,245,0.90) 0%,
+            rgba(248,247,245,0.55) 28%,
+            transparent 52%),
+          linear-gradient(to right,
+            rgba(248,247,245,0.65) 0%,
+            transparent 55%);
+      }
+    }
+
+    /* ── Nav on mobile ── */
+    @media (max-width: 480px) {
+      .svc-nav { padding: 0 1.2rem; }
+      .svc-back span { display: none; }
+      .svc-nav-cta { font-size: 0.55rem; padding: 0.45rem 0.8rem; }
+    }
+
+    /* ── View Transitions ── */
+    @view-transition { navigation: auto; }
+    ::view-transition-old(root) { animation: vt-out 0.4s cubic-bezier(0.4,0,1,1) both; }
+    ::view-transition-new(root) { animation: vt-in  0.4s cubic-bezier(0,0,0.2,1) both; }
+    @keyframes vt-out { from{opacity:1} to{opacity:0} }
+    @keyframes vt-in  { from{opacity:0} to{opacity:1} }
+
+    /* ── Loader ── */
+    #svc-loader {
+      position: fixed; inset: 0; z-index: 2000;
+      background: var(--warm);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1);
+    }
+    #svc-loader.hidden { opacity: 0; pointer-events: none; }
+    .sl-wordmark {
+      font-family: 'Instrument Serif', Georgia, serif; font-style: italic;
+      font-size: clamp(2rem,5vw,3.8rem); font-weight: 400;
+      letter-spacing: -0.025em; color: var(--ink); line-height: 1;
+      margin-bottom: 2rem; user-select: none;
+    }
+    .sl-track { width: clamp(120px,22vw,200px); height: 1px; background: var(--rule); position: relative; }
+    .sl-fill  { position: absolute; left:0; top:0; height:100%; background: var(--ink); width:0%; transition: width 0.06s linear; }
+
+    /* ── Cursor label ── */
+    .cursor-label {
+      position: fixed; pointer-events: none; z-index: 9997;
+      font-size: 0.52rem; letter-spacing: 0.24em; text-transform: uppercase;
+      color: var(--ink); opacity: 0;
+      transform: translate(-50%, 22px);
+      transition: opacity 0.18s ease;
+      white-space: nowrap; user-select: none;
+    }
+    .cursor-label.show { opacity: 0.65; }
+
+    /* ── C-tier ── */
+    ::selection { background: #FFAA17; color: #0E0F12; }
+    a:focus-visible, button:focus-visible { outline: 2px solid #FFAA17; outline-offset: 4px; }
+    .svc-title { font-optical-sizing: auto; }
+    .skip-link {
+      position: fixed; top: -100%; left: 1rem; z-index: 9999;
+      background: var(--ink); color: var(--warm);
+      padding: 0.5rem 1.2rem; font-size: 0.7rem; letter-spacing: 0.1em;
+      text-decoration: none; transition: top 0.2s;
+    }
+    .skip-link:focus { top: 1rem; }
+
+    /* ── Reduced motion ── */
+    @media (prefers-reduced-motion: reduce) {
+      @view-transition { navigation: none; }
+      * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+    }
+
+    /* ── Lenis ── */
+    html.lenis, html.lenis body { height: auto; }
+    .lenis.lenis-smooth { scroll-behavior: auto !important; }
+
+    /* ── Magnetic CTA ── */
+    .svc-cta { will-change: transform; }
+
+    /* ── Content reveal ── */
+    .svc-content {
+      opacity: 0; transform: translateY(22px);
+      animation: svc-in 0.85s cubic-bezier(0.16,1,0.3,1) 0.1s both;
+    }
+    @keyframes svc-in { to { opacity:1; transform:translateY(0); } }
+    @media (prefers-reduced-motion: reduce) { .svc-content { animation: none; opacity:1; transform:none; } }
+  </style>
+</head>
+<body>
+
+  <a href="#svc-main" class="skip-link">Saltar al contenido</a>
+
+  <!-- Loader -->
+  <div id="svc-loader" role="status" aria-label="Cargando servicio">
+    <p class="sl-wordmark">Victor — IA</p>
+    <div class="sl-track" aria-hidden="true"><div class="sl-fill" id="sl-fill"></div></div>
+  </div>
+
+  <!-- Marble -->
+  <div id="svc-bg" aria-hidden="true"></div>
+
+  <!-- Canvas reveal -->
+  <canvas id="revealCanvas" aria-hidden="true"></canvas>
+
+  <!-- Permanent fog — keeps text readable at all times -->
+  <div id="svc-fog" aria-hidden="true"></div>
+
+  <!-- Cursor -->
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+  <div class="cursor-label" id="cursor-label" aria-hidden="true"></div>
+
+  <!-- Nav -->
+  <nav class="svc-nav" aria-label="Navegación">
+    <a href="index.html" class="svc-back" aria-label="Volver a VICTOR IA">
+      <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 4L6 10L12 16" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span>VICTOR IA</span>
+    </a>
+    <a href="https://meetings.hubspot.com/pablo-solar" class="svc-nav-cta">Diagnóstico gratuito →</a>
+  </nav>
+
+  <!-- Main -->
+  <main class="svc-main" id="svc-main">
+    <div class="svc-content">
+      <span class="svc-eyebrow" id="svc-num">01</span>
+      <h1 class="svc-title" id="svc-title">Cargando…</h1>
+      <p class="svc-brief" id="svc-brief"></p>
+      <div class="svc-desc" id="svc-desc"></div>
+      <button class="svc-read-more" id="svc-read-more" type="button">Leer más +</button>
+      <a href="https://meetings.hubspot.com/pablo-solar" class="svc-cta">
+        <span>Agenda tu diagnóstico gratuito</span>
+        <svg viewBox="0 0 20 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 5H18M14 1L18 5L14 9" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+    <div class="svc-sidebar" id="svc-sidebar" aria-label="Todos los servicios"></div>
+  </main>
+
+  <!-- Prev/Next -->
+  <div class="svc-prevnext" id="svc-prevnext">
+    <button class="svc-prev" id="svc-prev" type="button">← Anterior</button>
+    <span class="svc-prevnext-sep">·</span>
+    <button class="svc-next" id="svc-next" type="button">Siguiente →</button>
+  </div>
+
+  <!-- Dots -->
+  <div class="svc-dots" id="svc-dots"></div>
+
+  <!-- Footer label -->
+  <div class="svc-footer-label">VICTOR IA · Playa del Carmen, México</div>
+
+<script>
+(function(){
+  'use strict';
+
+  var SVCS = [
+    { id:'01', bg:'assets/svc-bg-01.jpg', title:'Sitios Web Cinematográficos & Apps Interactivas', brief:'Tu presencia digital como declaración de guerra.', desc:'Experiencias digitales de nivel internacional: scroll cinematic, interacciones 3D, animaciones de alto impacto. El tipo de presencia digital que posiciona tu marca como la número uno de tu mercado.\n\nNo es un sitio web — es tu declaración de guerra al mercado. Mientras la competencia tiene páginas genéricas, tú tienes una experiencia que paraliza, convierte y vende.\n\nDiseñamos y desarrollamos desde cero: arquitectura de información, UI/UX, animaciones y rendimiento. Un activo digital que trabaja 24/7.' },
+    { id:'02', bg:'assets/svc-bg-11.jpg', title:'Mini Videojuegos Corporativos', brief:'Gamificación de alto nivel que no se olvida.', desc:'Gamificación de alto nivel para empresas: experiencias interactivas de marca, juegos de capacitación para equipos, herramientas de onboarding gamificadas y activaciones digitales que los clientes no olvidan.\n\nCuando el cliente juega, recuerda. Cuando recuerda, compra. Cuando se divierte, regresa.\n\nDiseñamos cada mecánica de juego alineada a tus objetivos de negocio: retención, capacitación, ventas o fidelización.' },
+    { id:'03', bg:'assets/svc-bg-15.jpg', title:'Modelos 3D de Producto y Arquitectura', brief:'Visualizaciones fotorrealistas que venden antes de construir.', desc:'Visualizaciones tridimensionales fotorrealistas de productos, espacios, desarrollos inmobiliarios y arquitectura. Renders de alto impacto para ventas, marketing y presentaciones corporativas.\n\nVende algo que aún no existe. Cierra proyectos inmobiliarios antes de poner el primer ladrillo. Presenta productos antes de fabricarlos.\n\nEl render correcto no muestra tu producto — muestra el estilo de vida que viene con él.' },
+    { id:'04', bg:'assets/svc-bg-04.jpg', title:'Configuradores 3D Interactivos', brief:'Tu cliente diseña su compra en tiempo real.', desc:'Herramientas que permiten a tus clientes personalizar productos o unidades inmobiliarias en tiempo real desde cualquier dispositivo — elige color, acabado, distribución y ve el resultado al instante.\n\nEl vendedor que nunca duerme. El que convierte la imaginación del cliente en una decisión de compra sin fricción.\n\nIntegrado a tu catálogo y CRM: cada configuración es un lead calificado con preferencias documentadas.' },
+    { id:'05', bg:'assets/svc-bg-08.jpg', title:'UI/UX Inclusivo — Primeros en México', brief:'El mercado que el 99% de tu competencia ignora.', desc:'Diseñamos experiencias digitales que cualquier persona puede usar de forma autónoma — incluyendo personas con discapacidades motrices, visuales, cognitivas o auditivas.\n\nImplementamos WCAG 2.2, estructura ARIA, navegación por teclado, control por voz y reconocimiento de gestos. Subtítulos automáticos y simplicidad cognitiva en cada interfaz.\n\nTu empresa accede a un mercado ignorado por el 99% de tus competidores y cumple con normativas legales de accesibilidad que se están volviendo obligatorias en México.' },
+    { id:'06', bg:'assets/svc-bg-06.jpg', title:'Video y Producción Audiovisual', brief:'Spots, reels y documentales que paralizan el scroll.', desc:'Spots comerciales, reels corporativos, documentales de marca y campañas de contenido producidos con tecnología y talento de primer nivel. Del concepto al producto final listo para cualquier pantalla.\n\nUn video bien hecho no se ve — se siente. Y los que se sienten, detienen el scroll, generan compartidos y venden.\n\nProducción con IA generativa (Runway, LTX Studio, ElevenLabs) combinada con dirección creativa de nivel cine.' },
+    { id:'07', bg:'assets/svc-bg-10.jpg', title:'Avatar Digital Corporativo', brief:'Tu vocero siempre disponible, siempre en punto.', desc:'Tu vocero digital siempre disponible: un representante virtual de tu marca con voz, imagen y conocimiento total de tu empresa — para ventas, soporte, capacitación o presentaciones.\n\nDisponible 24/7, sin vacaciones, sin mal humor, con la consistencia que ningún humano puede garantizar.\n\nPersonalizable con la voz, apariencia e idioma que mejor represente tu marca. Integrado a tu web, app o pantallas corporativas.' },
+    { id:'08', bg:'assets/svc-bg-05.jpg', title:'Upgrade de Branding', brief:'Identidad visual de nivel internacional en tiempo récord.', desc:'Identidad visual renovada: logo, paleta, tipografía, manual de marca y activos digitales rediseñados por nuestro equipo. Del concepto al activo listo para producción.\n\nUna marca fuerte no solo se ve bien — atrae clientes, justifica precios más altos y crea lealtad que la competencia no puede copiar.\n\nUsamos IA generativa para explorar cientos de posibilidades en días, luego refinamos con diseñadores senior.' },
+    { id:'09', bg:'assets/svc-bg-07.jpg', title:'Agentes de IA con Voz y Texto', brief:'El equipo que nunca para de cerrar.', desc:'Asistentes conversacionales para ventas, soporte, RRHH y operaciones disponibles 24/7 en WhatsApp, teléfono y web. Hablan como tu mejor vendedor, conocen tu empresa al 100% y nunca descansan.\n\nMientras tu equipo duerme, el agente califica leads, responde preguntas, agenda citas y hace seguimiento. Todo queda registrado. Todo llega a tu CRM.\n\nNo es un bot genérico — es tu mejor colaborador que nunca pide vacaciones.' },
+    { id:'10', bg:'assets/svc-bg-13.jpg', title:'Automatización de Procesos', brief:'Tu equipo solo hace lo que genera valor real.', desc:'Eliminamos el trabajo manual repetitivo: cotizaciones, reportes, seguimiento de leads, facturación y notificaciones — todo automático. Tu equipo solo hace lo que genera valor.\n\nSi se puede describir como proceso, se puede automatizar. Y si se automatiza, se hace mejor, más rápido y sin errores humanos.\n\nUsamos n8n, Make, Python y APIs para construir flujos que trabajan sin supervisión.' },
+    { id:'11', bg:'assets/svc-bg-12.jpg', title:'IA por Departamento', brief:'Inteligencia en cada área de tu empresa.', desc:'Ventas con agentes de cierre inteligentes. Marketing con generación de contenido. Operaciones con flujos automáticos. Finanzas con predicción. RRHH con screening automatizado.\n\nNo es IA genérica. Es IA entrenada específicamente para los procesos, el lenguaje y los objetivos de cada área de tu empresa.\n\nResultado: cada departamento produce más con el mismo equipo. Los directores toman decisiones con datos reales.' },
+    { id:'12', bg:'assets/svc-bg-02.jpg', title:'Intelligence Architecture Inmobiliaria', brief:'Sistema completo para desarrolladoras, brokerages y timeshare.', desc:'Sistema especializado para desarrolladoras, brokerages y grupos de timeshare: agentes de ventas que califican leads, CRM conectado, reportes automáticos y recorrido virtual de propiedades.\n\nIncluye nuestro Agente de Reactivación de Bases Muertas: contacta miles de prospectos fríos con mensajes personalizados según su historial y entrega solo los leads calientes a tu equipo. Lo que tardaba meses, el agente lo resuelve en días.\n\nDiseñado para Quintana Roo y México. Casos reales en timeshare, hotelería e inmobiliario de lujo.' },
+    { id:'13', bg:'assets/svc-bg-09.jpg', title:'Estrategia Integral 360°', brief:'Un equipo, un proyecto, todos los frentes cubiertos.', desc:'Diagnóstico completo de tu empresa + hoja de ruta de implementación tecnológica + ejecución coordinada de todos los frentes: ventas, marketing, operaciones, datos y marca. Un equipo, un proyecto, un resultado.\n\nNo vendemos módulos sueltos. Construimos el ecosistema tecnológico completo de tu empresa y lo operamos de forma continua.\n\nEl cliente define los objetivos. Nosotros definimos la arquitectura, ejecutamos y medimos cada KPI en tiempo real.' },
+    { id:'14', bg:'assets/svc-bg-03.jpg', title:'Data Analytics & Business Intelligence', brief:'Tus datos dispersos, convertidos en decisiones claras.', desc:'Centralización de datos dispersos en dashboards claros con KPIs en tiempo real. Modelos predictivos de ventas, churn y optimización de inventario.\n\nToma decisiones con datos, no con intuición. La diferencia entre una empresa que crece con precisión y una que supone en reuniones.\n\nConectamos todas tus fuentes de datos, las centralizamos y construimos dashboards ejecutivos que cualquier director puede leer sin ser técnico.' },
+    { id:'15', bg:'assets/svc-bg-14.jpg', title:'Ciberseguridad & IA On-Premise', brief:'Tu información nunca sale de tu red. Punto.', desc:'Auditoría de vulnerabilidades, encriptación de datos, acceso por roles y tecnología que opera 100% dentro del ecosistema de tu empresa.\n\nTu información nunca sale de tu red. Ideal para sectores regulados: salud, legal, financiero, gobierno.\n\nInstalamos modelos de IA (Llama, Mistral, DeepSeek) en tus servidores para que tu equipo tenga inteligencia de primer nivel sin exponer datos sensibles.' },
+    { id:'16', bg:'assets/svc-bg-11.jpg', title:'Integraciones entre Sistemas', brief:'Conectamos todo lo que usas hoy. Sin reemplazar nada.', desc:'Conectamos HubSpot, Salesforce, SAP, Shopify, Stripe, sistemas legacy — prácticamente cualquier software que uses hoy. Sin reemplazar lo que funciona, solo potenciándolo.\n\nLa mayoría de las empresas tiene buenas herramientas pero no se hablan entre sí. Eso es exactamente lo que resolvemos.\n\nUsamos APIs, webhooks y automatizaciones para crear un ecosistema donde todos los sistemas comparten información en tiempo real.' },
+    { id:'17', bg:'assets/svc-bg-09.jpg', title:'Capacitaciones Corporativas', brief:'Forma a tu equipo con IA entrenada en tus procesos.', desc:'Formación de alto impacto para equipos: IA aplicada al negocio, automatización, herramientas digitales.\n\nTambién desarrollamos agentes de capacitación internos entrenados con los manuales, procesos y objeciones de tu empresa — disponibles 24/7. Medimos el avance individual y entregamos reportes a gerentes y directores.\n\nEl agente nunca se cansa de explicar y siempre está disponible cuando el vendedor necesita repasar una objeción antes de una presentación.' },
+    { id:'18', bg:'assets/svc-bg-15.jpg', title:'Consultoría en Transformación Digital', brief:'Diagnóstico, plan y ROI estimado. Sin compromisos.', desc:'Para empresas que necesitan claridad antes de invertir: analizamos tu operación completa y entregamos un plan de transformación tecnológica con prioridades, costos y ROI estimado.\n\nSin compromisos. Sin presión de venta. Solo claridad absoluta sobre qué hacer, en qué orden, cuánto cuesta y qué puedes esperar a cambio.\n\nPerfecto para directores y dueños que saben que necesitan evolucionar pero no saben por dónde empezar.' }
+  ];
+
+  /* ── Routing ── */
+  var p = new URLSearchParams(window.location.search);
+  var s = p.get('s') || '01';
+  var idx = Math.max(0, Math.min(SVCS.length - 1, parseInt(s, 10) - 1));
+  var svc = SVCS[idx];
+
+  /* ── Populate ── */
+  document.title = 'VICTOR IA — ' + svc.title;
+  document.getElementById('page-title').textContent = 'VICTOR IA — ' + svc.title;
+  document.getElementById('svc-bg').style.backgroundImage = 'url(' + svc.bg + ')';
+  document.getElementById('svc-num').textContent = svc.id;
+  document.getElementById('svc-title').textContent = svc.title;
+  document.getElementById('svc-brief').textContent = svc.brief;
+  var descEl = document.getElementById('svc-desc');
+  svc.desc.split('\n\n').forEach(function(para){ var el=document.createElement('p'); el.textContent=para; descEl.appendChild(el); });
+
+  /* ── Read more ── */
+  var rmBtn = document.getElementById('svc-read-more');
+  rmBtn.addEventListener('click', function(){ var open=descEl.classList.toggle('open'); rmBtn.textContent=open?'Leer menos −':'Leer más +'; });
+
+  /* ── Sidebar ── */
+  var sidebar = document.getElementById('svc-sidebar');
+  SVCS.forEach(function(sv, i){
+    var a = document.createElement('a');
+    a.href = 'service.html?s=' + sv.id;
+    a.className = 'svc-side-link' + (i===idx?' active':'');
+    a.innerHTML = '<span class="svc-side-n">'+sv.id+'</span><span class="svc-side-name">'+sv.title+'</span>';
+    sidebar.appendChild(a);
+  });
+
+  /* ── Dots (show first 18, max 18) ── */
+  var dotsEl = document.getElementById('svc-dots');
+  SVCS.forEach(function(sv, i){
+    var d = document.createElement('a');
+    d.href = 'service.html?s=' + sv.id;
+    d.className = 'svc-dot' + (i===idx?' active':'');
+    d.title = sv.title;
+    dotsEl.appendChild(d);
+  });
+
+  /* ── Prev / Next ── */
+  var prevIdx = (idx - 1 + SVCS.length) % SVCS.length;
+  var nextIdx = (idx + 1) % SVCS.length;
+  document.getElementById('svc-prev').addEventListener('click', function(){ window.location.href='service.html?s='+SVCS[prevIdx].id; });
+  document.getElementById('svc-next').addEventListener('click', function(){ window.location.href='service.html?s='+SVCS[nextIdx].id; });
+  document.addEventListener('keydown', function(e){
+    if(e.key==='ArrowRight') window.location.href='service.html?s='+SVCS[nextIdx].id;
+    if(e.key==='ArrowLeft')  window.location.href='service.html?s='+SVCS[prevIdx].id;
+    if(e.key==='Escape')     window.location.href='index.html';
+  });
+
+  /* ── Canvas water-trail reveal ── */
+  var canvas = document.getElementById('revealCanvas');
+  var ctx    = canvas.getContext('2d');
+  var WARM   = '248,247,245';
+  var isMobile = !window.matchMedia('(hover:hover)').matches;
+
+  function resize(){ canvas.width=window.innerWidth; canvas.height=window.innerHeight; }
+  window.addEventListener('resize', resize); resize();
+
+  var lerp = function(a,b,t){ return a+(b-a)*t; };
+
+  if(isMobile){
+    var BASE_R=34,STEP_PX=5,HOLD_MS=1500,FADE_MS=1400,MAX_V=1.8,MAX_PTS=900;
+    var trail=[],isTouching=false,lastX=null,lastY=null,lastT=null,vel=0;
+    var tx=window.innerWidth*.5,ty=window.innerHeight*.5,fx=tx,fy=ty,liveA=0;
+    function stamp(x,y,hold){ var r=BASE_R*(0.74+Math.random()*0.54); trail.push({x:x+(Math.random()-.5)*5,y:y+(Math.random()-.5)*5,t:performance.now(),r:r,hold:hold}); if(trail.length>MAX_PTS) trail.splice(0,trail.length-MAX_PTS); }
+    function erase(x,y,r,a){ var halo=r*2.1; ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fillStyle='rgba(0,0,0,'+a+')'; ctx.fill(); var g=ctx.createRadialGradient(x,y,r,x,y,halo); g.addColorStop(0,'rgba(0,0,0,'+(a*.88)+')'); g.addColorStop(.38,'rgba(0,0,0,'+(a*.5)+')'); g.addColorStop(.72,'rgba(0,0,0,'+(a*.13)+')'); g.addColorStop(1,'rgba(0,0,0,0)'); ctx.beginPath(); ctx.arc(x,y,halo,0,Math.PI*2); ctx.fillStyle=g; ctx.fill(); }
+    function drawM(){ var now=performance.now(),maxAge=HOLD_MS+FADE_MS; while(trail.length&&now-trail[0].t>=maxAge) trail.shift(); fx=lerp(fx,tx,isTouching?.20:.08); fy=lerp(fy,ty,isTouching?.20:.08); liveA=lerp(liveA,isTouching?1:0,isTouching?.18:.05); ctx.clearRect(0,0,canvas.width,canvas.height); ctx.fillStyle='rgba('+WARM+',1)'; ctx.fillRect(0,0,canvas.width,canvas.height); ctx.globalCompositeOperation='destination-out'; for(var i=0;i<trail.length;i++){ var pt=trail[i],age=now-pt.t,a=age<pt.hold?1:1-(age-pt.hold)/FADE_MS; if(a>.005) erase(pt.x,pt.y,pt.r,a); } if(liveA>.005) erase(fx,fy,BASE_R,liveA); ctx.globalCompositeOperation='source-over'; requestAnimationFrame(drawM); }
+    drawM();
+    document.addEventListener('touchstart',function(e){ isTouching=true; var t=e.touches[0]; tx=t.clientX; ty=t.clientY; fx=tx; fy=ty; lastX=tx; lastY=ty; lastT=performance.now(); vel=0; stamp(tx,ty,HOLD_MS); },{passive:true});
+    document.addEventListener('touchmove',function(e){ var t=e.touches[0],nx=t.clientX,ny=t.clientY; tx=nx; ty=ny; var dist=Math.hypot(nx-lastX,ny-lastY); if(dist>=STEP_PX){ var now=performance.now(),dt=Math.max(now-lastT,1); vel=lerp(vel,dist/dt,.35); var hold=Math.max(0,HOLD_MS*(1-Math.min(1,vel/MAX_V))); var steps=Math.ceil(dist/STEP_PX); for(var i=1;i<=steps;i++){ var f=i/steps; stamp(lastX+(nx-lastX)*f,lastY+(ny-lastY)*f,hold); } lastX=nx; lastY=ny; lastT=now; } },{passive:true});
+    document.addEventListener('touchend',function(){ isTouching=false; lastX=lastY=lastT=null; vel=0; },{passive:true});
+  } else {
+    var D_BASE=30,D_STEP=5,D_HOLD=1400,D_FADE=1200,D_MAX_V=2.2,D_MAX_PTS=900;
+    var dTrail=[],isMoving=false,moveTo=null,dLX=null,dLY=null,dLT=null,dVel=0;
+    var dlx=window.innerWidth*.5,dly=window.innerHeight*.5,dmx=dlx,dmy=dly,dLiveA=0;
+    var cur=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+    function dStamp(x,y,hold){ var r=D_BASE*(0.74+Math.random()*0.54); dTrail.push({x:x+(Math.random()-.5)*4,y:y+(Math.random()-.5)*4,t:performance.now(),r:r,hold:hold}); if(dTrail.length>D_MAX_PTS) dTrail.splice(0,dTrail.length-D_MAX_PTS); }
+    function dErase(x,y,r,a){ var halo=r*2.1; ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fillStyle='rgba(0,0,0,'+a+')'; ctx.fill(); var g=ctx.createRadialGradient(x,y,r,x,y,halo); g.addColorStop(0,'rgba(0,0,0,'+(a*.88)+')'); g.addColorStop(.38,'rgba(0,0,0,'+(a*.5)+')'); g.addColorStop(.72,'rgba(0,0,0,'+(a*.13)+')'); g.addColorStop(1,'rgba(0,0,0,0)'); ctx.beginPath(); ctx.arc(x,y,halo,0,Math.PI*2); ctx.fillStyle=g; ctx.fill(); }
+    function dDraw(){ var now=performance.now(),maxAge=D_HOLD+D_FADE; while(dTrail.length&&now-dTrail[0].t>=maxAge) dTrail.shift(); dlx=lerp(dlx,dmx,isMoving?.22:.08); dly=lerp(dly,dmy,isMoving?.22:.08); dLiveA=lerp(dLiveA,isMoving?1:0,isMoving?.18:.05); ctx.clearRect(0,0,canvas.width,canvas.height); ctx.fillStyle='rgba('+WARM+',1)'; ctx.fillRect(0,0,canvas.width,canvas.height); ctx.globalCompositeOperation='destination-out'; for(var i=0;i<dTrail.length;i++){ var pt=dTrail[i],age=now-pt.t,a=age<pt.hold?1:1-(age-pt.hold)/D_FADE; if(a>.005) dErase(pt.x,pt.y,pt.r,a); } if(dLiveA>.005) dErase(dlx,dly,D_BASE,dLiveA); ctx.globalCompositeOperation='source-over'; requestAnimationFrame(dDraw); }
+    dDraw();
+    document.addEventListener('mousemove',function(e){
+      var nx=e.clientX,ny=e.clientY;
+      isMoving=true; clearTimeout(moveTo); moveTo=setTimeout(function(){ isMoving=false; },120);
+      dmx=nx; dmy=ny;
+      if(cur) cur.style.cssText='left:'+nx+'px;top:'+ny+'px';
+      if(ring) ring.style.cssText='left:'+nx+'px;top:'+ny+'px';
+      if(dLX===null){ dLX=nx; dLY=ny; dLT=performance.now(); return; }
+      var dist=Math.hypot(nx-dLX,ny-dLY);
+      if(dist>=D_STEP){ var now=performance.now(),dt=Math.max(now-dLT,1); dVel=lerp(dVel,dist/dt,.35); var hold=Math.max(0,D_HOLD*(1-Math.min(1,dVel/D_MAX_V))); var steps=Math.ceil(dist/D_STEP); for(var i=1;i<=steps;i++){ var f=i/steps; dStamp(dLX+(nx-dLX)*f,dLY+(ny-dLY)*f,hold); } dLX=nx; dLY=ny; dLT=now; }
+    });
+    document.querySelectorAll('a, button').forEach(function(el){
+      el.addEventListener('mouseenter',function(){ if(ring){ ring.style.width='52px'; ring.style.height='52px'; } });
+      el.addEventListener('mouseleave',function(){ if(ring){ ring.style.width='32px'; ring.style.height='32px'; } });
+    });
+  }
+}());
+</script>
+
+  <!-- Lenis smooth scroll -->
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
+  <!-- Loader + cursor labels + easter eggs -->
+  <script>
+  (function(){
+    /* ── Console egg ── */
+    console.log('%c V I C T O R  —  I A ', 'background:#FFAA17;color:#0E0F12;font-size:16px;font-weight:700;padding:8px 20px;font-family:serif;letter-spacing:0.2em');
+    console.log('%chello@victor-ia.com.mx  ·  victor-ia.com.mx', 'color:#CC8800;font-size:11px;font-family:monospace');
+
+    /* ── Loader ── */
+    var slFill   = document.getElementById('sl-fill');
+    var slLoader = document.getElementById('svc-loader');
+    var sp = 0, st0 = performance.now(), SMIN = 700;
+    function stk(){
+      sp = Math.min(sp + Math.random()*7+3, 96);
+      slFill.style.width = sp + '%';
+      if(sp < 96){ setTimeout(stk, 25 + Math.random()*25); }
+      else {
+        var w = Math.max(0, SMIN-(performance.now()-st0));
+        setTimeout(function(){
+          slFill.style.width='100%';
+          setTimeout(function(){
+            slLoader.classList.add('hidden');
+            setTimeout(function(){ slLoader.style.display='none'; }, 600);
+          }, 200);
+        }, w);
+      }
+    }
+    stk();
+
+    /* ── Cursor labels ── */
+    var label = document.getElementById('cursor-label');
+    if(label && window.matchMedia('(hover:hover)').matches){
+      document.addEventListener('mousemove', function(e){
+        label.style.left = e.clientX + 'px';
+        label.style.top  = e.clientY + 'px';
+      });
+      function svcLabelText(el){
+        if(!el) return null;
+        var tag = el.tagName.toLowerCase();
+        if(tag==='a'){
+          var href = el.getAttribute('href')||'';
+          if(el.classList.contains('svc-nav-cta')) return 'Agenda';
+          if(el.classList.contains('svc-cta'))     return 'Agenda';
+          if(el.classList.contains('svc-back'))    return 'Volver';
+          if(href.indexOf('service')>-1)           return 'Ver';
+          return 'Visitar';
+        }
+        if(tag==='button'){
+          if(el.classList.contains('svc-prev')) return 'Anterior';
+          if(el.classList.contains('svc-next')) return 'Siguiente';
+          if(el.id==='svc-read-more')           return 'Leer';
+          return 'Abrir';
+        }
+        return null;
+      }
+      document.addEventListener('mouseover', function(e){
+        var t=e.target.closest('a,button');
+        var txt=svcLabelText(t);
+        if(txt){ label.textContent=txt; label.classList.add('show'); }
+      });
+      document.addEventListener('mouseout', function(e){
+        if(e.target.closest('a,button')) label.classList.remove('show');
+      });
+    }
+  })();
+  </script>
+
+  <!-- Apple scroll + magnetic + tilt for service pages -->
+  <script>
+  (function(){
+    /* Lenis */
+    if (typeof Lenis !== 'undefined'){
+      var lenis = new Lenis({
+        duration: 1.35,
+        easing: function(t){ return Math.min(1, 1.001-Math.pow(2,-10*t)); },
+        smoothTouch: false,
+      });
+      function raf(t){ lenis.raf(t); requestAnimationFrame(raf); }
+      requestAnimationFrame(raf);
+    }
+
+    /* Magnetic CTA */
+    document.querySelectorAll('.svc-cta').forEach(function(btn){
+      btn.addEventListener('mousemove', function(e){
+        var r = btn.getBoundingClientRect();
+        var tx = (e.clientX - r.left - r.width/2)  * 0.20;
+        var ty = (e.clientY - r.top  - r.height/2) * 0.20;
+        btn.style.transition = 'transform 0.12s ease, color 0.35s';
+        btn.style.transform  = 'translate('+tx+'px,'+ty+'px)';
+      });
+      btn.addEventListener('mouseleave', function(){
+        btn.style.transition = 'transform 0.6s cubic-bezier(0.16,1,0.3,1), color 0.35s';
+        btn.style.transform  = 'translate(0,0)';
+      });
+    });
+  })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,255 @@
+/* ════════════════════════════════════════════════
+   VICTOR IA — service.css
+   Marble background · spotlight · immersive style
+   ════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500;600&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+a, a:link, a:visited, a:hover, a:active, a:focus {
+  color: inherit !important; text-decoration: none !important;
+  -webkit-tap-highlight-color: transparent !important; outline: none !important;
+}
+
+:root {
+  --warm:     #F8F7F5;
+  --ink:      #0E0F12;
+  --mute:     rgba(14,15,18,0.55);
+  --dim:      rgba(14,15,18,0.10);
+  --amber-dk: #CC8800;
+}
+
+html, body {
+  height: 100%; overflow: hidden;
+  background: var(--warm);
+  font-family: 'Space Grotesk', -apple-system, sans-serif;
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* On mobile: allow scroll */
+@media (max-width: 767px) {
+  html, body { overflow: auto; }
+}
+
+/* ── Cursor ─────────────────────────────────────── */
+@media (pointer: fine) { * { cursor: none !important; } }
+
+#svc-cursor {
+  position: fixed; top: 0; left: 0;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--ink); pointer-events: none; z-index: 9999;
+  transform: translate(-50%,-50%);
+  opacity: 0; transition: opacity 0.3s ease;
+  will-change: transform;
+}
+#svc-cursor.visible { opacity: 1; }
+
+/* ── Marble background ───────────────────────────── */
+#svc-bg {
+  position: fixed; inset: 0; z-index: 1;
+  background-size: cover;
+  background-position: 50% 30%;
+  background-repeat: no-repeat;
+}
+
+/* ── Spotlight overlay ───────────────────────────── */
+#svc-spotlight {
+  position: fixed; inset: 0; z-index: 2; pointer-events: none;
+  background: radial-gradient(
+    circle 380px at var(--cx, -2000px) var(--cy, -2000px),
+    rgba(255,255,255,0.24) 0%,
+    rgba(255,255,255,0.08) 42%,
+    transparent 68%
+  );
+}
+
+/* ── Grain ───────────────────────────────────────── */
+#svc-grain {
+  position: fixed; inset: 0; z-index: 3;
+  pointer-events: none; opacity: 0.18; mix-blend-mode: multiply;
+}
+
+/* ── Nav ─────────────────────────────────────────── */
+.svc-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  padding: 0 clamp(1.5rem,4vw,3rem);
+  height: 60px; display: flex; align-items: center; justify-content: space-between;
+}
+
+.svc-back {
+  display: flex; align-items: center; gap: 0.5rem;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.18em;
+  color: var(--ink) !important;
+  transition: opacity 0.2s ease;
+}
+.svc-back:hover { opacity: 0.6; }
+.svc-back svg { width: 16px; height: 16px; }
+
+.svc-nav-cta {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.18em;
+  color: var(--amber-dk) !important;
+  border: 1px solid rgba(204,136,0,0.35);
+  padding: 0.5rem 1.1rem;
+  transition: background 0.25s ease;
+}
+.svc-nav-cta:hover { background: rgba(204,136,0,0.08); }
+
+/* ── Main content ────────────────────────────────── */
+.svc-main {
+  position: fixed; inset: 0; z-index: 10;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: end;
+  padding: 60px clamp(1.5rem,5vw,3rem) clamp(3rem,8vh,5rem);
+  pointer-events: none;
+}
+
+@media (min-width: 900px) {
+  .svc-main {
+    grid-template-columns: 1fr 280px;
+    align-items: stretch;
+    gap: 2rem;
+  }
+}
+
+.svc-content {
+  pointer-events: auto;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  max-width: 580px;
+}
+
+.svc-eyebrow {
+  font-size: 10px; letter-spacing: 0.32em; text-transform: uppercase;
+  color: var(--amber-dk); margin-bottom: 1rem; display: block;
+}
+
+.svc-title {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: clamp(28px,6vw,58px); font-weight: 400; font-style: italic;
+  line-height: 1.12; letter-spacing: -0.02em; color: var(--ink);
+  margin-bottom: 1.5rem;
+}
+
+.svc-brief {
+  font-size: clamp(14px,2vw,17px); font-weight: 300;
+  color: var(--mute); line-height: 1.65; margin-bottom: 1rem;
+  font-style: normal;
+}
+
+.svc-desc {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.6s cubic-bezier(0.16,1,0.3,1);
+}
+.svc-desc.open { max-height: 40vh; overflow-y: auto; }
+.svc-desc p {
+  font-size: 13px; color: var(--mute); line-height: 1.75; margin-bottom: 0.85rem;
+}
+
+.svc-read-more {
+  font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--ink); border-bottom: 1px solid var(--dim);
+  padding-bottom: 2px; cursor: pointer; display: inline-block;
+  margin-bottom: 1.75rem; background: none; border-top: none;
+  border-left: none; border-right: none; font-family: inherit;
+  transition: border-color 0.2s ease;
+}
+.svc-read-more:hover { border-bottom-color: var(--ink); }
+
+.svc-cta {
+  display: inline-flex; align-items: center; gap: 0.75rem;
+  padding: 0.85rem 2rem;
+  border: 1px solid var(--ink); background: none;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.18em;
+  color: var(--ink) !important; position: relative; overflow: hidden;
+  align-self: flex-start; pointer-events: auto;
+  transition: color 0.35s ease;
+}
+.svc-cta::before {
+  content: ''; position: absolute; inset: 0; background: var(--ink);
+  transform: translateX(-101%); transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+.svc-cta:hover::before { transform: translateX(0); }
+.svc-cta span, .svc-cta svg { position: relative; z-index: 1; }
+.svc-cta:hover { color: var(--warm) !important; }
+.svc-cta svg { width: 18px; height: 9px; }
+
+/* ── Sidebar ─────────────────────────────────────── */
+.svc-sidebar {
+  display: none;
+  pointer-events: auto;
+  flex-direction: column; justify-content: center;
+  gap: 0;
+  border-left: 1px solid var(--dim);
+  padding-left: 1.5rem;
+  overflow-y: auto;
+  align-self: center;
+  max-height: calc(100vh - 120px);
+}
+
+@media (min-width: 900px) {
+  .svc-sidebar { display: flex; }
+}
+
+.svc-side-link {
+  display: flex; align-items: baseline; gap: 0.6rem;
+  padding: 0.45rem 0; border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
+}
+.svc-side-link:hover, .svc-side-link.active { border-bottom-color: var(--dim); }
+
+.svc-side-n {
+  font-size: 8px; color: var(--amber-dk); letter-spacing: 0.14em;
+  min-width: 16px; flex-shrink: 0;
+}
+.svc-side-name {
+  font-size: 11px; font-weight: 400; color: var(--mute);
+  line-height: 1.3; transition: color 0.2s ease;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px;
+}
+.svc-side-link:hover .svc-side-name { color: var(--ink); }
+.svc-side-link.active .svc-side-name { color: var(--ink); font-weight: 600; }
+
+/* ── Footer label ────────────────────────────────── */
+.svc-footer-label {
+  position: fixed; bottom: 1.25rem; right: clamp(1.5rem,4vw,3rem);
+  z-index: 10; font-size: 9px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--mute);
+  pointer-events: none;
+}
+
+/* ── Nav dots (page indicator) ───────────────────── */
+.svc-dots {
+  position: fixed; bottom: 1.25rem; left: clamp(1.5rem,4vw,3rem);
+  z-index: 10; display: flex; gap: 6px; align-items: center; pointer-events: none;
+}
+.svc-dot {
+  width: 4px; height: 4px; border-radius: 50%;
+  background: var(--dim); transition: background 0.25s ease;
+}
+.svc-dot.active { background: var(--ink); }
+
+/* ── Mobile layout adjustments ───────────────────── */
+@media (max-width: 767px) {
+  .svc-main {
+    position: relative; padding-top: 80px;
+    min-height: 100vh; align-items: flex-end;
+  }
+  .svc-desc.open { max-height: none; overflow: visible; }
+  .svc-footer-label { display: none; }
+}
+
+/* ── Prev/Next nav ───────────────────────────────── */
+.svc-prevnext {
+  position: fixed; bottom: 1.25rem; left: 50%; transform: translateX(-50%);
+  z-index: 10; display: flex; gap: 1rem; align-items: center;
+  pointer-events: auto;
+}
+.svc-prev, .svc-next {
+  font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--mute); transition: color 0.2s ease; cursor: pointer;
+  background: none; border: none; font-family: inherit;
+  padding: 0;
+}
+.svc-prev:hover, .svc-next:hover { color: var(--ink); }
+.svc-prevnext-sep { font-size: 10px; color: var(--dim); }
