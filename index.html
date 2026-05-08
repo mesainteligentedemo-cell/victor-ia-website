@@ -627,7 +627,7 @@
       </div>
     </section>
 
-    <!-- SCRUB — Apple AirPods–style scroll sequence (241 frames) -->
+    <!-- SCRUB — Apple AirPods–style scroll sequence (481 frames) -->
     <section class="scrub-zone" id="scrubZone" aria-label="Reel de capacidades">
       <div class="scrub-sticky" id="scrubSticky">
         <canvas class="scrub-canvas" id="scrubCanvas" aria-hidden="true"></canvas>
@@ -647,7 +647,7 @@
             </div>
           </div>
           <div class="scrub-pbar" aria-hidden="true"><div class="scrub-pbar-fill" id="scrubBarFill"></div></div>
-          <div class="scrub-ctr" id="scrubCtr" aria-hidden="true">001 / 241</div>
+          <div class="scrub-ctr" id="scrubCtr" aria-hidden="true">001 / 481</div>
           <div class="scrub-scroll-hint" aria-hidden="true">↓ scroll</div>
         </div>
       </div>
@@ -1195,14 +1195,14 @@
     window.addEventListener('scroll', onScroll, {passive:true});
 
     /* ═══════════════════════════════════════
-       3. FRAME SCRUB (241 frames, Apple style)
+       3. FRAME SCRUB (481 frames, ciudad aérea 4K)
     ═══════════════════════════════════════ */
     var scrubZone   = document.getElementById('scrubZone');
     var scrubCanvas = document.getElementById('scrubCanvas');
     var scrubBarFill = document.getElementById('scrubBarFill');
     var scrubCtr     = document.getElementById('scrubCtr');
     var scrubPanels  = document.querySelectorAll('.scrub-panel');
-    var NFRAMES = 241, FRAMES_DIR = 'assets/frames/', PRELOAD_N = 32;
+    var NFRAMES = 481, FRAMES_DIR = 'assets/frames/', PRELOAD_N = 32;
     var images = new Array(NFRAMES);
     var loaded = 0, firstReady = false, scrubReady = false;
     var scrubTarget = 0, scrubCurrent = 0, scrubLast = -1;
