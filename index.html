@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es-MX">
 <head>
   <meta charset="UTF-8">
@@ -20,6 +20,7 @@
   <meta name="twitter:title" content="VICTOR IA — Inteligencia que trabaja para ti">
   <meta name="twitter:description" content="Construimos inteligencia que trabaja 24/7 para tu empresa. Agentes autónomos, sitios cinematográficos y automatización real.">
   <meta name="twitter:image" content="https://victor-ia-website.vercel.app/og-image.jpg">
+  <link rel="manifest" href="/manifest.json">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -27,7 +28,7 @@
   <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -37,9 +38,30 @@
       --muted: rgba(14,15,18,0.45);
       --rule:  rgba(14,15,18,0.09);
       --warm:  #F8F7F5;
+      --gold:  #FFAA17;
+      /* ── Biometric system tokens ── */
+      --bone: #F2EEE5;
+      --bone-dim: rgba(242,238,229,0.62);
+      --dim: rgba(242,238,229,0.45);
+      --dim-2: rgba(242,238,229,0.28);
+      --line: rgba(242,238,229,0.07);
+      --line-strong: rgba(242,238,229,0.15);
+      --accent: var(--gold);
+      --accent-2: #FFB733;
+      --lime: var(--gold);
+      --lime-2: #FFB733;
+      --display: 'Instrument Serif', Georgia, serif;
+      --sans: 'Space Grotesk', sans-serif;
+      --mono: 'Space Grotesk', monospace;
+      --ease-cinema: cubic-bezier(0.22, 0.61, 0.36, 1);
+      --ease-snap: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --safe-t: env(safe-area-inset-top, 0px);
+      --safe-b: env(safe-area-inset-bottom, 0px);
+      --safe-l: env(safe-area-inset-left, 0px);
+      --safe-r: env(safe-area-inset-right, 0px);
     }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: auto; }
 
     body {
       font-family: 'Space Grotesk', sans-serif;
@@ -47,6 +69,8 @@
       color: var(--ink);
       cursor: none;
       overflow-x: hidden;
+      overscroll-behavior-y: contain;
+      -webkit-overflow-scrolling: touch;
     }
 
     .bg-marble {
@@ -56,12 +80,19 @@
       background-position: 50% 0%;
       background-repeat: no-repeat;
       z-index: 0;
-      filter: sepia(0.04) brightness(1.02);
+      filter: sepia(0.06) brightness(1.01) contrast(1.05) saturate(0.9);
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
+      will-change: transform;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
     }
 
     .reveal-canvas {
       position: fixed; inset: 0;
       z-index: 1; pointer-events: none;
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
     }
 
     .cursor {
@@ -75,7 +106,9 @@
       border: 1px solid rgba(14,15,18,0.3); border-radius: 50%;
       pointer-events: none; z-index: 9998;
       transform: translate(-50%,-50%);
-      transition: width 0.35s ease, height 0.35s ease;
+      transition: width 0.35s cubic-bezier(0.16,1,0.3,1),
+                  height 0.35s cubic-bezier(0.16,1,0.3,1),
+                  border-color 0.3s ease;
     }
 
     .content {
@@ -95,10 +128,17 @@
     }
     .nav-logo {
       display: flex; align-items: center; text-decoration: none;
+      opacity: 1;
     }
     .nav-logo img {
-      height: 28px; width: auto; mix-blend-mode: multiply;
+      height: 42px; width: auto; mix-blend-mode: multiply;
       display: block;
+      image-rendering: -webkit-optimize-contrast;
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      -webkit-font-smoothing: antialiased;
     }
     .nav-right { display: flex; align-items: center; gap: 2.5rem; }
     .nav-link {
@@ -128,7 +168,7 @@
     }
     .svc-panel-eyebrow::before { content:''; display:block; width:2rem; height:1px; background:currentColor; }
     .svc-panel-title {
-      font-family: 'Fraunces', serif; font-size: clamp(2rem,5vw,4rem);
+      font-family: 'Instrument Serif', serif; font-size: clamp(2rem,5vw,4rem);
       font-weight: 400; letter-spacing: -0.02em; margin-bottom: 3rem; line-height: 1;
     }
     .svc-panel-title em { font-style: italic; }
@@ -145,7 +185,7 @@
     .svc-panel-item:nth-child(even) { padding-left: 2rem; border-left: 1px solid var(--rule); }
     .svc-panel-item:hover { opacity: 0.5; }
     .svc-panel-n { font-size: 0.58rem; letter-spacing: 0.2em; opacity: 0.3; min-width: 1.8rem; }
-    .svc-panel-name { font-family: 'Fraunces', serif; font-size: 1.05rem; line-height: 1.2; }
+    .svc-panel-name { font-family: 'Instrument Serif', serif; font-size: 1.05rem; line-height: 1.2; }
     .svc-panel-close {
       position: absolute; top: 1.8rem; right: 3.5rem;
       font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
@@ -155,18 +195,18 @@
     .svc-panel-close:hover { opacity: 1; }
 
     /* ── Shared sections ── */
-    .section { padding: clamp(5rem,12vh,9rem) clamp(1.8rem,5vw,3.5rem); }
+    .section { padding: clamp(3.5rem,8vh,6rem) clamp(1.8rem,5vw,3.5rem); }
     .section-inner { max-width: 1200px; margin: 0 auto; }
 
     .eyebrow {
       display: flex; align-items: center; gap: 1rem;
       font-size: 0.62rem; letter-spacing: 0.38em; text-transform: uppercase;
-      color: var(--muted); margin-bottom: 2rem;
+      color: var(--gold); margin-bottom: 2rem;
     }
     .eyebrow::before { content:''; display:block; width:2rem; height:1px; background:currentColor; }
 
     .display {
-      font-family: 'Fraunces', serif;
+      font-family: 'Instrument Serif', serif;
       font-size: clamp(2.8rem,7vw,7rem); font-weight: 400;
       line-height: 0.92; letter-spacing: -0.025em; color: var(--ink);
     }
@@ -175,16 +215,24 @@
     .body-text {
       font-size: clamp(0.9rem,1.6vw,1.1rem); font-weight: 300;
       line-height: 1.8; color: var(--ink); opacity: 0.62; max-width: 52ch;
+      text-wrap: pretty;
     }
     .body-text strong { font-weight: 500; opacity: 1; }
+
+    .hero-services {
+      font-size: 0.65rem; letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--muted); opacity: 0.7;
+      display: flex; flex-wrap: wrap; gap: 0.3rem 1.2rem; align-items: center;
+    }
+    .hero-services span { opacity: 0.35; }
 
     .cta {
       display: inline-flex; align-items: center; gap: 1rem;
       background: var(--ink); color: #fff; text-decoration: none;
       font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase;
-      padding: 1.1rem 2.5rem; transition: background 0.3s, color 0.3s, gap 0.25s;
+      padding: 1.1rem 2.5rem; transition: background 0.3s, color 0.3s, gap 0.25s, letter-spacing 0.4s cubic-bezier(0.16,1,0.3,1);
     }
-    .cta:hover { background: var(--ink); color: var(--warm); gap: 1.5rem; }
+    .cta:hover { background: var(--ink); color: var(--warm); gap: 1.5rem; letter-spacing: 0.27em; }
 
     /* ── Hero ── */
     .hero {
@@ -194,7 +242,7 @@
     }
     .hero-inner { max-width: 1000px; display: flex; flex-direction: column; gap: 2.5rem; }
     .hero-headline {
-      font-family: 'Fraunces', serif;
+      font-family: 'Instrument Serif', serif;
       font-size: clamp(4rem,10vw,9.5rem); font-weight: 400;
       line-height: 0.88; letter-spacing: -0.03em; color: var(--ink);
     }
@@ -207,13 +255,14 @@
     .stat-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2.5rem; }
     .tech-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 2.5rem; }
     .process-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 2.5rem; }
-    .marcas-grid  { display: grid; grid-template-columns: repeat(2,1fr); gap: 2.5rem; }
+    .pf-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: clamp(2rem,4vw,4rem); align-items: start; }
+    .pf-item { display: flex; flex-direction: column; gap: 2rem; }
 
     .srv-card { display: flex; flex-direction: column; gap: 1rem; min-height: 200px; }
     .srv-card.wide { grid-column: span 2; }
     .srv-num { font-size: 0.58rem; letter-spacing: 0.25em; opacity: 0.25; text-transform: uppercase; }
     .srv-title {
-      font-family: 'Fraunces', serif; font-size: clamp(1.1rem,2vw,1.45rem);
+      font-family: 'Instrument Serif', serif; font-size: clamp(1.1rem,2vw,1.45rem);
       font-weight: 400; line-height: 1.15; letter-spacing: -0.015em;
     }
     .srv-body { font-size: 0.8rem; line-height: 1.65; opacity: 0.48; font-weight: 300; max-width: 28ch; margin-top: auto; }
@@ -228,7 +277,7 @@
     .vert-item:hover { opacity: 0.5; }
     .vert-num { font-size: 0.6rem; letter-spacing: 0.2em; opacity: 0.3; min-width: 2.5rem; }
     .vert-label {
-      font-family: 'Fraunces', serif;
+      font-family: 'Instrument Serif', serif;
       font-size: clamp(1.5rem,4vw,3.2rem); font-weight: 400;
       letter-spacing: -0.02em; line-height: 1; flex: 1;
     }
@@ -236,44 +285,121 @@
     .vert-summary { font-size: 0.75rem; letter-spacing: 0.12em; opacity: 0.35; text-transform: uppercase; min-width: 200px; text-align: right; }
 
     .process-step { display: flex; flex-direction: column; gap: 0.8rem; }
-    .step-num { font-family: 'Fraunces', serif; font-size: 1.4rem; font-style: italic; opacity: 0.2; }
-    .step-title { font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 400; letter-spacing: -0.015em; }
+    .step-num { font-family: 'Instrument Serif', serif; font-size: 1.4rem; font-style: italic; opacity: 0.2; }
+    .step-title { font-family: 'Instrument Serif', serif; font-size: 1.3rem; font-weight: 400; letter-spacing: -0.015em; }
     .step-body { font-size: 0.72rem; line-height: 1.6; opacity: 0.45; font-weight: 300; margin-top: auto; }
 
     .cap-card { display: flex; flex-direction: column; gap: 0.8rem; }
-    .cap-title { font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 400; letter-spacing: -0.015em; line-height: 1.1; }
+    .cap-title { font-family: 'Instrument Serif', serif; font-size: 1.3rem; font-weight: 400; letter-spacing: -0.015em; line-height: 1.1; }
     .cap-body { font-size: 0.72rem; line-height: 1.65; opacity: 0.45; font-weight: 300; }
 
     .stat-card { display: flex; flex-direction: column; gap: 0.5rem; }
     .stat-label { font-size: 0.58rem; letter-spacing: 0.25em; text-transform: uppercase; opacity: 0.32; }
-    .stat-value { font-family: 'Fraunces', serif; font-size: clamp(2rem,4vw,3.2rem); font-weight: 400; letter-spacing: -0.02em; line-height: 1; }
+    .stat-value { font-family: 'Instrument Serif', serif; font-size: clamp(2rem,4vw,3.2rem); font-weight: 400; letter-spacing: -0.02em; line-height: 1; }
     .stat-delta { font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.3; }
 
     .exec-list { display: flex; flex-direction: column; }
     .exec-item { display: flex; gap: 2.5rem; padding: 2.5rem 0; border-bottom: 1px solid var(--rule); }
     .exec-item:first-child { border-top: 1px solid var(--rule); }
-    .exec-item-num { font-family: 'Fraunces', serif; font-style: italic; font-size: 1rem; opacity: 0.2; padding-top: 0.25rem; min-width: 2rem; }
+    .exec-item-num { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 1rem; opacity: 0.2; padding-top: 0.25rem; min-width: 2rem; }
     .exec-item-body { display: flex; flex-direction: column; gap: 0.5rem; }
-    .exec-item-title { font-family: 'Fraunces', serif; font-size: clamp(1.2rem,2.5vw,1.7rem); font-weight: 400; letter-spacing: -0.02em; line-height: 1.05; }
-    .exec-item-desc { font-size: 0.85rem; line-height: 1.65; opacity: 0.5; font-weight: 300; max-width: 52ch; }
+    .exec-item-title { font-family: 'Instrument Serif', serif; font-size: clamp(1.2rem,2.5vw,1.7rem); font-weight: 400; letter-spacing: -0.02em; line-height: 1.05; }
+    .exec-item-desc { font-size: 0.85rem; line-height: 1.65; opacity: 0.5; font-weight: 300; max-width: 52ch; text-wrap: pretty; }
 
     .stack-list { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 2rem; }
     .stack-pill { font-size: 0.7rem; letter-spacing: 0.12em; padding: 0.4rem 0.9rem; opacity: 0.6; text-transform: uppercase; }
     .stack-note { font-size: 0.6rem; letter-spacing: 0.28em; text-transform: uppercase; opacity: 0.3; margin-top: 1.5rem; max-width: 60ch; line-height: 1.8; }
 
-    .marca-card {
-      display: flex; flex-direction: column; justify-content: space-between;
-      gap: 3rem; min-height: 280px; padding: 3.5rem 2.5rem;
+    /* ── Portfolio device frames (Cat 2) ── */
+    .pf-lid {
+      background: #1C1C1E;
+      border-radius: 10px 10px 0 0;
+      padding: 4% 3% 2%;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.07), 0 20px 50px rgba(0,0,0,0.18);
+      position: relative;
     }
-    .marca-tag { font-size: 0.6rem; letter-spacing: 0.28em; text-transform: uppercase; opacity: 0.38; }
-    .marca-name { font-family: 'Fraunces', serif; font-size: clamp(2rem,4.5vw,4rem); font-weight: 400; letter-spacing: -0.02em; line-height: 1; }
-    .marca-status { display: flex; align-items: center; gap: 0.6rem; font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; text-decoration: none; color: var(--ink); opacity: 0.4; }
-    .marca-status .dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; animation: pulse 2.5s ease-in-out infinite; }
+    .pf-cam { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.14); margin: 0 auto 6px; }
+    .pf-screen { aspect-ratio: 16/10; overflow: hidden; border-radius: 3px; position: relative; background: #0E0F12; }
+    .pf-base { height: 14px; background: linear-gradient(to bottom,#232325,#1a1a1c); border-radius: 0 0 3px 3px; box-shadow: 0 1px 0 rgba(255,255,255,0.04) inset; }
+    .pf-foot { height: 4px; background: #141416; border-radius: 0 0 8px 8px; width: 56%; margin: 0 auto; }
+    .pf-sim-vi { width:100%;height:100%;background:#0E0F12;padding:7% 7% 6%;position:relative;overflow:hidden;font-family:'Instrument Serif',serif; }
+    .pf-sim-vi::before { content:'';position:absolute;inset:0;background-image:url('assets/bg-light.jpg');background-size:cover;background-position:center;opacity:0.07;pointer-events:none; }
+    .pf-sim-cn { width:100%;height:100%;background:#0D0C0A;padding:7% 7% 6%;position:relative;overflow:hidden;font-family:'Instrument Serif',serif; }
+    .pf-sim-cn::before { content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 30%,rgba(160,120,50,0.12) 0%,transparent 65%);pointer-events:none; }
+    .pf-meta { display:flex;flex-direction:column;gap:0.6rem; }
+    .pf-meta-top { display:flex;justify-content:space-between;align-items:center; }
+    .pf-tag { font-size:0.57rem;letter-spacing:0.27em;text-transform:uppercase;opacity:0.34; }
+    .pf-live { display:flex;align-items:center;gap:0.45rem;font-size:0.57rem;letter-spacing:0.22em;text-transform:uppercase;opacity:0.42; }
+    .pf-live .dot { width:5px;height:5px;border-radius:50%;background:currentColor;animation:pulse 2.5s ease-in-out infinite; }
     @keyframes pulse { 0%,100%{opacity:0.3} 50%{opacity:1} }
+    .pf-title { font-family:'Instrument Serif',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:400;letter-spacing:-0.02em;line-height:1;margin-top:0.4rem; }
+    .pf-desc { font-size:0.78rem;line-height:1.7;opacity:0.46;font-weight:300;max-width:38ch;text-wrap:pretty; }
+    .pf-link { font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;text-decoration:none;color:var(--ink);opacity:0.4;transition:opacity 0.2s, transform 0.3s cubic-bezier(0.16,1,0.3,1);margin-top:0.3rem;display:inline-flex;align-items:center;gap:0.3rem; }
+    .pf-link:hover { opacity:1; transform: translateX(4px); }
 
-    .quote-wrap { padding: clamp(5rem,12vh,9rem) clamp(1.8rem,5vw,3.5rem); text-align: center; }
-    .quote-mark { font-family: 'Fraunces', serif; font-size: 4rem; line-height: 1; opacity: 0.07; display: block; margin-bottom: 0.5rem; }
-    .quote-text { font-family: 'Fraunces', serif; font-style: italic; font-size: clamp(1.5rem,3.5vw,2.6rem); line-height: 1.45; max-width: 700px; margin: 0 auto 1.5rem; }
+    /* ── Work Reel ── */
+    .work-reel-section { padding:clamp(2.5rem,5vh,4rem) 0; }
+    .work-reel-head { padding:0 clamp(1.8rem,5vw,3.5rem);margin-bottom:2rem; }
+    .work-reel-strip {
+      display:flex;gap:1rem;
+      overflow-x:auto;overflow-y:hidden;
+      scroll-snap-type:x mandatory;
+      scrollbar-width:none;
+      padding:0 clamp(1.8rem,5vw,3.5rem) 1.2rem; }
+    .work-reel-strip::-webkit-scrollbar { display:none; }
+    .work-card {
+      flex:0 0 auto;width:200px;
+      aspect-ratio:9/16;
+      border-radius:16px;overflow:hidden;
+      position:relative;
+      scroll-snap-align:start;
+      background:#0e0f12; }
+    .work-card video {
+      width:100%;height:100%;object-fit:cover;display:block; }
+    .work-card-overlay {
+      position:absolute;inset:0;
+      background:linear-gradient(to top,rgba(0,0,0,0.55) 0%,transparent 50%);
+      display:flex;align-items:flex-end;padding:1rem 0.9rem;
+      opacity:0;transition:opacity 0.3s ease; }
+    .work-card:hover .work-card-overlay { opacity:1; }
+    .work-card-label {
+      font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;
+      color:rgba(248,247,245,0.85);line-height:1.6; }
+    @media(max-width:768px){
+      .work-card { width:160px; } }
+
+    /* ── Social Proof (Cat 4) ── */
+    .logo-stage-wrap {
+      position:relative;width:100%;background:#F8F7F5;
+      margin-bottom:3.5rem;overflow:hidden; }
+    .logo-stage {
+      position:relative;width:100%;height:380px;background:#F8F7F5;
+      display:flex;align-items:center;justify-content:center; }
+    .logo-blend {
+      position:absolute;inset:0;
+      display:flex;align-items:center;justify-content:center;
+      mix-blend-mode:multiply; }
+    .logo-solo {
+      position:absolute;inset:0;
+      display:flex;align-items:center;justify-content:center;
+      opacity:0;transform:scale(0.94) translateY(6px);
+      transition:opacity 0.9s ease,transform 0.9s ease;
+      pointer-events:none; }
+    .logo-solo.active { opacity:1;transform:scale(1) translateY(0);pointer-events:auto; }
+    .logo-solo img {
+      width:280px;height:280px;object-fit:contain;display:block;flex-shrink:0;
+      filter:grayscale(1) contrast(1.3); }
+    @media(max-width:768px){
+      .logo-stage { height:240px; }
+      .logo-solo img { width:180px;height:180px; } }
+    .sp-testimonial { max-width:680px;margin:0 auto;text-align:center; }
+    .sp-quote-mark { font-family:'Instrument Serif',serif;font-size:3rem;line-height:1;opacity:0.08;display:block;margin-bottom:0.6rem; }
+    .sp-quote-text { font-family:'Instrument Serif',serif;font-style:italic;font-size:clamp(1.2rem,2.5vw,1.7rem);line-height:1.5;opacity:0.82;margin-bottom:1.4rem; }
+    .sp-quote-attr { font-size:0.58rem;letter-spacing:0.28em;text-transform:uppercase;opacity:0.3;line-height:1.9; }
+
+    .quote-wrap { padding: clamp(3rem,7vh,5rem) clamp(1.8rem,5vw,3.5rem); text-align: center; }
+    .quote-mark { font-family: 'Instrument Serif', serif; font-size: 4rem; line-height: 1; opacity: 0.07; display: block; margin-bottom: 0.5rem; }
+    .quote-text { font-family: 'Instrument Serif', serif; font-style: italic; font-size: clamp(1.5rem,3.5vw,2.6rem); line-height: 1.45; max-width: 700px; margin: 0 auto 1.5rem; }
     .quote-attr { font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; opacity: 0.28; }
 
     footer { padding: clamp(3rem,8vh,6rem) clamp(1.8rem,5vw,3.5rem) clamp(2rem,4vh,3rem); border-top: 1px solid var(--rule); }
@@ -283,7 +409,12 @@
     .footer-text { font-size: 0.88rem; line-height: 1.7; opacity: 0.65; }
     .footer-text a { color: inherit; text-decoration: none; opacity: 0.9; border-bottom: 1px solid currentColor; }
     .footer-text a:hover { opacity: 0.5; }
-    .footer-base { display: flex; justify-content: space-between; align-items: center; padding-top: 2rem; border-top: 1px solid var(--rule); font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.25; max-width: 1200px; margin: 0 auto; flex-wrap: wrap; gap: 0.5rem; }
+    .footer-base { display: flex; justify-content: space-between; align-items: center; padding-top: 2rem; border-top: 1px solid var(--rule); font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.25; max-width: 1200px; margin: 0 auto; flex-wrap: wrap; gap: 0.8rem; }
+    .footer-legal-links { display: flex; gap: 2rem; flex-wrap: wrap; }
+    .footer-legal-links a { color: inherit; text-decoration: none; opacity: 0.9; }
+    .footer-legal-links a:hover { opacity: 0.5; }
+    .footer-link-btn { background: none; border: none; font-family: inherit; font-size: inherit; line-height: inherit; color: inherit; cursor: pointer; padding: 0; text-align: left; opacity: 0.9; text-decoration: none; }
+    .footer-link-btn:hover { opacity: 0.5; }
 
     /* ── Responsive ── */
     @media (max-width: 960px) {
@@ -304,18 +435,18 @@
       .nav-right a.nav-link { display: none; }
       .svc-panel-close { right: 1.4rem; top: 1.2rem; }
       .svc-panel-inner { padding-top: 5rem; }
-      .section { padding: clamp(3rem,7vh,5.5rem) 1.4rem; }
+      .section { padding: clamp(2.2rem,5vh,4rem) 1.4rem; }
       .hero { padding: clamp(1.5rem,4vh,3rem) 1.4rem; padding-top: 0; }
       .hero-headline { font-size: clamp(3rem,12vw,5rem); line-height: 0.92; }
       .srv-grid, .cap-grid { grid-template-columns: 1fr; }
       .srv-card.wide { grid-column: span 1; }
       .process-grid, .mode-grid { grid-template-columns: 1fr; }
       .stat-grid { grid-template-columns: repeat(2,1fr); }
-      .tech-grid, .marcas-grid { grid-template-columns: 1fr; }
+      .tech-grid, .pf-grid { grid-template-columns: 1fr; }
+      .logo-item img { height:36px; }
       .footer-grid { grid-template-columns: 1fr; }
       .vert-item { flex-direction: column; gap: 0.5rem; }
       .display { font-size: clamp(2.2rem,9vw,4rem); }
-      .marca-card { min-height: 200px; padding: 2rem 1.5rem; }
       .exec-list { max-width: 100% !important; }
       footer { padding-bottom: 88px; }
     }
@@ -346,11 +477,23 @@
       transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1);
     }
     #loader.hidden { opacity: 0; pointer-events: none; }
+    #nav-loader {
+      position: fixed; inset: 0; z-index: 2001;
+      background: var(--warm);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.35s cubic-bezier(0.16,1,0.3,1);
+    }
+    #nav-loader.show { opacity: 1; pointer-events: all; }
     .loader-logo {
       height: clamp(64px, 12vw, 96px); width: auto;
       mix-blend-mode: multiply;
       margin-bottom: 2.4rem; user-select: none;
       display: block;
+      image-rendering: -webkit-optimize-contrast;
+      -webkit-transform: translateZ(0); transform: translateZ(0);
+      backface-visibility: hidden; -webkit-backface-visibility: hidden;
     }
     .loader-status {
       font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase;
@@ -371,6 +514,13 @@
       color: var(--muted); margin-top: 0.9rem;
       font-variant-numeric: tabular-nums; opacity: 0.45;
     }
+    .loader-wordmark {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(2rem, 6vw, 3.6rem);
+      font-weight: 400; letter-spacing: -0.025em; line-height: 1;
+      color: var(--ink); margin-bottom: 2.4rem; user-select: none;
+    }
+    .loader-wordmark em { font-style: italic; }
 
     /* ── Cursor label ── */
     .cursor-label {
@@ -406,7 +556,7 @@
     .awards-row {
       display: flex; flex-wrap: wrap; align-items: baseline;
       gap: 0.4rem 0;
-      font-family: 'Fraunces', serif; font-style: italic;
+      font-family: 'Instrument Serif', serif; font-style: italic;
       font-size: clamp(1.4rem,3.5vw,2.8rem); letter-spacing: -0.02em;
       line-height: 1.1;
     }
@@ -457,7 +607,7 @@
 
     /* ── Scroll progress bar (top, 1px) ── */
     .scroll-prog { position: fixed; top: 0; left: 0; right: 0; height: 1px; z-index: 300; }
-    .scroll-prog-fill { height: 100%; background: var(--ink); width: 0%; transition: width 0.08s linear; }
+    .scroll-prog-fill { height: 100%; background: rgba(255,170,23,.65); width: 0%; transition: width 0.08s linear; }
 
     /* ── Frame scrub section ── */
     .scrub-zone { height: 360vh; position: relative; }
@@ -490,7 +640,7 @@
       color: rgba(248,247,245,0.5); display: block; margin-bottom: 1rem;
     }
     .scrub-hl {
-      font-family: 'Fraunces', serif; font-weight: 400;
+      font-family: 'Instrument Serif', serif; font-weight: 400;
       font-size: clamp(2.5rem,6.5vw,5.5rem); letter-spacing: -0.03em;
       line-height: 0.91; color: #F8F7F5; font-optical-sizing: auto;
     }
@@ -533,6 +683,253 @@
     .sound-btn.on .sound-dot { opacity: 1; background: var(--ink); }
     @media (max-width: 768px) { .sound-btn { display: none; } }
 
+    /* ── Eye nav button ── */
+    .eye-btn {
+      display: flex; align-items: center; gap: 0.4rem;
+      font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--ink); background: none; border: none; cursor: none;
+      font-family: inherit; padding: 0; opacity: 0.38; transition: opacity 0.25s;
+    }
+    .eye-btn:hover { opacity: 1; }
+    .eye-btn.active { opacity: 1; color: var(--ink); }
+    .eye-nav-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; opacity: 0.4; transition: opacity 0.3s, background 0.3s, box-shadow 0.3s; }
+    .eye-btn.active .eye-nav-dot { opacity: 1; background: var(--gold); box-shadow: 0 0 8px var(--gold); animation: bio-led 1s ease-in-out infinite; }
+    @keyframes bio-led { 50% { opacity: 0.35; } }
+    @media (max-width: 768px) { .eye-btn { display: none; } }
+
+    /* ── Cursor coexistence: biometric active → ocultar cursor de mouse ── */
+    body.input-eye-active #cursor,
+    body.input-eye-active #cursorRing { opacity: 0 !important; transition: opacity 0.25s ease; }
+    body.input-mouse-active [data-pupil-cursor].is-on { opacity: 0 !important; pointer-events: none; }
+
+    /* ════════════════════════════════════════════════════════════
+       BIOMETRIC EYE-TRACKING — CSS (Victor IA brand)
+       ════════════════════════════════════════════════════════════ */
+    @keyframes live-blink  { 50% { opacity: 0.25; } }
+    @keyframes hint-in     { to { opacity: 1; transform: translateY(0); } }
+    @keyframes hint-pulse  { 0%,100%{box-shadow:0 0 0 0 rgba(255,170,23,0.45);}50%{box-shadow:0 0 0 14px rgba(255,170,23,0);} }
+    @keyframes intro-cta-glow { 0%,100%{box-shadow:0 0 0 0 rgba(255,170,23,0.5);}50%{box-shadow:0 0 0 18px rgba(255,170,23,0);} }
+    @keyframes eye-scan    { 0%,100%{transform:scale(1);}50%{transform:scale(1.18);} }
+    @keyframes cal-ping    { 0%{transform:scale(0.7);opacity:1;}100%{transform:scale(1.6);opacity:0;} }
+    @keyframes cal-pulse   { 0%,100%{transform:scale(1);}50%{transform:scale(1.3);} }
+    @keyframes cal-check-pop { 0%{transform:scale(0.4);opacity:0;}60%{transform:scale(1.1);opacity:1;}100%{transform:scale(1);opacity:1;} }
+    @keyframes gaze-arrow-bounce { 0%,100%{transform:translateY(0) rotate(var(--r,0deg));}50%{transform:translateY(6px) rotate(var(--r,0deg));} }
+    @keyframes led-blink   { 0%,100%{opacity:1;}50%{opacity:0.25;} }
+    @keyframes cam-scan    { 0%,100%{transform:translateY(-6px);opacity:0.3;}50%{transform:translateY(14px);opacity:0.95;} }
+    @keyframes dot-orbit   { 0%,100%{transform:translate(-14px,-4px);}25%{transform:translate(14px,-4px);}50%{transform:translate(14px,6px);}75%{transform:translate(-14px,6px);} }
+    @keyframes iris-follow { 0%,100%{transform:translate(-3.5px,-1px);}25%{transform:translate(3.5px,-1px);}50%{transform:translate(3.5px,1.5px);}75%{transform:translate(-3.5px,1.5px);} }
+    @keyframes palm-show   { 0%,42%{opacity:1;transform:scale(1);}50%,92%{opacity:0;transform:scale(0.85);}100%{opacity:1;transform:scale(1);} }
+    @keyframes fist-show   { 0%,42%{opacity:0;transform:scale(0.85);}50%,92%{opacity:1;transform:scale(1);}100%{opacity:0;transform:scale(0.85);} }
+    @keyframes finger-flip { 0%,38%{transform:rotate(0deg);}50%,88%{transform:rotate(180deg);}100%{transform:rotate(360deg);} }
+    @keyframes arrow-up    { 0%,100%{opacity:0.35;transform:translateY(0);}50%{opacity:1;transform:translateY(-3px);} }
+    @keyframes arrow-down  { 0%,100%{opacity:0.35;transform:translateY(0);}50%{opacity:1;transform:translateY(3px);} }
+    @keyframes device-rotate { 0%,100%{transform:rotate(0);}50%{transform:rotate(90deg);} }
+    @keyframes fade-up     { from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);} }
+
+    .biometric-chip {
+      position: fixed; top: 5rem; left: 1.2rem; z-index: 60;
+      display: none; align-items: center; gap: 0.6rem;
+      padding: 0.7rem 1rem 0.7rem 0.9rem;
+      background: rgba(10,10,10,0.88); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--lime); border-radius: 99px;
+      font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--lime); cursor: pointer;
+      box-shadow: 0 0 0 1px rgba(255,170,23,0.2), 0 8px 30px -8px rgba(255,170,23,0.4);
+      animation: hint-pulse 2.6s var(--ease-cinema) infinite;
+      transition: transform 0.3s var(--ease-snap), background 0.3s ease;
+    }
+    .biometric-chip.is-on { display: inline-flex; }
+    .biometric-chip:hover { transform: translateY(-2px); background: rgba(255,170,23,0.14); }
+    .biometric-chip .eye-icon { width: 14px; height: 14px; color: var(--lime); stroke-width: 2; animation: eye-scan 2.2s ease-in-out infinite; }
+    .biometric-chip .pulse-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 12px var(--lime); animation: live-blink 1s ease-in-out infinite; }
+    .biometric-chip .close-x { margin-left: 0.5rem; padding-left: 0.6rem; border-left: 1px solid rgba(255,170,23,0.35); color: var(--bone); font-size: 0.6rem; letter-spacing: 0.18em; transition: color 0.3s ease; display: inline-flex; align-items: center; gap: 0.3rem; }
+    .biometric-chip:hover .close-x { color: var(--lime); }
+    .biometric-chip .close-x::after { content: "✕"; font-size: 0.85rem; line-height: 0.8; }
+    @media (max-width: 900px) { .biometric-chip { top: 4.5rem; left: 0.6rem; font-size: 0.55rem; padding: 0.55rem 0.85rem 0.55rem 0.75rem; } }
+
+    .calibration {
+      position: fixed; inset: 0; z-index: 99996;
+      background: rgba(10,10,10,0.95); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+      display: none; align-items: center; justify-content: flex-start; flex-direction: column;
+      opacity: 0; transition: opacity 0.5s var(--ease-cinema);
+      overflow-y: auto; -webkit-overflow-scrolling: touch;
+      padding: max(1.5rem, calc(var(--safe-t) + 1rem)) max(1rem, var(--safe-r)) max(2.5rem, calc(var(--safe-b) + 2rem)) max(1rem, var(--safe-l));
+    }
+    .calibration.is-on { display: flex; opacity: 1; }
+    .calibration::-webkit-scrollbar { width: 6px; }
+    .calibration::-webkit-scrollbar-thumb { background: rgba(255,170,23,0.3); border-radius: 99px; }
+    .calibration-tag { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--lime); margin-bottom: 1.2rem; display: inline-flex; align-items: center; gap: 0.55rem; }
+    .calibration-tag .pulse-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--lime); animation: live-blink 0.9s ease-in-out infinite; }
+    .calibration-title { font-family: var(--display); font-weight: 400; font-size: clamp(1.4rem,3.2vw,2.4rem); line-height: 1.1; letter-spacing: -0.025em; color: var(--bone); text-align: center; max-width: 22ch; margin-bottom: 0.8rem; }
+    .calibration-title em { font-style: italic; color: var(--lime); }
+    .calibration-lede { font-size: 0.92rem; line-height: 1.55; color: var(--bone-dim); text-align: center; max-width: 38ch; margin-bottom: 2.4rem; }
+    .calibration-progress { margin-top: 2rem; width: 200px; height: 1px; background: var(--line); position: relative; overflow: hidden; }
+    .calibration-progress-fill { position: absolute; left: 0; top: 0; height: 100%; width: 0%; background: var(--lime); transition: width 0.1s linear; box-shadow: 0 0 8px var(--lime); }
+    .calibration-status { margin-top: 1rem; font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--dim); min-height: 1em; text-align: center; max-width: 32ch; }
+    .calibration-cancel { margin-top: 2rem; font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dim); cursor: pointer; transition: color 0.3s ease; background: none; border: none; }
+    .calibration-cancel:hover { color: var(--bone); }
+
+    .cal-phase { display: flex; flex-direction: column; align-items: center; max-width: 640px; width: 100%; margin-top: auto !important; margin-bottom: auto !important; flex-shrink: 0; }
+    .cal-phase[hidden] { display: none; }
+
+    .cal-accept-btn {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      background: var(--lime); color: var(--ink);
+      font-family: var(--sans); font-weight: 500; font-size: 0.92rem;
+      padding: 1rem 1.8rem; border-radius: 3px; border: none; cursor: pointer;
+      transition: transform 0.4s var(--ease-snap), box-shadow 0.4s ease;
+      animation: intro-cta-glow 2.4s var(--ease-cinema) infinite;
+    }
+    .cal-accept-btn:hover { transform: translateY(-2px); box-shadow: 0 0 0 8px rgba(255,170,23,0.14), 0 18px 50px -10px rgba(255,170,23,0.5); }
+    .cal-accept-btn svg { width: 16px; height: 16px; }
+    .cal-checkmark { width: 80px; height: 80px; color: var(--lime); margin: 0.5rem 0 1.2rem; animation: cal-check-pop 0.6s var(--ease-snap); }
+    .cal-checkmark svg { width: 100%; height: 100%; filter: drop-shadow(0 0 12px var(--lime)); }
+
+    .cal-instructions { width: 100%; max-width: 520px; display: grid; grid-template-columns: repeat(2,1fr); gap: 0.7rem; margin: 1.4rem 0 1.8rem; }
+    @media (min-width: 720px) { .cal-instructions { grid-template-columns: repeat(4,1fr); max-width: 780px; gap: 0.9rem; } }
+    .cal-instr-card { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: space-between; gap: 0.7rem; padding: 1.1rem 0.7rem 0.95rem; border: 1px solid var(--line-strong); background: rgba(20,20,20,0.55); border-radius: 4px; overflow: hidden; min-height: 150px; transition: border-color 0.4s ease, background 0.4s ease, transform 0.4s var(--ease-cinema); }
+    .cal-instr-card:hover { border-color: rgba(255,170,23,0.55); background: rgba(255,170,23,0.04); transform: translateY(-2px); }
+    .cal-instr-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg,transparent,var(--lime),transparent); opacity: 0.4; }
+    .cal-instr-card .corner { position: absolute; width: 10px; height: 10px; border: 1px solid rgba(255,170,23,0.55); pointer-events: none; }
+    .cal-instr-card .corner.tl { top: 4px; left: 4px; border-right: 0; border-bottom: 0; }
+    .cal-instr-card .corner.br { bottom: 4px; right: 4px; border-left: 0; border-top: 0; }
+    .cal-instr-icon { width: 68px; height: 56px; position: relative; display: flex; align-items: center; justify-content: center; color: var(--lime); filter: drop-shadow(0 0 10px rgba(255,170,23,0.35)); }
+    .cal-instr-icon svg { width: 100%; height: 100%; overflow: visible; }
+    .cal-instr-step { position: absolute; top: 12px; right: 14px; font-family: var(--display); font-style: italic; font-size: 1rem; color: var(--accent); opacity: 0.65; letter-spacing: -0.03em; z-index: 2; }
+    .cal-instr-title { font-family: var(--display); font-weight: 420; font-size: clamp(0.95rem,1.2vw,1.1rem); color: var(--bone); letter-spacing: -0.015em; text-align: center; line-height: 1.15; }
+    .cal-instr-desc { font-family: var(--sans); font-size: 0.78rem; line-height: 1.45; color: var(--bone-dim); text-align: center; opacity: 0.85; max-width: 22ch; margin: 0 auto; }
+    .cal-instr-desc strong { color: var(--accent); font-weight: 500; }
+    @media (min-width: 900px) { .cal-instructions-v2 .cal-instr-card { min-height: 260px !important; padding: 2rem 1.4rem 1.6rem !important; } .cal-instr-step { font-size: 1.3rem; top: 16px; right: 18px; } .cal-instr-title { font-size: 1.2rem; } .cal-instr-desc { font-size: 0.88rem; max-width: 26ch; } }
+    @media (max-width: 540px) { .cal-instructions-v2 .cal-instr-card { min-height: 160px !important; padding: 1.1rem 0.6rem 0.85rem !important; gap: 0.45rem !important; } .cal-instr-step { font-size: 0.85rem; top: 8px; right: 10px; } .cal-instr-title { font-size: 0.78rem; } .cal-instr-desc { font-size: 0.66rem; max-width: 18ch; line-height: 1.35; } }
+    .cal-instructions-foot { margin-top: 1.6rem; font-family: var(--sans); font-size: 0.85rem; line-height: 1.5; color: var(--bone-dim); text-align: center; max-width: 36ch; opacity: 0.85; }
+    .cal-instructions-foot strong { color: var(--bone); font-weight: 500; }
+    .cal-instructions-foot em { color: var(--accent); font-style: italic; }
+    .cal-instructions-foot-tag { display: inline-block; width: 28px; height: 1px; background: var(--accent); margin-right: 0.5rem; vertical-align: middle; }
+
+    .led-blink { animation: led-blink 1.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+    .cam-scan { animation: cam-scan 2.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+    .eye-dot { animation: dot-orbit 4.5s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+    .iris-follow { animation: iris-follow 4.5s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+    .hand-palm, .hand-fist { transform-box: fill-box; transform-origin: center; }
+    .hand-palm { animation: palm-show 3.4s ease-in-out infinite; }
+    .hand-fist { animation: fist-show 3.4s ease-in-out infinite; }
+    .finger-flip { transform-box: fill-box; transform-origin: center; animation: finger-flip 3.6s ease-in-out infinite; }
+    .scroll-up-arrow { animation: arrow-up 2s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+    .scroll-down-arrow { animation: arrow-down 2s ease-in-out infinite 0.4s; transform-box: fill-box; transform-origin: center; }
+
+    .cal-point-target { position: fixed; width: 72px; height: 72px; z-index: 99998; display: flex; align-items: center; justify-content: center; cursor: pointer; background: transparent; border: none; padding: 0; transition: top 0.6s var(--ease-cinema), left 0.6s var(--ease-cinema), right 0.6s var(--ease-cinema), bottom 0.6s var(--ease-cinema), transform 0.4s var(--ease-snap); }
+    .cal-point-target[hidden] { display: none; }
+    .cal-point-target:hover { transform: scale(1.08); }
+    .cal-point-target.is-locked { transform: scale(1.2); }
+    .cal-point-target.is-locked .core { background: #FFF; box-shadow: 0 0 40px var(--lime), 0 0 18px #FFF; }
+    .cal-point-target .ping { position: absolute; inset: 4px; border-radius: 50%; border: 2px solid var(--lime); animation: cal-ping 1.4s var(--ease-cinema) infinite; }
+    .cal-point-target .core { width: 18px; height: 18px; background: var(--lime); border-radius: 50%; box-shadow: 0 0 30px var(--lime), 0 0 12px var(--lime); animation: cal-pulse 1s ease-in-out infinite; z-index: 2; }
+    .cal-point-target .dwell-ring { --dwell: 0; position: absolute; inset: 0; border-radius: 50%; background: conic-gradient(var(--lime) calc(var(--dwell) * 360deg), transparent 0); -webkit-mask: radial-gradient(circle, transparent 28px, #000 30px, #000 34px, transparent 36px); mask: radial-gradient(circle, transparent 28px, #000 30px, #000 34px, transparent 36px); pointer-events: none; }
+    .cal-point-target.pos-center { top: 50%; left: 50%; transform: translate(-50%,-50%); }
+    .cal-point-target.pos-center:hover { transform: translate(-50%,-50%) scale(1.08); }
+    .cal-point-target.pos-center.is-locked { transform: translate(-50%,-50%) scale(1.2); }
+    .cal-point-target.pos-tl { top: 1.5rem; left: 1.5rem; }
+    .cal-point-target.pos-tr { top: 1.5rem; right: 1.5rem; }
+    .cal-point-target.pos-br { bottom: 1.5rem; right: 1.5rem; }
+    .cal-point-target.pos-bl { bottom: 1.5rem; left: 1.5rem; }
+
+    .pupil-cursor { position: fixed; top: 0; left: 0; width: 28px; height: 28px; pointer-events: none; z-index: 99990; transform: translate(-50%,-50%); display: none; align-items: center; justify-content: center; will-change: transform; }
+    .pupil-cursor.is-on { display: flex; }
+    .pupil-cursor::before { content: ""; position: absolute; inset: 0; border-radius: 50%; border: 1.5px solid var(--lime); animation: cal-ping 1.4s var(--ease-cinema) infinite; }
+    .pupil-cursor .core { width: 8px; height: 8px; background: var(--lime); border-radius: 50%; box-shadow: 0 0 14px var(--lime); z-index: 2; }
+    .pupil-cursor .dwell { --dwell: 0; position: absolute; inset: -10px; border-radius: 50%; background: conic-gradient(#FFF calc(var(--dwell) * 360deg), transparent 0); -webkit-mask: radial-gradient(circle, transparent 16px, #000 17px, #000 21px, transparent 22px); mask: radial-gradient(circle, transparent 16px, #000 17px, #000 21px, transparent 22px); pointer-events: none; opacity: 0; transition: opacity 0.2s ease; }
+    .pupil-cursor.is-dwelling .dwell { opacity: 1; }
+
+    .biometric-video { position: fixed; top: -9999px; left: -9999px; width: 320px; height: 240px; visibility: hidden; pointer-events: none; }
+
+    .cal-camera-frame { position: relative; width: clamp(180px,26vw,240px); aspect-ratio: 4/3; border: 1px solid var(--lime); background: #000; margin-bottom: 1.2rem; overflow: hidden; box-shadow: 0 0 0 1px rgba(255,170,23,0.3), 0 0 30px rgba(255,170,23,0.18); }
+    .cal-camera-frame video { position: absolute; inset: 0; width: 100%; height: 100%; transform: scaleX(-1); object-fit: cover; }
+    .cal-camera-frame canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+    .cal-camera-frame::before, .cal-camera-frame::after, .cal-camera-frame > .corner-tr, .cal-camera-frame > .corner-bl { content: ""; position: absolute; width: 14px; height: 14px; border: 1px solid var(--lime); z-index: 2; }
+    .cal-camera-frame::before { top: -4px; left: -4px; border-right: none; border-bottom: none; }
+    .cal-camera-frame::after { bottom: -4px; right: -4px; border-left: none; border-top: none; }
+    .cal-camera-frame > .corner-tr { top: -4px; right: -4px; border-left: none; border-bottom: none; }
+    .cal-camera-frame > .corner-bl { bottom: -4px; left: -4px; border-right: none; border-top: none; }
+    .cal-camera-tag { position: absolute; top: 0.4rem; left: 0.5rem; z-index: 3; font-family: var(--mono); font-size: 0.5rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--lime); display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(0,0,0,0.4); padding: 0.2rem 0.45rem; border-radius: 99px; }
+    .cal-camera-tag .pulse-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--lime); animation: live-blink 1s ease-in-out infinite; box-shadow: 0 0 8px var(--lime); }
+
+    .cal-sensitivity { width: 100%; max-width: 460px; display: flex; flex-direction: column; gap: 0.8rem; margin: 0.8rem 0 1.6rem; padding: 1.2rem; border: 1px solid var(--line); background: rgba(20,20,20,0.55); border-radius: 4px; }
+    .cal-sensitivity-head { display: flex; justify-content: space-between; align-items: center; font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--lime); }
+    .cal-sensitivity-head .val { color: var(--bone); }
+    .cal-slider { -webkit-appearance: none; appearance: none; width: 100%; height: 4px; background: var(--line-strong); border-radius: 99px; outline: none; cursor: pointer; }
+    .cal-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 18px; height: 18px; background: var(--lime); border-radius: 50%; border: 2px solid #0E0F12; box-shadow: 0 0 0 1px var(--lime), 0 0 12px var(--lime); cursor: pointer; transition: transform 0.2s var(--ease-snap); }
+    .cal-slider::-moz-range-thumb { width: 18px; height: 18px; background: var(--lime); border-radius: 50%; border: 2px solid #0E0F12; box-shadow: 0 0 0 1px var(--lime), 0 0 12px var(--lime); cursor: pointer; }
+    .cal-slider:hover::-webkit-slider-thumb { transform: scale(1.18); }
+    .cal-sensitivity-hint { font-size: 0.78rem; color: var(--dim); line-height: 1.4; }
+    .cal-sensitivity-test { margin-top: 0.4rem; height: 60px; border: 1px solid var(--line); border-radius: 3px; position: relative; background: rgba(10,10,10,0.5); overflow: hidden; }
+    .cal-sensitivity-test::before { content: "Mueve la mirada → este punto debe seguirla"; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 0.55rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--dim-2); pointer-events: none; padding: 0 1rem; text-align: center; }
+    .cal-sensitivity-test .tracker { position: absolute; top: 50%; left: 50%; width: 14px; height: 14px; background: var(--lime); border-radius: 50%; box-shadow: 0 0 14px var(--lime); transform: translate(-50%,-50%); z-index: 2; }
+
+    .cal-recommended-banner { width: 100%; max-width: 460px; margin: 0.4rem 0 1rem; display: flex; align-items: center; gap: 0.7rem; padding: 0.7rem 1rem; border: 1px solid var(--lime); background: rgba(255,170,23,0.07); border-radius: 4px; box-shadow: 0 0 0 1px rgba(255,170,23,0.15), 0 0 24px -8px rgba(255,170,23,0.4); }
+    .cal-recommended-banner .check { width: 22px; height: 22px; flex-shrink: 0; border-radius: 50%; background: var(--lime); color: var(--ink); display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.8rem; line-height: 1; box-shadow: 0 0 12px var(--lime); }
+    .cal-recommended-banner .copy { flex: 1; font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--lime); line-height: 1.4; }
+    .cal-recommended-banner .copy small { display: block; font-size: 0.55rem; letter-spacing: 0.18em; color: var(--bone-dim); margin-top: 0.25rem; text-transform: none; }
+    .cal-recommended-tag { display: inline-flex; align-items: center; margin-left: 0.5rem; padding: 0.15rem 0.5rem; border: 1px solid rgba(255,170,23,0.4); border-radius: 99px; font-family: var(--mono); font-size: 0.5rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--lime); background: rgba(255,170,23,0.06); transition: opacity 0.3s ease, color 0.3s ease, border-color 0.3s ease; }
+    .cal-recommended-tag::before { content: "✓"; margin-right: 0.3rem; font-size: 0.65rem; }
+    .cal-recommended-tag.is-off { color: var(--dim); border-color: var(--line-strong); opacity: 0.55; }
+    .cal-recommended-tag.is-off::before { content: "·"; }
+    .cal-restore-btn { margin: 0.4rem 0 1.2rem; display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1rem; background: none; border: 1px dashed rgba(255,170,23,0.45); border-radius: 99px; font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--bone); cursor: pointer; transition: color 0.3s ease, border-color 0.3s ease, background 0.3s ease; }
+    .cal-restore-btn:hover { color: var(--lime); border-color: var(--lime); border-style: solid; background: rgba(255,170,23,0.06); }
+    .cal-restore-btn svg { width: 13px; height: 13px; stroke-width: 2; }
+
+    .biometric-restart { position: fixed; top: 5rem; left: 1.2rem; z-index: 60; display: none; align-items: center; gap: 0.6rem; padding: 0.7rem 1.1rem 0.7rem 0.9rem; background: rgba(10,10,10,0.88); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px dashed var(--lime); border-radius: 99px; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--lime); cursor: pointer; box-shadow: 0 0 0 1px rgba(255,170,23,0.15), 0 8px 24px -10px rgba(255,170,23,0.4); transition: transform 0.3s var(--ease-snap), background 0.3s ease, border-style 0.3s ease; }
+    .biometric-restart.is-on { display: inline-flex; animation: hint-in 0.5s var(--ease-cinema), hint-pulse 2.6s var(--ease-cinema) 0.5s infinite; }
+    .biometric-restart:hover { transform: translateY(-2px); background: rgba(255,170,23,0.14); border-style: solid; }
+    .biometric-restart .eye-icon { width: 14px; height: 14px; color: var(--lime); stroke-width: 2; animation: eye-scan 2.2s ease-in-out infinite; }
+    .biometric-restart .pulse-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 10px var(--lime); animation: live-blink 1.2s ease-in-out infinite; }
+    @media (max-width: 900px) { .biometric-restart { top: 4.5rem; left: 0.6rem; font-size: 0.55rem; padding: 0.55rem 0.95rem 0.55rem 0.75rem; } }
+    @media (orientation: portrait) and (max-width: 900px) { .biometric-restart { top: auto; bottom: 0.6rem; left: 50%; transform: translateX(-50%); } .biometric-restart:hover { transform: translateX(-50%) translateY(-2px); } }
+
+    .biometric-hud { position: fixed; bottom: 1.2rem; right: 1.2rem; z-index: 60; display: none; flex-direction: column; width: 168px; border: 1px solid rgba(255,170,23,0.4); background: rgba(10,10,10,0.82); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-radius: 4px; overflow: hidden; box-shadow: 0 0 0 1px rgba(255,170,23,0.18), 0 0 30px -8px rgba(255,170,23,0.32); transition: transform 0.4s var(--ease-cinema), opacity 0.4s ease; }
+    .biometric-hud.is-on { display: flex; }
+    .biometric-hud-head { display: flex; align-items: center; justify-content: space-between; padding: 0.4rem 0.5rem 0.4rem 0.6rem; font-family: var(--mono); font-size: 0.5rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--lime); border-bottom: 1px solid rgba(255,170,23,0.18); background: rgba(10,10,10,0.6); }
+    .biometric-hud-head .pulse-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--lime); animation: live-blink 1s ease-in-out infinite; box-shadow: 0 0 8px var(--lime); margin-right: 0.4rem; }
+    .biometric-hud-head .left { display: inline-flex; align-items: center; }
+    .biometric-hud-head .close-x { color: var(--dim); cursor: pointer; font-size: 0.95rem; line-height: 1; padding: 0 0.2rem; background: none; border: none; transition: color 0.3s ease; }
+    .biometric-hud-head .close-x:hover { color: var(--bone); }
+    .biometric-hud-frame { position: relative; width: 100%; aspect-ratio: 4/3; background: #000; overflow: hidden; }
+    .biometric-hud-frame video { position: absolute; inset: 0; width: 100%; height: 100%; transform: scaleX(-1); object-fit: cover; }
+    .biometric-hud-frame canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+    .biometric-hud-foot { display: flex; justify-content: space-between; gap: 0.4rem; padding: 0.35rem 0.6rem; font-family: var(--mono); font-size: 0.46rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--dim); border-top: 1px solid rgba(255,170,23,0.18); background: rgba(10,10,10,0.5); }
+    .biometric-hud-foot .lime { color: var(--lime); }
+    @media (max-width: 540px) { .biometric-hud { width: 130px; bottom: 0.8rem; right: 0.8rem; } .biometric-hud-head { font-size: 0.46rem; } }
+    body.is-calibrating .biometric-hud { display: none !important; }
+
+    .gaze-scroll-zone { position: fixed; left: 0; right: 0; z-index: 55; height: 18vh; pointer-events: none; display: none; align-items: center; justify-content: center; flex-direction: column; gap: 0.4rem; transition: opacity 0.3s ease, background 0.2s ease; opacity: 0.55; }
+    .gaze-scroll-zone.is-on { display: flex; }
+    .gaze-scroll-zone.is-active { opacity: 1; }
+    .gaze-scroll-zone.is-paused { opacity: 0.18; }
+    .gaze-scroll-zone-up { top: 0; background: linear-gradient(180deg, rgba(255,170,23,0.14), rgba(255,170,23,0)); }
+    .gaze-scroll-zone-down { bottom: 0; background: linear-gradient(0deg, rgba(255,170,23,0.14), rgba(255,170,23,0)); }
+    .gaze-scroll-zone.is-active.gaze-scroll-zone-up { background: linear-gradient(180deg, rgba(255,170,23,0.30), rgba(255,170,23,0)); }
+    .gaze-scroll-zone.is-active.gaze-scroll-zone-down { background: linear-gradient(0deg, rgba(255,170,23,0.30), rgba(255,170,23,0)); }
+    .gaze-scroll-arrow { width: 36px; height: 36px; color: var(--lime); filter: drop-shadow(0 0 12px var(--lime)); animation: gaze-arrow-bounce 1.6s ease-in-out infinite; }
+    .gaze-scroll-zone-up .gaze-scroll-arrow { transform: rotate(180deg); margin-top: 0.6rem; }
+    .gaze-scroll-zone-down .gaze-scroll-arrow { margin-bottom: 0.6rem; }
+    .gaze-scroll-zone-up .gaze-scroll-arrow { --r: 180deg; }
+    .gaze-scroll-zone-label { font-family: var(--mono); font-size: 0.55rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--lime); background: rgba(10,10,10,0.78); padding: 0.35rem 0.7rem; border-radius: 99px; border: 1px solid rgba(255,170,23,0.35); }
+    body.is-calibrating .gaze-scroll-zone { display: none !important; }
+
+    .blink-toast { position: fixed; top: 5rem; left: 50%; transform: translateX(-50%) translateY(-12px); z-index: 99991; padding: 0.7rem 1rem; background: rgba(10,10,10,0.88); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid var(--lime); border-radius: 99px; font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--lime); opacity: 0; pointer-events: none; box-shadow: 0 0 24px -6px var(--lime); transition: opacity 0.4s ease, transform 0.4s var(--ease-cinema); }
+    .blink-toast.is-on { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    .orientation-hint { position: fixed; inset: 0; z-index: 99999; display: none; align-items: center; justify-content: center; background: rgba(10,10,10,0.94); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); pointer-events: none; opacity: 0; transition: opacity 0.4s ease; }
+    .orientation-hint.is-on { display: flex; opacity: 1; }
+    .orientation-hint .body { text-align: center; color: var(--lime); font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; display: flex; flex-direction: column; gap: 0.8rem; align-items: center; }
+    .orientation-hint .device { width: 64px; height: 64px; border: 2px solid var(--lime); border-radius: 8px; animation: device-rotate 1.4s var(--ease-cinema) infinite; position: relative; }
+    .orientation-hint .device::after { content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 32px; height: 4px; border-radius: 99px; background: var(--lime); }
+
+    body.is-biometric-active, html.is-biometric-active { scroll-behavior: auto !important; }
+    @media (max-width: 540px) { .gaze-scroll-zone { height: 14vh; } .gaze-scroll-arrow { width: 26px; height: 26px; } .gaze-scroll-zone-label { font-size: 0.48rem; padding: 0.28rem 0.55rem; } }
+    @media (orientation: portrait) and (max-width: 900px) { .gaze-scroll-zone { height: 16vh; } .cal-point-target { width: 84px; height: 84px; } .cal-point-target.pos-tl { top: 1rem; left: 1rem; } .cal-point-target.pos-tr { top: 1rem; right: 1rem; } .cal-point-target.pos-br { bottom: 1rem; right: 1rem; } .cal-point-target.pos-bl { bottom: 1rem; left: 1rem; } .cal-camera-frame { width: clamp(140px,60vw,220px); } .biometric-hud { width: 120px; bottom: auto; top: 4.6rem; right: 0.5rem; } .biometric-chip { top: auto; bottom: 0.6rem; left: 50%; transform: translateX(-50%); } .biometric-chip:hover { transform: translateX(-50%) translateY(-2px); } }
+    @media (orientation: landscape) and (max-height: 540px) { .gaze-scroll-zone { height: 22vh; } .cal-point-target { width: 60px; height: 60px; } .cal-point-target .core { width: 14px; height: 14px; } .cal-point-target.pos-tl { top: 0.6rem; left: 0.6rem; } .cal-point-target.pos-tr { top: 0.6rem; right: 0.6rem; } .cal-point-target.pos-br { bottom: 0.6rem; right: 0.6rem; } .cal-point-target.pos-bl { bottom: 0.6rem; left: 0.6rem; } .biometric-hud { width: 110px; bottom: 0.4rem; right: 0.4rem; } .calibration { padding: 1rem 0.8rem; overflow-y: auto; } .calibration-title { font-size: clamp(1rem,2.4vw,1.4rem); margin-bottom: 0.4rem; } }
+    @media (orientation: portrait) and (min-width: 600px) and (max-width: 1099px) { .biometric-hud { width: 180px; top: 5rem; bottom: auto; right: 1rem; } .biometric-chip { top: 5rem; bottom: auto; left: 1rem; transform: none; } .gaze-scroll-zone { height: 14vh; } .cal-point-target { width: 100px; height: 100px; } .cal-camera-frame { width: clamp(220px,38vw,300px); } }
+
     /* ── Section reveals (IntersectionObserver driven) ── */
     .rev-up {
       opacity: 0; transform: translateY(28px);
@@ -552,14 +949,477 @@
     .cta, .svc-panel-item { will-change: transform; }
 
     /* ── Card 3D tilt ── */
-    .srv-card, .cap-card, .stat-card, .marca-card, .process-step {
+    .srv-card, .cap-card, .stat-card, .process-step {
       will-change: transform;
       transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
     }
 
     /* ── Stat counter ── */
     .stat-value { font-variant-numeric: tabular-nums; }
+
+    /* ── Services home grid ── */
+    .svc-home-grid {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 0;
+    }
+    .svc-home-item {
+      display: flex; flex-direction: column; gap: 0.9rem;
+      padding: 2.4rem 2rem; border: 1px solid var(--rule); margin: -1px -1px 0 0;
+      text-decoration: none; color: var(--ink);
+      transition: background 0.25s ease;
+    }
+    .svc-home-item:hover { background: rgba(14,15,18,0.03); }
+    .svc-home-icon {
+      width: 48px; height: 48px; flex-shrink: 0;
+      opacity: 0.45; margin-bottom: 0.6rem; color: var(--ink);
+      transition: opacity 0.25s ease;
+    }
+    .svc-home-item:hover .svc-home-icon { opacity: 0.75; }
+    .svc-home-num { font-size: 0.55rem; letter-spacing: 0.25em; opacity: 0.22; text-transform: uppercase; }
+    .svc-home-title {
+      font-family: 'Instrument Serif', serif; font-size: clamp(1.05rem,1.8vw,1.35rem);
+      font-weight: 400; line-height: 1.1; letter-spacing: -0.015em;
+    }
+    .svc-home-title em { font-style: italic; }
+    .svc-home-body { font-size: 0.74rem; line-height: 1.65; opacity: 0.44; font-weight: 300; margin-top: auto; }
+    .svc-home-footer {
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem; padding-top: 2rem; border-top: 1px solid var(--rule); margin-top: 2.5rem;
+    }
+
+    /* ── Industrias ── */
+    .ind-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 3.5rem; }
+    .ind-item { display: flex; flex-direction: column; gap: 1rem; }
+    .ind-title {
+      font-family: 'Instrument Serif', serif; font-size: clamp(1.3rem,2.5vw,1.8rem);
+      font-weight: 400; letter-spacing: -0.02em;
+    }
+    .ind-body { font-size: 0.78rem; line-height: 1.7; opacity: 0.5; font-weight: 300; text-wrap: pretty; }
+
+    @media (max-width: 960px) {
+      .svc-home-grid { grid-template-columns: repeat(2,1fr); }
+      .ind-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+    @media (max-width: 640px) {
+      .svc-home-grid { grid-template-columns: 1fr; }
+      .svc-home-item { padding: 1.8rem 1.4rem; }
+      .ind-grid { gap: 2rem; }
+    }
+
+    /* ════════════════════════════════════════════════════
+       WEB 4.0 LAYER — victor-ia.com.mx
+       Neural · Glass · Chars · Glow · Levitate · Aura
+    ════════════════════════════════════════════════════ */
+
+    /* Neural constellation canvas */
+    #neural-canvas {
+      position: fixed; inset: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 4;
+      mix-blend-mode: multiply;
+    }
+
+    /* ── Hero char animation ── */
+    .hero-word.w4-split {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+    .hero-char {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(28px);
+      filter: blur(6px);
+      transition:
+        opacity  .7s cubic-bezier(.16,1,.3,1),
+        transform .7s cubic-bezier(.16,1,.3,1),
+        filter   .55s ease;
+    }
+    .hero-char.on { opacity: 1; transform: none; filter: blur(0); }
+
+    /* ── Glassmorphism service cards ── */
+    .svc-home-item {
+      background: rgba(248,247,245,.56) !important;
+      backdrop-filter: blur(14px) saturate(1.5);
+      -webkit-backdrop-filter: blur(14px) saturate(1.5);
+      border: 1px solid rgba(255,255,255,.52) !important;
+      box-shadow:
+        0 2px 18px rgba(14,15,18,.04),
+        inset 0 1px 0 rgba(255,255,255,.78),
+        inset 0 -1px 0 rgba(14,15,18,.03) !important;
+      transition: background .35s ease, box-shadow .35s ease,
+                  transform .4s cubic-bezier(.16,1,.3,1) !important;
+    }
+    .svc-home-item:hover {
+      background: rgba(248,247,245,.78) !important;
+      box-shadow:
+        0 8px 38px rgba(14,15,18,.08),
+        inset 0 1px 0 rgba(255,255,255,.88) !important;
+      transform: translateY(-2px) !important;
+    }
+
+    /* ── Glassmorphism stat cards ── */
+    .stat-card {
+      background: rgba(248,247,245,.60) !important;
+      backdrop-filter: blur(12px) saturate(1.4);
+      -webkit-backdrop-filter: blur(12px) saturate(1.4);
+      border: 1px solid rgba(255,255,255,.48);
+      box-shadow: 0 2px 16px rgba(14,15,18,.04), inset 0 1px 0 rgba(255,255,255,.72);
+      padding: 1.4rem !important;
+      transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .3s ease !important;
+    }
+    .stat-card:hover {
+      transform: translateY(-3px) !important;
+      box-shadow: 0 8px 32px rgba(14,15,18,.08), inset 0 1px 0 rgba(255,255,255,.8) !important;
+    }
+
+    /* ── Stat golden glow ── */
+    @keyframes statGlow {
+      0%,100% { text-shadow: none; }
+      50%      { text-shadow: 0 0 18px rgba(255,170,23,.55), 0 0 38px rgba(255,170,23,.22); }
+    }
+    .stat-value.glow { animation: statGlow 1.6s ease forwards; }
+
+    /* ── Portfolio device levitate ── */
+    .pf-item:nth-child(1) .pf-lid { animation: levA 5.2s ease-in-out infinite; }
+    .pf-item:nth-child(2) .pf-lid { animation: levB 6.8s ease-in-out infinite; animation-delay: -2.8s; }
+    @keyframes levA { 0%,100%{ transform:translateY(0) rotate(0) } 50%{ transform:translateY(-9px) rotate(.22deg) } }
+    @keyframes levB { 0%,100%{ transform:translateY(0) rotate(0) } 50%{ transform:translateY(-7px) rotate(-.22deg) } }
+
+    /* ── Service icon hover ── */
+    .svc-home-icon {
+      transition: transform .4s cubic-bezier(.16,1,.3,1), opacity .25s ease;
+    }
+    .svc-home-item:hover .svc-home-icon {
+      opacity: .82 !important;
+      transform: scale(1.1) translateY(-3px);
+    }
+
+    /* ── CTA ambient aura ── */
+    .cta { position: relative; }
+    .cta::before {
+      content: ''; position: absolute; inset: -14px;
+      background: radial-gradient(ellipse at 50% 50%, rgba(255,170,23,.18) 0%, transparent 65%);
+      opacity: 0; z-index: -1;
+      transition: opacity .45s ease;
+      pointer-events: none;
+    }
+    .cta:hover::before { opacity: 1; }
+
+    /* ── Eyebrow line draw on reveal ── */
+    .eyebrow::before {
+      width: 0 !important;
+      transition: width .75s cubic-bezier(.16,1,.3,1) .15s !important;
+    }
+    .eyebrow.in::before { width: 2rem !important; }
+
+    /* ── Scrub progress bar glow ── */
+    .scrub-pbar-fill { box-shadow: 0 0 8px rgba(255,170,23,.55); }
+
+    /* ── Work reel card hover zoom ── */
+    .work-card { overflow: hidden; }
+    .work-card video {
+      transition: transform .65s cubic-bezier(.16,1,.3,1);
+    }
+    .work-card:hover video { transform: scale(1.06); }
+    @media (hover: none) { .work-card-overlay { opacity: 0.75; } }
+
+    /* ── Quote ambient radial ── */
+    .quote-wrap { position: relative; isolation: isolate; }
+    .quote-wrap::after {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 65% at 50% 50%, rgba(255,170,23,.052) 0%, transparent 68%);
+      z-index: -1; pointer-events: none;
+    }
+
+    /* ── Film grain overlay ── */
+    body::after {
+      content: ''; position: fixed; inset: 0; z-index: 9500;
+      pointer-events: none; opacity: .025; mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+      animation: grain .5s steps(1) infinite;
+    }
+    @keyframes grain {
+      0%,100%{ background-position:0 0 }
+      10%{ background-position:-5% -10% }
+      20%{ background-position:-15% 5% }
+      30%{ background-position:7% -25% }
+      40%{ background-position:20% 15% }
+      50%{ background-position:-5% 30% }
+      60%{ background-position:15% 10% }
+      70%{ background-position:0% 25% }
+      80%{ background-position:-10% 10% }
+      90%{ background-position:5% -15% }
+    }
+
+    /* ── Hero ambient golden orb ── */
+    .hero { position: relative; }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -18%; right: -6%;
+      width: 56vw; height: 56vw;
+      background: radial-gradient(circle, rgba(255,170,23,.055) 0%, transparent 68%);
+      pointer-events: none;
+      animation: heroOrb 14s ease-in-out infinite alternate;
+      will-change: transform;
+    }
+    @keyframes heroOrb {
+      from { transform: translate(0,0) scale(1); }
+      to   { transform: translate(-4%,3%) scale(1.07); }
+    }
+
+    /* ── Service card cursor-tracked inner shimmer ── */
+    .svc-home-item { position: relative; overflow: hidden; }
+    .svc-home-item::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(255,170,23,.12) 0%, transparent 58%);
+      opacity: 0;
+      transition: opacity .35s;
+      pointer-events: none;
+    }
+    .svc-home-item:hover::after { opacity: 1; }
+
+    /* ── Stat card bottom glow on hover ── */
+    .stat-card { position: relative; }
+    .stat-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at 50% 100%, rgba(255,170,23,.09) 0%, transparent 65%);
+      opacity: 0; transition: opacity .6s; pointer-events: none;
+    }
+    .stat-card:hover::before { opacity: 1; }
+
+    /* ── Gold gradient on hero italic keyword (Fraunces) ── */
+    .hero-headline em {
+      background: linear-gradient(130deg, #cc7700 0%, #ffcc55 38%, #FFAA17 65%, #cc7700 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: goldShimmer 5s linear infinite;
+    }
+    @keyframes goldShimmer {
+      0%   { background-position: 0% center; }
+      100% { background-position: 200% center; }
+    }
+    /* Gold gradient on all section display italic headings */
+    .display em {
+      background: linear-gradient(130deg, #cc7700 0%, #ffcc55 38%, #FFAA17 65%, #cc7700 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: goldShimmer 5s linear infinite;
+    }
+
+    /* ── Holo shimmer on main CTA ── */
+    .cta::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.11) 45%, transparent 100%);
+      background-size: 200% 100%;
+      border-radius: inherit;
+      pointer-events: none;
+      animation: ctaShimmer 3s ease-in-out infinite;
+    }
+    @keyframes ctaShimmer {
+      0%   { background-position: -100% 0; opacity: 0; }
+      15%  { opacity: 1; }
+      100% { background-position: 260% 0; opacity: 0; }
+    }
+
+    /* ── Nav hide on scroll-down ── */
+    nav { transition: transform 0.42s cubic-bezier(0.16,1,0.3,1) !important; }
+    nav.nav-hidden { transform: translateY(-110%) !important; }
+    nav.nav-scrolled {
+      background: rgba(248,247,245,.88) !important;
+      backdrop-filter: blur(20px) saturate(1.7) !important;
+      -webkit-backdrop-filter: blur(20px) saturate(1.7) !important;
+      border-bottom: 1px solid rgba(14,15,18,.055) !important;
+    }
+
+    /* ═══════════════════════════════════════════════
+       MOBILE PREMIUM — Mobbin grade
+    ═══════════════════════════════════════════════ */
+    /* Floating CTA bar — hidden on desktop */
+    .mobile-cta-bar {
+      display: none;
+    }
+    @media (max-width: 640px) {
+      /* Safe-area vars */
+      :root { --sab: env(safe-area-inset-bottom,0px); --sat: env(safe-area-inset-top,0px); }
+
+      /* Bottom space for the fixed bar */
+      footer { padding-bottom: calc(90px + var(--sab)) !important; }
+
+      /* Glassmorphic sticky nav */
+      nav {
+        background: rgba(248,247,245,.9) !important;
+        backdrop-filter: blur(24px) saturate(1.8) !important;
+        -webkit-backdrop-filter: blur(24px) saturate(1.8) !important;
+        border-bottom: 1px solid rgba(14,15,18,.06) !important;
+      }
+
+      /* Hero — cinematic, generous */
+      .hero { padding-left: 1.2rem !important; padding-right: 1.2rem !important; }
+      .hero-inner { gap: 1.8rem; }
+      .hero-headline { font-size: clamp(3.4rem,13.5vw,5.8rem) !important; letter-spacing: -0.04em; }
+      .cta { padding: 1rem 2rem !important; font-size: 0.72rem !important; letter-spacing: 0.18em; border-radius: 12px; }
+
+      /* Service cards — premium card style */
+      .svc-home-grid {
+        display: flex !important; flex-direction: column !important;
+        gap: 0.7rem !important; border: none !important;
+      }
+      .svc-home-item {
+        border-radius: 20px !important;
+        border: 1px solid rgba(255,255,255,.7) !important;
+        box-shadow: 0 2px 16px rgba(14,15,18,.07), 0 1px 3px rgba(14,15,18,.04) !important;
+        padding: 1.5rem 1.3rem !important; gap: 0.9rem;
+        background: rgba(248,247,245,.75) !important;
+      }
+      .svc-home-item:active {
+        transform: scale(0.974) !important;
+        transition: transform 0.14s cubic-bezier(0.34,1.56,0.64,1) !important;
+      }
+      .svc-home-title { font-size: 1rem; letter-spacing: -0.01em; line-height: 1.2; }
+      .svc-home-body { font-size: 0.74rem; }
+
+      /* Stat grid — 2 cols, premium cards */
+      .stat-grid { gap: 0.7rem !important; }
+      .stat-card {
+        border-radius: 18px !important;
+        border: 1px solid rgba(255,255,255,.65) !important;
+        box-shadow: 0 2px 14px rgba(14,15,18,.07) !important;
+        padding: 1.4rem 1.2rem !important;
+        background: rgba(248,247,245,.72) !important;
+      }
+      .stat-card:active {
+        transform: scale(0.97) !important;
+        transition: transform 0.14s cubic-bezier(0.34,1.56,0.64,1) !important;
+      }
+      .stat-value { font-size: clamp(2rem,9vw,3rem) !important; }
+
+      /* Sections */
+      .section { padding: 3rem 1.2rem !important; }
+      .body-text { font-size: 0.88rem; line-height: 1.65; }
+
+      /* Hero orb off on mobile — performance */
+      .hero::before { display: none !important; }
+
+      /* Gradient text fallback on mobile — background-clip:text unreliable */
+      .hero-headline em, .display em {
+        background: none !important;
+        -webkit-text-fill-color: var(--gold) !important;
+        color: var(--gold) !important;
+        animation: none !important;
+      }
+
+      /* Floating bottom CTA — only after hero scroll */
+      .mobile-cta-bar {
+        display: flex; align-items: center; justify-content: center;
+        position: fixed; bottom: 0; left: 0; right: 0; z-index: 500;
+        padding: 0.85rem 1.2rem max(1rem, var(--sab));
+        background: rgba(248,247,245,.95);
+        backdrop-filter: blur(24px) saturate(2);
+        -webkit-backdrop-filter: blur(24px) saturate(2);
+        border-top: 1px solid rgba(14,15,18,.07);
+        box-shadow: 0 -8px 32px rgba(14,15,18,.06);
+        transform: translateY(110%);
+        transition: transform 0.38s cubic-bezier(0.16,1,0.3,1);
+      }
+      .mobile-cta-bar.visible {
+        transform: translateY(0);
+      }
+      .mobile-cta-link {
+        display: block; width: 100%;
+        padding: 0.95rem 1rem;
+        background: var(--ink); color: var(--warm);
+        text-align: center; text-decoration: none;
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase;
+        font-weight: 500; border-radius: 12px;
+        transition: transform 0.14s cubic-bezier(0.34,1.56,0.64,1);
+      }
+      .mobile-cta-link:active { transform: scale(0.97); }
+    }
+
+    /* ── Reduced motion overrides ── */
+    @media (prefers-reduced-motion: reduce) {
+      .hero-char { transition: none !important; opacity: 1 !important; transform: none !important; filter: none !important; }
+      .pf-item .pf-lid { animation: none !important; }
+      .hero::before { animation: none !important; }
+      #neural-canvas { display: none !important; }
+      body::after { animation: none !important; }
+      .hero-headline em, .display em { animation: none !important; }
+      .cta::after { display: none !important; }
+    }
   </style>
+  <script>
+    /* Bloquea pull-to-refresh (arriba) y elastic bounce (abajo) en iOS Safari */
+    (function(){
+      var _startY = 0;
+      document.addEventListener('touchstart', function(e){ _startY = e.touches[0].pageY; }, { passive: true });
+      document.addEventListener('touchmove', function(e){
+        var dy = e.touches[0].pageY - _startY;
+        var atTop    = window.scrollY <= 0 && dy > 0;
+        var atBottom = (window.scrollY + window.innerHeight) >= document.documentElement.scrollHeight && dy < 0;
+        if(atTop || atBottom) e.preventDefault();
+      }, { passive: false });
+    })();
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": ["Organization", "LocalBusiness"],
+        "@id": "https://victor-ia.com.mx/#organization",
+        "name": "VICTOR IA",
+        "legalName": "INFLUENCE IA S.A. DE C.V.",
+        "url": "https://victor-ia.com.mx",
+        "description": "Studio de Inteligencia Artificial en México. Construimos agentes autónomos, sitios cinematográficos y automatización real para hotelería, timeshare e inmobiliario de lujo.",
+        "email": "info@victor-ia.com.mx",
+        "telephone": "+52-984-235-3159",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Playa del Carmen",
+          "addressRegion": "Quintana Roo",
+          "addressCountry": "MX"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+52-984-235-3159",
+          "email": "info@victor-ia.com.mx",
+          "contactType": "customer service",
+          "availableLanguage": ["Spanish", "English"],
+          "areaServed": "MX"
+        },
+        "areaServed": ["México", "Latinoamérica"],
+        "knowsAbout": ["Inteligencia Artificial", "Automatización de Procesos", "Agentes de IA", "Sitios Web Inclusivos", "Data Analytics", "Business Intelligence", "Ciberseguridad"],
+        "sameAs": []
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://victor-ia.com.mx/#website",
+        "name": "VICTOR IA",
+        "url": "https://victor-ia.com.mx",
+        "publisher": { "@id": "https://victor-ia.com.mx/#organization" },
+        "inLanguage": "es-MX"
+      },
+      {
+        "@type": "Service",
+        "@id": "https://victor-ia.com.mx/service.html?s=09#service",
+        "name": "Agentes de IA con Voz y Texto",
+        "description": "Agentes autónomos de inteligencia artificial para ventas, soporte y calificación de leads. Disponibles 24/7 en todos los canales.",
+        "provider": { "@id": "https://victor-ia.com.mx/#organization" },
+        "areaServed": "México",
+        "serviceType": "Inteligencia Artificial"
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
@@ -567,10 +1427,16 @@
 
   <!-- Loader (RANK 1) -->
   <div id="loader" role="status" aria-label="Cargando VICTOR IA">
-    <img class="loader-logo" src="/assets/brand/logo-full.png" alt="VICTOR IA">
+    <p class="loader-wordmark">VICTOR <em>IA</em></p>
     <p class="loader-status" id="loader-status">Calibrando éter</p>
     <div class="loader-track" aria-hidden="true"><div class="loader-fill" id="loader-fill"></div></div>
     <p class="loader-pct" id="loader-pct" aria-hidden="true">000</p>
+  </div>
+
+  <!-- Transition overlay — aparece al hacer click en cualquier CTA/link interno -->
+  <div id="nav-loader" role="status" aria-label="Cargando" aria-hidden="true">
+    <p class="loader-wordmark">VICTOR <em>IA</em></p>
+    <div class="loader-track" aria-hidden="true"><div class="loader-fill" id="nav-fill"></div></div>
   </div>
 
   <div class="bg-marble" id="bgMarble"></div>
@@ -604,19 +1470,26 @@
           <span class="sound-dot"></span>
           <span>Sonido</span>
         </button>
+        <button class="eye-btn" id="eyeNavBtn" type="button" data-intro-bio aria-label="Activar control por mirada">
+          <span class="eye-nav-dot"></span>
+          <span>Mirada IA</span>
+        </button>
       </div>
     </nav>
 
     <!-- 01 · Hero -->
     <section class="hero">
       <div class="hero-inner">
-        <p class="eyebrow">VICTOR IA · Playa del Carmen, México</p>
+        <p class="eyebrow">01 / Studio de IA · México</p>
         <h1 class="hero-headline" id="hero-hl">
-          <span class="hero-word">Inteligencia</span><br>
-          <em><span class="hero-word" style="transition-delay:0.18s">que trabaja.</span></em>
+          <span class="hero-word">La IA que</span><br>
+          <em><span class="hero-word" style="transition-delay:0.18s">construye empresas.</span></em>
         </h1>
+        <p class="hero-services">
+          Agentes con voz <span>·</span> Sitios web inclusivos <span>·</span> Automatización <span>·</span> Video IA
+        </p>
         <p class="body-text">
-          Studio de IA en México. Agentes conversacionales, sitios cinematográficos, automatización y video.<br><br>
+          Construimos el sistema de IA que trabaja 24/7 mientras tu empresa escala. Agentes que venden, sitios inclusivos que convierten y automatización que opera sola — para hotelería, timeshare e inmobiliario de lujo.<br>
           <strong>Construimos. No consultamos.</strong>
         </p>
         <div>
@@ -653,339 +1526,317 @@
       </div>
     </section>
 
-    <!-- 02 · Capacidades -->
+    <!-- 02 · Servicios -->
     <section class="section">
       <div class="section-inner">
-        <p class="eyebrow">02 / Capacidades principales</p>
-        <h2 class="display" style="margin-bottom:3rem;">
-          Cada capacidad<br><em>responde distinto.</em>
+        <p class="eyebrow rev-up">02 / Servicios</p>
+        <h2 class="display rev-up" style="--d:80ms;margin-bottom:3rem;">
+          18 capacidades.<br><em>Un studio.</em>
         </h2>
-        <div class="srv-grid">
-          <div class="srv-card wide">
-            <span class="srv-num">/01</span>
-            <p class="srv-title">AI Agents que cierran ventas<br><em style="font-family:'Fraunces',serif;font-style:italic;">mientras duermes.</em></p>
-            <p class="srv-body">Agentes conversacionales con memoria persistente. Califican leads, agendan calls, integran HubSpot y WhatsApp.</p>
-          </div>
-          <div class="srv-card">
-            <span class="srv-num">/02</span>
-            <p class="srv-title">Automatización de Procesos</p>
-            <p class="srv-body">Workflows backend custom, integraciones API, sincronización de herramientas.</p>
-          </div>
-          <div class="srv-card">
-            <span class="srv-num">/03</span>
-            <p class="srv-title">Sitios Cinematográficos</p>
-            <p class="srv-body">WebGL, scroll-driven, animaciones de alto impacto. La cara de tu empresa al nivel internacional.</p>
-          </div>
-          <div class="srv-card wide">
-            <span class="srv-num">/04</span>
-            <p class="srv-title">AI Video · Higgsfield,<br>Runway, Seedance, LTX.</p>
-            <p class="srv-body">Videos cinematográficos generados con IA + post-procesamiento profesional. Solo SFX.</p>
-          </div>
-          <div class="srv-card">
-            <span class="srv-num">/05</span>
-            <p class="srv-title">Modelos 3D & Renders</p>
-            <p class="srv-body">Visualizaciones fotorrealistas, configuradores interactivos, motion graphics.</p>
-          </div>
-          <div class="srv-card">
-            <span class="srv-num">/06</span>
-            <p class="srv-title">CRM & Intelligence Arch.</p>
-            <p class="srv-body">HubSpot, Salesforce, sistemas inmobiliarios y timeshare implementados full-stack.</p>
-          </div>
-          <div class="srv-card">
-            <span class="srv-num">/07</span>
-            <p class="srv-title">Data Analytics & BI</p>
-            <p class="srv-body">Dashboards ejecutivos en tiempo real. Decisiones con datos, no con intuición.</p>
-          </div>
-          <div class="srv-card">
-            <span class="srv-num">/08</span>
-            <p class="srv-title">Capacitación Corporativa</p>
-            <p class="srv-body">Formación de equipos con agentes de IA entrenados en tus procesos.</p>
-          </div>
+        <div class="svc-home-grid">
+
+          <a href="service.html?s=09" class="svc-home-item rev-up" style="--d:120ms">
+            <!-- Agentes IA: esfera de inteligencia con onda de voz -->
+            <svg class="svc-home-icon" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="36" cy="36" r="22" stroke="currentColor" stroke-width="1.2"/>
+              <path d="M18 36 C20 29 24 29 26 36 C28 43 32 43 34 36 C36 29 40 29 42 36 C44 43 48 43 50 36 C52 29 54 29 56 36" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+              <circle cx="36" cy="36" r="2.2" fill="currentColor"/>
+            </svg>
+            <span class="svc-home-num">/01</span>
+            <p class="svc-home-title">Agentes de IA<br><em>con Voz y Texto</em></p>
+            <p class="svc-home-body">Ventas, soporte y calificación de leads. Disponibles 24/7 en todos los canales.</p>
+          </a>
+
+          <a href="service.html?s=01" class="svc-home-item rev-up" style="--d:160ms">
+            <!-- Sitios Web: ventana de browser con estructura editorial -->
+            <svg class="svc-home-icon" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="9" y="14" width="54" height="44" rx="2.5" stroke="currentColor" stroke-width="1.2"/>
+              <line x1="9" y1="27" x2="63" y2="27" stroke="currentColor" stroke-width="1.2"/>
+              <circle cx="18" cy="20.5" r="1.8" fill="currentColor"/>
+              <circle cx="25" cy="20.5" r="1.8" fill="currentColor"/>
+              <circle cx="32" cy="20.5" r="1.8" fill="currentColor"/>
+              <line x1="17" y1="38" x2="55" y2="38" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity="0.4"/>
+              <line x1="17" y1="46" x2="55" y2="46" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity="0.4"/>
+              <line x1="17" y1="52" x2="40" y2="52" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity="0.4"/>
+            </svg>
+            <span class="svc-home-num">/02</span>
+            <p class="svc-home-title">Sitios Web<br><em>Inclusivos</em></p>
+            <p class="svc-home-body">Presencia digital que detiene el scroll. Animaciones de alto impacto visual.</p>
+          </a>
+
+          <a href="service.html?s=10" class="svc-home-item rev-up" style="--d:200ms">
+            <!-- Automatización: flecha circular de proceso infinito -->
+            <svg class="svc-home-icon" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M55 22 A22 22 0 1 0 58 35" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+              <path d="M55 13 L55 22 L64 22" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="svc-home-num">/03</span>
+            <p class="svc-home-title">Automatización<br><em>de Procesos</em></p>
+            <p class="svc-home-body">Flujos que trabajan solos. Integraciones entre todas tus plataformas.</p>
+          </a>
+
+          <a href="service.html?s=12" class="svc-home-item rev-up" style="--d:240ms">
+            <!-- Intelligence: hexágono con radios internos (arquitectura de datos) -->
+            <svg class="svc-home-icon" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <polygon points="36,11 58,23.5 58,48.5 36,61 14,48.5 14,23.5" stroke="currentColor" stroke-width="1.2" fill="none"/>
+              <line x1="36" y1="11"   x2="36" y2="36" stroke="currentColor" stroke-width="1.2" opacity="0.32"/>
+              <line x1="58" y1="23.5" x2="36" y2="36" stroke="currentColor" stroke-width="1.2" opacity="0.32"/>
+              <line x1="58" y1="48.5" x2="36" y2="36" stroke="currentColor" stroke-width="1.2" opacity="0.32"/>
+              <line x1="36" y1="61"   x2="36" y2="36" stroke="currentColor" stroke-width="1.2" opacity="0.32"/>
+              <line x1="14" y1="48.5" x2="36" y2="36" stroke="currentColor" stroke-width="1.2" opacity="0.32"/>
+              <line x1="14" y1="23.5" x2="36" y2="36" stroke="currentColor" stroke-width="1.2" opacity="0.32"/>
+              <circle cx="36" cy="36" r="2.8" fill="currentColor"/>
+            </svg>
+            <span class="svc-home-num">/04</span>
+            <p class="svc-home-title">Intelligence<br><em>Architecture</em></p>
+            <p class="svc-home-body">CRM, pipeline y reactivación de bases muertas para inmobiliario y timeshare.</p>
+          </a>
+
+          <a href="service.html?s=06" class="svc-home-item rev-up" style="--d:280ms">
+            <!-- Video: iris de apertura de lente cinematográfico -->
+            <svg class="svc-home-icon" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="36" cy="36" r="24" stroke="currentColor" stroke-width="1.2"/>
+              <circle cx="36" cy="36" r="9"  stroke="currentColor" stroke-width="1.2"/>
+              <line x1="36"   y1="12"   x2="36"   y2="27"   stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+              <line x1="56.8" y1="24"   x2="43.8" y2="31.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+              <line x1="56.8" y1="48"   x2="43.8" y2="40.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+              <line x1="36"   y1="60"   x2="36"   y2="45"   stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+              <line x1="15.2" y1="48"   x2="28.2" y2="40.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+              <line x1="15.2" y1="24"   x2="28.2" y2="31.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+            </svg>
+            <span class="svc-home-num">/05</span>
+            <p class="svc-home-title">Video &amp;<br><em>Producción IA</em></p>
+            <p class="svc-home-body">Spots y reels cinematográficos. Calidad de producción profesional.</p>
+          </a>
+
+          <a href="service.html?s=14" class="svc-home-item rev-up" style="--d:320ms">
+            <!-- Analytics: eje cartesiano con curva ascendente y nodos -->
+            <svg class="svc-home-icon" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <line x1="13" y1="59" x2="61" y2="59" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+              <line x1="13" y1="13" x2="13" y2="59" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+              <path d="M13 51 C22 51 26 38 34 30 C42 22 52 18 61 13" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+              <circle cx="13" cy="51" r="2.4" fill="currentColor"/>
+              <circle cx="34" cy="30" r="2.4" fill="currentColor"/>
+              <circle cx="61" cy="13" r="2.4" fill="currentColor"/>
+            </svg>
+            <span class="svc-home-num">/06</span>
+            <p class="svc-home-title">Data Analytics<br><em>&amp; Business Intelligence</em></p>
+            <p class="svc-home-body">Dashboards ejecutivos en tiempo real. Decisiones con datos, no con intuición.</p>
+          </a>
+
+        </div>
+        <div class="svc-home-footer rev-up" style="--d:360ms">
+          <p style="font-size:0.72rem;opacity:0.38;letter-spacing:0.1em;">y 12 especialidades más</p>
+          <button id="svc-see-all-btn" type="button" class="nav-link" style="cursor:none;">Ver los 18 servicios &nbsp;→</button>
         </div>
       </div>
     </section>
 
-    <!-- 03 · Verticales -->
-    <section class="section">
+    <!-- 03 · Números -->
+    <section class="section" style="padding-top:0;">
       <div class="section-inner">
-        <p class="eyebrow">Cinco disciplinas · un studio</p>
-        <h2 class="display" style="margin-bottom:3rem;">
-          Cinco disciplinas. <em>Un<br>studio.</em>
-        </h2>
-        <div class="vert-list">
-          <a href="service.html?s=09" class="vert-item">
-            <span class="vert-num">01</span>
-            <span class="vert-label">Agentes de IA<br><em>Voz & Texto</em></span>
-            <span class="vert-summary">Disponibles 24/7. Sin intervención humana.</span>
-          </a>
-          <a href="service.html?s=06" class="vert-item">
-            <span class="vert-num">02</span>
-            <span class="vert-label">Video &amp;<br><em>Producción IA</em></span>
-            <span class="vert-summary">Cinematografía que detiene el scroll.</span>
-          </a>
-          <a href="service.html?s=12" class="vert-item">
-            <span class="vert-num">03</span>
-            <span class="vert-label">Intelligence<br><em>Architecture</em></span>
-            <span class="vert-summary">CRM, leads y pipeline. Todo automático.</span>
-          </a>
-          <a href="service.html?s=15" class="vert-item">
-            <span class="vert-num">04</span>
-            <span class="vert-label">Ciberseguridad<br><em>&amp; IA On-Premise</em></span>
-            <span class="vert-summary">Tu información nunca sale de tu red.</span>
-          </a>
-          <a href="service.html?s=13" class="vert-item">
-            <span class="vert-num">05</span>
-            <span class="vert-label">Estrategia<br><em>Integral 360°</em></span>
-            <span class="vert-summary">Un equipo, todos los frentes cubiertos.</span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- 04 · Agentes IA -->
-    <section class="section">
-      <div class="section-inner">
-        <p class="eyebrow">· 01 · Agentes de IA con Voz y Texto</p>
-        <h2 class="display" style="margin-bottom:1.5rem;">
-          Tu vendedor más<br><em>constante.</em>
-        </h2>
-        <p class="body-text" style="margin-bottom:3.5rem;">
-          Asistentes conversacionales para ventas, soporte, RRHH y operaciones. Disponibles en WhatsApp, teléfono y web. Conocen tu empresa en profundidad y califican leads mientras tu equipo se enfoca en lo que importa.
-        </p>
-        <p class="eyebrow" style="margin-bottom:1.5rem;">Proceso · 05 fases</p>
-        <div class="process-grid">
-          <div class="process-step">
-            <span class="step-num">01</span>
-            <h4 class="step-title">Audit</h4>
-            <p class="step-body">Levantamos los flujos y objeciones reales de tu equipo de ventas.</p>
-          </div>
-          <div class="process-step">
-            <span class="step-num">02</span>
-            <h4 class="step-title">Diseño</h4>
-            <p class="step-body">Arquitectura de conversación y guiones entrenados en tu empresa.</p>
-          </div>
-          <div class="process-step">
-            <span class="step-num">03</span>
-            <h4 class="step-title">Build</h4>
-            <p class="step-body">Desarrollo del agente con voz, memoria persistente e integraciones.</p>
-          </div>
-          <div class="process-step">
-            <span class="step-num">04</span>
-            <h4 class="step-title">Test</h4>
-            <p class="step-body">Pruebas con escenarios reales antes de salir al mercado.</p>
-          </div>
-          <div class="process-step">
-            <span class="step-num">05</span>
-            <h4 class="step-title">Deploy</h4>
-            <p class="step-body">Lanzamiento + monitoreo + mejora continua basada en datos.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 05 · Video IA -->
-    <section class="section">
-      <div class="section-inner">
-        <p class="eyebrow">· 02 · Video &amp; Producción Audiovisual IA</p>
-        <h2 class="display" style="margin-bottom:1.5rem;">
-          Spots que <em>paralizan.</em><br>
-          Videos que <em>venden.</em>
-        </h2>
-        <p class="body-text" style="margin-bottom:3.5rem;">
-          Spots, reels y documentales de marca con IA. Higgsfield, Runway, LTX Studio. Dirección creativa propia. Calidad de producción profesional, sin el presupuesto tradicional.
-        </p>
-        <p class="eyebrow" style="margin-bottom:2rem;">El brazo creativo-visual.</p>
-        <div class="cap-grid">
-          <div class="cap-card">
-            <h4 class="cap-title">Personajes<br>consistentes</h4>
-            <p class="cap-body">Identity preserved frame por frame, escena por escena.</p>
-          </div>
-          <div class="cap-card">
-            <h4 class="cap-title">Mundos<br>hiperrealistas</h4>
-            <p class="cap-body">Locaciones que no existen · que parecen rodadas en 35mm.</p>
-          </div>
-          <div class="cap-card">
-            <h4 class="cap-title">Grading<br>cinemático</h4>
-            <p class="cap-body">Color y atmósfera que pasa por cine, no por feed.</p>
-          </div>
-          <div class="cap-card">
-            <h4 class="cap-title">Solo<br>SFX</h4>
-            <p class="cap-body">Audio diseñado · cero música genérica · cero voces innecesarias.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 06 · Intelligence Architecture -->
-    <section class="section">
-      <div class="section-inner">
-        <p class="eyebrow">· 03 · Intelligence Architecture Inmobiliaria</p>
-        <h2 class="display" style="margin-bottom:1.5rem;">
-          Leads, CRM y pipeline.<br><em>Todo solo.</em>
-        </h2>
-        <p class="body-text" style="margin-bottom:3.5rem;">
-          Sistema especializado para desarrolladoras, brokerages y timeshare: agentes de ventas que califican leads, CRM conectado, reportes automáticos y Agente de Reactivación de Bases Muertas.
-        </p>
-        <p class="eyebrow" style="margin-bottom:2rem;">Tres modos de operación.</p>
-        <div class="mode-grid">
-          <div class="cap-card">
-            <h4 class="cap-title"><em style="font-family:'Fraunces',serif;font-style:italic;">Captación</em></h4>
-            <p class="cap-body">Agente califica leads entrantes en WhatsApp y web · 24/7 · sin intervención humana.</p>
-          </div>
-          <div class="cap-card">
-            <h4 class="cap-title"><em style="font-family:'Fraunces',serif;font-style:italic;">Reactivación</em></h4>
-            <p class="cap-body">Bases muertas contactadas con mensajes personalizados según historial · entrega leads calientes.</p>
-          </div>
-          <div class="cap-card">
-            <h4 class="cap-title"><em style="font-family:'Fraunces',serif;font-style:italic;">Seguimiento</em></h4>
-            <p class="cap-body">Pipeline automatizado · recordatorios · seguimiento post-visita · cierre asistido.</p>
-          </div>
-        </div>
-        <div class="stat-grid" style="margin-top:3rem;">
-          <div class="stat-card">
+        <div class="stat-grid">
+          <div class="stat-card rev-up" style="--d:0ms">
             <p class="stat-label">Leads calificados</p>
             <p class="stat-value">3.2×</p>
             <p class="stat-delta">vs proceso manual</p>
           </div>
-          <div class="stat-card">
+          <div class="stat-card rev-up" style="--d:80ms">
             <p class="stat-label">Bases reactivadas</p>
             <p class="stat-value">68%</p>
             <p class="stat-delta">respuesta en 48h</p>
           </div>
-          <div class="stat-card">
+          <div class="stat-card rev-up" style="--d:160ms">
             <p class="stat-label">Tiempo de cierre</p>
             <p class="stat-value">−40%</p>
             <p class="stat-delta">ciclo de venta</p>
           </div>
-          <div class="stat-card">
+          <div class="stat-card rev-up" style="--d:240ms">
             <p class="stat-label">Costo por lead</p>
             <p class="stat-value">−55%</p>
-            <p class="stat-delta">vs campañas tradicionales</p>
+            <p class="stat-delta">vs métodos tradicionales</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 07 · Executive Tech -->
+    <!-- 04 · Industrias -->
     <section class="section">
       <div class="section-inner">
-        <p class="eyebrow">· 04 · Executive Tech Setup</p>
-        <h2 class="display" style="margin-bottom:1.5rem;">
-          Para quien ya<br><em>no</em> tiene tiempo.
+        <p class="eyebrow rev-up">04 / Industrias</p>
+        <h2 class="display rev-up" style="--d:80ms;margin-bottom:3rem;">
+          Especialistas donde<br><em>otros no llegan.</em>
         </h2>
-        <p class="body-text" style="margin-bottom:1rem;">
-          Configuración personalizada de flujos de IA para directores y CEOs. Acceso por aplicación. Onboarding privado. Discreción total.
-        </p>
-        <p class="body-text" style="margin-bottom:3.5rem;opacity:0.38;font-size:0.85rem;">
-          Trabajamos con un máximo de 12 ejecutivos por trimestre. Respuesta en 48 horas si aplicas para el siguiente grupo.
-        </p>
-        <div class="exec-list" style="max-width:760px;">
-          <div class="exec-item">
-            <span class="exec-item-num">01</span>
-            <div class="exec-item-body">
-              <h4 class="exec-item-title">Workflow personalization</h4>
-              <p class="exec-item-desc">Cada flujo de IA · cada agente · cada automatización · diseñado para cómo TÚ trabajas.</p>
-            </div>
+        <div class="ind-grid">
+          <div class="ind-item rev-up" style="--d:120ms">
+            <h3 class="ind-title">Hotelería</h3>
+            <p class="ind-body">Agentes de reservas y concierge virtual. Pipeline de huéspedes automatizado. Reactivación de bases de temporadas pasadas.</p>
           </div>
-          <div class="exec-item">
-            <span class="exec-item-num">02</span>
-            <div class="exec-item-body">
-              <h4 class="exec-item-title">Private LLM</h4>
-              <p class="exec-item-desc">Modelos privados con tu data · sin que nada salga del dispositivo o del perímetro de tu empresa.</p>
-            </div>
+          <div class="ind-item rev-up" style="--d:200ms">
+            <h3 class="ind-title">Timeshare</h3>
+            <p class="ind-body">Calificación de leads en tiempo real. Agente de reactivación especializado. Pipeline conectado a todos los puntos de contacto.</p>
           </div>
-          <div class="exec-item">
-            <span class="exec-item-num">03</span>
-            <div class="exec-item-body">
-              <h4 class="exec-item-title">Executive briefings</h4>
-              <p class="exec-item-desc">Sesiones 1:1 · cada 2 semanas · audit del estado del setup + nuevas capacidades.</p>
-            </div>
-          </div>
-          <div class="exec-item">
-            <span class="exec-item-num">04</span>
-            <div class="exec-item-body">
-              <h4 class="exec-item-title">Private rituals</h4>
-              <p class="exec-item-desc">Setups de hardware · ergonomía · audio · ambiente · todo calibrado a tu rutina.</p>
-            </div>
+          <div class="ind-item rev-up" style="--d:280ms">
+            <h3 class="ind-title">Inmobiliario de Lujo</h3>
+            <p class="ind-body">Sitios cinematográficos para desarrollos. Configuradores 3D de propiedades. Intelligence Architecture para Quintana Roo y LATAM.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 08 · Ingeniería -->
+    <!-- 05 · Portfolio -->
     <section class="section">
       <div class="section-inner">
-        <p class="eyebrow">· 05 · Ingeniería &amp; Automatización</p>
-        <h2 class="display" style="margin-bottom:1.5rem;">
-          No hacemos posts.<br><em>Construimos</em> la infraestructura.
+        <p class="eyebrow rev-up">05 / Portfolio activo</p>
+        <h2 class="display rev-up" style="--d:80ms;margin-bottom:3rem;">
+          Lo que ya<br><em>funciona.</em>
         </h2>
-        <p class="body-text" style="margin-bottom:3.5rem;">
-          Flujos de IA · analítica de datos · prompt engineering · pauta digital. La arquitectura técnica que escala lo que ya funciona.
-        </p>
-        <div class="tech-grid" style="margin-bottom:2.5rem;">
-          <div class="cap-card">
-            <h4 class="cap-title">IA flows</h4>
-            <p class="cap-body">Agentes · automation pipelines · n8n · HubSpot integrations · custom edge functions.</p>
-          </div>
-          <div class="cap-card">
-            <h4 class="cap-title">Data analytics</h4>
-            <p class="cap-body">Supabase · pipelines de eventos · dashboards · cohort analysis · attribution.</p>
-          </div>
-          <div class="cap-card">
-            <h4 class="cap-title">Prompt engineering</h4>
-            <p class="cap-body">Sistemas de prompts versionados · tests reproducibles · evals con datasets.</p>
-          </div>
-          <div class="cap-card">
-            <h4 class="cap-title">Pauta digital</h4>
-            <p class="cap-body">Meta · Google Ads · LinkedIn · medición pixel-perfect · attribution multi-touch.</p>
-          </div>
-        </div>
-        <p class="eyebrow" style="margin-bottom:1rem;">Stack · transparente</p>
-        <div class="stack-list">
-          <span class="stack-pill">n8n</span>
-          <span class="stack-pill">HubSpot</span>
-          <span class="stack-pill">Supabase</span>
-          <span class="stack-pill">OpenAI</span>
-          <span class="stack-pill">Anthropic</span>
-          <span class="stack-pill">Higgsfield</span>
-          <span class="stack-pill">Runway</span>
-          <span class="stack-pill">ElevenLabs</span>
-          <span class="stack-pill">Vercel</span>
-          <span class="stack-pill">Cloudflare</span>
-          <span class="stack-pill">Stripe</span>
-          <span class="stack-pill">Twilio</span>
-        </div>
-        <p class="stack-note">· No ofrecemos administración de redes sociales · nos enfocamos en la arquitectura de la conversión ·</p>
-      </div>
-    </section>
+        <div class="pf-grid">
 
-    <!-- 09 · Portfolio -->
-    <section class="section">
-      <div class="section-inner">
-        <p class="eyebrow">03 / Portfolio activo</p>
-        <h2 class="display" style="margin-bottom:3rem;">
-          Pasa el cursor<br>para <em>revelar.</em>
-        </h2>
-        <div class="marcas-grid">
-          <div class="marca-card">
+          <!-- Influence IA -->
+          <div class="pf-item rev-up" style="--d:120ms">
             <div>
-              <p class="marca-tag">Intelligence Architecture · Live</p>
-              <p class="marca-name">Influence IA</p>
+              <div class="pf-lid">
+                <div class="pf-cam"></div>
+                <div class="pf-screen">
+                  <div class="pf-sim-vi">
+                    <!-- Nav sim -->
+                    <div style="position:relative;z-index:1;display:flex;justify-content:space-between;align-items:center;margin-bottom:9%;">
+                      <span style="font-size:0.75em;color:rgba(248,247,245,0.88);letter-spacing:-0.01em;">VICTOR <em>IA</em></span>
+                      <div style="display:flex;gap:10px;align-items:center;">
+                        <span style="font-size:0.32em;letter-spacing:0.2em;text-transform:uppercase;color:rgba(248,247,245,0.26);">Servicios</span>
+                        <span style="font-size:0.32em;letter-spacing:0.2em;text-transform:uppercase;color:rgba(248,247,245,0.26);">Portfolio</span>
+                        <span style="font-size:0.32em;letter-spacing:0.2em;text-transform:uppercase;color:rgba(248,247,245,0.26);">Agenda</span>
+                      </div>
+                    </div>
+                    <!-- Hero text -->
+                    <div style="position:relative;z-index:1;">
+                      <div style="font-size:0.36em;letter-spacing:0.28em;text-transform:uppercase;color:rgba(248,247,245,0.26);margin-bottom:5%;">STUDIO DE IA · MÉXICO</div>
+                      <div style="font-size:1.55em;line-height:0.92;color:#F8F7F5;font-weight:400;letter-spacing:-0.025em;">Inteligencia<br><em style="font-style:italic;">que trabaja.</em></div>
+                      <div style="width:20px;height:1px;background:rgba(248,247,245,0.22);margin-top:6%;"></div>
+                    </div>
+                    <!-- Scrub bar indicator -->
+                    <div style="position:absolute;bottom:8%;left:7%;right:7%;z-index:3;">
+                      <div style="width:100%;height:1px;background:rgba(248,247,245,0.06);"></div>
+                      <div style="width:28%;height:1px;background:rgba(248,247,245,0.32);margin-top:-1px;"></div>
+                      <div style="display:flex;justify-content:space-between;margin-top:3%;">
+                        <span style="font-size:0.28em;letter-spacing:0.22em;color:rgba(248,247,245,0.18);text-transform:uppercase;">001 / 481</span>
+                        <span style="font-size:0.28em;letter-spacing:0.18em;color:rgba(248,247,245,0.15);">↓ scroll</span>
+                      </div>
+                    </div>
+                    <!-- Gradient fade bottom -->
+                    <div style="position:absolute;bottom:0;left:0;right:0;height:35%;background:linear-gradient(to top,rgba(14,15,18,0.7),transparent);z-index:2;pointer-events:none;"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="pf-base"></div>
+              <div class="pf-foot"></div>
             </div>
-            <a href="https://victor-ia.com.mx" target="_blank" rel="noopener" class="marca-status">
-              <span class="dot"></span>
-              victor-ia.com.mx &nbsp;↗
-            </a>
+            <div class="pf-meta">
+              <div class="pf-meta-top">
+                <span class="pf-tag">Intelligence Architecture · Sitio web</span>
+                <span class="pf-live"><span class="dot"></span>Live</span>
+              </div>
+              <h3 class="pf-title">Influence IA</h3>
+              <p class="pf-desc">Sitio cinematográfico con scroll-scrub de 481 frames, 18 páginas de servicio, agente de voz integrado y automatización end-to-end.</p>
+              <a href="https://victor-ia.com.mx" target="_blank" rel="noopener" class="pf-link">victor-ia.com.mx &nbsp;↗</a>
+            </div>
           </div>
-          <div class="marca-card">
+
+          <!-- Costa Negra -->
+          <div class="pf-item rev-up" style="--d:220ms">
             <div>
-              <p class="marca-tag">Inmobiliario Lujo · Quintana Roo</p>
-              <p class="marca-name">Costa<br>Negra</p>
+              <div class="pf-lid">
+                <div class="pf-cam"></div>
+                <div class="pf-screen">
+                  <div class="pf-sim-cn">
+                    <!-- Background texture -->
+                    <div style="position:absolute;inset:0;background-image:url('assets/svc-bg-02.jpg');background-size:cover;background-position:center;opacity:0.06;z-index:0;pointer-events:none;"></div>
+                    <!-- Nav sim -->
+                    <div style="position:relative;z-index:1;display:flex;justify-content:space-between;align-items:center;margin-bottom:9%;">
+                      <span style="font-size:0.66em;color:rgba(220,200,160,0.82);letter-spacing:0.1em;font-weight:300;text-transform:uppercase;">COSTA NEGRA</span>
+                      <div style="width:14px;height:1px;background:rgba(200,170,100,0.28);"></div>
+                    </div>
+                    <!-- Hero text -->
+                    <div style="position:relative;z-index:1;">
+                      <div style="font-size:0.33em;letter-spacing:0.28em;text-transform:uppercase;color:rgba(200,180,130,0.28);margin-bottom:5%;">INMOBILIARIO DE LUJO · Q. ROO</div>
+                      <div style="font-size:1.55em;line-height:0.93;color:rgba(230,215,185,0.9);font-weight:300;letter-spacing:-0.01em;">Donde el lujo<br><em style="font-style:italic;">vive.</em></div>
+                      <div style="width:14px;height:1px;background:rgba(180,140,60,0.38);margin-top:6%;"></div>
+                    </div>
+                    <!-- CTA sim -->
+                    <div style="position:absolute;bottom:12%;left:7%;z-index:3;">
+                      <div style="display:inline-block;padding:1.4% 3.5%;border:1px solid rgba(200,165,80,0.22);font-size:0.28em;letter-spacing:0.2em;text-transform:uppercase;color:rgba(200,165,80,0.5);">Conoce el proyecto</div>
+                    </div>
+                    <!-- Gradient fade -->
+                    <div style="position:absolute;bottom:0;left:0;right:0;height:40%;background:linear-gradient(to top,rgba(13,12,10,0.8),transparent);z-index:2;pointer-events:none;"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="pf-base"></div>
+              <div class="pf-foot"></div>
             </div>
-            <span class="marca-status">
-              <span class="dot" style="opacity:0.4;"></span>
-              Proyecto activo · 2026
-            </span>
+            <div class="pf-meta">
+              <div class="pf-meta-top">
+                <span class="pf-tag">Inmobiliario Lujo · Quintana Roo</span>
+                <span class="pf-live" style="opacity:0.28;"><span class="dot" style="animation:none;opacity:0.5;"></span>En desarrollo</span>
+              </div>
+              <h3 class="pf-title">Costa<br>Negra</h3>
+              <p class="pf-desc">Plataforma inmobiliaria de lujo con landing cinematográfica, configurador de propiedades y pipeline de prospectos automatizado.</p>
+              <span class="pf-link" style="cursor:default;opacity:0.28;">Lanzamiento 2026</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 · Trabajo en movimiento -->
+    <section class="work-reel-section">
+      <div class="work-reel-head">
+        <p class="eyebrow rev-up">06 / Producción</p>
+        <h2 class="display rev-up" style="--d:80ms;">
+          El trabajo<br><em>en movimiento.</em>
+        </h2>
+      </div>
+      <div class="work-reel-strip">
+
+        <div class="work-card"><video src="assets/work/volkswagen-work.mp4" autoplay muted loop playsinline></video></div>
+        <div class="work-card"><video src="assets/work/hacienda.mp4" autoplay muted loop playsinline></video></div>
+        <div class="work-card"><video src="assets/work/resort-pool.mp4" autoplay muted loop playsinline></video></div>
+        <div class="work-card"><video src="assets/work/vibracion.mp4" autoplay muted loop playsinline></video></div>
+        <div class="work-card"><video src="assets/work/extraordinario.mp4" autoplay muted loop playsinline></video></div>
+        <div class="work-card"><video src="assets/work/venecia.mp4" autoplay muted loop playsinline></video></div>
+        <div class="work-card"><video src="assets/work/san-pedro.mp4" autoplay muted loop playsinline></video></div>
+        <div class="work-card"><video src="assets/work/glamping.mp4" autoplay muted loop playsinline></video></div>
+
+      </div>
+    </section>
+
+    <!-- 07 · Clientes -->
+    <section class="section" style="padding-top:0;">
+      <div class="section-inner">
+        <p class="eyebrow rev-up">07 / Clientes</p>
+        <h2 class="display rev-up" style="--d:80ms;margin-bottom:3rem;">
+          Empresas que<br><em>ya confían.</em>
+        </h2>
+        <div class="logo-stage-wrap">
+          <div class="logo-stage" id="logoStage">
+            <div class="logo-blend">
+              <div class="logo-solo active"><img src="assets/logos/volkswagen.png?v=4" alt="Volkswagen" loading="eager"></div>
+              <div class="logo-solo"><img src="assets/logos/hyatt.png?v=4" alt="World of Hyatt" loading="lazy"></div>
+              <div class="logo-solo"><img src="assets/logos/impression.png?v=4" alt="Impression by Secrets" loading="lazy"></div>
+              <div class="logo-solo"><img src="assets/logos/hacienda-soltepec.png?v=4" alt="Hacienda Soltepec" loading="lazy"></div>
+              <div class="logo-solo"><img src="assets/logos/prime-mystic.png?v=4" alt="Prime Mystic" loading="lazy"></div>
+              <div class="logo-solo"><img src="assets/logos/gran-chaka.png?v=4" alt="Gran Chaká" loading="lazy"></div>
+              <div class="logo-solo"><img src="assets/logos/aldea.png?v=4" alt="ALDEA" loading="lazy"></div>
+              <div class="logo-solo"><img src="assets/logos/chaka.png?v=4" alt="Chaká" loading="lazy"></div>
+              <div class="logo-solo"><img src="assets/logos/lativa.png?v=5" alt="LATIVA" loading="lazy"></div>
+              <div class="logo-solo"><img src="assets/logos/luum.png?v=4" alt="LU'UM" loading="lazy"></div>
+              <div class="logo-solo"><img src="assets/logos/lolha.png?v=4" alt="Lol-ha" loading="lazy"></div>
+              <div class="logo-solo"><img src="assets/logos/ssc.png?v=4" alt="SSC" loading="lazy"></div>
+              <div class="logo-solo"><img src="assets/logos/oxlajun.png?v=4" alt="Ox'lajun" loading="lazy"></div>
+              <div class="logo-solo"><img src="assets/logos/remi.png?v=4" alt="Remi Creative" loading="lazy"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -1016,20 +1867,25 @@
           <span class="footer-label">Servicios</span>
           <span class="footer-text">
             <a href="service.html?s=09">Agentes de IA ↗</a><br>
-            <a href="service.html?s=12">Intelligence Arch. ↗</a>
+            <a href="service.html?s=12">Intelligence Arch. ↗</a><br>
+            <button id="footer-svc-btn" type="button" class="footer-link-btn">Ver los 18 servicios ↗</button>
           </span>
         </div>
         <div class="footer-col">
           <span class="footer-label">Contacto</span>
           <span class="footer-text">
-            <a href="mailto:hello@victor-ia.com.mx">hello@victor-ia.com.mx</a><br>
+            <a href="mailto:info@victor-ia.com.mx">info@victor-ia.com.mx</a><br>
             <a href="https://wa.me/5219842353159" target="_blank" rel="noopener">WhatsApp ↗</a>
           </span>
         </div>
       </div>
       <div class="footer-base">
-        <span>Made with · Higgsfield · n8n · Anthropic · ElevenLabs · Vercel</span>
-        <span>© 2026 VÍCTOR-IA · Playa del Carmen</span>
+        <span>© 2026 INFLUENCE IA S.A. DE C.V. · Todos los derechos reservados</span>
+        <div class="footer-legal-links">
+          <a href="/aviso-privacidad.html">Aviso de Privacidad</a>
+          <a href="/terminos-condiciones.html">Términos y Condiciones</a>
+          <a href="/politica-cookies.html">Política de Cookies</a>
+        </div>
       </div>
     </footer>
 
@@ -1039,7 +1895,7 @@
   (function(){
     /* ── Services panel ── */
     var SVCS = [
-      {id:'01',title:'Sitios Web Cinematográficos & Apps'},
+      {id:'01',title:'Sitios Web Inclusivos & Apps'},
       {id:'02',title:'Mini Videojuegos Corporativos'},
       {id:'03',title:'Modelos 3D de Producto y Arquitectura'},
       {id:'04',title:'Configuradores 3D Interactivos'},
@@ -1068,10 +1924,12 @@
     });
 
     var panel = document.getElementById('svc-panel');
-    document.getElementById('nav-svc-btn').addEventListener('click', function(){
-      panel.classList.add('open');
-      panel.setAttribute('aria-hidden','false');
-    });
+    function openPanel(){ panel.classList.add('open'); panel.setAttribute('aria-hidden','false'); }
+    document.getElementById('nav-svc-btn').addEventListener('click', openPanel);
+    var seeAllBtn = document.getElementById('svc-see-all-btn');
+    if(seeAllBtn) seeAllBtn.addEventListener('click', openPanel);
+    var footerSvcBtn = document.getElementById('footer-svc-btn');
+    if(footerSvcBtn) footerSvcBtn.addEventListener('click', openPanel);
     document.getElementById('svc-panel-close').addEventListener('click', function(){
       panel.classList.remove('open');
       panel.setAttribute('aria-hidden','true');
@@ -1188,9 +2046,13 @@
     ═══════════════════════════════════════ */
     var progFill = document.getElementById('scrollProgFill');
     var bgMarble = document.getElementById('bgMarble');
+    var mobileCta = document.querySelector('.mobile-cta-bar');
     function onScroll(){
       var p = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
       if (progFill) progFill.style.width = (p*100) + '%';
+      if (mobileCta) {
+        mobileCta.classList.toggle('visible', window.scrollY > window.innerHeight * 0.75);
+      }
     }
     window.addEventListener('scroll', onScroll, {passive:true});
 
@@ -1345,17 +2207,12 @@
       });
 
       /* Cards & process steps: stagger up */
-      var staggerSel = '.srv-card, .cap-card, .stat-card, .process-step, .exec-item, .stack-pill, .marca-card';
+      var staggerSel = '.stat-card, .svc-home-item, .ind-item';
       document.querySelectorAll(staggerSel).forEach(function(el, i){
-        el.classList.add('rev-up');
-        el.style.setProperty('--d', (i % 5) * 90 + 'ms');
-        ioReveal.observe(el);
-      });
-
-      /* Vertical list items */
-      document.querySelectorAll('.vert-item').forEach(function(el, i){
-        el.classList.add('rev-up');
-        el.style.setProperty('--d', i * 70 + 'ms');
+        if (!el.classList.contains('rev-up')) {
+          el.classList.add('rev-up');
+          el.style.setProperty('--d', (i % 4) * 90 + 'ms');
+        }
         ioReveal.observe(el);
       });
 
@@ -1404,25 +2261,30 @@
        6. MAGNETIC CTA BUTTONS
     ═══════════════════════════════════════ */
     document.querySelectorAll('.cta').forEach(function(btn){
-      var tx = 0, ty = 0;
+      if (window.matchMedia('(pointer:coarse)').matches) return;
+      var tx = 0, ty = 0, cx = 0, cy = 0, raf;
+      function tick() {
+        cx += (tx - cx) * 0.18; cy += (ty - cy) * 0.18;
+        btn.style.transform = 'translate(' + cx.toFixed(2) + 'px,' + cy.toFixed(2) + 'px)';
+        if (Math.abs(tx - cx) > 0.05 || Math.abs(ty - cy) > 0.05) raf = requestAnimationFrame(tick);
+        else btn.style.transform = '';
+      }
       btn.addEventListener('mousemove', function(e){
-        var rect = btn.getBoundingClientRect();
-        var cx = rect.left + rect.width/2, cy = rect.top + rect.height/2;
-        tx = (e.clientX - cx) * 0.22;
-        ty = (e.clientY - cy) * 0.22;
-        btn.style.transition = 'transform 0.12s ease, background 0.3s, color 0.3s, gap 0.25s';
-        btn.style.transform = 'translate('+tx+'px,'+ty+'px)';
-      });
+        var r = btn.getBoundingClientRect();
+        tx = (e.clientX - r.left - r.width/2) * 0.28;
+        ty = (e.clientY - r.top  - r.height/2) * 0.28;
+        cancelAnimationFrame(raf); raf = requestAnimationFrame(tick);
+      }, {passive:true});
       btn.addEventListener('mouseleave', function(){
-        btn.style.transition = 'transform 0.55s cubic-bezier(0.16,1,0.3,1), background 0.3s, color 0.3s, gap 0.25s';
-        btn.style.transform = 'translate(0,0)';
+        tx = 0; ty = 0;
+        cancelAnimationFrame(raf); raf = requestAnimationFrame(tick);
       });
     });
 
     /* ═══════════════════════════════════════
        7. CARD 3D TILT
     ═══════════════════════════════════════ */
-    document.querySelectorAll('.srv-card, .cap-card, .stat-card, .marca-card, .process-step').forEach(function(card){
+    document.querySelectorAll('.srv-card, .cap-card, .stat-card, .process-step').forEach(function(card){
       card.style.perspective = '800px';
       card.addEventListener('mousemove', function(e){
         var rect = card.getBoundingClientRect();
@@ -1544,7 +2406,7 @@
     /* ── Console egg (RANK 5) ── */
     console.log('%c V I C T O R  —  I A ', 'background:#0E0F12;color:#F8F7F5;font-size:16px;font-weight:700;padding:8px 20px;font-family:serif;letter-spacing:0.2em');
     console.log('%cAgencia de Inteligencia Artificial · Playa del Carmen, Quintana Roo, México', 'color:#0E0F12;font-size:11px;font-family:monospace');
-    console.log('%chello@victor-ia.com.mx  ·  victor-ia.com.mx', 'color:#CC8800;font-size:11px;font-family:monospace');
+    console.log('%cinfo@victor-ia.com.mx  ·  victor-ia.com.mx', 'color:#CC8800;font-size:11px;font-family:monospace');
     console.log('%c─────────────────────────────────────────', 'color:#0E0F12;opacity:0.2;font-family:monospace');
 
     /* ── Loader (RANK 1) ── */
@@ -1624,6 +2486,13 @@
       });
     }
 
+    /* ── Service card ambient videos ── */
+    document.querySelectorAll('.svc-home-vid').forEach(function(vid){
+      vid.addEventListener('playing', function(){
+        vid.classList.add('playing');
+      });
+    });
+
     /* ── Void mode easter egg (RANK 5) — triple-click logo ── */
     var logo = document.querySelector('.nav-logo');
     var cc = 0, ct;
@@ -1640,7 +2509,928 @@
     }
 
   })();
+
+  /* ── Logo solo slider ── */
+  (function(){
+    var solos = document.querySelectorAll('.logo-solo');
+    if(solos.length < 2) return;
+    var cur = 0;
+    function advance(){
+      solos[cur].classList.remove('active');
+      cur = (cur + 1) % solos.length;
+      solos[cur].classList.add('active');
+      setTimeout(advance, 3800);
+    }
+    setTimeout(advance, 3800);
+  })();
+
+  /* ── CTA page transition overlay ── */
+  (function(){
+    var overlay = document.getElementById('nav-loader');
+    var fill    = document.getElementById('nav-fill');
+    if(!overlay || !fill) return;
+    document.addEventListener('click', function(e){
+      var a = e.target.closest('a');
+      if(!a) return;
+      var href = a.getAttribute('href');
+      if(!href) return;
+      var skip = href.charAt(0)==='#' || href.indexOf('http')===0 ||
+                 href.indexOf('tel:')===0 || href.indexOf('mailto:')===0 ||
+                 a.getAttribute('target')==='_blank';
+      if(skip) return;
+      e.preventDefault();
+      overlay.removeAttribute('aria-hidden');
+      overlay.classList.add('show');
+      requestAnimationFrame(function(){
+        fill.style.transition = 'width 0.55s cubic-bezier(0.4,0,0.2,1)';
+        fill.style.width = '100%';
+      });
+      setTimeout(function(){ window.location.href = href; }, 620);
+    });
+  })();
   </script>
+<div class="mobile-cta-bar">
+  <a href="/agenda" class="mobile-cta-link">Agenda una conversación</a>
+</div>
+<!-- ═══ BIOMETRIC EYE-TRACKING UI ═══ -->
+<div class="biometric-chip" data-biometric-chip role="button" tabindex="0" aria-label="Volver al modo normal con mouse o dedo">
+  <span class="pulse-dot" aria-hidden="true"></span>
+  <svg class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>
+  </svg>
+  <span>Mirada activa</span>
+  <span class="close-x" aria-label="Volver al modo normal">Salir</span>
+</div>
+
+<button type="button" class="biometric-restart" data-biometric-restart aria-label="Activar mirada">
+  <span class="pulse-dot" aria-hidden="true"></span>
+  <svg class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>
+  </svg>
+  <span>Activar mirada</span>
+</button>
+
+<div class="calibration" data-calibration role="dialog" aria-labelledby="cal-title-vic">
+  <!-- FASE 1: instrucciones -->
+  <div class="cal-phase cal-phase-intro" data-cal-phase="intro">
+    <span class="calibration-tag"><span class="pulse-dot"></span>Paso 1 de 3 &middot; Conoce el sistema</span>
+    <h2 class="calibration-title" id="cal-title-vic">Calibra <em>tu mirada</em>.</h2>
+    <p class="calibration-lede" style="margin-bottom:0.4rem;">4 maneras de fluir con la experiencia.</p>
+    <div class="cal-instructions cal-instructions-v2" role="list">
+      <div class="cal-instr-card" role="listitem">
+        <span class="corner tl" aria-hidden="true"></span><span class="corner br" aria-hidden="true"></span>
+        <span class="cal-instr-step" aria-hidden="true">01</span>
+        <span class="cal-instr-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 56" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="6" y="14" width="52" height="32" rx="3"/><circle cx="32" cy="30" r="11"/>
+            <circle cx="32" cy="30" r="6.5" fill="currentColor" fill-opacity="0.25"/>
+            <circle cx="32" cy="30" r="2.8" fill="currentColor"/>
+            <circle class="led-blink" cx="50" cy="20" r="2.2" fill="currentColor" stroke="none"/>
+            <line class="cam-scan" x1="14" y1="22" x2="50" y2="22" opacity="0.7"/>
+          </svg>
+        </span>
+        <span class="cal-instr-title">Permite la c&aacute;mara</span>
+        <span class="cal-instr-desc">Tu navegador te va a pedir permiso. Acepta &mdash; nada sale de tu dispositivo.</span>
+      </div>
+      <div class="cal-instr-card" role="listitem">
+        <span class="corner tl" aria-hidden="true"></span><span class="corner br" aria-hidden="true"></span>
+        <span class="cal-instr-step" aria-hidden="true">02</span>
+        <span class="cal-instr-icon" aria-hidden="true">
+          <svg viewBox="0 0 72 56" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 28 Q 36 4 68 28 Q 36 52 4 28 Z"/>
+            <g class="iris-follow">
+              <circle cx="36" cy="28" r="9" fill="currentColor" fill-opacity="0.18" stroke="none"/>
+              <circle cx="36" cy="28" r="7"/><circle cx="36" cy="28" r="3" fill="currentColor" stroke="none"/>
+            </g>
+            <circle class="eye-dot" cx="36" cy="28" r="2.5" fill="currentColor" stroke="none"/>
+          </svg>
+        </span>
+        <span class="cal-instr-title">Mira los 5 puntos</span>
+        <span class="cal-instr-desc">4 esquinas + el centro. Cada uno toma 3 segundos.</span>
+      </div>
+      <div class="cal-instr-card" role="listitem">
+        <span class="corner tl" aria-hidden="true"></span><span class="corner br" aria-hidden="true"></span>
+        <span class="cal-instr-step" aria-hidden="true">03</span>
+        <span class="cal-instr-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <g class="hand-palm">
+              <line x1="20" y1="14" x2="20" y2="30"/><line x1="27" y1="10" x2="27" y2="30"/>
+              <line x1="34" y1="10" x2="34" y2="30"/><line x1="41" y1="14" x2="41" y2="30"/>
+              <path d="M14 26 Q 10 30 14 36"/><path d="M16 30 Q 16 50 30 52 Q 44 50 44 30"/>
+            </g>
+            <g class="hand-fist">
+              <path d="M18 28 Q 18 20 24 20 L36 20 Q 42 20 42 28 V38 Q 42 50 30 50 Q 18 50 18 38 Z"/>
+              <line x1="22" y1="24" x2="22" y2="20"/><line x1="28" y1="24" x2="28" y2="20"/>
+              <line x1="34" y1="24" x2="34" y2="20"/><path d="M16 30 Q 12 30 12 36"/>
+            </g>
+          </svg>
+        </span>
+        <span class="cal-instr-title">Pu&ntilde;o = click</span>
+        <span class="cal-instr-desc">Mira lo que quieras presionar y cierra el <strong>pu&ntilde;o</strong>. La <strong>palma</strong> detiene el scroll.</span>
+      </div>
+      <div class="cal-instr-card" role="listitem">
+        <span class="corner tl" aria-hidden="true"></span><span class="corner br" aria-hidden="true"></span>
+        <span class="cal-instr-step" aria-hidden="true">04</span>
+        <span class="cal-instr-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <g class="scroll-up-arrow"><path d="M8 22 L12 18 L16 22"/><line x1="12" y1="18" x2="12" y2="32"/></g>
+            <g class="scroll-down-arrow"><line x1="52" y1="32" x2="52" y2="46"/><path d="M48 42 L52 46 L56 42"/></g>
+            <g class="finger-flip">
+              <line x1="32" y1="14" x2="32" y2="32"/><path d="M28 18 L32 14 L36 18"/>
+              <rect x="26" y="32" width="12" height="14" rx="3"/><path d="M26 36 Q 22 36 22 40"/>
+            </g>
+          </svg>
+        </span>
+        <span class="cal-instr-title">&Iacute;ndice arriba o abajo</span>
+        <span class="cal-instr-desc">Apunta el &iacute;ndice hacia arriba para subir, hacia abajo para bajar la p&aacute;gina.</span>
+      </div>
+    </div>
+    <p class="cal-instructions-foot">
+      <span class="cal-instructions-foot-tag" aria-hidden="true"></span>
+      Puedes <strong>cambiar al modo manual</strong> en cualquier momento haciendo clic en <em>Salir</em>.
+    </p>
+    <button type="button" class="cal-accept-btn" data-cal-accept>
+      Comenzar la calibraci&oacute;n
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </button>
+    <button type="button" class="calibration-cancel" data-cal-skip>Continuar sin la mirada</button>
+  </div>
+
+  <!-- FASE 2: calibración 5 puntos -->
+  <div class="cal-phase cal-phase-points" data-cal-phase="points" hidden>
+    <span class="calibration-tag"><span class="pulse-dot"></span>Paso 2 de 3 &middot; Calibraci&oacute;n (<span data-point-step>1</span>/5)</span>
+    <div class="cal-camera-frame" data-cal-camera>
+      <span class="corner-tr" aria-hidden="true"></span><span class="corner-bl" aria-hidden="true"></span>
+      <span class="cal-camera-tag"><span class="pulse-dot"></span>EN VIVO</span>
+      <canvas data-cal-overlay></canvas>
+    </div>
+    <h2 class="calibration-title">Mira al <em data-point-name>punto dorado</em>.</h2>
+    <p class="calibration-lede">Comenzamos por las <strong style="color:var(--lime)">4 esquinas</strong>. Cerramos con el centro. Haz clic mientras lo miras, o qu&eacute;date vi&eacute;ndolo 3 segundos.</p>
+    <div class="calibration-progress" style="width:280px;"><div class="calibration-progress-fill" data-point-fill></div></div>
+    <p class="calibration-status" data-point-status>Lleva tu mirada al punto cuando est&eacute;s listo&hellip;</p>
+    <button type="button" class="calibration-cancel" data-cal-cancel-points>Volver</button>
+  </div>
+
+  <button type="button" class="cal-point-target" data-point-target hidden aria-label="Confirmar posici&oacute;n de calibraci&oacute;n">
+    <span class="ping"></span><span class="dwell-ring" data-point-dwell></span><span class="core"></span>
+  </button>
+
+  <!-- FASE 3: ajuste de sensibilidad -->
+  <div class="cal-phase cal-phase-tune" data-cal-phase="tune" hidden>
+    <span class="calibration-tag"><span class="pulse-dot"></span>Paso 3 de 3 &middot; Ajuste fino</span>
+    <h2 class="calibration-title">Ajusta tu <em>velocidad ideal</em>.</h2>
+    <p class="calibration-lede">Mueve los ojos como si exploraras la pantalla &mdash; el punto dorado debe seguirte. Ajusta los sliders seg&uacute;n tu preferencia.</p>
+    <div class="cal-recommended-banner" role="note">
+      <span class="check" aria-hidden="true">&#10003;</span>
+      <span class="copy">Configuraci&oacute;n &oacute;ptima<small>Probados con miles de usuarios. Aj&uacute;stalos si lo deseas.</small></span>
+    </div>
+    <div class="cal-sensitivity">
+      <div class="cal-sensitivity-head">
+        <span>Velocidad de respuesta<span class="cal-recommended-tag" data-rec-tag="sens">&oacute;ptimo: 0.7&times;</span></span>
+        <span class="val" data-tune-sens-val>0.7&times;</span>
+      </div>
+      <input type="range" class="cal-slider" data-tune-sens min="0.6" max="2.5" step="0.05" value="0.7" />
+      <p class="cal-sensitivity-hint">M&aacute;s alto: la mirada cubre m&aacute;s espacio. M&aacute;s bajo: control m&aacute;s fino.</p>
+    </div>
+    <div class="cal-sensitivity">
+      <div class="cal-sensitivity-head">
+        <span>Fluidez<span class="cal-recommended-tag" data-rec-tag="smooth">&oacute;ptimo: 0.05</span></span>
+        <span class="val" data-tune-smooth-val>0.05</span>
+      </div>
+      <input type="range" class="cal-slider" data-tune-smooth min="0.05" max="0.5" step="0.01" value="0.05" />
+      <p class="cal-sensitivity-hint">M&aacute;s alto: respuesta inmediata. M&aacute;s bajo: movimiento m&aacute;s suave y estable.</p>
+      <div class="cal-sensitivity-test" data-tune-test><span class="tracker" data-tune-tracker></span></div>
+    </div>
+    <div class="cal-sensitivity">
+      <div class="cal-sensitivity-head">
+        <span>Bajar p&aacute;gina con la mirada<span class="cal-recommended-tag" data-rec-tag="scroll">&oacute;ptimo: activado</span></span>
+        <span class="val" data-tune-scroll-val>Activado</span>
+      </div>
+      <input type="range" class="cal-slider" data-tune-scroll min="0" max="1" step="1" value="1" />
+      <p class="cal-sensitivity-hint">Cuando lo activas, miras al borde inferior y la p&aacute;gina baja sola.</p>
+    </div>
+    <button type="button" class="cal-restore-btn" data-tune-restore>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
+      Volver a la configuraci&oacute;n &oacute;ptima
+    </button>
+    <button type="button" class="cal-accept-btn" data-tune-save>
+      Empezar a explorar
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </button>
+    <button type="button" class="calibration-cancel" data-cal-recalibrate>Calibrar de nuevo</button>
+  </div>
+
+  <!-- FASE 4: éxito -->
+  <div class="cal-phase cal-phase-done" data-cal-phase="done" hidden>
+    <span class="calibration-tag"><span class="pulse-dot"></span>Sistema listo</span>
+    <div class="cal-checkmark" aria-hidden="true">
+      <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="32" cy="32" r="28"/><path d="M20 33l8 8 16-18"/>
+      </svg>
+    </div>
+    <h2 class="calibration-title">Listo. <em>Tu mirada</em> ahora dirige todo.</h2>
+    <p class="calibration-lede">Mira al borde inferior para bajar, al superior para subir. Muestra <strong style="color:var(--lime)">la palma</strong> para frenar el scroll; cierra el <strong style="color:var(--lime)">pu&ntilde;o</strong> para reanudarlo.</p>
+  </div>
+</div>
+
+<!-- Camera HUD -->
+<div class="biometric-hud" data-biometric-hud aria-hidden="true">
+  <div class="biometric-hud-head">
+    <span class="left"><span class="pulse-dot"></span>Biometric &middot; ON</span>
+    <button type="button" class="close-x" data-hud-close aria-label="Apagar c&aacute;mara">&times;</button>
+  </div>
+  <div class="biometric-hud-frame"><canvas data-hud-canvas></canvas></div>
+  <div class="biometric-hud-foot">
+    <span>Iris &middot; <span class="lime" data-hud-fps>0</span> fps</span>
+    <span class="lime" data-hud-status>tracking</span>
+  </div>
+</div>
+
+<div class="pupil-cursor" data-pupil-cursor aria-hidden="true">
+  <span class="core"></span><span class="dwell" data-pupil-dwell></span>
+</div>
+
+<div class="gaze-scroll-zone gaze-scroll-zone-up" data-gaze-zone-up aria-hidden="true">
+  <svg class="gaze-scroll-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+  <span class="gaze-scroll-zone-label">Mira aqu&iacute; &middot; Subir</span>
+</div>
+<div class="gaze-scroll-zone gaze-scroll-zone-down" data-gaze-zone-down aria-hidden="true">
+  <span class="gaze-scroll-zone-label">Mira aqu&iacute; &middot; Bajar</span>
+  <svg class="gaze-scroll-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+</div>
+
+<div class="blink-toast" data-blink-toast aria-live="polite"></div>
+
+<div class="orientation-hint" data-orientation-hint aria-hidden="true">
+  <div class="body">
+    <span class="device" aria-hidden="true"></span>
+    <span data-orientation-msg>Adaptando a tu pantalla&hellip;</span>
+  </div>
+</div>
+
+<video class="biometric-video" data-biometric-video autoplay playsinline muted></video>
+
 <script src="https://victor-ia-tracker.vercel.app/widget/embed.js" data-agent-id="agent_5701kr0h5gg6eetb69tv6c5hwfj1"></script>
+<script src="web4.js" defer></script>
+
+<!-- ════════════════════════════════════════════════════════════
+     BIOMETRIC EYE-TRACKING — MediaPipe FaceLandmarker
+     Victor IA Website Integration
+     ════════════════════════════════════════════════════════════ -->
+<script>function hideIntro(){}</script>
+<script type="module">
+  const SETTINGS_KEY='robo-biometric-settings-v1';
+  function loadSettings(){try{return JSON.parse(localStorage.getItem(SETTINGS_KEY))||{};}catch(e){return{};}}
+  function saveSettings(s){try{localStorage.setItem(SETTINGS_KEY,JSON.stringify(s));}catch(e){}}
+  const saved=loadSettings();
+
+  const STATE={
+    active:false,calibrating:false,faceLandmarker:null,stream:null,
+    baseline:null,mapping:saved.mapping||null,raf:0,lastDispatch:0,
+    smoothedX:window.innerWidth/2,smoothedY:window.innerHeight/2,
+    rawIrisX:0.5,rawIrisY:0.5,
+    sensitivity:typeof saved.sensitivity==='number'?saved.sensitivity:0.7,
+    smoothing:typeof saved.smoothing==='number'?saved.smoothing:0.05,
+    scrollEnabled:saved.scrollEnabled!==false,
+    fps:0,lastFrameTime:0,dwellTarget:null,dwellStart:0,lastClick:0,
+    eyeClosed:false,blinkStartTime:0,blinkTimes:[],scrollPaused:false,lastBlinkToggle:0,
+    headBaseline:saved.headBaseline||null,
+    headWeight:typeof saved.headWeight==='number'?saved.headWeight:0.45,
+    handLandmarker:null,currentGesture:'idle',gestureStableSince:0,
+    lastGestureToast:'',lastGestureToastTime:0,handsDetected:false,handLm:null,
+  };
+
+  const startBtn        =document.querySelector('[data-biometric-start]');
+  const introBioBtn     =document.querySelector('[data-intro-bio]');
+  const introNormalBtn  =document.querySelector('[data-intro-normal]');
+  const introSkipBtn    =document.querySelector('[data-intro-skip]');
+  const calCancelPoints =document.querySelector('[data-cal-cancel-points]');
+  const chip            =document.querySelector('[data-biometric-chip]');
+  const restartBtn      =document.querySelector('[data-biometric-restart]');
+  const calOverlay      =document.querySelector('[data-calibration]');
+  const calFill         =document.querySelector('[data-cal-fill]');
+  const calStatus       =document.querySelector('[data-cal-status]');
+  const calCancel       =document.querySelector('[data-cal-cancel]');
+  const calAccept       =document.querySelector('[data-cal-accept]');
+  const calSkip         =document.querySelector('[data-cal-skip]');
+  const calRecalibrate  =document.querySelector('[data-cal-recalibrate]');
+  const calCamera       =document.querySelector('[data-cal-camera]');
+  const calOverlayCanvas=document.querySelector('[data-cal-overlay]');
+  const tuneSens        =document.querySelector('[data-tune-sens]');
+  const tuneSensVal     =document.querySelector('[data-tune-sens-val]');
+  const tuneSmooth      =document.querySelector('[data-tune-smooth]');
+  const tuneSmoothVal   =document.querySelector('[data-tune-smooth-val]');
+  const tuneScroll      =document.querySelector('[data-tune-scroll]');
+  const tuneScrollVal   =document.querySelector('[data-tune-scroll-val]');
+  const tuneSave        =document.querySelector('[data-tune-save]');
+  const tuneTracker     =document.querySelector('[data-tune-tracker]');
+  const tuneTest        =document.querySelector('[data-tune-test]');
+  const pupilCursor     =document.querySelector('[data-pupil-cursor]');
+  const video           =document.querySelector('[data-biometric-video]');
+  const hud             =document.querySelector('[data-biometric-hud]');
+  const hudCanvas       =document.querySelector('[data-hud-canvas]');
+  const hudClose        =document.querySelector('[data-hud-close]');
+  const hudFps          =document.querySelector('[data-hud-fps]');
+  const hudStatus       =document.querySelector('[data-hud-status]');
+  const gazeZoneUp      =document.querySelector('[data-gaze-zone-up]');
+  const gazeZoneDown    =document.querySelector('[data-gaze-zone-down]');
+  const blinkToast      =document.querySelector('[data-blink-toast]');
+  const eyeNavBtn       =document.getElementById('eyeNavBtn');
+
+  let toastTimer=null;
+  function showToast(msg){
+    if(!blinkToast)return;
+    blinkToast.textContent=msg;blinkToast.classList.add('is-on');
+    clearTimeout(toastTimer);toastTimer=setTimeout(()=>blinkToast.classList.remove('is-on'),1700);
+  }
+
+  const INPUT_MOUSE_TIMEOUT=1800;
+  let lastRealMouseAt=0,inputModeTimer=0;
+  function setInputMode(mode){
+    document.body.classList.toggle('input-eye-active',mode==='eye');
+    document.body.classList.toggle('input-mouse-active',mode==='mouse');
+  }
+  function onRealMouseActivity(){
+    if(!STATE.active)return;
+    lastRealMouseAt=performance.now();setInputMode('mouse');
+    if(!inputModeTimer){
+      inputModeTimer=setInterval(()=>{
+        if(!STATE.active){clearInterval(inputModeTimer);inputModeTimer=0;setInputMode('none');return;}
+        if(performance.now()-lastRealMouseAt>INPUT_MOUSE_TIMEOUT){setInputMode('eye');clearInterval(inputModeTimer);inputModeTimer=0;}
+      },200);
+    }
+  }
+  document.addEventListener('mousemove', e=>{if(e.isTrusted)onRealMouseActivity();},{passive:true,capture:true});
+  document.addEventListener('mousedown', e=>{if(e.isTrusted)onRealMouseActivity();},{passive:true,capture:true});
+  document.addEventListener('wheel',     e=>{if(e.isTrusted)onRealMouseActivity();},{passive:true,capture:true});
+  document.addEventListener('touchstart',e=>{if(e.isTrusted)onRealMouseActivity();},{passive:true,capture:true});
+
+  function setStatus(msg){if(calStatus)calStatus.textContent=msg;}
+  function showCal(){if(calOverlay)calOverlay.classList.add('is-on');document.body.classList.add('is-calibrating');}
+  function hideCal(){if(calOverlay)calOverlay.classList.remove('is-on');document.body.classList.remove('is-calibrating');}
+  function showPhase(name){
+    document.querySelectorAll('[data-cal-phase]').forEach(el=>{el.hidden=el.getAttribute('data-cal-phase')!==name;});
+    if(calOverlay){try{calOverlay.scrollTo({top:0,behavior:'instant'});}catch(e){calOverlay.scrollTop=0;}}
+  }
+  function showCalibrationFlow(){
+    hideIntro();
+    if(restartBtn)restartBtn.classList.remove('is-on');
+    showPhase('intro');showCal();
+  }
+
+  let MESH_TESSELATION=null,MESH_LIPS=null,MESH_LEFT_EYE=null,MESH_RIGHT_EYE=null;
+  let MESH_LEFT_BROW=null,MESH_RIGHT_BROW=null,MESH_FACE_OVAL=null;
+  let MESH_LEFT_IRIS=null,MESH_RIGHT_IRIS=null,HAND_CONNECTIONS=null;
+  let HandLandmarkerCls=null,visionResolver=null;
+  let faceTs=0,handTs=0;
+  function nextFaceTs(){faceTs+=1;return faceTs;}
+  function nextHandTs(){handTs+=1;return handTs;}
+
+  async function loadFaceLandmarker(){
+    setStatus('Cargando módulo de visión…');
+    const vision=await import('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/vision_bundle.mjs');
+    const{FilesetResolver,FaceLandmarker,HandLandmarker}=vision;
+    HandLandmarkerCls=HandLandmarker;
+    HAND_CONNECTIONS  =HandLandmarker.HAND_CONNECTIONS||null;
+    MESH_TESSELATION  =FaceLandmarker.FACE_LANDMARKS_TESSELATION||null;
+    MESH_LIPS         =FaceLandmarker.FACE_LANDMARKS_LIPS||null;
+    MESH_LEFT_EYE     =FaceLandmarker.FACE_LANDMARKS_LEFT_EYE||null;
+    MESH_RIGHT_EYE    =FaceLandmarker.FACE_LANDMARKS_RIGHT_EYE||null;
+    MESH_LEFT_BROW    =FaceLandmarker.FACE_LANDMARKS_LEFT_EYEBROW||null;
+    MESH_RIGHT_BROW   =FaceLandmarker.FACE_LANDMARKS_RIGHT_EYEBROW||null;
+    MESH_FACE_OVAL    =FaceLandmarker.FACE_LANDMARKS_FACE_OVAL||null;
+    MESH_LEFT_IRIS    =FaceLandmarker.FACE_LANDMARKS_LEFT_IRIS||null;
+    MESH_RIGHT_IRIS   =FaceLandmarker.FACE_LANDMARKS_RIGHT_IRIS||null;
+    const filesetResolver=await FilesetResolver.forVisionTasks('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/wasm');
+    setStatus('Inicializando detector de pupilas y rostro…');
+    let faceLandmarker;
+    try{
+      faceLandmarker=await FaceLandmarker.createFromOptions(filesetResolver,{
+        baseOptions:{modelAssetPath:'https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task',delegate:'GPU'},
+        runningMode:'VIDEO',numFaces:1,outputFaceBlendshapes:false,outputFacialTransformationMatrixes:false
+      });
+    }catch(gpuErr){
+      console.warn('[BIOMETRIC] GPU delegate falló, usando CPU:',gpuErr);
+      faceLandmarker=await FaceLandmarker.createFromOptions(filesetResolver,{
+        baseOptions:{modelAssetPath:'https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task',delegate:'CPU'},
+        runningMode:'VIDEO',numFaces:1
+      });
+    }
+    visionResolver=filesetResolver;
+    return faceLandmarker;
+  }
+
+  async function loadHandLandmarker(){
+    if(!HandLandmarkerCls||!visionResolver)return null;
+    try{
+      const handLm=await HandLandmarkerCls.createFromOptions(visionResolver,{
+        baseOptions:{modelAssetPath:'https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task',delegate:'GPU'},
+        runningMode:'VIDEO',numHands:1,minHandDetectionConfidence:0.5,minHandPresenceConfidence:0.5,minTrackingConfidence:0.5
+      });
+      console.log('[BIOMETRIC] HandLandmarker ready');return handLm;
+    }catch(err){
+      console.warn('[BIOMETRIC] HandLandmarker GPU falló, intentando CPU:',err);
+      try{return await HandLandmarkerCls.createFromOptions(visionResolver,{baseOptions:{modelAssetPath:'https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task',delegate:'CPU'},runningMode:'VIDEO',numHands:1});}
+      catch(err2){console.warn('[BIOMETRIC] HandLandmarker no disponible:',err2);return null;}
+    }
+  }
+
+  function getHeadPose(lm){
+    if(!lm||!lm[1]||!lm[10]||!lm[152]||!lm[234]||!lm[454]||!lm[33]||!lm[263])return null;
+    const faceCxNorm=(lm[234].x+lm[454].x)/2,faceWNorm=Math.abs(lm[454].x-lm[234].x)||1e-6;
+    const faceCyNorm=(lm[10].y+lm[152].y)/2,faceHNorm=Math.abs(lm[152].y-lm[10].y)||1e-6;
+    return{yaw:(lm[1].x-faceCxNorm)/faceWNorm,pitch:(lm[1].y-faceCyNorm)/faceHNorm,roll:Math.atan2(lm[263].y-lm[33].y,lm[263].x-lm[33].x)};
+  }
+  function faceRelIris(lm){
+    if(!lm||!lm[468]||!lm[473])return null;
+    const lp=lm[234],rp=lm[454],tp=lm[10],bp=lm[152];
+    if(!lp||!rp||!tp||!bp)return null;
+    const irisX=(lm[468].x+lm[473].x)/2,irisY=(lm[468].y+lm[473].y)/2;
+    const faceCx=(lp.x+rp.x+tp.x+bp.x)/4,faceCy=(lp.y+rp.y+tp.y+bp.y)/4;
+    const faceW=Math.hypot(rp.x-lp.x,rp.y-lp.y)||0.1;
+    return{rx:(irisX-faceCx)/faceW,ry:(irisY-faceCy)/faceW,faceCx,faceCy,faceW};
+  }
+  function lookSignal(lm){
+    const rel=faceRelIris(lm),head=getHeadPose(lm);
+    if(!rel)return null;
+    const w=STATE.headWeight;
+    return{x:rel.rx+(head?head.yaw*w:0),y:rel.ry+(head?head.pitch*w:0),rel,head};
+  }
+
+  function detectGesture(handLm){
+    if(!handLm||handLm.length<21)return'idle';
+    const wrist=handLm[0];
+    const dist=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y,((a.z||0)-(b.z||0)));
+    const fingers=[{tip:8,pip:6},{tip:12,pip:10},{tip:16,pip:14},{tip:20,pip:18}];
+    const ext=fingers.map(f=>dist(handLm[f.tip],wrist)>dist(handLm[f.pip],wrist)*1.12);
+    const thumbExt=dist(handLm[4],wrist)>dist(handLm[3],wrist)*1.06;
+    const numExt=ext.filter(Boolean).length+(thumbExt?1:0);
+    if(numExt>=4)return'palm';
+    if(numExt<=1&&!ext[0])return'fist';
+    if(ext[0]&&!ext[1]&&!ext[2]&&!ext[3]){
+      const dy=handLm[8].y-wrist.y,dx=handLm[8].x-wrist.x;
+      if(Math.abs(dy)>Math.abs(dx)*0.6)return dy<0?'point_up':'point_down';
+      return'point';
+    }
+    return'idle';
+  }
+
+  function drawHandOnCanvas(ctx,handLm,w,h,gestureLabel){
+    if(!handLm)return;
+    ctx.save();ctx.translate(w,0);ctx.scale(-1,1);
+    if(HAND_CONNECTIONS){
+      ctx.strokeStyle='rgba(255,170,23,0.85)';ctx.lineWidth=1.6;ctx.beginPath();
+      for(const c of HAND_CONNECTIONS){const a=handLm[c.start],b=handLm[c.end];if(!a||!b)continue;ctx.moveTo(a.x*w,a.y*h);ctx.lineTo(b.x*w,b.y*h);}
+      ctx.stroke();
+    }
+    ctx.shadowColor='#FFAA17';ctx.shadowBlur=6;
+    for(let i=0;i<handLm.length;i++){
+      const p=handLm[i];
+      ctx.fillStyle=(i===0||i===4||i===8||i===12||i===16||i===20)?'#FFFFFF':'#FFAA17';
+      ctx.beginPath();ctx.arc(p.x*w,p.y*h,i===0?4:2.5,0,Math.PI*2);ctx.fill();
+    }
+    ctx.shadowBlur=0;ctx.restore();
+    if(gestureLabel&&handLm[0]){
+      const x=w-(handLm[0].x*w),y=handLm[0].y*h;
+      const labelMap={palm:'◉ PAUSE',fist:'◉ RUN',point_up:'↑ UP',point_down:'↓ DOWN',point:'· POINT',idle:''};
+      const txt=labelMap[gestureLabel]||'';
+      if(txt){
+        ctx.font='bold 9px "Space Grotesk",ui-sans-serif,sans-serif';ctx.textBaseline='middle';
+        const tw=ctx.measureText(txt).width;
+        ctx.fillStyle='rgba(10,10,10,0.85)';ctx.fillRect(x-tw/2-4,y-24,tw+8,14);
+        ctx.fillStyle='#FFAA17';ctx.textAlign='center';ctx.fillText(txt,x,y-17);
+        ctx.textAlign='left';ctx.textBaseline='alphabetic';
+      }
+    }
+  }
+
+  async function requestCamera(){
+    setStatus('Solicitando permiso de cámara…');
+    if(!window.isSecureContext)throw new Error('La cámara requiere HTTPS. Abre el sitio con https:// para activar la mirada.');
+    if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)throw new Error('Tu navegador no soporta acceso a cámara. Prueba con Chrome, Safari o Firefox actualizado.');
+    const isPortrait=window.innerHeight>window.innerWidth;
+    const constraints={video:{facingMode:{ideal:'user'},width:{ideal:isPortrait?480:640},height:{ideal:isPortrait?640:480},frameRate:{ideal:30,max:60}},audio:false};
+    let stream;
+    try{stream=await navigator.mediaDevices.getUserMedia(constraints);}
+    catch(err){
+      if(err&&(err.name==='OverconstrainedError'||err.name==='NotReadableError')){stream=await navigator.mediaDevices.getUserMedia({video:true,audio:false});}
+      else if(err&&err.name==='NotAllowedError')throw new Error('Permiso de cámara denegado. Habilítalo en la configuración del navegador.');
+      else if(err&&err.name==='NotFoundError')throw new Error('No se detectó cámara frontal en este dispositivo.');
+      else throw err;
+    }
+    video.srcObject=stream;
+    await new Promise((res)=>{let done=false;const finish=()=>{if(!done){done=true;res();}};video.onloadedmetadata=()=>{video.play().then(finish).catch(finish);};setTimeout(()=>{video.play().catch(()=>{});finish();},4000);});
+    return stream;
+  }
+
+  function paintCameraFrame(canvas,lm){
+    if(!canvas||!video||video.readyState<2)return;
+    const ctx=canvas.getContext('2d');
+    const dpr=Math.min(window.devicePixelRatio||1,2);
+    const cssW=canvas.clientWidth,cssH=canvas.clientHeight;
+    if(canvas.width!==cssW*dpr){canvas.width=cssW*dpr;canvas.height=cssH*dpr;}
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    const w=cssW,h=cssH,now=performance.now();
+    ctx.save();ctx.translate(w,0);ctx.scale(-1,1);
+    ctx.save();ctx.filter='contrast(1.15) brightness(0.78) saturate(0.65)';ctx.drawImage(video,0,0,w,h);ctx.restore();
+    ctx.fillStyle='rgba(8,12,8,0.42)';ctx.fillRect(0,0,w,h);
+    ctx.strokeStyle='rgba(255,170,23,0.05)';ctx.lineWidth=1;
+    for(let y=0;y<h;y+=3){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();}
+    const scanY=(now/22)%(h+60)-30;
+    const scanGrad=ctx.createLinearGradient(0,scanY-24,0,scanY+24);
+    scanGrad.addColorStop(0,'rgba(255,170,23,0)');scanGrad.addColorStop(0.5,'rgba(255,170,23,0.22)');scanGrad.addColorStop(1,'rgba(255,170,23,0)');
+    ctx.fillStyle=scanGrad;ctx.fillRect(0,scanY-24,w,48);
+    let yaw=0,pitch=0,roll=0,ear=0;
+    if(lm&&lm.length){
+      if(MESH_TESSELATION){ctx.strokeStyle='rgba(255,170,23,0.18)';ctx.lineWidth=0.5;ctx.beginPath();for(let i=0;i<MESH_TESSELATION.length;i++){const c=MESH_TESSELATION[i];const a=lm[c.start],b=lm[c.end];if(!a||!b)continue;ctx.moveTo(a.x*w,a.y*h);ctx.lineTo(b.x*w,b.y*h);}ctx.stroke();}
+      const drawC=(conn,color,width)=>{if(!conn)return;ctx.strokeStyle=color;ctx.lineWidth=width;ctx.beginPath();for(let i=0;i<conn.length;i++){const c=conn[i];const a=lm[c.start],b=lm[c.end];if(!a||!b)continue;ctx.moveTo(a.x*w,a.y*h);ctx.lineTo(b.x*w,b.y*h);}ctx.stroke();};
+      drawC(MESH_FACE_OVAL,'rgba(255,170,23,0.55)',1.2);
+      drawC(MESH_LEFT_BROW,'rgba(255,170,23,0.7)',1.1);drawC(MESH_RIGHT_BROW,'rgba(255,170,23,0.7)',1.1);
+      drawC(MESH_LEFT_EYE,'rgba(255,170,23,0.95)',1.4);drawC(MESH_RIGHT_EYE,'rgba(255,170,23,0.95)',1.4);
+      drawC(MESH_LIPS,'rgba(255,170,23,0.6)',1.0);
+      drawC(MESH_LEFT_IRIS,'rgba(255,255,255,0.85)',1.3);drawC(MESH_RIGHT_IRIS,'rgba(255,255,255,0.85)',1.3);
+      if(lm[468]&&lm[473]){
+        ctx.shadowColor='#FFAA17';ctx.shadowBlur=14;ctx.fillStyle='#FFAA17';
+        ctx.beginPath();ctx.arc(lm[468].x*w,lm[468].y*h,4.5,0,Math.PI*2);ctx.fill();
+        ctx.beginPath();ctx.arc(lm[473].x*w,lm[473].y*h,4.5,0,Math.PI*2);ctx.fill();
+        ctx.shadowBlur=0;ctx.fillStyle='#FFFFFF';
+        ctx.beginPath();ctx.arc(lm[468].x*w,lm[468].y*h,1.6,0,Math.PI*2);ctx.fill();
+        ctx.beginPath();ctx.arc(lm[473].x*w,lm[473].y*h,1.6,0,Math.PI*2);ctx.fill();
+        const midX=(lm[468].x+lm[473].x)/2*w,midY=(lm[468].y+lm[473].y)/2*h;
+        const crossPulse=14+Math.sin(now*0.005)*2;
+        ctx.strokeStyle='rgba(255,170,23,0.85)';ctx.lineWidth=0.9;ctx.beginPath();
+        ctx.moveTo(midX-crossPulse,midY);ctx.lineTo(midX-5,midY);
+        ctx.moveTo(midX+5,midY);ctx.lineTo(midX+crossPulse,midY);
+        ctx.moveTo(midX,midY-crossPulse);ctx.lineTo(midX,midY-5);
+        ctx.moveTo(midX,midY+5);ctx.lineTo(midX,midY+crossPulse);ctx.stroke();
+        ctx.strokeRect(midX-18,midY-18,36,36);
+      }
+      if(lm[33]&&lm[263]&&lm[1]&&lm[10]&&lm[152]&&lm[234]&&lm[454]){
+        const fcn=(lm[234].x+lm[454].x)/2,fwn=Math.abs(lm[454].x-lm[234].x)||1e-6;
+        const fcyn=(lm[10].y+lm[152].y)/2,fhn=Math.abs(lm[152].y-lm[10].y)||1e-6;
+        yaw=((lm[1].x-fcn)/fwn)*90;pitch=((lm[1].y-fcyn)/fhn)*90;
+        roll=Math.atan2(lm[263].y-lm[33].y,lm[263].x-lm[33].x)*180/Math.PI;
+      }
+      if(lm[159]&&lm[145]&&lm[33]&&lm[133]&&lm[386]&&lm[374]&&lm[362]&&lm[263]){
+        const earR=Math.abs(lm[159].y-lm[145].y)/Math.max(1e-6,Math.abs(lm[33].x-lm[133].x));
+        const earL=Math.abs(lm[386].y-lm[374].y)/Math.max(1e-6,Math.abs(lm[362].x-lm[263].x));
+        ear=(earR+earL)/2;
+      }
+    }
+    ctx.restore();
+    ctx.fillStyle='rgba(255,170,23,0.95)';ctx.font='8px "Space Grotesk",ui-sans-serif,sans-serif';ctx.textBaseline='top';
+    ctx.fillText(lm?'◉ FACE LOCK':'◌ SEARCHING',8,6);ctx.fillText('478 NODES · MESH',8,17);
+    ctx.textAlign='right';ctx.fillText((STATE.fps||0)+' FPS',w-8,6);ctx.fillText(STATE.scrollPaused?'⏸ HOLD':'▶ LIVE',w-8,17);
+    ctx.textAlign='left';ctx.textBaseline='bottom';
+    const fmt=(v)=>(v>=0?'+':'')+v.toFixed(1)+'°';
+    ctx.fillText('YAW   '+fmt(yaw),8,h-28);ctx.fillText('PITCH '+fmt(pitch),8,h-18);ctx.fillText('ROLL  '+fmt(roll),8,h-8);
+    ctx.textAlign='right';ctx.fillText('EAR '+ear.toFixed(2),w-8,h-18);ctx.fillText(STATE.dwellTarget?'◉ DWELL':'◌ IDLE',w-8,h-8);
+    ctx.textAlign='left';ctx.textBaseline='alphabetic';
+    const cs=12;ctx.strokeStyle='rgba(255,170,23,0.85)';ctx.lineWidth=1.2;ctx.beginPath();
+    ctx.moveTo(0,cs);ctx.lineTo(0,0);ctx.lineTo(cs,0);
+    ctx.moveTo(w-cs,0);ctx.lineTo(w,0);ctx.lineTo(w,cs);
+    ctx.moveTo(w,h-cs);ctx.lineTo(w,h);ctx.lineTo(w-cs,h);
+    ctx.moveTo(cs,h);ctx.lineTo(0,h);ctx.lineTo(0,h-cs);ctx.stroke();
+    if(STATE.scrollPaused){ctx.strokeStyle='rgba(255,90,90,0.7)';ctx.lineWidth=1.5;ctx.strokeRect(2,2,w-4,h-4);}
+  }
+
+  const orientationHint=document.querySelector('[data-orientation-hint]');
+  const orientationMsg=document.querySelector('[data-orientation-msg]');
+  function getOrientation(){return window.matchMedia('(orientation: portrait)').matches?'portrait':'landscape';}
+  let lastOrientation=getOrientation();
+  function showOrientationHint(msg){
+    if(!orientationHint)return;
+    if(orientationMsg)orientationMsg.textContent=msg;
+    orientationHint.classList.add('is-on');
+    clearTimeout(showOrientationHint._t);
+    showOrientationHint._t=setTimeout(()=>orientationHint.classList.remove('is-on'),1200);
+  }
+  function handleOrientationChange(){
+    const newO=getOrientation();
+    STATE.smoothedX=window.innerWidth/2;STATE.smoothedY=window.innerHeight/2;
+    if(hudCanvas){hudCanvas.width=0;hudCanvas.height=0;}
+    if(calOverlayCanvas){calOverlayCanvas.width=0;calOverlayCanvas.height=0;}
+    if(newO!==lastOrientation&&STATE.active){showOrientationHint(newO==='portrait'?'Vertical detectado':'Horizontal detectado');lastOrientation=newO;}
+  }
+  window.addEventListener('orientationchange',handleOrientationChange);
+  window.addEventListener('resize',(()=>{let to;return()=>{clearTimeout(to);to=setTimeout(handleOrientationChange,180);};})());
+
+  async function runPointsCalibration(){
+    const stepEl=document.querySelector('[data-point-step]');
+    const nameEl=document.querySelector('[data-point-name]');
+    const statusEl=document.querySelector('[data-point-status]');
+    const fillEl=document.querySelector('[data-point-fill]');
+    const target=document.querySelector('[data-point-target]');
+    const dwellEl=document.querySelector('[data-point-dwell]');
+    showPhase('points');
+    const points=[
+      {key:'tl',    name:'esquina superior izquierda',cls:'pos-tl'},
+      {key:'tr',    name:'esquina superior derecha',  cls:'pos-tr'},
+      {key:'br',    name:'esquina inferior derecha',  cls:'pos-br'},
+      {key:'bl',    name:'esquina inferior izquierda',cls:'pos-bl'},
+      {key:'center',name:'centro (validación)',       cls:'pos-center'}
+    ];
+    const captured={};
+    const SETTLE_MS=700,CAPTURE_MS=2000,TOTAL_MS=SETTLE_MS+CAPTURE_MS;
+    if(statusEl)statusEl.textContent='Detectando tu rostro…';
+    const warmStart=performance.now();
+    while(performance.now()-warmStart<600){
+      try{const r=STATE.faceLandmarker.detectForVideo(video,nextFaceTs());paintCameraFrame(calOverlayCanvas,r&&r.faceLandmarks&&r.faceLandmarks[0]);}catch(e){}
+      await new Promise(r=>requestAnimationFrame(r));
+    }
+    function median(arr){if(!arr.length)return 0;const sorted=arr.slice().sort((a,b)=>a-b);const mid=Math.floor(sorted.length/2);return sorted.length%2===0?(sorted[mid-1]+sorted[mid])/2:sorted[mid];}
+    if(target)target.hidden=false;
+    for(let i=0;i<points.length;i++){
+      const p=points[i];
+      if(stepEl)stepEl.textContent=String(i+1);
+      if(nameEl)nameEl.textContent=p.name;
+      if(target){target.classList.remove('pos-center','pos-tl','pos-tr','pos-br','pos-bl','is-locked');target.classList.add(p.cls);if(dwellEl)dwellEl.style.setProperty('--dwell','0');}
+      const pointsPhase=document.querySelector('[data-cal-phase="points"]');
+      if(pointsPhase)pointsPhase.setAttribute('data-current-pos',p.key);
+      await new Promise(r=>setTimeout(r,350));
+      const phaseStart=performance.now(),irisSamples=[];
+      let confirmed=false;
+      const onClick=()=>{confirmed=true;};
+      if(target)target.addEventListener('click',onClick,{once:true});
+      await new Promise((resolve)=>{
+        function step(){
+          if(confirmed){resolve();return;}
+          const now=performance.now(),elapsed=now-phaseStart;
+          const result=STATE.faceLandmarker.detectForVideo(video,nextFaceTs());
+          let lm=null;
+          if(result&&result.faceLandmarks&&result.faceLandmarks[0]){
+            lm=result.faceLandmarks[0];
+            const sig=lookSignal(lm);
+            if(sig&&elapsed>=SETTLE_MS)irisSamples.push({x:sig.x,y:sig.y,hYaw:sig.head?sig.head.yaw:0,hPitch:sig.head?sig.head.pitch:0});
+          }
+          paintCameraFrame(calOverlayCanvas,lm);
+          if(statusEl){if(elapsed<SETTLE_MS){statusEl.textContent='Lleva tu mirada a la '+p.name+'…';}else{const rem=Math.max(0,((TOTAL_MS-elapsed)/1000)).toFixed(1);statusEl.textContent='Capturando… '+rem+'s';}}
+          const dwell=Math.min(1,elapsed/TOTAL_MS);
+          if(fillEl)fillEl.style.width=((i+dwell)/points.length*100)+'%';
+          if(dwellEl)dwellEl.style.setProperty('--dwell',dwell.toFixed(3));
+          if(dwell>=1){if(target)target.classList.add('is-locked');setTimeout(resolve,320);return;}
+          STATE.raf=requestAnimationFrame(step);
+        }
+        STATE.raf=requestAnimationFrame(step);
+      });
+      if(target)target.removeEventListener('click',onClick);
+      const isMobile=window.innerWidth<740,minSamples=isMobile?3:4;
+      if(irisSamples.length<minSamples){
+        const causa=irisSamples.length===0?'No detecté tu rostro. Acerca la cara a la cámara con buena luz.':'Pocas muestras ('+irisSamples.length+'). Quédate quieto e inténtalo de nuevo.';
+        if(statusEl)statusEl.textContent=causa;
+        if(target)target.hidden=true;
+        await new Promise(r=>setTimeout(r,2000));
+        return false;
+      }
+      const xs=irisSamples.map(q=>q.x),ys=irisSamples.map(q=>q.y);
+      const medX=median(xs),medY=median(ys);
+      const stdX=Math.sqrt(xs.reduce((s,x)=>s+(x-medX)*(x-medX),0)/xs.length);
+      const stdY=Math.sqrt(ys.reduce((s,y)=>s+(y-medY)*(y-medY),0)/ys.length);
+      const filtered=irisSamples.filter(q=>Math.abs(q.x-medX)<=stdX*2&&Math.abs(q.y-medY)<=stdY*2);
+      const final=filtered.length>=3?filtered:irisSamples;
+      captured[p.key]={x:final.reduce((s,q)=>s+q.x,0)/final.length,y:final.reduce((s,q)=>s+q.y,0)/final.length,hYaw:final.reduce((s,q)=>s+(q.hYaw||0),0)/final.length,hPitch:final.reduce((s,q)=>s+(q.hPitch||0),0)/final.length};
+    }
+    if(target)target.hidden=false;
+    const minIrisX=Math.min((captured.tl.x+captured.bl.x)/2,captured.tl.x,captured.bl.x);
+    const maxIrisX=Math.max((captured.tr.x+captured.br.x)/2,captured.tr.x,captured.br.x);
+    const minIrisY=Math.min((captured.tl.y+captured.tr.y)/2,captured.tl.y,captured.tr.y);
+    const maxIrisY=Math.max((captured.bl.y+captured.br.y)/2,captured.bl.y,captured.br.y);
+    let centerX=captured.center.x,centerY=captured.center.y;
+    if(centerX<=minIrisX||centerX>=maxIrisX)centerX=(minIrisX+maxIrisX)/2;
+    if(centerY<=minIrisY||centerY>=maxIrisY)centerY=(minIrisY+maxIrisY)/2;
+    const rangeX=Math.abs(maxIrisX-minIrisX),rangeY=Math.abs(maxIrisY-minIrisY);
+    const minRange=(window.innerWidth<740)?0.0012:0.002;
+    if(rangeX<minRange||rangeY<minRange){
+      if(statusEl)statusEl.textContent=(rangeX<minRange&&rangeY<minRange)?'Mueves muy poco los ojos. Gira más la mirada al ver las esquinas.':(rangeX<minRange?'Necesito más rango horizontal — mira bien a la izquierda y a la derecha.':'Necesito más rango vertical — mira bien arriba y abajo.');
+      if(target)target.hidden=true;
+      await new Promise(r=>setTimeout(r,2400));
+      return false;
+    }
+    STATE.mapping={minIrisX,maxIrisX,minIrisY,maxIrisY,centerX,centerY};
+    STATE.baseline=captured.center;
+    STATE.headBaseline={yaw:captured.center.hYaw,pitch:captured.center.hPitch};
+    if(target)target.hidden=true;
+    if(statusEl)statusEl.textContent='✓ Tu mirada quedó registrada · '+((maxIrisX-minIrisX)*1000).toFixed(0)+' iris-units';
+    return true;
+  }
+
+  let unifiedRunning=false;
+  function startUnifiedLoop(){
+    if(unifiedRunning)return;
+    unifiedRunning=true;
+    let viewportX=window.innerWidth/2,viewportY=window.innerHeight/2;
+    let scrollVel=0,scrollTargetVel=0,scrollAccumulator=0;
+    let lastSampleTime=performance.now(),frameCount=0,fpsTimer=performance.now();
+    function loop(){
+      if(!STATE.active){unifiedRunning=false;return;}
+      const now=performance.now(),dt=now-lastSampleTime;lastSampleTime=now;
+      frameCount++;
+      if(now-fpsTimer>=1000){STATE.fps=frameCount;if(hudFps)hudFps.textContent=String(STATE.fps);frameCount=0;fpsTimer=now;}
+      let lm=null;
+      try{const result=STATE.faceLandmarker.detectForVideo(video,nextFaceTs());if(result&&result.faceLandmarks&&result.faceLandmarks[0]){lm=result.faceLandmarks[0];if(hudStatus)hudStatus.textContent='tracking';}else if(hudStatus)hudStatus.textContent='no face';}catch(err){}
+      const GESTURE_ENTER_MS=250,GESTURE_EXIT_MS=500,HAND_LOSS_GRACE_MS=350;
+      if(STATE.handLandmarker){
+        try{
+          const handRes=STATE.handLandmarker.detectForVideo(video,nextHandTs());
+          const haveHand=handRes&&handRes.landmarks&&handRes.landmarks[0];
+          if(haveHand){
+            STATE.handLm=handRes.landmarks[0];STATE.handsDetected=true;STATE._lastHandSeen=now;
+            const newGesture=detectGesture(STATE.handLm);
+            if(newGesture===STATE.currentGesture){STATE._pendingGesture=null;STATE._pendingSince=0;}
+            else{
+              const exiting=STATE.currentGesture!=='idle',required=exiting?GESTURE_EXIT_MS:GESTURE_ENTER_MS;
+              if(STATE._pendingGesture!==newGesture){STATE._pendingGesture=newGesture;STATE._pendingSince=now;}
+              else if(now-STATE._pendingSince>required){
+                STATE.currentGesture=newGesture;STATE._pendingGesture=null;STATE._pendingSince=0;
+                const labels={palm:'✋ Palma — scroll en pausa',fist:'✊ Puño — scroll activo',point_up:'☝ Subiendo',point_down:'☟ Bajando'};
+                if(labels[newGesture]&&now-STATE.lastGestureToastTime>800){showToast(labels[newGesture]);STATE.lastGestureToastTime=now;STATE.lastGestureToast=newGesture;}
+              }
+            }
+          }else{
+            STATE.handLm=null;
+            if(!STATE._lastHandSeen||now-STATE._lastHandSeen>HAND_LOSS_GRACE_MS){STATE.handsDetected=false;if(STATE.currentGesture!=='idle'){STATE.currentGesture='idle';STATE._pendingGesture=null;STATE._pendingSince=0;}}
+          }
+        }catch(err){}
+      }
+      if(hud&&hud.classList.contains('is-on')){paintCameraFrame(hudCanvas,lm);if(STATE.handLm){const ctx=hudCanvas.getContext('2d');drawHandOnCanvas(ctx,STATE.handLm,hudCanvas.clientWidth,hudCanvas.clientHeight,STATE.currentGesture);}}
+      if(calOverlay&&calOverlay.classList.contains('is-on')){paintCameraFrame(calOverlayCanvas,lm);if(STATE.handLm){const ctx=calOverlayCanvas.getContext('2d');drawHandOnCanvas(ctx,STATE.handLm,calOverlayCanvas.clientWidth,calOverlayCanvas.clientHeight,STATE.currentGesture);}}
+      const sig=lookSignal(lm);
+      if(sig&&STATE.mapping){
+        const irisX=sig.x,irisY=sig.y;
+        STATE.rawIrisX=irisX;STATE.rawIrisY=irisY;
+        const vw=window.innerWidth,vh=window.innerHeight,m=STATE.mapping;
+        let normX,normY;
+        const cx=(typeof m.centerX==='number')?m.centerX:(m.minIrisX+m.maxIrisX)/2;
+        const cy=(typeof m.centerY==='number')?m.centerY:(m.minIrisY+m.maxIrisY)/2;
+        normX=irisX<=cx?0.5*(irisX-m.minIrisX)/((cx-m.minIrisX)||1e-6):0.5+0.5*(irisX-cx)/((m.maxIrisX-cx)||1e-6);
+        normY=irisY<=cy?0.5*(irisY-m.minIrisY)/((cy-m.minIrisY)||1e-6):0.5+0.5*(irisY-cy)/((m.maxIrisY-cy)||1e-6);
+        normX=0.5+(normX-0.5)*STATE.sensitivity;normY=0.5+(normY-0.5)*STATE.sensitivity;
+        const targetX=Math.max(0,Math.min(vw,normX*vw)),targetY=Math.max(0,Math.min(vh,normY*vh));
+        const cursorDt=Math.max(1,Math.min(50,dt));
+        const cursorTau=70/Math.max(0.05,STATE.smoothing*6);
+        const cursorAlpha=1-Math.exp(-cursorDt/cursorTau);
+        STATE.smoothedX+=(targetX-STATE.smoothedX)*cursorAlpha;
+        STATE.smoothedY+=(targetY-STATE.smoothedY)*cursorAlpha;
+        viewportX=STATE.smoothedX;viewportY=STATE.smoothedY;
+        STATE.rawTargetY=targetY;
+        if(pupilCursor&&pupilCursor.classList.contains('is-on'))pupilCursor.style.transform='translate('+viewportX+'px,'+viewportY+'px) translate(-50%,-50%)';
+        const tunePhase=document.querySelector('[data-cal-phase="tune"]');
+        if(tuneTracker&&tuneTest&&tunePhase&&!tunePhase.hidden){const r=tuneTest.getBoundingClientRect();const tx=Math.max(0,Math.min(r.width,normX*r.width));const ty=Math.max(0,Math.min(r.height,normY*r.height));tuneTracker.style.transform='translate('+tx+'px,'+ty+'px) translate(-50%,-50%)';}
+        if(!STATE.calibrating){
+          const el=document.elementFromPoint(viewportX,viewportY);
+          const clickable=el&&el.closest('a,button,summary,input,[data-magnet],[role="button"]');
+          if(clickable){
+            if(clickable===STATE.dwellTarget){
+              const dwellElapsed=now-STATE.dwellStart,dwellRatio=Math.min(1,dwellElapsed/1400);
+              if(pupilCursor){pupilCursor.classList.add('is-dwelling');const ring=pupilCursor.querySelector('[data-pupil-dwell]');if(ring)ring.style.setProperty('--dwell',dwellRatio.toFixed(3));}
+              if(dwellElapsed>=1400&&now-STATE.lastClick>900){STATE.lastClick=now;STATE.dwellTarget=null;if(pupilCursor)pupilCursor.classList.remove('is-dwelling');try{clickable.dispatchEvent(new MouseEvent('click',{bubbles:true,cancelable:true,clientX:viewportX,clientY:viewportY}));}catch(e){}}
+            }else{STATE.dwellTarget=clickable;STATE.dwellStart=now;if(pupilCursor)pupilCursor.classList.remove('is-dwelling');}
+          }else{STATE.dwellTarget=null;if(pupilCursor)pupilCursor.classList.remove('is-dwelling');}
+        }
+        if(lm&&lm[159]&&lm[145]&&lm[33]&&lm[133]&&lm[386]&&lm[374]&&lm[362]&&lm[263]){
+          const earR=Math.abs(lm[159].y-lm[145].y)/Math.max(1e-6,Math.abs(lm[33].x-lm[133].x));
+          const earL=Math.abs(lm[386].y-lm[374].y)/Math.max(1e-6,Math.abs(lm[362].x-lm[263].x));
+          const ear=(earR+earL)/2;
+          if(!STATE.eyeClosed&&ear<0.16){STATE.eyeClosed=true;STATE.blinkStartTime=now;}
+          else if(STATE.eyeClosed&&ear>0.22){
+            STATE.eyeClosed=false;
+            const bd=now-STATE.blinkStartTime;
+            if(bd<380&&bd>50){STATE.blinkTimes.push(now);STATE.blinkTimes=STATE.blinkTimes.filter(t=>now-t<700);if(STATE.blinkTimes.length>=2&&now-STATE.lastBlinkToggle>1000){STATE.scrollPaused=!STATE.scrollPaused;STATE.lastBlinkToggle=now;STATE.blinkTimes=[];showToast(STATE.scrollPaused?'⏸ Scroll pausado':'▶ Scroll activo');if(gazeZoneUp)gazeZoneUp.classList.toggle('is-paused',STATE.scrollPaused);if(gazeZoneDown)gazeZoneDown.classList.toggle('is-paused',STATE.scrollPaused);}}
+          }
+        }
+        STATE.lastSigTime=now;
+        let scrollAllowed=STATE.scrollEnabled&&!STATE.scrollPaused&&!STATE.calibrating&&!calOverlay.classList.contains('is-on');
+        if(STATE.currentGesture==='palm')scrollAllowed=false;
+        let upActive=false,downActive=false;
+        const MAX_PX_SEC_GAZE=950,MAX_PX_SEC_GESTURE=1100;
+        let targetVel=0;
+        if(scrollAllowed){
+          if(STATE.currentGesture==='point_up'){targetVel=-MAX_PX_SEC_GESTURE;upActive=true;}
+          else if(STATE.currentGesture==='point_down'){targetVel=MAX_PX_SEC_GESTURE;downActive=true;}
+          else{
+            const rawY=(typeof STATE.rawTargetY==='number')?STATE.rawTargetY:viewportY;
+            if(typeof STATE.scrollGazeY!=='number')STATE.scrollGazeY=rawY;
+            const sgDt=Math.max(1,Math.min(50,dt)),sgAlpha=1-Math.exp(-sgDt/85);
+            STATE.scrollGazeY+=(rawY-STATE.scrollGazeY)*sgAlpha;
+            const ny=(STATE.scrollGazeY/vh-0.5)*2,DEAD=0.13;
+            if(ny>DEAD){const t=(ny-DEAD)/(1-DEAD);targetVel=t*t*MAX_PX_SEC_GAZE;downActive=true;}
+            else if(ny<-DEAD){const t=(-ny-DEAD)/(1-DEAD);targetVel=-t*t*MAX_PX_SEC_GAZE;upActive=true;}
+          }
+        }
+        scrollTargetVel=targetVel;
+        if(gazeZoneUp)gazeZoneUp.classList.toggle('is-active',upActive);
+        if(gazeZoneDown)gazeZoneDown.classList.toggle('is-active',downActive);
+        if(gazeZoneUp)gazeZoneUp.classList.toggle('is-paused',!scrollAllowed);
+        if(gazeZoneDown)gazeZoneDown.classList.toggle('is-paused',!scrollAllowed);
+      }
+      if(STATE.lastSigTime&&now-STATE.lastSigTime>200)scrollTargetVel=0;
+      const dtG=Math.max(1,Math.min(50,dt));
+      const tauG=Math.abs(scrollTargetVel)>Math.abs(scrollVel)?180:240;
+      const alphaG=1-Math.exp(-dtG/tauG);
+      scrollVel+=(scrollTargetVel-scrollVel)*alphaG;
+      scrollAccumulator+=scrollVel*(dtG/1000);
+      if(Math.abs(scrollAccumulator)>=1){const intDelta=Math.trunc(scrollAccumulator);const scrollEl=document.scrollingElement||document.documentElement;scrollEl.scrollTop+=intDelta;scrollAccumulator-=intDelta;}
+      if(Math.abs(scrollVel)<3&&Math.abs(scrollTargetVel)<3){scrollVel=0;scrollAccumulator=0;}
+      STATE.raf=requestAnimationFrame(loop);
+    }
+    STATE.raf=requestAnimationFrame(loop);
+  }
+
+  async function runCalibration(){
+    if(STATE.active||STATE.calibrating)return;
+    STATE.calibrating=true;
+    try{
+      if(!STATE.stream)STATE.stream=await requestCamera();
+      if(!STATE.faceLandmarker)STATE.faceLandmarker=await loadFaceLandmarker();
+      if(!STATE.handLandmarker){loadHandLandmarker().then(hl=>{STATE.handLandmarker=hl;if(hl)showToast('✋ Manos detectadas — palma=pausa, índice=scroll');});}
+      const ok=await runPointsCalibration();
+      if(!ok){stopBiometric();return;}
+      STATE.active=true;STATE.calibrating=false;
+      if(chip)chip.classList.add('is-on');
+      if(eyeNavBtn)eyeNavBtn.classList.add('active');
+      if(pupilCursor)pupilCursor.classList.add('is-on');
+      if(gazeZoneUp)gazeZoneUp.classList.add('is-on');
+      if(gazeZoneDown)gazeZoneDown.classList.add('is-on');
+      document.documentElement.classList.add('is-biometric-active');
+      document.body.classList.add('is-biometric-active');
+      document.documentElement.style.scrollBehavior='auto';
+      setInputMode('eye');
+      startUnifiedLoop();
+      showPhase('tune');
+    }catch(err){
+      console.warn('[BIOMETRIC] error:',err);
+      if(calStatus)calStatus.textContent='No se pudo activar la cámara: '+(err.message||'permiso denegado');
+      setTimeout(stopBiometric,2400);
+    }
+  }
+
+  function finishCalibration(){
+    saveSettings({sensitivity:STATE.sensitivity,smoothing:STATE.smoothing,scrollEnabled:STATE.scrollEnabled,mapping:STATE.mapping,headBaseline:STATE.headBaseline,headWeight:STATE.headWeight,timestamp:Date.now()});
+    showPhase('done');
+    setTimeout(()=>{hideCal();if(hud)hud.classList.add('is-on');},1500);
+  }
+
+  function stopBiometric(){
+    STATE.active=false;STATE.calibrating=false;
+    if(STATE.raf)cancelAnimationFrame(STATE.raf);
+    if(STATE.stream){STATE.stream.getTracks().forEach(t=>t.stop());STATE.stream=null;}
+    STATE.handLm=null;STATE.handsDetected=false;STATE.currentGesture='idle';
+    STATE.rawTargetY=null;STATE.lastSigTime=0;
+    if(video)video.srcObject=null;
+    if(chip)chip.classList.remove('is-on');
+    if(eyeNavBtn)eyeNavBtn.classList.remove('active');
+    if(pupilCursor)pupilCursor.classList.remove('is-on');
+    if(hud)hud.classList.remove('is-on');
+    if(gazeZoneUp)gazeZoneUp.classList.remove('is-on','is-active','is-paused');
+    if(gazeZoneDown)gazeZoneDown.classList.remove('is-on','is-active','is-paused');
+    hideCal();
+    document.documentElement.classList.remove('is-biometric-active');
+    document.body.classList.remove('is-biometric-active');
+    document.documentElement.style.scrollBehavior='';
+    setInputMode('none');
+    if(inputModeTimer){clearInterval(inputModeTimer);inputModeTimer=0;}
+    if(restartBtn)restartBtn.classList.add('is-on');
+  }
+
+  const RECOMMENDED={sensitivity:0.7,smoothing:0.05,scrollEnabled:true};
+  const tuneRestore=document.querySelector('[data-tune-restore]');
+  const recTags={sens:document.querySelector('[data-rec-tag="sens"]'),smooth:document.querySelector('[data-rec-tag="smooth"]'),scroll:document.querySelector('[data-rec-tag="scroll"]')};
+  const eq=(a,b)=>Math.abs(a-b)<1e-6;
+  function refreshRecTags(){
+    if(recTags.sens)recTags.sens.classList.toggle('is-off',!eq(STATE.sensitivity,RECOMMENDED.sensitivity));
+    if(recTags.smooth)recTags.smooth.classList.toggle('is-off',!eq(STATE.smoothing,RECOMMENDED.smoothing));
+    if(recTags.scroll)recTags.scroll.classList.toggle('is-off',STATE.scrollEnabled!==RECOMMENDED.scrollEnabled);
+  }
+  function syncTuneUI(){
+    if(tuneSens)tuneSens.value=STATE.sensitivity;
+    if(tuneSensVal)tuneSensVal.textContent=STATE.sensitivity.toFixed(1)+'×';
+    if(tuneSmooth)tuneSmooth.value=STATE.smoothing;
+    if(tuneSmoothVal)tuneSmoothVal.textContent=STATE.smoothing.toFixed(2);
+    if(tuneScroll)tuneScroll.value=STATE.scrollEnabled?'1':'0';
+    if(tuneScrollVal)tuneScrollVal.textContent=STATE.scrollEnabled?'Activado':'Apagado';
+    refreshRecTags();
+  }
+  syncTuneUI();
+  if(tuneSens)tuneSens.addEventListener('input',e=>{STATE.sensitivity=parseFloat(e.target.value);if(tuneSensVal)tuneSensVal.textContent=STATE.sensitivity.toFixed(1)+'×';refreshRecTags();});
+  if(tuneSmooth)tuneSmooth.addEventListener('input',e=>{STATE.smoothing=parseFloat(e.target.value);if(tuneSmoothVal)tuneSmoothVal.textContent=STATE.smoothing.toFixed(2);refreshRecTags();});
+  if(tuneScroll)tuneScroll.addEventListener('input',e=>{STATE.scrollEnabled=e.target.value==='1';if(tuneScrollVal)tuneScrollVal.textContent=STATE.scrollEnabled?'Activado':'Apagado';refreshRecTags();});
+  if(tuneRestore)tuneRestore.addEventListener('click',()=>{STATE.sensitivity=RECOMMENDED.sensitivity;STATE.smoothing=RECOMMENDED.smoothing;STATE.scrollEnabled=RECOMMENDED.scrollEnabled;syncTuneUI();showToast('✓ Configuración óptima restaurada');});
+  if(tuneSave)tuneSave.addEventListener('click',finishCalibration);
+  if(calRecalibrate)calRecalibrate.addEventListener('click',()=>{runCalibration();});
+  if(introBioBtn)introBioBtn.addEventListener('click',function(e){e.preventDefault();e.stopImmediatePropagation();showCalibrationFlow();});
+  if(introNormalBtn)introNormalBtn.addEventListener('click',function(){hideIntro();});
+  if(introSkipBtn)introSkipBtn.addEventListener('click',function(){hideIntro();});
+  if(calAccept)calAccept.addEventListener('click',runCalibration);
+  if(calSkip)calSkip.addEventListener('click',()=>{stopBiometric();});
+  if(calCancel)calCancel.addEventListener('click',stopBiometric);
+  if(calCancelPoints)calCancelPoints.addEventListener('click',stopBiometric);
+  if(chip)chip.addEventListener('click',stopBiometric);
+  if(hudClose)hudClose.addEventListener('click',stopBiometric);
+  if(restartBtn)restartBtn.addEventListener('click',()=>{restartBtn.classList.remove('is-on');showCalibrationFlow();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&STATE.active&&!STATE.calibrating)stopBiometric();});
+  if(startBtn)startBtn.addEventListener('click',function(e){e.preventDefault();hideIntro();showPhase('intro');showCal();});
+  if(saved.timestamp)console.log('[BIOMETRIC] Settings previos detectados:',saved);
+</script>
 </body>
 </html>
+
