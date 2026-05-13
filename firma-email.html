@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Firma de Email — VICTOR IA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: #F0EDE8;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      min-height: 100vh; padding: 3rem 1.5rem;
+      gap: 3rem;
+    }
+    .instructions {
+      max-width: 640px; width: 100%;
+      background: #fff;
+      border: 1px solid rgba(14,15,18,0.08);
+      padding: 1.6rem 2rem;
+      font-size: 0.82rem; line-height: 1.7; color: #555;
+    }
+    .instructions h2 { font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: #999; margin-bottom: 0.8rem; }
+    .instructions ol { padding-left: 1.2rem; }
+    .instructions li { margin-bottom: 0.4rem; }
+    .instructions code { background: #f5f5f5; padding: 0.1em 0.4em; font-size: 0.85em; }
+
+    /* ──── FIRMA ──── */
+    .signature-wrapper {
+      max-width: 640px; width: 100%;
+    }
+    .signature-preview-label {
+      font-size: 0.58rem; letter-spacing: 0.28em; text-transform: uppercase; color: #aaa;
+      margin-bottom: 0.8rem;
+    }
+
+    /* La firma en sí — diseñada para ser copiada a Gmail/Outlook */
+    .via-signature {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background: #ffffff;
+      border-left: 2px solid #0E0F12;
+      padding: 1.4rem 1.8rem;
+      max-width: 540px;
+    }
+    .via-sig-name {
+      font-size: 15px; font-weight: 600;
+      color: #0E0F12; letter-spacing: 0.02em;
+      margin-bottom: 2px;
+    }
+    .via-sig-role {
+      font-size: 11px; color: #888; letter-spacing: 0.12em;
+      text-transform: uppercase; margin-bottom: 14px;
+    }
+    .via-sig-divider {
+      width: 24px; height: 1px; background: #0E0F12; opacity: 0.15;
+      margin-bottom: 14px;
+    }
+    .via-sig-brand {
+      font-size: 13px; font-weight: 600;
+      color: #0E0F12; letter-spacing: 0.08em;
+      text-transform: uppercase; margin-bottom: 2px;
+    }
+    .via-sig-tagline {
+      font-size: 11px; color: #999; font-weight: 300;
+      margin-bottom: 16px;
+    }
+    .via-sig-contacts {
+      font-size: 12px; color: #555; line-height: 1.8;
+    }
+    .via-sig-contacts a {
+      color: #0E0F12; text-decoration: none;
+    }
+    .via-sig-contacts a:hover { text-decoration: underline; }
+    .via-sig-separator { color: #ccc; padding: 0 6px; }
+    .via-sig-website {
+      display: inline-block;
+      margin-top: 14px;
+      font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: #999; text-decoration: none; border-bottom: 1px solid #ddd;
+      padding-bottom: 1px;
+    }
+    .via-sig-website:hover { color: #0E0F12; border-color: #0E0F12; }
+
+    .copy-btn {
+      margin-top: 1.2rem;
+      padding: 0.75rem 2rem;
+      background: #0E0F12; color: #F8F7F5;
+      border: none; cursor: pointer;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+      transition: background 0.2s;
+    }
+    .copy-btn:hover { background: #2a2b30; }
+    .copy-btn.copied { background: #3a7d44; }
+
+    .variant-label {
+      font-size: 0.58rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: #aaa; margin: 2rem 0 0.6rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="signature-wrapper">
+    <p class="signature-preview-label">Vista previa · Firma de email VICTOR IA</p>
+
+    <!-- VARIANTE 1: Con nombre personalizado -->
+    <p class="variant-label">Variante A — Víctor (fundador)</p>
+    <div class="via-signature" id="sig-victor">
+      <div class="via-sig-name">Víctor</div>
+      <div class="via-sig-role">Founder &amp; Director</div>
+      <div class="via-sig-divider"></div>
+      <div class="via-sig-brand">VICTOR IA</div>
+      <div class="via-sig-tagline">Inteligencia que trabaja para ti.</div>
+      <div class="via-sig-contacts">
+        <a href="mailto:info@victor-ia.com.mx">info@victor-ia.com.mx</a>
+        <span class="via-sig-separator">·</span>
+        <a href="https://wa.me/5219842353159">+52 984 235 3159</a>
+        <br>
+        Playa del Carmen, Quintana Roo · México
+      </div>
+      <a href="https://victor-ia.xyz" class="via-sig-website" target="_blank">victor-ia.com.mx ↗</a>
+    </div>
+    <button class="copy-btn" onclick="copySig('sig-victor', this)">Copiar firma A</button>
+
+    <!-- VARIANTE 2: Genérica para el equipo -->
+    <p class="variant-label" style="margin-top:2.5rem;">Variante B — Equipo / genérica</p>
+    <div class="via-signature" id="sig-team">
+      <div class="via-sig-name">Equipo VICTOR IA</div>
+      <div class="via-sig-role">Studio de Inteligencia Artificial</div>
+      <div class="via-sig-divider"></div>
+      <div class="via-sig-brand">VICTOR IA</div>
+      <div class="via-sig-tagline">Inteligencia que trabaja para ti.</div>
+      <div class="via-sig-contacts">
+        <a href="mailto:info@victor-ia.com.mx">info@victor-ia.com.mx</a>
+        <span class="via-sig-separator">·</span>
+        <a href="https://wa.me/5219842353159">+52 984 235 3159</a>
+        <br>
+        Playa del Carmen, Quintana Roo · México
+      </div>
+      <a href="https://victor-ia.xyz" class="via-sig-website" target="_blank">victor-ia.com.mx ↗</a>
+    </div>
+    <button class="copy-btn" onclick="copySig('sig-team', this)">Copiar firma B</button>
+
+  </div>
+
+  <div class="instructions">
+    <h2>Cómo instalar en Gmail</h2>
+    <ol>
+      <li>Haz clic en <strong>Copiar firma A</strong> o <strong>B</strong> arriba.</li>
+      <li>En Gmail ve a <strong>Configuración → Ver toda la configuración → General → Firma</strong>.</li>
+      <li>Crea una nueva firma, pega el contenido copiado y guarda.</li>
+      <li>Si los estilos no se ven bien al pegar, selecciona <strong>Pegar sin formato</strong> primero y luego pega el HTML.</li>
+    </ol>
+    <h2 style="margin-top:1.4rem;">Cómo instalar en Outlook</h2>
+    <ol>
+      <li>Haz clic en <strong>Copiar firma A</strong> o <strong>B</strong>.</li>
+      <li>Ve a <strong>Archivo → Opciones → Correo → Firmas</strong>.</li>
+      <li>Crea nueva firma, pega en el editor de firma y guarda.</li>
+    </ol>
+  </div>
+
+  <script>
+  function copySig(id, btn) {
+    var el = document.getElementById(id);
+    var html = el.outerHTML;
+    if (navigator.clipboard && window.ClipboardItem) {
+      var blob = new Blob([html], { type: 'text/html' });
+      var item = new ClipboardItem({ 'text/html': blob });
+      navigator.clipboard.write([item]).then(function() {
+        btn.textContent = '¡Copiado!';
+        btn.classList.add('copied');
+        setTimeout(function() {
+          btn.textContent = btn.textContent.includes('A') ? 'Copiar firma A' : 'Copiar firma B';
+          btn.classList.remove('copied');
+        }, 2200);
+      });
+    } else {
+      var range = document.createRange();
+      range.selectNode(el);
+      window.getSelection().removeAllRanges();
+      window.getSelection().addRange(range);
+      document.execCommand('copy');
+      window.getSelection().removeAllRanges();
+      btn.textContent = '¡Copiado!';
+      btn.classList.add('copied');
+      setTimeout(function() {
+        btn.textContent = btn.id === 'sig-victor' ? 'Copiar firma A' : 'Copiar firma B';
+        btn.classList.remove('copied');
+      }, 2200);
+    }
+  }
+  </script>
+</body>
+</html>

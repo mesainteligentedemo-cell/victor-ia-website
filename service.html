@@ -1,13 +1,30 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es-MX">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title id="page-title">VICTOR IA — Servicio</title>
-  <meta name="description" content="VICTOR IA — Inteligencia que trabaja para ti.">
-  <meta name="theme-color" content="#F8F7F5">
+  <meta id="meta-desc" name="description" content="La agencia de IA en México que construye agentes autónomos, sitios cinematográficos y automatización real. Resultados medibles para hotelería, timeshare e inmobiliario de lujo.">
+  <meta name="theme-color" content="#0E0F12">
   <meta property="og:site_name" content="VICTOR IA">
+  <meta id="og-title" property="og:title" content="VICTOR IA — Inteligencia que trabaja para ti">
+  <meta id="og-desc" property="og:description" content="Construimos inteligencia que trabaja 24/7 para tu empresa. Agentes autónomos con voz, sitios que enamoran y automatización que escala.">
+  <meta id="og-image" property="og:image" content="https://victor-ia.xyz/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta id="og-image-alt" property="og:image:alt" content="VICTOR IA — Inteligencia que trabaja para ti">
+  <meta property="og:locale" content="es_MX">
+  <meta id="og-url" property="og:url" content="https://victor-ia.xyz/service.html">
   <meta name="twitter:card" content="summary_large_image">
+  <meta id="tw-title" name="twitter:title" content="VICTOR IA — Inteligencia que trabaja para ti">
+  <meta id="tw-desc" name="twitter:description" content="Construimos inteligencia que trabaja 24/7 para tu empresa. Agentes autónomos, sitios cinematográficos y automatización real.">
+  <meta id="tw-image" name="twitter:image" content="https://victor-ia.xyz/og-image.png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -18,7 +35,8 @@
       --ink:      #0E0F12;
       --muted:    rgba(14,15,18,0.45);
       --rule:     rgba(14,15,18,0.09);
-      --amber-dk: #CC8800;
+      --amber-dk: #FFAA17;
+      --gold:     #FFAA17;
     }
     html, body {
       height: 100%; overflow: hidden;
@@ -27,7 +45,7 @@
       color: var(--ink); cursor: none;
       -webkit-font-smoothing: antialiased;
     }
-    @media (max-width: 767px) { html, body { overflow: auto; } }
+    @media (max-width: 767px) { html, body { overflow: auto; overscroll-behavior-y: contain; } }
     @media (pointer: coarse) { body { cursor: default; } }
 
     /* ── Marble background ── */
@@ -36,12 +54,30 @@
       background-size: cover;
       background-position: 50% 30%;
       background-repeat: no-repeat;
-      filter: sepia(0.04) brightness(1.02);
+      filter: sepia(0.06) brightness(1.01) contrast(1.05) saturate(0.9);
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
+      will-change: transform;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
     }
+    #svc-video {
+      position: fixed; inset: 0; z-index: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: sepia(0.06) brightness(1.01) contrast(1.05) saturate(0.9);
+      transform: translateZ(0); -webkit-transform: translateZ(0);
+      will-change: transform; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+      opacity: 0; transition: opacity 0.8s ease;
+      pointer-events: none;
+    }
+    #svc-video.playing { opacity: 1; }
 
     /* ── Canvas reveal ── */
     #revealCanvas {
       position: fixed; inset: 0; z-index: 1; pointer-events: none;
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
     }
 
     /* ── Permanent content fog — always readable, regardless of canvas ── */
@@ -74,17 +110,27 @@
     .svc-back {
       display: flex; align-items: center; gap: 0.5rem;
       font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--ink); text-decoration: none; opacity: 0.6; transition: opacity 0.2s;
+      color: var(--ink); text-decoration: none; opacity: 0.85; transition: opacity 0.2s;
     }
     .svc-back:hover { opacity: 1; }
     .svc-back svg { width: 16px; height: 16px; }
+    .svc-back-logo {
+      height: 22px; width: auto; mix-blend-mode: multiply; display: block;
+      opacity: 1;
+      image-rendering: -webkit-optimize-contrast;
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
     .svc-nav-cta {
       font-size: 0.62rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
       color: var(--amber-dk); text-decoration: none;
-      border: 1px solid rgba(204,136,0,0.35); padding: 0.5rem 1.1rem;
+      border: 1px solid rgba(255,170,23,0.35); padding: 0.5rem 1.1rem;
       transition: background 0.25s;
     }
-    .svc-nav-cta:hover { background: rgba(204,136,0,0.08); }
+    .svc-nav-cta:hover { background: rgba(255,170,23,0.08); }
 
     /* ── Main layout ── */
     .svc-main {
@@ -248,10 +294,10 @@
     }
     #svc-loader.hidden { opacity: 0; pointer-events: none; }
     .sl-wordmark {
-      font-family: 'Instrument Serif', Georgia, serif; font-style: italic;
-      font-size: clamp(2rem,5vw,3.8rem); font-weight: 400;
-      letter-spacing: -0.025em; color: var(--ink); line-height: 1;
-      margin-bottom: 2rem; user-select: none;
+      height: clamp(56px,10vw,84px); width: auto;
+      mix-blend-mode: multiply;
+      margin-bottom: 2.2rem; user-select: none; display: block;
+      image-rendering: -webkit-optimize-contrast;
     }
     .sl-track { width: clamp(120px,22vw,200px); height: 1px; background: var(--rule); position: relative; }
     .sl-fill  { position: absolute; left:0; top:0; height:100%; background: var(--ink); width:0%; transition: width 0.06s linear; }
@@ -299,7 +345,101 @@
     }
     @keyframes svc-in { to { opacity:1; transform:translateY(0); } }
     @media (prefers-reduced-motion: reduce) { .svc-content { animation: none; opacity:1; transform:none; } }
+
+    /* ── has-scrub: Módulo 1 (hero) + Módulo 2 (scrub) en flujo normal ── */
+    html.has-scrub, html.has-scrub body { height: auto; overflow-y: auto; overscroll-behavior-y: contain; }
+    /* Módulo 1 ocupa exactamente 1 viewport — el scrub empieza justo debajo */
+    body.has-scrub .svc-main {
+      position: relative !important; inset: auto !important;
+      height: 100svh; z-index: 10;
+      display: grid; grid-template-columns: 1fr;
+      align-items: end;
+      padding: 60px clamp(1.5rem,5vw,3rem) clamp(3rem,8vh,5rem);
+      pointer-events: none;
+    }
+    @media (min-width: 900px) {
+      body.has-scrub .svc-main { grid-template-columns: 1fr 280px; align-items: stretch; gap: 2rem; }
+    }
+    /* nav se adapta al fondo oscuro del Módulo 2 (scrub) */
+    body.has-scrub.nav-on-dark .svc-nav {
+      background: linear-gradient(to bottom, rgba(8,9,13,0.65) 0%, transparent 100%);
+    }
+    body.has-scrub.nav-on-dark .svc-back { color: rgba(248,247,245,0.88); }
+    body.has-scrub.nav-on-dark .svc-back-logo {
+      mix-blend-mode: normal;
+      filter: brightness(0) invert(1);
+    }
+    body.has-scrub.nav-on-dark .svc-nav-cta {
+      color: rgba(255,170,23,0.95);
+      border-color: rgba(255,170,23,0.45);
+    }
+
+    /* ── Módulo 2: scroll-scrub cuadro por cuadro ── */
+    #svc-scrub-zone { display: none; height: 360vh; position: relative; z-index: 15; }
+    body.has-scrub #svc-scrub-zone { display: block; }
+    #svcScrubSticky {
+      position: sticky; top: 0;
+      height: 100svh; overflow: hidden;
+      background: #08090D; z-index: 20;
+    }
+    #svcScrubCanvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    #svcScrubOverlay {
+      position: absolute; inset: 0; z-index: 2; pointer-events: none;
+      background:
+        linear-gradient(to top, rgba(8,9,13,0.78) 0%, rgba(8,9,13,0.32) 38%, transparent 62%),
+        linear-gradient(to bottom, rgba(8,9,13,0.45) 0%, transparent 18%);
+    }
+    #svcScrubText {
+      position: absolute; bottom: clamp(3rem,8vh,6rem);
+      left: clamp(1.5rem,5vw,3.5rem); max-width: 680px;
+    }
+    .svc-scrub-ey {
+      font-size: 0.6rem; letter-spacing: 0.32em; text-transform: uppercase;
+      color: rgba(248,247,245,0.5); display: block; margin-bottom: 1rem;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    .svc-scrub-hl {
+      font-family: 'Instrument Serif', serif; font-weight: 400;
+      font-size: clamp(2.5rem,6.5vw,5.5rem); letter-spacing: -0.03em;
+      line-height: 0.91; color: #F8F7F5; font-optical-sizing: auto;
+      font-style: italic;
+    }
+    #svcScrubPbar {
+      position: absolute; right: clamp(1.5rem,3vw,3rem); top: 50%;
+      transform: translateY(-50%);
+      width: 1px; height: 100px; background: rgba(248,247,245,0.1); z-index: 3;
+    }
+    #svcScrubPbarFill { width: 100%; background: rgba(255,170,23,0.65); height: 0%; transition: height 0.1s linear; }
+    #svcScrubHint {
+      position: absolute; bottom: clamp(1.5rem,3vh,2.5rem);
+      left: 50%; transform: translateX(-50%);
+      font-size: 0.52rem; letter-spacing: 0.28em; text-transform: uppercase;
+      color: rgba(248,247,245,0.3); z-index: 3; white-space: nowrap;
+      animation: svc-hint-pulse 2.5s ease-in-out infinite;
+    }
+    @keyframes svc-hint-pulse { 0%,100%{opacity:0.3} 50%{opacity:0.8} }
+    @media (max-width: 640px) {
+      .svc-scrub-hl { font-size: clamp(2rem,9vw,3.5rem); }
+      #svcScrubPbar { display: none; }
+    }
   </style>
+  <script>
+    /* Bloquea pull-to-refresh (arriba) y elastic bounce (abajo) en iOS Safari */
+    /* Excluye el scroll-scrub-zone para no bloquear el scrub en iOS          */
+    (function(){
+      var _startY = 0;
+      document.addEventListener('touchstart', function(e){ _startY = e.touches[0].pageY; }, { passive: true });
+      document.addEventListener('touchmove', function(e){
+        /* Si el toque viene del scrub-zone, dejar pasar — el scroll es necesario */
+        var scrubZone = document.getElementById('svc-scrub-zone');
+        if (scrubZone && scrubZone.contains(e.target)) return;
+        var dy = e.touches[0].pageY - _startY;
+        var atTop    = window.scrollY <= 0 && dy > 0;
+        var atBottom = (window.scrollY + window.innerHeight) >= document.documentElement.scrollHeight && dy < 0;
+        if(atTop || atBottom) e.preventDefault();
+      }, { passive: false });
+    })();
+  </script>
 </head>
 <body>
 
@@ -307,12 +447,13 @@
 
   <!-- Loader -->
   <div id="svc-loader" role="status" aria-label="Cargando servicio">
-    <p class="sl-wordmark">Victor — IA</p>
+    <img class="sl-wordmark" src="/assets/brand/logo-full.png" alt="VICTOR IA">
     <div class="sl-track" aria-hidden="true"><div class="sl-fill" id="sl-fill"></div></div>
   </div>
 
   <!-- Marble -->
   <div id="svc-bg" aria-hidden="true"></div>
+  <video id="svc-video" autoplay loop muted playsinline preload="metadata"></video>
 
   <!-- Canvas reveal -->
   <canvas id="revealCanvas" aria-hidden="true"></canvas>
@@ -331,12 +472,12 @@
       <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M12 4L6 10L12 16" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
-      <span>VICTOR IA</span>
+      <img src="/assets/brand/logo-full.png" alt="VICTOR IA" class="svc-back-logo">
     </a>
-    <a href="https://meetings.hubspot.com/pablo-solar" class="svc-nav-cta">Diagnóstico gratuito →</a>
+    <a href="/agenda" class="svc-nav-cta">Diagnóstico gratuito →</a>
   </nav>
 
-  <!-- Main -->
+  <!-- Módulo 1 — hero del servicio (fondo mármol, ocupa 1 viewport) -->
   <main class="svc-main" id="svc-main">
     <div class="svc-content">
       <span class="svc-eyebrow" id="svc-num">01</span>
@@ -344,7 +485,7 @@
       <p class="svc-brief" id="svc-brief"></p>
       <div class="svc-desc" id="svc-desc"></div>
       <button class="svc-read-more" id="svc-read-more" type="button">Leer más +</button>
-      <a href="https://meetings.hubspot.com/pablo-solar" class="svc-cta">
+      <a href="/agenda" class="svc-cta">
         <span>Agenda tu diagnóstico gratuito</span>
         <svg viewBox="0 0 20 10" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M0 5H18M14 1L18 5L14 9" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -353,6 +494,21 @@
     </div>
     <div class="svc-sidebar" id="svc-sidebar" aria-label="Todos los servicios"></div>
   </main>
+
+  <!-- Módulo 2 — video cuadro por cuadro (scroll activa los frames) -->
+  <div id="svc-scrub-zone" aria-hidden="true">
+    <div id="svcScrubSticky">
+      <canvas id="svcScrubCanvas"></canvas>
+      <div id="svcScrubOverlay">
+        <div id="svcScrubText">
+          <span class="svc-scrub-ey" id="svcScrubEy"></span>
+          <div class="svc-scrub-hl" id="svcScrubHl"></div>
+        </div>
+        <div id="svcScrubPbar"><div id="svcScrubPbarFill"></div></div>
+        <div id="svcScrubHint">↓ scroll</div>
+      </div>
+    </div>
+  </div>
 
   <!-- Prev/Next -->
   <div class="svc-prevnext" id="svc-prevnext">
@@ -365,31 +521,54 @@
   <div class="svc-dots" id="svc-dots"></div>
 
   <!-- Footer label -->
-  <div class="svc-footer-label">VICTOR IA · Playa del Carmen, México</div>
+  <div class="svc-footer-label">VICTOR IA · Playa del Carmen, México &nbsp;·&nbsp; <a href="/aviso-privacidad.html" style="color:inherit;text-decoration:none;opacity:0.7;">Privacidad</a> &nbsp;·&nbsp; <a href="/terminos-condiciones.html" style="color:inherit;text-decoration:none;opacity:0.7;">Términos</a></div>
 
 <script>
 (function(){
   'use strict';
 
+  var VIDEO_MAP = {
+    '01': 'assets/videos/vid-02-sitiosweb-kling3-4k.mp4',
+    '03': 'assets/videos/vid-07-modelos3d-veo31-4k.mp4',
+    '06': 'assets/videos/vid-05-video-kling3-4k.mp4',
+    '07': 'assets/videos/vid-12-4k.mp4',
+    '08': 'assets/videos/vid-10-4k.mp4',
+    '09': 'assets/videos/vid-01-agentes-kling3-4k.mp4',
+    '10': 'assets/videos/vid-03-automatizacion-veo31-4k.mp4',
+    '12': 'assets/videos/vid-04-intelligence-sd2-4k.mp4',
+    '13': 'assets/videos/vid-11-4k.mp4',
+    '14': 'assets/videos/vid-06-analytics-sd2-4k.mp4',
+    '15': 'assets/videos/vid-08-ciberseguridad-sd2-4k.mp4',
+    '18': 'assets/videos/vid-09-4k.mp4'
+  };
+
   var SVCS = [
-    { id:'01', bg:'assets/svc-bg-01.jpg', title:'Sitios Web Cinematográficos & Apps Interactivas', brief:'Tu presencia digital como declaración de guerra.', desc:'Experiencias digitales de nivel internacional: scroll cinematic, interacciones 3D, animaciones de alto impacto. El tipo de presencia digital que posiciona tu marca como la número uno de tu mercado.\n\nNo es un sitio web — es tu declaración de guerra al mercado. Mientras la competencia tiene páginas genéricas, tú tienes una experiencia que paraliza, convierte y vende.\n\nDiseñamos y desarrollamos desde cero: arquitectura de información, UI/UX, animaciones y rendimiento. Un activo digital que trabaja 24/7.' },
-    { id:'02', bg:'assets/svc-bg-11.jpg', title:'Mini Videojuegos Corporativos', brief:'Gamificación de alto nivel que no se olvida.', desc:'Gamificación de alto nivel para empresas: experiencias interactivas de marca, juegos de capacitación para equipos, herramientas de onboarding gamificadas y activaciones digitales que los clientes no olvidan.\n\nCuando el cliente juega, recuerda. Cuando recuerda, compra. Cuando se divierte, regresa.\n\nDiseñamos cada mecánica de juego alineada a tus objetivos de negocio: retención, capacitación, ventas o fidelización.' },
-    { id:'03', bg:'assets/svc-bg-15.jpg', title:'Modelos 3D de Producto y Arquitectura', brief:'Visualizaciones fotorrealistas que venden antes de construir.', desc:'Visualizaciones tridimensionales fotorrealistas de productos, espacios, desarrollos inmobiliarios y arquitectura. Renders de alto impacto para ventas, marketing y presentaciones corporativas.\n\nVende algo que aún no existe. Cierra proyectos inmobiliarios antes de poner el primer ladrillo. Presenta productos antes de fabricarlos.\n\nEl render correcto no muestra tu producto — muestra el estilo de vida que viene con él.' },
-    { id:'04', bg:'assets/svc-bg-04.jpg', title:'Configuradores 3D Interactivos', brief:'Tu cliente diseña su compra en tiempo real.', desc:'Herramientas que permiten a tus clientes personalizar productos o unidades inmobiliarias en tiempo real desde cualquier dispositivo — elige color, acabado, distribución y ve el resultado al instante.\n\nEl vendedor que nunca duerme. El que convierte la imaginación del cliente en una decisión de compra sin fricción.\n\nIntegrado a tu catálogo y CRM: cada configuración es un lead calificado con preferencias documentadas.' },
-    { id:'05', bg:'assets/svc-bg-08.jpg', title:'UI/UX Inclusivo — Primeros en México', brief:'El mercado que el 99% de tu competencia ignora.', desc:'Diseñamos experiencias digitales que cualquier persona puede usar de forma autónoma — incluyendo personas con discapacidades motrices, visuales, cognitivas o auditivas.\n\nImplementamos WCAG 2.2, estructura ARIA, navegación por teclado, control por voz y reconocimiento de gestos. Subtítulos automáticos y simplicidad cognitiva en cada interfaz.\n\nTu empresa accede a un mercado ignorado por el 99% de tus competidores y cumple con normativas legales de accesibilidad que se están volviendo obligatorias en México.' },
-    { id:'06', bg:'assets/svc-bg-06.jpg', title:'Video y Producción Audiovisual', brief:'Spots, reels y documentales que paralizan el scroll.', desc:'Spots comerciales, reels corporativos, documentales de marca y campañas de contenido producidos con tecnología y talento de primer nivel. Del concepto al producto final listo para cualquier pantalla.\n\nUn video bien hecho no se ve — se siente. Y los que se sienten, detienen el scroll, generan compartidos y venden.\n\nProducción con IA generativa (Runway, LTX Studio, ElevenLabs) combinada con dirección creativa de nivel cine.' },
-    { id:'07', bg:'assets/svc-bg-10.jpg', title:'Avatar Digital Corporativo', brief:'Tu vocero siempre disponible, siempre en punto.', desc:'Tu vocero digital siempre disponible: un representante virtual de tu marca con voz, imagen y conocimiento total de tu empresa — para ventas, soporte, capacitación o presentaciones.\n\nDisponible 24/7, sin vacaciones, sin mal humor, con la consistencia que ningún humano puede garantizar.\n\nPersonalizable con la voz, apariencia e idioma que mejor represente tu marca. Integrado a tu web, app o pantallas corporativas.' },
-    { id:'08', bg:'assets/svc-bg-05.jpg', title:'Upgrade de Branding', brief:'Identidad visual de nivel internacional en tiempo récord.', desc:'Identidad visual renovada: logo, paleta, tipografía, manual de marca y activos digitales rediseñados por nuestro equipo. Del concepto al activo listo para producción.\n\nUna marca fuerte no solo se ve bien — atrae clientes, justifica precios más altos y crea lealtad que la competencia no puede copiar.\n\nUsamos IA generativa para explorar cientos de posibilidades en días, luego refinamos con diseñadores senior.' },
-    { id:'09', bg:'assets/svc-bg-07.jpg', title:'Agentes de IA con Voz y Texto', brief:'El equipo que nunca para de cerrar.', desc:'Asistentes conversacionales para ventas, soporte, RRHH y operaciones disponibles 24/7 en WhatsApp, teléfono y web. Hablan como tu mejor vendedor, conocen tu empresa al 100% y nunca descansan.\n\nMientras tu equipo duerme, el agente califica leads, responde preguntas, agenda citas y hace seguimiento. Todo queda registrado. Todo llega a tu CRM.\n\nNo es un bot genérico — es tu mejor colaborador que nunca pide vacaciones.' },
-    { id:'10', bg:'assets/svc-bg-13.jpg', title:'Automatización de Procesos', brief:'Tu equipo solo hace lo que genera valor real.', desc:'Eliminamos el trabajo manual repetitivo: cotizaciones, reportes, seguimiento de leads, facturación y notificaciones — todo automático. Tu equipo solo hace lo que genera valor.\n\nSi se puede describir como proceso, se puede automatizar. Y si se automatiza, se hace mejor, más rápido y sin errores humanos.\n\nUsamos n8n, Make, Python y APIs para construir flujos que trabajan sin supervisión.' },
-    { id:'11', bg:'assets/svc-bg-12.jpg', title:'IA por Departamento', brief:'Inteligencia en cada área de tu empresa.', desc:'Ventas con agentes de cierre inteligentes. Marketing con generación de contenido. Operaciones con flujos automáticos. Finanzas con predicción. RRHH con screening automatizado.\n\nNo es IA genérica. Es IA entrenada específicamente para los procesos, el lenguaje y los objetivos de cada área de tu empresa.\n\nResultado: cada departamento produce más con el mismo equipo. Los directores toman decisiones con datos reales.' },
-    { id:'12', bg:'assets/svc-bg-02.jpg', title:'Intelligence Architecture Inmobiliaria', brief:'Sistema completo para desarrolladoras, brokerages y timeshare.', desc:'Sistema especializado para desarrolladoras, brokerages y grupos de timeshare: agentes de ventas que califican leads, CRM conectado, reportes automáticos y recorrido virtual de propiedades.\n\nIncluye nuestro Agente de Reactivación de Bases Muertas: contacta miles de prospectos fríos con mensajes personalizados según su historial y entrega solo los leads calientes a tu equipo. Lo que tardaba meses, el agente lo resuelve en días.\n\nDiseñado para Quintana Roo y México. Casos reales en timeshare, hotelería e inmobiliario de lujo.' },
-    { id:'13', bg:'assets/svc-bg-09.jpg', title:'Estrategia Integral 360°', brief:'Un equipo, un proyecto, todos los frentes cubiertos.', desc:'Diagnóstico completo de tu empresa + hoja de ruta de implementación tecnológica + ejecución coordinada de todos los frentes: ventas, marketing, operaciones, datos y marca. Un equipo, un proyecto, un resultado.\n\nNo vendemos módulos sueltos. Construimos el ecosistema tecnológico completo de tu empresa y lo operamos de forma continua.\n\nEl cliente define los objetivos. Nosotros definimos la arquitectura, ejecutamos y medimos cada KPI en tiempo real.' },
-    { id:'14', bg:'assets/svc-bg-03.jpg', title:'Data Analytics & Business Intelligence', brief:'Tus datos dispersos, convertidos en decisiones claras.', desc:'Centralización de datos dispersos en dashboards claros con KPIs en tiempo real. Modelos predictivos de ventas, churn y optimización de inventario.\n\nToma decisiones con datos, no con intuición. La diferencia entre una empresa que crece con precisión y una que supone en reuniones.\n\nConectamos todas tus fuentes de datos, las centralizamos y construimos dashboards ejecutivos que cualquier director puede leer sin ser técnico.' },
-    { id:'15', bg:'assets/svc-bg-14.jpg', title:'Ciberseguridad & IA On-Premise', brief:'Tu información nunca sale de tu red. Punto.', desc:'Auditoría de vulnerabilidades, encriptación de datos, acceso por roles y tecnología que opera 100% dentro del ecosistema de tu empresa.\n\nTu información nunca sale de tu red. Ideal para sectores regulados: salud, legal, financiero, gobierno.\n\nInstalamos modelos de IA (Llama, Mistral, DeepSeek) en tus servidores para que tu equipo tenga inteligencia de primer nivel sin exponer datos sensibles.' },
-    { id:'16', bg:'assets/svc-bg-11.jpg', title:'Integraciones entre Sistemas', brief:'Conectamos todo lo que usas hoy. Sin reemplazar nada.', desc:'Conectamos HubSpot, Salesforce, SAP, Shopify, Stripe, sistemas legacy — prácticamente cualquier software que uses hoy. Sin reemplazar lo que funciona, solo potenciándolo.\n\nLa mayoría de las empresas tiene buenas herramientas pero no se hablan entre sí. Eso es exactamente lo que resolvemos.\n\nUsamos APIs, webhooks y automatizaciones para crear un ecosistema donde todos los sistemas comparten información en tiempo real.' },
-    { id:'17', bg:'assets/svc-bg-09.jpg', title:'Capacitaciones Corporativas', brief:'Forma a tu equipo con IA entrenada en tus procesos.', desc:'Formación de alto impacto para equipos: IA aplicada al negocio, automatización, herramientas digitales.\n\nTambién desarrollamos agentes de capacitación internos entrenados con los manuales, procesos y objeciones de tu empresa — disponibles 24/7. Medimos el avance individual y entregamos reportes a gerentes y directores.\n\nEl agente nunca se cansa de explicar y siempre está disponible cuando el vendedor necesita repasar una objeción antes de una presentación.' },
-    { id:'18', bg:'assets/svc-bg-15.jpg', title:'Consultoría en Transformación Digital', brief:'Diagnóstico, plan y ROI estimado. Sin compromisos.', desc:'Para empresas que necesitan claridad antes de invertir: analizamos tu operación completa y entregamos un plan de transformación tecnológica con prioridades, costos y ROI estimado.\n\nSin compromisos. Sin presión de venta. Solo claridad absoluta sobre qué hacer, en qué orden, cuánto cuesta y qué puedes esperar a cambio.\n\nPerfecto para directores y dueños que saben que necesitan evolucionar pero no saben por dónde empezar.' }
+    /* ── PRESENCIA DIGITAL ── */
+    { id:'01', bg:'assets/svc-bg-01.jpg', title:'Sitios Web de Alto Impacto', brief:'Tu presencia digital que cierra tratos antes de que hablen contigo.', desc:'El sitio correcto no informa — convierte. Construimos experiencias web de nivel internacional que posicionan tu marca como líder desde el primer segundo: scroll cinemático, animaciones que paralizan, arquitectura diseñada para que el visitante tome acción.\n\nMientras la competencia tiene páginas genéricas, tú tienes una experiencia que paraliza, convierte y vende. Cada elemento — tipografía, espaciado, velocidad, mobile — está calibrado para un solo objetivo: que el visitante diga "quiero esto".\n\nEntregamos diseño, desarrollo, SEO técnico y optimización de velocidad. Tu sitio cargando en menos de 2 segundos, con LCP < 2.5s — porque cada segundo de carga vale dinero.' },
+    { id:'02', bg:'assets/svc-bg-16.jpg', title:'Apps & Experiencias Web', brief:'Herramientas digitales que tu equipo realmente usa.', desc:'Apps web, portales internos, dashboards operativos y herramientas a medida que tu equipo adopta porque están diseñadas para fluir — no para instruirse.\n\nCuando la herramienta se adapta al flujo del usuario, la adopción llega sola. Creamos interfaces que eliminan fricción, reducen errores y aceleran la toma de decisiones en cada nivel de tu organización.\n\nDesarrolladas con React o Next.js, con autenticación, roles, notificaciones en tiempo real e integración directa a los sistemas que ya usas.' },
+    { id:'03', bg:'assets/svc-bg-15.jpg', title:'Visualización 3D de Producto', brief:'Vende algo que aún no existe. Cierra antes de construir.', desc:'Renders fotorrealistas y visualizaciones 3D de productos, espacios y desarrollos arquitectónicos que hacen que el cliente imagine la experiencia antes de la entrega.\n\nVende propiedades antes de poner el primer ladrillo. Presenta productos antes de fabricarlos. El render correcto no muestra tu producto — muestra el estilo de vida que viene con él.\n\nUn cliente que ya se visualizó adentro tiene 3× más probabilidad de cerrar. Cada visualización es una inversión en decisiones de compra más rápidas.' },
+    { id:'04', bg:'assets/svc-bg-04.jpg', title:'Configuradores 3D Interactivos', brief:'Tu cliente diseña su compra en tiempo real — y ya no quiere otra.', desc:'Herramientas que permiten a tus clientes personalizar productos, unidades o espacios desde cualquier dispositivo en tiempo real: elige color, acabado, distribución y ve el resultado al instante.\n\nCuando el cliente configura su propia compra, la decisión se vuelve emocional. El vendedor que nunca duerme. El que convierte la imaginación en una decisión de compra sin fricción ni presión.\n\nIntegrado a tu catálogo y CRM: cada configuración es un lead calificado con preferencias documentadas, listo para que tu equipo cierre.' },
+    /* ── INTELIGENCIA ARTIFICIAL ── */
+    { id:'05', bg:'assets/svc-bg-08.jpg', title:'Agentes IA con Voz y Texto', brief:'El equipo que nunca para de cerrar — ni a las 3am.', desc:'Agentes conversacionales con voz y texto que atienden, califican y cierran leads en WhatsApp, web y teléfono — las 24 horas, los 7 días, sin vacaciones ni mal humor.\n\nMientras tu equipo duerme, el agente califica leads, responde preguntas frecuentes, agenda citas y hace seguimiento automático. Todo queda registrado. Todo llega a tu CRM en tiempo real.\n\nEntrenado con el lenguaje, los productos y las objeciones específicas de tu empresa — no es un bot genérico, es tu mejor vendedor que nunca descansa.' },
+    { id:'06', bg:'assets/svc-bg-06.jpg', title:'Automatización de Operaciones', brief:'Tu equipo solo hace lo que genera valor real. El resto, fluye solo.', desc:'Eliminamos el trabajo repetitivo que frena a tu equipo: cotizaciones, seguimiento de leads, reportes, notificaciones, facturación y coordinación — todo en flujos automáticos que trabajan sin supervisión.\n\nSi se puede describir como proceso, se puede automatizar. Y si se automatiza, se hace mejor, más rápido y sin errores humanos. Tu equipo deja de administrar para empezar a cerrar.\n\nConectamos todas las herramientas que ya usas: CRM, WhatsApp, correo, Google Sheets, calendarios y más. Sin reemplazar lo que funciona, solo haciéndolo trabajar junto.' },
+    { id:'07', bg:'assets/svc-bg-10.jpg', title:'IA por Departamento', brief:'Inteligencia específica en cada área. No IA genérica — IA tuya.', desc:'Ventas con agentes de cierre inteligentes. Marketing con generación de contenido automatizada. Operaciones con flujos que no fallan. Finanzas con predicción de ingresos. RRHH con screening y onboarding automático.\n\nNo es IA genérica instalada en tu empresa — es inteligencia entrenada con los procesos, el vocabulario y los objetivos específicos de cada área. Tu empresa con IA que sabe lo que hace tu empresa.\n\nResultado: cada departamento produce más con el mismo equipo. Los directores toman decisiones con datos reales, no con intuición en reuniones.' },
+    { id:'08', bg:'assets/svc-bg-05.jpg', title:'CRM & Pipeline Inteligente', brief:'Tu base de leads fríos reactivada en 72h.', desc:'CRM conectado e inteligente con pipeline visual, automatización de seguimiento y un agente de reactivación que contacta tu base dormida con mensajes personalizados — y entrega solo los leads calientes a tu equipo.\n\nMiles de prospectos que dejaron de responder no están perdidos. Están esperando el mensaje correcto en el momento correcto. Nuestro Agente de Reactivación lo hace en escala, de forma automática y sin costo marginal por contacto.\n\nDiseñado para timeshare, hotelería, inmobiliario y cualquier operación con alto volumen de leads. Closing ratio que se mide en semanas, no en trimestres.' },
+    /* ── CONTENIDO & MEDIOS ── */
+    { id:'09', bg:'assets/svc-bg-07.jpg', title:'Video & Producción Cinematográfica', brief:'Spots y reels de nivel broadcast que detienen el scroll.', desc:'Producción audiovisual de primer nivel: spots comerciales, reels de marca, documentales corporativos y campañas de contenido — del concepto al producto final listo para cualquier pantalla y plataforma.\n\nUn video bien hecho no se ve — se siente. Y los que se sienten, paran el scroll, generan compartidos y venden. Combinamos dirección creativa de nivel cine con IA generativa para producir en tiempos y costos imposibles para una productora tradicional.\n\nEntregamos piezas calibradas para cada formato: reel 9:16 para redes, spot 16:9 para broadcast, bumper 6s para pre-roll y versión horizontal para OOH digital.' },
+    { id:'10', bg:'assets/svc-bg-13.jpg', title:'Avatar Digital Corporativo', brief:'Tu vocero siempre disponible, siempre en punto, sin costo variable.', desc:'Un representante digital de tu marca — con voz, imagen y conocimiento completo de tu empresa — disponible para ventas, soporte, capacitación o presentaciones ejecutivas las 24 horas.\n\nSin vacaciones, sin mal humor, con la consistencia que ningún humano puede garantizar a escala. El mismo mensaje, el mismo tono, la misma precisión — cada vez.\n\nPersonalizable con la voz, apariencia e idioma que mejor represente tu marca. Integrado a tu web, app, pantallas corporativas o videollamadas automatizadas.' },
+    { id:'11', bg:'assets/svc-bg-12.jpg', title:'Videojuegos & Gamificación', brief:'Cuando el cliente juega, recuerda. Cuando recuerda, compra.', desc:'Experiencias gamificadas para empresas: activaciones digitales de marca, herramientas de capacitación interactivas, onboarding gamificado para equipos de ventas y mecánicas de loyalty que los clientes no olvidan.\n\nLa neurociencia lo confirma: el aprendizaje y el recuerdo mejoran hasta un 40% cuando hay juego de por medio. Diseñamos cada mecánica alineada a tus KPIs: retención, capacitación, ventas o fidelización.\n\nDesarrollado en tecnología web — sin instalar nada, funciona en cualquier dispositivo, integrado a tu CRM o LMS.' },
+    /* ── BRANDING & IDENTIDAD ── */
+    { id:'12', bg:'assets/svc-bg-02.jpg', title:'Branding & Identidad Digital', brief:'Una marca fuerte justifica precios más altos. Punto.', desc:'Identidad visual de nivel internacional: logo, paleta, tipografía, manual de marca y todos los activos digitales necesarios para que tu empresa compita en mercados premium.\n\nUna marca fuerte no solo se ve bien — atrae mejores clientes, justifica precios más altos y crea lealtad que la competencia no puede copiar con publicidad. El branding correcto es la inversión más rentable que hace una empresa en crecimiento.\n\nUsamos IA generativa para explorar cientos de posibilidades creativas en días y refinamos con diseño senior. Entregamos brandbook completo listo para producción en cualquier medio.' },
+    { id:'13', bg:'assets/svc-bg-09.jpg', title:'UI/UX de Conversión', brief:'El diseño que hace que el visitante tome acción — sin pensarlo.', desc:'Diseño de interfaces digitales optimizadas para convertir: flujos de usuario calibrados, jerarquía visual que guía sin instruir, y experiencias accesibles que cualquier persona puede usar de forma autónoma.\n\nImplementamos WCAG 2.2, estructura ARIA y navegación accesible — incluyendo personas con discapacidades motrices, visuales, cognitivas o auditivas. Tu empresa accede a un mercado que el 99% de tus competidores ignora.\n\nCada decisión de diseño está justificada con datos de comportamiento del usuario. Entregamos prototipos testeados, no suposiciones creativas.' },
+    /* ── DATOS & ANALYTICS ── */
+    { id:'14', bg:'assets/svc-bg-03.jpg', title:'Data Analytics & Dashboards', brief:'Tus datos dispersos, convertidos en decisiones claras hoy.', desc:'Centralizamos todas las fuentes de datos de tu empresa y las convertimos en dashboards ejecutivos que cualquier director lee sin ser técnico — con KPIs en tiempo real, alertas automáticas y visualizaciones que cuentan la historia completa.\n\nToma decisiones con datos, no con intuición. La diferencia entre una empresa que crece con precisión y una que supone en reuniones cada semana.\n\nConectamos CRM, ERP, plataformas de marketing, sistemas de reservas, e-commerce y cualquier fuente relevante. Construido sobre herramientas open source o las que ya tienes — sin costos de licencia innecesarios.' },
+    { id:'15', bg:'assets/svc-bg-14.jpg', title:'Business Intelligence Ejecutivo', brief:'Lo que va a pasar en tu negocio — antes de que pase.', desc:'Modelos predictivos de ventas, churn, demanda y optimización de inventario. BI de nivel enterprise disponible para cualquier empresa que tenga datos históricos y quiera usarlos para crecer con precisión.\n\nSaber lo que va a pasar no es magia — es matemática aplicada a los patrones de tu empresa. Cada modelo es entrenado con tu historia y calibrado para tu sector.\n\nForecast de ocupación para hotelería, predicción de rescisión para timeshare, velocidad de cierre para inmobiliario, rotación de inventario para retail. Reportes automáticos listos para el consejo.' },
+    /* ── INFRAESTRUCTURA & ESTRATEGIA ── */
+    { id:'16', bg:'assets/svc-bg-11.jpg', title:'Integraciones entre Sistemas', brief:'Todo lo que usas hoy, hablándose. Sin reemplazar nada.', desc:'Conectamos CRMs, ERPs, plataformas de e-commerce, sistemas de pago, calendarios y cualquier herramienta que ya uses hoy — sin reemplazar lo que funciona, solo haciéndolo trabajar junto como un ecosistema coherente.\n\nLa mayoría de las empresas tiene buenas herramientas pero no se hablan entre sí. Eso crea trabajo manual, errores y decisiones tardías. Eso es exactamente lo que resolvemos.\n\nConstruimos el puente entre todos tus sistemas para que compartan información en tiempo real, sin fricción, sin intervención manual y sin que nadie tenga que actualizarlo dos veces.' },
+    { id:'17', bg:'assets/svc-bg-17.jpg', title:'Ciberseguridad & IA On-Premise', brief:'Tu información nunca sale de tu red. Ni un solo bit.', desc:'Auditoría de vulnerabilidades, encriptación de datos, acceso por roles y modelos de IA desplegados 100% dentro del ecosistema de tu empresa — sin enviar información a servicios externos.\n\nTu información nunca sale de tu red. Ideal para sectores regulados donde los datos son el activo más valioso: salud, legal, financiero, gobierno y cualquier empresa que no puede permitirse una fuga.\n\nDesplegamos modelos de lenguaje e inteligencia de primer nivel directamente en tus servidores. Tu equipo tiene todo el poder de la IA moderna sin exponer ni un solo dato sensible.' },
+    { id:'18', bg:'assets/svc-bg-18.jpg', title:'Capacitación & Transformación Digital', brief:'Tu equipo listo para operar la IA que ya construimos.', desc:'Formación de alto impacto para equipos y directivos: IA aplicada al negocio, automatización práctica, herramientas digitales y cambio de mentalidad. No teoría — casos reales de tu industria con resultados medibles.\n\nTambién construimos agentes de capacitación internos entrenados con los manuales, procesos y objeciones de tu empresa. Disponibles 24/7, miden el avance individual y entregan reportes automáticos a gerentes.\n\nPara empresas que necesitan claridad antes de actuar: entregamos diagnóstico completo, plan de transformación con prioridades, costos y ROI estimado. Sin compromisos. Solo claridad absoluta.' },
+    /* ── CONTENIDO & MEDIOS ── */
+    { id:'19', bg:'assets/svc-bg-19.png', bgV:'assets/svc-bg-19-v.png', title:'Automatización de Redes Sociales', brief:'Tu marca publicando contenido inteligente todos los días — sin que nadie lo opere.', desc:'Las redes sociales que no publican todos los días no existen para el algoritmo. La inconsistencia no genera comunidad — la destruye. La mayoría de los negocios sabe que necesita estar presente, pero la operación del día a día siempre gana la batalla por el tiempo.\n\nConfiguramos un sistema completo de automatización editorial: calendario de contenido generado por IA, publicación automática en Instagram, Facebook, TikTok, LinkedIn y WhatsApp, con imágenes, copies y hashtags calibrados para cada plataforma y cada audiencia — sin intervención humana diaria.\n\nMonitoreo de métricas, ajuste automático de frecuencia según el engagement real y reportes semanales directos a tu teléfono. Tu marca siempre activa, siempre coherente — en temporada alta, en vacaciones, en lanzamiento o en crisis.' }
   ];
 
   /* ── Routing ── */
@@ -398,10 +577,56 @@
   var idx = Math.max(0, Math.min(SVCS.length - 1, parseInt(s, 10) - 1));
   var svc = SVCS[idx];
 
+  /* ── Meta tags dinámicos por servicio ── */
+  var BASE = 'https://victor-ia.xyz';
+  var ogImg = BASE + '/assets/og/og-' + svc.id + '.jpg';
+  var pageTitle = 'VICTOR IA — ' + svc.title;
+  var pageDesc = svc.brief + ' ' + svc.desc.split('\n\n')[0];
+  var pageUrl  = BASE + '/service.html?s=' + svc.id;
+  document.title = pageTitle;
+  document.getElementById('page-title').textContent = pageTitle;
+  document.getElementById('meta-desc').setAttribute('content', pageDesc);
+  document.getElementById('og-title').setAttribute('content', pageTitle);
+  document.getElementById('og-desc').setAttribute('content', pageDesc);
+  document.getElementById('og-image').setAttribute('content', ogImg);
+  document.getElementById('og-image-alt').setAttribute('content', pageTitle);
+  document.getElementById('og-url').setAttribute('content', pageUrl);
+  document.getElementById('tw-title').setAttribute('content', pageTitle);
+  document.getElementById('tw-desc').setAttribute('content', pageDesc);
+  document.getElementById('tw-image').setAttribute('content', ogImg);
+
+  /* ── JSON-LD dinámico por servicio ── */
+  var ldScript = document.createElement('script');
+  ldScript.type = 'application/ld+json';
+  ldScript.text = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": pageUrl + "#service",
+    "name": svc.title,
+    "description": svc.brief + ' ' + svc.desc.split('\n\n')[0],
+    "url": pageUrl,
+    "provider": {
+      "@type": "Organization",
+      "@id": "https://victor-ia.com.mx/#organization",
+      "name": "VICTOR IA",
+      "url": "https://victor-ia.com.mx"
+    },
+    "areaServed": "México",
+    "serviceType": "Inteligencia Artificial"
+  });
+  document.head.appendChild(ldScript);
+
   /* ── Populate ── */
-  document.title = 'VICTOR IA — ' + svc.title;
-  document.getElementById('page-title').textContent = 'VICTOR IA — ' + svc.title;
-  document.getElementById('svc-bg').style.backgroundImage = 'url(' + svc.bg + ')';
+  var isMobilePortrait = window.innerWidth <= 640 && window.innerHeight > window.innerWidth;
+  var bgSrc = (isMobilePortrait && svc.bgV) ? svc.bgV : svc.bg;
+  document.getElementById('svc-bg').style.backgroundImage = 'url(' + bgSrc + ')';
+  var videoEl = document.getElementById('svc-video');
+  var vidSrc = VIDEO_MAP[svc.id];
+  if (vidSrc) {
+    videoEl.src = vidSrc;
+    videoEl.load();
+    videoEl.addEventListener('playing', function() { videoEl.classList.add('playing'); }, { once: true });
+  }
   document.getElementById('svc-num').textContent = svc.id;
   document.getElementById('svc-title').textContent = svc.title;
   document.getElementById('svc-brief').textContent = svc.brief;
@@ -500,7 +725,7 @@
   (function(){
     /* ── Console egg ── */
     console.log('%c V I C T O R  —  I A ', 'background:#FFAA17;color:#0E0F12;font-size:16px;font-weight:700;padding:8px 20px;font-family:serif;letter-spacing:0.2em');
-    console.log('%chello@victor-ia.com.mx  ·  victor-ia.com.mx', 'color:#CC8800;font-size:11px;font-family:monospace');
+    console.log('%cinfo@victor-ia.com.mx  ·  victor-ia.com.mx', 'color:#CC8800;font-size:11px;font-family:monospace');
 
     /* ── Loader ── */
     var slFill   = document.getElementById('sl-fill');
@@ -591,5 +816,134 @@
     });
   })();
   </script>
+
+  <script>
+  /* ── Service scroll-scrub — módulo idéntico al home, responsive ── */
+  (function(){
+    var SVC_FRAMES = {
+      '01':193,'03':192,'06':193,'07':200,'08':180,
+      '09':193,'10':192,'12':193,'13':200,'14':193,'15':193,'18':200
+    };
+    var SVC_HL = {
+      '01':'Tu declaración<br><em>de guerra.</em>',
+      '03':'Vende lo que<br><em>aún no existe.</em>',
+      '06':'Videos que<br><em>paralizan el scroll.</em>',
+      '07':'Tu vocero<br><em>nunca descansa.</em>',
+      '08':'Identidad<br><em>de nivel mundial.</em>',
+      '09':'El equipo<br><em>que nunca para.</em>',
+      '10':'Procesos que<br><em>trabajan solos.</em>',
+      '12':'Inteligencia<br><em>para desarrolladoras.</em>',
+      '13':'Un equipo,<br><em>todos los frentes.</em>',
+      '14':'Datos que<br><em>dictan decisiones.</em>',
+      '15':'Tu información<br><em>nunca sale de tu red.</em>',
+      '18':'Claridad<br><em>antes de invertir.</em>'
+    };
+
+    var s = (new URLSearchParams(window.location.search).get('s') || '01').padStart(2,'0');
+    var nf = SVC_FRAMES[s];
+    if (!nf) return;
+
+    /* Activar modo scrollable — clase en html + body */
+    document.documentElement.classList.add('has-scrub');
+    document.body.classList.add('has-scrub');
+
+    var zone   = document.getElementById('svc-scrub-zone');
+    var canvas = document.getElementById('svcScrubCanvas');
+    var pbarFill = document.getElementById('svcScrubPbarFill');
+    if (!zone || !canvas) return;
+
+    /* Texto overlay */
+    var eyEl = document.getElementById('svcScrubEy');
+    var hlEl = document.getElementById('svcScrubHl');
+    if (eyEl) eyEl.textContent = '/ ' + s + ' · VICTOR IA';
+    if (hlEl) hlEl.innerHTML = SVC_HL[s] || '';
+
+    var ctx  = canvas.getContext('2d', {alpha: false});
+    var dir  = 'assets/frames-s' + s;
+    var imgs = new Array(nf);
+    var loaded = 0, sLast = -1;
+
+    function resize() {
+      var w = canvas.offsetWidth  || window.innerWidth;
+      var h = canvas.offsetHeight || window.innerHeight;
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width  = Math.round(w * dpr);
+      canvas.height = Math.round(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      if (sLast >= 0 && imgs[sLast]) drawCover(imgs[sLast]);
+    }
+
+    function drawCover(img) {
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      var cw = canvas.width / dpr, ch = canvas.height / dpr;
+      var iw = img.naturalWidth || img.width, ih = img.naturalHeight || img.height;
+      if (!iw || !ih) return;
+      var ratio = Math.max(cw / iw, ch / ih);
+      var w = iw * ratio, h = ih * ratio;
+      ctx.fillStyle = '#08090D';
+      ctx.fillRect(0, 0, cw, ch);
+      ctx.drawImage(img, (cw - w) / 2, (ch - h) / 2, w, h);
+    }
+
+    function drawFrame(idx) {
+      idx = Math.max(0, Math.min(nf - 1, idx));
+      if (idx === sLast) return;
+      var img = imgs[idx];
+      if (img && img.complete && img.naturalWidth) {
+        drawCover(img); sLast = idx;
+      } else {
+        for (var d = 1; d < 20; d++) {
+          if (imgs[idx - d] && imgs[idx - d].complete) { drawCover(imgs[idx - d]); sLast = idx - d; break; }
+          if (imgs[idx + d] && imgs[idx + d].complete) { drawCover(imgs[idx + d]); sLast = idx + d; break; }
+        }
+      }
+    }
+
+    requestAnimationFrame(resize);
+    window.addEventListener('resize', function(){ clearTimeout(resize._t); resize._t = setTimeout(resize, 100); });
+
+    /* Carga progresiva — primeros 20 frames con alta prioridad */
+    var firstDrawn = false;
+    for (var i = 0; i < nf; i++) {
+      (function(idx){
+        var img = new Image();
+        if (idx < 20) img.fetchPriority = 'high';
+        img.src = dir + '/frame-' + String(idx + 1).padStart(4, '0') + '.webp';
+        img.onload = function(){
+          imgs[idx] = img; ++loaded;
+          if (!firstDrawn && idx === 0) {
+            firstDrawn = true;
+            requestAnimationFrame(function(){ resize(); drawFrame(0); });
+          }
+        };
+      })(i);
+    }
+
+    /* Nav oscuro mientras el scrub esté en pantalla */
+    document.body.classList.add('nav-on-dark');
+    function updateNavDark(){
+      var r = zone.getBoundingClientRect();
+      document.body.classList.toggle('nav-on-dark', r.bottom > 0 && r.top < window.innerHeight);
+    }
+
+    /* Scroll handler con rAF + progress bar */
+    var rafPending = false, targetIdx = 0;
+    window.addEventListener('scroll', function(){
+      var rect  = zone.getBoundingClientRect();
+      var track = zone.offsetHeight - window.innerHeight;
+      if (track <= 0) return;
+      var progress = Math.max(0, Math.min(1, -rect.top / track));
+      targetIdx = Math.floor(progress * nf);
+      if (pbarFill) pbarFill.style.height = (progress * 100) + '%';
+      updateNavDark();
+      if (!rafPending) {
+        rafPending = true;
+        requestAnimationFrame(function(){ drawFrame(targetIdx); rafPending = false; });
+      }
+    }, { passive: true });
+  })();
+  </script>
+
+  <script src="https://victor-ia-tracker.vercel.app/widget/embed.js" data-agent-id="agent_5701kr0h5gg6eetb69tv6c5hwfj1"></script>
 </body>
 </html>

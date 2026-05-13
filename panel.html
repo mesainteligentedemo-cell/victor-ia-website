@@ -1,0 +1,640 @@
+﻿<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VICTOR IA — Panel de Control</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:     #070809;
+      --surface:#0E0F12;
+      --surf2:  #141518;
+      --gold:   #B8960C;
+      --gold2:  rgba(184,150,12,0.12);
+      --rule:   rgba(255,255,255,0.07);
+      --muted:  rgba(255,255,255,0.38);
+      --text:   rgba(255,255,255,0.88);
+      --dim:    rgba(255,255,255,0.52);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── BARRA PROGRESO ── */
+    #prog { position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--gold),#e5c84a);z-index:9999;pointer-events:none;transition:width .08s linear; }
+
+    /* ── SEARCH BAR ── */
+    .search-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7,8,9,0.92);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--rule);
+      padding: .6rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .search-wrap input {
+      flex: 1;
+      background: var(--surf2);
+      border: 1px solid var(--rule);
+      color: var(--text);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: .8rem;
+      padding: .5rem 1rem;
+      border-radius: 0;
+      outline: none;
+      max-width: 400px;
+    }
+    .search-wrap input::placeholder { color: var(--muted); }
+    .search-wrap input:focus { border-color: var(--gold); }
+    .search-label { font-size: .58rem; letter-spacing: .28em; text-transform: uppercase; color: var(--muted); }
+    .search-count { font-size: .68rem; color: var(--gold); margin-left: auto; }
+
+    /* ── HEADER ── */
+    header {
+      padding: 4rem 2rem 2.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      border-bottom: 1px solid var(--rule);
+    }
+    .eyebrow {
+      font-size: .56rem;
+      letter-spacing: .38em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+      margin-bottom: 1.2rem;
+    }
+    .eyebrow::before { content:''; display:block; width:2rem; height:1px; background:currentColor; }
+    h1 {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: .7rem;
+    }
+    h1 em { font-style: italic; color: var(--gold); }
+    .header-sub {
+      font-size: .78rem;
+      color: var(--dim);
+      line-height: 1.7;
+      max-width: 560px;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-top: .5rem;
+    }
+    .live-dot { display:inline-block; width:6px; height:6px; background:#22c55e; border-radius:50%; animation: livePulse 1.8s ease-in-out infinite; }
+    @keyframes livePulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.7)} }
+    .stat-pill {
+      font-size: .56rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      padding: .25rem .75rem;
+      border: 1px solid var(--rule);
+      color: var(--dim);
+    }
+
+    /* ── MAIN LAYOUT ── */
+    main { max-width: 1200px; margin: 0 auto; padding: 0 2rem 5rem; }
+
+    /* ── CATEGORY HEADER ── */
+    .cat {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin: 3.5rem 0 1.5rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .cat-num {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: 2.2rem;
+      font-weight: 300;
+      opacity: .12;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .cat-info { flex: 1; }
+    .cat-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.1rem;
+      font-weight: 300;
+      letter-spacing: .02em;
+    }
+    .cat-desc { font-size: .62rem; color: var(--muted); margin-top: .2rem; letter-spacing: .06em; }
+    .cat-badge {
+      font-size: .48rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      padding: .22rem .65rem;
+      border: 1px solid currentColor;
+    }
+
+    /* ── GRID ── */
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1rem; }
+    .grid-wide { grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); }
+
+    /* ── CARD ── */
+    .card {
+      display: block;
+      text-decoration: none;
+      color: var(--text);
+      background: var(--surface);
+      border: 1px solid var(--rule);
+      padding: 1.75rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color .25s, transform .25s, background .25s;
+    }
+    .card:hover { border-color: var(--gold); transform: translateY(-2px); background: var(--surf2); }
+    .card:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+    .card.highlighted { border-color: rgba(184,150,12,.3); background: var(--gold2); }
+    .card.private { border-color: rgba(255,255,255,.12); }
+    .card-num {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: 2.4rem;
+      font-weight: 300;
+      opacity: .07;
+      position: absolute;
+      top: 1rem;
+      right: 1.25rem;
+      line-height: 1;
+    }
+    .card-badges {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      flex-wrap: wrap;
+      margin-bottom: .8rem;
+    }
+    .badge {
+      font-size: .46rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      padding: .18rem .55rem;
+      border: 1px solid currentColor;
+    }
+    .b-gold   { color: var(--gold);    border-color: rgba(184,150,12,.4); background: rgba(184,150,12,.06); }
+    .b-blue   { color: #3b82f6;        border-color: rgba(59,130,246,.35); background: rgba(59,130,246,.05); }
+    .b-green  { color: #22c55e;        border-color: rgba(34,197,94,.35);  background: rgba(34,197,94,.05); }
+    .b-red    { color: #ef4444;        border-color: rgba(239,68,68,.35);  background: rgba(239,68,68,.05); }
+    .b-purple { color: #a855f7;        border-color: rgba(168,85,247,.35); background: rgba(168,85,247,.05); }
+    .b-teal   { color: #14b8a6;        border-color: rgba(20,184,166,.35); background: rgba(20,184,166,.05); }
+    .b-gray   { color: var(--dim);     border-color: rgba(255,255,255,.2); background: rgba(255,255,255,.04); }
+    .card-name {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.3rem;
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: .35rem;
+    }
+    .card-name em { font-style: italic; color: var(--gold); }
+    .card-spec { font-size: .66rem; color: var(--dim); line-height: 1.6; margin-bottom: 1.1rem; }
+    .card-url {
+      font-size: .58rem;
+      color: var(--gold);
+      letter-spacing: .04em;
+      word-break: break-all;
+      border-top: 1px solid var(--rule);
+      padding-top: .85rem;
+      margin-top: auto;
+    }
+    .card-arrow {
+      position: absolute;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      font-size: 1rem;
+      opacity: .12;
+      transition: opacity .2s, transform .2s;
+    }
+    .card:hover .card-arrow { opacity: .55; transform: translate(2px,-2px); }
+    .card-status {
+      position: absolute;
+      top: 1.25rem;
+      left: 1.75rem;
+      width: 5px; height: 5px;
+      border-radius: 50%;
+    }
+    .status-live    { background: #22c55e; box-shadow: 0 0 6px #22c55e88; }
+    .status-private { background: var(--gold); box-shadow: 0 0 6px rgba(184,150,12,.5); }
+    .status-system  { background: #14b8a6; box-shadow: 0 0 6px #14b8a688; }
+
+    /* ── INCLUSIVE GRID (smaller cards) ── */
+    .grid-inclusive { grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); }
+
+    /* ── FOOTER ── */
+    footer {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem;
+      border-top: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    footer p { font-size: .58rem; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; }
+    .footer-date { font-size: .58rem; color: var(--muted); letter-spacing: .08em; }
+
+    /* ── HIDDEN on search ── */
+    .card.hidden { display: none; }
+    .cat.hidden-cat { display: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      header, main { padding-left: 1.25rem; padding-right: 1.25rem; }
+      .search-wrap { padding: .5rem 1.25rem; }
+      .grid, .grid-wide, .grid-inclusive { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="prog"></div>
+
+<!-- SEARCH BAR -->
+<div class="search-wrap" role="search">
+  <span class="search-label">Buscar</span>
+  <input type="search" id="q" placeholder="Nombre, URL, categoría…" aria-label="Buscar proyectos" autocomplete="off">
+  <span class="search-count" id="cnt" aria-live="polite"></span>
+</div>
+
+<!-- HEADER -->
+<header>
+  <p class="eyebrow">VICTOR IA · INFLUENCE IA S.A. DE C.V. · Panel de Control 2026</p>
+  <h1>Todos los <em>proyectos.</em></h1>
+  <div class="header-sub">
+    <span><span class="live-dot"></span> &nbsp;Live en producción</span>
+    <span class="stat-pill">3 sitios principales</span>
+    <span class="stat-pill">10 webs inclusivas</span>
+    <span class="stat-pill">1 tracker / sistema</span>
+    <span class="stat-pill">2 documentos privados</span>
+  </div>
+</header>
+
+<main>
+
+  <!-- ═══════════════════════════════════════════
+       CAT 1 — SITIOS PRINCIPALES
+  ═══════════════════════════════════════════ -->
+  <div class="cat" data-cat="principales">
+    <span class="cat-num">01</span>
+    <div class="cat-info">
+      <p class="cat-title">Sitios principales</p>
+      <p class="cat-desc">Propiedades digitales activas de la marca VICTOR IA · INFLUENCE IA</p>
+    </div>
+    <span class="badge b-gold">Producción</span>
+  </div>
+
+  <div class="grid grid-wide">
+
+    <a href="https://victor-ia.xyz" target="_blank" class="card highlighted"
+       data-search="victor ia web 4.0 cinematográfico principal vercel">
+      <span class="card-status status-live" title="Live"></span>
+      <span class="card-num">01</span>
+      <div class="card-badges">
+        <span class="badge b-gold">PRINCIPAL</span>
+        <span class="badge b-blue">WEB 4.0</span>
+        <span class="badge b-green">LIVE</span>
+      </div>
+      <p class="card-name">VICTOR IA<br><em>Sitio principal</em></p>
+      <p class="card-spec">Sitio cinematográfico Web 4.0 · Canvas scroll-scrub 481 frames · 18 servicios · Agente IA con voz ElevenLabs · PWA · WCAG · Vercel</p>
+      <p class="card-url">victor-ia.xyz</p>
+      <span class="card-arrow">↗</span>
+    </a>
+
+    <a href="https://victor-ia.com.mx" target="_blank" class="card highlighted"
+       data-search="victor ia com mx hubspot capacitación ia neurociencia dominio propio">
+      <span class="card-status status-live" title="Live"></span>
+      <span class="card-num">02</span>
+      <div class="card-badges">
+        <span class="badge b-gold">DOMINIO PROPIO</span>
+        <span class="badge b-purple">HUBSPOT</span>
+        <span class="badge b-green">LIVE</span>
+      </div>
+      <p class="card-name">victor-ia.com.mx<br><em>Capacitación IA</em></p>
+      <p class="card-spec">Sitio HubSpot monolítico · Capacitación IA + Neurociencia · Spline 3D · MediaPipe biométrico · Cursor magnético · Concierge spider-web · B2B México</p>
+      <p class="card-url">victor-ia.com.mx</p>
+      <span class="card-arrow">↗</span>
+    </a>
+
+    <a href="https://influence-ia-awards-2027.vercel.app" target="_blank" class="card"
+       data-search="influence ia awards 2027 next.js vercel">
+      <span class="card-status status-live" title="Live"></span>
+      <span class="card-num">03</span>
+      <div class="card-badges">
+        <span class="badge b-purple">NEXT.JS 15</span>
+        <span class="badge b-blue">VERCEL</span>
+        <span class="badge b-green">LIVE</span>
+      </div>
+      <p class="card-name">INFLUENCE IA<br><em>Awards 2027</em></p>
+      <p class="card-spec">Plataforma de premios IA · Next.js 15 · Kinetic typography · Video header del ojo · Luxury editorial</p>
+      <p class="card-url">influence-ia-awards-2027.vercel.app</p>
+      <span class="card-arrow">↗</span>
+    </a>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       CAT 2 — SISTEMA / TRACKER
+  ═══════════════════════════════════════════ -->
+  <div class="cat" data-cat="sistema">
+    <span class="cat-num">02</span>
+    <div class="cat-info">
+      <p class="cat-title">Sistema &amp; Tracker</p>
+      <p class="cat-desc">Infraestructura de agentes, widgets y automatización</p>
+    </div>
+    <span class="badge b-teal">Sistema</span>
+  </div>
+
+  <div class="grid grid-wide">
+
+    <a href="https://victor-ia-tracker.vercel.app" target="_blank" class="card"
+       data-search="tracker chatbot widget elevenlabs agente voz embed sistema">
+      <span class="card-status status-system" title="Sistema activo"></span>
+      <span class="card-num">T</span>
+      <div class="card-badges">
+        <span class="badge b-teal">TRACKER</span>
+        <span class="badge b-teal">ELEVENLABS</span>
+        <span class="badge b-green">LIVE</span>
+      </div>
+      <p class="card-name">Victor IA<br><em>Tracker &amp; Widget</em></p>
+      <p class="card-spec">Host del chatbot widget · Agente ElevenLabs ID: agent_5701kr0h5gg6eetb69tv6c5hwfj1 · Embed en sitio principal · Formularios → n8n webhook · Transcripts</p>
+      <p class="card-url">victor-ia-tracker.vercel.app</p>
+      <span class="card-arrow">↗</span>
+    </a>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       CAT 3 — WEBS INCLUSIVAS (10 sitios)
+  ═══════════════════════════════════════════ -->
+  <div class="cat" data-cat="inclusivas">
+    <span class="cat-num">03</span>
+    <div class="cat-info">
+      <p class="cat-title">Portfolio — Webs Inclusivas</p>
+      <p class="cat-desc">10 sitios WCAG 2.2 AAA · 5 empresas reales + 5 marcas ficticias · Quintana Roo 2026</p>
+    </div>
+    <span class="badge b-gold">DEMO PORTFOLIO</span>
+  </div>
+
+  <div class="grid grid-inclusive">
+
+    <a href="https://victor-ia.xyz/palace-inclusivo.html" target="_blank" class="card"
+       data-search="palace resorts hotel cancún visual ceguera discapacidad visual alto contraste lector pantalla wcag">
+      <span class="card-status status-live"></span>
+      <span class="card-num">01</span>
+      <div class="card-badges">
+        <span class="badge b-blue">VISUAL</span>
+        <span class="badge b-gray">Hotelero · Cancún</span>
+      </div>
+      <p class="card-name">Palace Resorts<br><em>Inclusivo</em></p>
+      <p class="card-spec">Ceguera y discapacidad visual · Alto contraste · NVDA/JAWS/VoiceOver · Sin CAPTCHA visual</p>
+      <p class="card-url">palace-inclusivo.html</p>
+      <span class="card-arrow">↗</span>
+    </a>
+
+    <a href="https://victor-ia.xyz/xcaret-inclusivo.html" target="_blank" class="card"
+       data-search="xcaret turismo playa del carmen auditivo sordera lsm subtítulos lengua señas">
+      <span class="card-status status-live"></span>
+      <span class="card-num">02</span>
+      <div class="card-badges">
+        <span class="badge b-green">AUDITIVO</span>
+        <span class="badge b-gray">Turismo · PDC</span>
+      </div>
+      <p class="card-name">Grupo Xcaret<br><em>Inclusivo</em></p>
+      <p class="card-spec">Sordera y discapacidad auditiva · LSM · Alertas visuales · Sin dependencia de audio</p>
+      <p class="card-url">xcaret-inclusivo.html</p>
+      <span class="card-arrow">↗</span>
+    </a>
+
+    <a href="https://victor-ia.xyz/galenia-inclusivo.html" target="_blank" class="card"
+       data-search="galenia hospital salud cancún motriz silla de ruedas teclado control voz">
+      <span class="card-status status-live"></span>
+      <span class="card-num">03</span>
+      <div class="card-badges">
+        <span class="badge b-blue">MOTRIZ</span>
+        <span class="badge b-gray">Salud · Cancún</span>
+      </div>
+      <p class="card-name">Hospital Galenia<br><em>Inclusivo</em></p>
+      <p class="card-spec">Motriz y silla de ruedas · Área de clic grande · Control por voz · 100% teclado</p>
+      <p class="card-url">galenia-inclusivo.html</p>
+      <span class="card-arrow">↗</span>
+    </a>
+
+    <a href="https://victor-ia.xyz/cadu-inclusivo.html" target="_blank" class="card"
+       data-search="cadu inmobiliaria cancún cognitiva dislexia lenguaje simple wizard">
+      <span class="card-status status-live"></span>
+      <span class="card-num">04</span>
+      <div class="card-badges">
+        <span class="badge b-purple">COGNITIVA</span>
+        <span class="badge b-gray">Inmobiliario · CUN</span>
+      </div>
+      <p class="card-name">CADU Inmobiliaria<br><em>Inclusivo</em></p>
+      <p class="card-spec">Accesibilidad cognitiva · Fuente dislexia · Lenguaje simple · Wizard paso a paso</p>
+      <p class="card-url">cadu-inclusivo.html</p>
+      <span class="card-arrow">↗</span>
+    </a>
+
+    <a href="https://victor-ia.xyz/laparrilla-inclusivo.html" target="_blank" class="card"
+       data-search="la parrilla restaurante cancún wcag aaa 12 toggles total">
+      <span class="card-status status-live"></span>
+      <span class="card-num">05</span>
+      <div class="card-badges">
+        <span class="badge b-red">WCAG 2.2 AAA</span>
+        <span class="badge b-gray">Restaurante · CUN</span>
+      </div>
+      <p class="card-name">La Parrilla<br><em>Inclusivo</em></p>
+      <p class="card-spec">Accesibilidad total · 12 toggles · Visual + Auditivo + Motriz + Cognitivo · Modo oscuro</p>
+      <p class="card-url">laparrilla-inclusivo.html</p>
+      <span class="card-arrow">↗</span>
+    </a>
+
+    <a href="https://victor-ia.xyz/bahari-inclusivo.html" target="_blank" class="card"
+       data-search="bahari collection hotel ficticio cancún visual alto contraste 7 toggles">
+      <span class="card-status status-live"></span>
+      <span class="card-num">06</span>
+      <div class="card-badges">
+        <span class="badge b-gold">VISUAL</span>
+        <span class="badge b-gray">Ficticio · Cancún</span>
+      </div>
+      <p class="card-name">BAHARI Collection<br><em>Inclusivo</em></p>
+      <p class="card-spec">Marca ficticia · Visual completa · 7 toggles · Teal &amp; champagne gold palette</p>
+      <p class="card-url">bahari-inclusivo.html</p>
+      <span class="card-arrow">↗</span>
+    </a>
+
+    <a href="https://victor-ia.xyz/kaan-inclusivo.html" target="_blank" class="card"
+       data-search="kaán expeditions ecoturismo ficticio tulum auditivo lsm subtítulos">
+      <span class="card-status status-live"></span>
+      <span class="card-num">07</span>
+      <div class="card-badges">
+        <span class="badge b-green">AUDITIVO</span>
+        <span class="badge b-gray">Ficticio · Tulum</span>
+      </div>
+      <p class="card-name">KAÁN Expeditions<br><em>Inclusivo</em></p>
+      <p class="card-spec">Marca ficticia · Ecoturismo · Auditiva · LSM · Alertas visuales · Sin dependencia audio</p>
+      <p class="card-url">kaan-inclusivo.html</p>
+      <span class="card-arrow">↗</span>
+    </a>
+
+    <a href="https://victor-ia.xyz/cimamedica-inclusivo.html" target="_blank" class="card"
+       data-search="cima médica salud ficticia playa del carmen motriz targets 64px voz wizard">
+      <span class="card-status status-live"></span>
+      <span class="card-num">08</span>
+      <div class="card-badges">
+        <span class="badge b-blue">MOTRIZ</span>
+        <span class="badge b-gray">Ficticio · PDC</span>
+      </div>
+      <p class="card-name">CIMA MÉDICA<br><em>Inclusivo</em></p>
+      <p class="card-spec">Marca ficticia · Motriz · Targets 64px · Control voz · Wizard citas · Sin límites tiempo</p>
+      <p class="card-url">cimamedica-inclusivo.html</p>
+      <span class="card-arrow">↗</span>
+    </a>
+
+    <a href="https://victor-ia.xyz/alma-inclusivo.html" target="_blank" class="card"
+       data-search="alma desarrollos inmobiliario ficticio cancún cognitiva dislexia lenguaje simple resaltado párrafo">
+      <span class="card-status status-live"></span>
+      <span class="card-num">09</span>
+      <div class="card-badges">
+        <span class="badge b-purple">COGNITIVA</span>
+        <span class="badge b-gray">Ficticio · Cancún</span>
+      </div>
+      <p class="card-name">ALMA Desarrollos<br><em>Inclusivo</em></p>
+      <p class="card-spec">Marca ficticia · Cognitiva · Fuente dislexia · Resaltado de párrafo · Sin distracciones</p>
+      <p class="card-url">alma-inclusivo.html</p>
+      <span class="card-arrow">↗</span>
+    </a>
+
+    <a href="https://victor-ia.xyz/copal-inclusivo.html" target="_blank" class="card"
+       data-search="copal restaurante ficticio tulum wcag aaa 10 toggles maya cocina autor">
+      <span class="card-status status-live"></span>
+      <span class="card-num">10</span>
+      <div class="card-badges">
+        <span class="badge b-red">WCAG 2.2 AAA</span>
+        <span class="badge b-gray">Ficticio · Tulum</span>
+      </div>
+      <p class="card-name">COPAL<br><em>Inclusivo</em></p>
+      <p class="card-spec">Marca ficticia · Total · 10 toggles · Menú maya con filtros · Wizard · Voz · Modo oscuro</p>
+      <p class="card-url">copal-inclusivo.html</p>
+      <span class="card-arrow">↗</span>
+    </a>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       CAT 4 — DOCUMENTOS Y ACCESO PRIVADO
+  ═══════════════════════════════════════════ -->
+  <div class="cat" data-cat="documentos">
+    <span class="cat-num">04</span>
+    <div class="cat-info">
+      <p class="cat-title">Documentos &amp; Acceso privado</p>
+      <p class="cat-desc">Propuestas comerciales y páginas de acceso restringido</p>
+    </div>
+    <span class="badge b-gray">Privado</span>
+  </div>
+
+  <div class="grid grid-wide">
+
+    <a href="https://victor-ia.xyz/propuesta-aldo.html" target="_blank" class="card private"
+       data-search="propuesta aldo rendón remi creative deck 14 slides tres planes cad mxn">
+      <span class="card-status status-private" title="Acceso restringido"></span>
+      <span class="card-num">P</span>
+      <div class="card-badges">
+        <span class="badge b-gold">PROPUESTA</span>
+        <span class="badge b-gray">Remi Creative</span>
+      </div>
+      <p class="card-name">Propuesta<br><em>Aldo Rendón</em></p>
+      <p class="card-spec">Deck 14 slides · 3 planes CAD/MXN · Primer cliente Remi Creative · Servicios IA completos</p>
+      <p class="card-url">propuesta-aldo.html</p>
+      <span class="card-arrow">↗</span>
+    </a>
+
+    <a href="https://victor-ia.xyz/alianza-fiscal.html" target="_blank" class="card private highlighted"
+       data-search="alianza fiscal contadores outsourcing despachos canal a canal b comisión 60% beto">
+      <span class="card-status status-private" title="Acceso restringido"></span>
+      <span class="card-num">A</span>
+      <div class="card-badges">
+        <span class="badge b-gold">PRIVADO</span>
+        <span class="badge b-gray">Alianza · Contadores</span>
+      </div>
+      <p class="card-name">Alianza Fiscal<br><em>Tecnológica</em></p>
+      <p class="card-spec">Canal A (comisión 60%) + Canal B (servicios) · Despachos contables y outsourcing fiscal · Acceso: beto / 12345</p>
+      <p class="card-url">alianza-fiscal.html</p>
+      <span class="card-arrow">↗</span>
+    </a>
+
+  </div>
+
+</main>
+
+<footer>
+  <p>INFLUENCE IA S.A. DE C.V. · VICTOR IA · Quintana Roo, México · 2026</p>
+  <span class="footer-date" id="fdate"></span>
+</footer>
+
+<script>
+(function(){
+  /* progress bar */
+  const bar = document.getElementById('prog');
+  window.addEventListener('scroll', ()=>{
+    const p = window.scrollY / Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    bar.style.width = (p * 100).toFixed(2) + '%';
+  }, { passive: true });
+
+  /* footer date */
+  const d = new Date();
+  document.getElementById('fdate').textContent =
+    d.toLocaleDateString('es-MX', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+
+  /* search */
+  const q = document.getElementById('q');
+  const cnt = document.getElementById('cnt');
+  const cards = Array.from(document.querySelectorAll('.card'));
+
+  function updateCount() {
+    const visible = cards.filter(c => !c.classList.contains('hidden')).length;
+    cnt.textContent = visible + ' / ' + cards.length + ' proyectos';
+  }
+
+  q.addEventListener('input', () => {
+    const term = q.value.trim().toLowerCase();
+    cards.forEach(c => {
+      const hay = (c.dataset.search || '') + ' ' + c.textContent;
+      c.classList.toggle('hidden', term.length > 0 && !hay.toLowerCase().includes(term));
+    });
+    /* hide empty categories */
+    document.querySelectorAll('.cat').forEach(cat => {
+      const key = cat.dataset.cat;
+      const sibling = cat.nextElementSibling;
+      if (!sibling) return;
+      const anyVisible = Array.from(sibling.querySelectorAll('.card')).some(c => !c.classList.contains('hidden'));
+      cat.classList.toggle('hidden-cat', !anyVisible);
+      sibling.style.display = anyVisible ? '' : 'none';
+    });
+    updateCount();
+  });
+
+  updateCount();
+})();
+</script>
+
+</body>
+</html>
