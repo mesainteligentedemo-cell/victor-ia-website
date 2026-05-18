@@ -1,0 +1,2000 @@
+﻿<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VICTOR IA — Alianza Fiscal Tecnológica para Despachos Contables</title>
+  <meta name="description" content="Servicios tecnológicos de alto nivel con CFDI 4.0 respaldado. Alianza exclusiva para despachos contables y outsourcing fiscal. Soporte material real, deducciones sustentadas.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:   #0E0F12;
+      --warm:  #F8F7F5;
+      --rule:  rgba(14,15,18,0.09);
+      --muted: rgba(14,15,18,0.44);
+      --gold:  #B8960C;
+      --gold2: rgba(184,150,12,0.12);
+    }
+
+    html { scroll-behavior: auto; }
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--warm);
+      color: var(--ink);
+      cursor: none;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      overscroll-behavior-y: contain;
+    }
+
+    /* ── Cursor ── */
+    .cursor {
+      position: fixed; width: 5px; height: 5px;
+      background: var(--ink); border-radius: 50%;
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%,-50%);
+    }
+    .cursor-ring {
+      position: fixed; width: 32px; height: 32px;
+      border: 1px solid rgba(14,15,18,0.3); border-radius: 50%;
+      pointer-events: none; z-index: 9998;
+      transform: translate(-50%,-50%);
+      transition: width 0.35s cubic-bezier(0.16,1,0.3,1),
+                  height 0.35s cubic-bezier(0.16,1,0.3,1),
+                  border-color 0.3s ease;
+    }
+
+    /* ── Scroll progress bar ── */
+    .scroll-prog { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 200; background: transparent; }
+    .scroll-prog-fill { height: 100%; background: rgba(184,150,12,.55); width: 0%; transition: width 0.08s linear; }
+
+    /* ── Background ── */
+    .bg-marble {
+      position: fixed; inset: 0; z-index: 0;
+      background-image: url('assets/svc-bg-09.jpg');
+      background-size: cover; background-position: 50% 30%;
+      filter: sepia(0.06) brightness(1.01) contrast(1.05) saturate(0.9);
+      transform: translateZ(0);
+    }
+
+    /* ── Canvas water-trail (same as home) ── */
+    .reveal-canvas {
+      position: fixed; inset: 0; z-index: 1;
+      pointer-events: none;
+      transform: translateZ(0);
+    }
+
+    .content {
+      position: relative; z-index: 2;
+      animation: fadeUp 1.6s cubic-bezier(0.16,1,0.3,1) 0.1s both;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed; inset: 0 0 auto 0; z-index: 50;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.8rem clamp(1.8rem,5vw,3.5rem);
+    }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; }
+    .nav-logo img { height: 28px; width: auto; mix-blend-mode: multiply; display: block; }
+    .nav-right { display: flex; align-items: center; gap: 2.5rem; }
+    .nav-link {
+      font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--ink); text-decoration: none; opacity: 0.5;
+      transition: opacity 0.25s; border-bottom: 1px solid transparent;
+      background: none; border-top: none; border-left: none; border-right: none;
+      font-family: inherit; cursor: none; padding: 0;
+    }
+    .nav-link:hover { opacity: 1; border-bottom-color: currentColor; }
+    .nav-badge {
+      font-size: 0.52rem; letter-spacing: 0.26em; text-transform: uppercase;
+      background: var(--ink); color: var(--warm);
+      padding: 0.3rem 0.9rem; border-radius: 2px;
+    }
+
+    /* ── Sections ── */
+    .section {
+      padding: clamp(4rem,10vh,8rem) clamp(1.8rem,5vw,3.5rem);
+      max-width: 1200px; margin: 0 auto;
+      background: var(--warm);
+    }
+    .section-wide {
+      padding: clamp(4rem,10vh,8rem) clamp(1.8rem,5vw,3.5rem);
+      background: var(--ink);
+    }
+    .section-dark {
+      background: var(--ink); color: var(--warm);
+    }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+
+    .eyebrow {
+      display: flex; align-items: center; gap: 1rem;
+      font-size: 0.62rem; letter-spacing: 0.38em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 2rem;
+    }
+    .eyebrow::before { content:''; display:block; width:2rem; height:1px; background:currentColor; flex-shrink:0; }
+    .eyebrow-gold { color: var(--gold); }
+    .display {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(2.8rem,6vw,5.5rem);
+      font-weight: 400; line-height: 0.92; letter-spacing: -0.03em;
+      text-wrap: balance;
+    }
+    .display em { font-style: italic; }
+    .lead { font-size: clamp(0.95rem,1.5vw,1.15rem); line-height: 1.7; opacity: 0.72; font-weight: 400; max-width: 60ch; text-wrap: pretty; }
+
+    /* ── Hero ── */
+    .hero { padding-top: calc(clamp(4rem,10vh,8rem) + 80px); padding-bottom: clamp(4rem,10vh,8rem); padding-left: clamp(1.8rem,5vw,3.5rem); padding-right: clamp(1.8rem,5vw,3.5rem); max-width: 1200px; margin: 0 auto; background: transparent; }
+    .hero-badge {
+      display: inline-block; margin-bottom: 2rem;
+      font-size: 0.52rem; letter-spacing: 0.18em; text-transform: uppercase;
+      border: 1px solid var(--gold); color: var(--gold);
+      padding: 0.4rem 1.1rem;
+    }
+    .hero-sub { margin-top: 2rem; font-size: 0.82rem; line-height: 1.7; opacity: 0.62; font-weight: 300; max-width: 58ch; text-wrap: pretty; }
+    .hero-cta { margin-top: 3rem; display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+    .btn-primary {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 44px;
+      padding: 1rem 2.4rem;
+      background: var(--ink); color: var(--warm);
+      text-decoration: none;
+      font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+      transition: background 0.2s;
+    }
+    .btn-primary:hover { background: #2a2b30; }
+    .btn-outline {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 44px;
+      padding: 1rem 2.4rem;
+      border: 1px solid rgba(14,15,18,0.3); color: var(--ink);
+      text-decoration: none;
+      font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--ink); background: rgba(14,15,18,0.04); }
+
+    /* ── Rule divider ── */
+    .rule { border: none; border-top: 1px solid var(--rule); margin: 0; }
+    .rule-gold { border-color: rgba(184,150,12,0.25); }
+
+    /* ── Intro grid ── */
+    .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .intro-aside { display: flex; flex-direction: column; gap: 2rem; }
+    .aside-card { padding: 1.8rem; border: 1px solid var(--rule); }
+    .aside-card-label { font-size: 0.52rem; letter-spacing: 0.28em; text-transform: uppercase; opacity: 0.42; margin-bottom: 0.6rem; }
+    .aside-card-val { font-family: 'Instrument Serif', serif; font-size: 1.4rem; font-weight: 400; letter-spacing: -0.01em; line-height: 1.15; }
+
+    /* ── Service levels ── */
+    .levels-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; margin-top: 3rem; }
+    .level-card { padding: 2.8rem; border: 1px solid var(--rule); display: flex; flex-direction: column; gap: 1.2rem; }
+    .level-card.featured { background: var(--ink); color: var(--warm); border-color: var(--ink); }
+    .level-tag { font-size: 0.52rem; letter-spacing: 0.28em; text-transform: uppercase; opacity: 0.35; }
+    .level-name { font-family: 'Instrument Serif', serif; font-size: clamp(1.4rem,2.5vw,2rem); font-weight: 400; letter-spacing: -0.02em; line-height: 1.1; }
+    .level-name em { font-style: italic; }
+    .level-desc { font-size: 0.82rem; line-height: 1.7; opacity: 0.62; font-weight: 300; text-wrap: pretty; }
+    .level-price { margin-top: auto; padding-top: 1.4rem; border-top: 1px solid var(--rule); }
+    .level-card.featured .level-price { border-color: rgba(248,247,245,0.22); }
+    .level-price-label { font-size: 0.52rem; letter-spacing: 0.25em; text-transform: uppercase; opacity: 0.35; margin-bottom: 0.4rem; }
+    .level-price-val { font-family: 'Instrument Serif', serif; font-size: 1.6rem; font-weight: 400; letter-spacing: -0.02em; }
+    .level-price-note { font-size: 0.62rem; opacity: 0.38; margin-top: 0.25rem; }
+    .level-includes { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem; }
+    .level-inc-item { font-size: 0.75rem; line-height: 1.5; opacity: 0.6; padding-left: 1.1rem; position: relative; }
+    .level-inc-item::before { content: '—'; position: absolute; left: 0; opacity: 0.4; }
+
+    /* ── Billing concepts table ── */
+    .concepts-table { width: 100%; border-collapse: collapse; margin-top: 2.5rem; }
+    .concepts-table thead tr { border-bottom: 2px solid var(--ink); }
+    .concepts-table th { font-size: 0.52rem; letter-spacing: 0.28em; text-transform: uppercase; opacity: 0.35; font-weight: 500; padding: 0 1.2rem 1rem 0; text-align: left; }
+    .concepts-table th:last-child { text-align: right; }
+    .concepts-table tbody tr { border-bottom: 1px solid var(--rule); }
+    .concepts-table tbody tr:hover { background: rgba(14,15,18,0.025); }
+    .concepts-table td { padding: 1.4rem 1.2rem 1.4rem 0; vertical-align: top; }
+    .concepts-table td:last-child { text-align: right; white-space: nowrap; }
+    .ct-num { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 0.95rem; opacity: 0.2; min-width: 2rem; }
+    .ct-desc { font-family: 'Instrument Serif', serif; font-size: 1rem; font-weight: 400; letter-spacing: -0.01em; line-height: 1.2; margin-bottom: 0.3rem; }
+    .ct-sub { font-size: 0.65rem; opacity: 0.4; letter-spacing: 0.05em; }
+    .ct-code { font-size: 0.58rem; letter-spacing: 0.12em; opacity: 0.28; margin-top: 0.25rem; font-family: monospace; }
+    .ct-unit { font-size: 0.62rem; opacity: 0.35; text-transform: uppercase; letter-spacing: 0.1em; }
+    .ct-range { font-family: 'Instrument Serif', serif; font-size: 1.05rem; font-weight: 400; letter-spacing: -0.01em; }
+    .ct-range-note { font-size: 0.58rem; opacity: 0.35; margin-top: 0.2rem; }
+
+    /* ── Legal backing ── */
+    .legal-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 0; border: 1px solid rgba(248,247,245,0.12); margin-top: 3rem; }
+    .legal-item {
+      padding: 2.4rem 2rem;
+      border-right: 1px solid rgba(248,247,245,0.08);
+      border-top: 2px solid transparent;
+      position: relative; overflow: hidden;
+      transition: background 0.35s ease,
+                  border-top-color 0.3s ease,
+                  transform 0.4s cubic-bezier(0.16,1,0.3,1);
+      cursor: default;
+    }
+    .legal-item:last-child { border-right: none; }
+    .legal-item::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at 50% 0%, rgba(184,150,12,0.14) 0%, transparent 65%);
+      opacity: 0; transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+    .legal-item:hover {
+      background: rgba(248,247,245,0.07);
+      border-top-color: rgba(184,150,12,0.65);
+      transform: translateY(-3px);
+    }
+    .legal-item:hover::after { opacity: 1; }
+    .legal-art {
+      font-family: 'Instrument Serif', serif; font-size: 1.35rem; font-style: italic;
+      opacity: 0.65; margin-bottom: 0.8rem;
+      transition: color 0.3s ease, opacity 0.3s ease;
+      color: rgba(248,247,245,1);
+    }
+    .legal-item:hover .legal-art { color: var(--gold); opacity: 1; }
+    .legal-title {
+      font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
+      margin-bottom: 0.8rem; color: rgba(248,247,245,0.88);
+      transition: color 0.3s ease;
+    }
+    .legal-item:hover .legal-title { color: rgba(248,247,245,1); }
+    .legal-desc { font-size: 0.76rem; line-height: 1.7; opacity: 0.68; font-weight: 400; transition: opacity 0.3s ease; }
+    .legal-item:hover .legal-desc { opacity: 0.88; }
+
+    /* ── Tracker section ── */
+    .tracker-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; margin-top: 2rem; }
+    .tracker-visual {
+      background: var(--ink);
+      padding: 2.4rem;
+      position: relative;
+      overflow: hidden;
+      min-height: 380px;
+    }
+    .tracker-visual::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: url('assets/bg-light.jpg');
+      background-size: cover; opacity: 0.04;
+    }
+    .tracker-row { display: flex; justify-content: space-between; align-items: center; padding: 0.9rem 0; border-bottom: 1px solid rgba(248,247,245,0.07); position: relative; z-index: 1; }
+    .tracker-row:last-child { border-bottom: none; }
+    .tracker-row-label { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(248,247,245,0.38); }
+    .tracker-row-val { font-family: 'Instrument Serif', serif; font-size: 1.1rem; color: rgba(248,247,245,0.85); font-weight: 400; }
+    .tracker-row-delta { font-size: 0.58rem; color: rgba(120,200,120,0.8); letter-spacing: 0.1em; }
+    .tracker-header { font-size: 0.5rem; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(248,247,245,0.22); margin-bottom: 1rem; position: relative; z-index: 1; }
+    .tracker-features { display: flex; flex-direction: column; gap: 1.2rem; }
+    .tracker-feat { display: flex; gap: 1.2rem; align-items: flex-start; }
+    .tracker-feat-num { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 1rem; opacity: 0.2; min-width: 1.5rem; flex-shrink: 0; }
+    .tracker-feat-body { display: flex; flex-direction: column; gap: 0.25rem; }
+    .tracker-feat-title { font-family: 'Instrument Serif', serif; font-size: 1rem; font-weight: 400; letter-spacing: -0.01em; }
+    .tracker-feat-desc { font-size: 0.72rem; line-height: 1.6; opacity: 0.58; font-weight: 400; }
+
+    /* ── Process ── */
+    .process-row { display: flex; gap: 0; margin-top: 3rem; border: 1px solid var(--rule); }
+    .proc-step { flex: 1; padding: 2.2rem 1.8rem; border-right: 1px solid var(--rule); }
+    .proc-step:last-child { border-right: none; }
+    .proc-num { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 1.6rem; opacity: 0.15; margin-bottom: 1rem; }
+    .proc-title { font-family: 'Instrument Serif', serif; font-size: 1.05rem; font-weight: 400; letter-spacing: -0.01em; margin-bottom: 0.5rem; }
+    .proc-desc { font-size: 0.72rem; line-height: 1.65; opacity: 0.58; font-weight: 400; }
+
+    /* ── CTA final ── */
+    .cta-box { background: var(--ink); color: var(--warm); padding: clamp(3rem,7vh,6rem) clamp(1.8rem,5vw,3.5rem); text-align: center; }
+    .cta-box .display { color: var(--warm); }
+    .cta-box .lead { color: rgba(248,247,245,0.55); max-width: none; }
+    .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2.5rem; }
+    .btn-light {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 44px;
+      padding: 1rem 2.4rem;
+      background: var(--warm); color: var(--ink);
+      text-decoration: none;
+      font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+      transition: background 0.2s;
+    }
+    .btn-light:hover { background: rgba(248,247,245,0.85); }
+    .btn-ghost {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 44px;
+      padding: 1rem 2.4rem;
+      border: 1px solid rgba(248,247,245,0.2); color: rgba(248,247,245,0.7);
+      text-decoration: none;
+      font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+    .btn-ghost:hover { border-color: rgba(248,247,245,0.5); color: var(--warm); }
+
+    /* ── Footer ── */
+    footer {
+      padding: 2rem clamp(1.8rem,5vw,3.5rem);
+      border-top: 1px solid var(--rule);
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.45;
+      background: var(--warm);
+    }
+
+    /* ── Nota disclaimer ── */
+    .disclaimer {
+      font-size: 0.65rem; line-height: 1.7; opacity: 0.36; font-weight: 300;
+      border-top: 1px solid var(--rule); padding-top: 1.5rem; margin-top: 2rem;
+      max-width: 80ch;
+    }
+
+    /* ── Section reveals ── */
+    .rev-up {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity 0.85s cubic-bezier(0.16,1,0.3,1) var(--d,0ms),
+                  transform 0.85s cubic-bezier(0.16,1,0.3,1) var(--d,0ms);
+    }
+    .rev-up.in { opacity: 1; transform: translateY(0); }
+    .rev-wipe { clip-path: inset(0 0 100% 0); transition: clip-path 0.9s cubic-bezier(0.16,1,0.3,1) var(--d,0ms); }
+    .rev-wipe.in { clip-path: inset(0 0 0% 0); }
+
+    /* ── Dispersión / Win-Win section ── */
+    .win-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 0; border: 1px solid var(--rule); margin-top: 3rem; }
+    .win-card { padding: 2.4rem 2rem; border-right: 1px solid var(--rule); display: flex; flex-direction: column; gap: 1rem; }
+    .win-card:last-child { border-right: none; }
+    .win-tag { font-size: 0.48rem; letter-spacing: 0.32em; text-transform: uppercase; opacity: 0.3; }
+    .win-entity { font-family: 'Instrument Serif', serif; font-size: 1.3rem; font-weight: 400; letter-spacing: -0.02em; line-height: 1.1; }
+    .win-entity em { font-style: italic; }
+    .win-items { display: flex; flex-direction: column; gap: 0.55rem; margin-top: 0.5rem; }
+    .win-item { font-size: 0.72rem; line-height: 1.55; opacity: 0.62; padding-left: 1.1rem; position: relative; }
+    .win-item::before { content: '→'; position: absolute; left: 0; opacity: 0.35; }
+    .win-highlight { font-family: 'Instrument Serif', serif; font-size: 1.05rem; font-weight: 400; margin-top: auto; padding-top: 1.2rem; border-top: 1px solid var(--rule); }
+
+    /* ── Flow SVG divider ── */
+    .flow-diagram { margin: 3rem 0 2rem; overflow: visible; }
+    .flow-diagram text { font-family: 'Space Grotesk', sans-serif; }
+
+    /* ── AI quote strip ── */
+    .ia-quote-strip {
+      background: var(--ink); color: var(--warm);
+      padding: clamp(2.5rem,6vh,5rem) clamp(1.8rem,5vw,3.5rem);
+      text-align: center;
+    }
+    .ia-quote-text {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(1.3rem,2.8vw,2.2rem);
+      font-weight: 400; line-height: 1.35; letter-spacing: -0.02em;
+      color: var(--warm); max-width: 72ch; margin: 0 auto;
+      text-wrap: balance;
+    }
+    .ia-quote-text em { font-style: italic; opacity: 0.7; }
+    .ia-quote-attr { font-size: 0.58rem; letter-spacing: 0.28em; text-transform: uppercase; opacity: 0.28; margin-top: 1.5rem; }
+
+    /* ── Section gaps — marble canvas shows through ── */
+    .section-gap { height: clamp(1.2rem,2.5vh,2rem); }
+
+    /* ── Mobile SVG legibility ── */
+    .svg-mobile-flow { display: none; }
+    @media (max-width: 767px) {
+      svg[viewBox="0 0 760 510"] { display: none; }
+      .svg-mobile-flow {
+        display: flex; flex-direction: column; gap: 0;
+        margin: 2.5rem 0 2rem; border: 1px solid var(--rule);
+      }
+      .svg-mobile-row {
+        display: flex; align-items: center; gap: 1.2rem;
+        padding: 1.2rem 1.4rem; border-bottom: 1px solid var(--rule);
+      }
+      .svg-mobile-row:last-child { border-bottom: none; }
+      .svg-mobile-node {
+        font-family: 'Instrument Serif', serif; font-style: italic;
+        font-size: 1rem; opacity: 0.55; flex-shrink: 0; min-width: 80px;
+      }
+      .svg-mobile-label {
+        font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase;
+        opacity: 0.45; line-height: 1.5;
+      }
+      .svg-mobile-arrow {
+        font-size: 0.75rem; opacity: 0.2; flex-shrink: 0;
+      }
+    }
+
+    /* ── Auth overlay restores native cursor ── */
+    #auth-overlay { cursor: default; }
+    #auth-overlay .auth-btn { cursor: pointer; }
+    #auth-overlay .auth-input { cursor: text; }
+    #auth-overlay a { cursor: pointer; }
+
+    /* ── Table always scrollable ── */
+    .concepts-table-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+    /* ── Touch devices: hide custom cursor ── */
+    @media (pointer: coarse) {
+      body { cursor: auto; }
+      .cursor, .cursor-ring { display: none !important; }
+    }
+
+    /* ── Tablet (769–1024px) ── */
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .levels-grid { grid-template-columns: 1fr 1fr; }
+      .win-grid { grid-template-columns: 1fr 1fr; }
+      .win-card:nth-child(2) { border-right: none; }
+      .win-card:nth-child(3) { grid-column: 1 / -1; border-right: none; border-top: 1px solid var(--rule); }
+      .legal-grid { grid-template-columns: 1fr 1fr; }
+      .legal-item:nth-child(even) { border-right: none; }
+      .legal-item:nth-child(n+3) { border-top: 1px solid rgba(248,247,245,0.08); }
+      .tracker-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .intro-grid { gap: 3rem; }
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .intro-grid, .levels-grid, .tracker-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .legal-grid { grid-template-columns: 1fr; }
+      .legal-item { border-right: none; border-bottom: 1px solid rgba(248,247,245,0.1); border-top: none; }
+      .legal-item:last-child { border-bottom: none; }
+      .legal-item:hover { transform: none; }
+      .process-row { flex-direction: column; }
+      .proc-step { border-right: none; border-bottom: 1px solid var(--rule); }
+      .proc-step:last-child { border-bottom: none; }
+      .concepts-table { font-size: 0.9em; }
+      .concepts-table-wrapper { min-width: 0; }
+      .win-grid { grid-template-columns: 1fr; }
+      .win-card { border-right: none; border-bottom: 1px solid var(--rule); }
+      .win-card:last-child { border-bottom: none; }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+      /* Nav */
+      .nav-right { gap: 1rem; }
+      .nav-badge { font-size: 0.4rem; padding: 0.22rem 0.55rem; letter-spacing: 0.14em; max-width: 45vw; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      /* Tracker rows: stack on narrow screens */
+      .tracker-row { flex-wrap: wrap; gap: 0.2rem 0.8rem; }
+      .tracker-row-label { letter-spacing: 0.06em; flex: 1 1 60%; }
+      .tracker-row-val { flex-shrink: 0; }
+      /* SVG 900×100 (section 07) — texto ilegible en mobile */
+      svg.flow-diagram { display: none; }
+      .flow-diagram-mobile { display: flex !important; }
+    }
+  </style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="scroll-prog"><div class="scroll-prog-fill" id="scrollProgFill"></div></div>
+<div class="bg-marble" aria-hidden="true"></div>
+<canvas class="reveal-canvas" id="revealCanvas" aria-hidden="true"></canvas>
+<div class="content">
+
+  <!-- Nav -->
+  <nav>
+    <a href="/" class="nav-logo"><img src="/assets/brand/logo-full.png" alt="VICTOR IA"></a>
+    <div class="nav-right">
+      <a href="/" class="nav-link">← Inicio</a>
+      <span class="nav-badge">Alianza Fiscal · Acceso Restringido</span>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <div class="hero">
+    <span class="hero-badge">Exclusivo · Despachos Contables y Outsourcing Fiscal</span>
+    <h1 class="display">
+      Consultoría en<br>Eficiencia Operativa<br><em>y Planeación Fiscal</em><br>Tecnológica
+    </h1>
+    <p class="hero-sub">
+      Alianza estratégica para despachos contables y empresas de outsourcing fiscal. Servicios tecnológicos de alto nivel, soporte material real, CFDI 4.0 correcto y un sistema de trazabilidad que documenta cada actividad para el SAT.
+    </p>
+    <div class="hero-cta">
+      <a href="https://wa.me/5219842353159?text=Hola%2C%20soy%20contador%20y%20quiero%20conocer%20la%20alianza%20fiscal%20de%20VICTOR%20IA" target="_blank" rel="noopener" class="btn-primary">Agendar consulta privada</a>
+      <a href="#conceptos" class="btn-outline">Ver conceptos de facturación</a>
+    </div>
+  </div>
+
+  <hr class="rule" style="max-width:1200px;margin:0 auto 0;">
+
+  <!-- Intro -->
+  <div class="section">
+    <div class="intro-grid">
+      <div>
+        <span class="eyebrow">El modelo de alianza</span>
+        <h2 class="display" style="font-size:clamp(2rem,4vw,3.2rem);margin-bottom:2rem;">
+          Tecnología real.<br><em>Facturación sustentada.</em>
+        </h2>
+        <p class="lead">
+          Tu despacho recomienda a sus clientes contratar servicios tecnológicos de primer nivel. VICTOR IA entrega interfaces, automatización y agentes de IA reales. El cliente optimiza su carga fiscal con gastos estrictamente indispensables, documentados con CFDI 4.0 y respaldados por un tracker de actividades digitales que el SAT puede auditar en cualquier momento.
+        </p>
+        <p class="lead" style="margin-top:1.2rem;">
+          No vendemos facturas. Vendemos tecnología premium que genera facturas legítimas.
+        </p>
+      </div>
+      <div class="intro-aside">
+        <div class="aside-card">
+          <p class="aside-card-label">Sustento legal principal</p>
+          <p class="aside-card-val">Art. 25 y 27 LISR — Deducciones autorizadas y estrictamente indispensables para el giro del negocio</p>
+        </div>
+        <div class="aside-card">
+          <p class="aside-card-label">Comprobante fiscal</p>
+          <p class="aside-card-val">CFDI 4.0 con ClaveProdServ y ClaveUnidad del catálogo oficial SAT</p>
+        </div>
+        <div class="aside-card">
+          <p class="aside-card-label">Soporte material</p>
+          <p class="aside-card-val">Tracker Digital — registro continuo de actividades, métricas y entregables para cada servicio contratado</p>
+        </div>
+        <div class="aside-card" style="border-color:rgba(184,150,12,0.35);background:var(--gold2);">
+          <p class="aside-card-label" style="color:var(--gold);opacity:1;">Forma de pago requerida</p>
+          <p class="aside-card-val">Transferencia bancaria o cheque nominativo (Art. 27 Fracc. III LISR). Montos superiores a $2,000 MXN por día.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-gap"></div>
+
+  <!-- Service Levels -->
+  <div class="section">
+    <span class="eyebrow">02 · Modelos de contratación</span>
+    <h2 class="display" style="font-size:clamp(2rem,4vw,3.2rem);margin-bottom:0.5rem;">
+      Tres niveles.<br><em>Un mismo respaldo.</em>
+    </h2>
+    <p class="lead">Ambos niveles generan CFDI válido, incluyen el Tracker de Actividades Digitales y cuentan con soporte material completo.</p>
+
+    <div class="levels-grid">
+
+      <!-- Nivel 01 · Inicio Digital -->
+      <div class="level-card">
+        <p class="level-tag">Nivel 01 · Inicio Digital</p>
+        <h3 class="level-name">Primer paso.<br><em>Resultado visible.</em></h3>
+        <p class="level-desc">
+          Solución empaquetada para empresas que arrancan su inversión tecnológica. Sitio web con IA integrada, identidad digital o automatización base. Rápida de implementar, fácil de entender y 100% deducible. Ideal para el cliente que nunca ha invertido en tecnología.
+        </p>
+        <div class="level-includes">
+          <p class="level-inc-item">Sitio web Web 4.0 o landing page con IA conversacional</p>
+          <p class="level-inc-item">Identidad digital básica + activos para redes</p>
+          <p class="level-inc-item">Chatbot o agente de voz básico en el sitio</p>
+          <p class="level-inc-item">Tracker activo desde el primer día (horas + folio)</p>
+          <p class="level-inc-item">CFDI 4.0 · Soporte material completo para SAT</p>
+        </div>
+        <div class="level-price">
+          <p class="level-price-label">Inversión del cliente</p>
+          <p class="level-price-val">$45,000 — $120,000 MXN</p>
+          <p class="level-price-note">40–120 hrs · $1,800–$3,500/hr · Proyecto único</p>
+        </div>
+      </div>
+
+      <!-- Nivel 02 · Web 4.0 Integrado -->
+      <div class="level-card featured">
+        <p class="level-tag" style="color:rgba(248,247,245,0.35);">Nivel 02 · Proyecto Web 4.0 Integrado</p>
+        <h3 class="level-name">Implementación<br><em>completa y real.</em></h3>
+        <p class="level-desc" style="opacity:0.55;">
+          Plataforma digital a la medida con inteligencia artificial integrada. Incluye interfaces controladas por voz y visión, UX inclusivo (WCAG AA), agentes autónomos por departamento, automatización de procesos y analytics en tiempo real. La solución que transforma la operación.
+        </p>
+        <div class="level-includes" style="opacity:0.7;">
+          <p class="level-inc-item">Plataforma Web 4.0: Voice UI + Eye Tracking + Gesture Control</p>
+          <p class="level-inc-item">UX inclusivo certificado WCAG 2.2 AA — mayor alcance de mercado</p>
+          <p class="level-inc-item">Agentes de IA autónomos por área de negocio</p>
+          <p class="level-inc-item">Automatización de ventas, admin y operaciones</p>
+          <p class="level-inc-item">Dashboard ejecutivo con analytics predictivo</p>
+          <p class="level-inc-item">Tracker con desglose de horas por folio de CFDI</p>
+        </div>
+        <div class="level-price" style="border-color:rgba(248,247,245,0.12);">
+          <p class="level-price-label" style="color:rgba(248,247,245,0.35);">Inversión del cliente</p>
+          <p class="level-price-val">$180,000 — $650,000 MXN</p>
+          <p class="level-price-note" style="color:rgba(248,247,245,0.38);">120–650 hrs · $3,500–$6,500/hr · Pago único o parcialidades</p>
+        </div>
+      </div>
+
+      <!-- Nivel 03 · Operación Continua -->
+      <div class="level-card">
+        <p class="level-tag">Nivel 03 · Operación Continua</p>
+        <h3 class="level-name">Ecosistema activo<br><em>mes a mes.</em></h3>
+        <p class="level-desc">
+          Todo el ecosistema Web 4.0 operando 24/7. Agentes activos, campañas ejecutándose, automatizaciones corriendo y el Tracker generando evidencia en tiempo real cada mes. El mejor escenario de deducción: gasto recurrente, soporte diario, CFDI mensual con reporte de horas adjunto.
+        </p>
+        <div class="level-includes">
+          <p class="level-inc-item">Agentes de IA activos en todos los canales del cliente</p>
+          <p class="level-inc-item">Optimización mensual de plataforma + campañas</p>
+          <p class="level-inc-item">Reporte ejecutivo quincenal con horas y métricas</p>
+          <p class="level-inc-item">CFDI mensual con folio + desglose de horas por servicio</p>
+          <p class="level-inc-item">Acceso del despacho al Tracker para soporte ante SAT</p>
+          <p class="level-inc-item">Deducción anual acumulada: $780,000 — $2,220,000 MXN</p>
+        </div>
+        <div class="level-price">
+          <p class="level-price-label">Renta mensual del cliente</p>
+          <p class="level-price-val">$65,000 — $185,000 MXN/mes</p>
+          <p class="level-price-note">60–140 hrs/mes · $3,500–$6,500/hr · Contrato anual</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section-gap"></div>
+
+  <!-- Conceptos de Facturación -->
+  <div class="section" id="conceptos">
+    <span class="eyebrow">03 · Conceptos de facturación</span>
+    <h2 class="display" style="font-size:clamp(2rem,4vw,3.2rem);margin-bottom:0.5rem;">
+      15 conceptos<br><em>válidos ante SAT.</em>
+    </h2>
+    <p class="lead">Todos respaldados en el objeto social de INFLUENCE IA S.A. DE C.V. y en el catálogo SAT para CFDI 4.0. Cada concepto incluye tarifa por hora verificable en el Tracker Digital — la evidencia más sólida ante el SAT. El rango refleja Inicio (primeras horas del servicio) hasta Web 4.0 Integrado (proyecto completo).</p>
+
+    <div class="concepts-table-wrapper">
+    <table class="concepts-table" style="margin-top:0;">
+      <thead>
+        <tr>
+          <th style="width:2.5rem;">#</th>
+          <th>Concepto · ClaveProdServ · ClaveUnidad</th>
+          <th style="min-width:90px;">Unidad</th>
+          <th style="min-width:200px;">Inicio → Web 4.0 Integrado · MXN</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr>
+          <td class="ct-num">01</td>
+          <td>
+            <p class="ct-desc">Desarrollo e implementación de plataforma digital personalizada</p>
+            <p class="ct-sub">Sitios web, apps móviles, plataformas a la medida. Sustento: Art. 27 LISR — estrictamente indispensable para operación comercial.</p>
+            <p class="ct-code">ClaveProdServ: 81161501 · Creación de programas de cómputo a la medida</p>
+          </td>
+          <td class="ct-unit">E48<br>Unidad de<br>Servicio</td>
+          <td>
+            <p class="ct-range">$120,000 — $480,000</p>
+            <p class="ct-range-note">Proyecto único · Web 4.0</p>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="ct-num">02</td>
+          <td>
+            <p class="ct-desc">Licencia mensual de sistema de inteligencia artificial conversacional</p>
+            <p class="ct-sub">Agente de voz y texto, disponible 24/7. Facturación como licencia de software SaaS.</p>
+            <p class="ct-code">ClaveProdServ: 81112203 · Licencias de uso de software</p>
+          </td>
+          <td class="ct-unit">MON<br>Mes</td>
+          <td>
+            <p class="ct-range">$22,000 — $85,000</p>
+            <p class="ct-range-note">Mensual · 20–50 hrs/mes · $3,500–$6,000/hr</p>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="ct-num">03</td>
+          <td>
+            <p class="ct-desc">Servicio de automatización de procesos administrativos y operativos mediante IA</p>
+            <p class="ct-sub">Cotizaciones, seguimientos, facturación, notificaciones. Elimina trabajo manual repetitivo.</p>
+            <p class="ct-code">ClaveProdServ: 81161603 · Servicios de configuración de sistemas de software</p>
+          </td>
+          <td class="ct-unit">E48<br>Unidad de<br>Servicio</td>
+          <td>
+            <p class="ct-range">$65,000 — $240,000</p>
+            <p class="ct-range-note">Implementación 30–80 hrs · $3,500–$5,500/hr · Mant. $18,000–$55,000/mes</p>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="ct-num">04</td>
+          <td>
+            <p class="ct-desc">Campaña integral de marketing digital y posicionamiento en plataformas</p>
+            <p class="ct-sub">Gestión de redes, pauta, contenido y análisis de métricas. Directamente vinculado a generación de ingresos.</p>
+            <p class="ct-code">ClaveProdServ: 82101601 · Servicios de publicidad en medios de internet</p>
+          </td>
+          <td class="ct-unit">MON<br>Mes</td>
+          <td>
+            <p class="ct-range">$35,000 — $145,000</p>
+            <p class="ct-range-note">Mensual · 25–60 hrs/mes · $3,500–$5,500/hr · Pauta separado</p>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="ct-num">05</td>
+          <td>
+            <p class="ct-desc">Producción audiovisual corporativa — spots, reels y contenido institucional</p>
+            <p class="ct-sub">Videos de marca, comerciales, documentales corporativos. Activo de marketing con vida útil demostrable.</p>
+            <p class="ct-code">ClaveProdServ: 82121901 · Producción de películas y videos</p>
+          </td>
+          <td class="ct-unit">E48<br>Unidad de<br>Servicio</td>
+          <td>
+            <p class="ct-range">$55,000 — $320,000</p>
+            <p class="ct-range-note">Por producción · 20–90 hrs · $4,000–$6,500/hr · Spot 60 seg: $95,000–$180,000</p>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="ct-num">06</td>
+          <td>
+            <p class="ct-desc">Consultoría en transformación digital y arquitectura tecnológica</p>
+            <p class="ct-sub">Diagnóstico, hoja de ruta y supervisión de implementación. Servicio de consultoría ejecutiva de alto nivel.</p>
+            <p class="ct-code">ClaveProdServ: 83161600 · Servicios de consultoría de tecnología de la información</p>
+          </td>
+          <td class="ct-unit">ACT<br>Actividad</td>
+          <td>
+            <p class="ct-range">$6,500 — $14,000/hr</p>
+            <p class="ct-range-note">Ejecutivo Web 4.0 · Proyecto: $85,000–$280,000 MXN</p>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="ct-num">07</td>
+          <td>
+            <p class="ct-desc">Análisis de datos, tableros ejecutivos y reportes de KPIs en tiempo real</p>
+            <p class="ct-sub">Dashboard de métricas de negocio, predicción de ventas, comportamiento de clientes.</p>
+            <p class="ct-code">ClaveProdServ: 83111501 · Servicios de análisis de datos de negocios</p>
+          </td>
+          <td class="ct-unit">MON<br>Mes</td>
+          <td>
+            <p class="ct-range">$28,000 — $110,000</p>
+            <p class="ct-range-note">Setup 30–60 hrs · $3,500–$5,500/hr · Mensual: $22,000–$65,000</p>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="ct-num">08</td>
+          <td>
+            <p class="ct-desc">Diseño y desarrollo de experiencia de usuario (UX/UI) para plataformas digitales</p>
+            <p class="ct-sub">Arquitectura de información, wireframes, prototipo y diseño final de interfaces.</p>
+            <p class="ct-code">ClaveProdServ: 81161505 · Servicios de diseño de páginas de internet</p>
+          </td>
+          <td class="ct-unit">E48<br>Unidad de<br>Servicio</td>
+          <td>
+            <p class="ct-range">$45,000 — $185,000</p>
+            <p class="ct-range-note">Voice UI + Eye Tracking + Inclusivo WCAG AA · 30–80 hrs · $3,500–$5,500/hr</p>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="ct-num">09</td>
+          <td>
+            <p class="ct-desc">Desarrollo de identidad visual corporativa y manual de marca</p>
+            <p class="ct-sub">Logotipo, paleta cromática, tipografía, manual de uso y activos digitales para todos los canales.</p>
+            <p class="ct-code">ClaveProdServ: 82111902 · Servicios de diseño gráfico</p>
+          </td>
+          <td class="ct-unit">E48<br>Unidad de<br>Servicio</td>
+          <td>
+            <p class="ct-range">$55,000 — $220,000</p>
+            <p class="ct-range-note">Identidad Web 4.0 completa · 25–70 hrs · $3,500–$5,500/hr</p>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="ct-num">10</td>
+          <td>
+            <p class="ct-desc">Capacitación corporativa en herramientas tecnológicas e inteligencia artificial</p>
+            <p class="ct-sub">Talleres presenciales o en línea. Formación de equipos en IA aplicada, automatización y transformación digital.</p>
+            <p class="ct-code">ClaveProdServ: 86141903 · Formación profesional y capacitación especializada</p>
+          </td>
+          <td class="ct-unit">ACT<br>Actividad</td>
+          <td>
+            <p class="ct-range">$22,000 — $85,000</p>
+            <p class="ct-range-note">Por taller · $6,500–$14,000/hr ejecutivo · Programa anual: $120,000–$380,000</p>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="ct-num">11</td>
+          <td>
+            <p class="ct-desc">Servicio mensual de soporte técnico, monitoreo y optimización de plataformas digitales</p>
+            <p class="ct-sub">Mantenimiento preventivo, actualizaciones, seguridad y disponibilidad garantizada de sistemas en producción.</p>
+            <p class="ct-code">ClaveProdServ: 81111501 · Servicios de mantenimiento de software</p>
+          </td>
+          <td class="ct-unit">MON<br>Mes</td>
+          <td>
+            <p class="ct-range">$15,000 — $55,000</p>
+            <p class="ct-range-note">Mensual · SLA documentado · 10–25 hrs/mes · $3,500–$5,500/hr</p>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="ct-num">12</td>
+          <td>
+            <p class="ct-desc">Implementación de configurador 3D interactivo para productos o inmuebles</p>
+            <p class="ct-sub">Herramienta de personalización en tiempo real para e-commerce, inmobiliario y manufactura.</p>
+            <p class="ct-code">ClaveProdServ: 81161501 · Creación de programas de cómputo a la medida</p>
+          </td>
+          <td class="ct-unit">E48<br>Unidad de<br>Servicio</td>
+          <td>
+            <p class="ct-range">$95,000 — $380,000</p>
+            <p class="ct-range-note">Web 4.0 · Gesture + Voice + AR · 60–140 hrs · $4,000–$6,500/hr</p>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="ct-num">13</td>
+          <td>
+            <p class="ct-desc">Servicio de integración entre sistemas y plataformas empresariales</p>
+            <p class="ct-sub">Conexión de CRM, ERP, plataformas de pago, e-commerce y cualquier software existente.</p>
+            <p class="ct-code">ClaveProdServ: 81161603 · Servicios de configuración de sistemas de software</p>
+          </td>
+          <td class="ct-unit">E48<br>Unidad de<br>Servicio</td>
+          <td>
+            <p class="ct-range">$45,000 — $185,000</p>
+            <p class="ct-range-note">Por integración · 25–80 hrs · $3,500–$5,500/hr · Mant. $12,000–$35,000/mes</p>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="ct-num">14</td>
+          <td>
+            <p class="ct-desc">Plataforma de Business Intelligence y análisis predictivo de ventas</p>
+            <p class="ct-sub">Modelos predictivos de churn, comportamiento de compra y optimización de inventario conectados a datos reales.</p>
+            <p class="ct-code">ClaveProdServ: 83111501 · Servicios de análisis de datos de negocios</p>
+          </td>
+          <td class="ct-unit">MON<br>Mes</td>
+          <td>
+            <p class="ct-range">$50,000 — $180,000</p>
+            <p class="ct-range-note">Setup 40–80 hrs · $3,500–$5,500/hr · Servicio mensual: $35,000–$95,000</p>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="ct-num">15</td>
+          <td>
+            <p class="ct-desc">Desarrollo de avatar digital corporativo y vocero virtual con IA</p>
+            <p class="ct-sub">Representante virtual de la marca con voz, imagen y conocimiento total de la empresa para ventas, soporte y capacitación.</p>
+            <p class="ct-code">ClaveProdServ: 81161501 · Creación de programas de cómputo a la medida</p>
+          </td>
+          <td class="ct-unit">E48<br>Unidad de<br>Servicio</td>
+          <td>
+            <p class="ct-range">$85,000 — $320,000</p>
+            <p class="ct-range-note">Avatar Web 4.0 con voz + IA · 60–130 hrs · $4,000–$6,500/hr · Op. $22,000–$65,000/mes</p>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+    </div>
+
+    <p class="disclaimer">
+      <strong>Nota para el despacho:</strong> Los precios reflejan tarifas reales de un estudio Web 4.0 especializado en inteligencia artificial — posicionado en el segmento internacional (comparable con estudios de IA en CDMX, Miami y Madrid). La tarifa por hora va de $1,800 a $14,000 MXN según la especialidad: Voice UI, Eye Tracking, Agentes Autónomos, Machine Learning y Consultoría Ejecutiva. Los rangos están dentro de lo que el SAT acepta para servicios tecnológicos especializados de alta demanda. El Tracker Digital genera el soporte material hora a hora, con folio de CFDI vinculado a cada bloque de trabajo. Todos los conceptos se respaldan con el objeto social de INFLUENCE IA S.A. DE C.V. (Cláusula Séptima incisos a–i, Notario Público No. 13 de Playa del Carmen). Verificar ClaveProdServ con el catálogo SAT actualizado antes de emitir el CFDI.
+    </p>
+  </div>
+
+  <!-- Legal backing — dark section -->
+  <div class="section-wide section-dark">
+    <div class="section-inner">
+      <span class="eyebrow" style="color:rgba(248,247,245,0.35);">04 · Sustento legal y fiscal</span>
+      <h2 class="display" style="color:var(--warm);font-size:clamp(2rem,4vw,3.2rem);margin-bottom:0.5rem;">
+        Base jurídica<br><em>sólida.</em>
+      </h2>
+      <p class="lead">Cada concepto facturado tiene respaldo en ley. El servicio es real, el CFDI es correcto y el soporte material es auditable.</p>
+      <div class="legal-grid">
+        <div class="legal-item">
+          <p class="legal-art">Art. 25 LISR</p>
+          <p class="legal-title">Deducciones autorizadas para personas morales</p>
+          <p class="legal-desc">Los servicios tecnológicos contratados para operación, marketing, ventas y administración son deducibles como gastos de operación ordinarios, siempre que cumplan los requisitos del artículo 27.</p>
+        </div>
+        <div class="legal-item">
+          <p class="legal-art">Art. 27 LISR</p>
+          <p class="legal-title">Requisito de estricta indispensabilidad</p>
+          <p class="legal-desc">El gasto es estrictamente indispensable cuando se relaciona directamente con el giro del negocio y contribuye a la generación de ingresos. Un sitio web, un agente de ventas IA o automatización de procesos cumplen este requisito en cualquier empresa.</p>
+        </div>
+        <div class="legal-item">
+          <p class="legal-art">Art. 29-A CFF</p>
+          <p class="legal-title">Requisitos del CFDI 4.0</p>
+          <p class="legal-desc">Todos los comprobantes incluyen RFC, régimen fiscal, descripción detallada, ClaveProdServ, ClaveUnidad, método de pago y forma de pago correctos. Se adjunta acuse de recepción del servicio para soporte material.</p>
+        </div>
+        <div class="legal-item">
+          <p class="legal-art">Art. 5 LIVA</p>
+          <p class="legal-title">IVA acreditable</p>
+          <p class="legal-desc">El IVA trasladado en servicios tecnológicos es acreditable cuando los servicios se usan para actividades gravadas. El 16% de IVA en cada factura es recuperable para la empresa cliente.</p>
+        </div>
+        <div class="legal-item">
+          <p class="legal-art">Art. 31 LISR</p>
+          <p class="legal-title">Inversiones deducibles</p>
+          <p class="legal-desc">El software, plataformas y sistemas adquiridos como activo intangible son deducibles al 25% anual (Art. 35 LISR). Algunos activos digitales pueden deducirse al 100% en el ejercicio si se califican como gasto.</p>
+        </div>
+        <div class="legal-item">
+          <p class="legal-art">Criterio SAT</p>
+          <p class="legal-title">Soporte material del servicio</p>
+          <p class="legal-desc">El SAT exige que exista soporte material: contratos firmados, entregables documentados, métricas de actividad y comprobantes de pago bancario. Nuestro Tracker Digital genera este soporte de forma automática y continua.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tracker Digital -->
+  <div class="section">
+    <span class="eyebrow">05 · Soporte material garantizado</span>
+    <h2 class="display" style="font-size:clamp(2rem,4vw,3.2rem);margin-bottom:0.5rem;">
+      Tracker de<br><em>Actividades Digitales.</em>
+    </h2>
+    <p class="lead">Cada servicio contratado genera automáticamente un registro continuo de actividades que sirve como soporte material para el SAT. Rastreamos toda la información desde el primer día en <a href="https://victor-ia.xyz/" target="_blank" style="color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(184,150,12,0.35);">victor-ia.xyz</a> — no hay discrecionalidad, hay datos.</p>
+
+    <div class="tracker-grid">
+      <div class="tracker-visual">
+        <p class="tracker-header">TRACKER DIGITAL — Reporte de actividad mensual · Mayo 2026</p>
+        <div class="tracker-row">
+          <span class="tracker-row-label">Interacciones del agente IA</span>
+          <span class="tracker-row-val"><span data-count="2847">2,847</span> <span class="tracker-row-delta">↑ +12%</span></span>
+        </div>
+        <div class="tracker-row">
+          <span class="tracker-row-label">Leads calificados generados</span>
+          <span class="tracker-row-val"><span data-count="143">143</span> <span class="tracker-row-delta">↑ +8%</span></span>
+        </div>
+        <div class="tracker-row">
+          <span class="tracker-row-label">Horas facturables registradas</span>
+          <span class="tracker-row-val"><span data-count="87.5" data-suffix=" hrs">87.5 hrs</span></span>
+          <span class="tracker-row-delta">$3,500/hr</span>
+        </div>
+        <div class="tracker-row">
+          <span class="tracker-row-label">Automatizaciones ejecutadas</span>
+          <span class="tracker-row-val"><span data-count="5412">5,412</span></span>
+        </div>
+        <div class="tracker-row">
+          <span class="tracker-row-label">Campañas activas en plataformas</span>
+          <span class="tracker-row-val"><span data-count="7" data-suffix=" campañas">7 campañas</span></span>
+        </div>
+        <div class="tracker-row">
+          <span class="tracker-row-label">Piezas de contenido publicadas</span>
+          <span class="tracker-row-val"><span data-count="24" data-suffix=" piezas">24 piezas</span></span>
+        </div>
+        <div class="tracker-row">
+          <span class="tracker-row-label">Uptime del sistema</span>
+          <span class="tracker-row-val"><span data-count="99.97" data-suffix="%" data-decimals="2">99.97%</span></span>
+        </div>
+        <div class="tracker-row">
+          <span class="tracker-row-label">Horas de soporte técnico</span>
+          <span class="tracker-row-val"><span data-count="18.5" data-suffix=" hrs" data-decimals="1">18.5 hrs</span></span>
+        </div>
+      </div>
+
+      <div class="tracker-features">
+        <div class="tracker-feat">
+          <span class="tracker-feat-num">01</span>
+          <div class="tracker-feat-body">
+            <p class="tracker-feat-title">Registro automático en tiempo real</p>
+            <p class="tracker-feat-desc">Cada interacción del agente, cada automatización ejecutada, cada campaña activa queda registrada con timestamp, IP y resultado. El registro es inmutable.</p>
+          </div>
+        </div>
+        <div class="tracker-feat">
+          <span class="tracker-feat-num">02</span>
+          <div class="tracker-feat-body">
+            <p class="tracker-feat-title">Reporte ejecutivo mensual en PDF</p>
+            <p class="tracker-feat-desc">Cada mes el cliente recibe un reporte detallado listo para adjuntar a la contabilidad. Incluye resumen de actividades, métricas y descripción del servicio prestado.</p>
+          </div>
+        </div>
+        <div class="tracker-feat">
+          <span class="tracker-feat-num">03</span>
+          <div class="tracker-feat-body">
+            <p class="tracker-feat-title">Acceso del despacho contable</p>
+            <p class="tracker-feat-desc">El despacho aliado puede acceder al tracker de sus clientes para descargar evidencia en cualquier momento, incluso durante una auditoría del SAT.</p>
+          </div>
+        </div>
+        <div class="tracker-feat">
+          <span class="tracker-feat-num">04</span>
+          <div class="tracker-feat-body">
+            <p class="tracker-feat-title">Contrato de servicios firmado</p>
+            <p class="tracker-feat-desc">Cada relación comercial inicia con un contrato de prestación de servicios profesionales que especifica el alcance, duración, precio y forma de pago. Disponible para presentar ante la autoridad.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-gap"></div>
+
+  <!-- Proceso -->
+  <div class="section">
+    <span class="eyebrow">06 · Cómo funciona la alianza</span>
+    <h2 class="display" style="font-size:clamp(2rem,4vw,3.2rem);margin-bottom:0;">
+      Cuatro pasos.<br><em>Sin fricciones.</em>
+    </h2>
+    <div class="process-row">
+      <div class="proc-step">
+        <p class="proc-num">01</p>
+        <p class="proc-title">Consulta privada con tu despacho</p>
+        <p class="proc-desc">Analizamos el perfil fiscal del cliente, el cierre del ejercicio y qué conceptos tecnológicos tienen mayor sentido para su giro. Sin compromisos.</p>
+      </div>
+      <div class="proc-step">
+        <p class="proc-num">02</p>
+        <p class="proc-title">Propuesta personalizada</p>
+        <p class="proc-desc">Diseñamos una propuesta que combina servicios tecnológicos reales con los conceptos de facturación más sólidos para el cliente específico.</p>
+      </div>
+      <div class="proc-step">
+        <p class="proc-num">03</p>
+        <p class="proc-title">Contrato, CFDI y entrega</p>
+        <p class="proc-desc">Se firma contrato, el cliente paga por transferencia bancaria, emitimos CFDI 4.0 correcto y comenzamos la entrega del servicio. El Tracker se activa desde el primer día.</p>
+      </div>
+      <div class="proc-step">
+        <p class="proc-num">04</p>
+        <p class="proc-title">Soporte continuo al despacho</p>
+        <p class="proc-desc">Acompañamos al despacho en cualquier aclaración ante el SAT. Proveemos evidencia, contratos y reportes de actividad en tiempo real.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 07 · Beneficio para cada parte -->
+  <div class="section-gap"></div>
+  <div class="section">
+    <span class="eyebrow">07 · Quién gana y cuánto</span>
+    <h2 class="display" style="font-size:clamp(2rem,4vw,3.2rem);margin-bottom:0.5rem;">
+      Tres partes.<br><em>Todos ganan.</em>
+    </h2>
+    <p class="lead">La alianza está diseñada para que el beneficio económico fluya hacia los tres involucrados. No es una pirámide — es un ecosistema. El cliente recibe valor real, el despacho capitaliza su red y VICTOR IA escala con clientes de calidad.</p>
+
+    <!-- SVG Flow Diagram -->
+    <svg class="flow-diagram" viewBox="0 0 900 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:900px;">
+      <!-- Cliente node -->
+      <circle cx="120" cy="50" r="38" stroke="currentColor" stroke-opacity="0.1" stroke-width="1"/>
+      <circle cx="120" cy="50" r="48" stroke="currentColor" stroke-opacity="0.05" stroke-width="1">
+        <animate attributeName="r" values="38;52;38" dur="4s" repeatCount="indefinite"/>
+        <animate attributeName="stroke-opacity" values="0.05;0;0.05" dur="4s" repeatCount="indefinite"/>
+      </circle>
+      <text x="120" y="44" text-anchor="middle" font-size="6" fill="currentColor" opacity="0.3" letter-spacing="3">CLIENTE</text>
+      <text x="120" y="59" text-anchor="middle" font-family="Instrument Serif, serif" font-size="12" fill="currentColor" opacity="0.55">Empresa</text>
+
+      <!-- Arrow 1 -->
+      <path d="M 170 50 L 320 50" stroke="currentColor" stroke-opacity="0.12" stroke-width="1" stroke-dasharray="5 4">
+        <animate attributeName="stroke-dashoffset" values="120;0" dur="2.5s" repeatCount="indefinite"/>
+      </path>
+      <text x="245" y="42" text-anchor="middle" font-size="5.5" fill="currentColor" opacity="0.22" letter-spacing="2">CFDI 4.0 · PAGO</text>
+      <path d="M 320 55 L 170 55" stroke="currentColor" stroke-opacity="0.07" stroke-width="1" stroke-dasharray="5 4">
+        <animate attributeName="stroke-dashoffset" values="0;120" dur="2.5s" repeatCount="indefinite"/>
+      </path>
+      <text x="245" y="68" text-anchor="middle" font-size="5.5" fill="currentColor" opacity="0.15" letter-spacing="2">SERVICIO REAL</text>
+
+      <!-- VICTOR IA node -->
+      <rect x="340" y="20" width="120" height="60" rx="0" stroke="currentColor" stroke-opacity="0.14" stroke-width="1" fill="currentColor" fill-opacity="0.025"/>
+      <text x="400" y="46" text-anchor="middle" font-size="6" fill="currentColor" opacity="0.35" letter-spacing="3">VICTOR IA</text>
+      <text x="400" y="61" text-anchor="middle" font-family="Instrument Serif, serif" font-size="11" fill="currentColor" opacity="0.6">Tecnología</text>
+
+      <!-- Arrow 2 -->
+      <path d="M 470 50 L 620 50" stroke="currentColor" stroke-opacity="0.12" stroke-width="1" stroke-dasharray="5 4">
+        <animate attributeName="stroke-dashoffset" values="120;0" dur="2.5s" begin="0.8s" repeatCount="indefinite"/>
+      </path>
+      <text x="545" y="42" text-anchor="middle" font-size="5.5" fill="currentColor" opacity="0.22" letter-spacing="2">COMISIÓN · CFDI</text>
+      <path d="M 620 55 L 470 55" stroke="currentColor" stroke-opacity="0.07" stroke-width="1" stroke-dasharray="5 4">
+        <animate attributeName="stroke-dashoffset" values="0;120" dur="2.5s" begin="0.8s" repeatCount="indefinite"/>
+      </path>
+      <text x="545" y="68" text-anchor="middle" font-size="5.5" fill="currentColor" opacity="0.15" letter-spacing="2">REFERIDOS</text>
+
+      <!-- DESPACHO node -->
+      <circle cx="680" cy="50" r="38" stroke="currentColor" stroke-opacity="0.1" stroke-width="1"/>
+      <circle cx="680" cy="50" r="48" stroke="currentColor" stroke-opacity="0.05" stroke-width="1">
+        <animate attributeName="r" values="38;52;38" dur="4s" begin="1.2s" repeatCount="indefinite"/>
+        <animate attributeName="stroke-opacity" values="0.05;0;0.05" dur="4s" begin="1.2s" repeatCount="indefinite"/>
+      </circle>
+      <text x="680" y="44" text-anchor="middle" font-size="6" fill="currentColor" opacity="0.3" letter-spacing="3">DESPACHO</text>
+      <text x="680" y="59" text-anchor="middle" font-family="Instrument Serif, serif" font-size="12" fill="currentColor" opacity="0.55">Contador</text>
+    </svg>
+
+    <!-- Mobile fallback for section 07 flow SVG -->
+    <div class="flow-diagram-mobile" style="display:none;margin:2.5rem 0 2rem;border:1px solid var(--rule);">
+      <div style="display:flex;align-items:center;gap:1rem;padding:1.1rem 1.4rem;border-bottom:1px solid var(--rule);">
+        <span style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1rem;opacity:0.5;min-width:80px;">Empresa</span>
+        <span style="font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;opacity:0.4;line-height:1.5;">Cliente final — paga el proyecto + recibe CFDI 4.0</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:1rem;padding:1.1rem 1.4rem;border-bottom:1px solid var(--rule);background:var(--gold2);">
+        <span style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1rem;color:var(--gold);min-width:80px;">VICTOR IA</span>
+        <span style="font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;opacity:0.55;line-height:1.5;">Hub de operación — entrega servicio + emite CFDI + activa Tracker</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:1rem;padding:1.1rem 1.4rem;">
+        <span style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1rem;opacity:0.5;min-width:80px;">Despacho</span>
+        <span style="font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;opacity:0.4;line-height:1.5;">Recibe comisión (Canal A) + honorarios profesionales (Canal B)</span>
+      </div>
+    </div>
+
+    <div class="win-grid">
+      <!-- Cliente -->
+      <div class="win-card">
+        <p class="win-tag">El cliente final</p>
+        <h3 class="win-entity">La empresa<br><em>que más gana.</em></h3>
+        <div class="win-items">
+          <p class="win-item">Tecnología real que genera ROI medible en su operación</p>
+          <p class="win-item">Deducción fiscal 100% sustentada ante el SAT (Art. 25 LISR)</p>
+          <p class="win-item">CFDI 4.0 válido con Tracker Digital adjunto como evidencia</p>
+          <p class="win-item">Costo neto real puede reducirse hasta 35% vía deducción de ISR</p>
+          <p class="win-item">Un activo tecnológico que opera y genera valor mes a mes</p>
+        </div>
+        <p class="win-highlight">Inversión real · Deducción real · Resultado real</p>
+      </div>
+
+      <!-- Despacho -->
+      <div class="win-card">
+        <p class="win-tag">El despacho contable</p>
+        <h3 class="win-entity">Ingreso nuevo<br><em>sin carga operativa.</em></h3>
+        <div class="win-items">
+          <p class="win-item">Ingresos vía Canal A (comisión) + Canal B (servicios profesionales)</p>
+          <p class="win-item">Nivel 01 — ingreso por cliente referido · pago único</p>
+          <p class="win-item">Nivel 02 — ingreso por proyecto · pago al cobro</p>
+          <p class="win-item">Nivel 03 — ingreso mensual recurrente por cliente activo</p>
+          <p class="win-item">Todo facturado con CFDI válido — ingreso limpio, declarado y deducible</p>
+          <p class="win-item">Sin riesgo operativo — VICTOR IA entrega y garantiza el servicio</p>
+          <p class="win-item">Posicionamiento como despacho tecnológico ante sus propios clientes</p>
+        </div>
+        <p class="win-highlight">Ej. Nivel 02 de $350K → Canal A + Canal B combinados al despacho · monto a convenir</p>
+      </div>
+
+      <!-- VICTOR IA -->
+      <div class="win-card">
+        <p class="win-tag">VICTOR IA</p>
+        <h3 class="win-entity">Clientes de calidad<br><em>por canal calificado.</em></h3>
+        <div class="win-items">
+          <p class="win-item">Acceso a empresas ya calificadas fiscalmente (clientes de despachos)</p>
+          <p class="win-item">Canal de ventas sin inversión publicitaria adicional</p>
+          <p class="win-item">Contratos firmados, pagos por transferencia, cero fricciones</p>
+          <p class="win-item">Ecosistema de partners contables que escala de forma orgánica</p>
+          <p class="win-item">La comisión al despacho es gasto deducible para INFLUENCE IA (Art. 27 LISR)</p>
+        </div>
+        <p class="win-highlight">5 clientes Nivel 03 activos = ingreso recurrente mensual escalable al despacho</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 08 · Dispersión segura de recursos -->
+  <div class="section-gap"></div>
+  <div class="section">
+    <span class="eyebrow">08 · Dispersión de recursos y amarre total de la operación</span>
+    <h2 class="display" style="font-size:clamp(2rem,4vw,3.2rem);margin-bottom:0.5rem;">
+      Dos canales.<br><em>Un circuito cerrado.</em>
+    </h2>
+    <p class="lead">El dinero entra por un solo punto y se dispersa por dos canales completamente documentados. Cada peso tiene CFDI, transferencia bancaria y razón de negocio real — antes de que el SAT pregunte, la respuesta ya existe.</p>
+
+    <!-- ── ANIMATED MONEY FLOW DIAGRAM ── -->
+    <svg viewBox="0 0 760 510" fill="none" xmlns="http://www.w3.org/2000/svg"
+         style="width:100%;max-width:860px;margin:3.5rem auto 2.5rem;display:block;overflow:visible;">
+
+      <!-- CLIENTE node -->
+      <circle cx="380" cy="70" r="46" stroke="currentColor" stroke-opacity="0.12" stroke-width="1" fill="currentColor" fill-opacity="0.05"/>
+      <circle cx="380" cy="70" r="48" stroke="#B8960C" fill="none" stroke-width="1">
+        <animate attributeName="r" values="48;68;48" dur="4s" repeatCount="indefinite"/>
+        <animate attributeName="stroke-opacity" values="0.2;0;0.2" dur="4s" repeatCount="indefinite"/>
+      </circle>
+      <text x="380" y="56" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="9" fill="currentColor" opacity="0.5" letter-spacing="3">CLIENTE</text>
+      <text x="380" y="75" text-anchor="middle" font-family="Instrument Serif,serif" font-style="italic" font-size="17" fill="currentColor" opacity="0.75">Empresa</text>
+      <text x="380" y="93" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="8.5" fill="#B8960C" opacity="0.65" letter-spacing="0.5">paga el proyecto completo</text>
+
+      <!-- P1 flow: CLIENTE → INFLUENCE IA -->
+      <line x1="380" y1="118" x2="380" y2="130" stroke="#B8960C" stroke-opacity="0.4" stroke-width="2" stroke-dasharray="5 4">
+        <animate attributeName="stroke-dashoffset" values="36;0" dur="0.9s" repeatCount="indefinite"/>
+      </line>
+      <text x="410" y="128" font-family="Space Grotesk,sans-serif" font-size="8.5" fill="#B8960C" opacity="0.65" letter-spacing="1.5">CFDI 4.0</text>
+      <circle r="3.5" fill="#B8960C" opacity="0.9">
+        <animateMotion dur="0.9s" repeatCount="indefinite" path="M 380 118 L 380 130"/>
+      </circle>
+      <circle r="3.5" fill="#B8960C" opacity="0.55">
+        <animateMotion dur="0.9s" begin="-0.45s" repeatCount="indefinite" path="M 380 118 L 380 130"/>
+      </circle>
+
+      <!-- INFLUENCE IA node (rectangle) -->
+      <rect x="200" y="130" width="360" height="92" stroke="currentColor" stroke-opacity="0.15" stroke-width="1" fill="currentColor" fill-opacity="0.05"/>
+      <rect x="200" y="130" width="360" height="92" stroke="#B8960C" fill="none" stroke-width="1">
+        <animate attributeName="stroke-opacity" values="0;0.15;0" dur="3.5s" repeatCount="indefinite"/>
+      </rect>
+      <text x="380" y="157" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="10" fill="currentColor" opacity="0.5" letter-spacing="3">INFLUENCE IA</text>
+      <text x="380" y="180" text-anchor="middle" font-family="Instrument Serif,serif" font-style="italic" font-size="18" fill="currentColor" opacity="0.75">Hub de operación</text>
+      <text x="380" y="205" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="8" fill="currentColor" opacity="0.4" letter-spacing="1">CFDI emitido · Tracker activo · Servicio entregado</text>
+
+      <!-- split dot -->
+      <circle cx="380" cy="222" r="3" fill="currentColor" fill-opacity="0.2"/>
+      <line x1="340" y1="222" x2="420" y2="222" stroke="currentColor" stroke-opacity="0.1" stroke-width="1"/>
+
+      <!-- P2A: INFLUENCE IA → Canal A (left, GOLD) -->
+      <path d="M 325 222 C 255 260 175 268 118 298" stroke="#B8960C" stroke-opacity="0.4" stroke-width="2.5" stroke-dasharray="7 5">
+        <animate attributeName="stroke-dashoffset" values="160;0" dur="2.2s" repeatCount="indefinite"/>
+      </path>
+      <circle r="4" fill="#B8960C" opacity="0.9">
+        <animateMotion dur="2.2s" repeatCount="indefinite" path="M 325 222 C 255 260 175 268 118 298"/>
+      </circle>
+      <circle r="3.2" fill="#B8960C" opacity="0.6">
+        <animateMotion dur="2.2s" begin="-0.74s" repeatCount="indefinite" path="M 325 222 C 255 260 175 268 118 298"/>
+      </circle>
+      <circle r="2.5" fill="#B8960C" opacity="0.35">
+        <animateMotion dur="2.2s" begin="-1.48s" repeatCount="indefinite" path="M 325 222 C 255 260 175 268 118 298"/>
+      </circle>
+
+      <!-- CANAL A box -->
+      <rect x="10" y="298" width="216" height="112" stroke="#B8960C" stroke-opacity="0.35" stroke-width="1" fill="#B8960C" fill-opacity="0.09"/>
+      <text x="118" y="320" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="9.5" fill="#B8960C" opacity="0.9" letter-spacing="3">CANAL A</text>
+      <text x="118" y="343" text-anchor="middle" font-family="Instrument Serif,serif" font-style="italic" font-size="16" fill="currentColor" opacity="0.85">Comisión referido</text>
+      <text x="118" y="362" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="9" fill="currentColor" opacity="0.65" letter-spacing="0.5">30% · CFDI 80111500</text>
+      <text x="118" y="380" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="8.5" fill="#B8960C" opacity="0.8">$13.5K — $195K MXN</text>
+      <text x="118" y="397" text-anchor="middle" font-family="Instrument Serif,serif" font-style="italic" font-size="9.5" fill="#B8960C" opacity="0.65">deducible para INFLUENCE IA</text>
+
+      <!-- P3A: Canal A → DESPACHO -->
+      <path d="M 118 410 C 168 432 300 445 342 450" stroke="#B8960C" stroke-opacity="0.3" stroke-width="2" stroke-dasharray="6 5">
+        <animate attributeName="stroke-dashoffset" values="130;0" dur="2s" repeatCount="indefinite"/>
+      </path>
+      <circle r="3.5" fill="#B8960C" opacity="0.8">
+        <animateMotion dur="2s" repeatCount="indefinite" path="M 118 410 C 168 432 300 445 342 450"/>
+      </circle>
+      <circle r="2.5" fill="#B8960C" opacity="0.45">
+        <animateMotion dur="2s" begin="-1s" repeatCount="indefinite" path="M 118 410 C 168 432 300 445 342 450"/>
+      </circle>
+
+      <!-- P2B: INFLUENCE IA → Canal B (right) -->
+      <path d="M 435 222 C 505 260 585 268 642 298" stroke="currentColor" stroke-opacity="0.25" stroke-width="2" stroke-dasharray="7 5">
+        <animate attributeName="stroke-dashoffset" values="160;0" dur="2.7s" repeatCount="indefinite"/>
+      </path>
+      <circle r="3" fill="currentColor" opacity="0.55">
+        <animateMotion dur="2.7s" repeatCount="indefinite" path="M 435 222 C 505 260 585 268 642 298"/>
+      </circle>
+      <circle r="2.2" fill="currentColor" opacity="0.3">
+        <animateMotion dur="2.7s" begin="-1.35s" repeatCount="indefinite" path="M 435 222 C 505 260 585 268 642 298"/>
+      </circle>
+
+      <!-- CANAL B box -->
+      <rect x="534" y="298" width="216" height="112" stroke="currentColor" stroke-opacity="0.18" stroke-width="1" fill="currentColor" fill-opacity="0.05"/>
+      <text x="642" y="320" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="9.5" fill="currentColor" opacity="0.55" letter-spacing="3">CANAL B</text>
+      <text x="642" y="343" text-anchor="middle" font-family="Instrument Serif,serif" font-style="italic" font-size="16" fill="currentColor" opacity="0.78">Servicios profesionales</text>
+      <text x="642" y="362" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="9" fill="currentColor" opacity="0.55">Contabilidad · Asesoría · SAT</text>
+      <text x="642" y="380" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="8.5" fill="currentColor" opacity="0.5">CFDI 80121600 · $20K–$40K/mes</text>
+      <text x="642" y="397" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="8" fill="currentColor" opacity="0.38">despacho factura a INFLUENCE IA</text>
+
+      <!-- P3B: Canal B → DESPACHO -->
+      <path d="M 642 410 C 592 432 460 445 418 450" stroke="currentColor" stroke-opacity="0.18" stroke-width="1.5" stroke-dasharray="6 5">
+        <animate attributeName="stroke-dashoffset" values="130;0" dur="2.4s" repeatCount="indefinite"/>
+      </path>
+      <circle r="2.5" fill="currentColor" opacity="0.4">
+        <animateMotion dur="2.4s" repeatCount="indefinite" path="M 642 410 C 592 432 460 445 418 450"/>
+      </circle>
+      <circle r="2" fill="currentColor" opacity="0.22">
+        <animateMotion dur="2.4s" begin="-1.2s" repeatCount="indefinite" path="M 642 410 C 592 432 460 445 418 450"/>
+      </circle>
+
+      <!-- DESPACHO node (bottom center) -->
+      <circle cx="380" cy="468" r="44" stroke="currentColor" stroke-opacity="0.12" stroke-width="1" fill="currentColor" fill-opacity="0.05"/>
+      <circle cx="380" cy="468" r="46" stroke="#B8960C" fill="none" stroke-width="1">
+        <animate attributeName="r" values="46;66;46" dur="4s" begin="2.8s" repeatCount="indefinite"/>
+        <animate attributeName="stroke-opacity" values="0.2;0;0.2" dur="4s" begin="2.8s" repeatCount="indefinite"/>
+      </circle>
+      <text x="380" y="455" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="9" fill="currentColor" opacity="0.48" letter-spacing="3">DESPACHO</text>
+      <text x="380" y="472" text-anchor="middle" font-family="Instrument Serif,serif" font-style="italic" font-size="14" fill="currentColor" opacity="0.72">Devolución</text>
+      <text x="380" y="488" text-anchor="middle" font-family="Instrument Serif,serif" font-style="italic" font-size="14" fill="currentColor" opacity="0.72">del recurso</text>
+
+      <!-- Path labels -->
+      <text x="200" y="248" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="9" fill="#B8960C" opacity="0.7" letter-spacing="1.5" transform="rotate(-17,200,248)">COMISIÓN · 30%</text>
+      <text x="562" y="250" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="9" fill="currentColor" opacity="0.42" letter-spacing="1" transform="rotate(17,562,250)">SERVICIOS PROF.</text>
+    </svg>
+
+    <!-- Mobile fallback: flujo en lista vertical -->
+    <div class="svg-mobile-flow">
+      <div class="svg-mobile-row">
+        <span class="svg-mobile-node">Empresa</span>
+        <span class="svg-mobile-arrow">↓</span>
+        <span class="svg-mobile-label">Paga el proyecto completo · CFDI 4.0</span>
+      </div>
+      <div class="svg-mobile-row">
+        <span class="svg-mobile-node">INFLUENCE IA</span>
+        <span class="svg-mobile-arrow">↓</span>
+        <span class="svg-mobile-label">Entrega servicio · Activa Tracker · Hub de operación</span>
+      </div>
+      <div class="svg-mobile-row" style="background:rgba(184,150,12,0.04);">
+        <span class="svg-mobile-node" style="color:var(--gold);opacity:1;">Canal A</span>
+        <span class="svg-mobile-arrow">↓</span>
+        <span class="svg-mobile-label">Comisión 30% · CFDI 80111500 · $13.5K–$195K MXN</span>
+      </div>
+      <div class="svg-mobile-row">
+        <span class="svg-mobile-node">Canal B</span>
+        <span class="svg-mobile-arrow">↓</span>
+        <span class="svg-mobile-label">Servicios profesionales 30% · Contabilidad · Asesoría SAT</span>
+      </div>
+      <div class="svg-mobile-row" style="border-bottom:none;">
+        <span class="svg-mobile-node">Despacho</span>
+        <span class="svg-mobile-arrow">✓</span>
+        <span class="svg-mobile-label">Recibe ingresos vía dos canales · Mismo día de cobro</span>
+      </div>
+    </div>
+
+    <!-- TWO CANAL DETAIL CARDS -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;margin-bottom:3.5rem;">
+
+      <!-- Canal A -->
+      <div class="rev-up" style="padding:2rem;border:1px solid rgba(184,150,12,0.22);background:rgba(184,150,12,0.06);">
+        <p style="font-size:0.48rem;letter-spacing:0.38em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;display:flex;align-items:center;gap:0.7rem;"><span style="display:block;width:1.5rem;height:1px;background:var(--gold);flex-shrink:0;"></span>Canal A · Comisión por referido</p>
+        <p style="font-family:'Instrument Serif',serif;font-size:1.7rem;font-weight:300;margin-bottom:0.6rem;line-height:1.1;">30% <em style="font-size:0.9rem;opacity:0.5;">del valor del proyecto</em></p>
+        <p style="font-size:0.7rem;opacity:0.48;line-height:1.75;margin-bottom:1.5rem;">El despacho emite CFDI a INFLUENCE IA por captación y referencia comercial. Concepto: <em>Servicios de consultoría comercial</em>. ClaveProdServ 80111500 · ClaveUnidad E48. Ingreso declarado, transferencia bancaria, gasto deducible para INFLUENCE IA.</p>
+        <div style="display:flex;flex-direction:column;gap:0;">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;padding:0.6rem 0;border-bottom:1px solid rgba(184,150,12,0.15);">
+            <span style="font-size:0.62rem;opacity:0.45;">Nivel 01 · Inicio Digital</span>
+            <span style="font-family:'Instrument Serif',serif;font-size:1rem;color:var(--gold);">$13,500 — $36,000</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;padding:0.6rem 0;border-bottom:1px solid rgba(184,150,12,0.15);">
+            <span style="font-size:0.62rem;opacity:0.45;">Nivel 02 · Web 4.0 Integrado</span>
+            <span style="font-family:'Instrument Serif',serif;font-size:1rem;color:var(--gold);">$54,000 — $195,000</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;padding:0.6rem 0;">
+            <span style="font-size:0.62rem;opacity:0.45;">Nivel 03 · por mes activo</span>
+            <span style="font-family:'Instrument Serif',serif;font-size:1rem;color:var(--gold);">$19,500 — $55,500/mes</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Canal B -->
+      <div class="rev-up" style="padding:2rem;border:1px solid var(--rule);">
+        <p style="font-size:0.48rem;letter-spacing:0.38em;text-transform:uppercase;color:var(--muted);margin-bottom:1.2rem;display:flex;align-items:center;gap:0.7rem;"><span style="display:block;width:1.5rem;height:1px;background:currentColor;flex-shrink:0;"></span>Canal B · Servicios profesionales a INFLUENCE IA</p>
+        <p style="font-family:'Instrument Serif',serif;font-size:1.7rem;font-weight:300;margin-bottom:0.6rem;line-height:1.1;">30% <em style="font-size:0.9rem;opacity:0.5;">vía servicios reales</em></p>
+        <p style="font-size:0.7rem;opacity:0.48;line-height:1.75;margin-bottom:1.5rem;">Canal B opera vía servicios profesionales que el despacho factura directamente a INFLUENCE IA como cliente: contabilidad, asesoría fiscal, representación SAT. Servicios reales a precio de mercado — CFDI válido, deducible para INFLUENCE IA.</p>
+        <div style="display:flex;flex-direction:column;gap:0;">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;padding:0.6rem 0;border-bottom:1px solid var(--rule);">
+            <span style="font-size:0.62rem;opacity:0.42;">Nivel 01 · Inicio Digital · 80121600</span>
+            <span style="font-family:'Instrument Serif',serif;font-size:1rem;">$13,500–$36,000</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;padding:0.6rem 0;border-bottom:1px solid var(--rule);">
+            <span style="font-size:0.62rem;opacity:0.42;">Nivel 02 · Web 4.0 Integrado · 80111505</span>
+            <span style="font-family:'Instrument Serif',serif;font-size:1rem;">$54,000–$195,000</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;padding:0.6rem 0;border-bottom:1px solid var(--rule);">
+            <span style="font-size:0.62rem;opacity:0.42;">Nivel 03 · Operación mensual · 80131500</span>
+            <span style="font-family:'Instrument Serif',serif;font-size:1rem;">$19,500–$55,500/mes</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="intro-grid">
+      <div>
+        <p style="font-family:'Instrument Serif',serif;font-size:1.05rem;margin-bottom:2rem;line-height:1.4;opacity:0.7;">Flujo documentado — paso a paso</p>
+
+        <div style="display:flex;flex-direction:column;gap:0;">
+          <div style="padding:1.5rem 0;border-bottom:1px solid var(--rule);display:flex;gap:1.4rem;align-items:flex-start;">
+            <span style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1.1rem;opacity:0.18;min-width:2.2rem;flex-shrink:0;margin-top:-2px;">01</span>
+            <div>
+              <p style="font-family:'Instrument Serif',serif;font-size:0.95rem;margin-bottom:0.35rem;line-height:1.3;">El cliente firma contrato y paga a INFLUENCE IA</p>
+              <p style="font-size:0.7rem;opacity:0.42;line-height:1.65;">Transferencia bancaria o cheque nominativo (Art. 27 Fracc. III LISR). INFLUENCE IA emite CFDI 4.0 al cliente con ClaveProdServ correcto.</p>
+            </div>
+          </div>
+          <div style="padding:1.5rem 0;border-bottom:1px solid var(--rule);display:flex;gap:1.4rem;align-items:flex-start;">
+            <span style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1.1rem;opacity:0.18;min-width:2.2rem;flex-shrink:0;margin-top:-2px;">02</span>
+            <div>
+              <p style="font-family:'Instrument Serif',serif;font-size:0.95rem;margin-bottom:0.35rem;line-height:1.3;">INFLUENCE IA entrega el servicio y activa el Tracker</p>
+              <p style="font-size:0.7rem;opacity:0.42;line-height:1.65;">Cada actividad queda registrada con timestamp en el <a href="https://victor-ia.xyz/" target="_blank" style="color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(184,150,12,0.35);">Tracker Digital</a> desde el primer día. El despacho puede verificar el progreso en tiempo real. El soporte material es inmutable — todas las horas, avances y entregables documentados desde el inicio.</p>
+            </div>
+          </div>
+          <div style="padding:1.5rem 0;border-bottom:1px solid rgba(184,150,12,0.2);display:flex;gap:1.4rem;align-items:flex-start;background:rgba(184,150,12,0.04);padding-left:1rem;margin-left:-1rem;margin-right:-1rem;padding-right:1rem;">
+            <span style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1.1rem;opacity:0.5;min-width:2.2rem;flex-shrink:0;margin-top:-2px;color:var(--gold);">03A</span>
+            <div>
+              <p style="font-family:'Instrument Serif',serif;font-size:0.95rem;margin-bottom:0.35rem;line-height:1.3;">Canal A — El despacho factura su comisión a INFLUENCE IA</p>
+              <p style="font-size:0.7rem;opacity:0.42;line-height:1.65;">Concepto: "Servicios de consultoría comercial y captación de clientes". ClaveProdServ 80111500 · ClaveUnidad E48. CFDI emitido por el despacho — INFLUENCE IA lo recibe y lo deduce como gasto de adquisición de clientes.</p>
+            </div>
+          </div>
+          <div style="padding:1.5rem 0;border-bottom:1px solid var(--rule);display:flex;gap:1.4rem;align-items:flex-start;">
+            <span style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1.1rem;opacity:0.18;min-width:2.2rem;flex-shrink:0;margin-top:-2px;">03B</span>
+            <div>
+              <p style="font-family:'Instrument Serif',serif;font-size:0.95rem;margin-bottom:0.35rem;line-height:1.3;">Canal B — El despacho factura sus servicios profesionales mensuales a INFLUENCE IA</p>
+              <p style="font-size:0.7rem;opacity:0.42;line-height:1.65;">INFLUENCE IA es cliente permanente del despacho para contabilidad, asesoría fiscal y representación ante el SAT. El despacho emite CFDI mensual por sus honorarios — ingreso recurrente e independiente de cualquier referido activo.</p>
+            </div>
+          </div>
+          <div style="padding:1.5rem 0;border-bottom:1px solid var(--rule);display:flex;gap:1.4rem;align-items:flex-start;">
+            <span style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1.1rem;opacity:0.18;min-width:2.2rem;flex-shrink:0;margin-top:-2px;">04</span>
+            <div>
+              <p style="font-family:'Instrument Serif',serif;font-size:0.95rem;margin-bottom:0.35rem;line-height:1.3;">INFLUENCE IA paga ambos canales el mismo día o al día hábil siguiente</p>
+              <p style="font-size:0.7rem;opacity:0.42;line-height:1.65;">Dos transferencias bancarias directas al momento de cobrar al cliente: Canal A (comisión) y Canal B (servicios profesionales). INFLUENCE IA deduce ambos pagos (Art. 27 LISR). Circuito cerrado — ambas partes tienen CFDI de entrada y de salida.</p>
+            </div>
+          </div>
+          <div style="padding:1.5rem 0;display:flex;gap:1.4rem;align-items:flex-start;">
+            <span style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1.1rem;opacity:0.18;min-width:2.2rem;flex-shrink:0;margin-top:-2px;">05</span>
+            <div>
+              <p style="font-family:'Instrument Serif',serif;font-size:0.95rem;margin-bottom:0.35rem;line-height:1.3;">Reporte ejecutivo mensual generado por el Tracker</p>
+              <p style="font-size:0.7rem;opacity:0.42;line-height:1.65;">El despacho recibe automáticamente un PDF con el resumen de actividades del mes. Listo para adjuntar a la contabilidad del cliente o presentar ante el SAT como soporte material de la deducción.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="intro-aside">
+        <div class="aside-card" style="border-color:rgba(184,150,12,0.35);background:var(--gold2);">
+          <p class="aside-card-label" style="color:var(--gold);opacity:1;">Ingresos al despacho — dos canales</p>
+          <p class="aside-card-val" style="font-size:1.25rem;">Canal A + Canal B<br><span style="font-size:0.75rem;opacity:0.6;font-weight:400;font-family:'Space Grotesk',sans-serif;">Comisión por referido + Servicios profesionales a INFLUENCE IA</span></p>
+        </div>
+        <div class="aside-card">
+          <p class="aside-card-label">Canal B · Servicios profesionales al despacho</p>
+          <p class="aside-card-val" style="font-size:1.25rem;">30%<br><span style="font-size:0.75rem;opacity:0.6;font-weight:400;font-family:'Space Grotesk',sans-serif;">del valor del proyecto · facturado como servicios reales a INFLUENCE IA</span></p>
+        </div>
+        <div class="aside-card">
+          <p class="aside-card-label">Por qué el SAT no puede objetar</p>
+          <p class="aside-card-val" style="font-size:0.88rem;line-height:1.6;font-weight:400;font-family:'Space Grotesk',sans-serif;">Ambas partes tienen CFDIs emitidos y recibidos. La operación tiene contrato, transferencias bancarias, soporte material del Tracker y reportes mensuales. No hay efectivo, no hay intermediarios sin razón de negocio real.</p>
+        </div>
+        <div class="aside-card">
+          <p class="aside-card-label">Contrato de colaboración</p>
+          <p class="aside-card-val" style="font-size:0.88rem;line-height:1.6;font-weight:400;font-family:'Space Grotesk',sans-serif;">Se firma antes del primer cliente. Define Canal A y Canal B, montos, confidencialidad, exclusividad territorial y los derechos de cada parte en caso de auditoría.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- IA Quote -->
+  <div class="ia-quote-strip">
+    <p class="ia-quote-text">
+      "El futuro del despacho contable no está en hacer más facturas — <em>está en hacer que cada factura signifique más para su cliente.</em>"
+    </p>
+    <p class="ia-quote-attr">VICTOR IA · Inteligencia aplicada a la operación fiscal</p>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-box">
+    <span class="eyebrow" style="color:rgba(248,247,245,0.3);">Alianza exclusiva</span>
+    <h2 class="display">Hablemos en<br><em>privado.</em></h2>
+    <p class="lead" style="margin:1.5rem auto 0;max-width:52ch;">Esta alianza no es pública. Si llegas aquí es porque alguien de confianza te compartió este acceso. Contáctanos directamente para una consulta sin compromisos.</p>
+    <div class="cta-buttons">
+      <a href="https://wa.me/5219842353159?text=Hola%2C%20soy%20contador%20y%20quiero%20conocer%20la%20alianza%20fiscal%20de%20VICTOR%20IA" target="_blank" rel="noopener" class="btn-light">WhatsApp directo</a>
+      <a href="mailto:info@victor-ia.com.mx?subject=Alianza%20Fiscal%20Tecnológica&body=Hola%2C%20soy%20contador%20y%20me%20interesa%20conocer%20su%20alianza%20fiscal." class="btn-ghost">info@victor-ia.com.mx</a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <span>© 2026 INFLUENCE IA S.A. DE C.V. · Todos los derechos reservados</span>
+    <span>Playa del Carmen, Quintana Roo · México</span>
+  </footer>
+
+</div><!-- /content -->
+
+<!-- ─── LOGIN OVERLAY ─────────────────────────────────────────────────── -->
+<div id="auth-overlay" style="display:none;">
+  <div class="auth-bg"></div>
+  <div class="auth-box">
+    <div class="auth-logo"><img src="/assets/brand/logo-full.png" alt="VICTOR IA" style="height:32px;width:auto;mix-blend-mode:multiply;display:block;margin:0 auto;"></div>
+    <div class="auth-badge">Acceso Restringido</div>
+    <h2 class="auth-title">Alianza Fiscal<br><em>Tecnológica</em></h2>
+    <p class="auth-sub">Esta sección es exclusiva para despachos contables y socios estratégicos. Ingresa tus credenciales para continuar.</p>
+    <form id="auth-form" autocomplete="off">
+      <div class="auth-field">
+        <label class="auth-label" for="auth-user">Usuario</label>
+        <input class="auth-input" id="auth-user" type="text" autocomplete="username" spellcheck="false" placeholder="despacho@firma.com">
+      </div>
+      <div class="auth-field">
+        <label class="auth-label" for="auth-pass">Contraseña</label>
+        <input class="auth-input" id="auth-pass" type="password" autocomplete="current-password" placeholder="••••••••••">
+      </div>
+      <p class="auth-error" id="auth-error"></p>
+      <button class="auth-btn" type="submit">Ingresar &nbsp;→</button>
+    </form>
+    <a href="https://wa.me/5219842353159?text=Hola%2C%20necesito%20acceso%20a%20la%20alianza%20fiscal%20de%20VICTOR%20IA" target="_blank" rel="noopener" class="auth-request">Solicitar acceso &nbsp;↗</a>
+  </div>
+</div>
+
+<style>
+  /* ─── Auth overlay ─────────────────────────── */
+  #auth-overlay {
+    position: fixed; inset: 0; z-index: 9999;
+    display: flex; align-items: center; justify-content: center;
+    padding: 1.5rem;
+  }
+  .auth-bg {
+    position: absolute; inset: 0;
+    background: #0A0B0D;
+  }
+  .auth-bg::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: url('assets/svc-bg-18.jpg');
+    background-size: cover; background-position: center 20%;
+    opacity: 0.14;
+  }
+  .auth-box {
+    position: relative; z-index: 1;
+    width: 100%; max-width: 440px;
+    background: rgba(14,15,18,0.85);
+    border: 1px solid rgba(248,247,245,0.09);
+    padding: clamp(2.4rem,5vw,3.5rem);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    animation: authIn 0.6s cubic-bezier(0.16,1,0.3,1) both;
+  }
+  @keyframes authIn {
+    from { opacity:0; transform: translateY(16px); }
+    to   { opacity:1; transform: translateY(0); }
+  }
+  .auth-logo {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.1rem; font-weight: 400; letter-spacing: -0.01em;
+    color: #F8F7F5; margin-bottom: 0.8rem;
+  }
+  .auth-logo em { font-style: italic; }
+  .auth-badge {
+    display: inline-block;
+    font-size: 0.47rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: #B8960C; border: 1px solid rgba(184,150,12,0.35);
+    padding: 0.28rem 0.75rem; margin-bottom: 2rem;
+  }
+  .auth-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(1.8rem,4vw,2.6rem);
+    font-weight: 400; line-height: 1; letter-spacing: -0.025em;
+    color: #F8F7F5; margin-bottom: 1rem;
+  }
+  .auth-title em { font-style: italic; }
+  .auth-sub {
+    font-size: 0.75rem; line-height: 1.65;
+    color: rgba(248,247,245,0.38); font-weight: 300;
+    margin-bottom: 2rem;
+  }
+  .auth-field { display: flex; flex-direction: column; gap: 0.45rem; margin-bottom: 1.2rem; }
+  .auth-label { font-size: 0.52rem; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(248,247,245,0.3); }
+  .auth-input {
+    background: rgba(248,247,245,0.05);
+    border: 1px solid rgba(248,247,245,0.1);
+    color: #F8F7F5;
+    padding: 0.85rem 1rem;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.88rem; letter-spacing: 0.02em;
+    outline: none; width: 100%;
+    transition: border-color 0.2s;
+  }
+  .auth-input::placeholder { color: rgba(248,247,245,0.18); }
+  .auth-input:focus { border-color: rgba(248,247,245,0.3); }
+  .auth-error {
+    font-size: 0.65rem; color: rgba(220,80,80,0.8);
+    letter-spacing: 0.08em; min-height: 1.2rem;
+    margin-bottom: 0.4rem;
+  }
+  .auth-btn {
+    width: 100%; padding: 1rem;
+    background: #F8F7F5; color: #0E0F12;
+    border: none; cursor: pointer;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase;
+    font-weight: 500;
+    transition: background 0.2s;
+  }
+  .auth-btn:hover { background: rgba(248,247,245,0.88); }
+  .auth-request {
+    display: block; text-align: center; margin-top: 1.5rem;
+    font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(248,247,245,0.28); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .auth-request:hover { color: rgba(248,247,245,0.6); }
+
+  /* ═══════════════════════════════════════════════
+     WEB 4.0 LAYER — alianza-fiscal
+  ═══════════════════════════════════════════════ */
+  #neural-canvas {
+    position: fixed; inset: 0; z-index: 4;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+  }
+  .aside-card {
+    background: rgba(248,247,245,.62) !important;
+    backdrop-filter: blur(14px) saturate(1.5);
+    -webkit-backdrop-filter: blur(14px) saturate(1.5);
+    transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .35s ease !important;
+  }
+  .aside-card:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 8px 32px rgba(14,15,18,.09), inset 0 1px 0 rgba(255,255,255,.85) !important;
+  }
+  .level-card:not(.featured) {
+    background: rgba(248,247,245,.58) !important;
+    backdrop-filter: blur(12px) saturate(1.4);
+    -webkit-backdrop-filter: blur(12px) saturate(1.4);
+    transition: background .35s ease, box-shadow .35s ease, transform .4s cubic-bezier(.16,1,.3,1) !important;
+  }
+  .level-card:not(.featured):hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 8px 32px rgba(14,15,18,.09), inset 0 1px 0 rgba(255,255,255,.85) !important;
+  }
+  .proc-step, .tracker-feat, .win-card {
+    background: rgba(248,247,245,.54) !important;
+    backdrop-filter: blur(10px) saturate(1.3);
+    -webkit-backdrop-filter: blur(10px) saturate(1.3);
+  }
+  /* Legal items: dark glass — NO warm glass, viven sobre fondo oscuro */
+  .legal-item {
+    background: rgba(248,247,245,0.05) !important;
+    backdrop-filter: blur(12px) saturate(1.15) !important;
+    -webkit-backdrop-filter: blur(12px) saturate(1.15) !important;
+  }
+  /* Separador horizontal entre filas del legal grid */
+  .legal-grid .legal-item:nth-child(n+4) {
+    border-top: 1px solid rgba(248,247,245,0.08) !important;
+  }
+  .legal-grid .legal-item:nth-child(n+4):hover {
+    border-top-color: rgba(184,150,12,0.65) !important;
+    border-top-width: 2px !important;
+  }
+  .win-card {
+    transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .35s ease !important;
+  }
+  .win-card:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 8px 32px rgba(14,15,18,.09), inset 0 1px 0 rgba(255,255,255,.85) !important;
+  }
+  /* Gold gradient on display italic */
+  .display em {
+    background: linear-gradient(130deg, #8a6a00 0%, #d4a828 40%, #b8960c 68%, #8a6a00 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: goldShimmer 5s linear infinite;
+  }
+  @keyframes goldShimmer {
+    0%   { background-position: 0% center; }
+    100% { background-position: 200% center; }
+  }
+  /* Nav hide on scroll */
+  nav { transition: transform 0.42s cubic-bezier(0.16,1,0.3,1) !important; }
+  nav.nav-hidden { transform: translateY(-110%) !important; }
+  nav.nav-scrolled {
+    background: rgba(248,247,245,.88) !important;
+    backdrop-filter: blur(20px) saturate(1.7) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(1.7) !important;
+    border-bottom: 1px solid rgba(14,15,18,.055) !important;
+  }
+
+  /* Holo shimmer on primary buttons */
+  .btn-primary {
+    position: relative; overflow: hidden;
+  }
+  .btn-primary::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.1) 45%, transparent 100%);
+    background-size: 200% 100%;
+    pointer-events: none;
+    animation: ctaShimmer 3s ease-in-out infinite;
+  }
+  @keyframes ctaShimmer {
+    0%   { background-position: -100% 0; opacity: 0; }
+    15%  { opacity: 1; }
+    100% { background-position: 260% 0; opacity: 0; }
+  }
+
+  /* Hero ambient orb */
+  .hero { position: relative; }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -18%; right: -6%;
+    width: 56vw; height: 56vw;
+    background: radial-gradient(circle, rgba(184,150,12,.048) 0%, transparent 68%);
+    pointer-events: none;
+    animation: heroOrb 14s ease-in-out infinite alternate;
+    will-change: transform;
+  }
+  @keyframes heroOrb {
+    from { transform: translate(0,0) scale(1); }
+    to   { transform: translate(-4%,3%) scale(1.07); }
+  }
+
+  /* Card cursor shimmer */
+  .level-card:not(.featured), .aside-card, .proc-step, .win-card {
+    position: relative; overflow: hidden;
+  }
+  .level-card:not(.featured)::after,
+  .aside-card::after,
+  .proc-step::after,
+  .win-card::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(184,150,12,.12) 0%, transparent 58%);
+    opacity: 0; transition: opacity .35s;
+    pointer-events: none;
+  }
+  .level-card:not(.featured):hover::after,
+  .aside-card:hover::after,
+  .proc-step:hover::after,
+  .win-card:hover::after { opacity: 1; }
+
+  .eyebrow::before {
+    width: 0 !important;
+    transition: width .75s cubic-bezier(0.16,1,0.3,1) !important;
+  }
+  .eyebrow.in::before { width: 2rem !important; }
+  body::after {
+    content: '';
+    position: fixed; inset: 0; z-index: 9990;
+    pointer-events: none;
+    opacity: .022;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 180px 180px;
+    animation: grain .5s steps(1) infinite;
+  }
+  @keyframes grain {
+    0%  { background-position:   0%   0%; }
+    20% { background-position: -15%  -5%; }
+    40% { background-position:  10%  15%; }
+    60% { background-position: -12%  10%; }
+    80% { background-position:  18%  -8%; }
+   100% { background-position:   0%   0%; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    body::after { animation: none; }
+    #neural-canvas { display: none; }
+    .hero::before { animation: none; }
+    .display em { animation: none !important; }
+    .btn-primary::after { display: none !important; }
+    .rev-up { opacity: 1 !important; transform: none !important; transition: none !important; }
+    .rev-wipe { clip-path: none !important; transition: none !important; }
+  }
+
+  /* ═══════════════════════════════════════════════
+     MOBILE PREMIUM — alianza-fiscal Mobbin grade
+  ═══════════════════════════════════════════════ */
+  .mobile-cta-bar { display: none; }
+  @media (max-width: 640px) {
+    :root { --sab: env(safe-area-inset-bottom,0px); }
+    footer { padding-bottom: calc(90px + var(--sab)) !important; }
+
+    /* Glassmorphic nav */
+    nav {
+      background: rgba(248,247,245,.9) !important;
+      backdrop-filter: blur(24px) saturate(1.8) !important;
+      -webkit-backdrop-filter: blur(24px) saturate(1.8) !important;
+      border-bottom: 1px solid rgba(14,15,18,.06) !important;
+      padding: 1.2rem 1.2rem !important;
+    }
+    .nav-badge { display: none !important; }
+    .nav-right { gap: 0.8rem !important; }
+
+    /* Hero */
+    .hero { padding-left: 1.2rem !important; padding-right: 1.2rem !important; }
+    .display { font-size: clamp(2.4rem,11vw,4.2rem) !important; letter-spacing: -0.035em; }
+
+    /* Level cards */
+    .level-card {
+      border-radius: 20px !important;
+      border: 1px solid rgba(255,255,255,.65) !important;
+      box-shadow: 0 2px 16px rgba(14,15,18,.07), 0 1px 3px rgba(14,15,18,.04) !important;
+      padding: 1.8rem 1.4rem !important;
+    }
+    .level-card:not(.featured):active {
+      transform: scale(0.975) !important;
+      transition: transform 0.14s cubic-bezier(0.34,1.56,0.64,1) !important;
+    }
+    .level-card.featured { border-radius: 20px !important; }
+
+    /* Aside cards */
+    .aside-card {
+      border-radius: 18px !important;
+      border: 1px solid rgba(255,255,255,.65) !important;
+      box-shadow: 0 2px 12px rgba(14,15,18,.06) !important;
+    }
+
+    /* Proc steps */
+    .proc-step {
+      border-radius: 16px !important;
+      box-shadow: 0 2px 10px rgba(14,15,18,.05) !important;
+      padding: 1.4rem !important;
+    }
+
+    /* Table */
+    .concepts-table { font-size: 0.78rem !important; }
+    .ia-quote-text { max-width: 92% !important; font-size: clamp(1.1rem,4.5vw,1.6rem) !important; }
+    /* Tracker rows stacked */
+    .tracker-row { flex-direction: column; align-items: flex-start; gap: 0.15rem; padding: 0.7rem 0 !important; }
+    .tracker-row-label { letter-spacing: 0.04em !important; }
+    /* intro-grid inside dark section */
+    .intro-grid { gap: 2rem !important; }
+    /* Prose padding */
+    .hero-sub { font-size: 0.78rem; }
+    /* Display heading tighter on very small phones */
+    .display { word-break: break-word; }
+
+    /* Sections */
+    .section { padding: 2.5rem 1.2rem !important; }
+    .section-wide { padding: 2.5rem 1.2rem !important; }
+
+    /* Hero orb off on mobile */
+    .hero::before { display: none !important; }
+
+    /* Floating bottom CTA */
+    .mobile-cta-bar {
+      display: flex; align-items: center; justify-content: center;
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 500;
+      padding: 0.85rem 1.2rem max(1rem, var(--sab));
+      background: rgba(248,247,245,.95);
+      backdrop-filter: blur(24px) saturate(2);
+      -webkit-backdrop-filter: blur(24px) saturate(2);
+      border-top: 1px solid rgba(14,15,18,.07);
+      box-shadow: 0 -8px 32px rgba(14,15,18,.06);
+    }
+    .mobile-cta-link {
+      display: block; width: 100%;
+      padding: 0.95rem 1rem;
+      background: var(--ink); color: var(--warm);
+      text-align: center; text-decoration: none;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase;
+      font-weight: 500; border-radius: 12px;
+      transition: transform 0.14s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .mobile-cta-link:active { transform: scale(0.97); }
+  }
+</style>
+
+<script>
+(function(){
+  /* ── Canvas water-trail reveal + cursor (identical to home) ── */
+  var canvas = document.getElementById('revealCanvas');
+  var ctx    = canvas.getContext('2d');
+  var WARM   = '248,247,245';
+  var isMobile = !window.matchMedia('(hover:hover)').matches;
+  var lerp = function(a,b,t){ return a+(b-a)*t; };
+
+  function resize(){ canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+  window.addEventListener('resize', resize); resize();
+
+  if(isMobile){
+    var BASE_R=34, STEP_PX=5, HOLD_MS=1500, FADE_MS=1400, MAX_V=1.8, MAX_PTS=900;
+    var trail=[], isTouching=false, lastX=null, lastY=null, lastT=null, vel=0;
+    var tx2=window.innerWidth*.5, ty2=window.innerHeight*.5, fx=tx2, fy=ty2, liveA=0;
+    function stamp(x,y,hold){ var r=BASE_R*(0.74+Math.random()*0.54); trail.push({x:x+(Math.random()-.5)*5, y:y+(Math.random()-.5)*5, t:performance.now(), r:r, hold:hold}); if(trail.length>MAX_PTS) trail.splice(0,trail.length-MAX_PTS); }
+    function erase(x,y,r,a){ var halo=r*2.1; ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fillStyle='rgba(0,0,0,'+a+')'; ctx.fill(); var g=ctx.createRadialGradient(x,y,r,x,y,halo); g.addColorStop(0,'rgba(0,0,0,'+(a*.88)+')'); g.addColorStop(.38,'rgba(0,0,0,'+(a*.5)+')'); g.addColorStop(.72,'rgba(0,0,0,'+(a*.13)+')'); g.addColorStop(1,'rgba(0,0,0,0)'); ctx.beginPath(); ctx.arc(x,y,halo,0,Math.PI*2); ctx.fillStyle=g; ctx.fill(); }
+    function draw(){ var now=performance.now(), maxAge=HOLD_MS+FADE_MS; while(trail.length&&now-trail[0].t>=maxAge) trail.shift(); fx=lerp(fx,tx2,isTouching?.20:.08); fy=lerp(fy,ty2,isTouching?.20:.08); liveA=lerp(liveA,isTouching?1:0,isTouching?.18:.05); ctx.clearRect(0,0,canvas.width,canvas.height); ctx.fillStyle='rgba('+WARM+',1)'; ctx.fillRect(0,0,canvas.width,canvas.height); ctx.globalCompositeOperation='destination-out'; for(var i=0;i<trail.length;i++){ var p=trail[i],age=now-p.t,a=age<p.hold?1:1-(age-p.hold)/FADE_MS; if(a>.005) erase(p.x,p.y,p.r,a); } if(liveA>.005) erase(fx,fy,BASE_R,liveA); ctx.globalCompositeOperation='source-over'; requestAnimationFrame(draw); }
+    draw();
+    var _tsX=0,_tsY=0;
+    document.addEventListener('touchstart',function(e){ var t=e.touches[0]; _tsX=t.clientX; _tsY=t.clientY; tx2=t.clientX; ty2=t.clientY; lastX=tx2; lastY=ty2; lastT=performance.now(); vel=0; isTouching=true; stamp(tx2,ty2,HOLD_MS); },{passive:true});
+    document.addEventListener('touchmove',function(e){ var t=e.touches[0],nx=t.clientX,ny=t.clientY; var adx=Math.abs(nx-_tsX),ady=Math.abs(ny-_tsY); if(ady>12&&ady>adx*1.5){ isTouching=false; return; } tx2=nx; ty2=ny; var dist=Math.hypot(nx-lastX,ny-lastY); if(dist>=STEP_PX){ var now=performance.now(),dt=Math.max(now-lastT,1); vel=lerp(vel,dist/dt,.35); var hold=Math.max(0,HOLD_MS*(1-Math.min(1,vel/MAX_V))); var steps=Math.ceil(dist/STEP_PX); for(var i=1;i<=steps;i++){ var f=i/steps; stamp(lastX+(nx-lastX)*f,lastY+(ny-lastY)*f,hold); } lastX=nx; lastY=ny; lastT=now; } },{passive:true});
+    document.addEventListener('touchend',function(){ isTouching=false; lastX=lastY=lastT=null; vel=0; },{passive:true});
+  } else {
+    var D_BASE=30, D_STEP=5, D_HOLD=1400, D_FADE=1200, D_MAX_V=2.2, D_MAX_PTS=900;
+    var dTrail=[], isMoving=false, moveTo=null, dLX=null, dLY=null, dLT=null, dVel=0;
+    var dlx=window.innerWidth*.5, dly=window.innerHeight*.5, dmx=dlx, dmy=dly, dLiveA=0;
+    var cur=document.getElementById('cursor'), ring=document.getElementById('cursorRing');
+    function dStamp(x,y,hold){ var r=D_BASE*(0.74+Math.random()*0.54); dTrail.push({x:x+(Math.random()-.5)*4, y:y+(Math.random()-.5)*4, t:performance.now(), r:r, hold:hold}); if(dTrail.length>D_MAX_PTS) dTrail.splice(0,dTrail.length-D_MAX_PTS); }
+    function dErase(x,y,r,a){ var halo=r*2.1; ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fillStyle='rgba(0,0,0,'+a+')'; ctx.fill(); var g=ctx.createRadialGradient(x,y,r,x,y,halo); g.addColorStop(0,'rgba(0,0,0,'+(a*.88)+')'); g.addColorStop(.38,'rgba(0,0,0,'+(a*.5)+')'); g.addColorStop(.72,'rgba(0,0,0,'+(a*.13)+')'); g.addColorStop(1,'rgba(0,0,0,0)'); ctx.beginPath(); ctx.arc(x,y,halo,0,Math.PI*2); ctx.fillStyle=g; ctx.fill(); }
+    function dDraw(){ var now=performance.now(),maxAge=D_HOLD+D_FADE; while(dTrail.length&&now-dTrail[0].t>=maxAge) dTrail.shift(); dlx=lerp(dlx,dmx,isMoving?.22:.08); dly=lerp(dly,dmy,isMoving?.22:.08); dLiveA=lerp(dLiveA,isMoving?1:0,isMoving?.18:.05); ctx.clearRect(0,0,canvas.width,canvas.height); ctx.fillStyle='rgba('+WARM+',1)'; ctx.fillRect(0,0,canvas.width,canvas.height); ctx.globalCompositeOperation='destination-out'; for(var i=0;i<dTrail.length;i++){ var p=dTrail[i],age=now-p.t,a=age<p.hold?1:1-(age-p.hold)/D_FADE; if(a>.005) dErase(p.x,p.y,p.r,a); } if(dLiveA>.005) dErase(dlx,dly,D_BASE,dLiveA); ctx.globalCompositeOperation='source-over'; requestAnimationFrame(dDraw); }
+    dDraw();
+    document.addEventListener('mousemove',function(e){
+      var nx=e.clientX, ny=e.clientY;
+      isMoving=true; clearTimeout(moveTo); moveTo=setTimeout(function(){ isMoving=false; },120);
+      dmx=nx; dmy=ny;
+      if(cur)  cur.style.cssText='left:'+nx+'px;top:'+ny+'px';
+      if(ring) ring.style.cssText='left:'+nx+'px;top:'+ny+'px';
+      if(dLX===null){ dLX=nx; dLY=ny; dLT=performance.now(); return; }
+      var dist=Math.hypot(nx-dLX,ny-dLY);
+      if(dist>=D_STEP){ var now=performance.now(),dt=Math.max(now-dLT,1); dVel=lerp(dVel,dist/dt,.35); var hold=Math.max(0,D_HOLD*(1-Math.min(1,dVel/D_MAX_V))); var steps=Math.ceil(dist/D_STEP); for(var i=1;i<=steps;i++){ var f=i/steps; dStamp(dLX+(nx-dLX)*f,dLY+(ny-dLY)*f,hold); } dLX=nx; dLY=ny; dLT=now; }
+    });
+    document.querySelectorAll('a, button').forEach(function(el){
+      el.addEventListener('mouseenter',function(){ if(ring){ ring.style.width='52px'; ring.style.height='52px'; } });
+      el.addEventListener('mouseleave',function(){ if(ring){ ring.style.width='32px'; ring.style.height='32px'; } });
+    });
+  }
+})();
+</script>
+
+<!-- Lenis smooth scroll -->
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script>
+(function(){
+  'use strict';
+
+  /* 1. LENIS */
+  if (typeof Lenis !== 'undefined') {
+    var lenis = new Lenis({ duration: 1.35, easing: function(t){ return Math.min(1, 1.001 - Math.pow(2, -10*t)); }, smoothTouch: false });
+    function raf(t){ lenis.raf(t); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+  }
+
+  /* 2. SCROLL PROGRESS BAR */
+  var progFill = document.getElementById('scrollProgFill');
+  function onScroll(){
+    var p = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+    if (progFill) progFill.style.width = (p*100) + '%';
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+
+  /* 3. SECTION REVEALS */
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){ entry.target.classList.add('in'); io.unobserve(entry.target); }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.display, .eyebrow').forEach(function(el){
+      if (!el.closest('.hero') && !el.closest('.ia-quote-strip')){ el.classList.add('rev-wipe'); io.observe(el); }
+    });
+    document.querySelectorAll('.aside-card, .level-card, .proc-step, .tracker-feat, .legal-item, .win-card').forEach(function(el, i){
+      if (!el.classList.contains('rev-up')){ el.classList.add('rev-up'); el.style.setProperty('--d', (i%4)*80+'ms'); }
+      io.observe(el);
+    });
+  }
+
+  /* 4. 3D TILT */
+  document.querySelectorAll('.level-card, .aside-card, .proc-step, .win-card').forEach(function(card){
+    card.addEventListener('mousemove', function(e){
+      var rect = card.getBoundingClientRect();
+      var dx = (e.clientX - rect.left - rect.width/2) / (rect.width/2);
+      var dy = (e.clientY - rect.top  - rect.height/2) / (rect.height/2);
+      card.style.transition = 'transform 0.1s ease';
+      card.style.transform  = 'perspective(800px) rotateX('+(-dy*3.5)+'deg) rotateY('+(dx*3.5)+'deg) translateZ(8px)';
+    });
+    card.addEventListener('mouseleave', function(){
+      card.style.transition = 'transform 0.6s cubic-bezier(0.16,1,0.3,1)';
+      card.style.transform  = 'perspective(800px) rotateX(0) rotateY(0) translateZ(0)';
+    });
+  });
+
+  /* 5. TRACKER COUNTER ANIMATION (svg-motion) */
+  (function(){
+    function animateCount(el){
+      var target = parseFloat(el.getAttribute('data-count'));
+      var suffix  = el.getAttribute('data-suffix') || '';
+      var decs    = parseInt(el.getAttribute('data-decimals') || '0', 10);
+      var dur = 1300, startT = null;
+      var ease = function(t){ return 1 - Math.pow(1-t, 3); };
+      function fmt(n){
+        var s = n.toFixed(decs);
+        if(n >= 1000) s = parseFloat(s).toLocaleString('es-MX', {minimumFractionDigits: decs, maximumFractionDigits: decs});
+        return s;
+      }
+      function step(ts){
+        if(!startT) startT = ts;
+        var p = Math.min((ts - startT) / dur, 1);
+        el.textContent = fmt(target * ease(p)) + suffix;
+        if(p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+    if('IntersectionObserver' in window){
+      var cObs = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting){
+            entry.target.querySelectorAll('[data-count]').forEach(animateCount);
+            cObs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.4 });
+      var tv = document.querySelector('.tracker-visual');
+      if(tv) cObs.observe(tv);
+    }
+  })();
+
+  /* 6. MAGNETIC BUTTONS */
+  document.querySelectorAll('.btn-primary, .btn-light, .btn-outline, .btn-ghost').forEach(function(btn){
+    if (window.matchMedia('(pointer:coarse)').matches) return;
+    var tx = 0, ty = 0, cx = 0, cy = 0, raf;
+    function tick() {
+      cx += (tx - cx) * 0.18; cy += (ty - cy) * 0.18;
+      btn.style.transform = 'translate(' + cx.toFixed(2) + 'px,' + cy.toFixed(2) + 'px)';
+      if (Math.abs(tx - cx) > 0.05 || Math.abs(ty - cy) > 0.05) raf = requestAnimationFrame(tick);
+      else btn.style.transform = '';
+    }
+    btn.addEventListener('mousemove', function(e){
+      var r = btn.getBoundingClientRect();
+      tx = (e.clientX - r.left - r.width/2) * 0.28;
+      ty = (e.clientY - r.top  - r.height/2) * 0.28;
+      cancelAnimationFrame(raf); raf = requestAnimationFrame(tick);
+    }, {passive:true});
+    btn.addEventListener('mouseleave', function(){
+      tx = 0; ty = 0;
+      cancelAnimationFrame(raf); raf = requestAnimationFrame(tick);
+    });
+  });
+
+})();
+</script>
+
+<script>
+  (function(){
+    /* Credenciales */
+    var USERS = {
+      'beto':   '12345'
+    };
+    var SESSION_KEY = 'via_fiscal_auth';
+    var overlay = document.getElementById('auth-overlay');
+
+    function grant(){ overlay.style.display = 'none'; }
+    function deny(msg){
+      var err = document.getElementById('auth-error');
+      err.textContent = msg;
+      document.getElementById('auth-pass').value = '';
+      document.getElementById('auth-pass').focus();
+    }
+
+    /* Check existing session */
+    if(sessionStorage.getItem(SESSION_KEY) === '1'){ grant(); }
+    else { overlay.style.display = 'flex'; }
+
+    document.getElementById('auth-form').addEventListener('submit', function(e){
+      e.preventDefault();
+      var u = (document.getElementById('auth-user').value || '').trim().toLowerCase();
+      var p = (document.getElementById('auth-pass').value || '');
+      if(USERS[u] && USERS[u] === p){
+        sessionStorage.setItem(SESSION_KEY, '1');
+        grant();
+      } else {
+        deny('Credenciales incorrectas. Intenta de nuevo.');
+      }
+    });
+  })();
+</script>
+<div class="mobile-cta-bar">
+  <a href="https://wa.me/5219842353159?text=Hola%2C%20soy%20contador%20y%20quiero%20conocer%20la%20alianza%20fiscal%20de%20VICTOR%20IA" target="_blank" rel="noopener" class="mobile-cta-link">Agendar consulta privada</a>
+</div>
+<script src="https://victor-ia-tracker.vercel.app/widget/embed.js" data-agent-id="agent_5701kr0h5gg6eetb69tv6c5hwfj1"></script>
+<script src="web4.js" defer></script>
+</body>
+</html>
