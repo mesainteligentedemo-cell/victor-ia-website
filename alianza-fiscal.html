@@ -340,7 +340,7 @@
     .rev-wipe.in { clip-path: inset(0 0 0% 0); }
 
     /* ── Dispersión / Win-Win section ── */
-    .win-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 0; border: 1px solid var(--rule); margin-top: 3rem; }
+    .win-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 0; border: 1px solid var(--rule); margin-top: 3rem; }
     .win-card { padding: 2.4rem 2rem; border-right: 1px solid var(--rule); display: flex; flex-direction: column; gap: 1rem; }
     .win-card:last-child { border-right: none; }
     .win-tag { font-size: 0.48rem; letter-spacing: 0.32em; text-transform: uppercase; opacity: 0.3; }
@@ -419,8 +419,6 @@
     @media (min-width: 769px) and (max-width: 1024px) {
       .levels-grid { grid-template-columns: 1fr 1fr; }
       .win-grid { grid-template-columns: 1fr 1fr; }
-      .win-card:nth-child(2) { border-right: none; }
-      .win-card:nth-child(3) { grid-column: 1 / -1; border-right: none; border-top: 1px solid var(--rule); }
       .legal-grid { grid-template-columns: 1fr 1fr; }
       .legal-item:nth-child(even) { border-right: none; }
       .legal-item:nth-child(n+3) { border-top: 1px solid rgba(248,247,245,0.08); }
@@ -1104,19 +1102,6 @@
         <p class="win-highlight">Ej. Nivel 02 de $350K → Canal A + Canal B combinados al despacho · monto a convenir</p>
       </div>
 
-      <!-- VICTOR IA -->
-      <div class="win-card">
-        <p class="win-tag">VICTOR IA</p>
-        <h3 class="win-entity">Clientes de calidad<br><em>por canal calificado.</em></h3>
-        <div class="win-items">
-          <p class="win-item">Acceso a empresas ya calificadas fiscalmente (clientes de despachos)</p>
-          <p class="win-item">Canal de ventas sin inversión publicitaria adicional</p>
-          <p class="win-item">Contratos firmados, pagos por transferencia, cero fricciones</p>
-          <p class="win-item">Ecosistema de partners contables que escala de forma orgánica</p>
-          <p class="win-item">La comisión al despacho es gasto deducible para INFLUENCE IA (Art. 27 LISR)</p>
-        </div>
-        <p class="win-highlight">5 clientes Nivel 03 activos = ingreso recurrente mensual escalable al despacho</p>
-      </div>
     </div>
   </div>
 
