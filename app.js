@@ -1,4 +1,4 @@
-/* VICTOR IA — app.js v4
+﻿/* VICTOR IA — app.js v4
    Canvas water-trail reveal · marble scroll pan · light theme */
 
 (function () {
@@ -303,8 +303,8 @@
       hotelería:   { n:'Intelligence Architecture Hotelera', d:'Concierge digital, agentes de reservas y fidelización con IA. Tu hotel siempre disponible.' },
       inmobiliar:  { n:'Intelligence Architecture Inmobiliaria', d:'Sistema completo: agentes de ventas IA, CRM conectado, calificación de leads y property tour virtual.' },
       biene:       { n:'Intelligence Architecture Inmobiliaria', d:'Sistema completo para desarrolladoras y brokerages.' },
-      sitio:       { n:'Sitio Web Cinematográfico', d:'Experiencias digitales de nivel Awwwards: scroll cinematic, animaciones 3D, interacción máxima.' },
-      web:         { n:'Sitio Web Cinematográfico', d:'Diseñamos y construimos sitios cinematográficos que convierten.' },
+      sitio:       { n:'Sitio Web Inclusivo', d:'Experiencias digitales de nivel Awwwards: scroll cinematic, animaciones 3D, interacción máxima.' },
+      web:         { n:'Sitio Web Inclusivo', d:'Diseñamos y construimos sitios cinematográficos que convierten.' },
       video:       { n:'Video Cinematográfico con IA', d:'Spots, reels, documentales. Velocidad de startup, calidad de producción.' },
       branding:    { n:'Upgrade de Branding con IA', d:'Identidad visual renovada: logo, paleta, tipografía y manual de marca.' },
       cibersegur:  { n:'Ciberseguridad + IA Local', d:'Auditoría de vulnerabilidades, encriptación y IA on-premise. Tu información nunca sale de tu red.' },

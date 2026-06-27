@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seedance 2.0: el modelo que está reemplazando equipos de producción completos — Victor IA Blog</title>
+  <meta name="description" content="Cómo Seedance 2.0 genera video cinématico multi-shot con coherencia de personaje, y por qué cambia el modelo económico de la producción audiovisual para siempre.">
+  <meta property="og:title" content="Seedance 2.0: el modelo que está reemplazando equipos de producción completos">
+  <meta property="og:description" content="Análisis técnico y de negocio: qué cambia con Seedance 2.0, qué sigue siendo trabajo humano, y cómo implementarlo en Victor IA.">
+  <meta property="og:url" content="https://victor-ia.xyz/blog/seedance-2-equipos-produccion">
+  <meta property="og:type" content="article">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'><path d='M9 1.5L16 16.5L9 13L2 16.5Z' stroke='%23B8860B' stroke-width='1.2' stroke-linejoin='round' fill='none'/><circle cx='9' cy='9' r='1.6' fill='%230A0A0A'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{
+      --bg:#FFF;--bg-sub:#F7F7F7;--bg-card:#FAFAFA;--border:#E8E8E8;
+      --text:#0A0A0A;--muted:#6B7280;--dim:#9CA3AF;--gold:#B8860B;--ink:#111;
+    }
+    html{font-size:16px;scroll-behavior:auto}
+    body{background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,sans-serif;font-weight:400;overflow-x:hidden;cursor:none;-webkit-font-smoothing:antialiased}
+
+    /* CURSOR */
+    @media(prefers-contrast:more){html,body,*{cursor:auto!important}#cur,#cur-r{display:none!important}}
+    #cur{position:fixed;width:5px;height:5px;background:#0A0A0A;border-radius:50%;pointer-events:none!important;z-index:2147483647;transform:translate(-50%,-50%);transition:transform .2s}
+    #cur-r{position:fixed;width:28px;height:28px;border:1px solid rgba(10,10,10,.12);border-radius:50%;pointer-events:none!important;z-index:2147483646;transform:translate(-50%,-50%);transition:width .28s,height .28s}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:500;height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 40px;background:rgba(255,255,255,.93);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+    .nav-l{display:flex;align-items:center;gap:36px}
+    .logo{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--text)}
+    .logo-txt{font-size:14px;font-weight:600;letter-spacing:-.01em}
+    .nav-links{display:flex;gap:2px}
+    .nav-links a{font-size:13.5px;color:var(--muted);text-decoration:none;padding:5px 11px;border-radius:6px;transition:color .18s,background .18s}
+    .nav-links a:hover{color:var(--text);background:#F3F3F3}
+    .nav-links a.active{color:var(--text)}
+    .nav-r{display:flex;align-items:center;gap:8px}
+    .btn-plain{font-size:13.5px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:7px;padding:6px 16px;cursor:pointer;font-family:inherit;text-decoration:none;transition:all .18s}
+    .btn-plain:hover{color:var(--text);border-color:#CCC}
+    .btn-dark{font-size:13.5px;font-weight:500;color:#FFF;background:var(--ink);border:none;border-radius:7px;padding:6px 18px;cursor:pointer;font-family:inherit;text-decoration:none;transition:background .18s}
+    .btn-dark:hover{background:#333}
+
+    /* BREADCRUMB */
+    .breadcrumb{padding:80px 40px 0;max-width:1160px;margin:0 auto}
+    .bc-nav{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--dim)}
+    .bc-nav a{color:var(--dim);text-decoration:none;transition:color .15s}
+    .bc-nav a:hover{color:var(--text)}
+    .bc-sep{display:flex;align-items:center;color:var(--border)}
+    .bc-current{color:var(--muted)}
+
+    /* ARTICLE HERO */
+    .article-hero{padding:32px 40px 56px;max-width:1160px;margin:0 auto}
+    .art-eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:20px}
+    .art-tag{font-size:11px;font-weight:500;color:var(--dim);letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--border);border-radius:4px;padding:3px 9px}
+    .art-read{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--dim)}
+    .art-h1{font-size:clamp(28px,4vw,48px);font-weight:600;line-height:1.1;letter-spacing:-.03em;color:var(--ink);max-width:780px;margin-bottom:20px;opacity:0;animation:up .65s .1s forwards}
+    .art-meta{display:flex;align-items:center;gap:16px;font-size:13px;color:var(--dim);padding-top:16px;border-top:1px solid var(--border);opacity:0;animation:up .5s .25s forwards}
+    .art-meta-author{display:flex;align-items:center;gap:8px;color:var(--muted);font-weight:500}
+    .art-avatar{width:26px;height:26px;border-radius:7px;background:var(--ink);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#FFF;flex-shrink:0}
+    .art-dot{width:3px;height:3px;border-radius:50%;background:var(--border)}
+
+    /* LAYOUT */
+    .article-layout{display:grid;grid-template-columns:1fr 320px;gap:64px;max-width:1160px;margin:0 auto;padding:48px 40px 80px;align-items:start}
+
+    /* CONTENT */
+    .article-body{max-width:680px}
+    .article-body p{font-size:16px;font-weight:400;line-height:1.8;color:var(--text);margin-bottom:20px}
+    .article-body h2{font-size:22px;font-weight:600;letter-spacing:-.02em;line-height:1.2;color:var(--ink);margin-top:48px;margin-bottom:16px}
+    .article-body h3{font-size:17px;font-weight:500;letter-spacing:-.01em;line-height:1.3;color:var(--ink);margin-top:32px;margin-bottom:12px}
+    .article-body blockquote{border-left:3px solid var(--border);padding-left:20px;margin:28px 0;font-style:italic;color:var(--muted);font-size:16px;line-height:1.75}
+    .article-body code{background:#F7F7F7;border:1px solid var(--border);border-radius:4px;padding:1px 6px;font-family:'SF Mono','Fira Mono','Consolas',monospace;font-size:13px;color:#D97706;font-style:normal}
+    .article-body ul,
+    .article-body ol{margin:16px 0 24px 0;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:10px}
+    .article-body ul li,
+    .article-body ol li{display:flex;gap:12px;align-items:flex-start;font-size:15.5px;line-height:1.7;color:var(--text)}
+    .article-body ul li::before{content:'';display:block;width:5px;height:5px;border-radius:50%;background:var(--dim);flex-shrink:0;margin-top:9px}
+    .article-body ol{counter-reset:lst}
+    .article-body ol li::before{counter-increment:lst;content:counter(lst);font-size:11px;font-weight:600;color:var(--dim);background:var(--bg-sub);border:1px solid var(--border);border-radius:4px;padding:1px 6px;flex-shrink:0;margin-top:3px}
+
+    /* IMG PLACEHOLDER */
+    .art-img{width:100%;aspect-ratio:16/9;background:var(--bg-sub);border:1px solid var(--border);border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;margin:32px 0;color:var(--dim);overflow:hidden;position:relative}
+    .art-img-label{font-size:12px;color:var(--dim);text-align:center;line-height:1.5}
+
+    /* CONCLUSION BANNER */
+    .conclusion-box{background:var(--bg-sub);border:1px solid var(--border);border-radius:10px;padding:28px 32px;margin-top:40px}
+    .conclusion-box h3{font-size:15px;font-weight:600;margin-bottom:10px;color:var(--ink)}
+    .conclusion-box p{font-size:14px;line-height:1.75;color:var(--muted);margin:0}
+
+    /* SIDEBAR */
+    .article-sidebar{position:sticky;top:78px}
+    .sidebar-toc{border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:20px}
+    .toc-head{padding:14px 18px;border-bottom:1px solid var(--border);font-size:12px;font-weight:500;color:var(--dim);letter-spacing:.04em;text-transform:uppercase;background:var(--bg-sub);display:flex;align-items:center;gap:8px}
+    .toc-list{padding:8px 0}
+    .toc-item{display:block;padding:8px 18px;font-size:13px;color:var(--muted);text-decoration:none;transition:color .15s,background .15s;border-left:2px solid transparent;margin-left:1px;line-height:1.45}
+    .toc-item:hover{color:var(--text);background:#FAFAFA;border-left-color:var(--border)}
+    .toc-item.active{color:var(--text);border-left-color:var(--ink);background:#F5F5F5}
+    .toc-item.sub{padding-left:30px;font-size:12.5px}
+
+    /* CTA CARD */
+    .sidebar-cta{background:var(--ink);border-radius:10px;padding:28px 24px;color:#FFF}
+    .sc-eyebrow{font-size:11px;font-weight:500;color:rgba(255,255,255,.4);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+    .sc-eyebrow span{display:inline-block;width:5px;height:5px;border-radius:50%;background:#22C55E;box-shadow:0 0 0 2px rgba(34,197,94,.25)}
+    .sc-title{font-size:17px;font-weight:600;line-height:1.25;margin-bottom:8px;letter-spacing:-.015em}
+    .sc-desc{font-size:13px;color:rgba(255,255,255,.55);line-height:1.65;margin-bottom:22px}
+    .sc-btn{display:flex;align-items:center;justify-content:center;gap:7px;background:#FFF;color:var(--ink);font-size:13.5px;font-weight:500;padding:11px 20px;border-radius:8px;text-decoration:none;transition:background .18s}
+    .sc-btn:hover{background:#EEE}
+    .sc-note{font-size:11px;color:rgba(255,255,255,.3);text-align:center;margin-top:10px}
+
+    /* RELATED */
+    .related-section{border-top:1px solid var(--border);padding:64px 40px 80px;max-width:1160px;margin:0 auto}
+    .rel-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:32px}
+    .rel-title{font-size:20px;font-weight:600;letter-spacing:-.02em}
+    .rel-link{font-size:13px;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:5px;transition:color .15s}
+    .rel-link:hover{color:var(--text)}
+    .related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .blog-card{border:1px solid var(--border);border-radius:10px;overflow:hidden;text-decoration:none;color:inherit;display:block;transition:box-shadow .2s,border-color .2s}
+    .blog-card:hover{box-shadow:0 4px 20px rgba(0,0,0,.07);border-color:#DDD}
+    .bc-img{height:160px;background:var(--bg-sub);display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--border)}
+    .bc-body{padding:20px}
+    .bc-tag{font-size:11px;font-weight:500;color:var(--dim);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px}
+    .bc-title{font-size:14px;font-weight:500;line-height:1.4;margin-bottom:10px}
+    .bc-meta{font-size:12px;color:var(--dim)}
+
+    /* FOOTER */
+    .footer-wrap{border-top:1px solid var(--border)}
+    footer{padding:48px 40px 36px;display:grid;grid-template-columns:200px 1fr auto;gap:40px;align-items:start;max-width:1160px;margin:0 auto}
+    .ft-logo-row{display:flex;align-items:center;gap:7px;margin-bottom:8px}
+    .ft-logo-txt{font-size:14px;font-weight:600}
+    .ft-tagline{font-size:13px;color:var(--dim);line-height:1.6}
+    .ft-cols{display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
+    .ft-col-h{font-size:12px;font-weight:500;color:var(--dim);letter-spacing:.05em;text-transform:uppercase;margin-bottom:14px}
+    .ft-col a{display:block;font-size:13px;color:var(--muted);text-decoration:none;margin-bottom:9px;transition:color .15s}
+    .ft-col a:hover{color:var(--text)}
+    .ft-copy{font-size:12px;color:var(--dim);text-align:right}
+
+    @keyframes up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+    .rv{opacity:0;transform:translateY(12px)}
+
+    /* PROGRESS BAR */
+    #progress{position:fixed;top:0;left:0;height:2px;background:var(--ink);z-index:600;transition:width .1s linear;width:0}
+
+    /* RESPONSIVE */
+    @media(max-width:900px){
+      .article-layout{grid-template-columns:1fr;gap:40px}
+      .article-sidebar{position:static}
+      .related-grid{grid-template-columns:1fr}
+      nav{padding:0 20px}
+      .breadcrumb,.article-hero,.article-layout,.related-section{padding-left:20px;padding-right:20px}
+    }
+    @media(max-width:600px){
+      .art-h1{font-size:26px}
+      footer{grid-template-columns:1fr;gap:32px}
+      .ft-cols{grid-template-columns:repeat(2,1fr)}
+    }
+  </style>
+</head>
+<body>
+<div id="cur"></div>
+<div id="cur-r"></div>
+<div id="progress"></div>
+
+<svg style="display:none">
+  <defs>
+    <symbol id="ic-video" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2" y="5.5" width="11" height="9" rx="2"/>
+      <path d="M13 9L18 7V13L13 11"/>
+    </symbol>
+    <symbol id="ic-bolt" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M11.5 2L4.5 11H10L8.5 18L15.5 9H10L11.5 2Z"/>
+    </symbol>
+    <symbol id="ic-globe" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="10" cy="10" r="7.5"/>
+      <path d="M2.5 10h15M10 2.5c-2.5 2.5-2.5 12.5 0 15M10 2.5c2.5 2.5 2.5 12.5 0 15"/>
+    </symbol>
+    <symbol id="ic-list" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M7 5h10M7 10h10M7 15h10M3 5h.5M3 10h.5M3 15h.5"/>
+    </symbol>
+    <symbol id="ic-clock" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="10" cy="10" r="7.5"/>
+      <path d="M10 6v4.5l3 1.5"/>
+    </symbol>
+    <symbol id="ic-arrow-right" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 10h12M11 5l5 5-5 5"/>
+    </symbol>
+    <symbol id="ic-chevron-right" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 3l5 5-5 5"/>
+    </symbol>
+    <symbol id="ic-image" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2.5" y="3" width="15" height="14" rx="2"/>
+      <circle cx="7" cy="7.5" r="1.5"/>
+      <path d="M2.5 14L7 9.5 10 12.5 13 9 17.5 14"/>
+    </symbol>
+    <symbol id="ic-sparkle" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M10 2v3M10 15v3M2 10h3M15 10h3M4.2 4.2l2.1 2.1M13.7 13.7l2.1 2.1M4.2 15.8l2.1-2.1M13.7 6.3l2.1-2.1"/>
+      <circle cx="10" cy="10" r="3"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-l">
+    <a class="logo" href="/">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+        <path d="M9 1.5L16 16.5L9 13L2 16.5Z" stroke="#B8860B" stroke-width="1.2" stroke-linejoin="round"/>
+        <circle cx="9" cy="9" r="1.4" fill="#0A0A0A"/>
+      </svg>
+      <span class="logo-txt">Victor IA</span>
+    </a>
+    <div class="nav-links">
+      <a href="/#agentes">Agentes</a>
+      <a href="/#como-funciona">Cómo funciona</a>
+      <a href="/#precios">Precios</a>
+      <a href="/blog" class="active">Blog</a>
+    </div>
+  </div>
+  <div class="nav-r">
+    <a href="https://app.victor-ia.xyz/login" class="btn-plain">Iniciar sesión</a>
+    <a href="https://app.victor-ia.xyz/signup" class="btn-dark">Empezar gratis →</a>
+  </div>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <nav class="bc-nav" aria-label="Breadcrumb">
+    <a href="/blog">Blog</a>
+    <span class="bc-sep">
+      <svg width="12" height="12"><use href="#ic-chevron-right"/></svg>
+    </span>
+    <span class="bc-current">Video IA</span>
+  </nav>
+</div>
+
+<!-- ARTICLE HERO -->
+<header class="article-hero">
+  <div class="art-eyebrow" style="opacity:0;animation:up .45s .05s forwards">
+    <span class="art-tag">Video IA</span>
+    <span class="art-read">
+      <svg width="13" height="13" style="flex-shrink:0"><use href="#ic-clock"/></svg>
+      7 min de lectura
+    </span>
+  </div>
+  <h1 class="art-h1">Seedance 2.0: el modelo que está reemplazando equipos de producción completos</h1>
+  <div class="art-meta">
+    <span class="art-meta-author">
+      <span class="art-avatar">V</span>
+      Victor IA
+    </span>
+    <span class="art-dot"></span>
+    <span>Mayo 20, 2026</span>
+    <span class="art-dot"></span>
+    <span>Actualizado hace 6 días</span>
+  </div>
+</header>
+
+<!-- ARTICLE LAYOUT -->
+<div class="article-layout">
+
+  <!-- MAIN CONTENT -->
+  <article class="article-body">
+
+    <p>En los últimos 18 meses, la producción de video pasó de ser un proceso que requería cámara, dirección, edición y postproducción a convertirse en algo que un solo prompt puede iniciar. Pero con Seedance 2.0, el salto cualitativo es distinto: por primera vez, el modelo genera secuencias multi-shot con coherencia de personaje, transiciones cinematográficas y audio sincronizado — sin un director de fotografía en el set.</p>
+
+    <p>No es exageración. Es el resultado de tres años de investigación en motion coherence, temporal consistency y audio-visual alignment. Y las implicaciones para los equipos de producción van más allá de lo que la mayoría ha dimensionado.</p>
+
+    <h2 id="que-cambia">¿Qué cambia realmente con Seedance 2.0?</h2>
+
+    <p>El salto de primera a segunda generación no es iterativo — es estructural. La versión anterior podía generar clips de 4 a 8 segundos con buena resolución, pero con un defecto crítico: los personajes "flotaban" entre frames. La identidad visual se degradaba después del segundo 3. Para producción comercial, eso era inutilizable.</p>
+
+    <p>Seedance 2.0 resuelve esto con un sistema de anchoring temporal que mantiene los embeddings visuales del sujeto a lo largo de toda la secuencia. El resultado práctico:</p>
+
+    <ul>
+      <li>Clips de hasta 30 segundos con un solo personaje sin degradación visible</li>
+      <li>Cortes de cámara generativos (de gran angular a close-up) en la misma generación</li>
+      <li>Profundidad de campo simulada por contexto, no por postproducción</li>
+      <li>Generación de audio ambiente sincronizado al movimiento</li>
+    </ul>
+
+    <blockquote>
+      "La pregunta ya no es si la IA puede hacer lo que hace un cámara. La pregunta es cuántas decisiones creativas humanas quedan cuando la IA puede ejecutar la mayoría de ellas en tiempo real."
+    </blockquote>
+
+    <h2 id="economia">El modelo económico que esto rompe</h2>
+
+    <p>Un spot de 30 segundos para redes sociales tenía un costo de producción estándar en México de entre <code>$15,000</code> y <code>$80,000 MXN</code>, dependiendo de si incluía talent, locación, dirección y postproducción. Con Seedance 2.0 en Victor IA, ese mismo resultado se puede lograr en dos flujos distintos:</p>
+
+    <ol>
+      <li><strong>Flujo express:</strong> prompt estructurado + 3 iteraciones de ajuste. Tiempo: 45 minutos. Costo de generación: incluido en el plan Pro.</li>
+      <li><strong>Flujo con dirección creativa:</strong> brief de marca, script con beats, 5–8 versiones A/B. Tiempo: medio día. Costo: tarifa de agencia reducida en ~70% versus producción tradicional.</li>
+    </ol>
+
+    <p>Lo que no desaparece — y esto es importante — es el criterio creativo. Seedance 2.0 ejecuta con fidelidad asombrosa, pero necesita ser dirigido. El modelo no sabe si tu marca habla en tono austero o en tono cálido. No sabe si el corte lento comunica lujo o aburrimiento para tu audiencia específica. Eso sigue siendo trabajo estratégico.</p>
+
+    <!-- IMAGE PLACEHOLDER -->
+    <figure class="art-img">
+      <svg width="48" height="48" fill="none" stroke="#D1D5DB" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+        <use href="#ic-image"/>
+      </svg>
+      <figcaption class="art-img-label">Comparativo de coherencia temporal — Seedance 1.0 vs 2.0<br><span style="font-size:11px">Frame 1s · Frame 8s · Frame 16s · Frame 28s</span></figcaption>
+    </figure>
+
+    <h2 id="casos-uso">Casos de uso donde ya estamos viendo ROI real</h2>
+
+    <h3>1. Contenido de producto para e-commerce</h3>
+    <p>Videos de 6–10 segundos por SKU, con el producto en ambiente contextual, texto en movimiento y CTA final. Lo que antes requería un día de shooting por colección ahora se genera en paralelo. Una tienda con 200 productos puede tener todos sus assets de video en 48 horas.</p>
+
+    <h3>2. Spotting para presentaciones de propuesta</h3>
+    <p>Antes de producir el video final, las agencias presentan storyboards estáticos. Con Seedance 2.0, la propuesta llega con clips animáticos que ya tienen el look cinematográfico del resultado final. Las tasas de cierre de propuestas que usamos internamente en Victor IA mejoraron cuando empezamos a incluir previsualizaciones generativas.</p>
+
+    <h3>3. Variantes por mercado y plataforma</h3>
+    <p>El mismo brief, adaptado automáticamente a formato vertical para Reels, cuadrado para carrusel, y horizontal para YouTube. Sin re-editar manualmente: el agente de Victor IA recibe un solo prompt de input y produce las tres versiones en paralelo.</p>
+
+    <h2 id="limitaciones">Lo que Seedance 2.0 todavía no puede hacer</h2>
+
+    <p>Honestidad es parte del enfoque de Victor IA. Estas son las limitaciones actuales del modelo que afectan decisiones de producción real:</p>
+
+    <ul>
+      <li>Texto en video sigue siendo el punto débil. Letras con más de 5 caracteres en movimiento tienden a deformarse. Para subtítulos o overlays de texto, la solución es postproducción ligera o composición en After Effects.</li>
+      <li>Hands y dígitos: la coherencia en manos y dedos mejora pero no está resuelta. Para close-ups de producto donde las manos son protagonistas, el video generativo tiene que combinarse con recurso real.</li>
+      <li>Identidad de marca muy específica: si tu marca tiene un sistema visual muy particular (paleta exacta, tipografía propietaria, estética de cámara definida), el modelo necesita referencias visuales abundantes y varias iteraciones de steering.</li>
+    </ul>
+
+    <h2 id="flujo-victor-ia">Cómo funciona el flujo en Victor IA</h2>
+
+    <p>Dentro de la plataforma, el agente de Video Studio abstrae la complejidad técnica del modelo. No necesitas entender los parámetros de motion coherence ni ajustar manualmente los embeddings. El flujo es:</p>
+
+    <ol>
+      <li>Describes el video en lenguaje natural, con contexto de marca y objetivo</li>
+      <li>El agente detecta si es mejor Seedance 2.0 u otro modelo según el tipo de contenido</li>
+      <li>Genera una primera versión con los parámetros óptimos precalculados</li>
+      <li>Propone 2–3 variantes de dirección con diferencias claras explicadas en lenguaje de negocio</li>
+      <li>Itera según tu feedback hasta el resultado final listo para descarga en resolución de producción</li>
+    </ol>
+
+    <div class="conclusion-box rv">
+      <h3>Conclusión</h3>
+      <p>Seedance 2.0 no reemplaza el pensamiento creativo — elimina la fricción entre la idea y su ejecución. Los equipos que entiendan esto primero van a operar con una ventaja estructural: más iteraciones de concepto, menores costos de producción, y ciclos de feedback más rápidos con clientes. El modelo es una herramienta. La estrategia sigue siendo humana.</p>
+    </div>
+
+  </article>
+
+  <!-- SIDEBAR -->
+  <aside class="article-sidebar rv">
+
+    <!-- TABLE OF CONTENTS -->
+    <nav class="sidebar-toc" aria-label="En este artículo">
+      <div class="toc-head">
+        <svg width="14" height="14"><use href="#ic-list"/></svg>
+        En este artículo
+      </div>
+      <div class="toc-list">
+        <a href="#que-cambia" class="toc-item active">¿Qué cambia con Seedance 2.0?</a>
+        <a href="#economia" class="toc-item">El modelo económico que rompe</a>
+        <a href="#casos-uso" class="toc-item">Casos de uso con ROI real</a>
+        <a href="#limitaciones" class="toc-item">Limitaciones actuales</a>
+        <a href="#flujo-victor-ia" class="toc-item">Flujo en Victor IA</a>
+      </div>
+    </nav>
+
+    <!-- CTA CARD -->
+    <div class="sidebar-cta">
+      <p class="sc-eyebrow"><span></span>Disponible ahora</p>
+      <h3 class="sc-title">Prueba Seedance 2.0 en Victor IA</h3>
+      <p class="sc-desc">Genera tu primer video de 30 segundos hoy. Sin tarjeta de crédito, sin configuración técnica.</p>
+      <a href="https://app.victor-ia.xyz/signup?ref=article-seedance" class="sc-btn">
+        <svg width="15" height="15"><use href="#ic-sparkle"/></svg>
+        Empezar gratis
+      </a>
+      <p class="sc-note">Plan Pro: todos los modelos + generaciones ilimitadas</p>
+    </div>
+
+  </aside>
+
+</div>
+
+<!-- RELATED ARTICLES -->
+<section class="related-section">
+  <div class="rel-head">
+    <h2 class="rel-title rv">Artículos relacionados</h2>
+    <a href="/blog" class="rel-link rv">
+      Ver todo el blog
+      <svg width="14" height="14"><use href="#ic-arrow-right"/></svg>
+    </a>
+  </div>
+  <div class="related-grid">
+    <a href="/blog/automatizacion-n8n" class="blog-card rv">
+      <div class="bc-img">
+        <svg width="52" height="52" fill="none" stroke="#D4A017" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+          <use href="#ic-bolt"/>
+        </svg>
+      </div>
+      <div class="bc-body">
+        <p class="bc-tag">Automatización</p>
+        <h3 class="bc-title">40 horas de trabajo automatizadas con 3 nodos de n8n</h3>
+        <p class="bc-meta">Mayo 15, 2026 · 4 min</p>
+      </div>
+    </a>
+    <a href="/blog/branding-generativo" class="blog-card rv">
+      <div class="bc-img" style="background:#F5F9FF">
+        <svg width="52" height="52" fill="none" stroke="#93C5FD" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+          <use href="#ic-globe"/>
+        </svg>
+      </div>
+      <div class="bc-body">
+        <p class="bc-tag">Estrategia</p>
+        <h3 class="bc-title">El branding generativo — y casi nadie lo está aprovechando aún</h3>
+        <p class="bc-meta">Mayo 8, 2026 · 5 min</p>
+      </div>
+    </a>
+    <a href="/blog/agentes-ia-equipo" class="blog-card rv">
+      <div class="bc-img" style="background:#F5FFF7">
+        <svg width="52" height="52" fill="none" stroke="#6EE7B7" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+          <use href="#ic-sparkle"/>
+        </svg>
+      </div>
+      <div class="bc-body">
+        <p class="bc-tag">Agentes IA</p>
+        <h3 class="bc-title">Cómo estructurar un equipo de agentes IA para producción en paralelo</h3>
+        <p class="bc-meta">Mayo 3, 2026 · 6 min</p>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="footer-wrap">
+  <footer>
+    <div>
+      <div class="ft-logo-row">
+        <svg width="16" height="16" viewBox="0 0 18 18" fill="none">
+          <path d="M9 1.5L16 16.5L9 13L2 16.5Z" stroke="#B8860B" stroke-width="1.2" stroke-linejoin="round"/>
+          <circle cx="9" cy="9" r="1.4" fill="#0A0A0A"/>
+        </svg>
+        <span class="ft-logo-txt">Victor IA</span>
+      </div>
+      <p class="ft-tagline">Inteligencia Dimensional.<br>México · victor-ia.xyz</p>
+    </div>
+    <div class="ft-cols">
+      <div class="ft-col">
+        <p class="ft-col-h">Producto</p>
+        <a href="/#agentes">Agentes IA</a>
+        <a href="/#como-funciona">Cómo funciona</a>
+        <a href="/#precios">Precios</a>
+        <a href="https://app.victor-ia.xyz">App</a>
+      </div>
+      <div class="ft-col">
+        <p class="ft-col-h">Modelos</p>
+        <a href="#">Claude</a>
+        <a href="#">Seedance 2.0</a>
+        <a href="#">ElevenLabs</a>
+        <a href="#">n8n</a>
+      </div>
+      <div class="ft-col">
+        <p class="ft-col-h">Empresa</p>
+        <a href="#">Nosotros</a>
+        <a href="/blog">Blog</a>
+        <a href="mailto:hola@victor-ia.xyz">Contacto</a>
+      </div>
+      <div class="ft-col">
+        <p class="ft-col-h">Legal</p>
+        <a href="#">Privacidad</a>
+        <a href="#">Términos</a>
+        <a href="#">Seguridad</a>
+      </div>
+    </div>
+    <p class="ft-copy">© 2026 Victor IA<br>Todos los derechos reservados</p>
+  </footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js" integrity="sha384-O55L/6rhHr9CFvrxqv5luxOCcmVaBmETbZbJDP+Do8T0pztTACsFBD/IXCNkj7DV" crossorigin="anonymous"></script>
+<script src="/public/lenis-apple-config.js"></script>
+<script>
+  // Cursor
+  const dot = document.getElementById('cur'), ring = document.getElementById('cur-r');
+  let mx = window.innerWidth / 2, my = window.innerHeight / 2, rx = mx, ry = my;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+  });
+  (function l() {
+    rx += (mx - rx) * .1; ry += (my - ry) * .1;
+    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+    requestAnimationFrame(l);
+  })();
+  document.querySelectorAll('a,button,.blog-card').forEach(el => {
+    el.addEventListener('mouseenter', () => { dot.style.transform = 'translate(-50%,-50%) scale(1.8)'; ring.style.width = '40px'; ring.style.height = '40px'; });
+    el.addEventListener('mouseleave', () => { dot.style.transform = 'translate(-50%,-50%) scale(1)'; ring.style.width = '28px'; ring.style.height = '28px'; });
+  });
+
+  // Reading progress bar
+  const prog = document.getElementById('progress');
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    prog.style.width = (total > 0 ? (scrolled / total) * 100 : 0) + '%';
+  });
+
+  // GSAP scroll reveals
+  gsap.registerPlugin(ScrollTrigger);
+  document.querySelectorAll('.rv').forEach(el => {
+    gsap.to(el, { opacity: 1, y: 0, duration: .75, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 92%', once: true } });
+  });
+
+  // Active TOC on scroll
+  const sections = ['que-cambia', 'economia', 'casos-uso', 'limitaciones', 'flujo-victor-ia'];
+  const tocLinks = document.querySelectorAll('.toc-item');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        tocLinks.forEach(l => l.classList.remove('active'));
+        const active = document.querySelector('.toc-item[href="#' + entry.target.id + '"]');
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) observer.observe(el);
+  });
+</script>
+</body>
+</html>

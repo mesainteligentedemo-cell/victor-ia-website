@@ -1,0 +1,476 @@
+<!DOCTYPE html><html lang="es"><head>
+<meta charset="utf-8"/><meta content="width=device-width,initial-scale=1.0" name="viewport"/>
+<title>Blog | Inteligencia Artificial para Empresas — Victor IA</title>
+<meta name="description" content="Insights, guías y casos de uso de inteligencia artificial para empresas en México. Aprende cómo los agentes IA transforman industrias, reducen costos y aceleran el crecimiento."/>
+<link rel="canonical" href="https://victor-ia.xyz/blog/"/>
+<meta name="robots" content="index, follow"/>
+<meta http-equiv="content-language" content="es-MX"/>
+<meta name="geo.region" content="MX"/>
+<meta property="og:title" content="Blog | Inteligencia Artificial para Empresas — Victor IA"/>
+<meta property="og:description" content="Insights, guías y casos de uso de inteligencia artificial para empresas en México."/>
+<meta property="og:locale" content="es_MX"/>
+<script type="application/ld+json">{
+  "@context":"https://schema.org",
+  "@type":"CollectionPage",
+  "name":"Blog Victor IA — Inteligencia Artificial para Empresas",
+  "description":"Insights, guías y casos de uso de inteligencia artificial para empresas en México.",
+  "url":"https://victor-ia.xyz/blog/",
+  "publisher":{
+    "@type":"Organization",
+    "name":"INFLUENCE IA S.A. DE C.V.",
+    "url":"https://victor-ia.xyz"
+  },
+  "inLanguage":"es-MX"
+}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;0,500;1,200;1,300;1,400;1,500&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com" integrity="sha384-igm5BeiBt36UU4gqwWS7imYmelpTsZlQ45FZf+XBn9MuJbn4nQr7yx1yFydocC/K" crossorigin="anonymous"></script>
+<script>tailwind.config={darkMode:'class',theme:{extend:{colors:{ink:'#070708',cream:'#EAE6DF',muted:'#706C66',gold:'#B89A6A'},fontFamily:{display:['Cormorant Garamond','Georgia','serif'],body:['Inter','sans-serif']}}}}</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased;scroll-behavior:auto}
+body{background:#070708;color:#EAE6DF;font-family:'Inter',sans-serif;overflow-x:hidden;font-weight:300}
+@media(pointer:fine){html,body,*{cursor:none!important}}
+@media(prefers-contrast:more){html,body,*{cursor:auto!important}#cur-d,#cur-r{display:none!important}}
+#cur-d{position:fixed;width:5px;height:5px;background:#B89A6A;border-radius:50%;pointer-events:none!important;z-index:2147483647;transform:translate(-50%,-50%)}
+#cur-r{position:fixed;width:36px;height:36px;border:1px solid rgba(184,154,106,.42);border-radius:50%;pointer-events:none!important;z-index:2147483646;transform:translate(-50%,-50%);transition:width .4s,height .4s}
+#cur-r.expand{width:52px;height:52px;border-color:rgba(184,154,106,.22)}
+#pbar{position:fixed;top:0;left:0;height:1px;background:#B89A6A;z-index:100000;width:0}
+#noise{position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.024;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+header{position:fixed;top:0;left:0;right:0;z-index:500;height:68px;transition:background .5s,border-color .5s;border-bottom:1px solid transparent}
+header.scrolled{background:rgba(7,7,8,.92);border-bottom-color:rgba(255,255,255,.06);backdrop-filter:blur(18px)}
+.nav-a{position:relative;color:#706C66;font-size:13px;letter-spacing:.07em;font-weight:300;transition:color .3s;text-decoration:none}
+.nav-a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:#B89A6A;transition:width .45s}
+.nav-a:hover{color:#EAE6DF}.nav-a:hover::after{width:100%}
+.btn-p{display:inline-flex;align-items:center;border-radius:5px;font-family:'Inter',sans-serif;font-size:13px;letter-spacing:.09em;font-weight:500;background:#EAE6DF;color:#070708;padding:11px 26px;text-decoration:none;transition:background .25s,transform .2s}
+.btn-p:hover{background:#fff;transform:translateY(-2px)}
+.rv{opacity:0;transform:translateY(30px);transition:opacity .8s,transform .8s}
+.rv.on{opacity:1;transform:none}
+.blog-card{background:#0F0F12;border:1px solid rgba(255,255,255,.054);border-radius:12px;overflow:hidden;transition:border-color .4s,transform .3s;text-decoration:none;display:block}
+.blog-card:hover{border-color:rgba(184,154,106,.22);transform:translateY(-4px)}
+.card-thumb{width:100%;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;height:180px}
+.tag-pill{display:inline-block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;padding:4px 10px;border-radius:20px;border:1px solid rgba(184,154,106,.28);color:#B89A6A}
+</style>
+</head>
+<body class="dark">
+<div id="noise"></div>
+<div id="cur-d"></div><div id="cur-r"></div>
+<div id="pbar"></div>
+
+<header id="hdr">
+  <div class="flex justify-between items-center max-w-[1200px] mx-auto px-6 md:px-16 h-full relative z-10">
+    <a href="../index.html" class="font-display text-[21px] font-light tracking-[.04em] text-cream no-underline select-none" style="text-decoration:none">Victor <span style="color:#B89A6A">IA</span></a>
+    <nav class="hidden md:flex gap-9 items-center">
+      <a class="nav-a" href="../agentes.html">Agentes</a>
+      <a class="nav-a" href="../como-funciona.html">Cómo Funciona</a>
+      <a class="nav-a" href="../precios.html">Precios</a>
+      <a class="nav-a" href="index.html" style="color:#EAE6DF">Blog</a>
+      <a class="nav-a" href="../telemetria.html">Eficiencia IoT</a>
+    </nav>
+    <div class="flex items-center gap-5">
+      <a class="nav-a hidden sm:block" href="../app.html">Iniciar sesión</a>
+      <a class="btn-p" href="../app.html">Empezar gratis</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section style="padding:160px 0 72px;text-align:center;position:relative">
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(184,154,106,.07),transparent);pointer-events:none"></div>
+    <div style="max-width:720px;margin:0 auto;padding:0 24px" class="rv">
+      <div style="width:1px;height:64px;background:linear-gradient(to bottom,transparent,#B89A6A,transparent);margin:0 auto 32px"></div>
+      <div style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#B89A6A;margin-bottom:20px;font-weight:400">Conocimiento · Estrategia · Resultados</div>
+      <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(36px,6vw,60px);font-weight:200;line-height:1.12;letter-spacing:.02em;color:#EAE6DF;margin-bottom:22px">Insights de IA<br/><em style="font-style:italic;color:#B89A6A">para Empresas en México</em></h1>
+      <p style="font-size:16px;line-height:1.7;color:rgba(234,230,223,.55);font-weight:300;max-width:520px;margin:0 auto">Guías prácticas, casos de uso reales y estrategias para transformar tu empresa con inteligencia artificial. Sin tecnicismos — solo resultados.</p>
+    </div>
+    <div style="max-width:680px;margin:56px auto 0;padding:0 24px;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;border:1px solid rgba(255,255,255,.06);border-radius:14px;overflow:hidden;background:rgba(255,255,255,.04)" class="rv">
+      <div style="padding:24px;text-align:center;background:#0F0F12">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:#B89A6A">13</div>
+        <div style="font-size:11px;letter-spacing:.1em;color:#706C66;margin-top:4px">Artículos</div>
+      </div>
+      <div style="padding:24px;text-align:center;background:#0F0F12;border-left:1px solid rgba(255,255,255,.06);border-right:1px solid rgba(255,255,255,.06)">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:#B89A6A">7</div>
+        <div style="font-size:11px;letter-spacing:.1em;color:#706C66;margin-top:4px">Categorías</div>
+      </div>
+      <div style="padding:24px;text-align:center;background:#0F0F12">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:#B89A6A">2026</div>
+        <div style="font-size:11px;letter-spacing:.1em;color:#706C66;margin-top:4px">Actualizado</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PILLAR CARD (destacada) -->
+  <section style="max-width:1200px;margin:0 auto;padding:0 24px 0 64px;margin-bottom:20px" class="rv">
+    <div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(112,108,102,.45);margin-bottom:20px">Lectura recomendada</div>
+    <a href="inteligencia-artificial-para-empresas-mexico.html" class="blog-card" style="display:grid;grid-template-columns:1fr 1fr;gap:0;min-height:300px;border-color:rgba(184,154,106,.18)">
+      <div style="background:linear-gradient(135deg,#0c0a18 0%,#1a1035 40%,#0d0a10 100%);display:flex;align-items:center;justify-content:center;position:relative;min-height:300px">
+        <svg width="88" height="88" viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:.55">
+          <circle cx="44" cy="44" r="26" stroke="#B89A6A" stroke-width="1" fill="none"/>
+          <circle cx="44" cy="44" r="13" stroke="#B89A6A" stroke-width="1" fill="none" stroke-dasharray="4 3"/>
+          <circle cx="44" cy="18" r="4" fill="#B89A6A" opacity=".7"/>
+          <circle cx="44" cy="70" r="4" fill="#B89A6A" opacity=".7"/>
+          <circle cx="18" cy="44" r="4" fill="#B89A6A" opacity=".7"/>
+          <circle cx="70" cy="44" r="4" fill="#B89A6A" opacity=".7"/>
+          <circle cx="25" cy="25" r="3" fill="#B89A6A" opacity=".38"/>
+          <circle cx="63" cy="25" r="3" fill="#B89A6A" opacity=".38"/>
+          <circle cx="25" cy="63" r="3" fill="#B89A6A" opacity=".38"/>
+          <circle cx="63" cy="63" r="3" fill="#B89A6A" opacity=".38"/>
+          <line x1="44" y1="18" x2="44" y2="31" stroke="#B89A6A" stroke-width=".7" opacity=".5"/>
+          <line x1="44" y1="57" x2="44" y2="70" stroke="#B89A6A" stroke-width=".7" opacity=".5"/>
+          <line x1="18" y1="44" x2="31" y2="44" stroke="#B89A6A" stroke-width=".7" opacity=".5"/>
+          <line x1="57" y1="44" x2="70" y2="44" stroke="#B89A6A" stroke-width=".7" opacity=".5"/>
+          <circle cx="44" cy="44" r="4" fill="#B89A6A" opacity=".9"/>
+        </svg>
+        <div style="position:absolute;bottom:22px;left:22px;right:22px">
+          <div style="font-size:10px;letter-spacing:.16em;color:rgba(184,154,106,.5);text-transform:uppercase">Artículo pilar · SEO</div>
+        </div>
+      </div>
+      <div style="padding:40px 44px;display:flex;flex-direction:column;justify-content:center">
+        <span class="tag-pill" style="margin-bottom:20px;display:inline-block;width:fit-content;background:linear-gradient(135deg,rgba(184,154,106,.14),rgba(184,154,106,.06));border-color:rgba(184,154,106,.4);font-size:11px;padding:5px 14px">Guía Definitiva</span>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(22px,2.6vw,30px);font-weight:300;line-height:1.22;color:#EAE6DF;margin-bottom:16px;letter-spacing:.02em">IA para Empresas en México:<br/>La Guía Definitiva 2026</h2>
+        <p style="font-size:14.5px;line-height:1.75;color:rgba(234,230,223,.5);margin-bottom:28px">Todo lo que necesitas saber para implementar inteligencia artificial en tu empresa: qué son los agentes IA, cuánto cuesta, qué ROI esperar y cómo dar el primer paso sin riesgo.</p>
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <span style="font-size:11px;letter-spacing:.07em;color:#706C66">Mayo 2026 · 12 min lectura</span>
+          <span style="font-size:13px;color:#B89A6A;letter-spacing:.06em">Leer guía →</span>
+        </div>
+      </div>
+    </a>
+  </section>
+
+  <!-- GRID DE 12 ARTÍCULOS -->
+  <section style="max-width:1200px;margin:0 auto;padding:40px 24px 56px 64px">
+    <div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(112,108,102,.45);margin-bottom:24px">Todos los artículos</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px">
+
+      <!-- Card 1: que-son-agentes-ia -->
+      <a href="que-son-agentes-ia.html" class="blog-card rv">
+        <div class="card-thumb" style="background:linear-gradient(135deg,#080c18 0%,#0e1830 50%,#07090e 100%)">
+          <svg width="52" height="52" viewBox="0 0 52 52" fill="none" style="opacity:.52">
+            <rect x="10" y="10" width="32" height="32" rx="6" stroke="#B89A6A" stroke-width="1" fill="none"/>
+            <circle cx="26" cy="26" r="7" stroke="#B89A6A" stroke-width="1" fill="none"/>
+            <circle cx="26" cy="26" r="2.5" fill="#B89A6A" opacity=".85"/>
+            <line x1="26" y1="10" x2="26" y2="19" stroke="#B89A6A" stroke-width=".8" opacity=".45"/>
+            <line x1="26" y1="33" x2="26" y2="42" stroke="#B89A6A" stroke-width=".8" opacity=".45"/>
+            <line x1="10" y1="26" x2="19" y2="26" stroke="#B89A6A" stroke-width=".8" opacity=".45"/>
+            <line x1="33" y1="26" x2="42" y2="26" stroke="#B89A6A" stroke-width=".8" opacity=".45"/>
+          </svg>
+        </div>
+        <div style="padding:24px">
+          <span class="tag-pill" style="margin-bottom:12px;display:inline-block">Educativo</span>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:300;line-height:1.3;color:#EAE6DF;margin-bottom:10px">¿Qué son los Agentes de IA y Cómo Trabajan?</h3>
+          <p style="font-size:13.5px;line-height:1.65;color:rgba(234,230,223,.45);margin-bottom:20px">Explicación clara de qué hace realmente un agente de IA, cómo se diferencia de un chatbot y por qué cambia las reglas del juego para tu empresa.</p>
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <span style="font-size:11px;color:#706C66">Mayo 2026</span>
+            <span style="font-size:12px;color:#B89A6A">Leer →</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 2: automatizar-marketing-ia-mexico -->
+      <a href="automatizar-marketing-ia-mexico.html" class="blog-card rv">
+        <div class="card-thumb" style="background:linear-gradient(135deg,#0d0c08 0%,#1a180a 50%,#0a0907 100%)">
+          <svg width="52" height="52" viewBox="0 0 52 52" fill="none" style="opacity:.52">
+            <path d="M10 38 L20 22 L28 30 L36 16 L44 20" stroke="#B89A6A" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="44" cy="20" r="3" fill="#B89A6A" opacity=".8"/>
+            <line x1="10" y1="42" x2="44" y2="42" stroke="#B89A6A" stroke-width=".8" opacity=".35"/>
+            <line x1="10" y1="10" x2="10" y2="42" stroke="#B89A6A" stroke-width=".8" opacity=".35"/>
+          </svg>
+        </div>
+        <div style="padding:24px">
+          <span class="tag-pill" style="margin-bottom:12px;display:inline-block">Marketing</span>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:300;line-height:1.3;color:#EAE6DF;margin-bottom:10px">Automatización de Marketing con IA en México</h3>
+          <p style="font-size:13.5px;line-height:1.65;color:rgba(234,230,223,.45);margin-bottom:20px">Cómo las empresas mexicanas están usando agentes de IA para generar leads, nutrir prospectos y cerrar ventas con menos equipo humano.</p>
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <span style="font-size:11px;color:#706C66">Mayo 2026</span>
+            <span style="font-size:12px;color:#B89A6A">Leer →</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 3: ia-pymes-mexico -->
+      <a href="ia-pymes-mexico.html" class="blog-card rv">
+        <div class="card-thumb" style="background:linear-gradient(135deg,#08100e 0%,#0e1f1a 50%,#070d0b 100%)">
+          <svg width="52" height="52" viewBox="0 0 52 52" fill="none" style="opacity:.52">
+            <rect x="8" y="28" width="11" height="16" rx="2" stroke="#B89A6A" stroke-width="1" fill="none"/>
+            <rect x="21" y="20" width="11" height="24" rx="2" stroke="#B89A6A" stroke-width="1" fill="none"/>
+            <rect x="34" y="12" width="11" height="32" rx="2" stroke="#B89A6A" stroke-width="1" fill="none"/>
+            <line x1="8" y1="46" x2="48" y2="46" stroke="#B89A6A" stroke-width=".8" opacity=".35"/>
+          </svg>
+        </div>
+        <div style="padding:24px">
+          <span class="tag-pill" style="margin-bottom:12px;display:inline-block">PYMEs</span>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:300;line-height:1.3;color:#EAE6DF;margin-bottom:10px">IA para PYMEs Mexicanas: Cómo Competir con Grandes Empresas</h3>
+          <p style="font-size:13.5px;line-height:1.65;color:rgba(234,230,223,.45);margin-bottom:20px">Las PYMEs que adoptan IA hoy tienen ventaja sobre corporativos que aún están aprobando presupuestos. Te mostramos cómo empezar sin grandes inversiones.</p>
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <span style="font-size:11px;color:#706C66">Mayo 2026</span>
+            <span style="font-size:12px;color:#B89A6A">Leer →</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 4: telemetria-iot-flotillas-mexico -->
+      <a href="telemetria-iot-flotillas-mexico.html" class="blog-card rv">
+        <div class="card-thumb" style="background:linear-gradient(135deg,#080e18 0%,#0c1520 50%,#060a10 100%)">
+          <svg width="52" height="52" viewBox="0 0 52 52" fill="none" style="opacity:.52">
+            <rect x="20" y="20" width="12" height="8" rx="2" stroke="#B89A6A" stroke-width="1" fill="none"/>
+            <rect x="16" y="28" width="20" height="6" rx="1" stroke="#B89A6A" stroke-width="1" fill="none"/>
+            <circle cx="22" cy="34" r="3" stroke="#B89A6A" stroke-width="1" fill="none"/>
+            <circle cx="30" cy="34" r="3" stroke="#B89A6A" stroke-width="1" fill="none"/>
+            <path d="M10 22 Q14 14 26 12 Q38 14 42 22" stroke="#B89A6A" stroke-width=".8" fill="none" opacity=".45"/>
+            <path d="M14 25 Q18 18 26 16 Q34 18 38 25" stroke="#B89A6A" stroke-width=".7" fill="none" opacity=".3"/>
+          </svg>
+        </div>
+        <div style="padding:24px">
+          <span class="tag-pill" style="margin-bottom:12px;display:inline-block">IoT</span>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:300;line-height:1.3;color:#EAE6DF;margin-bottom:10px">Telemetría IoT para Flotillas: Reducción de Costos del 30%</h3>
+          <p style="font-size:13.5px;line-height:1.65;color:rgba(234,230,223,.45);margin-bottom:20px">Cómo los sensores conectados y los agentes de análisis en tiempo real están transformando la gestión de flotillas en México y reduciendo el gasto operativo.</p>
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <span style="font-size:11px;color:#706C66">Mayo 2026</span>
+            <span style="font-size:12px;color:#B89A6A">Leer →</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 5: ia-hoteles-mexico -->
+      <a href="ia-hoteles-mexico.html" class="blog-card rv">
+        <div class="card-thumb" style="background:linear-gradient(135deg,#100a08 0%,#1e120e 50%,#0c0806 100%)">
+          <svg width="52" height="52" viewBox="0 0 52 52" fill="none" style="opacity:.52">
+            <rect x="12" y="12" width="28" height="32" rx="2" stroke="#B89A6A" stroke-width="1" fill="none"/>
+            <line x1="12" y1="20" x2="40" y2="20" stroke="#B89A6A" stroke-width=".8" opacity=".45"/>
+            <rect x="17" y="24" width="6" height="5" rx="1" stroke="#B89A6A" stroke-width=".8" fill="none" opacity=".65"/>
+            <rect x="25" y="24" width="6" height="5" rx="1" stroke="#B89A6A" stroke-width=".8" fill="none" opacity=".65"/>
+            <rect x="17" y="32" width="6" height="5" rx="1" stroke="#B89A6A" stroke-width=".8" fill="none" opacity=".65"/>
+            <rect x="25" y="32" width="6" height="5" rx="1" stroke="#B89A6A" stroke-width=".8" fill="none" opacity=".65"/>
+            <path d="M22 44 L22 38 Q26 35 30 38 L30 44" stroke="#B89A6A" stroke-width=".8" fill="none" opacity=".55"/>
+          </svg>
+        </div>
+        <div style="padding:24px">
+          <span class="tag-pill" style="margin-bottom:12px;display:inline-block">Hotelería</span>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:300;line-height:1.3;color:#EAE6DF;margin-bottom:10px">IA en Hoteles Mexicanos: De la Reserva al Check-out</h3>
+          <p style="font-size:13.5px;line-height:1.65;color:rgba(234,230,223,.45);margin-bottom:20px">El sector hotelero mexicano pierde millones por no personalizar la experiencia. Los agentes de IA pueden cambiar eso desde el primer click hasta la encuesta post-estadía.</p>
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <span style="font-size:11px;color:#706C66">Mayo 2026</span>
+            <span style="font-size:12px;color:#B89A6A">Leer →</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 6: reducir-costos-ia -->
+      <a href="reducir-costos-ia.html" class="blog-card rv">
+        <div class="card-thumb" style="background:linear-gradient(135deg,#0a0808 0%,#180e0e 50%,#080606 100%)">
+          <svg width="52" height="52" viewBox="0 0 52 52" fill="none" style="opacity:.52">
+            <circle cx="26" cy="26" r="18" stroke="#B89A6A" stroke-width="1" fill="none"/>
+            <path d="M26 16 L26 20 M26 32 L26 36" stroke="#B89A6A" stroke-width="1.2" stroke-linecap="round"/>
+            <path d="M22 20 Q18 20 18 24 Q18 28 26 28 Q34 28 34 32 Q34 36 30 36" stroke="#B89A6A" stroke-width="1" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div style="padding:24px">
+          <span class="tag-pill" style="margin-bottom:12px;display:inline-block">Operaciones</span>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:300;line-height:1.3;color:#EAE6DF;margin-bottom:10px">Cómo la IA Reduce Costos Operativos hasta un 40%</h3>
+          <p style="font-size:13.5px;line-height:1.65;color:rgba(234,230,223,.45);margin-bottom:20px">Análisis real de empresas que implementaron agentes de IA en operaciones: dónde redujeron costos, cuánto tiempo tardaron y qué errores evitaron desde el día uno.</p>
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <span style="font-size:11px;color:#706C66">Mayo 2026</span>
+            <span style="font-size:12px;color:#B89A6A">Leer →</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 7: produccion-contenido-ia -->
+      <a href="produccion-contenido-ia.html" class="blog-card rv">
+        <div class="card-thumb" style="background:linear-gradient(135deg,#0a0c10 0%,#141820 50%,#080a0e 100%)">
+          <svg width="52" height="52" viewBox="0 0 52 52" fill="none" style="opacity:.52">
+            <rect x="10" y="14" width="32" height="6" rx="2" stroke="#B89A6A" stroke-width="1" fill="none"/>
+            <rect x="10" y="23" width="22" height="5" rx="2" stroke="#B89A6A" stroke-width=".8" fill="none" opacity=".55"/>
+            <rect x="10" y="31" width="28" height="5" rx="2" stroke="#B89A6A" stroke-width=".8" fill="none" opacity=".55"/>
+            <circle cx="40" cy="38" r="7" stroke="#B89A6A" stroke-width="1" fill="none"/>
+            <line x1="40" y1="34" x2="40" y2="42" stroke="#B89A6A" stroke-width="1.2" stroke-linecap="round" opacity=".75"/>
+            <line x1="36" y1="38" x2="44" y2="38" stroke="#B89A6A" stroke-width="1.2" stroke-linecap="round" opacity=".75"/>
+          </svg>
+        </div>
+        <div style="padding:24px">
+          <span class="tag-pill" style="margin-bottom:12px;display:inline-block">Contenido</span>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:300;line-height:1.3;color:#EAE6DF;margin-bottom:10px">Producción de Contenido con IA: 10x más Rápido</h3>
+          <p style="font-size:13.5px;line-height:1.65;color:rgba(234,230,223,.45);margin-bottom:20px">Guía práctica para escalar la producción de contenido sin sacrificar calidad: blogs, redes sociales, campañas de email y video — con agentes especializados.</p>
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <span style="font-size:11px;color:#706C66">Mayo 2026</span>
+            <span style="font-size:12px;color:#B89A6A">Leer →</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 8: roi-inteligencia-artificial -->
+      <a href="roi-inteligencia-artificial.html" class="blog-card rv">
+        <div class="card-thumb" style="background:linear-gradient(135deg,#080e0e 0%,#0e1e1a 50%,#060c0a 100%)">
+          <svg width="52" height="52" viewBox="0 0 52 52" fill="none" style="opacity:.52">
+            <circle cx="26" cy="26" r="17" stroke="#B89A6A" stroke-width="1" fill="none"/>
+            <path d="M26 26 L26 13" stroke="#B89A6A" stroke-width="1.4" stroke-linecap="round"/>
+            <path d="M26 26 L36 30" stroke="#B89A6A" stroke-width="1" stroke-linecap="round"/>
+            <circle cx="26" cy="26" r="2.5" fill="#B89A6A"/>
+            <circle cx="26" cy="13" r="1.5" fill="#B89A6A" opacity=".55"/>
+            <circle cx="36" cy="30" r="1.5" fill="#B89A6A" opacity=".55"/>
+          </svg>
+        </div>
+        <div style="padding:24px">
+          <span class="tag-pill" style="margin-bottom:12px;display:inline-block">Estrategia</span>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:300;line-height:1.3;color:#EAE6DF;margin-bottom:10px">ROI de la Inteligencia Artificial: Métricas y Expectativas</h3>
+          <p style="font-size:13.5px;line-height:1.65;color:rgba(234,230,223,.45);margin-bottom:20px">¿Cuánto tiempo tarda en verse el retorno de invertir en IA? Análisis con datos reales de empresas latinoamericanas que ya completaron su implementación.</p>
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <span style="font-size:11px;color:#706C66">Mayo 2026</span>
+            <span style="font-size:12px;color:#B89A6A">Leer →</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 9: agentes-ia-vs-empleados -->
+      <a href="agentes-ia-vs-empleados.html" class="blog-card rv">
+        <div class="card-thumb" style="background:linear-gradient(135deg,#0c0808 0%,#1a1010 50%,#0a0707 100%)">
+          <svg width="52" height="52" viewBox="0 0 52 52" fill="none" style="opacity:.52">
+            <circle cx="18" cy="18" r="8" stroke="#B89A6A" stroke-width="1" fill="none"/>
+            <path d="M8 38 Q8 30 18 30 Q28 30 28 38" stroke="#B89A6A" stroke-width="1" fill="none"/>
+            <rect x="32" y="12" width="13" height="13" rx="3" stroke="#B89A6A" stroke-width="1" fill="none"/>
+            <line x1="35" y1="18" x2="42" y2="18" stroke="#B89A6A" stroke-width=".8" opacity=".65"/>
+            <line x1="38" y1="15" x2="38" y2="21" stroke="#B89A6A" stroke-width=".8" opacity=".65"/>
+            <path d="M32 31 L46 31 M32 37 L42 37" stroke="#B89A6A" stroke-width=".8" opacity=".45" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div style="padding:24px">
+          <span class="tag-pill" style="margin-bottom:12px;display:inline-block">Estrategia</span>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:300;line-height:1.3;color:#EAE6DF;margin-bottom:10px">Agentes IA vs Empleados: ¿Sustitución o Colaboración?</h3>
+          <p style="font-size:13.5px;line-height:1.65;color:rgba(234,230,223,.45);margin-bottom:20px">La pregunta que todos tienen pero pocos se atreven a hacer. Análisis honesto de qué tareas conviene automatizar y cuáles siguen siendo territorio humano.</p>
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <span style="font-size:11px;color:#706C66">Mayo 2026</span>
+            <span style="font-size:12px;color:#B89A6A">Leer →</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 10: implementar-ia-empresa-mexico -->
+      <a href="implementar-ia-empresa-mexico.html" class="blog-card rv">
+        <div class="card-thumb" style="background:linear-gradient(135deg,#080e18 0%,#0d1628 50%,#070c14 100%)">
+          <svg width="52" height="52" viewBox="0 0 52 52" fill="none" style="opacity:.52">
+            <circle cx="26" cy="26" r="16" stroke="#B89A6A" stroke-width="1" fill="none"/>
+            <path d="M18 26 L23 31 L34 20" stroke="#B89A6A" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="26" cy="10" r="3" fill="rgba(184,154,106,.38)"/>
+            <line x1="26" y1="13" x2="26" y2="17" stroke="#B89A6A" stroke-width=".8" opacity=".35" stroke-dasharray="2 2"/>
+          </svg>
+        </div>
+        <div style="padding:24px">
+          <span class="tag-pill" style="margin-bottom:12px;display:inline-block">Implementación</span>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:300;line-height:1.3;color:#EAE6DF;margin-bottom:10px">Cómo Implementar IA en tu Empresa en 90 Días</h3>
+          <p style="font-size:13.5px;line-height:1.65;color:rgba(234,230,223,.45);margin-bottom:20px">El plan paso a paso que usan las empresas que logran adopción real: auditoría, casos de uso prioritarios, piloto, medición y escala. Sin promesas vacías.</p>
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <span style="font-size:11px;color:#706C66">Mayo 2026</span>
+            <span style="font-size:12px;color:#B89A6A">Leer →</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 11: ia-sector-turismo-mexico -->
+      <a href="ia-sector-turismo-mexico.html" class="blog-card rv">
+        <div class="card-thumb" style="background:linear-gradient(135deg,#08100a 0%,#0e1e12 50%,#070d08 100%)">
+          <svg width="52" height="52" viewBox="0 0 52 52" fill="none" style="opacity:.52">
+            <circle cx="26" cy="20" r="9" stroke="#B89A6A" stroke-width="1" fill="none"/>
+            <path d="M17 20 Q17 32 26 36 Q35 32 35 20" stroke="#B89A6A" stroke-width=".8" fill="none" opacity=".45"/>
+            <line x1="26" y1="29" x2="26" y2="42" stroke="#B89A6A" stroke-width=".8" opacity=".4"/>
+            <line x1="20" y1="42" x2="32" y2="42" stroke="#B89A6A" stroke-width=".8" opacity=".4"/>
+            <path d="M10 30 Q18 26 26 28 Q34 26 42 30" stroke="#B89A6A" stroke-width=".8" fill="none" opacity=".3"/>
+            <circle cx="26" cy="20" r="3" fill="#B89A6A" opacity=".7"/>
+          </svg>
+        </div>
+        <div style="padding:24px">
+          <span class="tag-pill" style="margin-bottom:12px;display:inline-block">Turismo</span>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:300;line-height:1.3;color:#EAE6DF;margin-bottom:10px">IA en el Sector Turismo de México y el Caribe</h3>
+          <p style="font-size:13.5px;line-height:1.65;color:rgba(234,230,223,.45);margin-bottom:20px">Cómo hoteles, tour operadores y destinos del Caribe mexicano están usando IA para personalizar experiencias y aumentar el ticket promedio por turista.</p>
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <span style="font-size:11px;color:#706C66">Mayo 2026</span>
+            <span style="font-size:12px;color:#B89A6A">Leer →</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 12: monitoreo-edificios-iot-ia -->
+      <a href="monitoreo-edificios-iot-ia.html" class="blog-card rv">
+        <div class="card-thumb" style="background:linear-gradient(135deg,#080a0e 0%,#10141e 50%,#070810 100%)">
+          <svg width="52" height="52" viewBox="0 0 52 52" fill="none" style="opacity:.52">
+            <rect x="14" y="10" width="24" height="34" rx="2" stroke="#B89A6A" stroke-width="1" fill="none"/>
+            <rect x="18" y="15" width="5" height="4" rx="1" stroke="#B89A6A" stroke-width=".7" fill="none" opacity=".65"/>
+            <rect x="29" y="15" width="5" height="4" rx="1" stroke="#B89A6A" stroke-width=".7" fill="none" opacity=".65"/>
+            <rect x="18" y="23" width="5" height="4" rx="1" stroke="#B89A6A" stroke-width=".7" fill="none" opacity=".65"/>
+            <rect x="29" y="23" width="5" height="4" rx="1" stroke="#B89A6A" stroke-width=".7" fill="none" opacity=".65"/>
+            <rect x="22" y="32" width="8" height="12" rx="1" stroke="#B89A6A" stroke-width=".7" fill="none" opacity=".55"/>
+            <path d="M6 24 Q10 18 14 24" stroke="#B89A6A" stroke-width=".8" fill="none" opacity=".35"/>
+            <path d="M38 24 Q42 18 46 24" stroke="#B89A6A" stroke-width=".8" fill="none" opacity=".35"/>
+          </svg>
+        </div>
+        <div style="padding:24px">
+          <span class="tag-pill" style="margin-bottom:12px;display:inline-block">IoT</span>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:300;line-height:1.3;color:#EAE6DF;margin-bottom:10px">Monitoreo de Edificios con IoT e IA: Eficiencia Total</h3>
+          <p style="font-size:13.5px;line-height:1.65;color:rgba(234,230,223,.45);margin-bottom:20px">Sensores, alertas predictivas y agentes de análisis: el sistema que reduce el consumo energético de edificios corporativos hasta un 35% con retorno en menos de 18 meses.</p>
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <span style="font-size:11px;color:#706C66">Mayo 2026</span>
+            <span style="font-size:12px;color:#B89A6A">Leer →</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section style="padding:96px 24px;text-align:center;position:relative" class="rv">
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse 50% 70% at 50% 50%,rgba(184,154,106,.05),transparent);pointer-events:none"></div>
+    <div style="max-width:600px;margin:0 auto">
+      <div style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#B89A6A;margin-bottom:18px">¿Listo para el siguiente paso?</div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(30px,4vw,46px);font-weight:200;color:#EAE6DF;margin-bottom:18px;line-height:1.2">Deja de leer sobre IA.<br/><em style="font-style:italic">Empieza a usarla.</em></h2>
+      <p style="font-size:15px;line-height:1.7;color:rgba(234,230,223,.5);margin-bottom:36px">Habla con Victor IA hoy y descubre exactamente qué agentes necesita tu empresa — sin presentaciones de ventas, solo una conversación honesta.</p>
+      <a href="../app.html" class="btn-p" style="font-size:14px;padding:14px 36px">Empezar gratis →</a>
+    </div>
+  </section>
+</main>
+
+<footer style="background:#040406;border-top:1px solid rgba(255,255,255,.05);padding:64px 0 40px;position:relative;z-index:10">
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px 0 64px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:48px">
+    <div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:300;letter-spacing:.04em;color:#EAE6DF;margin-bottom:14px">Victor <span style="color:#B89A6A">IA</span></div>
+      <p style="font-size:13.5px;line-height:1.7;font-weight:300;color:#706C66;max-width:260px;margin-bottom:14px">El primer supercerebro de IA en LATAM. Redefiniendo la productividad empresarial.</p>
+    </div>
+    <div>
+      <h4 style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(112,108,102,.35);margin-bottom:18px">Producto</h4>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:11px">
+        <li><a class="nav-a" href="../agentes.html">Agentes IA</a></li>
+        <li><a class="nav-a" href="../como-funciona.html">Cómo funciona</a></li>
+        <li><a class="nav-a" href="../precios.html">Precios</a></li>
+        <li><a class="nav-a" href="../telemetria.html">Eficiencia e IoT</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(112,108,102,.35);margin-bottom:18px">Blog</h4>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:11px">
+        <li><a class="nav-a" href="index.html">Todos los artículos</a></li>
+        <li><a class="nav-a" href="inteligencia-artificial-para-empresas-mexico.html">Guía IA empresarial</a></li>
+      </ul>
+    </div>
+  </div>
+  <div style="max-width:1200px;margin:48px auto 0;padding:28px 64px 0;border-top:1px solid rgba(255,255,255,.05);display:flex;justify-content:space-between;align-items:center">
+    <p style="font-size:10.5px;letter-spacing:.09em;color:rgba(112,108,102,.28)">© 2026 INFLUENCE IA S.A. DE C.V. — Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js" integrity="sha384-O55L/6rhHr9CFvrxqv5luxOCcmVaBmETbZbJDP+Do8T0pztTACsFBD/IXCNkj7DV" crossorigin="anonymous"></script>
+<script src="/public/lenis-apple-config.js"></script>
+<script>
+(()=>{
+// Lenis + Cursor + Progress Bar are now initialized in lenis-apple-config.js
+// Page-specific animations below
+gsap.utils.toArray('.rv').forEach(el=>{
+  const rc=el.getBoundingClientRect();
+  if(rc.top<window.innerHeight*.92){gsap.to(el,{opacity:1,y:0,duration:.8,ease:'power3.out'});}
+  else{gsap.to(el,{opacity:1,y:0,duration:1,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 88%'}});}
+});
+})();
+</script>
+</body></html>

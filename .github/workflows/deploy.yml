@@ -1,0 +1,45 @@
+name: Deploy to Vercel
+
+on:
+  push:
+    branches: [master, main]
+
+permissions:
+  contents: read
+  deployments: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate structure
+        run: |
+          if [ ! -f "index.html" ]; then
+            echo "ERROR: index.html not found"
+            exit 1
+          fi
+          echo "✓ Site structure valid"
+
+  deploy:
+    needs: validate
+    runs-on: ubuntu-latest
+    if: success()
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy to Vercel
+        uses: vercel/action@v7
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_WEBSITE }}
+          production: true
+          scope: ${{ secrets.VERCEL_ORG_ID }}
+
+      - name: Deployment Status
+        if: always()
+        run: echo "Deployment completed for victor-ia-website"

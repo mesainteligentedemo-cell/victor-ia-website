@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO: Primary ──────────────────────────────────────── -->
+  <title>CRM para Agencias Digitales con IA — Brain Tracker | Victor IA</title>
+  <meta name="description" content="El CRM diseñado para agencias digitales: pipeline visual, seguimiento de clientes y rentabilidad por cuenta en tiempo real. Integrado con IA. Sin Pipedrive ni HubSpot.">
+  <link rel="canonical" href="https://victor-ia.xyz/crm-agencias">
+
+  <!-- SEO: Open Graph ───────────────────────────────────── -->
+  <meta property="fb:app_id" content="1274596911506548">
+  <meta property="og:title" content="CRM para Agencias Digitales con IA — Brain Tracker">
+  <meta property="og:description" content="Pipeline visual, seguimiento de clientes y rentabilidad por cuenta. El CRM que entiende cómo opera una agencia digital.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://victor-ia.xyz/crm-agencias">
+  <meta property="og:image" content="https://victor-ia.xyz/assets/og-image.jpg">
+  <meta property="og:locale" content="es_MX">
+  <meta property="og:site_name" content="Victor IA">
+
+  <!-- SEO: Twitter Card ─────────────────────────────────── -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CRM para Agencias Digitales con IA — Brain Tracker">
+  <meta name="twitter:description" content="Pipeline visual, clientes y rentabilidad integrados. El CRM nativo para agencias con IA.">
+  <meta name="twitter:image" content="https://victor-ia.xyz/assets/og-image.jpg">
+
+  <!-- Schema: SoftwareApplication ──────────────────────── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Brain Tracker — CRM para Agencias",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "url": "https://victor-ia.xyz/crm-agencias",
+    "description": "CRM para agencias digitales con IA integrada. Pipeline visual, gestión de clientes, seguimiento de deals y rentabilidad por cuenta en tiempo real.",
+    "featureList": [
+      "Pipeline visual de etapas por cliente",
+      "Seguimiento de deals y propuestas",
+      "Historial de contacto y comunicación",
+      "Rentabilidad por cuenta",
+      "Alertas automáticas de seguimiento",
+      "Integración con IA para resúmenes de cliente"
+    ],
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "MXN",
+      "description": "Plan gratuito con acceso por invitación"
+    },
+    "provider": {
+      "@type": "Organization",
+      "name": "Victor IA",
+      "url": "https://victor-ia.xyz",
+      "email": "hola@victor-ia.com.mx"
+    }
+  }
+  </script>
+
+  <!-- Schema: FAQPage ───────────────────────────────────── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "¿Qué diferencia al CRM de Brain Tracker de HubSpot o Pipedrive?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "El CRM de Brain Tracker está diseñado exclusivamente para el flujo de trabajo de una agencia digital: prospecto → propuesta → autorizado → entregado. A diferencia de HubSpot o Pipedrive, que son CRMs genéricos, Brain Tracker conecta cada cliente directamente con su tiempo trabajado, proyectos activos y rentabilidad real, sin necesidad de integraciones adicionales."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Puedo migrar mis clientes de HubSpot o Notion a Brain Tracker?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sí. Brain Tracker permite importar clientes desde CSV, HubSpot y Notion. El proceso de migración se hace en menos de 30 minutos para la mayoría de agencias con menos de 50 clientes activos."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿El CRM de Brain Tracker tiene seguimiento de propuestas y contratos?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sí. El módulo CRM Pipeline incluye etapas configurables (Prospecto, Propuesta, Negociación, Autorizado, En producción, Entregado) con fechas, valores de deal y notas internas. Puedes ver en tiempo real el valor total de tu pipeline y la probabilidad de cierre por etapa."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿El CRM incluye seguimiento de comunicaciones con clientes?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sí. Cada cliente en Brain Tracker tiene un historial de interacciones: llamadas, correos, reuniones y notas. El Chat IA Integrado puede resumir automáticamente el historial de cada cliente y sugerirte el próximo paso de seguimiento."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Cuántos clientes puedo gestionar con Brain Tracker?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No hay límite en el número de clientes en ningún plan. El plan gratuito incluye acceso completo al CRM Pipeline. Los planes de pago añaden workspaces adicionales, mayor volumen de tokens de IA y funciones de automatización avanzada."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --ink: #0E0F12;
+      --ink2: #1a1b1f;
+      --warm: #F8F7F5;
+      --bone: #F2EEE5;
+      --gold: #FFAA17;
+      --gold-pale: rgba(255,170,23,0.10);
+      --muted: rgba(14,15,18,0.42);
+      --rule: rgba(14,15,18,0.09);
+      --ease-cinema: cubic-bezier(0.22, 0.61, 0.36, 1);
+      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --font-serif: 'Instrument Serif', Georgia, serif;
+      --font-sans: 'Space Grotesk', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; background-color: var(--warm); color: var(--ink); font-family: var(--font-sans); font-weight: 300; -webkit-font-smoothing: antialiased; }
+    body { overflow-x: hidden; }
+
+    /* ─── NOISE OVERLAY ──────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 1000; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      opacity: 0.028;
+    }
+
+    /* ─── LAYOUT ─────────────────────────────────────────── */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 clamp(1.25rem, 5vw, 3rem); }
+
+    /* ─── PROGRESS BAR ───────────────────────────────────── */
+    #scrollProgress { position: fixed; top: 0; left: 0; height: 2px; background: var(--gold); z-index: 9999; width: 0%; transition: width 0.1s; }
+
+    /* ─── NAV ────────────────────────────────────────────── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(248,247,245,0.85);
+      backdrop-filter: blur(20px) saturate(1.4);
+      -webkit-backdrop-filter: blur(20px) saturate(1.4);
+      border-bottom: 1px solid var(--rule);
+      padding: 1.1rem 0;
+    }
+    .nav-inner { display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; }
+    .nav-logo { font-family: var(--font-serif); font-size: 1.2rem; letter-spacing: -.01em; color: var(--ink); text-decoration: none; }
+    .nav-badge { font-size: 0.65rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; background: var(--gold-pale); color: var(--gold); border: 1px solid rgba(255,170,23,0.25); border-radius: 99px; padding: .25em .75em; }
+    .nav-cta { font-size: 0.82rem; font-weight: 600; color: var(--ink); text-decoration: none; border: 1px solid var(--rule); border-radius: 4px; padding: .55em 1.2em; transition: all .3s var(--ease-cinema); }
+    .nav-cta:hover { background: var(--ink); color: var(--warm); }
+
+    /* ─── BREADCRUMB ─────────────────────────────────────── */
+    .breadcrumb { padding: 1rem 0; font-size: 0.78rem; color: var(--muted); display: flex; gap: .4rem; align-items: center; }
+    .breadcrumb a { color: var(--muted); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--ink); }
+
+    /* ─── HERO ───────────────────────────────────────────── */
+    .hero {
+      padding: clamp(5rem, 12vw, 9rem) 0 clamp(4rem, 8vw, 6rem);
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.7rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+    h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(2.8rem, 6.5vw, 5.2rem);
+      font-weight: 400;
+      letter-spacing: -.025em;
+      line-height: 1.05;
+      color: var(--ink);
+      max-width: 750px;
+      margin-bottom: 1.5rem;
+    }
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      line-height: 1.7;
+      color: var(--muted);
+      max-width: 560px;
+      margin-bottom: 2.5rem;
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+    .btn-primary {
+      background: var(--ink); color: var(--warm);
+      border: 1px solid transparent;
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--font-sans); font-weight: 600; font-size: 0.95rem;
+      padding: 1em 2em; border-radius: 4px; text-decoration: none;
+      transition: all .4s var(--ease-cinema);
+    }
+    .btn-primary:hover { background: transparent; color: var(--ink); border-color: var(--ink); }
+    .btn-primary svg { transition: transform .3s var(--ease-cinema); }
+    .btn-primary:hover svg { transform: translateX(4px); }
+    .btn-ghost { font-size: 0.88rem; font-weight: 500; color: var(--muted); text-decoration: none; transition: color .2s; }
+    .btn-ghost:hover { color: var(--ink); }
+
+    /* ─── PIPELINE MOCKUP ────────────────────────────────── */
+    .pipeline-mockup {
+      margin: clamp(3rem, 6vw, 5rem) 0;
+      background: var(--ink);
+      border-radius: 16px;
+      padding: clamp(1.5rem, 3vw, 2.5rem);
+      overflow-x: auto;
+    }
+    .pipeline-mockup-label {
+      font-size: 0.65rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+      color: rgba(248,247,245,.25); margin-bottom: 1.5rem;
+    }
+    .pipeline-cols {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(140px, 1fr));
+      gap: 1rem;
+      min-width: 700px;
+    }
+    .p-col-head {
+      font-size: 0.7rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+      color: rgba(248,247,245,.4); margin-bottom: 0.75rem;
+    }
+    .p-card {
+      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.08);
+      border-radius: 8px; padding: .85rem 1rem; margin-bottom: .5rem;
+    }
+    .p-card-name { font-size: 0.8rem; font-weight: 500; color: rgba(248,247,245,.9); margin-bottom: .3rem; }
+    .p-card-val { font-size: 0.7rem; color: rgba(248,247,245,.35); }
+    .p-card-dot {
+      display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+      margin-right: .4rem; vertical-align: middle;
+    }
+    .dot-gold { background: var(--gold); }
+    .dot-blue { background: #60a5fa; }
+    .dot-green { background: #34d399; }
+    .dot-purple { background: #a78bfa; }
+
+    /* ─── FEATURES ───────────────────────────────────────── */
+    .features-section { padding: clamp(5rem, 10vw, 8rem) 0; }
+    .section-label { font-size: 0.7rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.25rem; }
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 400; letter-spacing: -.02em; line-height: 1.1;
+      margin-bottom: 1rem; color: var(--ink);
+    }
+    .section-sub { font-size: 1rem; line-height: 1.7; color: var(--muted); max-width: 520px; margin-bottom: 3.5rem; }
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+    .feat-card {
+      background: var(--bone); border: 1px solid var(--rule); border-radius: 12px;
+      padding: clamp(1.5rem, 3vw, 2rem);
+    }
+    .feat-icon { width: 40px; height: 40px; margin-bottom: 1.25rem; color: var(--ink); opacity: .7; }
+    .feat-title { font-size: 1rem; font-weight: 600; color: var(--ink); margin-bottom: .5rem; }
+    .feat-desc { font-size: 0.88rem; line-height: 1.7; color: var(--muted); }
+
+    /* ─── PROBLEM SECTION ────────────────────────────────── */
+    .problem-section {
+      padding: clamp(4rem, 8vw, 6rem) 0;
+      background: var(--ink);
+      color: var(--warm);
+    }
+    .problem-inner { max-width: 720px; margin: 0 auto; text-align: center; }
+    .problem-eyebrow { font-size: 0.7rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,170,23,.8); margin-bottom: 1.5rem; }
+    .problem-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      font-weight: 400; letter-spacing: -.02em; line-height: 1.15;
+      color: var(--warm); margin-bottom: 1.5rem;
+    }
+    .problem-list { list-style: none; display: flex; flex-direction: column; gap: .75rem; margin-bottom: 2rem; }
+    .problem-list li { font-size: 0.95rem; line-height: 1.6; color: rgba(248,247,245,.55); display: flex; align-items: flex-start; gap: .75rem; text-align: left; max-width: 520px; margin: 0 auto; }
+    .problem-list li::before { content: '—'; color: rgba(255,170,23,.5); flex-shrink: 0; margin-top: .05em; }
+
+    /* ─── COMPARISON TABLE ───────────────────────────────── */
+    .compare-section { padding: clamp(5rem, 10vw, 8rem) 0; background: var(--bone); }
+    .compare-table { width: 100%; border-collapse: collapse; margin-top: 2.5rem; font-size: 0.88rem; }
+    .compare-table th {
+      text-align: left; padding: 1rem 1.25rem;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--muted); border-bottom: 1px solid var(--rule);
+    }
+    .compare-table td { padding: .85rem 1.25rem; border-bottom: 1px solid var(--rule); color: var(--muted); vertical-align: middle; }
+    .compare-table tr:last-child td { border-bottom: none; }
+    .compare-table .col-feature { font-weight: 500; color: var(--ink); }
+    .compare-table .col-bt { color: var(--ink); font-weight: 500; }
+    .check { color: #16a34a; font-size: 1rem; }
+    .cross { color: rgba(14,15,18,.25); }
+    .highlight-row td { background: rgba(255,170,23,.06); }
+    .highlight-row .col-bt { color: var(--gold); }
+
+    /* ─── FAQ ────────────────────────────────────────────── */
+    .faq-section { padding: clamp(5rem, 10vw, 8rem) 0; }
+    .faq-grid { border-top: 1px solid var(--rule); }
+    .faq-item { border-bottom: 1px solid var(--rule); }
+    .faq-q {
+      width: 100%; background: none; border: none; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center; gap: 1.5rem;
+      padding: 1.5rem 0;
+      font-family: var(--font-sans); font-size: clamp(0.95rem,2vw,1.05rem); font-weight: 500;
+      color: var(--ink); text-align: left;
+    }
+    .faq-q svg { flex-shrink: 0; transition: transform .3s var(--ease-cinema); color: var(--muted); }
+    .faq-item.open .faq-q svg { transform: rotate(45deg); }
+    .faq-a { display: none; padding: 0 2rem 1.5rem 0; font-size: 0.92rem; line-height: 1.8; color: var(--muted); max-width: 700px; }
+    .faq-item.open .faq-a { display: block; }
+
+    /* ─── CTA FINAL ──────────────────────────────────────── */
+    .cta-section {
+      padding: clamp(5rem, 10vw, 7rem) 0;
+      background: var(--gold);
+    }
+    .cta-inner { max-width: 600px; }
+    .cta-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 400; letter-spacing: -.02em; line-height: 1.1;
+      color: var(--ink); margin-bottom: 1.25rem;
+    }
+    .cta-sub { font-size: 1rem; line-height: 1.65; color: rgba(14,15,18,.6); margin-bottom: 2.25rem; }
+    .btn-dark {
+      background: var(--ink); color: var(--warm);
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--font-sans); font-weight: 600; font-size: 0.95rem;
+      padding: 1em 2em; border-radius: 4px; text-decoration: none;
+      transition: opacity .3s;
+    }
+    .btn-dark:hover { opacity: .82; }
+
+    /* ─── FOOTER ─────────────────────────────────────────── */
+    footer { background-color: var(--ink); color: rgba(248,247,245,0.4); padding: 3rem 0; font-size: 0.88rem; }
+    .footer-container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .footer-logo { font-family: var(--font-serif); color: rgba(248,247,245,0.7); text-decoration: none; font-size: 1.05rem; }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-link { color: rgba(248,247,245,0.4); text-decoration: none; font-size: 0.82rem; transition: color .2s; }
+    .footer-link:hover { color: var(--warm); }
+
+    /* ─── REVEAL ─────────────────────────────────────────── */
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .65s var(--ease-cinema), transform .65s var(--ease-cinema); }
+    .reveal.revealed { opacity: 1; transform: none; }
+
+    @media (max-width: 640px) {
+      .footer-container { flex-direction: column; text-align: center; }
+      .footer-links { flex-wrap: wrap; justify-content: center; }
+      .hero-actions { flex-direction: column; align-items: flex-start; }
+      .pipeline-cols { grid-template-columns: repeat(3, minmax(130px, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+
+<div id="scrollProgress"></div>
+
+<!-- NAV ──────────────────────────────────────────────────── -->
+<nav>
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/brain-tracker" class="nav-logo">Victor IA <span class="nav-badge">Brain Tracker</span></a>
+      <a href="mailto:hola@victor-ia.com.mx" class="nav-cta">Solicitar acceso</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO ─────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Victor IA</a> <span>/</span>
+      <a href="/brain-tracker">Brain Tracker</a> <span>/</span>
+      <span>CRM para Agencias</span>
+    </nav>
+    <span class="hero-eyebrow reveal">CRM Pipeline</span>
+    <h1 class="reveal">El CRM diseñado<br><em>para agencias digitales.</em></h1>
+    <p class="hero-sub reveal">Pipeline visual, seguimiento de prospectos y rentabilidad por cliente en tiempo real. El CRM para agencias digitales que entiende cómo opera tu negocio — sin Pipedrive, sin HubSpot, sin hojas de cálculo.</p>
+    <div class="hero-actions reveal">
+      <a href="mailto:hola@victor-ia.com.mx" class="btn-primary">
+        Solicitar acceso gratuito
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="/brain-tracker" class="btn-ghost">Ver plataforma completa →</a>
+    </div>
+
+    <!-- PIPELINE MOCKUP -->
+    <div class="pipeline-mockup reveal">
+      <p class="pipeline-mockup-label">CRM Pipeline — Brain Tracker</p>
+      <div class="pipeline-cols">
+        <div>
+          <p class="p-col-head">Prospecto</p>
+          <div class="p-card">
+            <p class="p-card-name"><span class="p-card-dot dot-gold"></span>Nexus Media</p>
+            <p class="p-card-val">$45,000 MXN</p>
+          </div>
+          <div class="p-card">
+            <p class="p-card-name"><span class="p-card-dot dot-gold"></span>Grupo Altus</p>
+            <p class="p-card-val">$28,000 MXN</p>
+          </div>
+        </div>
+        <div>
+          <p class="p-col-head">Propuesta</p>
+          <div class="p-card">
+            <p class="p-card-name"><span class="p-card-dot dot-blue"></span>Seabird Hotel</p>
+            <p class="p-card-val">$120,000 MXN</p>
+          </div>
+        </div>
+        <div>
+          <p class="p-col-head">Negociación</p>
+          <div class="p-card">
+            <p class="p-card-name"><span class="p-card-dot dot-purple"></span>ROES & Co.</p>
+            <p class="p-card-val">$68,000 MXN</p>
+          </div>
+          <div class="p-card">
+            <p class="p-card-name"><span class="p-card-dot dot-purple"></span>Costa Negra</p>
+            <p class="p-card-val">$55,000 MXN</p>
+          </div>
+        </div>
+        <div>
+          <p class="p-col-head">Autorizado</p>
+          <div class="p-card">
+            <p class="p-card-name"><span class="p-card-dot dot-green"></span>Influence IA</p>
+            <p class="p-card-val">$95,000 MXN</p>
+          </div>
+        </div>
+        <div>
+          <p class="p-col-head">En producción</p>
+          <div class="p-card">
+            <p class="p-card-name"><span class="p-card-dot dot-green"></span>Victor IA Web</p>
+            <p class="p-card-val">$72,000 MXN</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEMA ─────────────────────────────────────────────── -->
+<section class="problem-section">
+  <div class="container">
+    <div class="problem-inner">
+      <p class="problem-eyebrow">El problema de las agencias</p>
+      <h2 class="problem-title">Clientes en Notion, propuestas en Gmail, seguimiento en WhatsApp. <em>Ya basta.</em></h2>
+      <ul class="problem-list">
+        <li>No sabes exactamente en qué etapa está cada cliente sin revisar 3 herramientas distintas</li>
+        <li>Pierdes prospectos porque no hay alertas automáticas de seguimiento</li>
+        <li>No tienes visibilidad del valor total de tu pipeline ni la probabilidad de cierre</li>
+        <li>El historial de cada cliente está fragmentado entre correo, Slack y hojas de cálculo</li>
+        <li>No puedes ver si un cliente es rentable hasta que el proyecto termina</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES ─────────────────────────────────────────────── -->
+<section class="features-section">
+  <div class="container">
+    <p class="section-label reveal">Funcionalidades del CRM</p>
+    <h2 class="section-title reveal">Todo lo que necesita<br>el CRM de <em>una agencia digital.</em></h2>
+    <p class="section-sub reveal">Diseñado específicamente para el ciclo de ventas y operación de una agencia: desde el primer contacto hasta la entrega y cobro del proyecto.</p>
+    <div class="features-grid">
+      <div class="feat-card reveal">
+        <svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
+        <h3 class="feat-title">Pipeline visual por etapas</h3>
+        <p class="feat-desc">Kanban configurable con las etapas reales de tu agencia. Arrastra clientes entre Prospecto, Propuesta, Negociación, Autorizado y En producción.</p>
+      </div>
+      <div class="feat-card reveal">
+        <svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        <h3 class="feat-title">Alertas de seguimiento automáticas</h3>
+        <p class="feat-desc">Recibe notificaciones cuando un cliente lleva más de N días sin contacto. Nunca pierdas un prospecto por falta de seguimiento oportuno.</p>
+      </div>
+      <div class="feat-card reveal">
+        <svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        <h3 class="feat-title">Valor de pipeline en tiempo real</h3>
+        <p class="feat-desc">Ve el valor total de tu pipeline, el ingreso potencial por etapa y la probabilidad de cierre — todo en un solo dashboard actualizado al instante.</p>
+      </div>
+      <div class="feat-card reveal">
+        <svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <h3 class="feat-title">Historial completo por cliente</h3>
+        <p class="feat-desc">Todas las interacciones, notas, reuniones y propuestas de cada cliente en un solo lugar. Con IA integrada que resume el historial y sugiere el próximo paso.</p>
+      </div>
+      <div class="feat-card reveal">
+        <svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        <h3 class="feat-title">Rentabilidad por cliente</h3>
+        <p class="feat-desc">Conectado directamente al Time Tracker: ve cuántas horas llevas trabajadas en cada cliente y si el proyecto es rentable o ya estás perdiendo dinero.</p>
+      </div>
+      <div class="feat-card reveal">
+        <svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        <h3 class="feat-title">Resúmenes IA de cada cuenta</h3>
+        <p class="feat-desc">Pídele al Chat IA de Brain Tracker que te resuma el estado actual de cualquier cliente: qué se ha hecho, qué falta, cuánto llevas cobrado y qué sigue.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TABLA COMPARATIVA ────────────────────────────────────── -->
+<section class="compare-section">
+  <div class="container">
+    <p class="section-label reveal">Comparativa</p>
+    <h2 class="section-title reveal">Brain Tracker vs.<br><em>CRMs genéricos.</em></h2>
+    <p class="section-sub reveal">Los CRMs genéricos no entienden el modelo de negocio de una agencia digital. Brain Tracker sí.</p>
+    <div style="overflow-x:auto">
+      <table class="compare-table reveal">
+        <thead>
+          <tr>
+            <th>Funcionalidad</th>
+            <th>HubSpot / Pipedrive</th>
+            <th>Brain Tracker</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-feature">Pipeline por etapas de agencia</td>
+            <td class="cross">Genérico, requiere configuración</td>
+            <td class="col-bt check">✓ Preconfigurado para agencias</td>
+          </tr>
+          <tr class="highlight-row">
+            <td class="col-feature">Rentabilidad por cliente integrada</td>
+            <td class="cross">✗ No disponible</td>
+            <td class="col-bt check">✓ Nativo con Time Tracker</td>
+          </tr>
+          <tr>
+            <td class="col-feature">Resúmenes IA del cliente</td>
+            <td class="cross">✗ Addon de pago externo</td>
+            <td class="col-bt check">✓ Chat IA incluido</td>
+          </tr>
+          <tr class="highlight-row">
+            <td class="col-feature">Time tracking por proyecto</td>
+            <td class="cross">✗ Requiere integración Toggl/Harvest</td>
+            <td class="col-bt check">✓ Integrado en el mismo dashboard</td>
+          </tr>
+          <tr>
+            <td class="col-feature">Agentes IA autónomos</td>
+            <td class="cross">✗ No disponible</td>
+            <td class="col-bt check">✓ Multi-agente incluido</td>
+          </tr>
+          <tr class="highlight-row">
+            <td class="col-feature">Costo mensual</td>
+            <td class="cross">$45–$800 USD/mes</td>
+            <td class="col-bt check">✓ Gratis (acceso por invitación)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ ──────────────────────────────────────────────────── -->
+<section class="faq-section" id="faq">
+  <div class="container">
+    <p class="section-label reveal">Preguntas frecuentes</p>
+    <h2 class="section-title reveal">Todo sobre el CRM<br><em>para agencias digitales.</em></h2>
+    <div class="faq-grid" style="margin-top:2.5rem">
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">
+          ¿Qué diferencia al CRM de Brain Tracker de HubSpot o Pipedrive?
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <p class="faq-a">El CRM de Brain Tracker está diseñado exclusivamente para el flujo de trabajo de una agencia digital: prospecto → propuesta → autorizado → entregado. A diferencia de HubSpot o Pipedrive, conecta cada cliente directamente con su tiempo trabajado, proyectos activos y rentabilidad real, sin integraciones adicionales.</p>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">
+          ¿Puedo migrar mis clientes desde HubSpot o Notion?
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <p class="faq-a">Sí. Brain Tracker permite importar clientes desde CSV, HubSpot y Notion. El proceso de migración toma menos de 30 minutos para la mayoría de agencias con menos de 50 clientes activos.</p>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">
+          ¿El CRM incluye seguimiento de propuestas y contratos?
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <p class="faq-a">Sí. El CRM Pipeline incluye etapas configurables con fechas, valores de deal y notas internas. Puedes ver en tiempo real el valor total de tu pipeline y la probabilidad de cierre por etapa.</p>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">
+          ¿Cuántos clientes puedo gestionar?
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <p class="faq-a">No hay límite en el número de clientes en ningún plan. El plan gratuito incluye acceso completo al CRM Pipeline. Los planes de pago añaden workspaces adicionales y automatización avanzada.</p>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">
+          ¿Cómo se conecta el CRM con el time tracker y las finanzas?
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <p class="faq-a">Todo está en el mismo sistema. Al registrar horas en el Time Tracker bajo el nombre de un cliente, Brain Tracker calcula automáticamente la rentabilidad: cuánto cobras vs. cuánto cuesta cada hora trabajada en esa cuenta. Las finanzas se actualizan en tiempo real.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL ────────────────────────────────────────────── -->
+<section class="cta-section" id="solicitar">
+  <div class="container">
+    <div class="cta-inner reveal">
+      <h2 class="cta-title">Tu agencia merece un CRM que la entienda.</h2>
+      <p class="cta-sub">Solicita acceso gratuito a Brain Tracker y deja de repartir tu operación entre 4 herramientas distintas.</p>
+      <a href="mailto:hola@victor-ia.com.mx?subject=Solicitud acceso Brain Tracker CRM" class="btn-dark">
+        Solicitar acceso gratuito
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER ───────────────────────────────────────────────── -->
+<footer>
+  <div class="container footer-container">
+    <a href="/brain-tracker" class="footer-logo">Victor IA</a>
+    <nav class="footer-links">
+      <a href="/brain-tracker" class="footer-link">Brain Tracker</a>
+      <a href="/crm-agencias" class="footer-link">CRM</a>
+      <a href="mailto:hola@victor-ia.com.mx" class="footer-link">Contacto</a>
+    </nav>
+    <p>&copy; 2026 Victor IA.</p>
+  </div>
+</footer>
+
+<script>
+  /* ─── SCROLL PROGRESS ────────────────────────────────── */
+  const bar = document.getElementById('scrollProgress');
+  window.addEventListener('scroll', () => {
+    bar.style.width = Math.min((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100, 100) + '%';
+  }, { passive: true });
+
+  /* ─── REVEAL ─────────────────────────────────────────── */
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  /* ─── FAQ ACCORDION ──────────────────────────────────── */
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) { item.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
+    });
+  });
+</script>
+</body>
+</html>

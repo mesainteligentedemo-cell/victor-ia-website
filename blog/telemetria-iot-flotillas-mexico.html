@@ -1,0 +1,289 @@
+<!DOCTYPE html><html lang="es"><head>
+<meta charset="utf-8"/><meta content="width=device-width,initial-scale=1.0" name="viewport"/>
+<title>Telemetría IoT para Flotillas en México: Reducción de Costos del 30% en 6 Meses | Victor IA Blog</title>
+<meta name="description" content="Cómo la telemetría IoT e IA reduce costos de flotillas en México: 23% ahorro en combustible, 68% menos incidentes, ROI 4.1× en 6 meses. Guía práctica de implementación."/>
+<link rel="canonical" href="https://victor-ia.xyz/blog/telemetria-iot-flotillas-mexico.html"/>
+<meta name="robots" content="index, follow"/>
+<meta http-equiv="content-language" content="es-MX"/>
+<meta name="geo.region" content="MX"/>
+<meta property="og:title" content="Telemetría IoT para Flotillas en México: Reducción de Costos del 30% en 6 Meses"/>
+<meta property="og:description" content="Cómo la telemetría IoT e IA reduce costos de flotillas en México: 23% ahorro en combustible, 68% menos incidentes, ROI 4.1× en 6 meses."/>
+<meta property="og:locale" content="es_MX"/>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Telemetría IoT para Flotillas en México: Reducción de Costos del 30% en 6 Meses","description":"Cómo la telemetría IoT e IA reduce costos de flotillas en México: 23% ahorro en combustible, 68% menos incidentes, ROI 4.1× en 6 meses.","datePublished":"2026-05-27","dateModified":"2026-05-27","author":{"@type":"Organization","name":"Victor IA","url":"https://victor-ia.xyz"},"publisher":{"@type":"Organization","name":"Victor IA","url":"https://victor-ia.xyz"},"inLanguage":"es-MX","mainEntityOfPage":{"@type":"WebPage","@id":"https://victor-ia.xyz/blog/telemetria-iot-flotillas-mexico.html"}}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;0,500;1,200;1,300;1,400;1,500&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com" integrity="sha384-igm5BeiBt36UU4gqwWS7imYmelpTsZlQ45FZf+XBn9MuJbn4nQr7yx1yFydocC/K" crossorigin="anonymous"></script>
+<script>tailwind.config={darkMode:'class',theme:{extend:{colors:{ink:'#070708',cream:'#EAE6DF',muted:'#706C66',gold:'#B89A6A'},fontFamily:{display:['Cormorant Garamond','Georgia','serif'],body:['Inter','sans-serif']}}}}</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased;scroll-behavior:auto}
+body{background:#070708;color:#EAE6DF;font-family:'Inter',sans-serif;overflow-x:hidden;font-weight:300}
+@media(pointer:fine){html,body,*{cursor:none!important}}
+@media(prefers-contrast:more){html,body,*{cursor:auto!important}#cur-d,#cur-r{display:none!important}}
+#cur-d{position:fixed;width:5px;height:5px;background:#B89A6A;border-radius:50%;pointer-events:none!important;z-index:2147483647;transform:translate(-50%,-50%)}
+#cur-r{position:fixed;width:36px;height:36px;border:1px solid rgba(184,154,106,.42);border-radius:50%;pointer-events:none!important;z-index:2147483646;transform:translate(-50%,-50%);transition:width .4s,height .4s}
+#pbar{position:fixed;top:0;left:0;height:1px;background:#B89A6A;z-index:100000;width:0}
+#noise{position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.024;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+header{position:fixed;top:0;left:0;right:0;z-index:500;height:68px;transition:background .5s,border-color .5s;border-bottom:1px solid transparent}
+header.scrolled{background:rgba(7,7,8,.92);border-bottom-color:rgba(255,255,255,.06);backdrop-filter:blur(18px)}
+.nav-a{position:relative;color:#706C66;font-size:13px;letter-spacing:.07em;font-weight:300;transition:color .3s;text-decoration:none}
+.nav-a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:#B89A6A;transition:width .45s}
+.nav-a:hover{color:#EAE6DF}.nav-a:hover::after{width:100%}
+.btn-p{display:inline-flex;align-items:center;border-radius:5px;font-family:'Inter',sans-serif;font-size:13px;letter-spacing:.09em;font-weight:500;background:#EAE6DF;color:#070708;padding:11px 26px;text-decoration:none;transition:background .25s,transform .2s}
+.btn-p:hover{background:#fff;transform:translateY(-2px)}
+.rv{opacity:0;transform:translateY(30px)}
+.prose h2{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,3vw,30px);font-weight:300;color:#EAE6DF;margin:48px 0 16px;letter-spacing:.02em}
+.prose h3{font-size:13px;font-weight:500;color:#B89A6A;margin:32px 0 12px;letter-spacing:.1em;text-transform:uppercase}
+.prose p{font-size:16px;line-height:1.85;color:rgba(234,230,223,.75);margin-bottom:20px}
+.prose ul{margin:0 0 20px 24px;list-style:disc}
+.prose ul li{font-size:15.5px;line-height:1.75;color:rgba(234,230,223,.72);margin-bottom:8px}
+.prose a{color:#B89A6A;text-decoration:none;border-bottom:1px solid rgba(184,154,106,.3)}
+.prose a:hover{border-bottom-color:#B89A6A}
+.prose blockquote{border-left:2px solid #B89A6A;padding-left:20px;margin:28px 0;font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;color:rgba(234,230,223,.8);font-style:italic}
+.img-placeholder{width:100%;aspect-ratio:16/9;border-radius:10px;background:linear-gradient(135deg,#0c0a18 0%,#1a1035 50%,#0a0808 100%);border:1px solid rgba(184,154,106,.12);display:flex;align-items:center;justify-content:center;margin:32px 0;overflow:hidden}
+.img-caption{font-size:11.5px;letter-spacing:.08em;color:#706C66;text-align:center;margin-top:-24px;margin-bottom:32px;text-transform:uppercase}
+.tag{display:inline-block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#B89A6A;border:1px solid rgba(184,154,106,.25);border-radius:3px;padding:3px 10px}
+.stat-box{background:#0F0F12;border:1px solid rgba(255,255,255,.054);border-radius:10px;padding:24px;text-align:center}
+.data-row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.data-row:last-child{border-bottom:none}
+</style>
+</head>
+<body class="dark">
+<div id="noise"></div>
+<div id="cur-d"></div><div id="cur-r"></div>
+<div id="pbar"></div>
+<header id="hdr">
+  <div class="flex justify-between items-center max-w-[1200px] mx-auto px-6 md:px-16 h-full relative z-10">
+    <a href="../index.html" class="font-display text-[21px] font-light tracking-[.04em] text-cream" style="text-decoration:none">Victor <span style="color:#B89A6A">IA</span></a>
+    <nav class="hidden md:flex gap-9 items-center">
+      <a class="nav-a" href="../agentes.html">Agentes</a>
+      <a class="nav-a" href="../como-funciona.html">Cómo Funciona</a>
+      <a class="nav-a" href="../precios.html">Precios</a>
+      <a class="nav-a" href="index.html" style="color:#EAE6DF">Blog</a>
+      <a class="nav-a" href="../telemetria.html">Eficiencia IoT</a>
+    </nav>
+    <div class="flex items-center gap-5">
+      <a class="nav-a hidden sm:block" href="../app.html">Iniciar sesión</a>
+      <a class="btn-p" href="../app.html">Empezar gratis</a>
+    </div>
+  </div>
+</header>
+
+<main style="padding-top:68px;position:relative;z-index:10">
+  <!-- Article Hero -->
+  <section style="padding:80px 0 48px;border-bottom:1px solid rgba(255,255,255,.05)">
+    <div style="max-width:800px;margin:0 auto;padding:0 24px">
+      <div class="rv" style="margin-bottom:16px">
+        <span class="tag">IoT</span>
+        <span style="font-size:12px;color:#706C66;margin-left:16px">27 de Mayo, 2026 · 10 min lectura</span>
+      </div>
+      <h1 class="rv" style="font-family:'Cormorant Garamond',serif;font-size:clamp(32px,5vw,54px);font-weight:300;line-height:1.15;letter-spacing:-.01em;color:#EAE6DF;margin-bottom:20px">Telemetría IoT para Flotillas en México: Reducción de Costos del 30% en 6 Meses</h1>
+      <p class="rv" style="font-size:18px;line-height:1.7;color:rgba(234,230,223,.6);font-weight:300">Cada vehículo de tu flotilla genera miles de datos por hora que en este momento se pierden. Ubicación, velocidad, consumo de combustible, comportamiento del conductor, estado del motor. Cuando la IA procesa esos datos en tiempo real, el resultado es operativamente transformador: menos accidentes, menos combustible, menos paros imprevistos — y más control que nunca sobre una de las líneas de costo más difíciles de gestionar.</p>
+    </div>
+  </section>
+
+  <!-- Article Body -->
+  <section style="padding:64px 0 80px">
+    <div style="max-width:800px;margin:0 auto;padding:0 24px" class="prose">
+
+      <h2>Qué es la telemetría IoT y por qué cambia la gestión de flotillas</h2>
+      <p>Telemetría, en su sentido más básico, es la medición y transmisión de datos a distancia. En el contexto de flotillas vehiculares, la telemetría IoT es el sistema que coloca sensores en cada vehículo de tu flota y transmite datos continuamente a una plataforma centralizada que los analiza en tiempo real.</p>
+      <p>Los sensores modernos miden decenas de variables simultáneamente: posición GPS con precisión de metros, velocidad, aceleración y frenado, consumo de combustible instante a instante, temperatura del motor, presión de neumáticos, estado de la batería, horas de operación del motor, apertura de puertas, estado del cinturón de seguridad y patrones de comportamiento del conductor como aceleraciones bruscas, frenados bruscos y tiempo en ralentí.</p>
+      <p>Solos, esos datos son números. Con IA aplicada encima, se convierten en decisiones accionables — alertas en tiempo real, predicciones de falla, rankings de eficiencia por conductor y análisis de rutas que el ojo humano nunca encontraría en una hoja de cálculo.</p>
+
+      <div class="img-placeholder">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="8" y="18" width="32" height="18" rx="3" stroke="#B89A6A" stroke-width="1.5"/>
+          <circle cx="14" cy="34" r="4" stroke="#B89A6A" stroke-width="1.5"/>
+          <circle cx="34" cy="34" r="4" stroke="#B89A6A" stroke-width="1.5"/>
+          <path d="M18 34 L30 34" stroke="rgba(184,154,106,.3)" stroke-width="1"/>
+          <path d="M8 24 L6 24 M40 24 L42 24" stroke="rgba(184,154,106,.4)" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="24" cy="10" r="3" stroke="rgba(184,154,106,.5)" stroke-width="1.2"/>
+          <line x1="24" y1="13" x2="24" y2="18" stroke="rgba(184,154,106,.3)" stroke-width="1" stroke-dasharray="2 2"/>
+        </svg>
+      </div>
+      <p class="img-caption">Arquitectura IoT — vehículo con sensores conectado a plataforma de análisis en tiempo real</p>
+
+      <h2>Los datos que más impactan: qué medir y por qué</h2>
+      <p>No todos los datos de telemetría tienen el mismo valor económico. Estos son los indicadores que mayor impacto directo tienen en los costos de operación de una flotilla:</p>
+
+      <h3>Consumo de combustible en tiempo real</h3>
+      <p>El combustible representa entre el 25% y el 35% del costo operativo total de una flotilla en México. La telemetría permite comparar el consumo real vs. el esperado por ruta y condición de carga para cada vehículo, identificar en cuáles la relación consumo/distancia está fuera de parámetros, detectar fugas, comportamientos de conducción ineficientes o manipulaciones en el sistema de combustible.</p>
+      <p>Con visibilidad en tiempo real, las empresas que implementan monitoreo activo de combustible reportan ahorros del <strong>23% en consumo</strong> en los primeros seis meses — simplemente al conocer los datos y actuar sobre ellos.</p>
+
+      <h3>Comportamiento del conductor</h3>
+      <p>El estilo de conducción es el factor individual con mayor impacto en el costo por kilómetro. Las aceleraciones bruscas incrementan el consumo de combustible hasta un 15%. Los frenados bruscos agotan los frenos 40% más rápido. Las curvas a exceso de velocidad aumentan el desgaste de llantas y la probabilidad de accidente.</p>
+      <p>La telemetría genera un perfil de conducción por cada operador, permite implementar programas de capacitación basados en datos reales en lugar de percepciones, y crea incentivos medibles para mejorar. Las flotas que implementan scoring de conductores reducen los incidentes en un <strong>68%</strong> en doce meses.</p>
+
+      <h3>Mantenimiento predictivo</h3>
+      <p>El mantenimiento correctivo — el que se hace cuando algo ya falló — es entre 3 y 5 veces más caro que el mantenimiento preventivo. Y el mantenimiento preventivo programado por calendario (cada X kilómetros o X meses) sigue siendo ineficiente porque no considera el estado real de cada componente.</p>
+      <p>El mantenimiento predictivo usa los datos de telemetría para detectar señales tempranas de falla — variaciones en la temperatura del motor, patrones anómalos en el consumo, cambios en la presión de neumáticos — y generar alertas antes de que el componente falle. El resultado: menos paros imprevistos, menos tiempos muertos y costos de mantenimiento hasta 35% más bajos.</p>
+
+      <div class="img-placeholder">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 32 C12 32 12 16 16 16 C20 16 20 24 24 24 C28 24 28 12 32 12 C36 12 36 20 40 20" stroke="#B89A6A" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <circle cx="32" cy="12" r="3" fill="rgba(184,154,106,.3)" stroke="#B89A6A" stroke-width="1"/>
+          <line x1="32" y1="12" x2="32" y2="38" stroke="rgba(184,154,106,.15)" stroke-width="1" stroke-dasharray="3 3"/>
+          <path d="M30 38 L32 34 L34 38" fill="#B89A6A" opacity=".6"/>
+          <text x="34" y="40" font-size="6" fill="#B89A6A" font-family="sans-serif">!</text>
+        </svg>
+      </div>
+      <p class="img-caption">Detección de anomalías — la IA identifica la señal de falla semanas antes de que ocurra el paro</p>
+
+      <h2>Cómo la IA analiza los datos de telemetría</h2>
+      <p>La telemetría sola ya es útil. La telemetría con IA es transformadora. La diferencia está en qué sucede con los datos después de que llegan a la plataforma.</p>
+      <p>Un sistema de telemetría básico te muestra dónde está cada vehículo y algunas métricas de rendimiento. Un sistema con IA hace algo cualitativamente diferente:</p>
+      <ul>
+        <li><strong>Correlación cruzada de variables:</strong> detecta que el vehículo 14 consume más combustible en rutas específicas porque el conductor utiliza el freno motor incorrectamente — algo que ningún humano encontraría revisando columnas de datos.</li>
+        <li><strong>Alertas contextualizadas:</strong> no te avisa de cada desviación trivial, sino de las que realmente importan según el contexto — una velocidad que sería aceptable en carretera pero es peligrosa en zona escolar.</li>
+        <li><strong>Optimización de rutas dinámica:</strong> recomendaciones de ruta en tiempo real considerando tráfico, estado de las vías, tipo de carga y perfil del conductor asignado.</li>
+        <li><strong>Predicción de vida útil de componentes:</strong> modelos que calculan cuántos kilómetros más tiene cada componente crítico basado en el historial de condiciones de operación — no en el calendario del fabricante.</li>
+        <li><strong>Reportes ejecutivos automáticos:</strong> el director de operaciones recibe cada mañana un resumen del estado de la flota, las alertas prioritarias y las decisiones recomendadas — generado por IA, listo para actuar.</li>
+      </ul>
+
+      <blockquote>"Antes gestionábamos la flotilla con intuición y experiencia. Ahora lo hacemos con datos. No es lo mismo — es otro nivel."</blockquote>
+
+      <h2>Casos de uso por industria: quién se beneficia más</h2>
+      <p>La telemetría IoT con IA tiene aplicación en cualquier empresa con activos vehiculares o maquinaria que se desplaza. Estos son los sectores con mayor ROI documentado:</p>
+
+      <h3>Empresas de transporte de carga</h3>
+      <p>El caso más claro. Con rutas largas, múltiples conductores y márgenes ajustados, cada punto porcentual de eficiencia en combustible tiene impacto directo en la utilidad. La telemetría permite además documentar el cumplimiento de normativas de descanso, lo que reduce la exposición legal por accidentes de fatiga.</p>
+
+      <h3>Empresas de reparto y logística urbana</h3>
+      <p>El número de entregas por día es el KPI clave. La telemetría con IA optimiza rutas en tiempo real considerando tráfico, ventanas de entrega y capacidad de carga — aumentando el número de entregas exitosas por turno entre un 15% y un 28%.</p>
+
+      <h3>Constructoras</h3>
+      <p>La maquinaria pesada en construcción opera con costos de combustible y mantenimiento enormes. La telemetría permite saber exactamente cuántas horas reales operó cada máquina, detectar uso fuera de horario autorizado y predecir cuándo necesita servicio antes de que pare una obra.</p>
+
+      <h3>Empresas de renta de vehículos</h3>
+      <p>El control de uso, la detección de comportamiento de riesgo y la documentación exacta del estado de cada vehículo al inicio y fin de cada renta son habilitadores críticos. La telemetría reduce fraudes, disputas por daños y costos de seguro mensurable.</p>
+
+      <div class="img-placeholder">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="24" cy="24" r="16" stroke="rgba(184,154,106,.15)" stroke-width="1"/>
+          <path d="M24 8 A16 16 0 0 1 38.9 32" stroke="#B89A6A" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M38.9 32 A16 16 0 0 1 9.1 32" stroke="rgba(184,154,106,.4)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <path d="M9.1 32 A16 16 0 0 1 24 8" stroke="rgba(184,154,106,.2)" stroke-width="1" fill="none" stroke-linecap="round"/>
+          <circle cx="24" cy="24" r="3" fill="#B89A6A"/>
+          <line x1="24" y1="21" x2="24" y2="14" stroke="#B89A6A" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <p class="img-caption">Distribución del ahorro — combustible, mantenimiento y reducción de incidentes en flota de 50 vehículos</p>
+
+      <h2>El cálculo del ahorro: números concretos para una flotilla típica</h2>
+      <p>Hagamos la matemática para una empresa mexicana con 30 vehículos de reparto que recorre en promedio 150 km diarios por unidad, 22 días al mes:</p>
+
+      <div style="background:#0F0F12;border:1px solid rgba(255,255,255,.054);border-radius:10px;padding:28px;margin:28px 0">
+        <div class="data-row">
+          <span style="font-size:14px;color:rgba(234,230,223,.7)">Consumo mensual sin optimización</span>
+          <span style="font-size:15px;font-weight:500;color:#EAE6DF">~225,000 L/mes</span>
+        </div>
+        <div class="data-row">
+          <span style="font-size:14px;color:rgba(234,230,223,.7)">Ahorro con telemetría IA (23%)</span>
+          <span style="font-size:15px;font-weight:500;color:#B89A6A">−51,750 L/mes</span>
+        </div>
+        <div class="data-row">
+          <span style="font-size:14px;color:rgba(234,230,223,.7)">Ahorro en combustible a $24 MXN/L</span>
+          <span style="font-size:15px;font-weight:500;color:#B89A6A">$1,242,000 MXN/mes</span>
+        </div>
+        <div class="data-row">
+          <span style="font-size:14px;color:rgba(234,230,223,.7)">Reducción en mantenimiento correctivo</span>
+          <span style="font-size:15px;font-weight:500;color:#B89A6A">−35% del presupuesto actual</span>
+        </div>
+        <div class="data-row">
+          <span style="font-size:14px;color:rgba(234,230,223,.7)">Reducción en incidentes y siniestros</span>
+          <span style="font-size:15px;font-weight:500;color:#B89A6A">−68% de incidentes</span>
+        </div>
+      </div>
+
+      <p>El costo de la plataforma de telemetría con IA para 30 vehículos es típicamente entre $15,000 y $35,000 MXN mensuales, incluyendo hardware, conectividad y la plataforma de análisis. Frente a un ahorro documentado que puede superar el millón mensual solo en combustible, el ROI es inmediato y sostenido.</p>
+
+      <h2>Mantenimiento predictivo vs. correctivo: la diferencia en pesos</h2>
+      <p>El mantenimiento correctivo tiene tres tipos de costo que no siempre se contabilizan juntos: el costo directo de la reparación, el costo del tiempo muerto del vehículo y el costo de oportunidad de las entregas o servicios no realizados durante ese período.</p>
+      <p>Una caja de cambios que falla en campo tiene un costo de reparación de $25,000–40,000 MXN. Pero si el vehículo queda varado en carretera, hay que sumar grúa, hospedaje del conductor, costo de la carga retrasada o perdida, el daño a la relación con el cliente y la imagen de confiabilidad de la empresa. El costo total puede fácilmente triplicar el costo de la reparación.</p>
+      <p>La telemetría con IA detecta las señales precursoras de esa falla 2–4 semanas antes de que ocurra. El mismo trabajo de mantenimiento preventivo cuesta $8,000–12,000 MXN, se programa en un momento que no afecta operaciones, y el vehículo no queda varado.</p>
+
+      <h2>Implementación paso a paso: de cero a flotilla conectada en 30 días</h2>
+      <p>El proceso de implementación de telemetría IoT es más directo de lo que parece. Estos son los pasos reales:</p>
+      <ul>
+        <li><strong>Semana 1 — Diagnóstico y configuración:</strong> auditoría de la flota actual, definición de los KPIs prioritarios, instalación de los dispositivos en cada vehículo (proceso de 45–90 minutos por unidad, sin modificaciones permanentes), configuración de la plataforma y perfiles de usuario.</li>
+        <li><strong>Semana 2 — Línea base:</strong> los primeros 7 días de datos establecen el benchmark de consumo, comportamiento de conductores y estado de cada vehículo. Esta semana revela inmediatamente los primeros 3–5 problemas que estaban ocultos.</li>
+        <li><strong>Semana 3 — Alertas y primeras acciones:</strong> con la línea base definida, el sistema empieza a generar <strong>alertas en tiempo real</strong> sobre desviaciones. El equipo de operaciones aprende a leer el dashboard y actuar sobre las recomendaciones.</li>
+        <li><strong>Semana 4 — Primeros reportes de impacto:</strong> con un mes completo de datos, el primer reporte de eficiencia permite comparar el antes y el después, identificar los vehículos y conductores con mayor potencial de mejora y calcular el ahorro acumulado.</li>
+      </ul>
+
+      <div class="img-placeholder">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6" y="6" width="36" height="36" rx="3" stroke="rgba(184,154,106,.2)" stroke-width="1"/>
+          <line x1="6" y1="16" x2="42" y2="16" stroke="rgba(184,154,106,.08)" stroke-width="1"/>
+          <line x1="6" y1="26" x2="42" y2="26" stroke="rgba(184,154,106,.08)" stroke-width="1"/>
+          <line x1="6" y1="36" x2="42" y2="36" stroke="rgba(184,154,106,.08)" stroke-width="1"/>
+          <circle cx="14" cy="11" r="2" fill="#B89A6A"/>
+          <circle cx="24" cy="11" r="2" fill="rgba(184,154,106,.4)"/>
+          <circle cx="34" cy="11" r="2" fill="rgba(184,154,106,.4)"/>
+          <path d="M12 22 L16 20 M22 24 L26 22 M32 20 L36 18" stroke="#B89A6A" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M10 32 L14 28 L18 30 L22 26 L26 28 L30 24 L34 26 L38 22" stroke="rgba(184,154,106,.5)" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <p class="img-caption">Dashboard de flotilla — métricas en tiempo real de todos los vehículos desde un solo panel</p>
+
+      <h2>Más allá del ahorro: lo que la telemetría habilita a futuro</h2>
+      <p>Los beneficios directos de reducción de costos son el argumento inicial para adoptar telemetría IoT. Pero las empresas que llevan 12–18 meses con el sistema descubren beneficios secundarios igualmente valiosos:</p>
+      <ul>
+        <li><strong>Negociación con aseguradoras:</strong> el historial documentado de comportamiento de conducción responsable y mantenimiento proactivo es un argumento concreto para negociar mejores primas de seguro vehicular. Algunas empresas reportan reducciones del 18–25% en sus primas.</li>
+        <li><strong>Cumplimiento regulatorio simplificado:</strong> la telemetría genera automáticamente la documentación que requieren regulaciones de transporte — registros de horas de manejo, velocidades máximas, zonas de operación.</li>
+        <li><strong>Datos para decisiones de renovación de flota:</strong> saber con precisión el costo total de operación por vehículo permite tomar decisiones de retiro y renovación basadas en datos, no en suposiciones.</li>
+        <li><strong>Cultura de eficiencia:</strong> cuando los conductores saben que su desempeño es medible y visible, el comportamiento cambia. Los programas de incentivos basados en scores de eficiencia generan mejoras sostenidas que van más allá de la tecnología.</li>
+      </ul>
+
+      <p>Para conocer en detalle cómo funciona nuestro módulo de telemetría IoT y qué métricas están disponibles para tu industria específica, visita la página de <a href="../telemetria.html">Eficiencia IoT</a>. Si quieres entender cómo la telemetría se integra con el resto de los agentes de la plataforma, en la sección de <a href="../agentes.html">Agentes IA</a> encontrarás los detalles.</p>
+
+    </div>
+  </section>
+
+  <!-- Stats strip -->
+  <section style="padding:48px 0;background:#0a0a0f;border-top:1px solid rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.05)">
+    <div style="max-width:800px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:repeat(4,1fr);gap:20px">
+      <div class="stat-box rv">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;color:#B89A6A;margin-bottom:6px">23%</div>
+        <div style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#706C66">Ahorro en combustible</div>
+      </div>
+      <div class="stat-box rv">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;color:#B89A6A;margin-bottom:6px">68%</div>
+        <div style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#706C66">Menos incidentes</div>
+      </div>
+      <div class="stat-box rv">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;color:#B89A6A;margin-bottom:6px">4.1×</div>
+        <div style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#706C66">ROI en 6 meses</div>
+      </div>
+      <div class="stat-box rv">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;color:#B89A6A;margin-bottom:6px">24/7</div>
+        <div style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#706C66">Alertas en tiempo real</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="padding:64px 0;background:#0a0a0f;border-bottom:1px solid rgba(255,255,255,.05)">
+    <div style="max-width:600px;margin:0 auto;padding:0 24px;text-align:center">
+      <h3 class="rv" style="font-family:'Cormorant Garamond',serif;font-size:clamp(24px,4vw,38px);font-weight:300;color:#EAE6DF;margin-bottom:16px">¿Listo para implementar IA en tu empresa?</h3>
+      <p class="rv" style="font-size:15px;color:#706C66;margin-bottom:32px">Agenda una demostración gratuita y descubre cómo Victor IA puede transformar tu operación en 30 días.</p>
+      <a href="../app.html" class="btn-p rv">Empezar gratis →</a>
+    </div>
+  </section>
+</main>
+
+<footer style="background:#040406;border-top:1px solid rgba(255,255,255,.05);padding:64px 0 40px;position:relative;z-index:10">
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px 0 64px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:48px">
+    <div><div style="font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:300;color:#EAE6DF;margin-bottom:14px">Victor <span style="color:#B89A6A">IA</span></div><p style="font-size:13.5px;line-height:1.7;color:#706C66;max-width:260px">El primer supercerebro de IA en LATAM.</p></div>
+    <div><h4 style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(112,108,102,.35);margin-bottom:18px">Producto</h4><ul style="list-style:none;display:flex;flex-direction:column;gap:11px"><li><a class="nav-a" href="../agentes.html">Agentes IA</a></li><li><a class="nav-a" href="../precios.html">Precios</a></li></ul></div>
+    <div><h4 style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(112,108,102,.35);margin-bottom:18px">Blog</h4><ul style="list-style:none;display:flex;flex-direction:column;gap:11px"><li><a class="nav-a" href="index.html">Todos los artículos</a></li></ul></div>
+  </div>
+  <div style="max-width:1200px;margin:48px auto 0;padding:28px 64px 0;border-top:1px solid rgba(255,255,255,.05)"><p style="font-size:10.5px;letter-spacing:.09em;color:rgba(112,108,102,.28)">© 2026 INFLUENCE IA S.A. DE C.V. — Todos los derechos reservados.</p></div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d" crossorigin="anonymous"></script>
+<script>(()=>{gsap.registerPlugin(ScrollTrigger);const dot=document.getElementById('cur-d'),ring=document.getElementById('cur-r');let cx=0,cy=0,rx=0,ry=0;document.addEventListener('mousemove',e=>{cx=e.clientX;cy=e.clientY;});document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>ring.classList.add('expand'));el.addEventListener('mouseleave',()=>ring.classList.remove('expand'));});(function animC(){rx+=(cx-rx)*.10;ry+=(cy-ry)*.10;dot.style.left=cx+'px';dot.style.top=cy+'px';ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animC);})();const pbar=document.getElementById('pbar');window.addEventListener('scroll',()=>{const d=document.documentElement;pbar.style.width=((d.scrollTop||document.body.scrollTop)/(d.scrollHeight-d.clientHeight)*100)+'%';});const hdr=document.getElementById('hdr');window.addEventListener('scroll',()=>hdr.classList.toggle('scrolled',window.scrollY>40));gsap.utils.toArray('.rv').forEach(el=>{const rc=el.getBoundingClientRect();if(rc.top<window.innerHeight*.92){gsap.to(el,{opacity:1,y:0,duration:.8,ease:'power3.out'});}else{gsap.to(el,{opacity:1,y:0,duration:1,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 88%'}});}});})();</script>
+</body></html>

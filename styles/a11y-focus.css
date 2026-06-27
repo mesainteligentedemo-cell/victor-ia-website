@@ -1,0 +1,131 @@
+/* ════════════════════════════════════════════════════════════════
+   VICTOR IA — WCAG 2.2 AA Focus Indicators
+   Keyboard navigation support for accessibility
+   ════════════════════════════════════════════════════════════════ */
+
+/* Primary focus indicator — visible outline */
+:focus-visible {
+  outline: 3px solid #0066cc !important;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Remove default browser focus styles where we provide our own */
+:focus {
+  outline: none;
+}
+
+/* Button focus states */
+button:focus-visible,
+[role="button"]:focus-visible,
+input[type="button"]:focus-visible,
+input[type="submit"]:focus-visible,
+input[type="reset"]:focus-visible {
+  outline: 3px solid #0066cc !important;
+  outline-offset: 2px;
+}
+
+/* Link focus states */
+a:focus-visible,
+[role="link"]:focus-visible {
+  outline: 3px solid #0066cc !important;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Form input focus states */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid #0066cc !important;
+  outline-offset: 1px;
+  border-radius: 2px;
+}
+
+/* Custom control focus states */
+[tabindex]:focus-visible {
+  outline: 3px solid #0066cc !important;
+  outline-offset: 2px;
+}
+
+/* High contrast mode — stronger focus indicators */
+@media (prefers-contrast: more) {
+  :focus-visible {
+    outline: 4px solid #000000 !important;
+    outline-offset: 3px;
+    border-radius: 0;
+  }
+
+  button:focus-visible,
+  [role="button"]:focus-visible,
+  a:focus-visible,
+  [role="link"]:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 4px solid #000000 !important;
+    outline-offset: 3px;
+    border-radius: 0;
+  }
+}
+
+/* Forced colors mode (Windows High Contrast) */
+@media (forced-colors: active) {
+  :focus-visible {
+    outline: 3px solid CanvasText !important;
+    outline-offset: 2px;
+  }
+
+  button:focus-visible,
+  [role="button"]:focus-visible,
+  a:focus-visible,
+  [role="link"]:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: 3px solid CanvasText !important;
+    outline-offset: 2px;
+  }
+}
+
+/* Skip to main content link — visible on focus */
+.skip-to-main {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #0066cc;
+  color: #ffffff;
+  padding: 8px 16px;
+  text-decoration: none;
+  z-index: 100;
+  border-radius: 2px;
+}
+
+.skip-to-main:focus-visible {
+  top: 0;
+  outline: none;
+}
+
+/* Tab indicator support */
+[role="tab"]:focus-visible {
+  outline: 3px solid #0066cc !important;
+  outline-offset: -3px;
+}
+
+/* Active focus ring for dark backgrounds */
+@media (prefers-color-scheme: dark) {
+  :focus-visible {
+    outline-color: #66b3ff !important;
+  }
+
+  button:focus-visible,
+  [role="button"]:focus-visible,
+  a:focus-visible,
+  [role="link"]:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline-color: #66b3ff !important;
+  }
+}

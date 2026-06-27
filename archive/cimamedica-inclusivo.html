@@ -1,0 +1,1733 @@
+﻿<!DOCTYPE html>
+<html lang="es-MX" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CIMA MÉDICA — Excelencia médica. Sin límites. | Cancún, Q. Roo</title>
+  <meta name="description" content="CIMA MÉDICA, hospital de especialidades de alto nivel en Cancún. 22 años siendo el hospital de referencia del Caribe mexicano. Cardiología, Oncología, Ortopedia, Neurología y más." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── RESET & BASE ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:    #0F2040;
+      --blue:    #1D6FA4;
+      --white:   #F8FAFF;
+      --gray:    #64748B;
+      --green:   #16A34A;
+      --accent:  #E8F4FD;
+      --red:     #DC2626;
+      --red-dk:  #7F1D1D;
+      --border:  #CBD5E1;
+      --text:    #1E293B;
+      --radius:  12px;
+      --shadow:  0 4px 24px rgba(15,32,64,.10);
+    }
+    [data-theme="contrast"] {
+      --navy:   #000;
+      --blue:   #004f8c;
+      --white:  #fff;
+      --gray:   #000;
+      --accent: #e0effa;
+      --text:   #000;
+      --border: #000;
+      background: #fff !important;
+      color: #000 !important;
+    }
+    [data-theme="contrast"] * { color: #000 !important; border-color: #000 !important; }
+    [data-theme="contrast"] .nav-bar,
+    [data-theme="contrast"] .hero,
+    [data-theme="contrast"] .urgencias-section { background: #000 !important; }
+    [data-theme="contrast"] .nav-bar *,
+    [data-theme="contrast"] .hero *,
+    [data-theme="contrast"] .urgencias-section * { color: #fff !important; }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      font-size: 100%;
+      background: var(--white);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ─── ACCESIBILIDAD ─── */
+    .sr-only {
+      position: absolute; width: 1px; height: 1px;
+      padding: 0; margin: -1px; overflow: hidden;
+      clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+    .skip-link {
+      position: absolute; top: -100px; left: 1rem;
+      background: var(--blue); color: #fff;
+      padding: .75rem 1.5rem; font-size: 1rem; font-weight: 600;
+      border-radius: var(--radius); z-index: 9999;
+      transition: top .2s;
+      text-decoration: none;
+    }
+    .skip-link:focus { top: 1rem; }
+    :focus-visible {
+      outline: 3px solid var(--blue);
+      outline-offset: 4px;
+    }
+
+    /* ─── BARRA ACCESIBILIDAD ─── */
+    .a11y-bar {
+      background: var(--navy);
+      padding: .5rem 1.5rem;
+      display: flex; flex-wrap: wrap; align-items: center;
+      gap: .5rem;
+    }
+    .a11y-bar__label {
+      color: rgba(248,250,255,.7);
+      font-size: .7rem; font-weight: 500;
+      letter-spacing: .08em; text-transform: uppercase;
+      margin-right: .5rem;
+    }
+    .a11y-btn {
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.15);
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: .72rem; font-weight: 500;
+      padding: .35rem .75rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background .2s, border-color .2s;
+      white-space: nowrap;
+      min-height: 36px;
+      display: inline-flex; align-items: center; gap: .4rem;
+    }
+    .a11y-btn:hover, .a11y-btn:focus { background: rgba(255,255,255,.18); border-color: rgba(255,255,255,.4); }
+    .a11y-btn[aria-pressed="true"] { background: var(--blue); border-color: var(--blue); }
+    .a11y-divider { width: 1px; height: 20px; background: rgba(255,255,255,.15); margin: 0 .25rem; }
+    .font-btn { font-size: .85rem; font-weight: 600; min-width: 36px; justify-content: center; }
+
+    /* ─── NAV ─── */
+    .nav-bar {
+      background: rgba(248,250,255,.97);
+      backdrop-filter: blur(10px);
+      position: sticky; top: 0; z-index: 100;
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 2px 12px rgba(15,32,64,.07);
+    }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto;
+      padding: .8rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1.5rem;
+    }
+    .nav-logo svg { width: 160px; height: auto; display: block; }
+    .nav-links {
+      display: flex; align-items: center; gap: .25rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--navy);
+      font-size: .875rem; font-weight: 500;
+      text-decoration: none;
+      padding: .5rem .9rem;
+      border-radius: 8px;
+      transition: background .2s, color .2s;
+      display: inline-block;
+    }
+    .nav-links a:hover, .nav-links a:focus { background: var(--accent); color: var(--blue); }
+    .nav-cta {
+      background: var(--blue); color: #fff !important;
+      border-radius: 8px;
+      font-weight: 600 !important;
+    }
+    .nav-cta:hover, .nav-cta:focus { background: var(--navy) !important; color: #fff !important; }
+
+    /* ─── HERO ─── */
+    .hero {
+      background: var(--navy);
+      position: relative; overflow: hidden;
+      padding: 6rem 1.5rem 5rem;
+      text-align: center;
+    }
+    .hero-hex-bg {
+      position: absolute; inset: 0;
+      opacity: .07; pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: rgba(29,111,164,.25);
+      border: 1px solid rgba(29,111,164,.4);
+      color: #93C5FD;
+      font-size: .78rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+      padding: .4rem 1rem; border-radius: 100px; margin-bottom: 1.75rem;
+    }
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 400; color: #fff;
+      line-height: 1.05; margin-bottom: .5rem;
+    }
+    .hero h2 {
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      font-size: clamp(2rem, 5vw, 3.75rem);
+      font-weight: 400; color: #93C5FD;
+      margin-bottom: 1.5rem; line-height: 1.1;
+    }
+    .hero-desc {
+      color: rgba(248,250,255,.75);
+      font-size: 1.05rem; font-weight: 300;
+      max-width: 540px; margin: 0 auto 2.5rem;
+      line-height: 1.75;
+    }
+    .hero-badges {
+      display: flex; justify-content: center; flex-wrap: wrap; gap: .75rem;
+      margin-bottom: 2.5rem;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: rgba(248,250,255,.08);
+      border: 1px solid rgba(248,250,255,.15);
+      color: rgba(248,250,255,.9);
+      font-size: .75rem; font-weight: 500; letter-spacing: .05em;
+      padding: .4rem .9rem; border-radius: 100px;
+    }
+    .hero-badge svg { width: 14px; height: 14px; }
+    .hero-ctas { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem; font-weight: 600;
+      padding: .875rem 2rem;
+      border-radius: 10px; border: 2px solid transparent;
+      cursor: pointer; text-decoration: none;
+      transition: transform .15s, box-shadow .15s, background .2s;
+      min-height: 56px;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: var(--blue); color: #fff; }
+    .btn-primary:hover, .btn-primary:focus { background: #155e88; box-shadow: 0 8px 24px rgba(29,111,164,.35); }
+    .btn-outline { background: transparent; color: #fff; border-color: rgba(255,255,255,.35); }
+    .btn-outline:hover, .btn-outline:focus { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.6); }
+    .btn-red { background: var(--red); color: #fff; }
+    .btn-red:hover, .btn-red:focus { background: #b91c1c; box-shadow: 0 8px 24px rgba(220,38,38,.35); }
+    .btn-green { background: var(--green); color: #fff; }
+    .btn-green:hover, .btn-green:focus { background: #15803d; }
+
+    /* ─── SECCIONES GENERALES ─── */
+    section { padding: 5rem 1.5rem; }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+    .section-tag {
+      display: inline-block;
+      background: var(--accent); color: var(--blue);
+      font-size: .72rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+      padding: .35rem .9rem; border-radius: 100px;
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.75rem, 4vw, 2.75rem);
+      font-weight: 400; color: var(--navy);
+      line-height: 1.2; margin-bottom: .75rem;
+    }
+    .section-desc {
+      color: var(--gray); font-size: 1rem; font-weight: 300;
+      max-width: 560px; line-height: 1.75;
+    }
+    .section-header { margin-bottom: 3rem; }
+
+    /* ─── ACCESIBILIDAD MOTRIZ 4 CARDS ─── */
+    .a11y-section { background: var(--accent); }
+    .a11y-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+    .a11y-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem 1.75rem;
+      box-shadow: var(--shadow);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .a11y-card:hover, .a11y-card:focus-within { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(15,32,64,.13); }
+    .a11y-card__icon {
+      width: 56px; height: 56px;
+      background: var(--accent);
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.25rem;
+    }
+    .a11y-card__icon svg { width: 28px; height: 28px; }
+    .a11y-card h3 {
+      font-size: 1rem; font-weight: 600; color: var(--navy);
+      margin-bottom: .5rem;
+    }
+    .a11y-card p { font-size: .875rem; color: var(--gray); line-height: 1.65; }
+
+    /* ─── ESPECIALIDADES ─── */
+    .espec-section { background: var(--white); }
+    .espec-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .espec-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem 1.75rem;
+      box-shadow: var(--shadow);
+      transition: transform .2s, box-shadow .2s, border-color .2s;
+      display: flex; flex-direction: column;
+    }
+    .espec-card:hover, .espec-card:focus-within {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(15,32,64,.14);
+      border-color: var(--blue);
+    }
+    .espec-icon {
+      width: 64px; height: 64px;
+      background: linear-gradient(135deg, var(--accent), #dbeafe);
+      border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.25rem;
+    }
+    .espec-icon svg { width: 32px; height: 32px; }
+    .espec-card h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.2rem; font-weight: 400;
+      color: var(--navy); margin-bottom: .4rem;
+    }
+    .espec-card p { font-size: .875rem; color: var(--gray); line-height: 1.6; flex: 1; margin-bottom: 1.25rem; }
+    .btn-sm {
+      font-size: .85rem; font-weight: 600;
+      padding: .55rem 1.25rem; min-height: 44px;
+      border-radius: 8px; border: 2px solid var(--blue);
+      background: transparent; color: var(--blue);
+      cursor: pointer; transition: background .2s, color .2s;
+      font-family: 'Inter', sans-serif;
+      display: inline-flex; align-items: center; gap: .4rem;
+      text-decoration: none;
+    }
+    .btn-sm:hover, .btn-sm:focus { background: var(--blue); color: #fff; }
+
+    /* ─── MÉDICOS ─── */
+    .medicos-section { background: #F1F5F9; }
+    .medicos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+    .medico-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .medico-card:hover, .medico-card:focus-within { transform: translateY(-4px); box-shadow: 0 14px 36px rgba(15,32,64,.13); }
+    .medico-avatar {
+      width: 80px; height: 80px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.25rem;
+    }
+    .medico-avatar span {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2rem; font-weight: 400; color: #fff;
+    }
+    .medico-card h3 { font-size: .95rem; font-weight: 600; color: var(--navy); margin-bottom: .3rem; }
+    .medico-card .espec-label {
+      font-size: .78rem; font-weight: 600; color: var(--blue);
+      text-transform: uppercase; letter-spacing: .07em;
+      display: block; margin-bottom: .35rem;
+    }
+    .medico-card .institucion { font-size: .8rem; color: var(--gray); margin-bottom: .3rem; }
+    .medico-card .años { font-size: .78rem; color: var(--gray); margin-bottom: 1.25rem; }
+    .medico-card .años strong { color: var(--navy); }
+
+    /* ─── WIZARD CITA ─── */
+    .cita-section { background: var(--white); }
+    .wizard-wrap {
+      max-width: 680px; margin: 0 auto;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: 0 8px 40px rgba(15,32,64,.11);
+      overflow: hidden;
+    }
+    .wizard-header {
+      background: var(--navy);
+      padding: 2rem 2.5rem 1.5rem;
+    }
+    .wizard-header h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.5rem; font-weight: 400; color: #fff;
+      margin-bottom: .5rem;
+    }
+    .wizard-progress-row {
+      display: flex; align-items: center; gap: 1rem;
+      margin-top: 1.25rem;
+    }
+    progress#cita-progress {
+      flex: 1; height: 6px;
+      border-radius: 100px; border: none;
+      appearance: none; -webkit-appearance: none;
+    }
+    progress#cita-progress::-webkit-progress-bar { background: rgba(255,255,255,.15); border-radius: 100px; }
+    progress#cita-progress::-webkit-progress-value { background: var(--blue); border-radius: 100px; }
+    progress#cita-progress::-moz-progress-bar { background: var(--blue); border-radius: 100px; }
+    .progress-label { color: rgba(255,255,255,.75); font-size: .78rem; white-space: nowrap; }
+    .wizard-body { padding: 2rem 2.5rem 2.5rem; }
+    fieldset { border: none; }
+    legend {
+      font-size: 1.05rem; font-weight: 600; color: var(--navy);
+      margin-bottom: 1.5rem; padding: 0;
+    }
+    .form-group { margin-bottom: 1.25rem; }
+    .form-group label {
+      display: block; font-size: .875rem; font-weight: 500;
+      color: var(--text); margin-bottom: .4rem;
+    }
+    .form-group input,
+    .form-group select {
+      width: 100%; padding: .75rem 1rem;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: .95rem; color: var(--text);
+      background: var(--white);
+      transition: border-color .2s;
+      min-height: 52px;
+    }
+    .form-group input:focus,
+    .form-group select:focus { border-color: var(--blue); outline: none; box-shadow: 0 0 0 3px rgba(29,111,164,.15); }
+    .radio-group { display: flex; flex-direction: column; gap: .75rem; }
+    .radio-label {
+      display: flex; align-items: center; gap: .85rem;
+      padding: .875rem 1.25rem;
+      border: 1.5px solid var(--border);
+      border-radius: 8px; cursor: pointer;
+      transition: border-color .2s, background .2s;
+      font-size: .9rem; font-weight: 500; color: var(--text);
+      min-height: 56px;
+    }
+    .radio-label:has(input:checked) { border-color: var(--blue); background: var(--accent); color: var(--navy); }
+    .radio-label input { width: 20px; height: 20px; accent-color: var(--blue); flex-shrink: 0; }
+    .wizard-nav {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-top: 2rem; gap: 1rem;
+    }
+    .confirm-summary {
+      background: var(--accent);
+      border-radius: 10px;
+      padding: 1.5rem;
+      font-size: .9rem; color: var(--text); line-height: 1.9;
+    }
+    .confirm-summary strong { color: var(--navy); }
+    #cita-success {
+      text-align: center; padding: 2rem;
+    }
+    #cita-success svg { width: 56px; height: 56px; margin: 0 auto 1rem; display: block; }
+    #cita-success h3 { font-size: 1.3rem; font-weight: 600; color: var(--green); margin-bottom: .5rem; }
+    #cita-success p { color: var(--gray); }
+
+    /* ─── URGENCIAS ─── */
+    .urgencias-section {
+      background: var(--red-dk);
+      padding: 5rem 1.5rem;
+    }
+    .urgencias-inner {
+      max-width: 900px; margin: 0 auto;
+      text-align: center;
+    }
+    .urgencias-eyebrow {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.2);
+      color: rgba(255,255,255,.85);
+      font-size: .75rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+      padding: .4rem 1rem; border-radius: 100px; margin-bottom: 1.5rem;
+    }
+    .urgencias-inner h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.75rem, 4vw, 2.75rem);
+      font-weight: 400; color: #fff; margin-bottom: .75rem;
+    }
+    .urgencias-inner p { color: rgba(255,255,255,.75); font-size: 1rem; margin-bottom: 2rem; }
+    .urgencias-phone {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 400; color: #fff;
+      letter-spacing: .04em;
+      margin-bottom: 2rem;
+      line-height: 1;
+    }
+    .urgencias-chips {
+      display: flex; justify-content: center; flex-wrap: wrap; gap: .75rem;
+      margin-bottom: 2.5rem;
+    }
+    .urgencias-chip {
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.2);
+      color: rgba(255,255,255,.85);
+      font-size: .8rem; font-weight: 500;
+      padding: .4rem .9rem; border-radius: 100px;
+    }
+
+    /* ─── STATS BAR ─── */
+    .stats-bar {
+      background: var(--navy);
+      padding: 3rem 1.5rem;
+    }
+    .stats-inner {
+      max-width: 1000px; margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 2rem; text-align: center;
+    }
+    .stat-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.5rem; color: #fff; font-weight: 400;
+      line-height: 1;
+    }
+    .stat-label { font-size: .78rem; color: rgba(255,255,255,.6); font-weight: 400; margin-top: .35rem; text-transform: uppercase; letter-spacing: .08em; }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      background: #0A1628;
+      padding: 3.5rem 1.5rem 2rem;
+    }
+    .footer-inner {
+      max-width: 1200px; margin: 0 auto;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.5fr repeat(3, 1fr);
+      gap: 3rem;
+      margin-bottom: 2.5rem;
+    }
+    .footer-brand p {
+      color: rgba(255,255,255,.5);
+      font-size: .82rem; line-height: 1.75; margin-top: 1rem;
+    }
+    .footer-col h4 {
+      font-size: .72rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+      color: rgba(255,255,255,.5); margin-bottom: 1rem;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: .5rem; }
+    .footer-col ul li a {
+      color: rgba(255,255,255,.7); font-size: .85rem; text-decoration: none;
+      transition: color .2s;
+    }
+    .footer-col ul li a:hover { color: #fff; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding-top: 1.75rem;
+      display: flex; flex-wrap: wrap; align-items: center;
+      justify-content: space-between; gap: 1rem;
+    }
+    .footer-bottom p { color: rgba(255,255,255,.4); font-size: .78rem; }
+    .victor-credit {
+      display: inline-flex; align-items: center; gap: .5rem;
+      color: rgba(255,255,255,.5); font-size: .75rem;
+      text-decoration: none;
+    }
+    .victor-credit strong { color: rgba(255,255,255,.8); }
+
+    /* ─── REVEAL ANIMATION ─── */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .55s ease, transform .55s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .footer-top { grid-template-columns: 1fr; }
+      .wizard-body, .wizard-header { padding-left: 1.25rem; padding-right: 1.25rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+      * { transition-duration: .001ms !important; }
+    }
+  </style>
+<style>
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");opacity:.028;pointer-events:none;z-index:9995;}
+.lxgc{cursor:default;position:relative;overflow:hidden;}
+.lxgc img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.23,1,.32,1),filter .5s;filter:brightness(.82);}
+.lxgc:hover img{transform:scale(1.09);filter:brightness(1);}
+.lxgc .lxov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55) 0%,transparent 55%);transition:opacity .4s;}
+.lxgc:hover .lxov{opacity:.3;}
+</style>
+<!-- lux-patch -->
+<style>
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");opacity:.028;pointer-events:none;z-index:9995;}
+</style>
+<!-- interact-patch -->
+<style>
+:root{--mpos-x:50%;--mpos-y:50%;--scroll-pct:0%;}
+/* Progress bar */
+.ip-bar{position:fixed;top:0;left:0;height:3px;z-index:10001;pointer-events:none;background:linear-gradient(90deg,#1D6FA4,#0F2040);transform-origin:left;transform:scaleX(var(--scroll-raw,0));transition:transform .08s linear;}
+/* Mouse-responsive ambient glow */
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(circle 700px at var(--mpos-x) var(--mpos-y),rgba(29,111,164,.12),transparent 70%);transition:background .4s;}
+/* Hero shimmer overlay */
+@keyframes ipShimmer{0%,100%{opacity:.6}50%{opacity:1}}
+@keyframes ipFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes ipPulse{0%,100%{box-shadow:0 0 0 0 rgba(29,111,164,.4)}70%{box-shadow:0 0 0 14px rgba(29,111,164,0)}}
+@keyframes ipSpin{to{transform:rotate(360deg)}}
+@keyframes ipCountUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+/* CTA pulse */
+.ip-pulse{animation:ipPulse 2.4s ease-in-out infinite;}
+/* Section reveal directions */
+.ip-rl{opacity:0;transform:translateX(-42px);transition:opacity .75s ease,transform .75s cubic-bezier(.23,1,.32,1);}
+.ip-rr{opacity:0;transform:translateX(42px);transition:opacity .75s ease,transform .75s cubic-bezier(.23,1,.32,1);}
+.ip-rb{opacity:0;transform:translateY(38px);transition:opacity .75s ease,transform .75s cubic-bezier(.23,1,.32,1);}
+.ip-rv{opacity:1!important;transform:none!important;}
+/* Stat counter */
+.ip-counted{animation:ipCountUp .5s ease forwards;}
+/* Animated border gradient on cards on hover */
+.card,.card-inclusivo,.specialty-card,.a11y-card,.feature-card,.plan-card,.tour-card,.menu-card,.exp-card,.service-card,.property-card,.tour-item,.reason-card{
+  position:relative;
+  transition:box-shadow .35s,border-color .35s,transform .35s;
+}
+.card:hover,.specialty-card:hover,.a11y-card:hover,.feature-card:hover,.plan-card:hover,.tour-card:hover,.menu-card:hover,.exp-card:hover,.property-card:hover,.tour-item:hover,.reason-card:hover{
+  box-shadow:0 16px 48px rgba(29,111,164,.22),0 4px 16px rgba(29,111,164,.14)!important;
+}
+/* Hero animated gradient layer */
+.ip-hero-layer{
+  position:absolute;inset:0;pointer-events:none;z-index:3;
+  background:linear-gradient(-45deg,rgba(29,111,164,.35),rgba(29,111,164,.05) 40%,transparent 60%);
+  background-size:300% 300%;
+  animation:ipShimmer 5s ease-in-out infinite;
+}
+/* Parallax text nudge */
+.ip-parallax{will-change:transform;}
+/* Scroll-linked image brightness */
+.lxgc:hover img{filter:brightness(1.05) saturate(1.08)!important;}
+</style>
+</head>
+<body>
+
+<!-- SKIP LINK -->
+<a class="skip-link" href="#main">Saltar al contenido principal</a>
+
+<!-- ARIA LIVE REGION -->
+<div id="sr-live" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+<!-- ─── 1. BARRA DE ACCESIBILIDAD ─── -->
+<div class="a11y-bar" role="region" aria-label="Herramientas de accesibilidad">
+  <span class="a11y-bar__label" aria-hidden="true">Accesibilidad:</span>
+
+  <button class="a11y-btn" data-toggle="grandesTargets" aria-pressed="false" title="Amplía todos los botones a mínimo 64×64px">
+    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2" y="6" width="12" height="4" rx="2" fill="currentColor" opacity=".5"/><rect x="5" y="2" width="6" height="12" rx="2" fill="currentColor"/></svg>
+    Área grande
+  </button>
+
+  <button class="a11y-btn" data-toggle="teclado" aria-pressed="false" title="Resalta el foco del teclado con borde azul 4px">
+    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="1" y="3" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/><rect x="3" y="6" width="2" height="2" rx=".4" fill="currentColor"/><rect x="7" y="6" width="2" height="2" rx=".4" fill="currentColor"/><rect x="11" y="6" width="2" height="2" rx=".4" fill="currentColor"/><rect x="5" y="9" width="6" height="2" rx=".4" fill="currentColor"/></svg>
+    Teclado
+  </button>
+
+  <button class="a11y-btn" data-toggle="voz" aria-pressed="false" title="Activa reconocimiento de voz para navegar con comandos en español">
+    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="5" y="1" width="6" height="9" rx="3" fill="currentColor" opacity=".7"/><path d="M3 8a5 5 0 0010 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/><line x1="8" y1="13" x2="8" y2="15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="5" y1="15" x2="11" y2="15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    Control voz
+  </button>
+
+  <button class="a11y-btn" data-toggle="sinHover" aria-pressed="false" title="Elimina efectos que solo se activan al hacer hover — sin mouse requerido">
+    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2C8 2 4 5 4 9a4 4 0 008 0c0-4-4-7-4-7z" fill="currentColor" opacity=".6"/><line x1="3" y1="13" x2="13" y2="3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    Sin hover
+  </button>
+
+  <button class="a11y-btn" data-toggle="sinTiempo" aria-pressed="false" title="Desactiva límites de tiempo en formularios y sesiones">
+    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="9" r="6" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M8 6v3l2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/><line x1="6" y1="2" x2="10" y2="2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    Sin tiempo
+  </button>
+
+  <button class="a11y-btn" data-toggle="contraste" aria-pressed="false" title="Activa modo de alto contraste">
+    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M8 2a6 6 0 000 12V2z" fill="currentColor"/></svg>
+    Contraste
+  </button>
+
+  <div class="a11y-divider" aria-hidden="true"></div>
+
+  <button class="a11y-btn font-btn" data-action="font-down" aria-label="Reducir tamaño de texto">A−</button>
+  <button class="a11y-btn font-btn" data-action="font-up" aria-label="Aumentar tamaño de texto">A+</button>
+</div>
+
+<!-- ─── 2. NAV ─── -->
+<header class="nav-bar" role="banner">
+  <div class="nav-inner">
+    <a href="#main" class="nav-logo" aria-label="CIMA MÉDICA — Ir al inicio">
+      <svg viewBox="0 0 240 52" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+        <rect x="4" y="16" width="8" height="20" rx="1" fill="#1D6FA4"/>
+        <rect x="0" y="20" width="16" height="12" rx="1" fill="#1D6FA4"/>
+        <text x="26" y="30" font-family="DM Serif Display, serif" font-size="22" font-weight="400" letter-spacing="3" fill="#0F2040">CIMA</text>
+        <text x="26" y="46" font-family="Inter, sans-serif" font-size="9" font-weight="300" letter-spacing="5" fill="#1D6FA4">MÉDICA</text>
+        <line x1="26" y1="34" x2="130" y2="34" stroke="#1D6FA4" stroke-width="0.6" opacity="0.4"/>
+      </svg>
+    </a>
+    <nav aria-label="Navegación principal">
+      <ul class="nav-links" role="list">
+        <li><a href="#especialidades">Especialidades</a></li>
+        <li><a href="#medicos">Médicos</a></li>
+        <li><a href="#urgencias">Urgencias</a></li>
+        <li><a href="#cita" class="nav-cta">Agendar cita</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- ─── MAIN ─── -->
+<main id="main" tabindex="-1">
+
+  <!-- ─── 3. HERO ─── -->
+  <section class="hero" aria-labelledby="hero-heading">
+    <!-- Fondo hexagonal SVG -->
+    <svg class="hero-hex-bg" viewBox="0 0 1200 600" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <pattern id="hexPattern" x="0" y="0" width="80" height="92" patternUnits="userSpaceOnUse">
+          <polygon points="40,6 74,24 74,68 40,86 6,68 6,24" stroke="#1D6FA4" stroke-width="0.8" fill="none"/>
+        </pattern>
+      </defs>
+      <rect width="1200" height="600" fill="url(#hexPattern)"/>
+      <!-- Líneas de tecnología médica -->
+      <line x1="100" y1="150" x2="400" y2="300" stroke="#1D6FA4" stroke-width="0.5" opacity="0.6"/>
+      <line x1="400" y1="300" x2="700" y2="200" stroke="#1D6FA4" stroke-width="0.5" opacity="0.6"/>
+      <line x1="700" y1="200" x2="1000" y2="350" stroke="#1D6FA4" stroke-width="0.5" opacity="0.6"/>
+      <line x1="200" y1="400" x2="550" y2="180" stroke="#1D6FA4" stroke-width="0.4" opacity="0.4"/>
+      <circle cx="400" cy="300" r="4" fill="#1D6FA4" opacity="0.8"/>
+      <circle cx="700" cy="200" r="4" fill="#1D6FA4" opacity="0.8"/>
+      <circle cx="100" cy="150" r="3" fill="#1D6FA4" opacity="0.6"/>
+      <circle cx="1000" cy="350" r="3" fill="#1D6FA4" opacity="0.6"/>
+    </svg>
+
+    <div class="hero-content">
+      <div class="hero-eyebrow" aria-label="Hospital de especialidades">
+        <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M8 5v6M5 8h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Cancún · Quintana Roo · Desde 2003
+      </div>
+
+      <h1 id="hero-heading">Excelencia médica.</h1>
+      <h2>Sin límites.</h2>
+
+      <p class="hero-desc">
+        22 años siendo el hospital de referencia del Caribe mexicano. Más de 180 médicos especialistas, 12 quirófanos activos y tecnología de imagen de última generación a su disposición.
+      </p>
+
+      <div class="hero-badges" role="list" aria-label="Certificaciones y compromisos">
+        <span class="hero-badge" role="listitem">
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1l1.8 3.6L14 5.5l-3 2.9.7 4.1L8 10.5l-3.7 1.9.7-4.1L2 5.5l4.2-.9L8 1z" fill="currentColor"/></svg>
+          Certificación CCSS
+        </span>
+        <span class="hero-badge" role="listitem">
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M5 8l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          WCAG 2.2 AA
+        </span>
+        <span class="hero-badge" role="listitem">
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M5 8a3 3 0 006 0" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" fill="none"/><circle cx="8" cy="5.5" r="1" fill="currentColor"/></svg>
+          Accesible 100% teclado
+        </span>
+        <span class="hero-badge" role="listitem">
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 14s-5-3-5-7a5 5 0 0110 0c0 4-5 7-5 7z" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="8" cy="7" r="2" stroke="currentColor" stroke-width="1.2" fill="none"/></svg>
+          Urgencias 24 / 7
+        </span>
+      </div>
+
+      <div class="hero-ctas">
+        <a href="#cita" class="btn btn-primary">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2" y="3" width="12" height="11" rx="1.5" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M5 1v4M11 1v4M2 7h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          Agendar cita
+        </a>
+        <a href="#urgencias" class="btn btn-red" aria-label="Ir a la sección de urgencias 24 horas">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2L2 12h12L8 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="none"/><path d="M8 7v3M8 11.5v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          Urgencias 24/7
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── STATS ─── -->
+  <div class="stats-bar" aria-label="Cifras del hospital">
+    <div class="stats-inner">
+      <div class="reveal">
+        <div class="stat-num" aria-label="22 años">22</div>
+        <div class="stat-label">Años de excelencia</div>
+      </div>
+      <div class="reveal">
+        <div class="stat-num" aria-label="180 especialistas">180+</div>
+        <div class="stat-label">Médicos especialistas</div>
+      </div>
+      <div class="reveal">
+        <div class="stat-num" aria-label="12 quirófanos">12</div>
+        <div class="stat-label">Quirófanos activos</div>
+      </div>
+      <div class="reveal">
+        <div class="stat-num" aria-label="24 horas">24h</div>
+        <div class="stat-label">Urgencias disponibles</div>
+      </div>
+      <div class="reveal">
+        <div class="stat-num" aria-label="98 por ciento">98%</div>
+        <div class="stat-label">Satisfacción pacientes</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── 4. ACCESIBILIDAD MOTRIZ ─── -->
+  <section class="a11y-section" aria-labelledby="a11y-heading">
+    <div class="section-inner">
+      <header class="section-header">
+        <span class="section-tag">Inclusión y accesibilidad</span>
+        <h2 class="section-title" id="a11y-heading">Diseñado para todos,<br>sin excepción</h2>
+        <p class="section-desc">CIMA MÉDICA está comprometida con la accesibilidad plena para personas con discapacidad motriz y paraplejia. Nuestro sitio cumple WCAG 2.2 nivel AA.</p>
+      </header>
+      <div class="a11y-grid">
+
+        <article class="a11y-card reveal">
+          <div class="a11y-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="4" y="10" width="20" height="12" rx="3" stroke="#1D6FA4" stroke-width="1.8" fill="none"/>
+              <rect x="10" y="4" width="8" height="8" rx="3" stroke="#1D6FA4" stroke-width="1.8" fill="none"/>
+              <path d="M11 16h6M14 14v4" stroke="#1D6FA4" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Área de clic grande</h3>
+          <p>Todos los botones, enlaces y controles interactivos tienen mínimo 64×64 píxeles. Activar con el botón "Área grande" en la barra superior.</p>
+        </article>
+
+        <article class="a11y-card reveal">
+          <div class="a11y-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="3" y="7" width="22" height="14" rx="2.5" stroke="#1D6FA4" stroke-width="1.8" fill="none"/>
+              <rect x="6" y="11" width="3" height="3" rx=".6" fill="#1D6FA4" opacity=".5"/>
+              <rect x="12" y="11" width="3" height="3" rx=".6" fill="#1D6FA4" opacity=".5"/>
+              <rect x="18" y="11" width="3" height="3" rx=".6" fill="#1D6FA4" opacity=".5"/>
+              <rect x="9" y="15" width="10" height="3" rx=".6" fill="#1D6FA4"/>
+            </svg>
+          </div>
+          <h3>100% teclado</h3>
+          <p>Navega con Tab, Enter, flechas y Escape. Ninguna función requiere mouse o trackpad. Foco siempre visible y predecible.</p>
+        </article>
+
+        <article class="a11y-card reveal">
+          <div class="a11y-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="9" y="4" width="10" height="14" rx="5" stroke="#1D6FA4" stroke-width="1.8" fill="none"/>
+              <path d="M5 14a9 9 0 0018 0" stroke="#1D6FA4" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+              <line x1="14" y1="23" x2="14" y2="26" stroke="#1D6FA4" stroke-width="1.8" stroke-linecap="round"/>
+              <line x1="10" y1="26" x2="18" y2="26" stroke="#1D6FA4" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Control por voz</h3>
+          <p>Di "urgencias", "cita", "especialidades" o "inicio" para navegar sin tocar el dispositivo. Disponible en Chrome y Edge.</p>
+        </article>
+
+        <article class="a11y-card reveal">
+          <div class="a11y-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="14" cy="12" r="6" stroke="#1D6FA4" stroke-width="1.8" fill="none"/>
+              <path d="M14 18v6M11 24h6" stroke="#1D6FA4" stroke-width="1.8" stroke-linecap="round"/>
+              <line x1="4" y1="4" x2="24" y2="24" stroke="#DC2626" stroke-width="1.5" stroke-linecap="round" opacity=".5"/>
+            </svg>
+          </div>
+          <h3>Sin hover</h3>
+          <p>Nunca se oculta información detrás de efectos hover. Todo el contenido accesible sin necesidad de movimiento del cursor.</p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 5. ESPECIALIDADES ─── -->
+  <section class="espec-section" id="especialidades" aria-labelledby="espec-heading">
+    <div class="section-inner">
+      <header class="section-header">
+        <span class="section-tag">Especialidades médicas</span>
+        <h2 class="section-title" id="espec-heading">Atención de alto nivel<br>en cada disciplina</h2>
+        <p class="section-desc">Nuestros equipos multidisciplinarios trabajan coordinados para ofrecer diagnóstico y tratamiento integral en las especialidades de mayor demanda del Caribe.</p>
+      </header>
+      <div class="espec-grid">
+
+        <!-- Cardiología -->
+        <article class="espec-card reveal">
+          <div class="espec-icon" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16 27S5 20 5 12a7 7 0 0114 0 7 7 0 0114 0c0 8-11 15-11 15h-6z" fill="none" stroke="#1D6FA4" stroke-width="1.8" stroke-linejoin="round"/>
+              <polyline points="8,15 11,10 14,18 17,12 20,15 23,15" stroke="#DC2626" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </svg>
+          </div>
+          <h3>Cardiología &amp; Cirugía Cardiovascular</h3>
+          <p>Diagnóstico y tratamiento integral de enfermedades del corazón con laboratorio hemodinámico de última generación.</p>
+          <a href="#cita" class="btn-sm" aria-label="Ver médicos de Cardiología y agendar cita">
+            Ver médicos
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </article>
+
+        <!-- Oncología -->
+        <article class="espec-card reveal">
+          <div class="espec-icon" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="16" cy="16" r="3" fill="#1D6FA4" opacity=".8"/>
+              <circle cx="8"  cy="12" r="2.5" stroke="#1D6FA4" stroke-width="1.5" fill="none"/>
+              <circle cx="24" cy="12" r="2.5" stroke="#1D6FA4" stroke-width="1.5" fill="none"/>
+              <circle cx="8"  cy="22" r="2.5" stroke="#1D6FA4" stroke-width="1.5" fill="none"/>
+              <circle cx="24" cy="22" r="2.5" stroke="#1D6FA4" stroke-width="1.5" fill="none"/>
+              <line x1="10" y1="13"  x2="14" y2="15" stroke="#1D6FA4" stroke-width="1" opacity=".6"/>
+              <line x1="22" y1="13"  x2="18" y2="15" stroke="#1D6FA4" stroke-width="1" opacity=".6"/>
+              <line x1="10" y1="21"  x2="14" y2="17" stroke="#1D6FA4" stroke-width="1" opacity=".6"/>
+              <line x1="22" y1="21"  x2="18" y2="17" stroke="#1D6FA4" stroke-width="1" opacity=".6"/>
+            </svg>
+          </div>
+          <h3>Oncología &amp; Radioterapia</h3>
+          <p>Tratamientos oncológicos personalizados con equipo de radioterapia de intensidad modulada y quimioterapia ambulatoria.</p>
+          <a href="#cita" class="btn-sm" aria-label="Ver médicos de Oncología y agendar cita">
+            Ver médicos
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </article>
+
+        <!-- Ortopedia -->
+        <article class="espec-card reveal">
+          <div class="espec-icon" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="16" cy="16" rx="5" ry="10" stroke="#1D6FA4" stroke-width="1.8" fill="none"/>
+              <ellipse cx="16" cy="16" rx="3" ry="6" stroke="#1D6FA4" stroke-width="1" fill="none" opacity=".5"/>
+              <line x1="16" y1="6"  x2="16" y2="26" stroke="#1D6FA4" stroke-width="1.2" stroke-dasharray="2 2" opacity=".4"/>
+              <rect x="12" y="13" width="8" height="6" rx="3" fill="#1D6FA4" opacity=".15" stroke="#1D6FA4" stroke-width="1.2"/>
+            </svg>
+          </div>
+          <h3>Ortopedia &amp; Traumatología</h3>
+          <p>Cirugía artroscópica, reemplazo articular y rehabilitación musculoesquelética con tecnología robótica de asistencia.</p>
+          <a href="#cita" class="btn-sm" aria-label="Ver médicos de Ortopedia y agendar cita">
+            Ver médicos
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </article>
+
+        <!-- Neurología -->
+        <article class="espec-card reveal">
+          <div class="espec-icon" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 22c0-6 3-10 6-12 3 2 6 6 6 12" stroke="#1D6FA4" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+              <path d="M10 22c-1-2-1.5-4-1-6 1-4 4-6 7-6s6 2 7 6c.5 2 0 4-1 6" stroke="#1D6FA4" stroke-width="1.2" fill="none" opacity=".5"/>
+              <path d="M13 14q2-1 3-3M19 14q-2-1-3-3" stroke="#1D6FA4" stroke-width="1" stroke-linecap="round" opacity=".6"/>
+              <path d="M11 18q2 0 5-1 3 1 5 1" stroke="#1D6FA4" stroke-width="1" stroke-linecap="round" opacity=".5"/>
+              <line x1="16" y1="22" x2="16" y2="26" stroke="#1D6FA4" stroke-width="1.8" stroke-linecap="round"/>
+              <line x1="12" y1="26" x2="20" y2="26" stroke="#1D6FA4" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Neurología &amp; Neurocirugía</h3>
+          <p>Diagnóstico avanzado de enfermedades neurológicas con IRM 3T, neurocirugía mínimamente invasiva y neurointervencionismo.</p>
+          <a href="#cita" class="btn-sm" aria-label="Ver médicos de Neurología y agendar cita">
+            Ver médicos
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </article>
+
+        <!-- Materno-Fetal -->
+        <article class="espec-card reveal">
+          <div class="espec-icon" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8 22C8 16 11.6 10 16 10s8 6 8 12" stroke="#1D6FA4" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+              <ellipse cx="16" cy="22" rx="8" ry="4" stroke="#1D6FA4" stroke-width="1.5" fill="none" opacity=".5"/>
+              <circle cx="16" cy="17" r="3" fill="#1D6FA4" opacity=".2" stroke="#1D6FA4" stroke-width="1.3"/>
+              <circle cx="16" cy="17" r="1.2" fill="#1D6FA4" opacity=".7"/>
+            </svg>
+          </div>
+          <h3>Medicina Materno-Fetal</h3>
+          <p>Seguimiento de embarazos de alto riesgo, ultrasonido 4D, diagnóstico prenatal y parto humanizado en suite privada.</p>
+          <a href="#cita" class="btn-sm" aria-label="Ver médicos de Medicina Materno-Fetal y agendar cita">
+            Ver médicos
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </article>
+
+        <!-- Urgencias -->
+        <article class="espec-card reveal">
+          <div class="espec-icon" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="12" y="4" width="8" height="24" rx="2" stroke="#DC2626" stroke-width="1.8" fill="none"/>
+              <rect x="4" y="12" width="24" height="8" rx="2" stroke="#DC2626" stroke-width="1.8" fill="none"/>
+              <path d="M16 8v-2M16 26v-2" stroke="#DC2626" stroke-width="1.5" stroke-linecap="round" opacity=".5"/>
+              <path d="M19 16l-4-5v4H9l8 7v-4h6l-4-2z" fill="#DC2626" opacity=".25"/>
+            </svg>
+          </div>
+          <h3>Urgencias 24/7</h3>
+          <p>Atención de emergencias las 24 horas con triaje inmediato, trauma center nivel II y helipuerto para traslados críticos.</p>
+          <a href="#urgencias" class="btn-sm" aria-label="Ver información de urgencias CIMA MÉDICA">
+            Ver urgencias
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 6. MÉDICOS ─── -->
+  <section class="medicos-section" id="medicos" aria-labelledby="medicos-heading">
+    <div class="section-inner">
+      <header class="section-header">
+        <span class="section-tag">Nuestro equipo médico</span>
+        <h2 class="section-title" id="medicos-heading">Especialistas de<br>referencia nacional</h2>
+        <p class="section-desc">Formados en las mejores universidades del mundo, nuestros médicos combinan experiencia internacional con cercanía humana.</p>
+      </header>
+      <div class="medicos-grid">
+
+        <article class="medico-card reveal">
+          <div class="medico-avatar" style="background: linear-gradient(135deg, #1D6FA4, #0F2040);" aria-hidden="true">
+            <span>AM</span>
+          </div>
+          <h3>Dr. Alejandro Morales Ruiz</h3>
+          <span class="espec-label">Cardiología</span>
+          <p class="institucion">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" style="vertical-align:middle;margin-right:.3rem" aria-hidden="true"><circle cx="8" cy="8" r="6" stroke="#1D6FA4" stroke-width="1.3" fill="none"/><path d="M8 5v4l2 2" stroke="#1D6FA4" stroke-width="1.3" stroke-linecap="round" fill="none"/></svg>
+            Egresado UNAM · Cardiology Fellow Houston
+          </p>
+          <p class="años"><strong>18 años</strong> de práctica clínica</p>
+          <a href="#cita" class="btn-sm" aria-label="Agendar cita con el Dr. Alejandro Morales Ruiz, Cardiólogo">Agendar cita</a>
+        </article>
+
+        <article class="medico-card reveal">
+          <div class="medico-avatar" style="background: linear-gradient(135deg, #16A34A, #065f46);" aria-hidden="true">
+            <span>VO</span>
+          </div>
+          <h3>Dra. Valentina Ochoa</h3>
+          <span class="espec-label">Oncología</span>
+          <p class="institucion">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" style="vertical-align:middle;margin-right:.3rem" aria-hidden="true"><circle cx="8" cy="8" r="6" stroke="#16A34A" stroke-width="1.3" fill="none"/><path d="M8 5v4l2 2" stroke="#16A34A" stroke-width="1.3" stroke-linecap="round" fill="none"/></svg>
+            Maestría MD Anderson · UANL
+          </p>
+          <p class="años"><strong>14 años</strong> de práctica clínica</p>
+          <a href="#cita" class="btn-sm" aria-label="Agendar cita con la Dra. Valentina Ochoa, Oncóloga">Agendar cita</a>
+        </article>
+
+        <article class="medico-card reveal">
+          <div class="medico-avatar" style="background: linear-gradient(135deg, #7C3AED, #4C1D95);" aria-hidden="true">
+            <span>IS</span>
+          </div>
+          <h3>Dr. Iván Soto Briceño</h3>
+          <span class="espec-label">Ortopedia</span>
+          <p class="institucion">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" style="vertical-align:middle;margin-right:.3rem" aria-hidden="true"><circle cx="8" cy="8" r="6" stroke="#7C3AED" stroke-width="1.3" fill="none"/><path d="M8 5v4l2 2" stroke="#7C3AED" stroke-width="1.3" stroke-linecap="round" fill="none"/></svg>
+            Fellow Mayo Clinic · IPN
+          </p>
+          <p class="años"><strong>11 años</strong> de práctica clínica</p>
+          <a href="#cita" class="btn-sm" aria-label="Agendar cita con el Dr. Iván Soto Briceño, Ortopedista">Agendar cita</a>
+        </article>
+
+        <article class="medico-card reveal">
+          <div class="medico-avatar" style="background: linear-gradient(135deg, #DC2626, #7F1D1D);" aria-hidden="true">
+            <span>CR</span>
+          </div>
+          <h3>Dra. Camila Ríos Fuentes</h3>
+          <span class="espec-label">Neurología</span>
+          <p class="institucion">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" style="vertical-align:middle;margin-right:.3rem" aria-hidden="true"><circle cx="8" cy="8" r="6" stroke="#DC2626" stroke-width="1.3" fill="none"/><path d="M8 5v4l2 2" stroke="#DC2626" stroke-width="1.3" stroke-linecap="round" fill="none"/></svg>
+            Doctorado UAG · Neurología Clínica
+          </p>
+          <p class="años"><strong>16 años</strong> de práctica clínica</p>
+          <a href="#cita" class="btn-sm" aria-label="Agendar cita con la Dra. Camila Ríos Fuentes, Neuróloga">Agendar cita</a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 7. WIZARD DE CITA ─── -->
+  <section class="cita-section" id="cita" aria-labelledby="cita-heading">
+    <div class="section-inner">
+      <header class="section-header" style="text-align:center;">
+        <span class="section-tag">Agenda tu consulta</span>
+        <h2 class="section-title" id="cita-heading">Agendar cita médica</h2>
+        <p class="section-desc" style="margin:0 auto;">Proceso en 3 pasos, completamente accesible con teclado. Sin límites de tiempo.</p>
+      </header>
+
+      <div class="wizard-wrap" role="form" aria-labelledby="cita-heading">
+        <div class="wizard-header">
+          <h2>Solicitud de cita</h2>
+          <div class="wizard-progress-row">
+            <progress id="cita-progress" max="3" value="1"
+              aria-valuenow="1" aria-valuemin="1" aria-valuemax="3"
+              aria-valuetext="Paso 1 de 3"
+              aria-label="Progreso del formulario de cita">
+            </progress>
+            <span class="progress-label" aria-live="polite" id="progress-text">Paso 1 de 3</span>
+          </div>
+        </div>
+
+        <div class="wizard-body">
+
+          <!-- PASO 1 -->
+          <fieldset data-paso="0" aria-labelledby="legend-paso1">
+            <legend id="legend-paso1">Paso 1 — Elige tu especialidad</legend>
+
+            <div class="form-group">
+              <label for="especialidad-select">Especialidad médica <span aria-hidden="true">*</span><span class="sr-only">(requerido)</span></label>
+              <select id="especialidad-select" name="especialidad" required aria-required="true">
+                <option value="">Selecciona una especialidad</option>
+                <option value="cardiologia">Cardiología &amp; Cirugía Cardiovascular</option>
+                <option value="oncologia">Oncología &amp; Radioterapia</option>
+                <option value="ortopedia">Ortopedia &amp; Traumatología</option>
+                <option value="neurologia">Neurología &amp; Neurocirugía</option>
+                <option value="materno">Medicina Materno-Fetal</option>
+                <option value="urgencias">Urgencias</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <fieldset style="border:none;padding:0;">
+                <legend style="font-size:.875rem;font-weight:500;color:var(--text);margin-bottom:.75rem;">Tipo de consulta</legend>
+                <div class="radio-group" role="group" aria-label="Tipo de consulta">
+                  <label class="radio-label">
+                    <input type="radio" name="tipo-consulta" value="primera" />
+                    Primera vez
+                  </label>
+                  <label class="radio-label">
+                    <input type="radio" name="tipo-consulta" value="seguimiento" />
+                    Seguimiento / control
+                  </label>
+                  <label class="radio-label">
+                    <input type="radio" name="tipo-consulta" value="urgente" />
+                    Urgente (dentro de 24 h)
+                  </label>
+                </div>
+              </fieldset>
+            </div>
+
+            <div class="wizard-nav">
+              <div></div>
+              <button type="button" class="btn btn-primary" data-siguiente aria-label="Ir al paso 2: datos personales">
+                Siguiente
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 8h8M9 5l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+          </fieldset>
+
+          <!-- PASO 2 -->
+          <fieldset data-paso="1" hidden aria-labelledby="legend-paso2">
+            <legend id="legend-paso2">Paso 2 — Tus datos y fecha preferida</legend>
+
+            <div class="form-group">
+              <label for="nombre-paciente">Nombre completo <span aria-hidden="true">*</span><span class="sr-only">(requerido)</span></label>
+              <input type="text" id="nombre-paciente" name="nombre" required aria-required="true" placeholder="Ej. María González López" autocomplete="name" />
+            </div>
+
+            <div class="form-group">
+              <label for="telefono-paciente">Teléfono de contacto <span aria-hidden="true">*</span><span class="sr-only">(requerido)</span></label>
+              <input type="tel" id="telefono-paciente" name="telefono" required aria-required="true" placeholder="(998) 000-0000" autocomplete="tel" inputmode="tel" />
+            </div>
+
+            <div class="form-group">
+              <label for="fecha-preferida">Fecha preferida <span aria-hidden="true">*</span><span class="sr-only">(requerido)</span></label>
+              <input type="date" id="fecha-preferida" name="fecha" required aria-required="true" min="2026-05-10" />
+            </div>
+
+            <div class="form-group">
+              <label for="hora-preferida">Hora preferida</label>
+              <select id="hora-preferida" name="hora">
+                <option value="">Sin preferencia</option>
+                <option value="08:00">08:00 – Mañana temprano</option>
+                <option value="10:00">10:00 – Media mañana</option>
+                <option value="12:00">12:00 – Mediodía</option>
+                <option value="15:00">15:00 – Tarde</option>
+                <option value="17:00">17:00 – Tarde-noche</option>
+              </select>
+            </div>
+
+            <div class="wizard-nav">
+              <button type="button" class="btn btn-outline" style="color:var(--navy);border-color:var(--border);" data-anterior aria-label="Volver al paso 1: elegir especialidad">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M12 8H4M7 11L4 8l3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Anterior
+              </button>
+              <button type="button" class="btn btn-primary" data-siguiente aria-label="Ir al paso 3: confirmar solicitud">
+                Siguiente
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 8h8M9 5l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+          </fieldset>
+
+          <!-- PASO 3 -->
+          <fieldset data-paso="2" hidden aria-labelledby="legend-paso3">
+            <legend id="legend-paso3">Paso 3 — Confirma tu solicitud</legend>
+
+            <div class="confirm-summary" role="region" aria-label="Resumen de tu solicitud de cita">
+              <p><strong>Especialidad:</strong> Cardiología &amp; Cirugía Cardiovascular</p>
+              <p><strong>Tipo de consulta:</strong> Primera vez</p>
+              <p><strong>Nombre:</strong> (datos del paso anterior)</p>
+              <p><strong>Fecha preferida:</strong> A confirmar por nuestro equipo</p>
+              <p><strong>Respuesta en:</strong> Menos de 2 horas en horario hábil</p>
+            </div>
+
+            <p style="font-size:.8rem;color:var(--gray);margin-top:1rem;line-height:1.65;">
+              Al enviar esta solicitud, aceptas que un asesor médico de CIMA MÉDICA se ponga en contacto contigo para confirmar disponibilidad. <strong>Sin límite de tiempo</strong> para completar este formulario.
+            </p>
+
+            <div class="wizard-nav">
+              <button type="button" class="btn btn-outline" style="color:var(--navy);border-color:var(--border);" data-anterior aria-label="Volver al paso 2: datos personales">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M12 8H4M7 11L4 8l3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Anterior
+              </button>
+              <button type="button" class="btn btn-green" data-siguiente aria-label="Enviar solicitud de cita a CIMA MÉDICA">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8l4 4 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Enviar solicitud
+              </button>
+            </div>
+          </fieldset>
+
+          <!-- SUCCESS -->
+          <div id="cita-success" hidden tabindex="-1" aria-live="assertive" role="status">
+            <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="28" cy="28" r="26" fill="#DCFCE7" stroke="#16A34A" stroke-width="2"/>
+              <path d="M17 28l8 8 14-14" stroke="#16A34A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <h3>¡Solicitud enviada!</h3>
+            <p>Tu solicitud de cita ha sido recibida. Un especialista de CIMA MÉDICA te contactará en menos de 2 horas para confirmar fecha y horario.</p>
+            <p style="margin-top:.75rem;font-size:.82rem;color:var(--gray);">¿Tienes una urgencia? Llama al <strong style="color:var(--red)">(998) 123-4567</strong></p>
+          </div>
+
+        </div><!-- /.wizard-body -->
+      </div><!-- /.wizard-wrap -->
+    </div>
+  </section>
+
+  <!-- ─── 8. URGENCIAS ─── -->
+  <section class="urgencias-section" id="urgencias" aria-labelledby="urgencias-heading">
+    <div class="urgencias-inner">
+      <div class="urgencias-eyebrow">
+        <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2L2 12h12L8 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="none"/><path d="M8 7v2M8 11.5v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Urgencias · Disponibles 24/7/365
+      </div>
+      <h2 id="urgencias-heading">Emergencia médica.<br>Estamos aquí.</h2>
+      <p>Trauma center nivel II, helipuerto operativo, UCI con 18 camas y equipo de guardia las 24 horas. No esperes.</p>
+
+      <div class="urgencias-phone" aria-label="Teléfono de urgencias: (998) 123-4567">
+        (998) 123-4567
+      </div>
+
+      <div class="urgencias-chips" role="list" aria-label="Servicios de urgencias disponibles">
+        <span class="urgencias-chip" role="listitem">Trauma Center Nivel II</span>
+        <span class="urgencias-chip" role="listitem">UCI 18 camas</span>
+        <span class="urgencias-chip" role="listitem">Helipuerto operativo</span>
+        <span class="urgencias-chip" role="listitem">Radiología 24h</span>
+        <span class="urgencias-chip" role="listitem">Triaje inmediato</span>
+        <span class="urgencias-chip" role="listitem">Quirófano de emergencia</span>
+      </div>
+
+      <a href="tel:9981234567"
+         class="btn btn-red"
+         style="font-size:1.1rem; padding:1.1rem 3rem; min-height:64px;"
+         aria-label="Llamar a urgencias de CIMA MÉDICA al número (998) 123-4567">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M5.8 3c.3 0 .6.1.8.4l2 3c.2.3.2.7 0 1L7 8.9a11 11 0 005.1 5.1l1.5-1.5c.3-.3.7-.3 1 0l3 2c.3.2.4.5.4.8v2.5A1.2 1.2 0 0116.8 19C8 19 1 12 1 3.2A1.2 1.2 0 012.2 2H4.8c.3 0 .7.1.8.4L5.8 3z" fill="currentColor" opacity=".9"/>
+        </svg>
+        Llamar ahora
+      </a>
+
+      <p style="color:rgba(255,255,255,.5);font-size:.78rem;margin-top:1.5rem;">
+        Av. Tulum 255, Cancún Centro · Zona Hotelera accessible · Frente al Hospital
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<!-- ─── 9. FOOTER ─── -->
+<!-- luxury-photos-patch -->
+<section aria-labelledby="esp-h" style="padding:6rem 1.5rem;background:#F8FAFF;">
+<div style="max-width:1200px;margin:0 auto;">
+<p style="font-size:.62rem;letter-spacing:.32em;text-transform:uppercase;color:#1D6FA4;margin-bottom:.8rem;">Especialidades</p>
+<h2 id="esp-h" style="font-family:'DM Serif Display',serif;font-size:clamp(2rem,4vw,3rem);color:#0F2040;margin-bottom:2.5rem;line-height:1.1;">Medicina de <em>vanguardia.</em></h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:1.5rem;">
+<article class="card" style="background:#fff;overflow:hidden;border:1px solid rgba(29,111,164,.1);">
+<div class="lxgc" style="aspect-ratio:4/3;"><img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=800&q=80" alt="Consulta cardiológica CIMA Médica con equipo de ultrasonido de última generación" loading="lazy"><div class="lxov"></div><div style="position:absolute;bottom:1.2rem;left:1.2rem;z-index:2;"><p style="font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(248,250,255,.8);">Cardiología</p><p style="font-family:'DM Serif Display',serif;font-size:1.2rem;color:#fff;">Dr. Alberto Fuentes</p></div></div>
+<div style="padding:1.5rem;"><p style="font-size:.84rem;color:rgba(15,32,64,.6);line-height:1.75;margin-bottom:.8rem;">Unidad cardiovascular con cateterismo, ecocardiograma 4D y cirugía mínimamente invasiva. 18 años de trayectoria.</p><p style="font-size:.8rem;color:#1D6FA4;font-weight:500;">Consulta: $850 MXN · Incluye ECG</p></div>
+</article>
+<article class="card" style="background:#fff;overflow:hidden;border:1px solid rgba(29,111,164,.1);">
+<div class="lxgc" style="aspect-ratio:4/3;"><img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80" alt="Sala de resonancia magnética CIMA Médica con equipo Siemens de 3 Teslas" loading="lazy"><div class="lxov"></div><div style="position:absolute;bottom:1.2rem;left:1.2rem;z-index:2;"><p style="font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(248,250,255,.8);">Diagnóstico</p><p style="font-family:'DM Serif Display',serif;font-size:1.2rem;color:#fff;">Imagenología 3T</p></div></div>
+<div style="padding:1.5rem;"><p style="font-size:.84rem;color:rgba(15,32,64,.6);line-height:1.75;margin-bottom:.8rem;">Resonancia magnética 3 Teslas, tomografía PET-CT, ultrasonido elastografía. Resultados en 2 horas.</p><p style="font-size:.8rem;color:#1D6FA4;font-weight:500;">RM desde $2,400 MXN · Mismo día</p></div>
+</article>
+<article class="card" style="background:#fff;overflow:hidden;border:1px solid rgba(29,111,164,.1);">
+<div class="lxgc" style="aspect-ratio:4/3;"><img src="https://images.unsplash.com/photo-1551601651-2a8555f1a136?auto=format&fit=crop&w=800&q=80" alt="Quirófano CIMA Médica con tecnología robótica Da Vinci para cirugía mínimamente invasiva" loading="lazy"><div class="lxov"></div><div style="position:absolute;bottom:1.2rem;left:1.2rem;z-index:2;"><p style="font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(248,250,255,.8);">Cirugía</p><p style="font-family:'DM Serif Display',serif;font-size:1.2rem;color:#fff;">Robot Da Vinci</p></div></div>
+<div style="padding:1.5rem;"><p style="font-size:.84rem;color:rgba(15,32,64,.6);line-height:1.75;margin-bottom:.8rem;">5 quirófanos laparoscópicos, robot Da Vinci para cirugía de precisión. Recuperación 60% más rápida.</p><p style="font-size:.8rem;color:#1D6FA4;font-weight:500;">Incluye anestesiología y recuperación</p></div>
+</article>
+</div></div></section>
+
+<section aria-label="Instalaciones CIMA" style="display:grid;grid-template-columns:1fr 1fr;min-height:520px;">
+<div style="background:#0F2040;padding:5rem 3.5rem;display:flex;flex-direction:column;justify-content:center;">
+<p style="font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:#1D6FA4;margin-bottom:1.2rem;">Nuestros números</p>
+<h2 style="font-family:'DM Serif Display',serif;font-size:clamp(1.6rem,3vw,2.5rem);color:#F8FAFF;line-height:1.1;margin-bottom:1.2rem;">Excelencia médica <em>medible.</em></h2>
+<p style="color:rgba(248,250,255,.65);line-height:1.8;font-size:.88rem;margin-bottom:1.8rem;">CIMA Médica opera con los estándares de la Joint Commission International (JCI) y los protocolos de la Mayo Clinic Network para hospitales asociados en México.</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;">
+<div><p style="font-family:'DM Serif Display',serif;font-size:1.8rem;color:#1D6FA4;">98.4%</p><p style="font-size:.65rem;color:rgba(248,250,255,.4);text-transform:uppercase;letter-spacing:.1em;">Satisfacción paciente</p></div>
+<div><p style="font-family:'DM Serif Display',serif;font-size:1.8rem;color:#1D6FA4;">42</p><p style="font-size:.65rem;color:rgba(248,250,255,.4);text-transform:uppercase;letter-spacing:.1em;">Especialidades</p></div>
+<div><p style="font-family:'DM Serif Display',serif;font-size:1.8rem;color:#1D6FA4;">160+</p><p style="font-size:.65rem;color:rgba(248,250,255,.4);text-transform:uppercase;letter-spacing:.1em;">Médicos certificados</p></div>
+<div><p style="font-family:'DM Serif Display',serif;font-size:1.8rem;color:#1D6FA4;">24/7</p><p style="font-size:.65rem;color:rgba(248,250,255,.4);text-transform:uppercase;letter-spacing:.1em;">Urgencias activas</p></div>
+</div></div>
+<div class="lxgc"><img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=900&q=80" alt="Hospital CIMA Médica fachada moderna con acceso universal para personas con discapacidad" loading="lazy"><div class="lxov"></div></div>
+</section>
+
+<section aria-labelledby="gal-c" style="padding:5rem 1.5rem;background:#0F2040;">
+<div style="max-width:1200px;margin:0 auto;">
+<h2 id="gal-c" style="font-family:'DM Serif Display',serif;font-size:clamp(1.6rem,3vw,2.5rem);color:#F8FAFF;text-align:center;margin-bottom:2.5rem;">Nuestras instalaciones</h2>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:3px;">
+<div class="lxgc" style="grid-column:1/3;aspect-ratio:16/9;"><img src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=1100&q=80" alt="Recepción CIMA Médica con diseño minimalista y accesibilidad total" loading="lazy"><div class="lxov"></div></div>
+<div class="lxgc" style="aspect-ratio:3/4;"><img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=600&q=80" alt="Dr. Fernando Salinas especialista en medicina interna CIMA Médica" loading="lazy"><div class="lxov"></div></div>
+<div class="lxgc" style="aspect-ratio:4/3;"><img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=700&q=80" alt="Equipo de ultrasonido Philips Elite CIMA Médica" loading="lazy"><div class="lxov"></div></div>
+<div class="lxgc" style="grid-column:2/4;aspect-ratio:16/9;"><img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1000&q=80" alt="Consulta médica en ambiente cómodo y accesible CIMA Médica" loading="lazy"><div class="lxov"></div></div>
+</div></div></section>
+
+<section aria-labelledby="rev-cm" style="padding:5rem 1.5rem;background:#F8FAFF;">
+<div style="max-width:960px;margin:0 auto;text-align:center;">
+<p style="font-size:.62rem;letter-spacing:.32em;text-transform:uppercase;color:#1D6FA4;margin-bottom:.8rem;">Pacientes reales</p>
+<h2 id="rev-cm" style="font-family:'DM Serif Display',serif;font-size:clamp(1.5rem,2.5vw,2.2rem);color:#0F2040;margin-bottom:2.5rem;">Historias de <em>recuperación.</em></h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;text-align:left;">
+<blockquote style="background:#fff;padding:1.8rem;border-left:3px solid #1D6FA4;border-radius:2px;"><p style="font-family:'DM Serif Display',serif;font-style:italic;font-size:.93rem;color:#0F2040;line-height:1.7;margin-bottom:1rem;">"El Dr. Fuentes detectó mi arritmia en una revisión de rutina. La cirugía fue el mismo mes. Literalmente me salvó la vida."</p><footer style="font-size:.73rem;color:rgba(15,32,64,.5);">— Roberto A. · Cancún · Cardiología · ★★★★★</footer></blockquote>
+<blockquote style="background:#fff;padding:1.8rem;border-left:3px solid #1D6FA4;border-radius:2px;"><p style="font-family:'DM Serif Display',serif;font-style:italic;font-size:.93rem;color:#0F2040;line-height:1.7;margin-bottom:1rem;">"Uso silla de ruedas. CIMA es el único hospital en Cancún donde cada rampa, cada elevador y cada baño está realmente adaptado."</p><footer style="font-size:.73rem;color:rgba(15,32,64,.5);">— Laura V. · Playa del Carmen · Traumatología · ★★★★★</footer></blockquote>
+<blockquote style="background:#fff;padding:1.8rem;border-left:3px solid #1D6FA4;border-radius:2px;"><p style="font-family:'DM Serif Display',serif;font-style:italic;font-size:.93rem;color:#0F2040;line-height:1.7;margin-bottom:1rem;">"La resonancia en 3 Teslas detectó lo que 3 hospitales en México no vieron. Resultados en 90 minutos. El equipo es extraordinario."</p><footer style="font-size:.73rem;color:rgba(15,32,64,.5);">— James P. · Houston · Imagenología · ★★★★★</footer></blockquote>
+</div></div></section>
+<!-- hf-photos-patch -->
+<section aria-label="CIMA MÉDICA · Playa del Carmen — Galería fotográfica" id="galeria-hf-cimamedica" style="background:#060D1A;padding:5rem 1.5rem 4rem;margin:0;overflow:hidden;">
+<div style="max-width:1100px;margin:0 auto;">
+<p style="font-size:.6rem;letter-spacing:.32em;text-transform:uppercase;color:#1D6FA4;margin-bottom:.7rem;display:flex;align-items:center;gap:.65rem;"><span style="display:inline-block;width:2.2rem;height:1px;background:currentColor;"></span>CIMA MÉDICA · Playa del Carmen</p>
+<h2 style="font-family:'DM Serif Display','Instrument Serif',Georgia,serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#E8F4FD;margin-bottom:2.5rem;line-height:1.1;font-weight:400;font-style:italic;">Excelencia sin límites.</h2>
+<div style="display:grid;gap:4px;">
+<div class="lxgc" style="aspect-ratio:16/9;border-radius:0;"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_2xDKzgUHSbZ2WsUfnTEP222ovTJ/hf_20260510_051054_60f367a1-11d8-4fbb-956e-2dd7b22fa880.png" alt="Exterior CIMA MÉDICA Playa del Carmen, arquitectura vidrio con acceso accesible" loading="lazy" style="width:100%;height:100%;object-fit:cover;"><div class="lxov"></div></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;">
+<div class="lxgc" style="aspect-ratio:4/3;"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_2xDKzgUHSbZ2WsUfnTEP222ovTJ/hf_20260510_051055_a18b5adf-e3f1-491d-946a-0b9f4f55652e.png" alt="Sala de resonancia magnética alta tecnología CIMA MÉDICA, luz azul ambiente" loading="lazy" style="width:100%;height:100%;object-fit:cover;"><div class="lxov"></div></div>
+<div class="lxgc" style="aspect-ratio:4/3;"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_2xDKzgUHSbZ2WsUfnTEP222ovTJ/hf_20260510_051057_62afcecb-ff1a-4873-bf7d-5516e1111ff6.png" alt="Especialista CIMA MÉDICA con tablet consultando paciente en clínica moderna" loading="lazy" style="width:100%;height:100%;object-fit:cover;"><div class="lxov"></div></div>
+</div>
+</div>
+</div>
+</section>
+<footer class="footer" role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <svg viewBox="0 0 240 52" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:150px;height:auto;" role="img" aria-label="CIMA MÉDICA">
+          <rect x="4" y="16" width="8" height="20" rx="1" fill="#1D6FA4"/>
+          <rect x="0" y="20" width="16" height="12" rx="1" fill="#1D6FA4"/>
+          <text x="26" y="30" font-family="DM Serif Display, serif" font-size="22" font-weight="400" letter-spacing="3" fill="#F8FAFF">CIMA</text>
+          <text x="26" y="46" font-family="Inter, sans-serif" font-size="9" font-weight="300" letter-spacing="5" fill="#1D6FA4">MÉDICA</text>
+          <line x1="26" y1="34" x2="130" y2="34" stroke="#1D6FA4" stroke-width="0.6" opacity="0.4"/>
+        </svg>
+        <p>Hospital de especialidades de alto nivel en Cancún, Quintana Roo. 22 años siendo el centro médico de referencia del Caribe mexicano. Institución ficticia para demostración.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Especialidades</h4>
+        <ul>
+          <li><a href="#especialidades">Cardiología</a></li>
+          <li><a href="#especialidades">Oncología</a></li>
+          <li><a href="#especialidades">Ortopedia</a></li>
+          <li><a href="#especialidades">Neurología</a></li>
+          <li><a href="#especialidades">Materno-Fetal</a></li>
+          <li><a href="#urgencias">Urgencias 24/7</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Pacientes</h4>
+        <ul>
+          <li><a href="#cita">Agendar cita</a></li>
+          <li><a href="#medicos">Nuestros médicos</a></li>
+          <li><a href="#urgencias">Urgencias</a></li>
+          <li><a href="#main">Inicio</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <ul>
+          <li><a href="tel:9981234567">(998) 123-4567</a></li>
+          <li><a href="mailto:contacto@cimamedica-ficticia.mx">contacto@cimamedica.mx</a></li>
+          <li><a href="#main">Av. Tulum 255</a></li>
+          <li><a href="#main">Cancún, Q. Roo 77500</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2026 CIMA MÉDICA — Institución ficticia con fines demostrativos. Todos los médicos, teléfonos y datos son ficticios.</p>
+      <a href="https://victor-ia.com.mx" class="victor-credit" target="_blank" rel="noopener" aria-label="Sitio web desarrollado por VICTOR IA — Inteligencia artificial de negocios">
+        <svg width="18" height="18" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <circle cx="16" cy="16" r="14" fill="#1D6FA4" opacity=".15" stroke="#1D6FA4" stroke-width="1.5"/>
+          <path d="M10 12l6 8 6-8" stroke="#1D6FA4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <circle cx="16" cy="10" r="2" fill="#1D6FA4"/>
+        </svg>
+        Desarrollado por <strong>VICTOR IA</strong>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const html = document.documentElement;
+  const body = document.body;
+  const KEY = 'cimamedica-a11y';
+  let prefs = {};
+  try { prefs = JSON.parse(localStorage.getItem(KEY)||'{}'); } catch(e){}
+  const save = () => { try { localStorage.setItem(KEY, JSON.stringify(prefs)); } catch(e){} };
+
+  function injectCSS(id, css) {
+    let el = document.getElementById(id);
+    if (!el) { el = document.createElement('style'); el.id = id; document.head.appendChild(el); }
+    el.textContent = css;
+  }
+  function removeCSS(id) { const el = document.getElementById(id); if(el) el.textContent = ''; }
+
+  let live = document.getElementById('sr-live');
+  if (!live) {
+    live = document.createElement('div');
+    live.id = 'sr-live';
+    live.setAttribute('aria-live','polite');
+    live.className = 'sr-only';
+    document.body.appendChild(live);
+  }
+  const announce = msg => { live.textContent = ''; requestAnimationFrame(() => live.textContent = msg); };
+
+  const toggleMap = {
+    grandesTargets: {
+      on:  () => injectCSS('gt-css', 'button,a,input,select,label,[role="button"]{min-height:64px!important;min-width:64px!important;padding:1rem 1.5rem!important;font-size:1.1rem!important}'),
+      off: () => removeCSS('gt-css')
+    },
+    teclado: {
+      on:  () => injectCSS('kb-css', ':focus-visible{outline:4px solid #1D6FA4!important;outline-offset:6px!important;box-shadow:0 0 0 6px rgba(29,111,164,.2)!important}'),
+      off: () => removeCSS('kb-css')
+    },
+    sinHover: {
+      on:  () => injectCSS('nh-css', '@media(hover:hover){*:hover:not(:focus){outline:none!important;box-shadow:none!important;transform:none!important}}'),
+      off: () => removeCSS('nh-css')
+    },
+    sinTiempo: {
+      on:  () => {
+        document.querySelectorAll('[data-timeout]').forEach(el => el.removeAttribute('data-timeout'));
+        announce('Sin límite de tiempo activado');
+      },
+      off: () => announce('Límites de tiempo restaurados')
+    },
+    contraste: {
+      on:  () => html.setAttribute('data-theme','contrast'),
+      off: () => html.removeAttribute('data-theme')
+    },
+    voz: {
+      on: () => {
+        if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
+          announce('Control por voz no disponible en este navegador');
+          return;
+        }
+        const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+        const rec = new SR();
+        rec.lang = 'es-MX';
+        rec.continuous = false;
+        rec.onresult = e => {
+          const cmd = e.results[0][0].transcript.toLowerCase();
+          announce('Comando: ' + cmd);
+          if      (cmd.includes('urgencia') || cmd.includes('emergencia')) document.getElementById('urgencias')?.scrollIntoView({behavior:'smooth'});
+          else if (cmd.includes('cita')     || cmd.includes('agendar'))    document.getElementById('cita')?.scrollIntoView({behavior:'smooth'});
+          else if (cmd.includes('especialidad'))                            document.getElementById('especialidades')?.scrollIntoView({behavior:'smooth'});
+          else if (cmd.includes('médico')   || cmd.includes('doctor'))     document.getElementById('medicos')?.scrollIntoView({behavior:'smooth'});
+          else if (cmd.includes('inicio'))                                  window.scrollTo({top:0,behavior:'smooth'});
+          else announce('Comando no reconocido. Di: urgencias, cita, especialidades, médicos o inicio.');
+        };
+        rec.onerror = () => announce('Error de micrófono. Verifica permisos.');
+        rec.start();
+        announce('Escuchando... Di: urgencias, cita, especialidades, médicos o inicio');
+        prefs.voz = false; save();
+      },
+      off: () => {}
+    }
+  };
+
+  // Aplicar preferencias guardadas al cargar
+  Object.entries(prefs).forEach(([k, v]) => { if (v && toggleMap[k]) toggleMap[k].on(); });
+  if (prefs.fontSize) body.style.fontSize = prefs.fontSize + '%';
+
+  // Botones de toggle
+  document.querySelectorAll('[data-toggle]').forEach(btn => {
+    const key = btn.getAttribute('data-toggle');
+    if (prefs[key]) btn.setAttribute('aria-pressed','true');
+    btn.addEventListener('click', function() {
+      prefs[key] = !prefs[key];
+      this.setAttribute('aria-pressed', String(prefs[key]));
+      if (prefs[key]) { if (toggleMap[key]) toggleMap[key].on();  announce(btn.textContent.trim() + ' activado'); }
+      else            { if (toggleMap[key]) toggleMap[key].off(); announce(btn.textContent.trim() + ' desactivado'); }
+      save();
+    });
+  });
+
+  // Tamaño de texto
+  let fontSize = prefs.fontSize || 100;
+  document.querySelectorAll('[data-action="font-up"]').forEach(b => b.addEventListener('click', () => {
+    fontSize = Math.min(180, fontSize + 10);
+    body.style.fontSize = fontSize + '%';
+    prefs.fontSize = fontSize; save();
+    announce('Tamaño de texto: ' + fontSize + '%');
+  }));
+  document.querySelectorAll('[data-action="font-down"]').forEach(b => b.addEventListener('click', () => {
+    fontSize = Math.max(70, fontSize - 10);
+    body.style.fontSize = fontSize + '%';
+    prefs.fontSize = fontSize; save();
+    announce('Tamaño de texto: ' + fontSize + '%');
+  }));
+
+  // ── WIZARD DE CITA ──
+  let pasoActual = 0;
+  const pasos = document.querySelectorAll('[data-paso]');
+  const progBar = document.getElementById('cita-progress');
+  const progressText = document.getElementById('progress-text');
+
+  function mostrarPaso(n) {
+    pasos.forEach((p, i) => { p.hidden = i !== n; });
+    if (progBar) {
+      progBar.value = n + 1;
+      progBar.setAttribute('aria-valuenow', n + 1);
+      progBar.setAttribute('aria-valuetext', 'Paso ' + (n + 1) + ' de ' + pasos.length);
+    }
+    if (progressText) progressText.textContent = 'Paso ' + (n + 1) + ' de ' + pasos.length;
+    announce('Paso ' + (n + 1) + ' de ' + pasos.length);
+    pasoActual = n;
+    const firstInput = pasos[n]?.querySelector('input,select,button');
+    setTimeout(() => firstInput?.focus(), 120);
+  }
+
+  document.querySelectorAll('[data-siguiente]').forEach(btn => btn.addEventListener('click', () => {
+    if (pasoActual < pasos.length - 1) {
+      mostrarPaso(pasoActual + 1);
+    } else {
+      announce('Cita agendada exitosamente. Un especialista te contactará pronto.');
+      const s = document.getElementById('cita-success');
+      if (s) {
+        pasos.forEach(p => p.hidden = true);
+        s.hidden = false;
+        setTimeout(() => s.focus(), 120);
+      }
+    }
+  }));
+
+  document.querySelectorAll('[data-anterior]').forEach(btn => btn.addEventListener('click', () => {
+    if (pasoActual > 0) mostrarPaso(pasoActual - 1);
+  }));
+
+  if (pasos.length) mostrarPaso(0);
+
+  // ── REVEAL ANIMATION ──
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const obs = new IntersectionObserver(entries => entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    }), { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  } else {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+  }
+
+  // ── NAVEGACIÓN POR TECLADO EN EL WIZARD ──
+  document.querySelectorAll('.radio-label input[type="radio"]').forEach(radio => {
+    radio.addEventListener('keydown', e => {
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        const radios = [...document.querySelectorAll('[name="' + radio.name + '"]')];
+        const idx = radios.indexOf(radio);
+        const next = e.key === 'ArrowDown' ? radios[idx + 1] : radios[idx - 1];
+        if (next) { next.focus(); next.checked = true; }
+      }
+    });
+  });
+
+});
+</script>
+<script>
+(function(){
+var rm=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+var CFG={hero:'https://d8j0ntlcm91z4.cloudfront.net/user_2xDKzgUHSbZ2WsUfnTEP222ovTJ/hf_20260510_051054_60f367a1-11d8-4fbb-956e-2dd7b22fa880.png',gal:['https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=900&q=80','https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=900&q=80','https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=900&q=80'],alt:['Consulta CIMA Medica','Tecnologia diagnostico avanzada','Instalaciones modernas accesibles'],galLabel:'Galería CIMA Médica',ov1:'rgba(15,32,64,0.88)',ov2:'rgba(29,111,164,0.45)',gl:'rgba(29,111,164,0.09)'};
+var cur=document.createElement('div');
+cur.style.cssText='position:fixed;width:360px;height:360px;border-radius:50%;pointer-events:none;transform:translate(-50%,-50%);z-index:9990;opacity:0;transition:opacity .5s;background:radial-gradient(circle,'+CFG.gl+' 0%,transparent 68%);';
+document.body.appendChild(cur);
+var mx=innerWidth/2,my=innerHeight/2;
+document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;cur.style.opacity='1';});
+document.addEventListener('mouseleave',function(){cur.style.opacity='0';});
+!function t(){cur.style.left=mx+'px';cur.style.top=my+'px';requestAnimationFrame(t);}();
+var hero=document.querySelector('#inicio,#home,.hero-section,section.hero')||document.querySelector('body>section,main>section,section');
+if(hero&&CFG.hero){
+if(getComputedStyle(hero).position==='static')hero.style.position='relative';
+hero.style.overflow='hidden';
+var il=document.createElement('div');il.style.cssText='position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;';
+var himg=document.createElement('img');himg.src=CFG.hero;himg.alt='';himg.setAttribute('aria-hidden','true');
+himg.style.cssText='width:100%;height:100%;object-fit:cover;object-position:center 30%;filter:brightness(.25) saturate(1.3);transition:transform 8s ease;';
+il.appendChild(himg);
+var hov=document.createElement('div');hov.style.cssText='position:absolute;inset:0;background:linear-gradient(145deg,'+CFG.ov1+' 0%,'+CFG.ov2+' 100%);';il.appendChild(hov);
+hero.insertBefore(il,hero.firstChild);
+[].slice.call(hero.children).forEach(function(c){if(c!==il){c.style.position='relative';c.style.zIndex='2';}});
+setTimeout(function(){himg.style.transform='scale(1.0)';},100);
+if(!rm)window.addEventListener('scroll',function(){if(window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;himg.style.transform='scale(1.08) translateY('+(window.scrollY*.1)+'px)';},{passive:true});
+}
+var gs=document.createElement('section');gs.setAttribute('aria-label',CFG.galLabel);gs.style.cssText='margin:0;padding:0;line-height:0;display:block;';
+var gi='<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:#000;max-height:380px;overflow:hidden;">';
+CFG.gal.forEach(function(u,i){gi+='<div class="lxgc" style="aspect-ratio:4/3;"><img src="'+u+'" alt="'+CFG.alt[i]+'" loading="lazy"><div class="lxov"></div></div>';});
+gi+='</div>';gs.innerHTML=gi;
+if(hero&&hero.parentNode)hero.parentNode.insertBefore(gs,hero.nextSibling);
+var cards=[].slice.call(document.querySelectorAll('[class*=card],[class*=plan],[class*=beneficio],[class*=caracteristica],[class*=servicio],[class*=feature],[class*=habitacion],[class*=platillo],[class*=especialidad],[class*=propiedad],[class*=modelo]')).filter(function(c){return !c.closest('[class*=toolbar],[class*=toggle],[class*=a11y],[class*=nav],[role=tablist],[class*=filtro],[data-paso]');});
+cards.forEach(function(c){
+c.addEventListener('mousemove',function(e){if(window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;var r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform='perspective(800px) rotateY('+(x*12)+'deg) rotateX('+(-y*8)+'deg) translateY(-8px) scale(1.01)';c.style.boxShadow='0 24px 70px rgba(0,0,0,.25)';});
+c.addEventListener('mouseleave',function(){c.style.transform='';c.style.boxShadow='';});
+});
+[].slice.call(document.querySelectorAll('a[class*=cta],a[class*=btn],a[class*=reserva],a[class*=cita],button[type=submit],.btn-cta,.btn-primary')).forEach(function(b){if(b.closest('[class*=toolbar],[class*=a11y],[class*=toggle],[class*=nav],[role=tablist]'))return;b.addEventListener('mousemove',function(e){if(window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;var r=b.getBoundingClientRect(),x=(e.clientX-r.left-r.width/2)*.22,y=(e.clientY-r.top-r.height/2)*.22;b.style.transform='translate('+x+'px,'+y+'px)';});b.addEventListener('mouseleave',function(){b.style.transform='';});});
+if('IntersectionObserver' in window){var io=new IntersectionObserver(function(ents){ents.filter(function(e){return e.isIntersecting;}).forEach(function(e,i){setTimeout(function(){e.target.style.opacity='1';e.target.style.transform='';},i*90);io.unobserve(e.target);});},{threshold:.1});cards.forEach(function(c){c.style.opacity='0';c.style.transform='translateY(24px)';c.style.transition=(c.style.transition?c.style.transition+',':'')+' opacity .75s ease,transform .75s cubic-bezier(.23,1,.32,1)';io.observe(c);});}
+})();
+</script>
+<script>
+(function(){
+if(window.__ip)return;window.__ip=1;
+/* --- progress bar --- */
+const bar=document.createElement('div');bar.className='ip-bar';document.body.prepend(bar);
+const updScroll=()=>{
+  const r=window.scrollY/Math.max(1,document.documentElement.scrollHeight-window.innerHeight);
+  document.documentElement.style.setProperty('--scroll-raw',r.toFixed(4));
+};
+window.addEventListener('scroll',updScroll,{passive:true});
+updScroll();
+
+/* --- mouse ambient glow vars --- */
+window.addEventListener('mousemove',e=>{
+  document.documentElement.style.setProperty('--mpos-x',e.clientX+'px');
+  document.documentElement.style.setProperty('--mpos-y',e.clientY+'px');
+},{passive:true});
+
+/* --- floating particles on hero --- */
+const hero=document.querySelector('.hero,section.hero,[class*="hero-section"],section:first-of-type,header.site-header,header');
+if(hero){
+  const pos=getComputedStyle(hero).position;
+  if(pos==='static')hero.style.position='relative';
+  hero.style.overflow='hidden';
+  const cvs=document.createElement('canvas');
+  cvs.style.cssText='position:absolute;inset:0;pointer-events:none;z-index:4;opacity:.38;';
+  hero.appendChild(cvs);
+  const ctx=cvs.getContext('2d');
+  const sz=()=>{cvs.width=hero.offsetWidth;cvs.height=hero.offsetHeight||window.innerHeight;};
+  sz();new ResizeObserver(sz).observe(hero);
+  const N=55;
+  const pts=Array.from({length:N},(_,i)=>({
+    x:Math.random()*cvs.width,y:Math.random()*cvs.height,
+    r:Math.random()*2.2+.4,
+    vx:(Math.random()-.5)*.25,vy:-(Math.random()*.45+.08),
+    o:Math.random()*.55+.15,
+    pulse:Math.random()*Math.PI*2
+  }));
+  let t=0;
+  const draw=()=>{
+    ctx.clearRect(0,0,cvs.width,cvs.height);
+    t+=.012;
+    pts.forEach(p=>{
+      p.pulse+=.025;
+      const ro=p.o*(0.7+0.3*Math.sin(p.pulse));
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,6.2832);
+      ctx.fillStyle='rgba(255,255,255,'+ro+')';ctx.fill();
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.y<-8){p.y=cvs.height+8;p.x=Math.random()*cvs.width;}
+      if(p.x<-8)p.x=cvs.width+8;if(p.x>cvs.width+8)p.x=-8;
+    });
+    requestAnimationFrame(draw);
+  };
+  draw();
+
+  /* Add shimmer overlay to hero */
+  const hl=document.createElement('div');hl.className='ip-hero-layer';
+  hero.appendChild(hl);
+
+  /* hero text parallax */
+  const htxt=hero.querySelector('h1,.hero-title,[class*="hero"] h1,.main-title');
+  if(htxt&&!window.matchMedia('(prefers-reduced-motion:reduce)').matches){
+    htxt.classList.add('ip-parallax');
+    window.addEventListener('scroll',()=>{
+      htxt.style.transform='translateY('+Math.round(window.scrollY*.12)+'px)';
+    },{passive:true});
+  }
+}
+
+/* --- pulse on CTA buttons --- */
+document.querySelectorAll('a[class*="cta"],a[class*="btn-primary"],button[class*="cta"],button[class*="primary"],.btn-primary,.cta,.book-btn,.contact-btn,.btn-cta,.hero a').forEach(el=>{
+  el.classList.add('ip-pulse');
+});
+
+/* --- counter animation --- */
+const numRx=/^([\D]*?)([\d][\d,. ]*)([\D]*)$/;
+function tryCountEl(el){
+  if(el.dataset.ipC)return;
+  const txt=el.textContent.trim();
+  if(!txt)return;
+  const m=txt.match(numRx);
+  if(!m)return;
+  const target=parseFloat(m[2].replace(/[, ]/g,''));
+  if(isNaN(target)||target<2)return;
+  el.dataset.ipC='1';
+  const pre=m[1],suf=m[3];
+  const isDecimal=m[2].includes('.');
+  const obs=new IntersectionObserver(([e],o)=>{
+    if(!e.isIntersecting)return;o.disconnect();
+    let start=null;const dur=1600;
+    const step=ts=>{
+      if(!start)start=ts;
+      const p=Math.min((ts-start)/dur,1);
+      const ease=1-Math.pow(1-p,3);
+      const val=isDecimal?(target*ease).toFixed(1):Math.round(target*ease);
+      el.textContent=pre+(typeof val==='number'&&val>=1000?val.toLocaleString():val)+suf;
+      if(p<1)requestAnimationFrame(step);else el.classList.add('ip-counted');
+    };
+    requestAnimationFrame(step);
+  },{threshold:.6});
+  obs.observe(el);
+}
+document.querySelectorAll('[class*="stat"],[class*="metric"],[class*="num"],[class*="count"],[class*="data-"],[class*="figure"],[class*="score"]').forEach(tryCountEl);
+/* Also scan .hero and stats sections broadly */
+document.querySelectorAll('.stats-grid>*,.metrics>*,.hero-stats>*,.awards>*,.kpi>*,.highlights>*').forEach(el=>{
+  el.querySelectorAll('*').forEach(tryCountEl);
+});
+
+/* --- section reveal with alternating directions --- */
+const dirs=['ip-rb','ip-rl','ip-rr'];
+let ri=0;
+const skipSel=new Set(['A11Y-BAR','NAV','HEADER','FOOTER','SCRIPT','STYLE','CANVAS','NOSCRIPT']);
+document.querySelectorAll('section>*,main>section,.grid>*,[class*="grid"]>*,article').forEach(el=>{
+  if(skipSel.has(el.tagName)||el.dataset.ip||el.classList.contains('ip-rb'))return;
+  if(el.offsetHeight===0)return;
+  el.dataset.ip='1';
+  const d=dirs[ri%3];ri++;
+  el.classList.add(d);
+  const obs=new IntersectionObserver(([e],o)=>{
+    if(!e.isIntersecting)return;
+    el.classList.add('ip-rv');
+    o.disconnect();
+  },{threshold:.12,rootMargin:'0px 0px -30px 0px'});
+  obs.observe(el);
+});
+
+/* --- lxgc gallery: stagger reveal --- */
+document.querySelectorAll('.lxgc').forEach((el,i)=>{
+  el.style.transitionDelay=(i*.07)+'s';
+});
+
+/* --- nav highlight on scroll --- */
+const nav=document.querySelector('nav,.nav-bar,.site-nav,header nav');
+if(nav){
+  const navBg=getComputedStyle(nav).backgroundColor;
+  window.addEventListener('scroll',()=>{
+    const past=window.scrollY>80;
+    nav.style.backdropFilter=past?'blur(18px)':'none';
+    nav.style.boxShadow=past?'0 4px 32px rgba(0,0,0,.18)':'none';
+  },{passive:true});
+}
+})();
+</script>
+</body>
+</html>
+
+
+
+
+
+

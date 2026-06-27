@@ -1,0 +1,2737 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CADU Inmobiliaria — Accesible para Todos · Demo VICTOR IA</title>
+  <link rel="icon" type="image/png" href="https://ri.caduinmobiliaria.com/assets/cadu/images/globales/logo.png">
+  <meta name="description" content="Encuentra tu casa en Cancún y la Riviera Maya. Sitio diseñado con accesibilidad cognitiva para personas con dislexia, TDAH, autismo y adultos mayores." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- OpenDyslexic via CDN (para toggle de dislexia) -->
+  <style>
+    @import url('https://fonts.cdnfonts.com/css/opendyslexic');
+
+    /* ============================================================
+       VARIABLES Y RESET
+    ============================================================ */
+    :root {
+      --azul: #1E3A5F;
+      --azul-claro: #2A5298;
+      --naranja: #F4841E;
+      --naranja-hover: #d96e0a;
+      --verde: #2E8B57;
+      --blanco: #FFFFFF;
+      --gris-suave: #F2F4F6;
+      --gris-texto: #333333;
+      --gris-medio: #666666;
+      --amarillo-guia: rgba(255, 230, 80, 0.35);
+      --sombra: 0 4px 16px rgba(30,58,95,0.12);
+      --radio: 14px;
+      --fuente-base: 'Atkinson Hyperlegible', 'Open Sans', sans-serif;
+      --tam-base: 18px;
+      --tam-h1: clamp(2rem, 5vw, 3.2rem);
+      --tam-h2: clamp(1.5rem, 3.5vw, 2.2rem);
+      --tam-h3: clamp(1.1rem, 2.5vw, 1.4rem);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: var(--tam-base);
+    }
+
+    body {
+      font-family: var(--fuente-base);
+      background: var(--blanco);
+      color: var(--gris-texto);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ============================================================
+       MODOS DE ACCESIBILIDAD
+    ============================================================ */
+
+    /* Modo dislexia */
+    body.modo-dislexia {
+      font-family: 'OpenDyslexic', 'Atkinson Hyperlegible', sans-serif !important;
+      letter-spacing: 0.05em;
+      word-spacing: 0.15em;
+    }
+    body.modo-dislexia * {
+      font-family: 'OpenDyslexic', 'Atkinson Hyperlegible', sans-serif !important;
+    }
+
+    /* Modo simple */
+    body.modo-simple {
+      font-size: 120%;
+      line-height: 1.9;
+    }
+    body.modo-simple * {
+      animation: none !important;
+      transition: none !important;
+    }
+    body.modo-simple .decorativo {
+      display: none !important;
+    }
+    body.modo-simple .hero-fondo-deco {
+      display: none !important;
+    }
+    /* Forzar 1 columna en modo simple */
+    body.modo-simple [class*="grid"] {
+      grid-template-columns: 1fr !important;
+    }
+    body.modo-simple .proyectos-track {
+      grid-template-columns: 1fr !important;
+    }
+    body.modo-simple .proceso-grid {
+      grid-template-columns: 1fr !important;
+    }
+    body.modo-simple .wizard-opciones {
+      grid-template-columns: 1fr !important;
+    }
+
+    /* Lenguaje simple: ocultar data-simple por defecto, mostrar cuando activo */
+    [data-simple] {
+      display: none;
+    }
+    body.lenguaje-simple [data-full] {
+      display: none !important;
+    }
+    body.lenguaje-simple [data-simple] {
+      display: block !important;
+    }
+
+    /* Sin animaciones */
+    body.sin-animaciones * {
+      animation: none !important;
+      transition: none !important;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+
+    /* Modo TDAH */
+    body.modo-tdah .seccion-oculta-tdah {
+      display: none !important;
+    }
+
+    /* ============================================================
+       BARRA DE ACCESIBILIDAD COGNITIVA
+    ============================================================ */
+    #barra-accesibilidad {
+      background: var(--azul);
+      color: var(--blanco);
+      padding: 10px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .accesib-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.7);
+      margin-right: 6px;
+      white-space: nowrap;
+    }
+
+    .accesib-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.12);
+      border: 2px solid rgba(255,255,255,0.3);
+      color: var(--blanco);
+      padding: 6px 14px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 0.82rem;
+      font-weight: 600;
+      font-family: inherit;
+      transition: background 0.2s, border-color 0.2s;
+      white-space: nowrap;
+    }
+    .accesib-btn:hover {
+      background: rgba(255,255,255,0.22);
+      border-color: rgba(255,255,255,0.6);
+    }
+    .accesib-btn.activo {
+      background: var(--naranja);
+      border-color: var(--naranja);
+      color: var(--blanco);
+    }
+    .accesib-btn .icono-btn {
+      font-size: 1.1rem;
+      line-height: 1;
+    }
+
+    .victor-ia-badge {
+      margin-left: auto;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.55);
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .victor-ia-badge strong {
+      color: var(--naranja);
+    }
+
+    /* ============================================================
+       GUIA DE LECTURA
+    ============================================================ */
+    #guia-lectura {
+      position: fixed;
+      left: 0;
+      width: 100%;
+      height: 3.2rem;
+      background: var(--amarillo-guia);
+      border-top: 2px solid rgba(200, 170, 0, 0.4);
+      border-bottom: 2px solid rgba(200, 170, 0, 0.4);
+      pointer-events: none;
+      z-index: 999;
+      display: none;
+      transition: top 0.05s linear;
+    }
+    body.guia-activa #guia-lectura {
+      display: block;
+    }
+
+    /* ============================================================
+       NAVEGACIÓN
+    ============================================================ */
+    #nav-principal {
+      background: var(--blanco);
+      border-bottom: 3px solid var(--gris-suave);
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      min-height: 70px;
+      position: sticky;
+      top: 52px;
+      z-index: 900;
+      box-shadow: var(--sombra);
+    }
+
+    .logo-cadu {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .logo-cadu-bloque {
+      background: var(--azul);
+      color: var(--blanco);
+      padding: 8px 14px;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+    .logo-cadu-bloque .marca {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+    .logo-cadu-bloque .sub {
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.8;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      list-style: none;
+    }
+    .nav-links a {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      text-decoration: none;
+      color: var(--azul);
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 10px 16px;
+      border-radius: 10px;
+      transition: background 0.2s;
+    }
+    .nav-links a:hover, .nav-links a:focus {
+      background: var(--gris-suave);
+    }
+    .nav-links a .nav-icono {
+      font-size: 1.25rem;
+    }
+
+    .nav-cta {
+      background: var(--naranja) !important;
+      color: var(--blanco) !important;
+      border-radius: 10px !important;
+      padding: 10px 20px !important;
+    }
+    .nav-cta:hover {
+      background: var(--naranja-hover) !important;
+    }
+
+    /* Breadcrumb */
+    .breadcrumb-bar {
+      background: var(--gris-suave);
+      padding: 8px 24px;
+      font-size: 0.8rem;
+      color: var(--gris-medio);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .breadcrumb-bar a {
+      color: var(--azul);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .breadcrumb-bar span {
+      color: var(--gris-medio);
+    }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    #hero {
+      background: linear-gradient(135deg, var(--azul) 0%, var(--azul-claro) 60%, #1a6bb5 100%);
+      color: var(--blanco);
+      padding: 80px 24px 90px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-fondo-deco {
+      position: absolute;
+      inset: 0;
+      opacity: 0.06;
+      background-image: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 30px,
+        rgba(255,255,255,0.5) 30px,
+        rgba(255,255,255,0.5) 32px
+      );
+      pointer-events: none;
+    }
+
+    .hero-contenido {
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-etiqueta {
+      display: inline-block;
+      background: rgba(244,132,30,0.25);
+      border: 2px solid var(--naranja);
+      color: var(--naranja);
+      padding: 6px 18px;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      margin-bottom: 28px;
+      text-transform: uppercase;
+    }
+
+    .hero-h1 {
+      font-size: var(--tam-h1);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 22px;
+      color: var(--blanco);
+    }
+    .hero-h1 em {
+      color: var(--naranja);
+      font-style: normal;
+    }
+
+    .hero-subtitulo {
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      line-height: 1.8;
+      color: rgba(255,255,255,0.88);
+      margin-bottom: 42px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--naranja);
+      color: var(--blanco);
+      font-size: 1.15rem;
+      font-weight: 700;
+      padding: 18px 38px;
+      border-radius: 50px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      box-shadow: 0 6px 20px rgba(244,132,30,0.5);
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .hero-cta:hover, .hero-cta:focus {
+      background: var(--naranja-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(244,132,30,0.55);
+    }
+    .hero-cta:active {
+      transform: translateY(0);
+    }
+
+    .hero-social-proof {
+      margin-top: 44px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+    .social-proof-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+    .social-proof-num {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--naranja);
+      line-height: 1;
+    }
+    .social-proof-txt {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.75);
+      text-align: center;
+    }
+    .social-proof-sep {
+      width: 1px;
+      height: 40px;
+      background: rgba(255,255,255,0.2);
+    }
+
+    /* ============================================================
+       SECCIONES GENERALES
+    ============================================================ */
+    .seccion {
+      padding: 72px 24px;
+    }
+    .seccion-gris {
+      background: var(--gris-suave);
+    }
+
+    .seccion-titulo {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .seccion-titulo h2 {
+      font-size: var(--tam-h2);
+      font-weight: 700;
+      color: var(--azul);
+      margin-bottom: 12px;
+    }
+    .seccion-titulo p {
+      font-size: 1.05rem;
+      color: var(--gris-medio);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    .contenedor {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* ============================================================
+       WIZARD BUSCADOR
+    ============================================================ */
+    #wizard-buscador {
+      background: var(--blanco);
+      border-radius: 20px;
+      box-shadow: var(--sombra);
+      padding: 48px 40px;
+      max-width: 760px;
+      margin: 0 auto;
+      border: 2px solid var(--gris-suave);
+    }
+
+    /* Barra de progreso wizard */
+    .wizard-progreso {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 40px;
+      position: relative;
+    }
+    .wizard-progreso::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--gris-suave);
+      z-index: 0;
+    }
+    .wizard-progreso-linea {
+      position: absolute;
+      top: 20px;
+      left: 0;
+      height: 4px;
+      background: var(--verde);
+      z-index: 1;
+      transition: width 0.4s ease;
+      border-radius: 2px;
+    }
+
+    .wizard-paso-indicador {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      position: relative;
+      z-index: 2;
+    }
+    .wizard-paso-circulo {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--gris-suave);
+      border: 3px solid var(--gris-suave);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--gris-medio);
+      transition: all 0.3s;
+    }
+    .wizard-paso-circulo.completado {
+      background: var(--verde);
+      border-color: var(--verde);
+      color: var(--blanco);
+    }
+    .wizard-paso-circulo.activo {
+      background: var(--azul);
+      border-color: var(--azul);
+      color: var(--blanco);
+      box-shadow: 0 0 0 4px rgba(30,58,95,0.15);
+    }
+    .wizard-paso-etiqueta {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--gris-medio);
+      text-align: center;
+      max-width: 80px;
+    }
+    .wizard-paso-etiqueta.activo {
+      color: var(--azul);
+    }
+
+    /* Paneles wizard */
+    .wizard-panel {
+      display: none;
+    }
+    .wizard-panel.visible {
+      display: block;
+      animation: fadeEntra 0.3s ease;
+    }
+
+    @keyframes fadeEntra {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    body.sin-animaciones .wizard-panel.visible {
+      animation: none;
+    }
+
+    .wizard-pregunta {
+      font-size: clamp(1.1rem, 2.5vw, 1.45rem);
+      font-weight: 700;
+      color: var(--azul);
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .wizard-ayuda {
+      font-size: 0.9rem;
+      color: var(--gris-medio);
+      margin-bottom: 28px;
+    }
+
+    /* Botones de opciones wizard */
+    .wizard-opciones {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+    .wizard-opcion {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      padding: 20px 16px;
+      border: 3px solid var(--gris-suave);
+      border-radius: var(--radio);
+      cursor: pointer;
+      background: var(--blanco);
+      transition: border-color 0.2s, background 0.2s;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--azul);
+      text-align: center;
+    }
+    .wizard-opcion:hover, .wizard-opcion:focus {
+      border-color: var(--azul);
+      background: rgba(30,58,95,0.04);
+    }
+    .wizard-opcion.seleccionado {
+      border-color: var(--naranja);
+      background: rgba(244,132,30,0.08);
+      color: var(--naranja);
+    }
+    .wizard-opcion .opcion-icono {
+      font-size: 2.2rem;
+      line-height: 1;
+    }
+    .wizard-opcion .opcion-texto {
+      font-size: 1rem;
+      font-weight: 700;
+    }
+    .wizard-opcion .opcion-sub {
+      font-size: 0.78rem;
+      color: var(--gris-medio);
+      font-weight: 400;
+    }
+
+    /* Slider presupuesto */
+    .wizard-slider-wrap {
+      margin-bottom: 32px;
+    }
+    .wizard-slider-display {
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .wizard-slider-display .cantidad {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--azul);
+    }
+    .wizard-slider-display .unidad {
+      font-size: 0.9rem;
+      color: var(--gris-medio);
+      display: block;
+      margin-top: 2px;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      height: 8px;
+      border-radius: 4px;
+      background: linear-gradient(to right, var(--azul) 0%, var(--azul) 50%, var(--gris-suave) 50%);
+      outline: none;
+      cursor: pointer;
+      -webkit-appearance: none;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--naranja);
+      border: 3px solid var(--blanco);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      cursor: pointer;
+    }
+    .slider-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      color: var(--gris-medio);
+      margin-top: 8px;
+    }
+
+    /* Campos de contacto */
+    .wizard-campos {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      margin-bottom: 32px;
+    }
+    .campo-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .campo-wrap label {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--azul);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .campo-wrap label .campo-icono {
+      font-size: 1.2rem;
+    }
+    .campo-wrap input {
+      border: 2px solid var(--gris-suave);
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-size: 1rem;
+      font-family: inherit;
+      color: var(--gris-texto);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .campo-wrap input:focus {
+      border-color: var(--azul);
+    }
+
+    /* Navegación wizard */
+    .wizard-nav {
+      display: flex;
+      gap: 12px;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .btn-wizard-ant {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 22px;
+      border: 2px solid var(--gris-suave);
+      border-radius: 10px;
+      background: var(--blanco);
+      color: var(--gris-medio);
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-wizard-ant:hover {
+      border-color: var(--azul);
+      color: var(--azul);
+    }
+    .btn-wizard-ant:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+    .btn-wizard-sig {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: var(--azul);
+      color: var(--blanco);
+      border: none;
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      margin-left: auto;
+    }
+    .btn-wizard-sig:hover {
+      background: var(--azul-claro);
+      transform: translateY(-1px);
+    }
+
+    /* Pantalla de éxito wizard */
+    #wizard-exito {
+      display: none;
+      text-align: center;
+      padding: 20px 0;
+    }
+    #wizard-exito.visible {
+      display: block;
+      animation: fadeEntra 0.4s ease;
+    }
+    .exito-icono {
+      font-size: 4rem;
+      margin-bottom: 20px;
+    }
+    .exito-titulo {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--verde);
+      margin-bottom: 12px;
+    }
+    .exito-subtitulo {
+      font-size: 1rem;
+      color: var(--gris-medio);
+      margin-bottom: 28px;
+      line-height: 1.7;
+    }
+    .btn-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #25D366;
+      color: var(--blanco);
+      padding: 16px 32px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.05rem;
+      box-shadow: 0 4px 14px rgba(37,211,102,0.4);
+    }
+
+    /* ============================================================
+       PROYECTOS (CARDS)
+    ============================================================ */
+    .proyectos-slider {
+      position: relative;
+    }
+    .proyectos-track {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      overflow: hidden;
+    }
+    .proyecto-card {
+      background: var(--blanco);
+      border-radius: var(--radio);
+      box-shadow: var(--sombra);
+      overflow: hidden;
+      border: 2px solid var(--gris-suave);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .proyecto-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 28px rgba(30,58,95,0.16);
+    }
+
+    .card-imagen {
+      height: 160px;
+      background: linear-gradient(135deg, var(--azul) 0%, var(--azul-claro) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.5rem;
+      position: relative;
+    }
+    .card-badge-estado {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .badge-disponible {
+      background: var(--verde);
+      color: var(--blanco);
+    }
+    .badge-pronto {
+      background: var(--naranja);
+      color: var(--blanco);
+    }
+
+    .card-cuerpo {
+      padding: 22px 22px 20px;
+    }
+    .card-nombre {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--azul);
+      margin-bottom: 8px;
+    }
+    .card-ubicacion {
+      font-size: 0.88rem;
+      color: var(--gris-medio);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .card-precio {
+      font-size: 1rem;
+      color: var(--gris-texto);
+      margin-bottom: 18px;
+    }
+    .card-precio strong {
+      font-size: 1.25rem;
+      color: var(--verde);
+      font-weight: 700;
+    }
+    .btn-card {
+      display: block;
+      text-align: center;
+      background: var(--azul);
+      color: var(--blanco);
+      padding: 12px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      width: 100%;
+      transition: background 0.2s;
+    }
+    .btn-card:hover {
+      background: var(--azul-claro);
+    }
+
+    /* Navegación proyectos */
+    .proyectos-nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      margin-top: 32px;
+    }
+    .btn-nav-proyecto {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 2px solid var(--azul);
+      background: var(--blanco);
+      color: var(--azul);
+      font-size: 1.3rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-nav-proyecto:hover {
+      background: var(--azul);
+      color: var(--blanco);
+    }
+    .btn-nav-proyecto:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+    .proyectos-contador {
+      font-size: 0.9rem;
+      color: var(--gris-medio);
+      font-weight: 600;
+    }
+
+    /* ============================================================
+       PROCESO DE COMPRA (5 PASOS)
+    ============================================================ */
+    .proceso-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+      counter-reset: paso;
+    }
+    .proceso-paso {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 28px 16px;
+      border-radius: var(--radio);
+      position: relative;
+    }
+    .proceso-paso:nth-child(1) { background: rgba(30,58,95,0.07); }
+    .proceso-paso:nth-child(2) { background: rgba(244,132,30,0.08); }
+    .proceso-paso:nth-child(3) { background: rgba(46,139,87,0.08); }
+    .proceso-paso:nth-child(4) { background: rgba(155,89,182,0.08); }
+    .proceso-paso:nth-child(5) { background: rgba(41,182,246,0.1); }
+
+    .proceso-num {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--blanco);
+      margin-bottom: 14px;
+    }
+    .proceso-paso:nth-child(1) .proceso-num { background: var(--azul); }
+    .proceso-paso:nth-child(2) .proceso-num { background: var(--naranja); }
+    .proceso-paso:nth-child(3) .proceso-num { background: var(--verde); }
+    .proceso-paso:nth-child(4) .proceso-num { background: #9B59B6; }
+    .proceso-paso:nth-child(5) .proceso-num { background: #29B6F6; }
+
+    .proceso-icono {
+      font-size: 2.2rem;
+      margin-bottom: 12px;
+      line-height: 1;
+    }
+    .proceso-titulo {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--azul);
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+    .proceso-desc {
+      font-size: 0.82rem;
+      color: var(--gris-medio);
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+    .proceso-tiempo {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.7);
+      color: var(--gris-texto);
+    }
+
+    /* ============================================================
+       FAQ ACCORDION
+    ============================================================ */
+    .faq-lista {
+      max-width: 760px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .faq-item {
+      border: 2px solid var(--gris-suave);
+      border-radius: var(--radio);
+      overflow: hidden;
+    }
+    .faq-pregunta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 18px 22px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--azul);
+      background: var(--blanco);
+      border: none;
+      width: 100%;
+      text-align: left;
+      font-family: inherit;
+      transition: background 0.2s;
+    }
+    .faq-pregunta:hover {
+      background: var(--gris-suave);
+    }
+    .faq-pregunta .faq-icono {
+      font-size: 1.3rem;
+      flex-shrink: 0;
+      margin-right: 10px;
+    }
+    .faq-flecha {
+      font-size: 1.1rem;
+      transition: transform 0.3s;
+      flex-shrink: 0;
+    }
+    .faq-item.abierto .faq-flecha {
+      transform: rotate(180deg);
+    }
+    .faq-respuesta {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.2s;
+    }
+    .faq-item.abierto .faq-respuesta {
+      max-height: 200px;
+    }
+    .faq-respuesta-inner {
+      padding: 0 22px 18px;
+      font-size: 0.95rem;
+      color: var(--gris-medio);
+      line-height: 1.7;
+      border-top: 1px solid var(--gris-suave);
+      padding-top: 14px;
+    }
+
+    .faq-ayuda {
+      text-align: center;
+      margin-top: 36px;
+      padding: 24px;
+      background: rgba(46,139,87,0.07);
+      border-radius: var(--radio);
+      border: 2px solid rgba(46,139,87,0.2);
+    }
+    .faq-ayuda p {
+      font-size: 1rem;
+      color: var(--gris-texto);
+      margin-bottom: 14px;
+    }
+    .btn-whatsapp-mini {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #25D366;
+      color: var(--blanco);
+      padding: 12px 24px;
+      border-radius: 40px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer {
+      background: var(--azul);
+      color: var(--blanco);
+      padding: 40px 24px;
+      text-align: center;
+    }
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+    .footer-logo-bloque {
+      background: rgba(255,255,255,0.12);
+      color: var(--blanco);
+      padding: 8px 14px;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+    .footer-logo-bloque .marca {
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+    .footer-logo-bloque .sub {
+      font-size: 0.58rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.7;
+    }
+
+    .footer-contacto {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 24px;
+      margin-bottom: 22px;
+      flex-wrap: wrap;
+    }
+    .footer-contacto a {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 8px 16px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.08);
+      transition: background 0.2s;
+    }
+    .footer-contacto a:hover {
+      background: rgba(255,255,255,0.15);
+    }
+    .footer-contacto a .f-icono {
+      font-size: 1.2rem;
+    }
+
+    .footer-credit {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.45);
+      margin-top: 10px;
+    }
+    .footer-credit strong {
+      color: var(--naranja);
+    }
+
+    /* ============================================================
+       BANNER DEMO VICTOR IA
+    ============================================================ */
+    .banner-victor {
+      background: linear-gradient(90deg, #0d1b2a 0%, #1E3A5F 50%, #0d1b2a 100%);
+      color: var(--blanco);
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      text-align: center;
+      border-bottom: 3px solid var(--naranja);
+    }
+    .banner-victor-texto {
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+    .banner-victor-texto strong {
+      color: var(--naranja);
+    }
+    .banner-victor-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--naranja);
+      color: var(--blanco);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 900px) {
+      .proceso-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .proceso-paso:nth-child(5) {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 768px) {
+      #barra-accesibilidad {
+        padding: 8px 12px;
+        gap: 6px;
+      }
+      .accesib-btn {
+        padding: 5px 10px;
+        font-size: 0.75rem;
+      }
+      .accesib-label {
+        display: none;
+      }
+      #nav-principal {
+        padding: 0 16px;
+        top: 48px;
+      }
+      .nav-links {
+        display: none;
+      }
+      .victor-ia-badge {
+        display: none;
+      }
+      .proyectos-track {
+        grid-template-columns: 1fr;
+      }
+      .wizard-opciones {
+        grid-template-columns: 1fr 1fr;
+      }
+      #wizard-buscador {
+        padding: 28px 20px;
+      }
+      .hero-social-proof {
+        gap: 16px;
+      }
+      .social-proof-sep {
+        display: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .wizard-opciones {
+        grid-template-columns: 1fr;
+      }
+      .proceso-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ============================================================
+       SKIP TO CONTENT (ACCESIBILIDAD)
+    ============================================================ */
+    .skip-link {
+      position: absolute;
+      top: -100px;
+      left: 20px;
+      background: var(--naranja);
+      color: var(--blanco);
+      padding: 10px 20px;
+      border-radius: 0 0 10px 10px;
+      font-weight: 700;
+      z-index: 9999;
+      text-decoration: none;
+      transition: top 0.2s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+    /* ============================================================
+       FOCUS VISIBLE (ACCESIBILIDAD DE TECLADO)
+    ============================================================ */
+    :focus-visible {
+      outline: 3px solid var(--naranja);
+      outline-offset: 3px;
+    }
+  </style>
+<style>
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");opacity:.028;pointer-events:none;z-index:9995;}
+.lxgc{cursor:default;position:relative;overflow:hidden;}
+.lxgc img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.23,1,.32,1),filter .5s;filter:brightness(.82);}
+.lxgc:hover img{transform:scale(1.09);filter:brightness(1);}
+.lxgc .lxov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55) 0%,transparent 55%);transition:opacity .4s;}
+.lxgc:hover .lxov{opacity:.3;}
+</style>
+<!-- lux-patch -->
+<style>
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");opacity:.028;pointer-events:none;z-index:9995;}
+.lxgc{cursor:default;position:relative;overflow:hidden;}.lxgc img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.23,1,.32,1),filter .5s;filter:brightness(.82);}.lxgc:hover img{transform:scale(1.09);filter:brightness(1);}.lxgc .lxov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55) 0%,transparent 55%);transition:opacity .4s;}.lxgc:hover .lxov{opacity:.3;}
+</style>
+<!-- interact-patch -->
+<style>
+:root{--mpos-x:50%;--mpos-y:50%;--scroll-pct:0%;}
+/* Progress bar */
+.ip-bar{position:fixed;top:0;left:0;height:3px;z-index:10001;pointer-events:none;background:linear-gradient(90deg,#C9A84C,#14284A);transform-origin:left;transform:scaleX(var(--scroll-raw,0));transition:transform .08s linear;}
+/* Mouse-responsive ambient glow */
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(circle 700px at var(--mpos-x) var(--mpos-y),rgba(201,168,76,.12),transparent 70%);transition:background .4s;}
+/* Hero shimmer overlay */
+@keyframes ipShimmer{0%,100%{opacity:.6}50%{opacity:1}}
+@keyframes ipFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes ipPulse{0%,100%{box-shadow:0 0 0 0 rgba(201,168,76,.4)}70%{box-shadow:0 0 0 14px rgba(201,168,76,0)}}
+@keyframes ipSpin{to{transform:rotate(360deg)}}
+@keyframes ipCountUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+/* CTA pulse */
+.ip-pulse{animation:ipPulse 2.4s ease-in-out infinite;}
+/* Section reveal directions */
+.ip-rl{opacity:0;transform:translateX(-42px);transition:opacity .75s ease,transform .75s cubic-bezier(.23,1,.32,1);}
+.ip-rr{opacity:0;transform:translateX(42px);transition:opacity .75s ease,transform .75s cubic-bezier(.23,1,.32,1);}
+.ip-rb{opacity:0;transform:translateY(38px);transition:opacity .75s ease,transform .75s cubic-bezier(.23,1,.32,1);}
+.ip-rv{opacity:1!important;transform:none!important;}
+/* Stat counter */
+.ip-counted{animation:ipCountUp .5s ease forwards;}
+/* Animated border gradient on cards on hover */
+.card,.card-inclusivo,.specialty-card,.a11y-card,.feature-card,.plan-card,.tour-card,.menu-card,.exp-card,.service-card,.property-card,.tour-item,.reason-card{
+  position:relative;
+  transition:box-shadow .35s,border-color .35s,transform .35s;
+}
+.card:hover,.specialty-card:hover,.a11y-card:hover,.feature-card:hover,.plan-card:hover,.tour-card:hover,.menu-card:hover,.exp-card:hover,.property-card:hover,.tour-item:hover,.reason-card:hover{
+  box-shadow:0 16px 48px rgba(201,168,76,.22),0 4px 16px rgba(201,168,76,.14)!important;
+}
+/* Hero animated gradient layer */
+.ip-hero-layer{
+  position:absolute;inset:0;pointer-events:none;z-index:3;
+  background:linear-gradient(-45deg,rgba(201,168,76,.35),rgba(201,168,76,.05) 40%,transparent 60%);
+  background-size:300% 300%;
+  animation:ipShimmer 5s ease-in-out infinite;
+}
+/* Parallax text nudge */
+.ip-parallax{will-change:transform;}
+/* Scroll-linked image brightness */
+.lxgc:hover img{filter:brightness(1.05) saturate(1.08)!important;}
+</style>
+</head>
+<body>
+
+  <!-- Skip to content -->
+  <a href="#contenido-principal" class="skip-link">Ir al contenido principal</a>
+
+  <!-- Guía de lectura (sigue al ratón/scroll) -->
+  <div id="guia-lectura" aria-hidden="true" role="presentation"></div>
+
+  <!-- ============================================================
+       BANNER DEMO VICTOR IA
+  ============================================================ -->
+  <div class="banner-victor" role="banner" aria-label="Aviso de demostración">
+    <div class="banner-victor-badge">✦ Demo · VICTOR IA</div>
+    <div class="banner-victor-texto">
+      Este es un sitio demo que muestra cómo <strong>VICTOR IA</strong> transforma el sitio de CADU Inmobiliaria con
+      <strong>accesibilidad cognitiva avanzada</strong> — dislexia, TDAH, autismo y adultos mayores.
+    </div>
+  </div>
+
+  <!-- ============================================================
+       BARRA DE ACCESIBILIDAD COGNITIVA
+  ============================================================ -->
+  <div id="barra-accesibilidad" role="toolbar" aria-label="Herramientas de accesibilidad cognitiva">
+    <span class="accesib-label">♿ Accesibilidad:</span>
+
+    <button class="accesib-btn" id="btn-dislexia" onclick="toggleDislexia()" aria-pressed="false" title="Activar fuente para personas con dislexia">
+      <span class="icono-btn">🔤</span> Fuente Dislexia
+    </button>
+
+    <button class="accesib-btn" id="btn-lenguaje-simple" onclick="toggleLenguajeSimple()" aria-pressed="false" title="Cambiar textos complejos a versiones más simples">
+      <span class="icono-btn">💬</span> Lenguaje Simple
+    </button>
+
+    <button class="accesib-btn" id="btn-simple" onclick="toggleModoSimple()" aria-pressed="false" title="Simplificar el diseño y aumentar el texto">
+      <span class="icono-btn">◻</span> Modo Simple
+    </button>
+
+    <button class="accesib-btn" id="btn-guia" onclick="toggleGuiaLectura()" aria-pressed="false" title="Activar guía de lectura horizontal">
+      <span class="icono-btn">📍</span> Guía de Lectura
+    </button>
+
+    <button class="accesib-btn" id="btn-anim" onclick="toggleAnimaciones()" aria-pressed="false" title="Desactivar todas las animaciones">
+      <span class="icono-btn">⏸</span> Sin Animaciones
+    </button>
+
+    <button class="accesib-btn" id="btn-resaltar" onclick="toggleResaltarParrafo()" aria-pressed="false" title="Resaltar el párrafo que el cursor toca">
+      <span class="icono-btn">🖊</span> Resaltar Párrafo
+    </button>
+
+    <button class="accesib-btn" id="btn-tdah" onclick="toggleTDAH()" aria-pressed="false" title="Modo enfocado para personas con TDAH">
+      <span class="icono-btn">🎯</span> Modo TDAH
+    </button>
+
+    <button class="accesib-btn" id="btn-font-down" data-action="font-down" onclick="cambiarFuente(-10)" title="Reducir tamaño de texto" aria-label="Texto más pequeño">
+      <span class="icono-btn">A−</span>
+    </button>
+    <button class="accesib-btn" id="btn-font-up" data-action="font-up" onclick="cambiarFuente(10)" title="Aumentar tamaño de texto" aria-label="Texto más grande">
+      <span class="icono-btn">A+</span>
+    </button>
+
+    <div class="victor-ia-badge" aria-label="Tecnología VICTOR IA Web 4.0">
+      ✦ Tecnología <strong>VICTOR IA</strong> · Web 4.0 Cognitiva
+    </div>
+  </div>
+
+  <!-- ============================================================
+       NAVEGACIÓN
+  ============================================================ -->
+  <nav id="nav-principal" role="navigation" aria-label="Menú principal">
+    <a href="#" class="logo-cadu" aria-label="CADU Inmobiliaria - Inicio">
+      <div class="logo-cadu-bloque">
+        <span class="marca">CADU</span>
+        <span class="sub">Inmobiliaria</span>
+      </div>
+    </a>
+
+    <ul class="nav-links" role="list">
+      <li>
+        <a href="#wizard-section" aria-label="Buscar casa">
+          <span class="nav-icono">🏠</span> Buscar Casa
+        </a>
+      </li>
+      <li>
+        <a href="#proyectos" aria-label="Ver proyectos">
+          <span class="nav-icono">🏗️</span> Proyectos
+        </a>
+      </li>
+      <li>
+        <a href="#proceso" aria-label="Cómo comprar">
+          <span class="nav-icono">📋</span> Cómo Comprar
+        </a>
+      </li>
+      <li>
+        <a href="#faq" class="nav-cta" aria-label="Hablar con asesor">
+          <span class="nav-icono">💬</span> Asesor
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb-bar" role="navigation" aria-label="Ruta de navegación">
+    <a href="#">Inicio</a>
+    <span aria-hidden="true">›</span>
+    <span aria-current="page">Inicio</span>
+  </div>
+
+  <!-- ============================================================
+       HERO
+  ============================================================ -->
+  <main id="contenido-principal">
+    <section id="hero" aria-labelledby="hero-titulo">
+      <div class="hero-fondo-deco decorativo" aria-hidden="true"></div>
+      <div class="hero-contenido">
+        <div class="hero-etiqueta" role="text">🏆 Listada en BMV · Quintana Roo</div>
+
+        <h1 class="hero-h1" id="hero-titulo">
+          Tu casa propia.<br/><em>Paso a paso.</em>
+        </h1>
+
+        <p class="hero-subtitulo" data-full>
+          Te ayudamos a encontrar tu hogar en Cancún y la Riviera Maya.<br/>
+          Sin complicaciones. Sin letra pequeña.
+        </p>
+        <p class="hero-subtitulo" data-simple>
+          Te ayudamos a encontrar una casa en Cancún.<br/>
+          Fácil y sin problemas.
+        </p>
+
+        <a href="#wizard-section" class="hero-cta" role="button" aria-label="Comenzar a buscar casas disponibles">
+          <span aria-hidden="true">🏠</span> Ver casas disponibles
+        </a>
+
+        <div class="hero-social-proof" role="region" aria-label="Números de confianza">
+          <div class="social-proof-item">
+            <div class="social-proof-num">+20,000</div>
+            <div class="social-proof-txt">familias con su casa</div>
+          </div>
+          <div class="social-proof-sep decorativo" aria-hidden="true"></div>
+          <div class="social-proof-item">
+            <div class="social-proof-num">30 años</div>
+            <div class="social-proof-txt">de experiencia</div>
+          </div>
+          <div class="social-proof-sep decorativo" aria-hidden="true"></div>
+          <div class="social-proof-item">
+            <div class="social-proof-num">BMV</div>
+            <div class="social-proof-txt">empresa certificada</div>
+          </div>
+          <div class="social-proof-sep decorativo" aria-hidden="true"></div>
+          <div class="social-proof-item">
+            <div class="social-proof-num">15+</div>
+            <div class="social-proof-txt">desarrollos activos</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         WIZARD BUSCADOR
+    ============================================================ -->
+    <section class="seccion seccion-gris" id="wizard-section" aria-labelledby="wizard-titulo">
+      <div class="contenedor">
+        <div class="seccion-titulo">
+          <h2 id="wizard-titulo">🔍 Encuentra tu casa ideal</h2>
+          <p data-full>Responde 4 preguntas sencillas. Solo toma 2 minutos. Puedes pausar y regresar cuando quieras.</p>
+          <p data-simple>Responde 4 preguntas. Son fáciles y rápidas.</p>
+        </div>
+
+        <div id="wizard-buscador" role="form" aria-label="Formulario de búsqueda de vivienda">
+          <!-- Progreso visual -->
+          <div class="wizard-progreso" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="4" aria-label="Paso 1 de 4">
+            <div class="wizard-progreso-linea" id="linea-progreso" style="width: 12.5%;"></div>
+
+            <div class="wizard-paso-indicador">
+              <div class="wizard-paso-circulo activo" id="circulo-1" aria-label="Paso 1: Dónde vivir">1</div>
+              <div class="wizard-paso-etiqueta activo">Dónde vivir</div>
+            </div>
+            <div class="wizard-paso-indicador">
+              <div class="wizard-paso-circulo" id="circulo-2" aria-label="Paso 2: Recámaras">2</div>
+              <div class="wizard-paso-etiqueta">Recámaras</div>
+            </div>
+            <div class="wizard-paso-indicador">
+              <div class="wizard-paso-circulo" id="circulo-3" aria-label="Paso 3: Presupuesto">3</div>
+              <div class="wizard-paso-etiqueta">Presupuesto</div>
+            </div>
+            <div class="wizard-paso-indicador">
+              <div class="wizard-paso-circulo" id="circulo-4" aria-label="Paso 4: Contacto">4</div>
+              <div class="wizard-paso-etiqueta">Contacto</div>
+            </div>
+          </div>
+
+          <!-- PASO 1: DÓNDE VIVIR -->
+          <div class="wizard-panel visible" id="paso-1" role="group" aria-labelledby="preg-1">
+            <div class="wizard-pregunta" id="preg-1">🗺️ ¿En qué ciudad quieres vivir?</div>
+            <div class="wizard-ayuda">Elige la zona que te guste más. Después puedes cambiarla.</div>
+            <div class="wizard-opciones" role="radiogroup" aria-label="Ciudad">
+              <button class="wizard-opcion" role="radio" aria-checked="false" onclick="seleccionarOpcion(this, 'ciudad')" data-valor="Cancún">
+                <span class="opcion-icono">🌊</span>
+                <span class="opcion-texto">Cancún</span>
+                <span class="opcion-sub">Zona hotelera y ciudad</span>
+              </button>
+              <button class="wizard-opcion" role="radio" aria-checked="false" onclick="seleccionarOpcion(this, 'ciudad')" data-valor="Playa del Carmen">
+                <span class="opcion-icono">🌴</span>
+                <span class="opcion-texto">Playa del Carmen</span>
+                <span class="opcion-sub">La Quinta Avenida</span>
+              </button>
+              <button class="wizard-opcion" role="radio" aria-checked="false" onclick="seleccionarOpcion(this, 'ciudad')" data-valor="Tulum">
+                <span class="opcion-icono">🏛️</span>
+                <span class="opcion-texto">Tulum</span>
+                <span class="opcion-sub">Zona en crecimiento</span>
+              </button>
+              <button class="wizard-opcion" role="radio" aria-checked="false" onclick="seleccionarOpcion(this, 'ciudad')" data-valor="Chetumal">
+                <span class="opcion-icono">🏙️</span>
+                <span class="opcion-texto">Chetumal</span>
+                <span class="opcion-sub">Capital de Q. Roo</span>
+              </button>
+            </div>
+            <div class="wizard-nav">
+              <button class="btn-wizard-ant" disabled aria-disabled="true">← Anterior</button>
+              <button class="btn-wizard-sig" onclick="siguientePaso(2)" id="btn-sig-1" aria-label="Continuar al paso 2">
+                Siguiente →
+              </button>
+            </div>
+          </div>
+
+          <!-- PASO 2: RECÁMARAS -->
+          <div class="wizard-panel" id="paso-2" role="group" aria-labelledby="preg-2">
+            <div class="wizard-pregunta" id="preg-2">🛏️ ¿Cuántas recámaras necesitas?</div>
+            <div class="wizard-ayuda">No te preocupes, puedes ver todas las opciones disponibles en cada tamaño.</div>
+            <div class="wizard-opciones" role="radiogroup" aria-label="Número de recámaras">
+              <button class="wizard-opcion" role="radio" aria-checked="false" onclick="seleccionarOpcion(this, 'recamaras')" data-valor="1">
+                <span class="opcion-icono">🛏</span>
+                <span class="opcion-texto">1 recámara</span>
+                <span class="opcion-sub">Para solteros o parejas</span>
+              </button>
+              <button class="wizard-opcion" role="radio" aria-checked="false" onclick="seleccionarOpcion(this, 'recamaras')" data-valor="2">
+                <span class="opcion-icono">🛏🛏</span>
+                <span class="opcion-texto">2 recámaras</span>
+                <span class="opcion-sub">Para familia pequeña</span>
+              </button>
+              <button class="wizard-opcion" role="radio" aria-checked="false" onclick="seleccionarOpcion(this, 'recamaras')" data-valor="3">
+                <span class="opcion-icono">🏠</span>
+                <span class="opcion-texto">3 recámaras</span>
+                <span class="opcion-sub">Para familia</span>
+              </button>
+              <button class="wizard-opcion" role="radio" aria-checked="false" onclick="seleccionarOpcion(this, 'recamaras')" data-valor="4+">
+                <span class="opcion-icono">🏡</span>
+                <span class="opcion-texto">Más de 3</span>
+                <span class="opcion-sub">Casa grande o residencial</span>
+              </button>
+            </div>
+            <div class="wizard-nav">
+              <button class="btn-wizard-ant" onclick="anteriorPaso(1)" aria-label="Regresar al paso 1">← Anterior</button>
+              <button class="btn-wizard-sig" onclick="siguientePaso(3)" aria-label="Continuar al paso 3">Siguiente →</button>
+            </div>
+          </div>
+
+          <!-- PASO 3: PRESUPUESTO -->
+          <div class="wizard-panel" id="paso-3" role="group" aria-labelledby="preg-3">
+            <div class="wizard-pregunta" id="preg-3">💰 ¿Cuánto puedes pagar al mes?</div>
+            <div class="wizard-ayuda">Mueve el control para seleccionar tu pago mensual aproximado. No es un compromiso.</div>
+            <div class="wizard-slider-wrap">
+              <div class="wizard-slider-display">
+                <div class="cantidad" id="slider-valor" aria-live="polite" aria-atomic="true">$6,000</div>
+                <span class="unidad">pesos mexicanos al mes (mensualidad aproximada)</span>
+              </div>
+              <input
+                type="range"
+                id="slider-presupuesto"
+                min="3000"
+                max="30000"
+                step="500"
+                value="6000"
+                aria-label="Presupuesto mensual en pesos mexicanos"
+                aria-valuenow="6000"
+                aria-valuemin="3000"
+                aria-valuemax="30000"
+                oninput="actualizarSlider(this.value)"
+              />
+              <div class="slider-labels">
+                <span>$3,000 / mes</span>
+                <span>$30,000 / mes</span>
+              </div>
+            </div>
+            <div class="wizard-nav">
+              <button class="btn-wizard-ant" onclick="anteriorPaso(2)" aria-label="Regresar al paso 2">← Anterior</button>
+              <button class="btn-wizard-sig" onclick="siguientePaso(4)" aria-label="Continuar al paso 4">Siguiente →</button>
+            </div>
+          </div>
+
+          <!-- PASO 4: CONTACTO -->
+          <div class="wizard-panel" id="paso-4" role="group" aria-labelledby="preg-4">
+            <div class="wizard-pregunta" id="preg-4">📱 ¿Cómo te avisamos cuando encontremos tu casa?</div>
+            <div class="wizard-ayuda">Solo necesitamos tu nombre y WhatsApp. Nada más. Sin llamadas no deseadas.</div>
+            <div class="wizard-campos">
+              <div class="campo-wrap">
+                <label for="campo-nombre">
+                  <span class="campo-icono" aria-hidden="true">👤</span>
+                  Tu nombre
+                </label>
+                <input
+                  type="text"
+                  id="campo-nombre"
+                  name="nombre"
+                  placeholder="Escribe tu nombre"
+                  autocomplete="given-name"
+                  aria-required="true"
+                />
+              </div>
+              <div class="campo-wrap">
+                <label for="campo-whatsapp">
+                  <span class="campo-icono" aria-hidden="true">💬</span>
+                  Tu número de WhatsApp
+                </label>
+                <input
+                  type="tel"
+                  id="campo-whatsapp"
+                  name="whatsapp"
+                  placeholder="Ej: 998 123 4567"
+                  autocomplete="tel"
+                  aria-required="true"
+                  inputmode="tel"
+                />
+              </div>
+            </div>
+            <div class="wizard-nav">
+              <button class="btn-wizard-ant" onclick="anteriorPaso(3)" aria-label="Regresar al paso 3">← Anterior</button>
+              <button class="btn-wizard-sig" onclick="enviarWizard()" style="background: var(--verde);" aria-label="Enviar búsqueda y contactar asesor">
+                ✅ ¡Buscar mi casa!
+              </button>
+            </div>
+          </div>
+
+          <!-- ÉXITO -->
+          <div id="wizard-exito" role="alert" aria-live="polite">
+            <div class="exito-icono" aria-hidden="true">🎉</div>
+            <div class="exito-titulo">¡Listo! Tu búsqueda fue enviada</div>
+            <div class="exito-subtitulo" id="exito-mensaje">
+              Un asesor te va a escribir por WhatsApp en menos de 2 horas.<br/>
+              Sin presión. Puedes preguntarle lo que quieras.
+            </div>
+            <a href="https://wa.me/529981234567" class="btn-whatsapp" aria-label="Hablar directamente por WhatsApp con un asesor CADU">
+              <span aria-hidden="true">💬</span> Hablar con asesor ahora
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PROYECTOS
+    ============================================================ -->
+    <section class="seccion" id="proyectos" aria-labelledby="proyectos-titulo">
+      <div class="contenedor">
+        <div class="seccion-titulo">
+          <h2 id="proyectos-titulo">🏗️ Nuestros proyectos</h2>
+          <p data-full>Casas nuevas en las mejores zonas de Quintana Roo. Haz clic en "Más información" para conocer cada desarrollo.</p>
+          <p data-simple>Casas nuevas en Quintana Roo. Toca "Más información" para ver cada casa.</p>
+        </div>
+
+        <div class="proyectos-slider">
+          <div class="proyectos-track" id="proyectos-track">
+
+            <!-- Card 1 -->
+            <article class="proyecto-card" aria-label="Desarrollo Residencial Cancún Norte">
+              <div class="card-imagen" aria-hidden="true">
+                🏘️
+                <span class="card-badge-estado badge-disponible">Disponible</span>
+              </div>
+              <div class="card-cuerpo">
+                <div class="card-nombre">Residencial Cancún Norte</div>
+                <div class="card-ubicacion">📍 Cancún, Quintana Roo</div>
+                <div class="card-precio">Desde <strong>$450,000 MXN</strong></div>
+                <button class="btn-card" onclick="verProyecto('Residencial Cancún Norte')" aria-label="Más información sobre Residencial Cancún Norte">
+                  Más información
+                </button>
+              </div>
+            </article>
+
+            <!-- Card 2 -->
+            <article class="proyecto-card" aria-label="Desarrollo Villas Playa del Carmen">
+              <div class="card-imagen" aria-hidden="true">
+                🌴
+                <span class="card-badge-estado badge-disponible">Disponible</span>
+              </div>
+              <div class="card-cuerpo">
+                <div class="card-nombre">Villas Playa del Carmen</div>
+                <div class="card-ubicacion">📍 Playa del Carmen, Q. Roo</div>
+                <div class="card-precio">Desde <strong>$680,000 MXN</strong></div>
+                <button class="btn-card" onclick="verProyecto('Villas Playa del Carmen')" aria-label="Más información sobre Villas Playa del Carmen">
+                  Más información
+                </button>
+              </div>
+            </article>
+
+            <!-- Card 3 -->
+            <article class="proyecto-card" aria-label="Desarrollo Bosques de Tulum">
+              <div class="card-imagen" aria-hidden="true">
+                🏛️
+                <span class="card-badge-estado badge-pronto">Próximamente</span>
+              </div>
+              <div class="card-cuerpo">
+                <div class="card-nombre">Bosques de Tulum</div>
+                <div class="card-ubicacion">📍 Tulum, Quintana Roo</div>
+                <div class="card-precio">Desde <strong>$820,000 MXN</strong></div>
+                <button class="btn-card" onclick="verProyecto('Bosques de Tulum')" aria-label="Más información sobre Bosques de Tulum">
+                  Más información
+                </button>
+              </div>
+            </article>
+
+            <!-- Card 4 (oculta inicialmente) -->
+            <article class="proyecto-card" aria-label="Desarrollo Ciudad CADU Chetumal" style="display:none" data-extra>
+              <div class="card-imagen" aria-hidden="true">
+                🏙️
+                <span class="card-badge-estado badge-disponible">Disponible</span>
+              </div>
+              <div class="card-cuerpo">
+                <div class="card-nombre">Ciudad CADU Chetumal</div>
+                <div class="card-ubicacion">📍 Chetumal, Quintana Roo</div>
+                <div class="card-precio">Desde <strong>$320,000 MXN</strong></div>
+                <button class="btn-card" onclick="verProyecto('Ciudad CADU Chetumal')" aria-label="Más información sobre Ciudad CADU Chetumal">
+                  Más información
+                </button>
+              </div>
+            </article>
+
+            <!-- Card 5 (oculta inicialmente) -->
+            <article class="proyecto-card" aria-label="Desarrollo Laguna Cancún" style="display:none" data-extra>
+              <div class="card-imagen" aria-hidden="true">
+                🌊
+                <span class="card-badge-estado badge-pronto">Próximamente</span>
+              </div>
+              <div class="card-cuerpo">
+                <div class="card-nombre">Laguna Cancún</div>
+                <div class="card-ubicacion">📍 Cancún, Quintana Roo</div>
+                <div class="card-precio">Desde <strong>$560,000 MXN</strong></div>
+                <button class="btn-card" onclick="verProyecto('Laguna Cancún')" aria-label="Más información sobre Laguna Cancún">
+                  Más información
+                </button>
+              </div>
+            </article>
+
+            <!-- Card 6 (oculta inicialmente) -->
+            <article class="proyecto-card" aria-label="Desarrollo Riviera Solidaridad" style="display:none" data-extra>
+              <div class="card-imagen" aria-hidden="true">
+                🌺
+                <span class="card-badge-estado badge-disponible">Disponible</span>
+              </div>
+              <div class="card-cuerpo">
+                <div class="card-nombre">Riviera Solidaridad</div>
+                <div class="card-ubicacion">📍 Solidaridad, Q. Roo</div>
+                <div class="card-precio">Desde <strong>$490,000 MXN</strong></div>
+                <button class="btn-card" onclick="verProyecto('Riviera Solidaridad')" aria-label="Más información sobre Riviera Solidaridad">
+                  Más información
+                </button>
+              </div>
+            </article>
+
+          </div>
+
+          <div class="proyectos-nav" role="group" aria-label="Navegar proyectos">
+            <button class="btn-nav-proyecto" id="btn-prev-proyecto" onclick="navProyecto(-1)" disabled aria-label="Ver proyectos anteriores">←</button>
+            <span class="proyectos-contador" id="contador-proyectos" aria-live="polite">Mostrando 1–3 de 6</span>
+            <button class="btn-nav-proyecto" id="btn-next-proyecto" onclick="navProyecto(1)" aria-label="Ver más proyectos">→</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PROCESO DE COMPRA
+    ============================================================ -->
+    <section class="seccion seccion-gris" id="proceso" aria-labelledby="proceso-titulo">
+      <div class="contenedor">
+        <div class="seccion-titulo">
+          <h2 id="proceso-titulo">📋 Cómo comprar tu casa en 5 pasos</h2>
+          <p data-full>Es más fácil de lo que crees. Te guiamos en cada etapa para que no tengas dudas.</p>
+          <p data-simple>Te ayudamos en cada paso. Es sencillo.</p>
+        </div>
+
+        <div class="proceso-grid" role="list">
+          <div class="proceso-paso" role="listitem" aria-label="Paso 1: Escoger tu casa">
+            <div class="proceso-num" aria-hidden="true">1</div>
+            <div class="proceso-icono" aria-hidden="true">🏠</div>
+            <div class="proceso-titulo">Escoges tu casa</div>
+            <div class="proceso-desc">Visitas los desarrollos que te gustan. Te damos un recorrido sin compromiso.</div>
+            <div class="proceso-tiempo">⏱ 1–2 semanas</div>
+          </div>
+
+          <div class="proceso-paso" role="listitem" aria-label="Paso 2: Apartas con poco dinero">
+            <div class="proceso-num" aria-hidden="true">2</div>
+            <div class="proceso-icono" aria-hidden="true">🤝</div>
+            <div class="proceso-titulo">Apartas con poco dinero</div>
+            <div class="proceso-desc">Dejas una cantidad pequeña para reservar tu casa mientras haces los trámites.</div>
+            <div class="proceso-tiempo">⏱ 1 día</div>
+          </div>
+
+          <div class="proceso-paso" role="listitem" aria-label="Paso 3: Pedimos el préstamo">
+            <div class="proceso-num" aria-hidden="true">3</div>
+            <div class="proceso-icono" aria-hidden="true">🏦</div>
+            <div class="proceso-titulo">Pedimos el préstamo juntos</div>
+            <div class="proceso-desc">Te ayudamos a pedir el dinero para tu casa. Puede ser INFONAVIT, FOVISSSTE o banco.</div>
+            <div class="proceso-tiempo">⏱ 4–8 semanas</div>
+          </div>
+
+          <div class="proceso-paso" role="listitem" aria-label="Paso 4: Firmas los papeles">
+            <div class="proceso-num" aria-hidden="true">4</div>
+            <div class="proceso-icono" aria-hidden="true">✍️</div>
+            <div class="proceso-titulo">Firmas los papeles</div>
+            <div class="proceso-desc">Un notario explica todo con calma. Firmas cuando estés listo y entiendas todo.</div>
+            <div class="proceso-tiempo">⏱ 1 día</div>
+          </div>
+
+          <div class="proceso-paso" role="listitem" aria-label="Paso 5: Recibes las llaves">
+            <div class="proceso-num" aria-hidden="true">5</div>
+            <div class="proceso-icono" aria-hidden="true">🔑</div>
+            <div class="proceso-titulo">¡Recibes las llaves!</div>
+            <div class="proceso-desc">Tu casa ya es tuya. Te hacemos entrega con un recorrido para que conozcas todo.</div>
+            <div class="proceso-tiempo">⏱ El mejor día 🎉</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         FAQ
+    ============================================================ -->
+    <section class="seccion" id="faq" aria-labelledby="faq-titulo">
+      <div class="contenedor">
+        <div class="seccion-titulo">
+          <h2 id="faq-titulo">❓ Preguntas frecuentes</h2>
+          <p data-full>Las dudas más comunes que nos hacen. Respuestas cortas y claras.</p>
+          <p data-simple>Preguntas y respuestas cortas.</p>
+        </div>
+
+        <div class="faq-lista" role="list">
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-pregunta" onclick="toggleFAQ(this)" aria-expanded="false" aria-controls="faq-r1">
+              <span><span class="faq-icono" aria-hidden="true">💰</span> ¿Cuánto dinero necesito para empezar?</span>
+              <span class="faq-flecha" aria-hidden="true">▼</span>
+            </button>
+            <div class="faq-respuesta" id="faq-r1" role="region" aria-label="Respuesta: cuánto dinero necesito">
+              <div class="faq-respuesta-inner">
+                <span data-full>Puedes empezar con muy poco. Con tu INFONAVIT o FOVISSSTE, a veces no necesitas dinero extra de entrada. Un asesor te explica según tu caso.</span>
+                <span data-simple>Puedes empezar con poco dinero. A veces con INFONAVIT no pagas nada extra. Un asesor te explica.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-pregunta" onclick="toggleFAQ(this)" aria-expanded="false" aria-controls="faq-r2">
+              <span><span class="faq-icono" aria-hidden="true">📄</span> ¿Qué papeles necesito juntar?</span>
+              <span class="faq-flecha" aria-hidden="true">▼</span>
+            </button>
+            <div class="faq-respuesta" id="faq-r2" role="region" aria-label="Respuesta: qué papeles necesito">
+              <div class="faq-respuesta-inner">
+                <span data-full>Solo necesitas tu identificación oficial, CURP, y comprobante de ingresos. Nosotros te decimos exactamente qué llevar.</span>
+                <span data-simple>Necesitas tu ID, CURP y un papel que diga cuánto ganas. Te decimos qué traer.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-pregunta" onclick="toggleFAQ(this)" aria-expanded="false" aria-controls="faq-r3">
+              <span><span class="faq-icono" aria-hidden="true">⏳</span> ¿Cuánto tiempo tarda todo el proceso?</span>
+              <span class="faq-flecha" aria-hidden="true">▼</span>
+            </button>
+            <div class="faq-respuesta" id="faq-r3" role="region" aria-label="Respuesta: tiempo del proceso">
+              <div class="faq-respuesta-inner">
+                <span data-full>Normalmente entre 2 y 4 meses desde que eliges tu casa hasta que tienes las llaves. Depende del tipo de crédito que uses.</span>
+                <span data-simple>Entre 2 y 4 meses. Depende de cómo vayas a pagar tu casa.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-pregunta" onclick="toggleFAQ(this)" aria-expanded="false" aria-controls="faq-r4">
+              <span><span class="faq-icono" aria-hidden="true">🏦</span> ¿Puedo usar mi INFONAVIT?</span>
+              <span class="faq-flecha" aria-hidden="true">▼</span>
+            </button>
+            <div class="faq-respuesta" id="faq-r4" role="region" aria-label="Respuesta: INFONAVIT">
+              <div class="faq-respuesta-inner">
+                <span data-full>Sí, la mayoría de nuestras casas aceptan INFONAVIT. También aceptamos FOVISSSTE y créditos bancarios.</span>
+                <span data-simple>Sí. Puedes usar INFONAVIT, FOVISSSTE o un banco.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-pregunta" onclick="toggleFAQ(this)" aria-expanded="false" aria-controls="faq-r5">
+              <span><span class="faq-icono" aria-hidden="true">🔒</span> ¿Es seguro comprar con CADU?</span>
+              <span class="faq-flecha" aria-hidden="true">▼</span>
+            </button>
+            <div class="faq-respuesta" id="faq-r5" role="region" aria-label="Respuesta: seguridad de compra">
+              <div class="faq-respuesta-inner">
+                <span data-full>Sí. CADU está listada en la Bolsa Mexicana de Valores (BMV) y tiene más de 30 años construyendo casas. Tu dinero está protegido.</span>
+                <span data-simple>Sí. CADU tiene 30 años de experiencia y está en la BMV. Tu dinero está seguro.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-pregunta" onclick="toggleFAQ(this)" aria-expanded="false" aria-controls="faq-r6">
+              <span><span class="faq-icono" aria-hidden="true">🌍</span> ¿Puedo comprar si no vivo en Quintana Roo?</span>
+              <span class="faq-flecha" aria-hidden="true">▼</span>
+            </button>
+            <div class="faq-respuesta" id="faq-r6" role="region" aria-label="Respuesta: compra a distancia">
+              <div class="faq-respuesta-inner">
+                <span data-full>Sí. Puedes hacer todo por WhatsApp y videollamada. Muchas familias compran su casa a distancia sin problema.</span>
+                <span data-simple>Sí. Todo se puede hacer por WhatsApp. No tienes que viajar.</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="faq-ayuda" role="complementary" aria-label="Ayuda adicional">
+          <p>¿Tienes otra pregunta? Un asesor te responde de inmediato, sin costo y sin compromiso.</p>
+          <a href="https://wa.me/529981234567?text=Hola,%20me%20interesa%20saber%20más%20sobre%20las%20casas%20de%20CADU" class="btn-whatsapp-mini" aria-label="Escribir por WhatsApp a un asesor CADU">
+            <span aria-hidden="true">💬</span> Escribir por WhatsApp
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <!-- hf-photos-patch -->
+<section aria-label="CADU Inmobiliaria · Cancún — Galería fotográfica" id="galeria-hf-cadu" style="background:#080E1C;padding:5rem 1.5rem 4rem;margin:0;overflow:hidden;">
+<div style="max-width:1100px;margin:0 auto;">
+<p style="font-size:.6rem;letter-spacing:.32em;text-transform:uppercase;color:#C9A84C;margin-bottom:.7rem;display:flex;align-items:center;gap:.65rem;"><span style="display:inline-block;width:2.2rem;height:1px;background:currentColor;"></span>CADU Inmobiliaria · Cancún</p>
+<h2 style="font-family:'DM Serif Display','Instrument Serif',Georgia,serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#FDF6E3;margin-bottom:2.5rem;line-height:1.1;font-weight:400;font-style:italic;">Vive en el horizonte.</h2>
+<div style="display:grid;gap:4px;">
+<div class="lxgc" style="aspect-ratio:16/9;border-radius:0;"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_2xDKzgUHSbZ2WsUfnTEP222ovTJ/hf_20260510_051032_c6bfb209-de98-455e-945c-10990c6e3298.png" alt="Torre residencial CADU al atardecer dorado, fachada vidrio y concreto Cancún" loading="lazy" style="width:100%;height:100%;object-fit:cover;"><div class="lxov"></div></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;">
+<div class="lxgc" style="aspect-ratio:4/3;"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_2xDKzgUHSbZ2WsUfnTEP222ovTJ/hf_20260510_051034_50591a0f-8b05-4247-a758-a5d093645105.png" alt="Penthouse CADU, sala con ventanales panorámicos y mar Caribe" loading="lazy" style="width:100%;height:100%;object-fit:cover;"><div class="lxov"></div></div>
+<div class="lxgc" style="aspect-ratio:4/3;"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_2xDKzgUHSbZ2WsUfnTEP222ovTJ/hf_20260510_051036_3f67d939-8eb9-4946-a1a4-5e65cc5fc53f.png" alt="Cubierta amenidades CADU, alberca infinity con vista al Caribe" loading="lazy" style="width:100%;height:100%;object-fit:cover;"><div class="lxov"></div></div>
+</div>
+</div>
+</div>
+</section>
+<footer role="contentinfo" aria-label="Pie de página CADU Inmobiliaria">
+    <div class="footer-logo">
+      <div class="footer-logo-bloque">
+        <span class="marca">CADU</span>
+        <span class="sub">Inmobiliaria</span>
+      </div>
+    </div>
+
+    <div class="footer-contacto" role="list">
+      <a href="tel:+529981234567" role="listitem" aria-label="Llamar a CADU al 998 123 4567">
+        <span class="f-icono" aria-hidden="true">📞</span> 998 123 4567
+      </a>
+      <a href="https://wa.me/529981234567" role="listitem" aria-label="Escribir por WhatsApp a CADU">
+        <span class="f-icono" aria-hidden="true">💬</span> WhatsApp
+      </a>
+      <a href="mailto:info@caduinmobiliaria.com" role="listitem" aria-label="Enviar correo a CADU">
+        <span class="f-icono" aria-hidden="true">✉️</span> info@caduinmobiliaria.com
+      </a>
+    </div>
+
+    <div class="footer-credit">
+      Diseñado por <strong>VICTOR IA</strong> · Web 4.0 Cognitivamente Accesible ·
+      <a href="https://victor-ia.com.mx" style="color:var(--naranja);text-decoration:none;">victor-ia.com.mx</a>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       JAVASCRIPT
+  ============================================================ -->
+  <script>
+    // ============================================================
+    // ESTADO GLOBAL
+    // ============================================================
+    const estado = {
+      pasoActual: 1,
+      ciudad: null,
+      recamaras: null,
+      presupuesto: 6000,
+      nombre: '',
+      whatsapp: '',
+      proyectoOffset: 0
+    };
+
+    // ============================================================
+    // WIZARD — PASOS
+    // ============================================================
+    function irPaso(num) {
+      const panelActual = document.getElementById('paso-' + estado.pasoActual);
+      if (panelActual) panelActual.classList.remove('visible');
+
+      estado.pasoActual = num;
+
+      const panelNuevo = document.getElementById('paso-' + num);
+      if (panelNuevo) {
+        panelNuevo.classList.add('visible');
+        const pregunta = panelNuevo.querySelector('.wizard-pregunta');
+        if (pregunta) {
+          pregunta.setAttribute('tabindex', '-1');
+          pregunta.focus();
+        }
+      }
+
+      actualizarProgreso(num);
+      guardarEstadoWizard();
+    }
+
+    function siguientePaso(num) {
+      irPaso(num);
+    }
+
+    function anteriorPaso(num) {
+      irPaso(num);
+    }
+
+    function actualizarProgreso(paso) {
+      const totalPasos = 4;
+      const porcentaje = ((paso - 1) / totalPasos) * 100 + (1 / totalPasos / 2 * 100);
+      const linea = document.getElementById('linea-progreso');
+      if (linea) linea.style.width = Math.min(porcentaje, 100) + '%';
+
+      const progreso = document.querySelector('.wizard-progreso');
+      if (progreso) {
+        progreso.setAttribute('aria-valuenow', paso);
+        progreso.setAttribute('aria-label', 'Paso ' + paso + ' de ' + totalPasos);
+      }
+
+      for (let i = 1; i <= totalPasos; i++) {
+        const circulo = document.getElementById('circulo-' + i);
+        const etiqueta = circulo ? circulo.nextElementSibling : null;
+        if (!circulo) continue;
+
+        circulo.classList.remove('activo', 'completado');
+        if (etiqueta) etiqueta.classList.remove('activo');
+
+        if (i < paso) {
+          circulo.classList.add('completado');
+          circulo.innerHTML = '✓';
+        } else if (i === paso) {
+          circulo.classList.add('activo');
+          circulo.innerHTML = i;
+          if (etiqueta) etiqueta.classList.add('activo');
+        } else {
+          circulo.innerHTML = i;
+        }
+      }
+    }
+
+    function guardarEstadoWizard() {
+      try { localStorage.setItem('cadu_wizard', JSON.stringify(estado)); } catch(e) {}
+    }
+
+    // ============================================================
+    // WIZARD — OPCIONES DE SELECCIÓN
+    // ============================================================
+    function seleccionarOpcion(btn, tipo) {
+      const grupo = btn.closest('.wizard-opciones');
+      if (grupo) {
+        grupo.querySelectorAll('.wizard-opcion').forEach(function(b) {
+          b.classList.remove('seleccionado');
+          b.setAttribute('aria-checked', 'false');
+        });
+      }
+      btn.classList.add('seleccionado');
+      btn.setAttribute('aria-checked', 'true');
+      estado[tipo] = btn.dataset.valor;
+      guardarEstadoWizard();
+    }
+
+    // ============================================================
+    // WIZARD — SLIDER PRESUPUESTO
+    // ============================================================
+    function actualizarSlider(valor) {
+      const num = parseInt(valor);
+      estado.presupuesto = num;
+
+      const display = document.getElementById('slider-valor');
+      if (display) display.textContent = '$' + num.toLocaleString('es-MX');
+
+      const slider = document.getElementById('slider-presupuesto');
+      if (slider) {
+        slider.setAttribute('aria-valuenow', num);
+        const min = parseInt(slider.min);
+        const max = parseInt(slider.max);
+        const pct = ((num - min) / (max - min)) * 100;
+        slider.style.background = 'linear-gradient(to right, var(--azul) 0%, var(--azul) ' + pct + '%, var(--gris-suave) ' + pct + '%)';
+      }
+
+      guardarEstadoWizard();
+    }
+
+    // ============================================================
+    // WIZARD — ENVÍO FINAL
+    // ============================================================
+    function enviarWizard() {
+      const nombreInput = document.getElementById('campo-nombre');
+      const waInput = document.getElementById('campo-whatsapp');
+
+      estado.nombre = nombreInput ? nombreInput.value.trim() : '';
+      estado.whatsapp = waInput ? waInput.value.trim() : '';
+
+      if (!estado.nombre) {
+        if (nombreInput) {
+          nombreInput.focus();
+          nombreInput.style.borderColor = '#e74c3c';
+          nombreInput.setAttribute('aria-invalid', 'true');
+          nombreInput.setAttribute('aria-describedby', 'error-nombre');
+          let err = document.getElementById('error-nombre');
+          if (!err) {
+            err = document.createElement('span');
+            err.id = 'error-nombre';
+            err.style.cssText = 'color:#e74c3c;font-size:0.85rem;margin-top:4px;display:block;';
+            err.textContent = 'Por favor escribe tu nombre.';
+            nombreInput.parentNode.appendChild(err);
+          }
+        }
+        return;
+      }
+      if (!estado.whatsapp) {
+        if (waInput) {
+          waInput.focus();
+          waInput.style.borderColor = '#e74c3c';
+          waInput.setAttribute('aria-invalid', 'true');
+          waInput.setAttribute('aria-describedby', 'error-wa');
+          let err = document.getElementById('error-wa');
+          if (!err) {
+            err = document.createElement('span');
+            err.id = 'error-wa';
+            err.style.cssText = 'color:#e74c3c;font-size:0.85rem;margin-top:4px;display:block;';
+            err.textContent = 'Por favor escribe tu número de WhatsApp.';
+            waInput.parentNode.appendChild(err);
+          }
+        }
+        return;
+      }
+
+      document.getElementById('paso-4').classList.remove('visible');
+
+      const textoExito = document.getElementById('exito-mensaje');
+      if (textoExito) {
+        const ciudad = estado.ciudad || 'la zona que elegiste';
+        textoExito.innerHTML =
+          '¡Hola, <strong>' + estado.nombre + '</strong>! Buscamos casas en <strong>' + ciudad + '</strong>' +
+          ' con <strong>' + (estado.recamaras || '?') + ' recámara(s)</strong> y pagos desde' +
+          ' <strong>$' + estado.presupuesto.toLocaleString('es-MX') + '/mes</strong>.<br/><br/>' +
+          'Un asesor te va a escribir por WhatsApp en menos de 2 horas.' +
+          ' Sin presión. Puedes preguntarle lo que quieras.';
+      }
+
+      const exito = document.getElementById('wizard-exito');
+      if (exito) {
+        exito.classList.add('visible');
+        exito.focus();
+      }
+
+      const linea = document.getElementById('linea-progreso');
+      if (linea) linea.style.width = '100%';
+      for (let i = 1; i <= 4; i++) {
+        const c = document.getElementById('circulo-' + i);
+        if (c) { c.classList.remove('activo'); c.classList.add('completado'); c.innerHTML = '✓'; }
+      }
+
+      try { localStorage.removeItem('cadu_wizard'); } catch(e) {}
+    }
+
+    // ============================================================
+    // PROYECTOS — NAVEGACIÓN
+    // ============================================================
+    const CARDS_POR_PAGINA = 3;
+    let todasLasCards = [];
+    let totalCards = 0;
+
+    function inicializarProyectos() {
+      todasLasCards = Array.from(document.querySelectorAll('.proyecto-card'));
+      totalCards = todasLasCards.length;
+      todasLasCards.forEach(function(card, idx) {
+        card.style.display = idx < CARDS_POR_PAGINA ? 'block' : 'none';
+      });
+      const btnNext = document.getElementById('btn-next-proyecto');
+      if (btnNext) btnNext.disabled = totalCards <= CARDS_POR_PAGINA;
+      const btnPrev = document.getElementById('btn-prev-proyecto');
+      if (btnPrev) btnPrev.disabled = true;
+    }
+
+    function navProyecto(dir) {
+      estado.proyectoOffset += dir * CARDS_POR_PAGINA;
+      if (estado.proyectoOffset < 0) estado.proyectoOffset = 0;
+      if (estado.proyectoOffset >= totalCards) estado.proyectoOffset = totalCards - CARDS_POR_PAGINA;
+
+      todasLasCards.forEach(function(card, idx) {
+        const visible = idx >= estado.proyectoOffset && idx < estado.proyectoOffset + CARDS_POR_PAGINA;
+        card.style.display = visible ? 'block' : 'none';
+      });
+
+      const btnPrev = document.getElementById('btn-prev-proyecto');
+      const btnNext = document.getElementById('btn-next-proyecto');
+      const contador = document.getElementById('contador-proyectos');
+
+      if (btnPrev) btnPrev.disabled = estado.proyectoOffset === 0;
+      if (btnNext) btnNext.disabled = estado.proyectoOffset + CARDS_POR_PAGINA >= totalCards;
+
+      const desde = estado.proyectoOffset + 1;
+      const hasta = Math.min(estado.proyectoOffset + CARDS_POR_PAGINA, totalCards);
+      if (contador) contador.textContent = 'Mostrando ' + desde + '–' + hasta + ' de ' + totalCards;
+    }
+
+    function verProyecto(nombre) {
+      alert('📋 ' + nombre + '\n\nUn asesor te enviará información detallada de este desarrollo.\n\nEscribe al WhatsApp: 998 123 4567');
+    }
+
+    // ============================================================
+    // FAQ — ACCORDION
+    // ============================================================
+    function toggleFAQ(btn) {
+      const item = btn.closest('.faq-item');
+      const abierto = item.classList.contains('abierto');
+
+      document.querySelectorAll('.faq-item.abierto').forEach(function(el) {
+        el.classList.remove('abierto');
+        el.querySelector('.faq-pregunta').setAttribute('aria-expanded', 'false');
+      });
+
+      if (!abierto) {
+        item.classList.add('abierto');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    }
+
+    // ============================================================
+    // ACCESIBILIDAD — PREFERENCIAS (localStorage unificado)
+    // ============================================================
+    function cargarPrefs() {
+      try { return JSON.parse(localStorage.getItem('cadu-a11y') || '{}'); } catch(e) { return {}; }
+    }
+    function guardarPrefs(prefs) {
+      try { localStorage.setItem('cadu-a11y', JSON.stringify(prefs)); } catch(e) {}
+    }
+
+    // 1. FUENTE DISLEXIA — inyecta <style> en lugar de clase CSS
+    function applyDislexia(on) {
+      let st = document.getElementById('dislexia-style');
+      if (!st) { st = document.createElement('style'); st.id = 'dislexia-style'; document.head.appendChild(st); }
+      st.textContent = on
+        ? 'body,p,li,td,th,label,input,button,h1,h2,h3,h4,div{font-family:"OpenDyslexic","Atkinson Hyperlegible","Courier New",monospace!important;letter-spacing:0.05em!important;word-spacing:0.15em!important;line-height:1.9!important;}'
+        : '';
+      document.body.classList.toggle('modo-dislexia', on);
+    }
+
+    function toggleDislexia() {
+      const prefs = cargarPrefs();
+      prefs.dislexia = !prefs.dislexia;
+      applyDislexia(prefs.dislexia);
+      guardarPrefs(prefs);
+      const btn = document.getElementById('btn-dislexia');
+      if (btn) {
+        btn.classList.toggle('activo', prefs.dislexia);
+        btn.setAttribute('aria-pressed', prefs.dislexia ? 'true' : 'false');
+        btn.title = prefs.dislexia ? 'Desactivar fuente para dislexia' : 'Activar fuente para personas con dislexia';
+      }
+    }
+
+    // 2. LENGUAJE SIMPLE — data-full / data-simple
+    function applyLenguajeSimple(on) {
+      document.querySelectorAll('[data-full]').forEach(function(el) { el.style.display = on ? 'none' : ''; });
+      document.querySelectorAll('[data-simple]').forEach(function(el) { el.style.display = on ? '' : 'none'; });
+      document.body.classList.toggle('lenguaje-simple', on);
+    }
+
+    function toggleLenguajeSimple() {
+      const prefs = cargarPrefs();
+      prefs.lenguajeSimple = !prefs.lenguajeSimple;
+      applyLenguajeSimple(prefs.lenguajeSimple);
+      guardarPrefs(prefs);
+      const btn = document.getElementById('btn-lenguaje-simple');
+      if (btn) {
+        btn.classList.toggle('activo', prefs.lenguajeSimple);
+        btn.setAttribute('aria-pressed', prefs.lenguajeSimple ? 'true' : 'false');
+      }
+    }
+
+    // 3. MODO SIMPLE — 1 columna + oculta decorativos
+    function applyModoSimple(on) {
+      document.body.classList.toggle('modo-simple', on);
+    }
+
+    function toggleModoSimple() {
+      const prefs = cargarPrefs();
+      prefs.modoSimple = !prefs.modoSimple;
+      applyModoSimple(prefs.modoSimple);
+      guardarPrefs(prefs);
+      const btn = document.getElementById('btn-simple');
+      if (btn) {
+        btn.classList.toggle('activo', prefs.modoSimple);
+        btn.setAttribute('aria-pressed', prefs.modoSimple ? 'true' : 'false');
+      }
+    }
+
+    // 4. GUIA DE LECTURA
+    function toggleGuiaLectura() {
+      const prefs = cargarPrefs();
+      prefs.guia = !prefs.guia;
+      document.body.classList.toggle('guia-activa', prefs.guia);
+      guardarPrefs(prefs);
+      const btn = document.getElementById('btn-guia');
+      if (btn) {
+        btn.classList.toggle('activo', prefs.guia);
+        btn.setAttribute('aria-pressed', prefs.guia ? 'true' : 'false');
+      }
+    }
+
+    // 5. SIN ANIMACIONES
+    function applySinAnimaciones(on) {
+      let st = document.getElementById('sin-anim-style');
+      if (!st) { st = document.createElement('style'); st.id = 'sin-anim-style'; document.head.appendChild(st); }
+      st.textContent = on ? '*,*::before,*::after{animation:none!important;transition:none!important;}' : '';
+      document.body.classList.toggle('sin-animaciones', on);
+    }
+
+    function toggleAnimaciones() {
+      const prefs = cargarPrefs();
+      prefs.sinAnimaciones = !prefs.sinAnimaciones;
+      applySinAnimaciones(prefs.sinAnimaciones);
+      guardarPrefs(prefs);
+      const btn = document.getElementById('btn-anim');
+      if (btn) {
+        btn.classList.toggle('activo', prefs.sinAnimaciones);
+        btn.setAttribute('aria-pressed', prefs.sinAnimaciones ? 'true' : 'false');
+      }
+    }
+
+    // 6. RESALTAR PÁRRAFO ACTIVO
+    var resaltarActivo = false;
+    function toggleResaltarParrafo() {
+      const prefs = cargarPrefs();
+      prefs.resaltar = !prefs.resaltar;
+      resaltarActivo = prefs.resaltar;
+      guardarPrefs(prefs);
+      const btn = document.getElementById('btn-resaltar');
+      if (btn) {
+        btn.classList.toggle('activo', prefs.resaltar);
+        btn.setAttribute('aria-pressed', prefs.resaltar ? 'true' : 'false');
+      }
+      // Limpiar resaltados si se desactiva
+      if (!prefs.resaltar) {
+        document.querySelectorAll('p').forEach(function(p) { p.style.background = ''; });
+      }
+    }
+
+    // 7. MODO TDAH
+    function toggleTDAH() {
+      const prefs = cargarPrefs();
+      prefs.tdah = !prefs.tdah;
+      document.body.classList.toggle('modo-tdah', prefs.tdah);
+      guardarPrefs(prefs);
+      const btn = document.getElementById('btn-tdah');
+      if (btn) {
+        btn.classList.toggle('activo', prefs.tdah);
+        btn.setAttribute('aria-pressed', prefs.tdah ? 'true' : 'false');
+      }
+      const seccionesOcultar = [document.getElementById('proceso'), document.getElementById('faq')];
+      seccionesOcultar.forEach(function(s) {
+        if (s) s.classList.toggle('seccion-oculta-tdah', prefs.tdah);
+      });
+    }
+
+    // 8. TAMAÑO DE TEXTO
+    var tamañoFuente = 100;
+    function cambiarFuente(delta) {
+      tamañoFuente = Math.max(70, Math.min(180, tamañoFuente + delta));
+      document.body.style.fontSize = tamañoFuente + '%';
+      const prefs = cargarPrefs();
+      prefs.fontSize = tamañoFuente;
+      guardarPrefs(prefs);
+    }
+
+    // ============================================================
+    // GUIA DE LECTURA — SEGUIR AL MOUSE/SCROLL
+    // ============================================================
+    (function inicializarGuiaLectura() {
+      const guia = document.getElementById('guia-lectura');
+      if (!guia) return;
+
+      document.addEventListener('mousemove', function(e) {
+        if (!document.body.classList.contains('guia-activa')) return;
+        guia.style.top = (e.clientY - guia.offsetHeight / 2) + 'px';
+      });
+
+      window.addEventListener('scroll', function() {
+        if (!document.body.classList.contains('guia-activa')) return;
+        guia.style.top = (window.innerHeight / 2 - guia.offsetHeight / 2) + 'px';
+      }, { passive: true });
+    })();
+
+    // ============================================================
+    // RESTAURAR PREFERENCIAS AL CARGAR
+    // ============================================================
+    document.addEventListener('DOMContentLoaded', function() {
+
+      // Inicializar data-simple ocultos por defecto
+      document.querySelectorAll('[data-simple]').forEach(function(el) { el.style.display = 'none'; });
+
+      // Restaurar preferencias guardadas
+      var prefs = cargarPrefs();
+
+      if (prefs.dislexia) {
+        applyDislexia(true);
+        var b = document.getElementById('btn-dislexia');
+        if (b) { b.classList.add('activo'); b.setAttribute('aria-pressed', 'true'); }
+      }
+      if (prefs.lenguajeSimple) {
+        applyLenguajeSimple(true);
+        var b = document.getElementById('btn-lenguaje-simple');
+        if (b) { b.classList.add('activo'); b.setAttribute('aria-pressed', 'true'); }
+      }
+      if (prefs.modoSimple) {
+        applyModoSimple(true);
+        var b = document.getElementById('btn-simple');
+        if (b) { b.classList.add('activo'); b.setAttribute('aria-pressed', 'true'); }
+      }
+      if (prefs.guia) {
+        document.body.classList.add('guia-activa');
+        var b = document.getElementById('btn-guia');
+        if (b) { b.classList.add('activo'); b.setAttribute('aria-pressed', 'true'); }
+      }
+      if (prefs.sinAnimaciones) {
+        applySinAnimaciones(true);
+        var b = document.getElementById('btn-anim');
+        if (b) { b.classList.add('activo'); b.setAttribute('aria-pressed', 'true'); }
+      }
+      if (prefs.resaltar) {
+        resaltarActivo = true;
+        var b = document.getElementById('btn-resaltar');
+        if (b) { b.classList.add('activo'); b.setAttribute('aria-pressed', 'true'); }
+      }
+      if (prefs.tdah) {
+        document.body.classList.add('modo-tdah');
+        var b = document.getElementById('btn-tdah');
+        if (b) { b.classList.add('activo'); b.setAttribute('aria-pressed', 'true'); }
+        var seccionesOcultar = [document.getElementById('proceso'), document.getElementById('faq')];
+        seccionesOcultar.forEach(function(s) { if (s) s.classList.add('seccion-oculta-tdah'); });
+      }
+      if (prefs.fontSize) {
+        tamañoFuente = prefs.fontSize;
+        document.body.style.fontSize = tamañoFuente + '%';
+      }
+
+      // Respetar prefers-reduced-motion del sistema
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches && !prefs.sinAnimaciones) {
+        applySinAnimaciones(true);
+        var b = document.getElementById('btn-anim');
+        if (b) { b.classList.add('activo'); b.setAttribute('aria-pressed', 'true'); }
+      }
+
+      // Resaltar párrafo activo al hover
+      document.querySelectorAll('p').forEach(function(p) {
+        p.addEventListener('mouseenter', function() {
+          if (resaltarActivo) p.style.background = 'rgba(255, 200, 0, 0.18)';
+        });
+        p.addEventListener('mouseleave', function() {
+          if (resaltarActivo) p.style.background = '';
+          else p.style.background = '';
+        });
+      });
+
+      // Inicializar proyectos
+      inicializarProyectos();
+
+      // Inicializar slider
+      actualizarSlider(6000);
+
+      // Primer paso del wizard
+      actualizarProgreso(1);
+
+      console.info('CADU Inmobiliaria — Demo de Accesibilidad Cognitiva por VICTOR IA');
+    });
+  </script>
+<script>
+(function(){
+var rm=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+var CFG={hero:'https://d8j0ntlcm91z4.cloudfront.net/user_2xDKzgUHSbZ2WsUfnTEP222ovTJ/hf_20260510_051032_c6bfb209-de98-455e-945c-10990c6e3298.png',gal:['https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=900&q=80','https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=900&q=80','https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=900&q=80'],alt:['Desarrollo residencial CADU Cancun','Interiores modernos accesibles','Amenidades conjunto residencial'],galLabel:'Galería CADU Inmobiliaria',ov1:'rgba(20,40,80,0.88)',ov2:'rgba(180,140,60,0.4)',gl:'rgba(180,140,60,0.09)'};
+var cur=document.createElement('div');
+cur.style.cssText='position:fixed;width:360px;height:360px;border-radius:50%;pointer-events:none;transform:translate(-50%,-50%);z-index:9990;opacity:0;transition:opacity .5s;background:radial-gradient(circle,'+CFG.gl+' 0%,transparent 68%);';
+document.body.appendChild(cur);
+var mx=innerWidth/2,my=innerHeight/2;
+document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;cur.style.opacity='1';});
+document.addEventListener('mouseleave',function(){cur.style.opacity='0';});
+!function t(){cur.style.left=mx+'px';cur.style.top=my+'px';requestAnimationFrame(t);}();
+var hero=document.querySelector('#inicio,#home,.hero-section,section.hero')||document.querySelector('body>section,main>section,section');
+if(hero&&CFG.hero){
+if(getComputedStyle(hero).position==='static')hero.style.position='relative';
+hero.style.overflow='hidden';
+var il=document.createElement('div');il.style.cssText='position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;';
+var himg=document.createElement('img');himg.src=CFG.hero;himg.alt='';himg.setAttribute('aria-hidden','true');
+himg.style.cssText='width:100%;height:100%;object-fit:cover;object-position:center 30%;filter:brightness(.25) saturate(1.3);transition:transform 8s ease;';
+il.appendChild(himg);
+var hov=document.createElement('div');hov.style.cssText='position:absolute;inset:0;background:linear-gradient(145deg,'+CFG.ov1+' 0%,'+CFG.ov2+' 100%);';il.appendChild(hov);
+hero.insertBefore(il,hero.firstChild);
+[].slice.call(hero.children).forEach(function(c){if(c!==il){c.style.position='relative';c.style.zIndex='2';}});
+setTimeout(function(){himg.style.transform='scale(1.0)';},100);
+if(!rm)window.addEventListener('scroll',function(){if(window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;himg.style.transform='scale(1.08) translateY('+(window.scrollY*.1)+'px)';},{passive:true});
+}
+var gs=document.createElement('section');gs.setAttribute('aria-label',CFG.galLabel);gs.style.cssText='margin:0;padding:0;line-height:0;display:block;';
+var gi='<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:#000;max-height:380px;overflow:hidden;">';
+CFG.gal.forEach(function(u,i){gi+='<div class="lxgc" style="aspect-ratio:4/3;"><img src="'+u+'" alt="'+CFG.alt[i]+'" loading="lazy"><div class="lxov"></div></div>';});
+gi+='</div>';gs.innerHTML=gi;
+if(hero&&hero.parentNode)hero.parentNode.insertBefore(gs,hero.nextSibling);
+var cards=[].slice.call(document.querySelectorAll('[class*=card],[class*=plan],[class*=beneficio],[class*=caracteristica],[class*=servicio],[class*=feature],[class*=habitacion],[class*=platillo],[class*=especialidad],[class*=propiedad],[class*=modelo]')).filter(function(c){return !c.closest('[class*=toolbar],[class*=toggle],[class*=a11y],[class*=nav],[role=tablist],[class*=filtro],[data-paso]');});
+cards.forEach(function(c){
+c.addEventListener('mousemove',function(e){if(window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;var r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform='perspective(800px) rotateY('+(x*12)+'deg) rotateX('+(-y*8)+'deg) translateY(-8px) scale(1.01)';c.style.boxShadow='0 24px 70px rgba(0,0,0,.25)';});
+c.addEventListener('mouseleave',function(){c.style.transform='';c.style.boxShadow='';});
+});
+[].slice.call(document.querySelectorAll('a[class*=cta],a[class*=btn],a[class*=reserva],a[class*=cita],button[type=submit],.btn-cta,.btn-primary')).forEach(function(b){if(b.closest('[class*=toolbar],[class*=a11y],[class*=toggle],[class*=nav],[role=tablist]'))return;b.addEventListener('mousemove',function(e){if(window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;var r=b.getBoundingClientRect(),x=(e.clientX-r.left-r.width/2)*.22,y=(e.clientY-r.top-r.height/2)*.22;b.style.transform='translate('+x+'px,'+y+'px)';});b.addEventListener('mouseleave',function(){b.style.transform='';});});
+if('IntersectionObserver' in window){var io=new IntersectionObserver(function(ents){ents.filter(function(e){return e.isIntersecting;}).forEach(function(e,i){setTimeout(function(){e.target.style.opacity='1';e.target.style.transform='';},i*90);io.unobserve(e.target);});},{threshold:.1});cards.forEach(function(c){c.style.opacity='0';c.style.transform='translateY(24px)';c.style.transition=(c.style.transition?c.style.transition+',':'')+' opacity .75s ease,transform .75s cubic-bezier(.23,1,.32,1)';io.observe(c);});}
+})();
+</script>
+<script>
+(function(){
+if(window.__ip)return;window.__ip=1;
+/* --- progress bar --- */
+const bar=document.createElement('div');bar.className='ip-bar';document.body.prepend(bar);
+const updScroll=()=>{
+  const r=window.scrollY/Math.max(1,document.documentElement.scrollHeight-window.innerHeight);
+  document.documentElement.style.setProperty('--scroll-raw',r.toFixed(4));
+};
+window.addEventListener('scroll',updScroll,{passive:true});
+updScroll();
+
+/* --- mouse ambient glow vars --- */
+window.addEventListener('mousemove',e=>{
+  document.documentElement.style.setProperty('--mpos-x',e.clientX+'px');
+  document.documentElement.style.setProperty('--mpos-y',e.clientY+'px');
+},{passive:true});
+
+/* --- floating particles on hero --- */
+const hero=document.querySelector('.hero,section.hero,[class*="hero-section"],section:first-of-type,header.site-header,header');
+if(hero){
+  const pos=getComputedStyle(hero).position;
+  if(pos==='static')hero.style.position='relative';
+  hero.style.overflow='hidden';
+  const cvs=document.createElement('canvas');
+  cvs.style.cssText='position:absolute;inset:0;pointer-events:none;z-index:4;opacity:.38;';
+  hero.appendChild(cvs);
+  const ctx=cvs.getContext('2d');
+  const sz=()=>{cvs.width=hero.offsetWidth;cvs.height=hero.offsetHeight||window.innerHeight;};
+  sz();new ResizeObserver(sz).observe(hero);
+  const N=55;
+  const pts=Array.from({length:N},(_,i)=>({
+    x:Math.random()*cvs.width,y:Math.random()*cvs.height,
+    r:Math.random()*2.2+.4,
+    vx:(Math.random()-.5)*.25,vy:-(Math.random()*.45+.08),
+    o:Math.random()*.55+.15,
+    pulse:Math.random()*Math.PI*2
+  }));
+  let t=0;
+  const draw=()=>{
+    ctx.clearRect(0,0,cvs.width,cvs.height);
+    t+=.012;
+    pts.forEach(p=>{
+      p.pulse+=.025;
+      const ro=p.o*(0.7+0.3*Math.sin(p.pulse));
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,6.2832);
+      ctx.fillStyle='rgba(255,255,255,'+ro+')';ctx.fill();
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.y<-8){p.y=cvs.height+8;p.x=Math.random()*cvs.width;}
+      if(p.x<-8)p.x=cvs.width+8;if(p.x>cvs.width+8)p.x=-8;
+    });
+    requestAnimationFrame(draw);
+  };
+  draw();
+
+  /* Add shimmer overlay to hero */
+  const hl=document.createElement('div');hl.className='ip-hero-layer';
+  hero.appendChild(hl);
+
+  /* hero text parallax */
+  const htxt=hero.querySelector('h1,.hero-title,[class*="hero"] h1,.main-title');
+  if(htxt&&!window.matchMedia('(prefers-reduced-motion:reduce)').matches){
+    htxt.classList.add('ip-parallax');
+    window.addEventListener('scroll',()=>{
+      htxt.style.transform='translateY('+Math.round(window.scrollY*.12)+'px)';
+    },{passive:true});
+  }
+}
+
+/* --- pulse on CTA buttons --- */
+document.querySelectorAll('a[class*="cta"],a[class*="btn-primary"],button[class*="cta"],button[class*="primary"],.btn-primary,.cta,.book-btn,.contact-btn,.btn-cta,.hero a').forEach(el=>{
+  el.classList.add('ip-pulse');
+});
+
+/* --- counter animation --- */
+const numRx=/^([\D]*?)([\d][\d,. ]*)([\D]*)$/;
+function tryCountEl(el){
+  if(el.dataset.ipC)return;
+  const txt=el.textContent.trim();
+  if(!txt)return;
+  const m=txt.match(numRx);
+  if(!m)return;
+  const target=parseFloat(m[2].replace(/[, ]/g,''));
+  if(isNaN(target)||target<2)return;
+  el.dataset.ipC='1';
+  const pre=m[1],suf=m[3];
+  const isDecimal=m[2].includes('.');
+  const obs=new IntersectionObserver(([e],o)=>{
+    if(!e.isIntersecting)return;o.disconnect();
+    let start=null;const dur=1600;
+    const step=ts=>{
+      if(!start)start=ts;
+      const p=Math.min((ts-start)/dur,1);
+      const ease=1-Math.pow(1-p,3);
+      const val=isDecimal?(target*ease).toFixed(1):Math.round(target*ease);
+      el.textContent=pre+(typeof val==='number'&&val>=1000?val.toLocaleString():val)+suf;
+      if(p<1)requestAnimationFrame(step);else el.classList.add('ip-counted');
+    };
+    requestAnimationFrame(step);
+  },{threshold:.6});
+  obs.observe(el);
+}
+document.querySelectorAll('[class*="stat"],[class*="metric"],[class*="num"],[class*="count"],[class*="data-"],[class*="figure"],[class*="score"]').forEach(tryCountEl);
+/* Also scan .hero and stats sections broadly */
+document.querySelectorAll('.stats-grid>*,.metrics>*,.hero-stats>*,.awards>*,.kpi>*,.highlights>*').forEach(el=>{
+  el.querySelectorAll('*').forEach(tryCountEl);
+});
+
+/* --- section reveal with alternating directions --- */
+const dirs=['ip-rb','ip-rl','ip-rr'];
+let ri=0;
+const skipSel=new Set(['A11Y-BAR','NAV','HEADER','FOOTER','SCRIPT','STYLE','CANVAS','NOSCRIPT']);
+document.querySelectorAll('section>*,main>section,.grid>*,[class*="grid"]>*,article').forEach(el=>{
+  if(skipSel.has(el.tagName)||el.dataset.ip||el.classList.contains('ip-rb'))return;
+  if(el.offsetHeight===0)return;
+  el.dataset.ip='1';
+  const d=dirs[ri%3];ri++;
+  el.classList.add(d);
+  const obs=new IntersectionObserver(([e],o)=>{
+    if(!e.isIntersecting)return;
+    el.classList.add('ip-rv');
+    o.disconnect();
+  },{threshold:.12,rootMargin:'0px 0px -30px 0px'});
+  obs.observe(el);
+});
+
+/* --- lxgc gallery: stagger reveal --- */
+document.querySelectorAll('.lxgc').forEach((el,i)=>{
+  el.style.transitionDelay=(i*.07)+'s';
+});
+
+/* --- nav highlight on scroll --- */
+const nav=document.querySelector('nav,.nav-bar,.site-nav,header nav');
+if(nav){
+  const navBg=getComputedStyle(nav).backgroundColor;
+  window.addEventListener('scroll',()=>{
+    const past=window.scrollY>80;
+    nav.style.backdropFilter=past?'blur(18px)':'none';
+    nav.style.boxShadow=past?'0 4px 32px rgba(0,0,0,.18)':'none';
+  },{passive:true});
+}
+})();
+</script>
+</body>
+</html>
+
+
+

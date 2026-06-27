@@ -1,0 +1,1055 @@
+{
+  "name": "04_scroll_90s",
+  "voice_id": "iDEmt5MnqUotdwCIVplo",
+  "model": "eleven_multilingual_v2",
+  "duration_seconds": 73.142,
+  "word_count": 208,
+  "voice_settings": {
+    "stability": 0.62,
+    "similarity_boost": 0.85,
+    "style": 0.15,
+    "use_speaker_boost": true
+  },
+  "words": [
+    {
+      "word": "Hay",
+      "start": 0.0,
+      "end": 0.267
+    },
+    {
+      "word": "una",
+      "start": 0.302,
+      "end": 0.406
+    },
+    {
+      "word": "diferencia",
+      "start": 0.441,
+      "end": 0.917
+    },
+    {
+      "word": "entre",
+      "start": 0.94,
+      "end": 1.138
+    },
+    {
+      "word": "construir",
+      "start": 1.173,
+      "end": 1.718
+    },
+    {
+      "word": "<break",
+      "start": 2.531,
+      "end": 2.531
+    },
+    {
+      "word": "time=\"0.7s\"/>",
+      "start": 2.531,
+      "end": 2.531
+    },
+    {
+      "word": "y",
+      "start": 2.531,
+      "end": 2.601
+    },
+    {
+      "word": "crear.",
+      "start": 2.67,
+      "end": 3.123
+    },
+    {
+      "word": "Entre",
+      "start": 3.506,
+      "end": 3.785
+    },
+    {
+      "word": "lo",
+      "start": 3.82,
+      "end": 3.889
+    },
+    {
+      "word": "que",
+      "start": 3.924,
+      "end": 3.994
+    },
+    {
+      "word": "funciona",
+      "start": 4.04,
+      "end": 4.609
+    },
+    {
+      "word": "<break",
+      "start": 5.283,
+      "end": 5.283
+    },
+    {
+      "word": "time=\"0.6s\"/>",
+      "start": 5.283,
+      "end": 5.283
+    },
+    {
+      "word": "y",
+      "start": 5.283,
+      "end": 5.341
+    },
+    {
+      "word": "lo",
+      "start": 5.41,
+      "end": 5.503
+    },
+    {
+      "word": "que",
+      "start": 5.561,
+      "end": 5.654
+    },
+    {
+      "word": "enamora.",
+      "start": 5.712,
+      "end": 6.385
+    },
+    {
+      "word": "Aqui,",
+      "start": 6.896,
+      "end": 7.372
+    },
+    {
+      "word": "en",
+      "start": 7.396,
+      "end": 7.465
+    },
+    {
+      "word": "Victor",
+      "start": 7.523,
+      "end": 7.825
+    },
+    {
+      "word": "IA,",
+      "start": 7.86,
+      "end": 8.324
+    },
+    {
+      "word": "empezamos",
+      "start": 8.499,
+      "end": 9.067
+    },
+    {
+      "word": "donde",
+      "start": 9.091,
+      "end": 9.3
+    },
+    {
+      "word": "otros",
+      "start": 9.346,
+      "end": 9.578
+    },
+    {
+      "word": "terminan:",
+      "start": 9.625,
+      "end": 10.252
+    },
+    {
+      "word": "<break",
+      "start": 10.704,
+      "end": 10.704
+    },
+    {
+      "word": "time=\"0.4s\"/>",
+      "start": 10.704,
+      "end": 10.786
+    },
+    {
+      "word": "en",
+      "start": 10.786,
+      "end": 10.82
+    },
+    {
+      "word": "el",
+      "start": 10.879,
+      "end": 10.937
+    },
+    {
+      "word": "detalle.",
+      "start": 10.96,
+      "end": 11.54
+    },
+    {
+      "word": "<break",
+      "start": 12.237,
+      "end": 12.237
+    },
+    {
+      "word": "time=\"0.6s\"/>",
+      "start": 12.237,
+      "end": 12.237
+    },
+    {
+      "word": "El",
+      "start": 12.237,
+      "end": 12.399
+    },
+    {
+      "word": "marmol",
+      "start": 12.457,
+      "end": 12.817
+    },
+    {
+      "word": "no",
+      "start": 12.875,
+      "end": 13.003
+    },
+    {
+      "word": "es",
+      "start": 13.084,
+      "end": 13.177
+    },
+    {
+      "word": "decoracion.",
+      "start": 13.212,
+      "end": 13.978
+    },
+    {
+      "word": "<break",
+      "start": 14.431,
+      "end": 14.431
+    },
+    {
+      "word": "time=\"0.4s\"/>",
+      "start": 14.431,
+      "end": 14.431
+    },
+    {
+      "word": "Es",
+      "start": 14.431,
+      "end": 14.629
+    },
+    {
+      "word": "filosofia.",
+      "start": 14.675,
+      "end": 15.488
+    },
+    {
+      "word": "<break",
+      "start": 15.929,
+      "end": 15.929
+    },
+    {
+      "word": "time=\"0.4s\"/>",
+      "start": 15.929,
+      "end": 15.929
+    },
+    {
+      "word": "Cada",
+      "start": 15.929,
+      "end": 16.242
+    },
+    {
+      "word": "veta,",
+      "start": 16.3,
+      "end": 16.765
+    },
+    {
+      "word": "unica.",
+      "start": 16.881,
+      "end": 17.531
+    },
+    {
+      "word": "<break",
+      "start": 17.996,
+      "end": 17.996
+    },
+    {
+      "word": "time=\"0.4s\"/>",
+      "start": 17.996,
+      "end": 17.996
+    },
+    {
+      "word": "Imposible",
+      "start": 17.996,
+      "end": 18.704
+    },
+    {
+      "word": "de",
+      "start": 18.75,
+      "end": 18.808
+    },
+    {
+      "word": "copiar.",
+      "start": 18.855,
+      "end": 19.412
+    },
+    {
+      "word": "<break",
+      "start": 19.981,
+      "end": 19.981
+    },
+    {
+      "word": "time=\"0.5s\"/>",
+      "start": 19.981,
+      "end": 19.981
+    },
+    {
+      "word": "Como",
+      "start": 19.981,
+      "end": 20.202
+    },
+    {
+      "word": "tu",
+      "start": 20.236,
+      "end": 20.318
+    },
+    {
+      "word": "negocio.",
+      "start": 20.364,
+      "end": 20.933
+    },
+    {
+      "word": "<break",
+      "start": 21.63,
+      "end": 21.63
+    },
+    {
+      "word": "time=\"0.5s\"/>",
+      "start": 21.63,
+      "end": 21.63
+    },
+    {
+      "word": "Trabajamos",
+      "start": 21.63,
+      "end": 22.152
+    },
+    {
+      "word": "asi:",
+      "start": 22.21,
+      "end": 22.489
+    },
+    {
+      "word": "con",
+      "start": 22.524,
+      "end": 22.675
+    },
+    {
+      "word": "la",
+      "start": 22.709,
+      "end": 22.767
+    },
+    {
+      "word": "paciencia",
+      "start": 22.825,
+      "end": 23.301
+    },
+    {
+      "word": "del",
+      "start": 23.336,
+      "end": 23.429
+    },
+    {
+      "word": "artesano",
+      "start": 23.476,
+      "end": 24.172
+    },
+    {
+      "word": "y",
+      "start": 24.23,
+      "end": 24.265
+    },
+    {
+      "word": "la",
+      "start": 24.312,
+      "end": 24.381
+    },
+    {
+      "word": "precision",
+      "start": 24.439,
+      "end": 24.962
+    },
+    {
+      "word": "de",
+      "start": 24.997,
+      "end": 25.055
+    },
+    {
+      "word": "la",
+      "start": 25.101,
+      "end": 25.171
+    },
+    {
+      "word": "maquina.",
+      "start": 25.229,
+      "end": 25.786
+    },
+    {
+      "word": "<break",
+      "start": 26.483,
+      "end": 26.483
+    },
+    {
+      "word": "time=\"0.5s\"/>",
+      "start": 26.483,
+      "end": 26.483
+    },
+    {
+      "word": "Lujo",
+      "start": 26.483,
+      "end": 26.866
+    },
+    {
+      "word": "que",
+      "start": 26.924,
+      "end": 27.005
+    },
+    {
+      "word": "no",
+      "start": 27.063,
+      "end": 27.156
+    },
+    {
+      "word": "grita.",
+      "start": 27.202,
+      "end": 27.748
+    },
+    {
+      "word": "<break",
+      "start": 28.421,
+      "end": 28.421
+    },
+    {
+      "word": "time=\"0.5s\"/>",
+      "start": 28.421,
+      "end": 28.421
+    },
+    {
+      "word": "Lujo",
+      "start": 28.421,
+      "end": 28.758
+    },
+    {
+      "word": "que",
+      "start": 28.805,
+      "end": 28.886
+    },
+    {
+      "word": "se",
+      "start": 28.932,
+      "end": 29.014
+    },
+    {
+      "word": "siente.",
+      "start": 29.06,
+      "end": 29.664
+    },
+    {
+      "word": "<break",
+      "start": 30.442,
+      "end": 30.442
+    },
+    {
+      "word": "time=\"0.7s\"/>",
+      "start": 30.442,
+      "end": 30.442
+    },
+    {
+      "word": "Disenamos",
+      "start": 30.442,
+      "end": 30.987
+    },
+    {
+      "word": "mundos",
+      "start": 31.057,
+      "end": 31.417
+    },
+    {
+      "word": "donde",
+      "start": 31.44,
+      "end": 31.626
+    },
+    {
+      "word": "tu",
+      "start": 31.672,
+      "end": 31.754
+    },
+    {
+      "word": "marca",
+      "start": 31.812,
+      "end": 32.102
+    },
+    {
+      "word": "vive.",
+      "start": 32.148,
+      "end": 32.601
+    },
+    {
+      "word": "<break",
+      "start": 33.112,
+      "end": 33.112
+    },
+    {
+      "word": "time=\"0.4s\"/>",
+      "start": 33.112,
+      "end": 33.112
+    },
+    {
+      "word": "Sitios",
+      "start": 33.112,
+      "end": 33.588
+    },
+    {
+      "word": "que",
+      "start": 33.646,
+      "end": 33.727
+    },
+    {
+      "word": "se",
+      "start": 33.774,
+      "end": 33.855
+    },
+    {
+      "word": "sienten",
+      "start": 33.901,
+      "end": 34.319
+    },
+    {
+      "word": "como",
+      "start": 34.389,
+      "end": 34.563
+    },
+    {
+      "word": "entrar",
+      "start": 34.598,
+      "end": 34.969
+    },
+    {
+      "word": "a",
+      "start": 35.027,
+      "end": 35.05
+    },
+    {
+      "word": "otro",
+      "start": 35.143,
+      "end": 35.376
+    },
+    {
+      "word": "lugar.",
+      "start": 35.41,
+      "end": 35.91
+    },
+    {
+      "word": "<break",
+      "start": 36.409,
+      "end": 36.409
+    },
+    {
+      "word": "time=\"0.4s\"/>",
+      "start": 36.409,
+      "end": 36.409
+    },
+    {
+      "word": "Automatizaciones",
+      "start": 36.409,
+      "end": 37.396
+    },
+    {
+      "word": "invisibles",
+      "start": 37.465,
+      "end": 38.092
+    },
+    {
+      "word": "que",
+      "start": 38.15,
+      "end": 38.22
+    },
+    {
+      "word": "trabajan",
+      "start": 38.266,
+      "end": 38.661
+    },
+    {
+      "word": "en",
+      "start": 38.708,
+      "end": 38.754
+    },
+    {
+      "word": "silencio.",
+      "start": 38.789,
+      "end": 39.369
+    },
+    {
+      "word": "<break",
+      "start": 39.903,
+      "end": 39.903
+    },
+    {
+      "word": "time=\"0.4s\"/>",
+      "start": 39.903,
+      "end": 39.903
+    },
+    {
+      "word": "Video",
+      "start": 39.903,
+      "end": 40.345
+    },
+    {
+      "word": "que",
+      "start": 40.403,
+      "end": 40.484
+    },
+    {
+      "word": "detiene",
+      "start": 40.542,
+      "end": 40.913
+    },
+    {
+      "word": "el",
+      "start": 40.937,
+      "end": 41.03
+    },
+    {
+      "word": "scroll.",
+      "start": 41.122,
+      "end": 41.598
+    },
+    {
+      "word": "<break",
+      "start": 42.098,
+      "end": 42.098
+    },
+    {
+      "word": "time=\"0.4s\"/>",
+      "start": 42.098,
+      "end": 42.098
+    },
+    {
+      "word": "E",
+      "start": 42.098,
+      "end": 42.307
+    },
+    {
+      "word": "interfaces",
+      "start": 42.4,
+      "end": 43.05
+    },
+    {
+      "word": "inclusivas",
+      "start": 43.119,
+      "end": 43.781
+    },
+    {
+      "word": "<break",
+      "start": 44.559,
+      "end": 44.559
+    },
+    {
+      "word": "time=\"0.6s\"/>",
+      "start": 44.559,
+      "end": 44.559
+    },
+    {
+      "word": "porque",
+      "start": 44.559,
+      "end": 44.814
+    },
+    {
+      "word": "la",
+      "start": 44.861,
+      "end": 44.919
+    },
+    {
+      "word": "belleza",
+      "start": 44.965,
+      "end": 45.325
+    },
+    {
+      "word": "que",
+      "start": 45.395,
+      "end": 45.465
+    },
+    {
+      "word": "excluye,",
+      "start": 45.499,
+      "end": 46.196
+    },
+    {
+      "word": "no",
+      "start": 46.405,
+      "end": 46.614
+    },
+    {
+      "word": "es",
+      "start": 46.684,
+      "end": 46.776
+    },
+    {
+      "word": "belleza.",
+      "start": 46.835,
+      "end": 47.461
+    },
+    {
+      "word": "<break",
+      "start": 48.042,
+      "end": 48.042
+    },
+    {
+      "word": "time=\"0.5s\"/>",
+      "start": 48.042,
+      "end": 48.042
+    },
+    {
+      "word": "Dieciocho",
+      "start": 48.042,
+      "end": 48.599
+    },
+    {
+      "word": "formas",
+      "start": 48.657,
+      "end": 49.029
+    },
+    {
+      "word": "de",
+      "start": 49.075,
+      "end": 49.133
+    },
+    {
+      "word": "hacerte",
+      "start": 49.168,
+      "end": 49.54
+    },
+    {
+      "word": "crecer.",
+      "start": 49.575,
+      "end": 50.132
+    },
+    {
+      "word": "<break",
+      "start": 50.898,
+      "end": 50.898
+    },
+    {
+      "word": "time=\"0.7s\"/>",
+      "start": 50.898,
+      "end": 50.898
+    },
+    {
+      "word": "Todo",
+      "start": 50.898,
+      "end": 51.165
+    },
+    {
+      "word": "esto",
+      "start": 51.211,
+      "end": 51.408
+    },
+    {
+      "word": "nace",
+      "start": 51.478,
+      "end": 51.757
+    },
+    {
+      "word": "en",
+      "start": 51.803,
+      "end": 51.861
+    },
+    {
+      "word": "un",
+      "start": 51.942,
+      "end": 52.012
+    },
+    {
+      "word": "solo",
+      "start": 52.059,
+      "end": 52.279
+    },
+    {
+      "word": "lugar:",
+      "start": 52.326,
+      "end": 52.767
+    },
+    {
+      "word": "<break",
+      "start": 53.22,
+      "end": 53.22
+    },
+    {
+      "word": "time=\"0.4s\"/>",
+      "start": 53.22,
+      "end": 53.22
+    },
+    {
+      "word": "Playa",
+      "start": 53.22,
+      "end": 53.58
+    },
+    {
+      "word": "del",
+      "start": 53.626,
+      "end": 53.73
+    },
+    {
+      "word": "Carmen.",
+      "start": 53.777,
+      "end": 54.311
+    },
+    {
+      "word": "<break",
+      "start": 54.88,
+      "end": 54.88
+    },
+    {
+      "word": "time=\"0.4s\"/>",
+      "start": 54.88,
+      "end": 54.88
+    },
+    {
+      "word": "Donde",
+      "start": 54.88,
+      "end": 55.124
+    },
+    {
+      "word": "el",
+      "start": 55.147,
+      "end": 55.193
+    },
+    {
+      "word": "Caribe",
+      "start": 55.24,
+      "end": 55.576
+    },
+    {
+      "word": "se",
+      "start": 55.623,
+      "end": 55.704
+    },
+    {
+      "word": "vuelve",
+      "start": 55.739,
+      "end": 56.006
+    },
+    {
+      "word": "idea,",
+      "start": 56.029,
+      "end": 56.586
+    },
+    {
+      "word": "<break",
+      "start": 57.028,
+      "end": 57.028
+    },
+    {
+      "word": "time=\"0.4s\"/>",
+      "start": 57.028,
+      "end": 57.028
+    },
+    {
+      "word": "y",
+      "start": 57.028,
+      "end": 57.074
+    },
+    {
+      "word": "la",
+      "start": 57.155,
+      "end": 57.213
+    },
+    {
+      "word": "idea",
+      "start": 57.248,
+      "end": 57.492
+    },
+    {
+      "word": "se",
+      "start": 57.55,
+      "end": 57.643
+    },
+    {
+      "word": "vuelve",
+      "start": 57.689,
+      "end": 57.956
+    },
+    {
+      "word": "tecnologia.",
+      "start": 58.003,
+      "end": 58.792
+    },
+    {
+      "word": "<break",
+      "start": 59.384,
+      "end": 59.384
+    },
+    {
+      "word": "time=\"0.5s\"/>",
+      "start": 59.384,
+      "end": 59.384
+    },
+    {
+      "word": "Inteligencia",
+      "start": 59.384,
+      "end": 60.162
+    },
+    {
+      "word": "con",
+      "start": 60.232,
+      "end": 60.383
+    },
+    {
+      "word": "alma",
+      "start": 60.453,
+      "end": 60.65
+    },
+    {
+      "word": "mexicana.",
+      "start": 60.696,
+      "end": 61.381
+    },
+    {
+      "word": "<break",
+      "start": 61.985,
+      "end": 61.985
+    },
+    {
+      "word": "time=\"0.5s\"/>",
+      "start": 61.985,
+      "end": 61.985
+    },
+    {
+      "word": "Disenada",
+      "start": 61.985,
+      "end": 62.566
+    },
+    {
+      "word": "para",
+      "start": 62.624,
+      "end": 62.798
+    },
+    {
+      "word": "un",
+      "start": 62.844,
+      "end": 62.891
+    },
+    {
+      "word": "mundo",
+      "start": 62.949,
+      "end": 63.239
+    },
+    {
+      "word": "que",
+      "start": 63.297,
+      "end": 63.39
+    },
+    {
+      "word": "no",
+      "start": 63.46,
+      "end": 63.564
+    },
+    {
+      "word": "se",
+      "start": 63.622,
+      "end": 63.703
+    },
+    {
+      "word": "conforma.",
+      "start": 63.761,
+      "end": 64.481
+    },
+    {
+      "word": "<break",
+      "start": 65.317,
+      "end": 65.317
+    },
+    {
+      "word": "time=\"0.7s\"/>",
+      "start": 65.317,
+      "end": 65.317
+    },
+    {
+      "word": "Victor",
+      "start": 65.317,
+      "end": 65.77
+    },
+    {
+      "word": "IA.",
+      "start": 65.886,
+      "end": 66.548
+    },
+    {
+      "word": "<break",
+      "start": 67.07,
+      "end": 67.07
+    },
+    {
+      "word": "time=\"0.4s\"/>",
+      "start": 67.07,
+      "end": 67.07
+    },
+    {
+      "word": "No",
+      "start": 67.07,
+      "end": 67.221
+    },
+    {
+      "word": "seguimos",
+      "start": 67.268,
+      "end": 67.616
+    },
+    {
+      "word": "tendencias.",
+      "start": 67.662,
+      "end": 68.394
+    },
+    {
+      "word": "<break",
+      "start": 68.881,
+      "end": 68.881
+    },
+    {
+      "word": "time=\"0.4s\"/>",
+      "start": 68.881,
+      "end": 68.881
+    },
+    {
+      "word": "Las",
+      "start": 68.881,
+      "end": 69.079
+    },
+    {
+      "word": "creamos.",
+      "start": 69.125,
+      "end": 69.88
+    },
+    {
+      "word": "<break",
+      "start": 70.635,
+      "end": 70.635
+    },
+    {
+      "word": "time=\"0.6s\"/>",
+      "start": 70.635,
+      "end": 70.635
+    },
+    {
+      "word": "Bienvenido",
+      "start": 70.635,
+      "end": 71.238
+    },
+    {
+      "word": "a",
+      "start": 71.273,
+      "end": 71.296
+    },
+    {
+      "word": "la",
+      "start": 71.331,
+      "end": 71.378
+    },
+    {
+      "word": "inteligencia",
+      "start": 71.401,
+      "end": 72.028
+    },
+    {
+      "word": "con",
+      "start": 72.074,
+      "end": 72.202
+    },
+    {
+      "word": "identidad.",
+      "start": 72.248,
+      "end": 73.142
+    }
+  ]
+}

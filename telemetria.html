@@ -1,0 +1,585 @@
+<!-- Victor IA — Telemetría Inteligente -->
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Victor IA | Eficiencia e IoT — Monitoreo B2B en Tiempo Real</title>
+<meta name="description" content="Monitoreo inteligente para edificios, hoteles, flotillas, renta de autos y transportadoras. Visibilidad total de tus operaciones, alertas en tiempo real y análisis predictivo."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;0,500;1,200;1,300;1,400;1,500&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com" integrity="sha384-igm5BeiBt36UU4gqwWS7imYmelpTsZlQ45FZf+XBn9MuJbn4nQr7yx1yFydocC/K" crossorigin="anonymous"></script>
+<script>tailwind.config={darkMode:'class',theme:{extend:{colors:{ink:'#070708',ink2:'#0A0A0C',ink3:'#0F0F12',cream:'#EAE6DF',muted:'#706C66',gold:'#B89A6A'},fontFamily:{display:['Cormorant Garamond','Georgia','serif'],body:['Inter','sans-serif']}}}}</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased;scroll-behavior:auto}
+body{background:transparent;color:#EAE6DF;font-family:'Inter',sans-serif;overflow-x:hidden;font-weight:300}
+@media(pointer:fine){*{cursor:none!important}}
+#cur-d{position:fixed;width:5px;height:5px;background:#B89A6A;border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:opacity .3s}
+#cur-r{position:fixed;width:36px;height:36px;border:1px solid rgba(184,154,106,.42);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:width .4s cubic-bezier(.16,1,.3,1),height .4s,border-color .4s,opacity .4s}
+#cur-r.expand{width:58px;height:58px;border-color:rgba(184,154,106,.72)}
+#pbar{position:fixed;top:0;left:0;height:1px;background:#B89A6A;z-index:100000;width:0}
+#noise{position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.024;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+header{position:fixed;top:0;left:0;right:0;z-index:500;height:68px;transition:background .5s,border-color .5s;border-bottom:1px solid transparent}
+header.scrolled{background:rgba(7,7,8,.92);border-bottom-color:rgba(255,255,255,.06);backdrop-filter:blur(18px)}
+.nav-a{position:relative;color:#706C66;font-size:13px;letter-spacing:.07em;font-weight:300;transition:color .3s;text-decoration:none}
+.nav-a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:#B89A6A;transition:width .45s cubic-bezier(.16,1,.3,1)}
+.nav-a:hover{color:#EAE6DF}.nav-a:hover::after{width:100%}
+.btn-p{display:inline-flex;align-items:center;justify-content:center;border-radius:5px;font-family:'Inter',sans-serif;font-size:13px;letter-spacing:.09em;font-weight:500;text-decoration:none;background:#EAE6DF;color:#070708;padding:11px 26px;transition:background .25s,transform .2s}
+.btn-p:hover{background:#fff;transform:translateY(-2px)}
+.btn-g{display:inline-flex;align-items:center;justify-content:center;border-radius:5px;font-family:'Inter',sans-serif;font-size:13px;letter-spacing:.09em;font-weight:500;text-decoration:none;background:transparent;color:#EAE6DF;border:1px solid rgba(255,255,255,.11);padding:11px 26px;transition:border-color .3s,transform .2s}
+.btn-g:hover{border-color:rgba(255,255,255,.28);transform:translateY(-2px)}
+.card{background:#0F0F12;border:1px solid rgba(255,255,255,.054);border-radius:12px;transition:border-color .45s}
+.card:hover{border-color:rgba(184,154,106,.22)}
+.eyec{font-family:'Inter',sans-serif;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(184,154,106,.6);display:flex;align-items:center;justify-content:center;gap:10px}
+.eyec::before,.eyec::after{content:'';display:block;width:0;height:1px;background:rgba(184,154,106,.4);transition:width 1.3s cubic-bezier(.16,1,.3,1)}
+.eyec.on::before,.eyec.on::after{width:18px}
+.eye{display:inline-flex;align-items:center;gap:13px;font-family:'Inter',sans-serif;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:#B89A6A}
+.eye::before{content:'';display:block;width:0;height:1px;background:#B89A6A;transition:width 1.3s cubic-bezier(.16,1,.3,1)}
+.eye.on::before{width:26px}
+.rv{opacity:0;transform:translateY(30px)}
+.hr{height:1px;background:rgba(255,255,255,.052)}
+.mag{display:inline-block}
+/* Vertical cards */
+.vcard{background:#0A0A0C;border:1px solid rgba(255,255,255,.054);border-radius:12px;padding:36px 32px;transition:border-color .45s,transform .4s}
+.vcard:hover{border-color:rgba(184,154,106,.22);transform:translateY(-4px)}
+/* Metric badges */
+.mbadge{display:inline-flex;align-items:center;gap:8px;background:rgba(184,154,106,.07);border:1px solid rgba(184,154,106,.15);border-radius:40px;padding:6px 14px}
+/* Live dot */
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+.ldot{width:7px;height:7px;border-radius:50%;background:#4ade80;animation:pulse 2s ease-in-out infinite}
+/* Dashboard mock */
+.dash-line{height:1px;background:rgba(255,255,255,.05);margin:0}
+.dash-bar{background:linear-gradient(to right,rgba(184,154,106,.6),rgba(184,154,106,.15));border-radius:2px}
+/* ── Responsive ───────────────────────────────────────── */
+@media(max-width:860px){
+  #main-nav{display:none!important}
+  #login-link{display:none!important}
+  [style*="grid-template-columns:repeat(3"]{grid-template-columns:1fr!important}
+  [style*="grid-template-columns:repeat(2"]{grid-template-columns:1fr!important}
+  [style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}
+  [style*="grid-template-columns:1.4fr"]{grid-template-columns:1fr!important}
+  [style*="grid-template-columns:repeat(4"]{grid-template-columns:1fr 1fr!important}
+  [style*="padding:80px 64px"]{padding:40px 24px!important}
+  [style*="padding:44px 36px"]{padding:28px 20px!important}
+  [style*="padding:36px 32px"]{padding:24px 16px!important}
+  [style*="gap:64px"]{gap:32px!important}
+  [style*="gap:80px"]{gap:40px!important}
+  footer>div{padding-left:16px!important;padding-right:16px!important}
+  [style*="min-height:68vh"]{min-height:50vh!important}
+  [style*="gap:80px;align-items:center"]{gap:40px!important}
+}
+@media(max-width:640px){
+  header>div{padding-left:16px!important;padding-right:16px!important}
+  [style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}
+}
+
+/* ── Marble background ── */
+#bg-marble-page{position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:url('assets/marble-white/marble-telemetria.webp');background-size:cover;background-position:50% 50%;opacity:1;}
+main{position:relative;z-index:1}
+</style>
+</head>
+<body>
+<div id="bg-marble-page"></div>
+<div id="noise"></div>
+<div id="pbar"></div>
+<div id="cur-d"></div>
+<div id="cur-r"></div>
+
+<header id="hdr">
+  <div style="display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto;padding:0 24px;height:100%">
+    <a href="index.html" style="font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:300;letter-spacing:.04em;color:#EAE6DF;text-decoration:none">Victor <span style="color:#B89A6A">IA</span></a>
+    <nav id="main-nav" style="display:flex;gap:36px;align-items:center">
+      <a class="nav-a" href="agentes.html">Agentes</a>
+      <a class="nav-a" href="como-funciona.html">Cómo Funciona</a>
+      <a class="nav-a" href="precios.html">Precios</a>
+      <a class="nav-a" href="blog/">Blog</a>
+      <a class="nav-a" href="telemetria.html" style="color:#EAE6DF">Eficiencia IoT</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:20px">
+      <a class="nav-a" href="app.html" id="login-link">Iniciar sesión</a>
+      <div class="mag"><a class="btn-p" href="app.html">Empezar gratis</a></div>
+    </div>
+  </div>
+</header>
+
+<main style="padding-top:68px;position:relative;z-index:10">
+
+<!-- HERO -->
+<section style="min-height:68vh;display:flex;align-items:center;padding:100px 0 80px;position:relative;overflow:hidden">
+  <div class="max-w-[1200px] mx-auto px-6 md:px-16 w-full">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center">
+
+      <div class="rv">
+        <div class="eye" style="margin-bottom:32px" data-eye>Eficiencia e IoT</div>
+        <h1 style="font-family:'Cormorant Garamond',serif;font-weight:200;font-size:clamp(46px,6.5vw,84px);line-height:1.02;letter-spacing:-.025em;color:#EAE6DF;margin-bottom:28px">
+          Tus operaciones,<br/><span style="font-style:italic;color:#B89A6A">visibles en tiempo<br/>real.</span>
+        </h1>
+        <p style="font-size:17px;line-height:1.8;font-weight:300;color:#706C66;margin-bottom:44px;max-width:440px">
+          Monitoreo inteligente para empresas que no pueden permitirse puntos ciegos. Edificios, hoteles, flotas vehiculares, renta de autos y transporte — todo conectado, analizado y alertado por IA.
+        </p>
+        <div style="display:flex;flex-wrap:wrap;gap:14px">
+          <div class="mag"><a class="btn-p" href="app.html" style="padding:14px 36px;font-size:14px">Solicitar demo</a></div>
+          <div class="mag"><a class="btn-g" href="#verticals" style="padding:14px 36px;font-size:14px">Ver verticales →</a></div>
+        </div>
+      </div>
+
+      <!-- Dashboard mockup -->
+      <div class="rv" style="position:relative">
+        <div class="card" style="padding:0;overflow:hidden;border-radius:14px">
+          <!-- Header bar -->
+          <div style="background:#0A0A0C;padding:16px 22px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.06)">
+            <div style="display:flex;align-items:center;gap:10px">
+              <div class="ldot"></div>
+              <span style="font-size:12px;letter-spacing:.06em;color:rgba(112,108,102,.7)">Centro de Monitoreo</span>
+            </div>
+            <div class="mbadge">
+              <span style="font-size:11px;color:#B89A6A;letter-spacing:.08em">247 activos en línea</span>
+            </div>
+          </div>
+          <!-- Stats row -->
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid rgba(255,255,255,.05)">
+            <div style="padding:22px 20px;border-right:1px solid rgba(255,255,255,.05)">
+              <p style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(112,108,102,.5);margin-bottom:8px">Alertas activas</p>
+              <p style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:#EAE6DF;line-height:1">3</p>
+              <p style="font-size:11px;color:rgba(184,154,106,.6);margin-top:4px">↓ 68% vs ayer</p>
+            </div>
+            <div style="padding:22px 20px;border-right:1px solid rgba(255,255,255,.05)">
+              <p style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(112,108,102,.5);margin-bottom:8px">Eficiencia flotilla</p>
+              <p style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:#EAE6DF;line-height:1">94<span style="font-size:18px;color:#706C66">%</span></p>
+              <p style="font-size:11px;color:rgba(184,154,106,.6);margin-top:4px">↑ 11% este mes</p>
+            </div>
+            <div style="padding:22px 20px">
+              <p style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(112,108,102,.5);margin-bottom:8px">Ahorro energético</p>
+              <p style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:#EAE6DF;line-height:1">23<span style="font-size:18px;color:#706C66">%</span></p>
+              <p style="font-size:11px;color:rgba(184,154,106,.6);margin-top:4px">Último trimestre</p>
+            </div>
+          </div>
+          <!-- Bar chart area -->
+          <div style="padding:22px 22px 8px;background:#080809">
+            <p style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(112,108,102,.4);margin-bottom:14px">Actividad de sensores — últimas 24 hrs</p>
+            <div style="display:flex;align-items:flex-end;gap:5px;height:52px">
+              <div class="dash-bar" style="flex:1;height:35%"></div>
+              <div class="dash-bar" style="flex:1;height:55%"></div>
+              <div class="dash-bar" style="flex:1;height:70%"></div>
+              <div class="dash-bar" style="flex:1;height:48%"></div>
+              <div class="dash-bar" style="flex:1;height:88%"></div>
+              <div class="dash-bar" style="flex:1;height:62%"></div>
+              <div class="dash-bar" style="flex:1;height:45%"></div>
+              <div class="dash-bar" style="flex:1;height:78%"></div>
+              <div class="dash-bar" style="flex:1;height:55%"></div>
+              <div class="dash-bar" style="flex:1;height:92%"></div>
+              <div class="dash-bar" style="flex:1;height:68%"></div>
+              <div class="dash-bar" style="flex:1;height:100%"></div>
+              <div class="dash-bar" style="flex:1;height:75%"></div>
+              <div class="dash-bar" style="flex:1;height:58%"></div>
+              <div class="dash-bar" style="flex:1;height:42%"></div>
+              <div class="dash-bar" style="flex:1;height:66%"></div>
+              <div class="dash-bar" style="flex:1;height:51%"></div>
+              <div class="dash-bar" style="flex:1;height:83%"></div>
+            </div>
+          </div>
+          <!-- Alert row -->
+          <div style="padding:14px 22px 20px;background:#080809;display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(184,154,106,.04);border:1px solid rgba(184,154,106,.1);border-radius:7px">
+              <div style="display:flex;align-items:center;gap:10px">
+                <div style="width:6px;height:6px;border-radius:50%;background:#B89A6A"></div>
+                <span style="font-size:12px;color:#706C66">Temperatura HVAC — Zona B elevada</span>
+              </div>
+              <span style="font-size:11px;color:rgba(112,108,102,.4)">hace 4 min</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(255,255,255,.018);border:1px solid rgba(255,255,255,.05);border-radius:7px">
+              <div style="display:flex;align-items:center;gap:10px">
+                <div style="width:6px;height:6px;border-radius:50%;background:#4ade80"></div>
+                <span style="font-size:12px;color:#706C66">Unidad 14-F — mantenimiento completado</span>
+              </div>
+              <span style="font-size:11px;color:rgba(112,108,102,.4)">hace 18 min</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="hr"></div>
+
+<!-- VERTICALS -->
+<section id="verticals" style="padding:120px 0;background:#0A0A0C">
+  <div class="max-w-[1200px] mx-auto px-6 md:px-16">
+    <div class="rv" style="text-align:center;margin-bottom:80px">
+      <p class="eyec" style="margin-bottom:22px" data-eyec>Verticales B2B</p>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:200;font-size:clamp(38px,5vw,66px);line-height:1.04;letter-spacing:-.025em">
+        Diseñado para<br/><span style="font-style:italic;color:#706C66">cada industria.</span>
+      </h2>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+
+      <!-- Edificios -->
+      <div class="vcard rv">
+        <div style="width:52px;height:52px;border-radius:10px;background:rgba(184,154,106,.06);border:1px solid rgba(184,154,106,.12);display:flex;align-items:center;justify-content:center;margin-bottom:24px">
+          <svg width="22" height="22" fill="none" viewBox="0 0 22 22"><rect x="3" y="2" width="16" height="18" rx="1" stroke="#B89A6A" stroke-width="1.2"/><path d="M7 6h2M7 10h2M7 14h2M13 6h2M13 10h2M13 14h2" stroke="#B89A6A" stroke-width="1.1" stroke-linecap="round"/><path d="M9 20v-4h4v4" stroke="#B89A6A" stroke-width="1.2" stroke-linejoin="round"/></svg>
+        </div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;color:#EAE6DF;margin-bottom:12px">Edificios corporativos</h3>
+        <p style="font-size:14px;line-height:1.8;color:#706C66;margin-bottom:20px">Control total de climatización, accesos, iluminación y consumo energético. Detecta anomalías antes de que se conviertan en problemas costosos.</p>
+        <ul style="display:flex;flex-direction:column;gap:9px">
+          <li style="display:flex;gap:9px;align-items:center"><span style="color:#B89A6A;font-size:16px;line-height:1">·</span><span style="font-size:13px;color:#706C66">Monitoreo HVAC y energía</span></li>
+          <li style="display:flex;gap:9px;align-items:center"><span style="color:#B89A6A;font-size:16px;line-height:1">·</span><span style="font-size:13px;color:#706C66">Control de accesos y seguridad</span></li>
+          <li style="display:flex;gap:9px;align-items:center"><span style="color:#B89A6A;font-size:16px;line-height:1">·</span><span style="font-size:13px;color:#706C66">Mantenimiento predictivo</span></li>
+        </ul>
+      </div>
+
+      <!-- Hoteles -->
+      <div class="vcard rv">
+        <div style="width:52px;height:52px;border-radius:10px;background:rgba(184,154,106,.06);border:1px solid rgba(184,154,106,.12);display:flex;align-items:center;justify-content:center;margin-bottom:24px">
+          <svg width="22" height="22" fill="none" viewBox="0 0 22 22"><rect x="2" y="4" width="18" height="15" rx="1.5" stroke="#B89A6A" stroke-width="1.2"/><path d="M2 9h18" stroke="#B89A6A" stroke-width="1.1"/><path d="M7 9v10M15 9v10" stroke="#B89A6A" stroke-width="1" stroke-dasharray="2 2"/><circle cx="11" cy="6.5" r="1.2" fill="#B89A6A" opacity=".6"/></svg>
+        </div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;color:#EAE6DF;margin-bottom:12px">Hoteles y resorts</h3>
+        <p style="font-size:14px;line-height:1.8;color:#706C66;margin-bottom:20px">Visibilidad en tiempo real del estado de habitaciones, amenidades y servicios. Mejora la experiencia del huésped y reduce costos operativos.</p>
+        <ul style="display:flex;flex-direction:column;gap:9px">
+          <li style="display:flex;gap:9px;align-items:center"><span style="color:#B89A6A;font-size:16px;line-height:1">·</span><span style="font-size:13px;color:#706C66">Estado de habitaciones en vivo</span></li>
+          <li style="display:flex;gap:9px;align-items:center"><span style="color:#B89A6A;font-size:16px;line-height:1">·</span><span style="font-size:13px;color:#706C66">Gestión de mantenimiento</span></li>
+          <li style="display:flex;gap:9px;align-items:center"><span style="color:#B89A6A;font-size:16px;line-height:1">·</span><span style="font-size:13px;color:#706C66">Alertas de servicio automáticas</span></li>
+        </ul>
+      </div>
+
+      <!-- Flotillas -->
+      <div class="vcard rv">
+        <div style="width:52px;height:52px;border-radius:10px;background:rgba(184,154,106,.06);border:1px solid rgba(184,154,106,.12);display:flex;align-items:center;justify-content:center;margin-bottom:24px">
+          <svg width="22" height="22" fill="none" viewBox="0 0 22 22"><rect x="1" y="7" width="16" height="9" rx="2" stroke="#B89A6A" stroke-width="1.2"/><path d="M17 11h3l1 2v3h-4" stroke="#B89A6A" stroke-width="1.2" stroke-linejoin="round"/><circle cx="5.5" cy="17.5" r="1.5" stroke="#B89A6A" stroke-width="1.1"/><circle cx="14.5" cy="17.5" r="1.5" stroke="#B89A6A" stroke-width="1.1"/><path d="M1 11h16" stroke="#B89A6A" stroke-width="1" opacity=".4"/></svg>
+        </div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;color:#EAE6DF;margin-bottom:12px">Flotillas corporativas</h3>
+        <p style="font-size:14px;line-height:1.8;color:#706C66;margin-bottom:20px">Geolocalización, consumo de combustible, comportamiento del conductor y alertas de mantenimiento preventivo para toda tu flota desde un solo panel.</p>
+        <ul style="display:flex;flex-direction:column;gap:9px">
+          <li style="display:flex;gap:9px;align-items:center"><span style="color:#B89A6A;font-size:16px;line-height:1">·</span><span style="font-size:13px;color:#706C66">Rastreo GPS en tiempo real</span></li>
+          <li style="display:flex;gap:9px;align-items:center"><span style="color:#B89A6A;font-size:16px;line-height:1">·</span><span style="font-size:13px;color:#706C66">Telemetría de motor y combustible</span></li>
+          <li style="display:flex;gap:9px;align-items:center"><span style="color:#B89A6A;font-size:16px;line-height:1">·</span><span style="font-size:13px;color:#706C66">Score de conducción por unidad</span></li>
+        </ul>
+      </div>
+
+      <!-- Renta de autos -->
+      <div class="vcard rv">
+        <div style="width:52px;height:52px;border-radius:10px;background:rgba(184,154,106,.06);border:1px solid rgba(184,154,106,.12);display:flex;align-items:center;justify-content:center;margin-bottom:24px">
+          <svg width="22" height="22" fill="none" viewBox="0 0 22 22"><path d="M3 13l2-5h12l2 5" stroke="#B89A6A" stroke-width="1.2" stroke-linejoin="round"/><rect x="2" y="13" width="18" height="5" rx="1.5" stroke="#B89A6A" stroke-width="1.2"/><circle cx="6.5" cy="18.5" r="1.5" stroke="#B89A6A" stroke-width="1.1"/><circle cx="15.5" cy="18.5" r="1.5" stroke="#B89A6A" stroke-width="1.1"/><path d="M9 10h4" stroke="#B89A6A" stroke-width="1" stroke-linecap="round"/></svg>
+        </div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;color:#EAE6DF;margin-bottom:12px">Renta de autos</h3>
+        <p style="font-size:14px;line-height:1.8;color:#706C66;margin-bottom:20px">Conoce en todo momento dónde está cada unidad, su estado de servicio, kilometraje y condición. Reduce pérdidas y optimiza la disponibilidad de tu inventario.</p>
+        <ul style="display:flex;flex-direction:column;gap:9px">
+          <li style="display:flex;gap:9px;align-items:center"><span style="color:#B89A6A;font-size:16px;line-height:1">·</span><span style="font-size:13px;color:#706C66">Disponibilidad en tiempo real</span></li>
+          <li style="display:flex;gap:9px;align-items:center"><span style="color:#B89A6A;font-size:16px;line-height:1">·</span><span style="font-size:13px;color:#706C66">Geovallas y alertas de zona</span></li>
+          <li style="display:flex;gap:9px;align-items:center"><span style="color:#B89A6A;font-size:16px;line-height:1">·</span><span style="font-size:13px;color:#706C66">Historial completo por unidad</span></li>
+        </ul>
+      </div>
+
+      <!-- Transportadoras -->
+      <div class="vcard rv">
+        <div style="width:52px;height:52px;border-radius:10px;background:rgba(184,154,106,.06);border:1px solid rgba(184,154,106,.12);display:flex;align-items:center;justify-content:center;margin-bottom:24px">
+          <svg width="22" height="22" fill="none" viewBox="0 0 22 22"><path d="M2 8h13v8H2z" stroke="#B89A6A" stroke-width="1.2" stroke-linejoin="round"/><path d="M15 10l4 2v4h-4V10z" stroke="#B89A6A" stroke-width="1.2" stroke-linejoin="round"/><circle cx="5.5" cy="17.5" r="1.5" stroke="#B89A6A" stroke-width="1.1"/><circle cx="16.5" cy="17.5" r="1.5" stroke="#B89A6A" stroke-width="1.1"/><path d="M2 5h9" stroke="#B89A6A" stroke-width="1.1" stroke-linecap="round"/></svg>
+        </div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;color:#EAE6DF;margin-bottom:12px">Transportadoras</h3>
+        <p style="font-size:14px;line-height:1.8;color:#706C66;margin-bottom:20px">Monitoreo de rutas, tiempos de entrega, temperatura de carga refrigerada y cumplimiento de recorridos. Más entregas, menos incidentes.</p>
+        <ul style="display:flex;flex-direction:column;gap:9px">
+          <li style="display:flex;gap:9px;align-items:center"><span style="color:#B89A6A;font-size:16px;line-height:1">·</span><span style="font-size:13px;color:#706C66">Control de cadena de frío</span></li>
+          <li style="display:flex;gap:9px;align-items:center"><span style="color:#B89A6A;font-size:16px;line-height:1">·</span><span style="font-size:13px;color:#706C66">Prueba de entrega digital</span></li>
+          <li style="display:flex;gap:9px;align-items:center"><span style="color:#B89A6A;font-size:16px;line-height:1">·</span><span style="font-size:13px;color:#706C66">Alertas de desvío de ruta</span></li>
+        </ul>
+      </div>
+
+      <!-- Empresas en general -->
+      <div class="vcard rv">
+        <div style="width:52px;height:52px;border-radius:10px;background:rgba(184,154,106,.06);border:1px solid rgba(184,154,106,.12);display:flex;align-items:center;justify-content:center;margin-bottom:24px">
+          <svg width="22" height="22" fill="none" viewBox="0 0 22 22"><rect x="3" y="3" width="7" height="7" rx="1" stroke="#B89A6A" stroke-width="1.2"/><rect x="12" y="3" width="7" height="7" rx="1" stroke="#B89A6A" stroke-width="1.2"/><rect x="3" y="12" width="7" height="7" rx="1" stroke="#B89A6A" stroke-width="1.2"/><rect x="12" y="12" width="7" height="7" rx="1" stroke="#B89A6A" stroke-width="1.2"/></svg>
+        </div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;color:#EAE6DF;margin-bottom:12px">Empresas e industria</h3>
+        <p style="font-size:14px;line-height:1.8;color:#706C66;margin-bottom:20px">Cualquier operación que dependa de activos físicos se beneficia de visibilidad continua. Desde maquinaria industrial hasta inventarios, ubicaciones y condiciones ambientales.</p>
+        <ul style="display:flex;flex-direction:column;gap:9px">
+          <li style="display:flex;gap:9px;align-items:center"><span style="color:#B89A6A;font-size:16px;line-height:1">·</span><span style="font-size:13px;color:#706C66">Monitoreo de activos fijos</span></li>
+          <li style="display:flex;gap:9px;align-items:center"><span style="color:#B89A6A;font-size:16px;line-height:1">·</span><span style="font-size:13px;color:#706C66">Variables ambientales y de proceso</span></li>
+          <li style="display:flex;gap:9px;align-items:center"><span style="color:#B89A6A;font-size:16px;line-height:1">·</span><span style="font-size:13px;color:#706C66">Integración con operaciones existentes</span></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="hr"></div>
+
+<!-- CAPABILITIES — SPLIT -->
+<section style="padding:120px 0">
+  <div class="max-w-[1200px] mx-auto px-6 md:px-16">
+
+    <!-- Cap 1 -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-bottom:100px">
+      <div class="rv">
+        <p class="eye" style="margin-bottom:28px" data-eye>Alertas Inteligentes</p>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-weight:200;font-size:clamp(34px,4vw,54px);line-height:1.06;letter-spacing:-.022em;margin-bottom:24px">
+          No más llamadas<br/><span style="font-style:italic;color:#B89A6A">de emergencia.</span>
+        </h2>
+        <p style="font-size:16px;line-height:1.82;font-weight:300;color:#706C66;margin-bottom:28px">El sistema detecta anomalías antes de que escalen. Si una unidad se desvía de ruta, si el consumo energético sube fuera de parámetros o si un activo requiere mantenimiento, recibes la alerta antes de que lo notes.</p>
+        <ul style="display:flex;flex-direction:column;gap:14px">
+          <li style="display:flex;gap:14px;align-items:center">
+            <div style="width:34px;height:34px;border-radius:6px;background:rgba(184,154,106,.07);border:1px solid rgba(184,154,106,.12);flex-shrink:0;display:flex;align-items:center;justify-content:center">
+              <svg width="13" height="13" fill="none" viewBox="0 0 13 13"><path d="M2 7l3 3 6-6" stroke="#B89A6A" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <span style="font-size:14px;color:#706C66">Alertas por WhatsApp, email o SMS</span>
+          </li>
+          <li style="display:flex;gap:14px;align-items:center">
+            <div style="width:34px;height:34px;border-radius:6px;background:rgba(184,154,106,.07);border:1px solid rgba(184,154,106,.12);flex-shrink:0;display:flex;align-items:center;justify-content:center">
+              <svg width="13" height="13" fill="none" viewBox="0 0 13 13"><path d="M2 7l3 3 6-6" stroke="#B89A6A" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <span style="font-size:14px;color:#706C66">Umbrales configurables por activo</span>
+          </li>
+          <li style="display:flex;gap:14px;align-items:center">
+            <div style="width:34px;height:34px;border-radius:6px;background:rgba(184,154,106,.07);border:1px solid rgba(184,154,106,.12);flex-shrink:0;display:flex;align-items:center;justify-content:center">
+              <svg width="13" height="13" fill="none" viewBox="0 0 13 13"><path d="M2 7l3 3 6-6" stroke="#B89A6A" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <span style="font-size:14px;color:#706C66">Escalamiento automático si no hay respuesta</span>
+          </li>
+        </ul>
+      </div>
+      <div class="rv">
+        <div class="card" style="padding:32px">
+          <p style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(112,108,102,.4);margin-bottom:20px">Alertas recientes</p>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="padding:14px 18px;background:rgba(255,230,100,.03);border:1px solid rgba(255,210,60,.1);border-radius:8px;display:flex;align-items:center;justify-content:space-between">
+              <div style="display:flex;align-items:center;gap:10px">
+                <div style="width:7px;height:7px;border-radius:50%;background:#facc15;flex-shrink:0"></div>
+                <span style="font-size:12.5px;color:#706C66">Temperatura zona 3 — 27°C (umbral: 25°C)</span>
+              </div>
+              <span style="font-size:10.5px;color:rgba(112,108,102,.35)">2 min</span>
+            </div>
+            <div style="padding:14px 18px;background:rgba(74,222,128,.025);border:1px solid rgba(74,222,128,.1);border-radius:8px;display:flex;align-items:center;justify-content:space-between">
+              <div style="display:flex;align-items:center;gap:10px">
+                <div style="width:7px;height:7px;border-radius:50%;background:#4ade80;flex-shrink:0"></div>
+                <span style="font-size:12.5px;color:#706C66">Unidad F-08 — regresó a zona permitida</span>
+              </div>
+              <span style="font-size:10.5px;color:rgba(112,108,102,.35)">14 min</span>
+            </div>
+            <div style="padding:14px 18px;background:rgba(255,255,255,.018);border:1px solid rgba(255,255,255,.05);border-radius:8px;display:flex;align-items:center;justify-content:space-between">
+              <div style="display:flex;align-items:center;gap:10px">
+                <div style="width:7px;height:7px;border-radius:50%;background:#4ade80;flex-shrink:0"></div>
+                <span style="font-size:12.5px;color:#706C66">Hab. 412 — servicio completado</span>
+              </div>
+              <span style="font-size:10.5px;color:rgba(112,108,102,.35)">31 min</span>
+            </div>
+            <div style="padding:14px 18px;background:rgba(255,255,255,.018);border:1px solid rgba(255,255,255,.05);border-radius:8px;display:flex;align-items:center;justify-content:space-between">
+              <div style="display:flex;align-items:center;gap:10px">
+                <div style="width:7px;height:7px;border-radius:50%;background:#706C66;flex-shrink:0"></div>
+                <span style="font-size:12.5px;color:#706C66">Motor Unidad 22 — aceite próximo</span>
+              </div>
+              <span style="font-size:10.5px;color:rgba(112,108,102,.35)">2 hrs</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hr" style="margin-bottom:100px"></div>
+
+    <!-- Cap 2 -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center">
+      <div class="rv" style="order:2">
+        <p class="eye" style="margin-bottom:28px" data-eye>Análisis Predictivo</p>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-weight:200;font-size:clamp(34px,4vw,54px);line-height:1.06;letter-spacing:-.022em;margin-bottom:24px">
+          Corrige antes de<br/><span style="font-style:italic;color:#B89A6A">que falle.</span>
+        </h2>
+        <p style="font-size:16px;line-height:1.82;font-weight:300;color:#706C66;margin-bottom:28px">La IA aprende los patrones normales de cada activo y detecta cuando algo empieza a desviarse. Un compresor que consume 8% más, un vehículo que frena diferente, una habitación con tiempo de limpieza inusualmente alto — todo queda registrado y analizado.</p>
+        <ul style="display:flex;flex-direction:column;gap:14px">
+          <li style="display:flex;gap:14px;align-items:center">
+            <div style="width:34px;height:34px;border-radius:6px;background:rgba(184,154,106,.07);border:1px solid rgba(184,154,106,.12);flex-shrink:0;display:flex;align-items:center;justify-content:center">
+              <svg width="13" height="13" fill="none" viewBox="0 0 13 13"><path d="M2 7l3 3 6-6" stroke="#B89A6A" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <span style="font-size:14px;color:#706C66">Detección de anomalías por aprendizaje de patrones</span>
+          </li>
+          <li style="display:flex;gap:14px;align-items:center">
+            <div style="width:34px;height:34px;border-radius:6px;background:rgba(184,154,106,.07);border:1px solid rgba(184,154,106,.12);flex-shrink:0;display:flex;align-items:center;justify-content:center">
+              <svg width="13" height="13" fill="none" viewBox="0 0 13 13"><path d="M2 7l3 3 6-6" stroke="#B89A6A" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <span style="font-size:14px;color:#706C66">Proyección de consumos y mantenimientos</span>
+          </li>
+          <li style="display:flex;gap:14px;align-items:center">
+            <div style="width:34px;height:34px;border-radius:6px;background:rgba(184,154,106,.07);border:1px solid rgba(184,154,106,.12);flex-shrink:0;display:flex;align-items:center;justify-content:center">
+              <svg width="13" height="13" fill="none" viewBox="0 0 13 13"><path d="M2 7l3 3 6-6" stroke="#B89A6A" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <span style="font-size:14px;color:#706C66">Recomendaciones accionables en lenguaje natural</span>
+          </li>
+        </ul>
+      </div>
+      <div class="rv" style="order:1">
+        <div class="card" style="padding:36px">
+          <p style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(112,108,102,.4);margin-bottom:22px">Predicciones activas</p>
+          <div style="display:flex;flex-direction:column;gap:16px">
+            <div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:8px">
+                <span style="font-size:13px;color:#706C66">Eficiencia energética Edificio A</span>
+                <span style="font-size:12px;color:#B89A6A">91%</span>
+              </div>
+              <div style="height:4px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden"><div style="width:91%;height:100%;background:linear-gradient(to right,#B89A6A,rgba(184,154,106,.4));border-radius:4px"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:8px">
+                <span style="font-size:13px;color:#706C66">Disponibilidad flotilla</span>
+                <span style="font-size:12px;color:#B89A6A">78%</span>
+              </div>
+              <div style="height:4px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden"><div style="width:78%;height:100%;background:linear-gradient(to right,#B89A6A,rgba(184,154,106,.4));border-radius:4px"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:8px">
+                <span style="font-size:13px;color:#706C66">Score de conducción promedio</span>
+                <span style="font-size:12px;color:#B89A6A">85%</span>
+              </div>
+              <div style="height:4px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden"><div style="width:85%;height:100%;background:linear-gradient(to right,#B89A6A,rgba(184,154,106,.4));border-radius:4px"></div></div>
+            </div>
+            <div style="margin-top:8px;padding:14px;background:rgba(184,154,106,.04);border:1px solid rgba(184,154,106,.1);border-radius:8px">
+              <p style="font-size:12.5px;color:#706C66;line-height:1.7"><span style="color:#B89A6A">Predicción:</span> 3 unidades de la flotilla requieren revisión preventiva en los próximos 18 días. Costo estimado si se posterga: 4.2× mayor.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="hr"></div>
+
+<!-- METRICS STRIP -->
+<section style="padding:80px 0;background:#0A0A0C">
+  <div class="max-w-[1200px] mx-auto px-6 md:px-16">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.05)">
+      <div class="rv" style="background:#0A0A0C;padding:40px 32px;text-align:center">
+        <p style="font-family:'Cormorant Garamond',serif;font-weight:200;font-size:54px;line-height:1;color:#EAE6DF;margin-bottom:10px">23<span style="font-size:28px;color:#B89A6A">%</span></p>
+        <p style="font-size:13px;color:#706C66;line-height:1.6">reducción promedio<br/>en consumo energético</p>
+      </div>
+      <div class="rv" style="background:#0A0A0C;padding:40px 32px;text-align:center">
+        <p style="font-family:'Cormorant Garamond',serif;font-weight:200;font-size:54px;line-height:1;color:#EAE6DF;margin-bottom:10px">68<span style="font-size:28px;color:#B89A6A">%</span></p>
+        <p style="font-size:13px;color:#706C66;line-height:1.6">menos incidentes<br/>en flotillas monitoreadas</p>
+      </div>
+      <div class="rv" style="background:#0A0A0C;padding:40px 32px;text-align:center">
+        <p style="font-family:'Cormorant Garamond',serif;font-weight:200;font-size:54px;line-height:1;color:#EAE6DF;margin-bottom:10px">4.1<span style="font-size:28px;color:#B89A6A">×</span></p>
+        <p style="font-size:13px;color:#706C66;line-height:1.6">retorno sobre inversión<br/>en el primer año</p>
+      </div>
+      <div class="rv" style="background:#0A0A0C;padding:40px 32px;text-align:center">
+        <p style="font-family:'Cormorant Garamond',serif;font-weight:200;font-size:54px;line-height:1;color:#EAE6DF;margin-bottom:10px">24<span style="font-size:22px;color:#B89A6A">/7</span></p>
+        <p style="font-size:13px;color:#706C66;line-height:1.6">monitoreo sin<br/>interrupciones</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="hr"></div>
+
+<!-- HOW IT WORKS -->
+<section style="padding:120px 0">
+  <div class="max-w-[1200px] mx-auto px-6 md:px-16">
+    <div class="rv" style="text-align:center;margin-bottom:80px">
+      <p class="eyec" style="margin-bottom:22px" data-eyec>Implementación</p>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:200;font-size:clamp(38px,5vw,64px);line-height:1.04;letter-spacing:-.025em">
+        Operativo en<br/><span style="font-style:italic;color:#706C66">menos de una semana.</span>
+      </h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:32px">
+      <div class="rv card" style="padding:44px 36px">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:72px;font-weight:200;color:rgba(184,154,106,.08);line-height:1;margin-bottom:20px">01</div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;color:#EAE6DF;margin-bottom:12px">Diagnóstico de operación</h3>
+        <p style="font-size:14px;line-height:1.8;color:#706C66">Entendemos tus operaciones, qué activos tienes, qué métricas importan y cuáles son tus puntos de dolor principales. Sin tecnicismos.</p>
+      </div>
+      <div class="rv card" style="padding:44px 36px">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:72px;font-weight:200;color:rgba(184,154,106,.08);line-height:1;margin-bottom:20px">02</div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;color:#EAE6DF;margin-bottom:12px">Configuración y conexión</h3>
+        <p style="font-size:14px;line-height:1.8;color:#706C66">Configuramos el panel, los alertas y los reportes según tu operación. Nos adaptamos a tus sistemas actuales — no al revés.</p>
+      </div>
+      <div class="rv card" style="padding:44px 36px">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:72px;font-weight:200;color:rgba(184,154,106,.08);line-height:1;margin-bottom:20px">03</div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;color:#EAE6DF;margin-bottom:12px">Visibilidad total desde el día uno</h3>
+        <p style="font-size:14px;line-height:1.8;color:#706C66">Desde la primera semana tienes datos reales, alertas activas y acceso al panel. Tu equipo puede operar desde cualquier dispositivo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="padding:80px 24px 120px;background:#0A0A0C">
+  <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+    <div class="card rv" style="padding:80px 64px;text-align:center">
+      <p class="eyec" style="margin-bottom:28px" data-eyec>Agenda una demo</p>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:200;font-size:clamp(42px,5.5vw,78px);line-height:1.04;letter-spacing:-.03em;margin-bottom:20px">
+        Ve tus operaciones<br/><span style="font-style:italic;color:#706C66">en tiempo real.</span>
+      </h2>
+      <p style="font-size:16px;line-height:1.8;color:#706C66;max-width:440px;margin:0 auto 44px">Cuéntanos qué tienes que monitorear. En 30 minutos te mostramos cómo se vería con tus datos reales.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center">
+        <div class="mag"><a class="btn-p" href="app.html" style="padding:14px 40px;font-size:14px">Solicitar demo gratuita</a></div>
+        <div class="mag"><a class="btn-g" href="mailto:hola@victor-ia.xyz" style="padding:14px 40px;font-size:14px">Hablar con el equipo →</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer style="background:#040406;border-top:1px solid rgba(255,255,255,.05);padding:64px 0 40px;position:relative;z-index:10">
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px 0 64px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:48px">
+    <div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:300;letter-spacing:.04em;color:#EAE6DF;margin-bottom:14px">Victor <span style="color:#B89A6A">IA</span></div>
+      <p style="font-size:13.5px;line-height:1.7;font-weight:300;color:#706C66;max-width:260px">El primer supercerebro de IA en LATAM.</p>
+    </div>
+    <div>
+      <h4 style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(112,108,102,.35);margin-bottom:18px">Producto</h4>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:11px">
+        <li><a class="nav-a" href="agentes.html">Agentes IA</a></li>
+        <li><a class="nav-a" href="como-funciona.html">Cómo funciona</a></li>
+        <li><a class="nav-a" href="precios.html">Precios</a></li>
+        <li><a class="nav-a" href="telemetria.html" style="color:#EAE6DF">Eficiencia e IoT</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(112,108,102,.35);margin-bottom:18px">Legal</h4>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:11px">
+        <li><a class="nav-a" href="aviso-privacidad.html">Aviso de Privacidad</a></li>
+        <li><a class="nav-a" href="terminos-condiciones.html">Términos y Condiciones</a></li>
+        <li><a class="nav-a" href="politica-cookies.html">Política de Cookies</a></li>
+        <li><a class="nav-a" href="seguridad.html">Seguridad</a></li>
+      </ul>
+    </div>
+  </div>
+  <div style="max-width:1200px;margin:0 auto;padding:28px 64px 0;margin-top:48px;border-top:1px solid rgba(255,255,255,.05)">
+    <p style="font-size:10.5px;letter-spacing:.09em;color:rgba(112,108,102,.28)">© 2026 INFLUENCE IA S.A. DE C.V. — Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js" integrity="sha384-O55L/6rhHr9CFvrxqv5luxOCcmVaBmETbZbJDP+Do8T0pztTACsFBD/IXCNkj7DV" crossorigin="anonymous"></script>
+<script>
+(function(){
+'use strict';
+const lenis=new Lenis({duration:1.35,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)),smoothWheel:true});
+(function raf(t){lenis.raf(t);requestAnimationFrame(raf);})(0);
+gsap.registerPlugin(ScrollTrigger);
+lenis.on('scroll',ScrollTrigger.update);
+gsap.ticker.add(t=>lenis.raf(t*1000));
+gsap.ticker.lagSmoothing(0);
+const dot=document.getElementById('cur-d'),ring=document.getElementById('cur-r');
+let cx=innerWidth/2,cy=innerHeight/2,rx=cx,ry=cy,vis=false;
+document.addEventListener('mousemove',e=>{cx=e.clientX;cy=e.clientY;if(!vis){vis=true;dot.style.opacity='1';ring.style.opacity='1';}});
+document.addEventListener('mouseleave',()=>{dot.style.opacity='0';ring.style.opacity='0';vis=false;});
+document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>ring.classList.add('expand'));el.addEventListener('mouseleave',()=>ring.classList.remove('expand'));});
+(function animC(){rx+=(cx-rx)*.10;ry+=(cy-ry)*.10;dot.style.left=cx+'px';dot.style.top=cy+'px';ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animC);})();
+const pbar=document.getElementById('pbar');
+lenis.on('scroll',({progress})=>{pbar.style.width=(progress*100)+'%';});
+const hdr=document.getElementById('hdr');
+ScrollTrigger.create({start:'top -40',onUpdate:self=>hdr.classList.toggle('scrolled',self.scroll()>40)});
+gsap.utils.toArray('.rv').forEach(el=>{const rc=el.getBoundingClientRect();if(rc.top<window.innerHeight*.92){gsap.to(el,{opacity:1,y:0,duration:.8,ease:'power3.out'});}else{gsap.to(el,{opacity:1,y:0,duration:1,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 88%'}});}});
+document.querySelectorAll('[data-eye]').forEach(el=>{const rc=el.getBoundingClientRect();if(rc.top<window.innerHeight*.92){setTimeout(()=>el.classList.add('on'),100);}else{ScrollTrigger.create({trigger:el,start:'top 88%',onEnter:()=>el.classList.add('on')});}});
+document.querySelectorAll('[data-eyec]').forEach(el=>{const rc=el.getBoundingClientRect();if(rc.top<window.innerHeight*.92){setTimeout(()=>el.classList.add('on'),100);}else{ScrollTrigger.create({trigger:el,start:'top 88%',onEnter:()=>el.classList.add('on')});}});
+document.querySelectorAll('.mag').forEach(wrap=>{const btn=wrap.querySelector('button,a')||wrap;wrap.addEventListener('mousemove',e=>{const r=wrap.getBoundingClientRect();gsap.to(btn,{x:((e.clientX-r.left)/r.width-.5)*20,y:((e.clientY-r.top)/r.height-.5)*20,duration:.5,ease:'power2.out'});});wrap.addEventListener('mouseleave',()=>gsap.to(btn,{x:0,y:0,duration:.8,ease:'elastic.out(1,.38)'}));});
+(function(){const cv=document.createElement('canvas');cv.id='space-bg';Object.assign(cv.style,{position:'fixed',inset:'0',width:'100%',height:'100%',zIndex:'-1',pointerEvents:'none',opacity:'0',transition:'opacity 3s ease'});document.body.prepend(cv);const ctx=cv.getContext('2d');let W=cv.width=innerWidth,H=cv.height=innerHeight,mx=W/2,my=H/2;document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});window.addEventListener('resize',()=>{W=cv.width=innerWidth;H=cv.height=innerHeight;buildStars();});let stars=[],shoots=[],st=0;function buildStars(){stars=[];for(let i=0;i<380;i++)stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*.7+.15,l:0,tw:Math.random()*Math.PI*2,sp:.006+Math.random()*.006});for(let i=0;i<75;i++)stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.1+.5,l:1,tw:Math.random()*Math.PI*2,sp:.009+Math.random()*.008});for(let i=0;i<20;i++)stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.5+.9,l:2,tw:Math.random()*Math.PI*2,sp:.012+Math.random()*.01});}buildStars();const asts=Array.from({length:4},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.13,vy:(Math.random()-.5)*.1,r:Math.random()*10+6,rot:Math.random()*Math.PI*2,drot:(Math.random()-.5)*.004,sides:Math.floor(Math.random()*4)+5,jt:Array.from({length:8},()=>.6+Math.random()*.8)}));(function tick(){requestAnimationFrame(tick);ctx.clearRect(0,0,W,H);const px=(mx/W-.5),py=(my/H-.5);for(const s of stars){s.tw+=s.sp;const a=Math.min(.95,.25+Math.sin(s.tw)*.22+s.l*.12);ctx.beginPath();ctx.arc(s.x+px*(s.l+1)*-7,s.y+py*(s.l+1)*-7,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(215,205,185,${a.toFixed(2)})`;ctx.fill();}for(const a of asts){a.x+=a.vx;a.y+=a.vy;a.rot+=a.drot;if(a.x<-60)a.x=W+60;if(a.x>W+60)a.x=-60;if(a.y<-60)a.y=H+60;if(a.y>H+60)a.y=-60;ctx.save();ctx.translate(a.x,a.y);ctx.rotate(a.rot);ctx.beginPath();for(let i=0;i<a.sides;i++){const ang=(i/a.sides)*Math.PI*2,jr=a.jt[i%a.jt.length];i===0?ctx.moveTo(Math.cos(ang)*a.r*jr,Math.sin(ang)*a.r*jr):ctx.lineTo(Math.cos(ang)*a.r*jr,Math.sin(ang)*a.r*jr);}ctx.closePath();ctx.strokeStyle='rgba(170,150,110,.15)';ctx.lineWidth=.7;ctx.stroke();ctx.fillStyle='rgba(28,26,22,.45)';ctx.fill();ctx.restore();}st++;if(st>200+Math.random()*220){st=0;shoots.push({x:Math.random()*W*.65,y:Math.random()*H*.28,vx:4.5+Math.random()*5,vy:1.8+Math.random()*2,len:100+Math.random()*120,life:1,fade:.014+Math.random()*.014});}for(let i=shoots.length-1;i>=0;i--){const s=shoots[i];s.x+=s.vx;s.y+=s.vy;s.life-=s.fade;if(s.life<=0){shoots.splice(i,1);continue;}const g=ctx.createLinearGradient(s.x,s.y,s.x-s.vx*(s.len/5),s.y-s.vy*(s.len/5));g.addColorStop(0,`rgba(255,248,225,${(s.life*.9).toFixed(2)})`);g.addColorStop(1,'transparent');ctx.strokeStyle=g;ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(s.x,s.y);ctx.lineTo(s.x-s.vx*(s.len/5),s.y-s.vy*(s.len/5));ctx.stroke();}})();setTimeout(()=>{cv.style.opacity='1';},500);})();
+gsap.from('.rv:first-of-type',{opacity:0,y:40,duration:1.2,delay:.3,ease:'power3.out'});
+})();
+</script>
+</body>
+</html>

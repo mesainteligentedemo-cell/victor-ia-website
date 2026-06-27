@@ -1,0 +1,392 @@
+﻿<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VICTOR IA — One Pager</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:   #0E0F12;
+      --muted: rgba(14,15,18,0.42);
+      --rule:  rgba(14,15,18,0.10);
+      --warm:  #F8F7F5;
+      --amber: #CC8800;
+    }
+
+    /* ── Screen wrapper ── */
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: #E8E4DC;
+      display: flex; flex-direction: column;
+      align-items: center;
+      padding: 3rem 1.5rem;
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .screen-controls {
+      width: 100%; max-width: 860px;
+      display: flex; justify-content: flex-end; gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .btn-print {
+      padding: 0.7rem 1.8rem;
+      background: var(--ink); color: var(--warm);
+      border: none; cursor: pointer;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+      transition: background 0.2s;
+    }
+    .btn-print:hover { background: #2a2b30; }
+
+    /* ── Page ── */
+    .page {
+      width: 100%; max-width: 860px;
+      background: var(--warm);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 8px 60px rgba(0,0,0,0.14);
+    }
+
+    /* Marble texture overlay */
+    .page-marble {
+      position: absolute; inset: 0;
+      background-image: url('assets/bg-light.jpg');
+      background-size: cover; background-position: 50% 20%;
+      opacity: 0.18;
+      pointer-events: none;
+    }
+
+    .page-inner {
+      position: relative; z-index: 1;
+      padding: 3.5rem 4rem;
+    }
+
+    /* ── Header ── */
+    .op-header {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 2.5rem;
+    }
+    .op-logo-text {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.8rem; font-weight: 400;
+      letter-spacing: -0.02em;
+    }
+    .op-logo-text em { font-style: italic; }
+    .op-tagline {
+      font-size: 0.6rem; letter-spacing: 0.28em;
+      text-transform: uppercase; opacity: 0.38;
+      margin-top: 0.3rem;
+    }
+    .op-header-right {
+      text-align: right;
+    }
+    .op-location {
+      font-size: 0.62rem; letter-spacing: 0.2em;
+      text-transform: uppercase; opacity: 0.35;
+      line-height: 1.8;
+    }
+
+    /* ── Hero statement ── */
+    .op-hero {
+      margin-bottom: 3rem;
+    }
+    .op-hero h1 {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-weight: 400; line-height: 0.92;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.2rem;
+    }
+    .op-hero h1 em { font-style: italic; }
+    .op-hero p {
+      font-size: 0.88rem; line-height: 1.7;
+      opacity: 0.6; font-weight: 300;
+      max-width: 52ch;
+    }
+
+    /* ── Services grid ── */
+    .op-services {
+      margin-bottom: 3rem;
+    }
+    .op-section-label {
+      font-size: 0.58rem; letter-spacing: 0.3em;
+      text-transform: uppercase; opacity: 0.3;
+      margin-bottom: 1.4rem;
+    }
+    .op-svc-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border: 1px solid var(--rule);
+    }
+    .op-svc-item {
+      padding: 1.2rem 1.5rem 1.4rem;
+      border-right: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      display: flex; flex-direction: column; gap: 0.4rem;
+    }
+    .op-svc-item:nth-child(3n) { border-right: none; }
+    .op-svc-item:nth-child(7), .op-svc-item:nth-child(8), .op-svc-item:nth-child(9) { border-bottom: none; }
+    .op-svc-icon {
+      width: 40px; height: 40px; object-fit: cover;
+      filter: sepia(0.06) brightness(1.01) contrast(1.05) saturate(0.9);
+      opacity: 0.80; margin-bottom: 0.3rem;
+    }
+    .op-svc-num {
+      font-size: 0.52rem; letter-spacing: 0.22em;
+      opacity: 0.2; text-transform: uppercase;
+      margin-bottom: 0.1rem;
+    }
+    .op-svc-name {
+      font-family: 'Instrument Serif', serif;
+      font-size: 0.98rem; font-weight: 400;
+      line-height: 1.2; letter-spacing: -0.01em;
+    }
+    .op-svc-name em { font-style: italic; }
+
+    /* ── Stats ── */
+    .op-stats {
+      display: grid; grid-template-columns: repeat(4,1fr);
+      gap: 0;
+      border: 1px solid var(--rule);
+      margin-bottom: 3rem;
+    }
+    .op-stat {
+      padding: 1.4rem 1.5rem;
+      border-right: 1px solid var(--rule);
+    }
+    .op-stat:last-child { border-right: none; }
+    .op-stat-label {
+      font-size: 0.52rem; letter-spacing: 0.22em;
+      text-transform: uppercase; opacity: 0.3;
+      margin-bottom: 0.4rem;
+    }
+    .op-stat-value {
+      font-family: 'Instrument Serif', serif;
+      font-size: 2rem; font-weight: 400;
+      letter-spacing: -0.02em; line-height: 1;
+    }
+    .op-stat-delta {
+      font-size: 0.58rem; opacity: 0.3;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      margin-top: 0.3rem;
+    }
+
+    /* ── Industries ── */
+    .op-industries {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 2.5rem;
+      padding: 2.5rem 0;
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 2.5rem;
+    }
+    .op-ind-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.1rem; font-weight: 400;
+      letter-spacing: -0.015em;
+      margin-bottom: 0.6rem;
+    }
+    .op-ind-body {
+      font-size: 0.72rem; line-height: 1.65;
+      opacity: 0.48; font-weight: 300;
+    }
+
+    /* ── Footer ── */
+    .op-footer {
+      display: flex; justify-content: space-between;
+      align-items: flex-end;
+    }
+    .op-footer-left {
+      font-size: 0.6rem; letter-spacing: 0.18em;
+      text-transform: uppercase; opacity: 0.28;
+      line-height: 1.9;
+    }
+    .op-cta {
+      text-align: right;
+    }
+    .op-cta-label {
+      font-size: 0.55rem; letter-spacing: 0.25em;
+      text-transform: uppercase; opacity: 0.3;
+      margin-bottom: 0.4rem;
+    }
+    .op-cta-url {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.1rem; font-style: italic;
+      font-weight: 400; letter-spacing: -0.01em;
+    }
+
+    /* ── Print ── */
+    @media print {
+      body { background: white; padding: 0; }
+      .screen-controls { display: none; }
+      .page { max-width: 100%; box-shadow: none; }
+      .page-inner { padding: 2.5cm 2.8cm; }
+      .op-hero h1 { font-size: 3rem; }
+    }
+
+    @media (max-width: 640px) {
+      .page-inner { padding: 2rem 1.6rem; }
+      .op-header { flex-direction: column; gap: 1rem; }
+      .op-header-right { text-align: left; }
+      .op-svc-grid { grid-template-columns: 1fr; }
+      .op-svc-item { border-right: none !important; }
+      .op-svc-item:nth-child(n) { border-bottom: 1px solid var(--rule); }
+      .op-stats { grid-template-columns: repeat(2,1fr); }
+      .op-stat:nth-child(2) { border-right: none; }
+      .op-stat:nth-child(3) { border-top: 1px solid var(--rule); }
+      .op-industries { grid-template-columns: 1fr; gap: 1.8rem; }
+      .op-footer { flex-direction: column; gap: 1.5rem; }
+      .op-cta { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="screen-controls">
+    <button class="btn-print" onclick="window.print()">Imprimir / Guardar PDF</button>
+  </div>
+
+  <div class="page">
+    <div class="page-marble"></div>
+    <div class="page-inner">
+
+      <!-- Header -->
+      <header class="op-header">
+        <div>
+          <div class="op-logo-text">VICTOR <em>IA</em></div>
+          <div class="op-tagline">Studio de Inteligencia Artificial · México</div>
+        </div>
+        <div class="op-header-right">
+          <div class="op-location">
+            Playa del Carmen<br>
+            Quintana Roo · México<br>
+            info@victor-ia.com.mx
+          </div>
+        </div>
+      </header>
+
+      <!-- Hero statement -->
+      <div class="op-hero">
+        <h1>Inteligencia<br><em>que trabaja.</em></h1>
+        <p>Construimos agentes de IA, automatización real y presencia digital cinematográfica para empresas que necesitan resultados medibles, no consultorías genéricas.</p>
+      </div>
+
+      <!-- Services -->
+      <div class="op-services">
+        <p class="op-section-label">Nuestros servicios</p>
+        <div class="op-svc-grid">
+          <div class="op-svc-item">
+            <img src="assets/icons/icon-01-agentes-ia.png" alt="" class="op-svc-icon">
+            <div class="op-svc-num">/01</div>
+            <div class="op-svc-name">Agentes de IA<br><em>con Voz y Texto</em></div>
+          </div>
+          <div class="op-svc-item">
+            <img src="assets/icons/icon-02-sitios-web.png" alt="" class="op-svc-icon">
+            <div class="op-svc-num">/02</div>
+            <div class="op-svc-name">Sitios Web<br><em>Inclusivos</em></div>
+          </div>
+          <div class="op-svc-item">
+            <img src="assets/icons/icon-03-automatizacion.png" alt="" class="op-svc-icon">
+            <div class="op-svc-num">/03</div>
+            <div class="op-svc-name">Automatización<br><em>de Procesos</em></div>
+          </div>
+          <div class="op-svc-item">
+            <img src="assets/icons/icon-04-intelligence.png" alt="" class="op-svc-icon">
+            <div class="op-svc-num">/04</div>
+            <div class="op-svc-name">Intelligence<br><em>Architecture</em></div>
+          </div>
+          <div class="op-svc-item">
+            <img src="assets/icons/icon-05-video.png" alt="" class="op-svc-icon">
+            <div class="op-svc-num">/05</div>
+            <div class="op-svc-name">Video &amp;<br><em>Producción IA</em></div>
+          </div>
+          <div class="op-svc-item">
+            <img src="assets/icons/icon-06-analytics.png" alt="" class="op-svc-icon">
+            <div class="op-svc-num">/06</div>
+            <div class="op-svc-name">Data Analytics<br><em>&amp; Business Intelligence</em></div>
+          </div>
+          <div class="op-svc-item">
+            <img src="assets/icons/icon-07-modelos-3d.png" alt="" class="op-svc-icon">
+            <div class="op-svc-num">/07</div>
+            <div class="op-svc-name">Modelos 3D<br><em>&amp; Configuradores</em></div>
+          </div>
+          <div class="op-svc-item">
+            <img src="assets/icons/icon-08-ciberseguridad.png" alt="" class="op-svc-icon">
+            <div class="op-svc-num">/08</div>
+            <div class="op-svc-name">Ciberseguridad<br><em>&amp; IA On-Premise</em></div>
+          </div>
+          <div class="op-svc-item">
+            <div class="op-svc-num">/09</div>
+            <div class="op-svc-name">Estrategia<br><em>Integral 360°</em></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="op-stats">
+        <div class="op-stat">
+          <div class="op-stat-label">Leads calificados</div>
+          <div class="op-stat-value">3.2×</div>
+          <div class="op-stat-delta">vs proceso manual</div>
+        </div>
+        <div class="op-stat">
+          <div class="op-stat-label">Bases reactivadas</div>
+          <div class="op-stat-value">68%</div>
+          <div class="op-stat-delta">respuesta en 48h</div>
+        </div>
+        <div class="op-stat">
+          <div class="op-stat-label">Tiempo de cierre</div>
+          <div class="op-stat-value">−40%</div>
+          <div class="op-stat-delta">ciclo de venta</div>
+        </div>
+        <div class="op-stat">
+          <div class="op-stat-label">Costo por lead</div>
+          <div class="op-stat-value">−55%</div>
+          <div class="op-stat-delta">vs métodos tradicionales</div>
+        </div>
+      </div>
+
+      <!-- Industries -->
+      <div class="op-industries">
+        <div>
+          <div class="op-ind-title">Hotelería</div>
+          <div class="op-ind-body">Agentes de reservas, concierge virtual y reactivación de huéspedes de temporadas anteriores.</div>
+        </div>
+        <div>
+          <div class="op-ind-title">Timeshare</div>
+          <div class="op-ind-body">Calificación de leads en tiempo real, agente de reactivación especializado y pipeline automatizado.</div>
+        </div>
+        <div>
+          <div class="op-ind-title">Inmobiliario de Lujo</div>
+          <div class="op-ind-body">Sitios cinematográficos, configuradores 3D y arquitectura de inteligencia para LATAM.</div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer class="op-footer">
+        <div class="op-footer-left">
+          INFLUENCE IA S.A. DE C.V.<br>
+          +52 984 235 3159 &nbsp;·&nbsp; info@victor-ia.com.mx<br>
+          Playa del Carmen, Quintana Roo · México
+        </div>
+        <div class="op-cta">
+          <div class="op-cta-label">Agenda tu diagnóstico gratuito</div>
+          <div class="op-cta-url">victor-ia.com.mx</div>
+        </div>
+      </footer>
+
+    </div><!-- /page-inner -->
+  </div><!-- /page -->
+
+</body>
+</html>

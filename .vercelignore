@@ -1,0 +1,9 @@
+# Large video files — servidos desde CDN externo
+assets/videos/
+
+# Git internals
+.git/
+
+# Dev files
+*.md
+node_modules/

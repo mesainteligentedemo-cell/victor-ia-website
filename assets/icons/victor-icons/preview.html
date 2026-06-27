@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Victor Icons — Sistema</title>
+<style>
+  :root{ --ink:#0E0F12; --snow:#F8F7F5; --gold:#B8860B; --line:rgba(248,247,245,.08); }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--ink);color:var(--snow);
+    font-family:'Inter',-apple-system,'Segoe UI',sans-serif;padding:48px 32px}
+  h1{font-weight:700;letter-spacing:-.03em;font-size:1.6rem;margin:0 0 4px}
+  .sub{color:rgba(248,247,245,.45);font-size:.8rem;margin:0 0 40px;letter-spacing:.02em}
+  h2{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--gold);margin:40px 0 16px;font-weight:600}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:2px;
+    background:var(--line);border:1px solid var(--line)}
+  .cell{background:var(--ink);padding:20px 8px;display:flex;flex-direction:column;
+    align-items:center;gap:12px;transition:background .15s}
+  .cell:hover{background:#16181d}
+  .icons{display:flex;align-items:flex-end;gap:14px}
+  .name{font-size:.62rem;color:rgba(248,247,245,.5);letter-spacing:.02em}
+  .sz{font-size:.5rem;color:rgba(248,247,245,.25);font-family:monospace}
+  /* la V madre como referencia de coherencia */
+  .vref{display:flex;align-items:center;gap:24px;margin:24px 0 8px;
+    padding:24px;border:1px solid var(--line);border-radius:8px}
+  .vref svg{color:var(--snow)}
+  .vref .lbl{font-size:.72rem;color:rgba(248,247,245,.55);line-height:1.7}
+  .gold{color:var(--gold)!important}
+</style>
+</head>
+<body>
+  <h1>Victor Icons</h1>
+  <p class="sub">40 iconos · geometría angular · DNA de la "V" · viewBox 24 · stroke 2 · outline currentColor</p>
+
+  <div class="vref">
+    <span data-victor-icon="maestria" data-size="56"></span>
+    <span data-victor-icon="check" data-size="56" data-color="#B8860B"></span>
+    <span class="lbl">Prueba de coherencia: la <b>V madre</b> (maestria) y el <b>check</b> (que ES una V)
+      comparten el mismo ADN angular. Todo el sistema deriva de aquí.</span>
+  </div>
+
+  <h2>A · Agentes / Categorías (21)</h2>
+  <div class="grid" id="g-agentes"></div>
+
+  <h2>B · UI (15)</h2>
+  <div class="grid" id="g-ui"></div>
+
+  <h2>C · Status / Feedback (4)</h2>
+  <div class="grid" id="g-status"></div>
+
+<script src="./victor-icons.js"></script>
+<script>
+  var AGENTES = ['maestria','creatividad','codigo','datos','seguridad','automatizacion',
+    'inteligencia','web','video','audio','copy','seo','analitica','marketing','finanzas',
+    'cliente','integraciones','documentacion','devops','tresd','scraping'];
+  var UI = ['home','menu','search','settings','close','arrow','check','warning','info',
+    'plus','minus','chevron','edit','trash','send'];
+  var STATUS = ['loading','success','error','pending'];
+
+  function build(id, list){
+    var html = '';
+    list.forEach(function(n){
+      var spin = n === 'loading' ? ' data-spin' : '';
+      html += '<div class="cell">'
+        + '<div class="icons">'
+        + '<span data-victor-icon="'+n+'" data-size="24"'+spin+'></span>'
+        + '<span data-victor-icon="'+n+'" data-size="16"'+spin+'></span>'
+        + '</div>'
+        + '<span class="name">'+n+'</span>'
+        + '<span class="sz">24 · 16</span>'
+        + '</div>';
+    });
+    document.getElementById(id).innerHTML = html;
+  }
+  build('g-agentes', AGENTES);
+  build('g-ui', UI);
+  build('g-status', STATUS);
+  VictorIcons.mountAll();
+</script>
+</body>
+</html>

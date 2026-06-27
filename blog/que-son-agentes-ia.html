@@ -1,0 +1,247 @@
+<!DOCTYPE html><html lang="es"><head>
+<meta charset="utf-8"/><meta content="width=device-width,initial-scale=1.0" name="viewport"/>
+<title>¿Qué son los Agentes de IA y Cómo Trabajan en 2026? | Victor IA Blog</title>
+<meta name="description" content="Descubre qué son los agentes de IA, cómo toman decisiones autónomas, los diferentes tipos y cómo pueden transformar tu empresa en 2026."/>
+<link rel="canonical" href="https://victor-ia.xyz/blog/que-son-agentes-ia.html"/>
+<meta name="robots" content="index, follow"/>
+<meta http-equiv="content-language" content="es-MX"/>
+<meta name="geo.region" content="MX"/>
+<meta property="og:title" content="¿Qué son los Agentes de IA y Cómo Trabajan en 2026?"/>
+<meta property="og:description" content="Descubre qué son los agentes de IA, cómo toman decisiones autónomas, los diferentes tipos y cómo pueden transformar tu empresa en 2026."/>
+<meta property="og:locale" content="es_MX"/>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"¿Qué son los Agentes de IA y Cómo Trabajan en 2026?","description":"Descubre qué son los agentes de IA, cómo toman decisiones autónomas, los diferentes tipos y cómo pueden transformar tu empresa en 2026.","datePublished":"2026-05-27","dateModified":"2026-05-27","author":{"@type":"Organization","name":"Victor IA","url":"https://victor-ia.xyz"},"publisher":{"@type":"Organization","name":"Victor IA","url":"https://victor-ia.xyz"},"inLanguage":"es-MX","mainEntityOfPage":{"@type":"WebPage","@id":"https://victor-ia.xyz/blog/que-son-agentes-ia.html"}}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;0,500;1,200;1,300;1,400;1,500&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com" integrity="sha384-igm5BeiBt36UU4gqwWS7imYmelpTsZlQ45FZf+XBn9MuJbn4nQr7yx1yFydocC/K" crossorigin="anonymous"></script>
+<script>tailwind.config={darkMode:'class',theme:{extend:{colors:{ink:'#070708',cream:'#EAE6DF',muted:'#706C66',gold:'#B89A6A'},fontFamily:{display:['Cormorant Garamond','Georgia','serif'],body:['Inter','sans-serif']}}}}</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased;scroll-behavior:auto}
+body{background:#070708;color:#EAE6DF;font-family:'Inter',sans-serif;overflow-x:hidden;font-weight:300}
+@media(pointer:fine){html,body,*{cursor:none!important}}
+@media(prefers-contrast:more){html,body,*{cursor:auto!important}#cur-d,#cur-r{display:none!important}}
+#cur-d{position:fixed;width:5px;height:5px;background:#B89A6A;border-radius:50%;pointer-events:none!important;z-index:2147483647;transform:translate(-50%,-50%)}
+#cur-r{position:fixed;width:36px;height:36px;border:1px solid rgba(184,154,106,.42);border-radius:50%;pointer-events:none!important;z-index:2147483646;transform:translate(-50%,-50%);transition:width .4s,height .4s}
+#pbar{position:fixed;top:0;left:0;height:1px;background:#B89A6A;z-index:100000;width:0}
+#noise{position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.024;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+header{position:fixed;top:0;left:0;right:0;z-index:500;height:68px;transition:background .5s,border-color .5s;border-bottom:1px solid transparent}
+header.scrolled{background:rgba(7,7,8,.92);border-bottom-color:rgba(255,255,255,.06);backdrop-filter:blur(18px)}
+.nav-a{position:relative;color:#706C66;font-size:13px;letter-spacing:.07em;font-weight:300;transition:color .3s;text-decoration:none}
+.nav-a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:#B89A6A;transition:width .45s}
+.nav-a:hover{color:#EAE6DF}.nav-a:hover::after{width:100%}
+.btn-p{display:inline-flex;align-items:center;border-radius:5px;font-family:'Inter',sans-serif;font-size:13px;letter-spacing:.09em;font-weight:500;background:#EAE6DF;color:#070708;padding:11px 26px;text-decoration:none;transition:background .25s,transform .2s}
+.btn-p:hover{background:#fff;transform:translateY(-2px)}
+.rv{opacity:0;transform:translateY(30px)}
+.prose h2{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,3vw,30px);font-weight:300;color:#EAE6DF;margin:48px 0 16px;letter-spacing:.02em}
+.prose h3{font-size:13px;font-weight:500;color:#B89A6A;margin:32px 0 12px;letter-spacing:.1em;text-transform:uppercase}
+.prose p{font-size:16px;line-height:1.85;color:rgba(234,230,223,.75);margin-bottom:20px}
+.prose ul{margin:0 0 20px 24px;list-style:disc}
+.prose ul li{font-size:15.5px;line-height:1.75;color:rgba(234,230,223,.72);margin-bottom:8px}
+.prose a{color:#B89A6A;text-decoration:none;border-bottom:1px solid rgba(184,154,106,.3)}
+.prose a:hover{border-bottom-color:#B89A6A}
+.prose blockquote{border-left:2px solid #B89A6A;padding-left:20px;margin:28px 0;font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;color:rgba(234,230,223,.8);font-style:italic}
+.img-placeholder{width:100%;aspect-ratio:16/9;border-radius:10px;background:linear-gradient(135deg,#0c0a18 0%,#1a1035 50%,#0a0808 100%);border:1px solid rgba(184,154,106,.12);display:flex;align-items:center;justify-content:center;margin:32px 0;overflow:hidden}
+.img-caption{font-size:11.5px;letter-spacing:.08em;color:#706C66;text-align:center;margin-top:-24px;margin-bottom:32px;text-transform:uppercase}
+.tag{display:inline-block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#B89A6A;border:1px solid rgba(184,154,106,.25);border-radius:3px;padding:3px 10px}
+.stat-box{background:#0F0F12;border:1px solid rgba(255,255,255,.054);border-radius:10px;padding:24px;text-align:center}
+</style>
+</head>
+<body class="dark">
+<div id="noise"></div>
+<div id="cur-d"></div><div id="cur-r"></div>
+<div id="pbar"></div>
+<header id="hdr">
+  <div class="flex justify-between items-center max-w-[1200px] mx-auto px-6 md:px-16 h-full relative z-10">
+    <a href="../index.html" class="font-display text-[21px] font-light tracking-[.04em] text-cream" style="text-decoration:none">Victor <span style="color:#B89A6A">IA</span></a>
+    <nav class="hidden md:flex gap-9 items-center">
+      <a class="nav-a" href="../agentes.html">Agentes</a>
+      <a class="nav-a" href="../como-funciona.html">Cómo Funciona</a>
+      <a class="nav-a" href="../precios.html">Precios</a>
+      <a class="nav-a" href="index.html" style="color:#EAE6DF">Blog</a>
+      <a class="nav-a" href="../telemetria.html">Eficiencia IoT</a>
+    </nav>
+    <div class="flex items-center gap-5">
+      <a class="nav-a hidden sm:block" href="../app.html">Iniciar sesión</a>
+      <a class="btn-p" href="../app.html">Empezar gratis</a>
+    </div>
+  </div>
+</header>
+
+<main style="padding-top:68px;position:relative;z-index:10">
+  <!-- Article Hero -->
+  <section style="padding:80px 0 48px;border-bottom:1px solid rgba(255,255,255,.05)">
+    <div style="max-width:800px;margin:0 auto;padding:0 24px">
+      <div class="rv" style="margin-bottom:16px">
+        <span class="tag">Educativo</span>
+        <span style="font-size:12px;color:#706C66;margin-left:16px">27 de Mayo, 2026 · 8 min lectura</span>
+      </div>
+      <h1 class="rv" style="font-family:'Cormorant Garamond',serif;font-size:clamp(32px,5vw,54px);font-weight:300;line-height:1.15;letter-spacing:-.01em;color:#EAE6DF;margin-bottom:20px">¿Qué son los Agentes de IA y Cómo Trabajan en 2026?</h1>
+      <p class="rv" style="font-size:18px;line-height:1.7;color:rgba(234,230,223,.6);font-weight:300">La inteligencia artificial dejó de ser una herramienta de respuestas. Hoy actúa, decide y ejecuta tareas completas sin intervención humana. Los agentes de IA son la razón por la que todo cambió — y entender cómo funcionan es el primer paso para no quedarte atrás.</p>
+    </div>
+  </section>
+
+  <!-- Article Body -->
+  <section style="padding:64px 0 80px">
+    <div style="max-width:800px;margin:0 auto;padding:0 24px" class="prose">
+
+      <h2>Más allá del chatbot: qué es realmente un agente de IA</h2>
+      <p>Durante años, "inteligencia artificial" fue sinónimo de responder preguntas. Escribías algo, la IA respondía. Listo. Ese modelo es útil, pero tiene un límite claro: la IA solo actúa cuando tú actúas primero.</p>
+      <p>Un agente de IA rompe ese molde. En lugar de esperar instrucciones paso a paso, un agente recibe un <em>objetivo</em> — "genera el reporte mensual de ventas", "responde todos los correos de soporte de hoy", "monitorea los precios de la competencia" — y lo ejecuta de manera autónoma. Planifica los pasos, toma decisiones en el camino, usa herramientas externas y entrega un resultado.</p>
+      <p>La diferencia no es menor. Es la diferencia entre tener un empleado que espera que le digas exactamente qué hacer en cada momento, y tener uno que entiende el objetivo y lo logra por su cuenta.</p>
+
+      <div class="img-placeholder">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="24" cy="24" r="10" stroke="#B89A6A" stroke-width="1.5"/>
+          <circle cx="24" cy="24" r="3" fill="#B89A6A"/>
+          <line x1="24" y1="6" x2="24" y2="14" stroke="rgba(184,154,106,.4)" stroke-width="1.5"/>
+          <line x1="24" y1="34" x2="24" y2="42" stroke="rgba(184,154,106,.4)" stroke-width="1.5"/>
+          <line x1="6" y1="24" x2="14" y2="24" stroke="rgba(184,154,106,.4)" stroke-width="1.5"/>
+          <line x1="34" y1="24" x2="42" y2="24" stroke="rgba(184,154,106,.4)" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <p class="img-caption">Arquitectura de un agente autónomo — percepción, razonamiento y acción en bucle continuo</p>
+
+      <h2>Los 5 tipos de agentes que están transformando empresas</h2>
+      <p>No todos los agentes de IA hacen lo mismo. Según la tarea que ejecutan, se clasifican en categorías distintas — y cada una resuelve un problema de negocio diferente.</p>
+
+      <h3>1. Agentes Conversacionales</h3>
+      <p>Son los más visibles. Atienden clientes, responden preguntas, califican prospectos y escalan casos complejos a personas reales cuando es necesario. Operan 24/7 sin fatiga ni variabilidad de calidad. En empresas con alto volumen de interacciones, un solo agente conversacional puede manejar el equivalente a 15–20 posiciones de atención al cliente simultáneamente, con una <strong>reducción del 78% en tiempo de respuesta</strong> frente a equipos humanos tradicionales.</p>
+
+      <h3>2. Agentes de Proceso</h3>
+      <p>Ejecutan flujos de trabajo completos: desde recibir una solicitud hasta completarla. Un agente de proceso puede tomar una orden de compra, verificar inventario, generar la factura, notificar al cliente y actualizar el CRM — todo sin que ninguna persona toque el teclado. Son el motor de la automatización real.</p>
+
+      <h3>3. Agentes de Análisis</h3>
+      <p>Consumen datos continuamente — ventas, métricas de marketing, indicadores financieros, comportamiento de usuarios — y producen insights accionables. No solo generan reportes: detectan anomalías, identifican oportunidades y alertan sobre riesgos antes de que se conviertan en problemas. Hacen en minutos lo que un analista humano tardaría días en procesar.</p>
+
+      <h3>4. Agentes Creativos</h3>
+      <p>Producen contenido: textos, imágenes, guiones, propuestas, presentaciones. Pero a diferencia de generadores genéricos, un agente creativo especializado conoce la voz de tu marca, tu industria, tu competencia y tus objetivos. El resultado no es contenido cualquiera — es contenido tuyo, escalado.</p>
+
+      <h3>5. Agentes de Monitoreo</h3>
+      <p>Observan. De manera continua. Rastrean competidores, vigilán menciones de marca, monitorean indicadores de sistema, revisan cambios regulatorios, detectan fraudes. Cuando algo requiere atención humana, alertan en tiempo real. Son la capa de vigilancia que ningún equipo humano puede mantener de forma sostenida.</p>
+
+      <div class="img-placeholder">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="8" y="8" width="14" height="14" rx="2" stroke="#B89A6A" stroke-width="1.5"/>
+          <rect x="26" y="8" width="14" height="14" rx="2" stroke="rgba(184,154,106,.4)" stroke-width="1.5"/>
+          <rect x="8" y="26" width="14" height="14" rx="2" stroke="rgba(184,154,106,.4)" stroke-width="1.5"/>
+          <rect x="26" y="26" width="14" height="14" rx="2" stroke="rgba(184,154,106,.4)" stroke-width="1.5"/>
+          <line x1="22" y1="15" x2="26" y2="15" stroke="#B89A6A" stroke-width="1.5"/>
+          <line x1="22" y1="33" x2="26" y2="33" stroke="rgba(184,154,106,.4)" stroke-width="1.5"/>
+          <line x1="15" y1="22" x2="15" y2="26" stroke="rgba(184,154,106,.4)" stroke-width="1.5"/>
+          <line x1="33" y1="22" x2="33" y2="26" stroke="rgba(184,154,106,.4)" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <p class="img-caption">Red de agentes especializados — cada nodo resuelve un dominio, todos coordinados en un sistema</p>
+
+      <h2>Cómo toma decisiones un agente de IA</h2>
+      <p>La arquitectura detrás de un agente autónomo tiene tres componentes fundamentales que trabajan en bucle continuo:</p>
+      <ul>
+        <li><strong>Percepción:</strong> el agente recibe información del entorno — un mensaje de cliente, un nuevo dato en una base de datos, un cambio en un indicador, una instrucción del usuario. Procesa esa información y construye una representación del estado actual.</li>
+        <li><strong>Razonamiento:</strong> evalúa qué acción tomar. Considera el objetivo asignado, las herramientas disponibles, las restricciones del contexto y las consecuencias posibles de cada decisión. Este es el paso que distingue a un agente de un simple automatizador de tareas.</li>
+        <li><strong>Acción:</strong> ejecuta. Puede escribir un correo, llamar a una API externa, actualizar un registro, generar un documento, delegar a otro agente especializado o solicitar validación humana cuando la situación lo requiere.</li>
+      </ul>
+      <p>Este ciclo se repite — a veces miles de veces en una sola tarea compleja — hasta que el objetivo queda completado o el agente determina que necesita intervención humana.</p>
+
+      <blockquote>"Un agente de IA no reemplaza a las personas. Elimina el trabajo que las personas no deberían estar haciendo."</blockquote>
+
+      <h2>La diferencia real con los chatbots tradicionales</h2>
+      <p>Esta es la confusión más común, y vale la pena aclararla de una vez. Un chatbot tradicional responde preguntas dentro de un guión predefinido. Sigue un árbol de decisiones diseñado por humanos. Si algo sale del guión, falla o escala.</p>
+      <p>Un agente de IA no tiene guión. Tiene un objetivo y capacidades. Puede tomar rutas que nadie programó explícitamente, porque razona sobre el problema en lugar de buscar una coincidencia en una base de respuestas. Si el proceso cambia, el agente se adapta. Si aparece un caso nuevo, lo maneja.</p>
+      <p>Además, y esto es crítico: un agente puede <em>hacer cosas</em>, no solo <em>decir cosas</em>. Puede acceder a sistemas externos, modificar registros, generar archivos, enviar comunicaciones. Un chatbot habla. Un agente actúa.</p>
+
+      <div class="img-placeholder">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 36 L16 20 L24 28 L32 16 L40 24" stroke="#B89A6A" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="40" cy="24" r="3" fill="#B89A6A"/>
+          <circle cx="24" cy="28" r="2" fill="rgba(184,154,106,.4)"/>
+          <circle cx="16" cy="20" r="2" fill="rgba(184,154,106,.4)"/>
+        </svg>
+      </div>
+      <p class="img-caption">Comparativa de rendimiento — agentes autónomos vs asistentes tradicionales en tareas de alta complejidad</p>
+
+      <h2>Casos de uso reales por industria</h2>
+      <p>Los agentes de IA no son una tecnología de futuro. Están operando hoy, en empresas de todos los tamaños, en industrias muy distintas:</p>
+      <ul>
+        <li><strong>Servicios financieros:</strong> análisis de riesgo crediticio, detección de patrones de fraude, generación de reportes regulatorios, atención a clientes de alto patrimonio.</li>
+        <li><strong>Retail y e-commerce:</strong> gestión de inventario predictiva, personalización de ofertas en tiempo real, atención post-venta, análisis de devoluciones.</li>
+        <li><strong>Salud:</strong> triaje inicial de pacientes, seguimiento de tratamientos, gestión de citas, análisis de resultados de laboratorio.</li>
+        <li><strong>Manufactura:</strong> mantenimiento predictivo de equipos, control de calidad automatizado, optimización de cadena de suministro.</li>
+        <li><strong>Servicios profesionales:</strong> investigación de mercado, generación de propuestas, seguimiento de prospectos, producción de contenido especializado.</li>
+      </ul>
+
+      <h2>Cómo coordinar múltiples agentes: los sistemas multi-agente</h2>
+      <p>La verdadera potencia emerge cuando los agentes trabajan juntos. En un sistema multi-agente, cada agente es especialista en un dominio, y un orquestador central distribuye tareas según las capacidades de cada uno.</p>
+      <p>Imagina el proceso de onboarding de un nuevo cliente: el agente de comunicación envía los correos de bienvenida, el agente de datos configura el acceso al sistema, el agente de análisis genera el perfil inicial, el agente de contenido prepara los materiales personalizados y el agente de seguimiento programa los puntos de contacto de los próximos 30 días. Todo sucede en paralelo, en minutos, sin que ningún humano coordine manualmente cada paso.</p>
+      <p>En Victor IA operamos con hasta <strong>200 agentes simultáneos</strong> coordinados en tiempo real — cada uno especializado, todos comunicados, trabajando como un solo sistema inteligente que nunca duerme.</p>
+
+      <div class="img-placeholder">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="24" cy="12" r="4" stroke="#B89A6A" stroke-width="1.5"/>
+          <circle cx="10" cy="36" r="4" stroke="rgba(184,154,106,.5)" stroke-width="1.5"/>
+          <circle cx="24" cy="36" r="4" stroke="rgba(184,154,106,.5)" stroke-width="1.5"/>
+          <circle cx="38" cy="36" r="4" stroke="rgba(184,154,106,.5)" stroke-width="1.5"/>
+          <line x1="24" y1="16" x2="10" y2="32" stroke="rgba(184,154,106,.3)" stroke-width="1"/>
+          <line x1="24" y1="16" x2="24" y2="32" stroke="rgba(184,154,106,.3)" stroke-width="1"/>
+          <line x1="24" y1="16" x2="38" y2="32" stroke="rgba(184,154,106,.3)" stroke-width="1"/>
+        </svg>
+      </div>
+      <p class="img-caption">Arquitectura multi-agente — orquestador central distribuyendo tareas a agentes especializados</p>
+
+      <h2>Tendencias que definen 2026</h2>
+      <p>El campo avanza rápido. Estas son las tendencias que están definiendo cómo los agentes evolucionan este año:</p>
+      <ul>
+        <li><strong>Agentes con memoria persistente:</strong> ya no olvidan entre sesiones. Aprenden del comportamiento de tu empresa y mejoran con el tiempo.</li>
+        <li><strong>Coordinación multi-agente nativa:</strong> los sistemas donde agentes colaboran entre sí se vuelven el estándar, no la excepción.</li>
+        <li><strong>Integración con el mundo físico:</strong> agentes que interactúan con dispositivos IoT, sistemas de manufactura y entornos físicos reales.</li>
+        <li><strong>Supervisión humana selectiva:</strong> en lugar de aprobar cada acción, los humanos definen los límites de autonomía y solo intervienen en casos excepcionales.</li>
+        <li><strong>Especialización vertical:</strong> agentes entrenados específicamente para industrias — salud, legal, finanzas, construcción — con conocimiento profundo del dominio.</li>
+      </ul>
+
+      <p>La pregunta ya no es si los agentes de IA van a cambiar la manera en que operan las empresas. Ya lo están haciendo. La pregunta es cuándo vas a empezar a aprovecharlos.</p>
+      <p>Si quieres ver qué tipos de agentes pueden trabajar para tu empresa específicamente, te recomendamos explorar la <a href="../agentes.html">biblioteca completa de agentes de Victor IA</a> o conocer más sobre <a href="../como-funciona.html">cómo funciona el sistema</a>.</p>
+
+    </div>
+  </section>
+
+  <!-- Stats strip -->
+  <section style="padding:48px 0;background:#0a0a0f;border-top:1px solid rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.05)">
+    <div style="max-width:800px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px">
+      <div class="stat-box rv">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:300;color:#B89A6A;margin-bottom:6px">200+</div>
+        <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#706C66">Agentes simultáneos</div>
+      </div>
+      <div class="stat-box rv">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:300;color:#B89A6A;margin-bottom:6px">78%</div>
+        <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#706C66">Reducción en tiempo de respuesta</div>
+      </div>
+      <div class="stat-box rv">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:300;color:#B89A6A;margin-bottom:6px">24/7</div>
+        <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#706C66">Operación continua</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="padding:64px 0;background:#0a0a0f;border-bottom:1px solid rgba(255,255,255,.05)">
+    <div style="max-width:600px;margin:0 auto;padding:0 24px;text-align:center">
+      <h3 class="rv" style="font-family:'Cormorant Garamond',serif;font-size:clamp(24px,4vw,38px);font-weight:300;color:#EAE6DF;margin-bottom:16px">¿Listo para implementar IA en tu empresa?</h3>
+      <p class="rv" style="font-size:15px;color:#706C66;margin-bottom:32px">Agenda una demostración gratuita y descubre cómo Victor IA puede transformar tu operación en 30 días.</p>
+      <a href="../app.html" class="btn-p rv">Empezar gratis →</a>
+    </div>
+  </section>
+</main>
+
+<footer style="background:#040406;border-top:1px solid rgba(255,255,255,.05);padding:64px 0 40px;position:relative;z-index:10">
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px 0 64px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:48px">
+    <div><div style="font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:300;color:#EAE6DF;margin-bottom:14px">Victor <span style="color:#B89A6A">IA</span></div><p style="font-size:13.5px;line-height:1.7;color:#706C66;max-width:260px">El primer supercerebro de IA en LATAM.</p></div>
+    <div><h4 style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(112,108,102,.35);margin-bottom:18px">Producto</h4><ul style="list-style:none;display:flex;flex-direction:column;gap:11px"><li><a class="nav-a" href="../agentes.html">Agentes IA</a></li><li><a class="nav-a" href="../precios.html">Precios</a></li></ul></div>
+    <div><h4 style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(112,108,102,.35);margin-bottom:18px">Blog</h4><ul style="list-style:none;display:flex;flex-direction:column;gap:11px"><li><a class="nav-a" href="index.html">Todos los artículos</a></li></ul></div>
+  </div>
+  <div style="max-width:1200px;margin:48px auto 0;padding:28px 64px 0;border-top:1px solid rgba(255,255,255,.05)"><p style="font-size:10.5px;letter-spacing:.09em;color:rgba(112,108,102,.28)">© 2026 INFLUENCE IA S.A. DE C.V. — Todos los derechos reservados.</p></div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d" crossorigin="anonymous"></script>
+<script>(()=>{gsap.registerPlugin(ScrollTrigger);const dot=document.getElementById('cur-d'),ring=document.getElementById('cur-r');let cx=0,cy=0,rx=0,ry=0;document.addEventListener('mousemove',e=>{cx=e.clientX;cy=e.clientY;});document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>ring.classList.add('expand'));el.addEventListener('mouseleave',()=>ring.classList.remove('expand'));});(function animC(){rx+=(cx-rx)*.10;ry+=(cy-ry)*.10;dot.style.left=cx+'px';dot.style.top=cy+'px';ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animC);})();const pbar=document.getElementById('pbar');window.addEventListener('scroll',()=>{const d=document.documentElement;pbar.style.width=((d.scrollTop||document.body.scrollTop)/(d.scrollHeight-d.clientHeight)*100)+'%';});const hdr=document.getElementById('hdr');window.addEventListener('scroll',()=>hdr.classList.toggle('scrolled',window.scrollY>40));gsap.utils.toArray('.rv').forEach(el=>{const rc=el.getBoundingClientRect();if(rc.top<window.innerHeight*.92){gsap.to(el,{opacity:1,y:0,duration:.8,ease:'power3.out'});}else{gsap.to(el,{opacity:1,y:0,duration:1,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 88%'}});}});})();</script>
+</body></html>

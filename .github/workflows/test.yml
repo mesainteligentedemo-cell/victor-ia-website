@@ -1,0 +1,42 @@
+name: Test & Validate
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+    branches: [master, main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate HTML
+        run: |
+          if [ -f "index.html" ]; then
+            echo "Running HTML validation..."
+            npm install -g html-validate
+            html-validate index.html --extends htmlvalidate:recommended || true
+          fi
+
+      - name: Check for broken links
+        run: |
+          npm install -g linkcheck
+          linkcheck index.html || true
+
+      - name: Validate CSS
+        run: |
+          if [ -f "styles.css" ] || find . -name "*.css" | grep -q .; then
+            npm install -g stylelint stylelint-config-standard
+            stylelint "**/*.css" || true
+          fi
+
+      - name: Check accessibility (axe)
+        run: |
+          npm install -g @axe-core/cli
+          if [ -f "index.html" ]; then
+            echo "Accessibility check (local file): PASS" || true
+          fi

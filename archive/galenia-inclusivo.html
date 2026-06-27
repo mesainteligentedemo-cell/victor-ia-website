@@ -1,0 +1,2306 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/x-icon" href="https://hospitalgalenia.com/favicon.ico">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hospital Galenia — Atención Médica Sin Barreras Motrices</title>
+<meta name="description" content="Hospital Galenia Cancún: primer hospital en México con experiencia digital 100% sin mouse. WCAG 2.2 AAA. Control por voz, navegación por teclado, accesibilidad motriz.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --azul: #003B7A;
+  --azul-claro: #0078D4;
+  --verde: #00A878;
+  --blanco: #FFFFFF;
+  --gris: #F5F7FA;
+  --gris-medio: #E8ECF0;
+  --gris-texto: #4A5568;
+  --rojo: #C0392B;
+  --sombra: 0 2px 16px rgba(0,59,122,0.10);
+  --sombra-hover: 0 6px 32px rgba(0,59,122,0.18);
+  --radio: 12px;
+  --transicion: 0.22s ease;
+}
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'Nunito Sans', sans-serif;
+  background: var(--blanco);
+  color: #1A2940;
+  line-height: 1.6;
+}
+
+/* ===== FOCUS VISIBLE GLOBAL — siempre extremadamente visible ===== */
+:focus-visible {
+  outline: 4px solid #005EB8 !important;
+  outline-offset: 6px !important;
+  box-shadow: 0 0 0 8px rgba(0,94,184,0.22) !important;
+}
+
+/* ===== MODO TECLADO — foco aún más visible ===== */
+body.modo-teclado *:focus,
+body.modo-teclado *:focus-visible {
+  outline: 5px solid #FFD600 !important;
+  outline-offset: 6px !important;
+  box-shadow: 0 0 0 10px rgba(255,214,0,0.28) !important;
+}
+body.modo-teclado .skip-links { top: 0 !important; }
+
+/* ===== ÁREA DE CLIC AMPLIADA ===== */
+body.area-ampliada a,
+body.area-ampliada button,
+body.area-ampliada input,
+body.area-ampliada select,
+body.area-ampliada textarea,
+body.area-ampliada label {
+  min-height: 64px !important;
+  min-width: 64px !important;
+  padding: 16px 24px !important;
+  font-size: 1.1rem !important;
+}
+body.area-ampliada .nav-link { padding: 18px 20px !important; }
+
+/* ===== SCROLL LENTO ===== */
+body.scroll-lento { scroll-behavior: auto; }
+body.scroll-lento * { scroll-behavior: auto !important; animation-duration: 0.01ms !important; }
+
+/* ===== SKIP LINKS ===== */
+.skip-links {
+  position: fixed;
+  top: -120px;
+  left: 0;
+  z-index: 9999;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--azul);
+  transition: top 0.2s;
+}
+.skip-links:focus-within { top: 0; }
+.skip-links a {
+  background: var(--blanco);
+  color: var(--azul);
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 0.95rem;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+.skip-links a:focus { outline: 3px solid var(--verde); }
+body.modo-teclado .skip-links { top: 0; }
+
+/* ===== SR-ONLY (screen reader only) ===== */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ===== SIN HOVER — Modo sin efectos hover ===== */
+body.sin-hover *:hover {
+  outline: 3px solid #005EB8 !important;
+}
+
+/* ===== ALTO CONTRASTE ===== */
+[data-theme="contrast"],
+[data-theme="contrast"] body {
+  background: #000 !important;
+  color: #FFD700 !important;
+}
+[data-theme="contrast"] *:not(script):not(style) {
+  background: #000 !important;
+  color: #FFD700 !important;
+  border-color: #FFD700 !important;
+}
+[data-theme="contrast"] a { color: #FFD700 !important; text-decoration: underline !important; }
+
+/* ===== REDUCED MOTION ===== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ===== BARRA ACCESIBILIDAD ===== */
+#barra-accesibilidad {
+  background: var(--azul);
+  color: var(--blanco);
+  padding: 10px 24px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  position: sticky;
+  top: 0;
+  z-index: 900;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+#barra-accesibilidad .barra-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #A8C8F0;
+  margin-right: 4px;
+  flex-shrink: 0;
+}
+.toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.12);
+  border: 1.5px solid rgba(255,255,255,0.25);
+  color: var(--blanco);
+  padding: 8px 14px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 600;
+  font-family: 'Nunito Sans', sans-serif;
+  transition: var(--transicion);
+  min-height: 48px;
+  min-width: 44px;
+  white-space: nowrap;
+}
+.toggle-btn:hover, .toggle-btn:focus {
+  background: rgba(255,255,255,0.22);
+  border-color: rgba(255,255,255,0.5);
+  outline: 2px solid #FFD600;
+  outline-offset: 2px;
+}
+.toggle-btn.activo {
+  background: var(--verde);
+  border-color: var(--verde);
+}
+.toggle-btn .icono-toggle { font-size: 1rem; }
+
+/* Indicador de foco */
+#indicador-foco {
+  margin-left: auto;
+  font-size: 0.78rem;
+  color: #A8C8F0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 280px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  flex-shrink: 0;
+}
+#indicador-foco span {
+  color: var(--blanco);
+  font-weight: 600;
+}
+
+/* ===== NAVBAR ===== */
+#navbar {
+  background: var(--blanco);
+  border-bottom: 1px solid var(--gris-medio);
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+  position: sticky;
+  top: 57px;
+  z-index: 800;
+  box-shadow: var(--sombra);
+}
+.logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--azul);
+}
+.logo-svg {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+}
+.logo-texto {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+.logo-texto .hospital { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--azul-claro); font-weight: 600; }
+.logo-texto .galenia { font-size: 1.4rem; font-weight: 800; color: var(--azul); font-family: 'Libre Baskerville', serif; }
+
+nav { display: flex; align-items: center; gap: 4px; }
+.nav-link {
+  text-decoration: none;
+  color: var(--gris-texto);
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: var(--transicion);
+  min-height: 48px;
+  min-width: 44px;
+  display: flex;
+  align-items: center;
+}
+.nav-link:hover, .nav-link:focus {
+  background: var(--gris);
+  color: var(--azul);
+  outline: 2px solid var(--azul-claro);
+  outline-offset: 2px;
+}
+.nav-cta {
+  background: var(--azul);
+  color: var(--blanco) !important;
+  padding: 10px 20px;
+  border-radius: 50px;
+}
+.nav-cta:hover, .nav-cta:focus { background: var(--azul-claro); }
+
+/* ===== HERO ===== */
+#hero {
+  background: linear-gradient(135deg, #EEF4FB 0%, #F0F9F6 60%, #E8F4FF 100%);
+  padding: 100px 40px 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.hero-content { max-width: 560px; }
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0,168,120,0.12);
+  color: #006B4F;
+  border: 1px solid rgba(0,168,120,0.3);
+  padding: 6px 16px;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  letter-spacing: 0.03em;
+}
+h1 {
+  font-family: 'Libre Baskerville', serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--azul);
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+h1 em { font-style: italic; color: var(--azul-claro); }
+.hero-subtitulo {
+  font-size: 1.15rem;
+  color: var(--gris-texto);
+  margin-bottom: 16px;
+  line-height: 1.7;
+}
+.hero-tech-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0,59,122,0.07);
+  color: var(--azul);
+  border: 1px solid rgba(0,59,122,0.15);
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  margin-bottom: 32px;
+}
+.btn-primario {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--azul);
+  color: var(--blanco);
+  padding: 0 40px;
+  height: 80px;
+  border-radius: 50px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Nunito Sans', sans-serif;
+  transition: var(--transicion);
+  min-width: 220px;
+  box-shadow: 0 4px 20px rgba(0,59,122,0.25);
+}
+.btn-primario:hover, .btn-primario:focus {
+  background: var(--azul-claro);
+  box-shadow: 0 8px 32px rgba(0,120,212,0.35);
+  outline: 3px solid var(--verde);
+  outline-offset: 3px;
+  transform: translateY(-1px);
+}
+.btn-secundario {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--azul);
+  padding: 0 28px;
+  height: 56px;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 2px solid var(--azul);
+  cursor: pointer;
+  font-family: 'Nunito Sans', sans-serif;
+  transition: var(--transicion);
+}
+.btn-secundario:hover, .btn-secundario:focus {
+  background: var(--azul);
+  color: var(--blanco);
+  outline: 3px solid var(--verde);
+  outline-offset: 3px;
+}
+.hero-btns { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+.hero-visual {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.hero-card {
+  background: var(--blanco);
+  border-radius: var(--radio);
+  padding: 20px 24px;
+  box-shadow: var(--sombra);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.hero-card-icon { font-size: 2rem; flex-shrink: 0; }
+.hero-card h3 { font-size: 0.95rem; font-weight: 700; color: var(--azul); margin-bottom: 2px; }
+.hero-card p { font-size: 0.82rem; color: var(--gris-texto); }
+.acred-chips { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+.chip {
+  background: var(--gris);
+  border: 1px solid var(--gris-medio);
+  padding: 3px 10px;
+  border-radius: 50px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--azul);
+  letter-spacing: 0.05em;
+}
+
+/* ===== SECCIONES GENERALES ===== */
+.seccion {
+  padding: 80px 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.seccion-fondo {
+  background: var(--gris);
+  padding: 80px 0;
+}
+.seccion-fondo .seccion { padding-top: 0; padding-bottom: 0; }
+.seccion-titulo {
+  text-align: center;
+  margin-bottom: 56px;
+}
+.seccion-titulo .etiqueta {
+  display: inline-block;
+  background: rgba(0,59,122,0.08);
+  color: var(--azul);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  border-radius: 50px;
+  margin-bottom: 12px;
+}
+.seccion-titulo h2 {
+  font-family: 'Libre Baskerville', serif;
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  color: var(--azul);
+  margin-bottom: 14px;
+}
+.seccion-titulo p { font-size: 1.05rem; color: var(--gris-texto); max-width: 560px; margin: 0 auto; }
+
+/* ===== GRID ACCESIBILIDAD 6 FEATURES ===== */
+.grid-features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.feature-card {
+  background: var(--blanco);
+  border-radius: var(--radio);
+  padding: 28px 24px;
+  box-shadow: var(--sombra);
+  border: 1px solid var(--gris-medio);
+  transition: var(--transicion);
+  position: relative;
+  overflow: hidden;
+}
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(to bottom, var(--azul-claro), var(--verde));
+  border-radius: 0 0 0 var(--radio);
+}
+.feature-card:hover, .feature-card:focus-within {
+  box-shadow: var(--sombra-hover);
+  transform: translateY(-3px);
+}
+.feature-icon { font-size: 2.2rem; margin-bottom: 14px; display: block; }
+.feature-card h3 { font-size: 1rem; font-weight: 700; color: var(--azul); margin-bottom: 8px; }
+.feature-card p { font-size: 0.875rem; color: var(--gris-texto); line-height: 1.6; }
+.feature-tag {
+  display: inline-block;
+  margin-top: 12px;
+  background: rgba(0,168,120,0.1);
+  color: #005C42;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 50px;
+}
+
+/* ===== DEMO VOZ ===== */
+#demo-voz {
+  background: linear-gradient(135deg, var(--azul) 0%, #005BB5 100%);
+  padding: 80px 0;
+  color: var(--blanco);
+}
+#demo-voz .seccion { padding-top: 0; padding-bottom: 0; }
+#demo-voz .seccion-titulo .etiqueta { background: rgba(255,255,255,0.15); color: #A8C8F0; }
+#demo-voz .seccion-titulo h2 { color: var(--blanco); }
+#demo-voz .seccion-titulo p { color: #A8C8F0; }
+.voz-panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+.btn-voz {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  background: var(--blanco);
+  color: var(--azul);
+  border: none;
+  padding: 0 40px;
+  height: 72px;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Nunito Sans', sans-serif;
+  transition: var(--transicion);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  min-width: 260px;
+}
+.btn-voz:hover, .btn-voz:focus {
+  background: #E8F4FF;
+  outline: 3px solid #FFD600;
+  outline-offset: 3px;
+  transform: scale(1.02);
+}
+.btn-voz.escuchando {
+  background: #C0392B;
+  color: var(--blanco);
+  animation: pulso-voz 1.5s infinite;
+}
+@keyframes pulso-voz {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(192,57,43,0.4); }
+  50% { box-shadow: 0 0 0 20px rgba(192,57,43,0); }
+}
+
+/* Onda sonora */
+.onda-wrap {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 40px;
+  margin: 16px 0;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.onda-wrap.activa { opacity: 1; }
+.onda-barra {
+  width: 4px;
+  background: rgba(255,255,255,0.7);
+  border-radius: 2px;
+  animation: onda 0.8s ease-in-out infinite;
+}
+.onda-barra:nth-child(1) { height: 8px; animation-delay: 0s; }
+.onda-barra:nth-child(2) { height: 20px; animation-delay: 0.1s; }
+.onda-barra:nth-child(3) { height: 32px; animation-delay: 0.2s; }
+.onda-barra:nth-child(4) { height: 24px; animation-delay: 0.3s; }
+.onda-barra:nth-child(5) { height: 40px; animation-delay: 0.4s; }
+.onda-barra:nth-child(6) { height: 28px; animation-delay: 0.3s; }
+.onda-barra:nth-child(7) { height: 16px; animation-delay: 0.2s; }
+.onda-barra:nth-child(8) { height: 8px; animation-delay: 0.1s; }
+@keyframes onda {
+  0%, 100% { transform: scaleY(0.4); opacity: 0.5; }
+  50% { transform: scaleY(1); opacity: 1; }
+}
+
+.voz-transcript {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: var(--radio);
+  padding: 20px 24px;
+  min-height: 120px;
+  font-size: 0.95rem;
+  color: var(--blanco);
+  line-height: 1.7;
+}
+.voz-transcript .label { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: #A8C8F0; margin-bottom: 8px; font-weight: 700; }
+.voz-transcript .texto { font-size: 1.1rem; font-weight: 600; min-height: 28px; }
+.comandos-lista { margin-top: 20px; }
+.comandos-lista h4 { font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: #A8C8F0; margin-bottom: 10px; font-weight: 700; }
+.comando-chip {
+  display: inline-block;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: var(--blanco);
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin: 3px;
+  font-family: monospace;
+}
+
+/* ===== ESPECIALIDADES ===== */
+.grid-especialidades {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+.esp-card {
+  background: var(--blanco);
+  border: 2px solid var(--gris-medio);
+  border-radius: var(--radio);
+  padding: 24px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transicion);
+  position: relative;
+}
+.esp-card:hover, .esp-card:focus {
+  border-color: var(--azul-claro);
+  box-shadow: var(--sombra-hover);
+  outline: 3px solid var(--azul-claro);
+  outline-offset: 2px;
+  transform: translateY(-2px);
+}
+.esp-card:focus { outline: 3px solid var(--verde); }
+.esp-icon { font-size: 2.4rem; margin-bottom: 10px; display: block; }
+.esp-card h3 { font-size: 0.95rem; font-weight: 700; color: var(--azul); margin-bottom: 6px; }
+.esp-card p { font-size: 0.78rem; color: var(--gris-texto); margin-bottom: 10px; }
+.esp-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(0,168,120,0.1);
+  color: #005C42;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 50px;
+}
+
+/* ===== BOTÓN EMERGENCIA ===== */
+#btn-emergencia {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  background: var(--rojo);
+  color: var(--blanco);
+  border: none;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  font-size: 1.8rem;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(192,57,43,0.5);
+  z-index: 9000;
+  transition: var(--transicion);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Nunito Sans', sans-serif;
+}
+#btn-emergencia:hover, #btn-emergencia:focus {
+  transform: scale(1.1);
+  box-shadow: 0 8px 32px rgba(192,57,43,0.6);
+  outline: 4px solid #FFD600;
+  outline-offset: 4px;
+}
+#btn-emergencia-label {
+  position: fixed;
+  bottom: 112px;
+  right: 24px;
+  background: var(--azul);
+  color: var(--blanco);
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+  white-space: nowrap;
+}
+#btn-emergencia:hover + #btn-emergencia-label,
+#btn-emergencia:focus + #btn-emergencia-label { opacity: 1; }
+
+/* ===== FORMULARIO ===== */
+.form-wizard {
+  background: var(--blanco);
+  border-radius: 16px;
+  box-shadow: var(--sombra);
+  padding: 40px;
+  max-width: 680px;
+  margin: 0 auto;
+}
+.wizard-steps {
+  display: flex;
+  gap: 0;
+  margin-bottom: 40px;
+  border-radius: 50px;
+  overflow: hidden;
+  background: var(--gris-medio);
+}
+.wizard-step {
+  flex: 1;
+  padding: 10px;
+  text-align: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--gris-texto);
+  transition: var(--transicion);
+}
+.wizard-step.activo {
+  background: var(--azul);
+  color: var(--blanco);
+  border-radius: 50px;
+}
+.wizard-step.completo { background: var(--verde); color: var(--blanco); }
+.wizard-step:focus-visible {
+  outline: 4px solid #FFD600 !important;
+  outline-offset: 4px !important;
+}
+
+.form-grupo { margin-bottom: 24px; position: relative; }
+.form-label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--azul);
+  margin-bottom: 6px;
+}
+.form-input {
+  width: 100%;
+  border: 2px solid var(--gris-medio);
+  border-radius: 10px;
+  padding: 14px 18px;
+  font-size: 1rem;
+  font-family: 'Nunito Sans', sans-serif;
+  color: #1A2940;
+  background: var(--blanco);
+  transition: var(--transicion);
+  min-height: 52px;
+  min-width: 44px;
+}
+.form-input:focus,
+.form-input:focus-visible {
+  border-color: var(--azul-claro);
+  outline: 4px solid #005EB8 !important;
+  outline-offset: 4px !important;
+  box-shadow: 0 0 0 6px rgba(0,94,184,0.2) !important;
+}
+.form-input.valido { border-color: var(--verde); }
+.form-input.invalido { border-color: var(--rojo); }
+.form-hint { font-size: 0.78rem; margin-top: 4px; }
+.form-hint.error { color: var(--rojo); font-weight: 600; }
+.form-hint.ok { color: var(--verde); font-weight: 600; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-autoguardado {
+  font-size: 0.78rem;
+  color: var(--verde);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 20px;
+  min-height: 20px;
+}
+.wizard-nav { display: flex; justify-content: space-between; margin-top: 28px; }
+
+/* ===== INSTALACIONES ===== */
+.instalaciones-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+.install-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+.install-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: var(--blanco);
+  border-radius: 10px;
+  padding: 16px 20px;
+  box-shadow: var(--sombra);
+  border-left: 4px solid var(--verde);
+}
+.install-icon { font-size: 1.6rem; flex-shrink: 0; }
+.install-item h4 { font-size: 0.9rem; font-weight: 700; color: var(--azul); margin-bottom: 2px; }
+.install-item p { font-size: 0.8rem; color: var(--gris-texto); }
+
+/* Mapa accesibilidad HTML */
+.mapa-html {
+  background: var(--blanco);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  padding: 24px;
+  min-height: 360px;
+  position: relative;
+  overflow: hidden;
+}
+.mapa-html h3 { font-size: 0.9rem; font-weight: 700; color: var(--azul); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+.planta { display: grid; grid-template-columns: repeat(6, 1fr); grid-template-rows: repeat(5, 52px); gap: 4px; }
+.zona {
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 4px;
+  line-height: 1.2;
+}
+.zona.entrada { background: #E3F2FD; color: #1565C0; grid-column: 1/3; grid-row: 4/6; border: 2px solid #1565C0; }
+.zona.emergencias { background: #FFEBEE; color: #C62828; grid-column: 1/3; grid-row: 1/3; border: 2px solid #C62828; }
+.zona.elevador { background: #E8F5E9; color: #2E7D32; grid-column: 3/4; grid-row: 2/4; border: 2px solid #2E7D32; }
+.zona.estacionamiento { background: #FFF8E1; color: #F57F17; grid-column: 5/7; grid-row: 4/6; border: 2px solid #F57F17; }
+.zona.consultorios { background: #EDE7F6; color: #4527A0; grid-column: 4/7; grid-row: 1/3; border: 2px solid #4527A0; }
+.zona.rampa { background: #E0F7FA; color: #006064; grid-column: 3/5; grid-row: 4/6; border: 2px solid #006064; }
+.zona.farmacia { background: #F3E5F5; color: #6A1B9A; grid-column: 1/3; grid-row: 3/4; border: 2px solid #6A1B9A; }
+.mapa-leyenda { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.leyenda-item { display: flex; align-items: center; gap: 4px; font-size: 0.68rem; font-weight: 600; color: var(--gris-texto); }
+.leyenda-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+
+/* ===== CONTACTO / INFO ===== */
+.info-strip {
+  background: var(--azul);
+  color: var(--blanco);
+  padding: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  justify-content: center;
+  align-items: center;
+}
+.info-item { display: flex; align-items: center; gap: 12px; }
+.info-item-icon { font-size: 1.6rem; }
+.info-item h4 { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: #A8C8F0; font-weight: 600; }
+.info-item a, .info-item p { color: var(--blanco); font-weight: 700; font-size: 1rem; text-decoration: none; }
+.info-item a:hover, .info-item a:focus { color: #A8C8F0; text-decoration: underline; }
+
+/* ===== FOOTER ===== */
+footer {
+  background: #0A1929;
+  color: rgba(255,255,255,0.7);
+  padding: 32px 40px;
+  text-align: center;
+  font-size: 0.82rem;
+  line-height: 2;
+}
+footer strong { color: var(--blanco); }
+.footer-wcag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0,168,120,0.2);
+  color: #5FD6B2;
+  border: 1px solid rgba(0,168,120,0.3);
+  padding: 4px 14px;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-top: 8px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  #hero { grid-template-columns: 1fr; padding: 60px 24px 40px; gap: 40px; }
+  .grid-features { grid-template-columns: 1fr 1fr; }
+  .voz-panel { grid-template-columns: 1fr; }
+  .instalaciones-grid { grid-template-columns: 1fr; }
+  .form-grid { grid-template-columns: 1fr; }
+  #navbar { padding: 0 20px; }
+  nav .nav-link:not(.nav-cta) { display: none; }
+}
+@media (max-width: 600px) {
+  .grid-features { grid-template-columns: 1fr; }
+  .grid-especialidades { grid-template-columns: 1fr 1fr; }
+  .seccion { padding: 60px 20px; }
+  #barra-accesibilidad { padding: 8px 12px; gap: 6px; }
+  .toggle-btn { padding: 6px 10px; font-size: 0.75rem; min-height: 44px; }
+  #indicador-foco { display: none; }
+}
+
+/* ===== NOTIFICACIÓN TOAST ===== */
+#toast {
+  position: fixed;
+  bottom: 120px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--azul);
+  color: var(--blanco);
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s;
+  pointer-events: none;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+#toast.visible { opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+<style>
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");opacity:.028;pointer-events:none;z-index:9995;}
+.lxgc{cursor:default;position:relative;overflow:hidden;}
+.lxgc img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.23,1,.32,1),filter .5s;filter:brightness(.82);}
+.lxgc:hover img{transform:scale(1.09);filter:brightness(1);}
+.lxgc .lxov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55) 0%,transparent 55%);transition:opacity .4s;}
+.lxgc:hover .lxov{opacity:.3;}
+</style>
+<!-- lux-patch -->
+<style>
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");opacity:.028;pointer-events:none;z-index:9995;}
+.lxgc{cursor:default;position:relative;overflow:hidden;}.lxgc img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.23,1,.32,1),filter .5s;filter:brightness(.82);}.lxgc:hover img{transform:scale(1.09);filter:brightness(1);}.lxgc .lxov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55) 0%,transparent 55%);transition:opacity .4s;}.lxgc:hover .lxov{opacity:.3;}
+</style>
+<!-- interact-patch -->
+<style>
+:root{--mpos-x:50%;--mpos-y:50%;--scroll-pct:0%;}
+/* Progress bar */
+.ip-bar{position:fixed;top:0;left:0;height:3px;z-index:10001;pointer-events:none;background:linear-gradient(90deg,#1D6FA4,#0F2040);transform-origin:left;transform:scaleX(var(--scroll-raw,0));transition:transform .08s linear;}
+/* Mouse-responsive ambient glow */
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(circle 700px at var(--mpos-x) var(--mpos-y),rgba(29,111,164,.12),transparent 70%);transition:background .4s;}
+/* Hero shimmer overlay */
+@keyframes ipShimmer{0%,100%{opacity:.6}50%{opacity:1}}
+@keyframes ipFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes ipPulse{0%,100%{box-shadow:0 0 0 0 rgba(29,111,164,.4)}70%{box-shadow:0 0 0 14px rgba(29,111,164,0)}}
+@keyframes ipSpin{to{transform:rotate(360deg)}}
+@keyframes ipCountUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+/* CTA pulse */
+.ip-pulse{animation:ipPulse 2.4s ease-in-out infinite;}
+/* Section reveal directions */
+.ip-rl{opacity:0;transform:translateX(-42px);transition:opacity .75s ease,transform .75s cubic-bezier(.23,1,.32,1);}
+.ip-rr{opacity:0;transform:translateX(42px);transition:opacity .75s ease,transform .75s cubic-bezier(.23,1,.32,1);}
+.ip-rb{opacity:0;transform:translateY(38px);transition:opacity .75s ease,transform .75s cubic-bezier(.23,1,.32,1);}
+.ip-rv{opacity:1!important;transform:none!important;}
+/* Stat counter */
+.ip-counted{animation:ipCountUp .5s ease forwards;}
+/* Animated border gradient on cards on hover */
+.card,.card-inclusivo,.specialty-card,.a11y-card,.feature-card,.plan-card,.tour-card,.menu-card,.exp-card,.service-card,.property-card,.tour-item,.reason-card{
+  position:relative;
+  transition:box-shadow .35s,border-color .35s,transform .35s;
+}
+.card:hover,.specialty-card:hover,.a11y-card:hover,.feature-card:hover,.plan-card:hover,.tour-card:hover,.menu-card:hover,.exp-card:hover,.property-card:hover,.tour-item:hover,.reason-card:hover{
+  box-shadow:0 16px 48px rgba(29,111,164,.22),0 4px 16px rgba(29,111,164,.14)!important;
+}
+/* Hero animated gradient layer */
+.ip-hero-layer{
+  position:absolute;inset:0;pointer-events:none;z-index:3;
+  background:linear-gradient(-45deg,rgba(29,111,164,.35),rgba(29,111,164,.05) 40%,transparent 60%);
+  background-size:300% 300%;
+  animation:ipShimmer 5s ease-in-out infinite;
+}
+/* Parallax text nudge */
+.ip-parallax{will-change:transform;}
+/* Scroll-linked image brightness */
+.lxgc:hover img{filter:brightness(1.05) saturate(1.08)!important;}
+</style>
+</head>
+<body>
+
+<!-- SKIP LINKS -->
+<nav class="skip-links" aria-label="Saltar a secciones principales">
+  <a href="#contenido-principal">Saltar al contenido</a>
+  <a href="#navbar">Saltar a navegación</a>
+  <a href="#cita-form">Saltar al formulario de citas</a>
+  <a href="#especialidades">Saltar a especialidades</a>
+  <a href="#demo-voz">Saltar a control de voz</a>
+</nav>
+
+<!-- BARRA DE ACCESIBILIDAD MOTRIZ -->
+<div id="barra-accesibilidad" role="toolbar" aria-label="Controles de accesibilidad motriz">
+  <span class="barra-label" aria-hidden="true">♿ Accesibilidad</span>
+
+  <button class="toggle-btn" id="btn-modo-teclado" aria-pressed="false" onclick="toggleModoTeclado()" title="Activa indicadores TAB extra grandes y skip links visibles">
+    <span class="icono-toggle" aria-hidden="true">⌨️</span>
+    Modo Teclado
+  </button>
+
+  <button class="toggle-btn" id="btn-area-ampliada" aria-pressed="false" onclick="toggleAreaAmpliada()" title="Agranda todos los botones y enlaces al 150%">
+    <span class="icono-toggle" aria-hidden="true">🔍</span>
+    Área ampliada
+  </button>
+
+  <button class="toggle-btn" id="btn-scroll-lento" aria-pressed="false" onclick="toggleScrollLento()" title="Reduce la velocidad de desplazamiento">
+    <span class="icono-toggle" aria-hidden="true">🐢</span>
+    Scroll lento
+  </button>
+
+  <button class="toggle-btn" id="btn-sin-timeout" aria-pressed="false" onclick="toggleSinTimeout()" title="Elimina los límites de tiempo de sesión y formularios">
+    <span class="icono-toggle" aria-hidden="true">⏱️</span>
+    Sin tiempo límite
+  </button>
+
+  <button class="toggle-btn" id="btn-sin-hover" aria-pressed="false" onclick="toggleSinHover()" title="Elimina efectos hover y aplica indicador visual permanente al pasar el cursor">
+    <span class="icono-toggle" aria-hidden="true">🖱️</span>
+    Sin hover
+  </button>
+
+  <button class="toggle-btn" id="btn-contraste" aria-pressed="false" onclick="toggleContraste()" title="Alto contraste: fondo negro y texto amarillo para máxima visibilidad">
+    <span class="icono-toggle" aria-hidden="true">◐</span>
+    Alto contraste
+  </button>
+
+  <div id="indicador-foco" aria-live="polite" aria-atomic="true" role="status">
+    <span aria-hidden="true">📍 Foco:</span>
+    <span id="foco-texto">Página principal</span>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<header>
+  <div id="navbar" role="banner">
+    <a href="#" class="logo-wrap" aria-label="Hospital Galenia — Inicio">
+      <svg class="logo-svg" viewBox="0 0 44 44" aria-hidden="true" focusable="false">
+        <rect width="44" height="44" rx="8" fill="#003B7A"/>
+        <rect x="18" y="8" width="8" height="28" rx="3" fill="white"/>
+        <rect x="8" y="18" width="28" height="8" rx="3" fill="white"/>
+        <rect x="20" y="10" width="4" height="24" rx="2" fill="#0078D4"/>
+        <rect x="10" y="20" width="24" height="4" rx="2" fill="#0078D4"/>
+      </svg>
+      <div class="logo-texto">
+        <span class="hospital">Hospital</span>
+        <span class="galenia">GALENIA</span>
+      </div>
+    </a>
+    <nav role="navigation" aria-label="Menú principal">
+      <a href="#especialidades" class="nav-link" tabindex="0">Especialidades</a>
+      <a href="#accesibilidad" class="nav-link" tabindex="0">Accesibilidad</a>
+      <a href="#instalaciones" class="nav-link" tabindex="0">Instalaciones</a>
+      <a href="#demo-voz" class="nav-link" tabindex="0">Control de voz</a>
+      <a href="#citas" class="nav-link nav-cta" tabindex="0">Agendar cita</a>
+    </nav>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main id="contenido-principal" tabindex="-1" aria-label="Contenido principal">
+
+<!-- HERO -->
+<section id="hero" aria-labelledby="hero-titulo">
+  <div class="hero-content">
+    <div class="hero-badge" role="note">
+      <span aria-hidden="true">🏆</span>
+      Acreditación JCI · Cancún, México
+    </div>
+    <h1 id="hero-titulo">
+      Atención médica de excelencia.<br>
+      <em>Sin barreras motrices.</em>
+    </h1>
+    <p class="hero-subtitulo">
+      Hospital Galenia es el primer hospital en México con experiencia digital
+      <strong>100% sin mouse</strong>: navegación por teclado, control por voz y acceso
+      adaptado para personas con paraplejia, cuadriplejia, temblor esencial o control limitado.
+    </p>
+    <div class="hero-tech-badge" role="note">
+      <span aria-hidden="true">🎙️</span>
+      Control por voz Web Speech API · Navegación por teclado certificada WCAG 2.2 AAA
+    </div>
+    <div class="hero-btns">
+      <a href="#citas" class="btn-primario" role="button" aria-describedby="cita-desc">
+        <span aria-hidden="true">📅</span>
+        Agendar cita
+      </a>
+      <a href="tel:9988915200" class="btn-secundario" aria-label="Llamar al hospital: 998 891 5200">
+        <span aria-hidden="true">📞</span>
+        998 891 5200
+      </a>
+    </div>
+    <p id="cita-desc" class="sr-only">Abre el formulario de cita accesible, completable por pasos con guardado automático</p>
+    <div class="acred-chips" style="margin-top:24px;" role="list" aria-label="Acreditaciones">
+      <span class="chip" role="listitem">JCI Acreditado</span>
+      <span class="chip" role="listitem">WCAG 2.2 AAA</span>
+      <span class="chip" role="listitem">Más que un hospital</span>
+    </div>
+  </div>
+  <div class="hero-visual" aria-hidden="true">
+    <div class="hero-card">
+      <span class="hero-card-icon">⌨️</span>
+      <div>
+        <h3>Navegación total por teclado</h3>
+        <p>Tab, Shift+Tab, Enter, Espacio, flechas — cada función accesible</p>
+      </div>
+    </div>
+    <div class="hero-card">
+      <span class="hero-card-icon">🎙️</span>
+      <div>
+        <h3>Control por voz en español</h3>
+        <p>"ir a citas", "llamar hospital", "buscar especialidad" — comandos naturales</p>
+      </div>
+    </div>
+    <div class="hero-card">
+      <span class="hero-card-icon">🔁</span>
+      <div>
+        <h3>Compatible con Switch Access</h3>
+        <p>Joystick, pulsador único, eye-tracking — sin mouse, sin problema</p>
+      </div>
+    </div>
+    <div class="hero-card">
+      <span class="hero-card-icon">💾</span>
+      <div>
+        <h3>Formularios guardados automáticamente</h3>
+        <p>Tu progreso se guarda cada 30 segundos. Continúa cuando quieras</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACCESIBILIDAD MOTRIZ — 6 FEATURES -->
+<div class="seccion-fondo" id="accesibilidad">
+  <section class="seccion" aria-labelledby="acc-titulo">
+    <div class="seccion-titulo">
+      <span class="etiqueta">Tecnología inclusiva</span>
+      <h2 id="acc-titulo">Accesibilidad Motriz Completa</h2>
+      <p>Diseñado desde cero para personas con discapacidad motriz. No es un agregado — es la base de nuestra experiencia digital.</p>
+    </div>
+    <div class="grid-features" role="list">
+
+      <article class="feature-card" role="listitem" tabindex="0" aria-label="Navegación 100% por teclado">
+        <span class="feature-icon" aria-hidden="true">⌨️</span>
+        <h3>Navegación 100% por teclado</h3>
+        <p>Usa Tab / Shift+Tab para moverte, Enter o Espacio para activar, flechas para navegar listas y menús. Cada elemento es accesible sin mouse.</p>
+        <span class="feature-tag">WCAG 2.1.1 Teclado</span>
+      </article>
+
+      <article class="feature-card" role="listitem" tabindex="0" aria-label="Compatible con Switch Access y joystick">
+        <span class="feature-icon" aria-hidden="true">🕹️</span>
+        <h3>Compatible con Switch Access y joystick</h3>
+        <p>La interfaz funciona con pulsadores de un solo botón, joysticks adaptados y dispositivos de seguimiento ocular mediante el orden lógico de foco.</p>
+        <span class="feature-tag">Switch Access Ready</span>
+      </article>
+
+      <article class="feature-card" role="listitem" tabindex="0" aria-label="Control por voz Web Speech API">
+        <span class="feature-icon" aria-hidden="true">🎙️</span>
+        <h3>Control por voz (Web Speech API)</h3>
+        <p>Di comandos en español: "ir a citas", "llamar hospital", "buscar especialidad", "regresar". El sistema reconoce tu voz directamente en el navegador.</p>
+        <span class="feature-tag">Web Speech API</span>
+      </article>
+
+      <article class="feature-card" role="listitem" tabindex="0" aria-label="Sin drag and drop requerido">
+        <span class="feature-icon" aria-hidden="true">🚫</span>
+        <h3>Sin drag &amp; drop requerido</h3>
+        <p>Ninguna función del sitio requiere arrastrar. Subir documentos, ordenar preferencias y firmar formularios — todo se hace con clics o teclado.</p>
+        <span class="feature-tag">WCAG 2.5.7 Dragging</span>
+      </article>
+
+      <article class="feature-card" role="listitem" tabindex="0" aria-label="Formularios guardados en múltiples sesiones">
+        <span class="feature-icon" aria-hidden="true">💾</span>
+        <h3>Formularios en múltiples sesiones</h3>
+        <p>Tu avance en el formulario de cita se guarda automáticamente cada 30 segundos en tu dispositivo. Cierra y retoma donde quedaste, sin perder datos.</p>
+        <span class="feature-tag">WCAG 2.2.6 Sin timeout</span>
+      </article>
+
+      <article class="feature-card" role="listitem" tabindex="0" aria-label="Botón de emergencia accesible">
+        <span class="feature-icon" aria-hidden="true">🚨</span>
+        <h3>Botón de emergencia accesible</h3>
+        <p>Botón rojo grande siempre visible, activable con Enter o Espacio desde cualquier parte del sitio. Llama de inmediato a urgencias: (998) 222-4363.</p>
+        <span class="feature-tag">WCAG 2.5.5 Tamaño objetivo</span>
+      </article>
+
+    </div>
+  </section>
+</div>
+
+<!-- DEMO DE VOZ -->
+<section id="demo-voz" aria-labelledby="voz-titulo">
+  <div class="seccion">
+    <div class="seccion-titulo">
+      <span class="etiqueta" style="background:rgba(255,255,255,0.15);color:#A8C8F0;">Demo en vivo</span>
+      <h2 id="voz-titulo">Control por Voz — Pruébalo Ahora</h2>
+      <p>Haz clic en el botón y habla. El sistema reconoce tus comandos en español sin instalaciones adicionales.</p>
+    </div>
+    <div class="voz-panel">
+      <div>
+        <button class="btn-voz" id="btn-voz-activar" aria-pressed="false" onclick="toggleVoz()" aria-live="polite">
+          <span aria-hidden="true" id="voz-icono">🎙️</span>
+          <span id="voz-texto-btn">Activar control por voz</span>
+        </button>
+        <div class="onda-wrap" id="onda-wrap" aria-hidden="true" role="presentation">
+          <div class="onda-barra"></div>
+          <div class="onda-barra"></div>
+          <div class="onda-barra"></div>
+          <div class="onda-barra"></div>
+          <div class="onda-barra"></div>
+          <div class="onda-barra"></div>
+          <div class="onda-barra"></div>
+          <div class="onda-barra"></div>
+        </div>
+        <div class="comandos-lista" aria-label="Comandos de voz disponibles">
+          <h4>Comandos disponibles:</h4>
+          <span class="comando-chip">"ir a citas"</span>
+          <span class="comando-chip">"llamar hospital"</span>
+          <span class="comando-chip">"buscar especialidad"</span>
+          <span class="comando-chip">"ir a especialidades"</span>
+          <span class="comando-chip">"regresar"</span>
+          <span class="comando-chip">"ir arriba"</span>
+          <span class="comando-chip">"emergencia"</span>
+        </div>
+      </div>
+      <div>
+        <div class="voz-transcript" role="log" aria-live="polite" aria-label="Transcripción de voz en tiempo real">
+          <div class="label">Escuchando…</div>
+          <div class="texto" id="voz-transcript-texto">Di un comando de voz para comenzar</div>
+        </div>
+        <div style="margin-top:16px;background:rgba(255,255,255,0.08);border-radius:10px;padding:16px 20px;">
+          <div class="label" style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#A8C8F0;margin-bottom:8px;font-weight:700;">Último comando ejecutado</div>
+          <div id="voz-comando-ejecutado" style="color:#5FD6B2;font-weight:700;font-size:1rem;min-height:24px;">—</div>
+        </div>
+        <div id="voz-no-soporte" style="display:none;margin-top:12px;background:rgba(255,165,0,0.15);border:1px solid rgba(255,165,0,0.4);padding:12px 16px;border-radius:8px;font-size:0.82rem;color:#FFD080;">
+          ⚠️ Tu navegador no soporta Web Speech API. Usa Chrome o Edge para control de voz. Todas las demás funciones de accesibilidad siguen disponibles.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ESPECIALIDADES -->
+<section class="seccion" id="especialidades" aria-labelledby="esp-titulo">
+  <div class="seccion-titulo">
+    <span class="etiqueta">Centros médicos</span>
+    <h2 id="esp-titulo">Especialidades Médicas</h2>
+    <p>Navega con las flechas del teclado. Cada especialidad indica atención adaptada para personas con discapacidad motriz.</p>
+  </div>
+  <div class="grid-especialidades" role="list" id="grid-esp" aria-label="Especialidades médicas de Hospital Galenia">
+
+    <div class="esp-card" role="listitem" tabindex="0" aria-label="Cardiología y Pulmonología — atiende discapacidad motriz" onkeydown="navEspecialidad(event)">
+      <span class="esp-icon" aria-hidden="true">❤️</span>
+      <h3>Cardiología y Pulmonología</h3>
+      <p>Centro Cardiológico y Pulmonar con tecnología de punta para diagnóstico y tratamiento</p>
+      <span class="esp-badge">✓ Atiende discapacidad motriz</span>
+    </div>
+
+    <div class="esp-card" role="listitem" tabindex="0" aria-label="Neurología — atiende discapacidad motriz" onkeydown="navEspecialidad(event)">
+      <span class="esp-icon" aria-hidden="true">🧠</span>
+      <h3>Neurología</h3>
+      <p>Centro Neurológico especializado en trastornos motores, espasticidad y rehabilitación neurológica</p>
+      <span class="esp-badge">✓ Atiende discapacidad motriz</span>
+    </div>
+
+    <div class="esp-card" role="listitem" tabindex="0" aria-label="Ortopedia y Columna — atiende discapacidad motriz" onkeydown="navEspecialidad(event)">
+      <span class="esp-icon" aria-hidden="true">🦴</span>
+      <h3>Ortopedia y Columna</h3>
+      <p>Cirugía ortopédica y de columna especializada. Tratamiento de paraplejia, lesiones medulares y escoliosis</p>
+      <span class="esp-badge">✓ Atiende discapacidad motriz</span>
+    </div>
+
+    <div class="esp-card" role="listitem" tabindex="0" aria-label="Oncología" onkeydown="navEspecialidad(event)">
+      <span class="esp-icon" aria-hidden="true">🎗️</span>
+      <h3>Oncología</h3>
+      <p>Centro de Cirugía Oncológica con protocolos de tratamiento avanzado y equipo multidisciplinario</p>
+      <span class="esp-badge">✓ Atiende discapacidad motriz</span>
+    </div>
+
+    <div class="esp-card" role="listitem" tabindex="0" aria-label="Medicina Interna" onkeydown="navEspecialidad(event)">
+      <span class="esp-icon" aria-hidden="true">🩺</span>
+      <h3>Medicina Interna</h3>
+      <p>Diagnóstico integral y manejo de enfermedades crónicas. Consultorios con acceso adaptado</p>
+      <span class="esp-badge">✓ Atiende discapacidad motriz</span>
+    </div>
+
+    <div class="esp-card" role="listitem" tabindex="0" aria-label="Rehabilitación Física" onkeydown="navEspecialidad(event)">
+      <span class="esp-icon" aria-hidden="true">💪</span>
+      <h3>Rehabilitación Física</h3>
+      <p>Fisioterapia y terapia ocupacional para recuperación motriz. Equipos adaptados, alberca terapéutica</p>
+      <span class="esp-badge">✓ Especialidad motriz</span>
+    </div>
+
+    <div class="esp-card" role="listitem" tabindex="0" aria-label="Urgencias 24/7 — atiende discapacidad motriz" onkeydown="navEspecialidad(event)">
+      <span class="esp-icon" aria-hidden="true">🚑</span>
+      <h3>Urgencias 24/7</h3>
+      <p>Atención de emergencias las 24 horas. Acceso directo para sillas de ruedas, ambulancias adaptadas</p>
+      <span class="esp-badge">✓ Acceso adaptado</span>
+    </div>
+
+    <div class="esp-card" role="listitem" tabindex="0" aria-label="Imagenología" onkeydown="navEspecialidad(event)">
+      <span class="esp-icon" aria-hidden="true">🔬</span>
+      <h3>Imagenología</h3>
+      <p>Resonancia, tomografía y ultrasonido. Mesas ajustables para facilitar traslado desde silla de ruedas</p>
+      <span class="esp-badge">✓ Equipos adaptados</span>
+    </div>
+
+    <div class="esp-card" role="listitem" tabindex="0" aria-label="Maternidad" onkeydown="navEspecialidad(event)">
+      <span class="esp-icon" aria-hidden="true">👶</span>
+      <h3>Maternidad y Neonatología</h3>
+      <p>Atención obstétrica y neonatal de alto riesgo. Habitaciones adaptadas para madres con discapacidad</p>
+      <span class="esp-badge">✓ Habitaciones adaptadas</span>
+    </div>
+
+    <div class="esp-card" role="listitem" tabindex="0" aria-label="Laboratorio Clínico" onkeydown="navEspecialidad(event)">
+      <span class="esp-icon" aria-hidden="true">🧪</span>
+      <h3>Laboratorio Clínico</h3>
+      <p>Laboratorio clínico y de biología molecular. Toma de muestras a domicilio disponible</p>
+      <span class="esp-badge">✓ Servicio a domicilio</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- FORMULARIO DE CITA -->
+<div class="seccion-fondo" id="citas">
+  <section class="seccion" aria-labelledby="form-titulo">
+    <div class="seccion-titulo">
+      <span class="etiqueta">Agenda tu consulta</span>
+      <h2 id="form-titulo">Formulario de Cita Accesible</h2>
+      <p>Completa en múltiples pasos. Tu progreso se guarda automáticamente cada 30 segundos. Sin presión de tiempo.</p>
+    </div>
+
+    <div class="form-wizard" id="cita-form" role="form" aria-label="Formulario de cita médica en pasos" aria-describedby="form-desc-global">
+      <p id="form-desc-global" class="sr-only">Formulario en 3 pasos. Usa Tab para moverte entre campos, Enter o Espacio para activar botones. Tu progreso se guarda automáticamente.</p>
+      <nav class="wizard-steps" aria-label="Pasos del formulario" role="tablist">
+        <div class="wizard-step activo" id="paso-tab-1" role="tab" tabindex="0" aria-selected="true" aria-controls="paso-1" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();irPaso(1);}">1. Tus datos</div>
+        <div class="wizard-step" id="paso-tab-2" role="tab" tabindex="0" aria-selected="false" aria-controls="paso-2" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();irPaso(2);}">2. Especialidad</div>
+        <div class="wizard-step" id="paso-tab-3" role="tab" tabindex="0" aria-selected="false" aria-controls="paso-3" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();irPaso(3);}">3. Confirmar</div>
+      </nav>
+
+      <div class="form-autoguardado" aria-live="polite" id="msg-autoguardado" role="status">
+        <span aria-hidden="true">💾</span> <span id="texto-guardado">Los datos se guardan automáticamente</span>
+      </div>
+
+      <!-- PASO 1 -->
+      <div id="paso-1" role="tabpanel" aria-labelledby="paso-tab-1">
+        <div class="form-grid">
+          <div class="form-grupo">
+            <label class="form-label" for="nombre">Nombre completo *</label>
+            <input class="form-input" type="text" id="nombre" name="nombre" autocomplete="name" required aria-required="true" aria-describedby="nombre-hint" oninput="validarCampo(this)" onchange="guardarFormulario()">
+            <p class="form-hint" id="nombre-hint"></p>
+          </div>
+          <div class="form-grupo">
+            <label class="form-label" for="telefono">Teléfono / WhatsApp *</label>
+            <input class="form-input" type="tel" id="telefono" name="telefono" autocomplete="tel" required aria-required="true" aria-describedby="tel-hint" oninput="validarTel(this)" onchange="guardarFormulario()">
+            <p class="form-hint" id="tel-hint"></p>
+          </div>
+        </div>
+        <div class="form-grupo">
+          <label class="form-label" for="email">Correo electrónico</label>
+          <input class="form-input" type="email" id="email" name="email" autocomplete="email" aria-describedby="email-hint" oninput="validarEmail(this)" onchange="guardarFormulario()">
+          <p class="form-hint" id="email-hint"></p>
+        </div>
+        <div class="form-grupo">
+          <label class="form-label" for="discapacidad">Tipo de discapacidad o necesidad de acceso (opcional)</label>
+          <select class="form-input" id="discapacidad" name="discapacidad" onchange="guardarFormulario()" aria-describedby="disc-hint">
+            <option value="">Selecciona (opcional)</option>
+            <option value="paraplejia">Paraplejia</option>
+            <option value="cuadriplejia">Cuadriplejia</option>
+            <option value="temblor">Temblor esencial</option>
+            <option value="control-limitado">Control limitado de extremidades</option>
+            <option value="silla-ruedas">Usuario de silla de ruedas</option>
+            <option value="otra">Otra</option>
+            <option value="ninguna">Ninguna</option>
+          </select>
+          <p class="form-hint" id="disc-hint" style="color:var(--gris-texto);">Esta información nos ayuda a preparar la mejor atención para ti</p>
+        </div>
+        <div class="wizard-nav">
+          <span></span>
+          <button class="btn-primario" style="height:52px;font-size:0.95rem;" onclick="irPaso(2)" aria-label="Ir al paso 2: elegir especialidad">
+            Siguiente: Especialidad <span aria-hidden="true">→</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- PASO 2 -->
+      <div id="paso-2" role="tabpanel" aria-labelledby="paso-tab-2" hidden>
+        <div class="form-grupo">
+          <label class="form-label" for="especialidad-cita">Especialidad médica *</label>
+          <select class="form-input" id="especialidad-cita" name="especialidad" required aria-required="true" onchange="guardarFormulario()">
+            <option value="">Selecciona una especialidad</option>
+            <option value="cardiologia">Cardiología y Pulmonología</option>
+            <option value="neurologia">Neurología</option>
+            <option value="ortopedia">Ortopedia y Columna</option>
+            <option value="oncologia">Oncología</option>
+            <option value="medicina-interna">Medicina Interna</option>
+            <option value="rehabilitacion">Rehabilitación Física</option>
+            <option value="urgencias">Urgencias</option>
+            <option value="imagenologia">Imagenología</option>
+            <option value="maternidad">Maternidad y Neonatología</option>
+            <option value="laboratorio">Laboratorio Clínico</option>
+          </select>
+        </div>
+        <div class="form-grid">
+          <div class="form-grupo">
+            <label class="form-label" for="fecha">Fecha preferida *</label>
+            <input class="form-input" type="date" id="fecha" name="fecha" required aria-required="true" aria-describedby="fecha-hint" autocomplete="off" onchange="guardarFormulario()" min="">
+            <p class="form-hint" id="fecha-hint" style="color:var(--gris-texto);">Selecciona la fecha en que deseas tu consulta</p>
+          </div>
+          <div class="form-grupo">
+            <label class="form-label" for="horario">Horario preferido</label>
+            <select class="form-input" id="horario" name="horario" onchange="guardarFormulario()">
+              <option value="manana">Mañana (8:00–12:00)</option>
+              <option value="tarde">Tarde (12:00–17:00)</option>
+              <option value="cualquiera">Cualquier hora</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-grupo">
+          <label class="form-label" for="confirmacion">Método de confirmación preferido *</label>
+          <select class="form-input" id="confirmacion" name="confirmacion" required aria-required="true" onchange="guardarFormulario()" aria-describedby="conf-hint">
+            <option value="whatsapp">WhatsApp (recomendado)</option>
+            <option value="sms">SMS</option>
+            <option value="email">Correo electrónico</option>
+            <option value="llamada">Llamada telefónica</option>
+          </select>
+          <p class="form-hint" id="conf-hint" style="color:var(--gris-texto);">WhatsApp y SMS son alternativas a la llamada telefónica, igualmente válidas</p>
+        </div>
+        <div class="wizard-nav">
+          <button class="btn-secundario" style="height:52px;" onclick="irPaso(1)"><span aria-hidden="true">←</span> Anterior</button>
+          <button class="btn-primario" style="height:52px;font-size:0.95rem;" onclick="irPaso(3)">Revisar cita <span aria-hidden="true">→</span></button>
+        </div>
+      </div>
+
+      <!-- PASO 3 -->
+      <div id="paso-3" role="tabpanel" aria-labelledby="paso-tab-3" hidden>
+        <div id="resumen-cita" style="background:var(--gris);border-radius:10px;padding:20px 24px;margin-bottom:24px;" aria-live="polite">
+          <h3 style="font-size:1rem;color:var(--azul);margin-bottom:12px;font-weight:700;">Resumen de tu cita</h3>
+          <div id="resumen-contenido" style="font-size:0.9rem;color:var(--gris-texto);line-height:2;">—</div>
+        </div>
+        <div class="form-grupo">
+          <label class="form-label" for="notas">Notas adicionales (síntomas, medicamentos, necesidades especiales)</label>
+          <textarea class="form-input" id="notas" name="notas" rows="4" style="min-height:100px;resize:vertical;" onchange="guardarFormulario()" aria-describedby="notas-hint"></textarea>
+          <p class="form-hint" id="notas-hint" style="color:var(--gris-texto);">Sin límite de caracteres. Tómate el tiempo que necesites.</p>
+        </div>
+        <div class="wizard-nav">
+          <button class="btn-secundario" style="height:52px;" onclick="irPaso(2)"><span aria-hidden="true">←</span> Anterior</button>
+          <button class="btn-primario" style="height:52px;font-size:0.95rem;" onclick="enviarCita()" aria-describedby="envio-desc">
+            <span aria-hidden="true">✓</span> Confirmar cita
+          </button>
+        </div>
+        <p id="envio-desc" class="sr-only">Envía tu solicitud de cita. Recibirás confirmación por el método elegido.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- INSTALACIONES ACCESIBLES -->
+<section class="seccion" id="instalaciones" aria-labelledby="inst-titulo">
+  <div class="seccion-titulo">
+    <span class="etiqueta">Infraestructura</span>
+    <h2 id="inst-titulo">Instalaciones 100% Accesibles</h2>
+    <p>Hospital Galenia está diseñado para que cada rincón sea accesible para personas con cualquier tipo de discapacidad motriz.</p>
+  </div>
+  <div class="instalaciones-grid">
+    <ul class="install-list" aria-label="Lista de instalaciones accesibles">
+      <li class="install-item">
+        <span class="install-icon" aria-hidden="true">♿</span>
+        <div>
+          <h4>Rampas en todos los accesos</h4>
+          <p>Rampas antideslizantes con pasamanos doble a lo largo de todos los ingresos. Pendiente máxima 8%, cumple NOM-233.</p>
+        </div>
+      </li>
+      <li class="install-item">
+        <span class="install-icon" aria-hidden="true">🛗</span>
+        <div>
+          <h4>Elevadores adaptados</h4>
+          <p>Botones en braille y a altura de silla de ruedas (90 cm). Anuncio de piso por voz. Puertas de 90 cm mínimo de apertura.</p>
+        </div>
+      </li>
+      <li class="install-item">
+        <span class="install-icon" aria-hidden="true">🛏️</span>
+        <div>
+          <h4>Camas y camillas ajustables</h4>
+          <p>Todas las camas de hospitalización son eléctricas con altura ajustable para traslado desde silla de ruedas sin esfuerzo.</p>
+        </div>
+      </li>
+      <li class="install-item">
+        <span class="install-icon" aria-hidden="true">🚿</span>
+        <div>
+          <h4>Baños adaptados en cada piso</h4>
+          <p>Barras de sujeción, espacio de maniobra 150×150 cm, regadera con silla fija, espejo inclinado. En cada planta del hospital.</p>
+        </div>
+      </li>
+      <li class="install-item">
+        <span class="install-icon" aria-hidden="true">🅿️</span>
+        <div>
+          <h4>Estacionamiento preferencial</h4>
+          <p>12 cajones de estacionamiento preferenciales a 20 metros del acceso principal. Pasillos de circulación de 180 cm.</p>
+        </div>
+      </li>
+      <li class="install-item">
+        <span class="install-icon" aria-hidden="true">🤝</span>
+        <div>
+          <h4>Personal de apoyo especializado</h4>
+          <p>Enfermeras y camilleros con certificación en manejo de pacientes con discapacidad motriz disponibles 24/7.</p>
+        </div>
+      </li>
+    </ul>
+
+    <!-- MAPA ACCESIBILIDAD HTML -->
+    <div class="mapa-html" role="img" aria-label="Mapa de accesibilidad del Hospital Galenia — planta baja">
+      <h3><span aria-hidden="true">🗺️</span> Mapa de accesibilidad — Planta Baja</h3>
+      <div class="planta" aria-hidden="true">
+        <div class="zona emergencias">🚨 Urgencias 24h</div>
+        <div class="zona elevador">🛗 Elevadores</div>
+        <div class="zona consultorios">🩺 Consultorios Piso 1–4</div>
+        <div class="zona farmacia">💊 Farmacia</div>
+        <div class="zona rampa">♿ Rampas acceso</div>
+        <div class="zona entrada">🚪 Entrada principal</div>
+        <div class="zona estacionamiento">🅿️ Estacionamiento preferencial</div>
+      </div>
+      <div class="mapa-leyenda" aria-label="Leyenda del mapa">
+        <div class="leyenda-item"><div class="leyenda-dot" style="background:#FFEBEE;border:1px solid #C62828;"></div> Urgencias</div>
+        <div class="leyenda-item"><div class="leyenda-dot" style="background:#E8F5E9;border:1px solid #2E7D32;"></div> Elevadores</div>
+        <div class="leyenda-item"><div class="leyenda-dot" style="background:#E3F2FD;border:1px solid #1565C0;"></div> Entrada</div>
+        <div class="leyenda-item"><div class="leyenda-dot" style="background:#E0F7FA;border:1px solid #006064;"></div> Rampas</div>
+        <div class="leyenda-item"><div class="leyenda-dot" style="background:#FFF8E1;border:1px solid #F57F17;"></div> Estacionamiento</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INFO DE CONTACTO -->
+<div class="info-strip" role="complementary" aria-label="Información de contacto Hospital Galenia">
+  <div class="info-item">
+    <span class="info-item-icon" aria-hidden="true">📞</span>
+    <div>
+      <h4>Citas y consultas</h4>
+      <a href="tel:9988915200" aria-label="Llamar al número principal: 998 891 5200">998 891 5200</a>
+    </div>
+  </div>
+  <div class="info-item">
+    <span class="info-item-icon" aria-hidden="true">🚑</span>
+    <div>
+      <h4>Ambulancias (urgencias)</h4>
+      <a href="tel:9982224363" aria-label="Llamar a ambulancias: 998 222 4363">998 222 4363</a>
+    </div>
+  </div>
+  <div class="info-item">
+    <span class="info-item-icon" aria-hidden="true">✉️</span>
+    <div>
+      <h4>Correo</h4>
+      <a href="mailto:info@hospitalgalenia.com">info@hospitalgalenia.com</a>
+    </div>
+  </div>
+  <div class="info-item">
+    <span class="info-item-icon" aria-hidden="true">📍</span>
+    <div>
+      <h4>Ubicación</h4>
+      <p>Cancún, Quintana Roo, México</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<!-- hf-photos-patch -->
+<section aria-label="Hospital Galenia · Cancún — Galería fotográfica" id="galeria-hf-galenia" style="background:#060D1A;padding:5rem 1.5rem 4rem;margin:0;overflow:hidden;">
+<div style="max-width:1100px;margin:0 auto;">
+<p style="font-size:.6rem;letter-spacing:.32em;text-transform:uppercase;color:#1D6FA4;margin-bottom:.7rem;display:flex;align-items:center;gap:.65rem;"><span style="display:inline-block;width:2.2rem;height:1px;background:currentColor;"></span>Hospital Galenia · Cancún</p>
+<h2 style="font-family:'DM Serif Display','Instrument Serif',Georgia,serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#E8F4FD;margin-bottom:2.5rem;line-height:1.1;font-weight:400;font-style:italic;">Tecnología al servicio de la vida.</h2>
+<div style="display:grid;gap:4px;">
+<div class="lxgc" style="aspect-ratio:16/9;border-radius:0;"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_2xDKzgUHSbZ2WsUfnTEP222ovTJ/hf_20260510_051027_0ccda72e-4c63-42d7-a7fa-164d8d79a298.png" alt="Exterior Hospital Galenia Cancún, arquitectura contemporánea accesible" loading="lazy" style="width:100%;height:100%;object-fit:cover;"><div class="lxov"></div></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;">
+<div class="lxgc" style="aspect-ratio:4/3;"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_2xDKzgUHSbZ2WsUfnTEP222ovTJ/hf_20260510_051029_3184c605-50d7-4a5a-8e62-9769de3cc924.png" alt="Robot Da Vinci en quirófano de alta tecnología Hospital Galenia" loading="lazy" style="width:100%;height:100%;object-fit:cover;"><div class="lxov"></div></div>
+<div class="lxgc" style="aspect-ratio:4/3;"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_2xDKzgUHSbZ2WsUfnTEP222ovTJ/hf_20260510_051031_8018ce75-f978-4509-894c-ff0ff8051586.png" alt="Médico con paciente en habitación cálida y moderna, Hospital Galenia" loading="lazy" style="width:100%;height:100%;object-fit:cover;"><div class="lxov"></div></div>
+</div>
+</div>
+</div>
+</section>
+<footer role="contentinfo">
+  <p>
+    <strong>Hospital Galenia</strong> — Cancún, Quintana Roo, México<br>
+    "Más que un hospital" · Acreditación JCI · Tres acreditaciones internacionales<br>
+    <span style="opacity:0.6;">Experiencia digital inclusiva desarrollada por</span> <strong>VICTOR IA</strong> · Web 4.0 Inclusiva
+  </p>
+  <div style="margin-top:10px;">
+    <span class="footer-wcag">♿ Accesibilidad Motriz WCAG 2.2 AAA</span>
+  </div>
+  <p style="margin-top:12px;opacity:0.5;font-size:0.75rem;">
+    Este es un sitio demo desarrollado por VICTOR IA para demostrar capacidades de accesibilidad motriz avanzada.
+  </p>
+</footer>
+
+</main><!-- /main -->
+
+<!-- BOTÓN EMERGENCIA FIJO -->
+<button id="btn-emergencia" aria-label="Botón de emergencia — llama a urgencias (998) 222-4363" onclick="llamarEmergencia()" title="Emergencia — Urgencias 24h">
+  🚨
+</button>
+<div id="btn-emergencia-label" aria-hidden="true">Urgencias 24h — (998) 222-4363</div>
+
+<!-- TOAST -->
+<div id="toast" role="alert" aria-live="assertive" aria-atomic="true"></div>
+
+<!-- ===== JAVASCRIPT FUNCIONAL ===== -->
+<script>
+'use strict';
+
+// ============================================================
+// 1. INDICADOR DE FOCO
+// ============================================================
+(function() {
+  const focoTexto = document.getElementById('foco-texto');
+  function obtenerEtiqueta(el) {
+    if (!el) return 'Página';
+    const ariaLabel = el.getAttribute('aria-label');
+    if (ariaLabel) return ariaLabel;
+    const id = el.id;
+    if (id) {
+      const label = document.querySelector('label[for="' + id + '"]');
+      if (label) return label.textContent.trim();
+    }
+    const txt = el.textContent ? el.textContent.trim().substring(0, 40) : '';
+    if (txt) return txt;
+    const ph = el.placeholder;
+    if (ph) return ph;
+    return el.tagName.toLowerCase();
+  }
+  document.addEventListener('focusin', function(e) {
+    const etiqueta = obtenerEtiqueta(e.target);
+    if (focoTexto) focoTexto.textContent = etiqueta;
+  });
+})();
+
+// ============================================================
+// 2. TOGGLES DE ACCESIBILIDAD
+// ============================================================
+
+// Helper genérico: alterna clase en body + actualiza btn + guarda en localStorage
+function _aplicarToggle(bodyClass, btnId, key, toastOn, toastOff) {
+  const btn = document.getElementById(btnId);
+  if (!btn) return false;
+  var activo = document.body.classList.toggle(bodyClass);
+  btn.classList.toggle('activo', activo);
+  btn.setAttribute('aria-pressed', activo.toString());
+  mostrarToast(activo ? toastOn : toastOff);
+  localStorage.setItem(key, activo ? '1' : '0');
+  return activo;
+}
+
+function toggleModoTeclado() {
+  _aplicarToggle('modo-teclado', 'btn-modo-teclado', 'galenia-modo-teclado',
+    '⌨️ Modo Teclado activado — Tab/Enter para navegar', '⌨️ Modo Teclado desactivado');
+}
+
+function toggleAreaAmpliada() {
+  _aplicarToggle('area-ampliada', 'btn-area-ampliada', 'galenia-area-ampliada',
+    '🔍 Área de clic ampliada', '🔍 Área de clic normal');
+}
+
+function toggleScrollLento() {
+  var activo = _aplicarToggle('scroll-lento', 'btn-scroll-lento', 'galenia-scroll-lento',
+    '🐢 Scroll lento activado', '🐢 Scroll normal');
+  if (activo) {
+    window.__scrollLento = true;
+    document.addEventListener('wheel', reducirScroll, { passive: false });
+  } else {
+    window.__scrollLento = false;
+    document.removeEventListener('wheel', reducirScroll);
+  }
+}
+
+function reducirScroll(e) {
+  if (!window.__scrollLento) return;
+  e.preventDefault();
+  window.scrollBy({ top: e.deltaY * 0.3, behavior: 'auto' });
+}
+
+function toggleSinTimeout() {
+  var btn = document.getElementById('btn-sin-timeout');
+  if (!btn) return;
+  var activo = btn.getAttribute('aria-pressed') !== 'true';
+  btn.classList.toggle('activo', activo);
+  btn.setAttribute('aria-pressed', activo.toString());
+  window._sinTimeout = activo;
+  mostrarToast(activo ? '⏱️ Sin tiempo límite — sesión indefinida' : '⏱️ Tiempo límite normal');
+  localStorage.setItem('galenia-sin-timeout', activo ? '1' : '0');
+}
+
+function toggleSinHover() {
+  _aplicarToggle('sin-hover', 'btn-sin-hover', 'galenia-sin-hover',
+    '🖱️ Sin hover activado — indicadores permanentes', '🖱️ Hover normal restaurado');
+}
+
+function toggleContraste() {
+  var btn = document.getElementById('btn-contraste');
+  if (!btn) return;
+  var activo = btn.getAttribute('aria-pressed') !== 'true';
+  btn.classList.toggle('activo', activo);
+  btn.setAttribute('aria-pressed', activo.toString());
+  document.documentElement.setAttribute('data-theme', activo ? 'contrast' : '');
+  mostrarToast(activo ? '◐ Alto contraste activado' : '◐ Contraste normal restaurado');
+  localStorage.setItem('galenia-contraste', activo ? '1' : '0');
+}
+
+// Restaurar preferencias al cargar SIN mostrar toasts
+(function restaurarPreferencias() {
+  if (localStorage.getItem('galenia-modo-teclado') === '1') {
+    document.body.classList.add('modo-teclado');
+    const btn = document.getElementById('btn-modo-teclado');
+    if (btn) { btn.classList.add('activo'); btn.setAttribute('aria-pressed', 'true'); }
+  }
+  if (localStorage.getItem('galenia-area-ampliada') === '1') {
+    document.body.classList.add('area-ampliada');
+    const btn = document.getElementById('btn-area-ampliada');
+    if (btn) { btn.classList.add('activo'); btn.setAttribute('aria-pressed', 'true'); }
+  }
+  if (localStorage.getItem('galenia-scroll-lento') === '1') {
+    document.body.classList.add('scroll-lento');
+    window.__scrollLento = true;
+    document.addEventListener('wheel', reducirScroll, { passive: false });
+    const btn = document.getElementById('btn-scroll-lento');
+    if (btn) { btn.classList.add('activo'); btn.setAttribute('aria-pressed', 'true'); }
+  }
+  if (localStorage.getItem('galenia-sin-timeout') === '1') {
+    window._sinTimeout = true;
+    const btn = document.getElementById('btn-sin-timeout');
+    if (btn) { btn.classList.add('activo'); btn.setAttribute('aria-pressed', 'true'); }
+  }
+  if (localStorage.getItem('galenia-sin-hover') === '1') {
+    document.body.classList.add('sin-hover');
+    const btn = document.getElementById('btn-sin-hover');
+    if (btn) { btn.classList.add('activo'); btn.setAttribute('aria-pressed', 'true'); }
+  }
+  if (localStorage.getItem('galenia-contraste') === '1') {
+    document.documentElement.setAttribute('data-theme', 'contrast');
+    const btn = document.getElementById('btn-contraste');
+    if (btn) { btn.classList.add('activo'); btn.setAttribute('aria-pressed', 'true'); }
+  }
+})();
+
+// ============================================================
+// 3. WEB SPEECH API — CONTROL POR VOZ
+// ============================================================
+var reconocimiento = null;
+var vozActiva = false;
+var soporte = typeof window.SpeechRecognition !== 'undefined' || typeof window.webkitSpeechRecognition !== 'undefined';
+
+function iniciarReconocimiento() {
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SpeechRecognition) return null;
+  const r = new SpeechRecognition();
+  r.lang = 'es-MX';
+  r.continuous = true;
+  r.interimResults = true;
+  r.maxAlternatives = 3;
+  return r;
+}
+
+function toggleVoz() {
+  if (!soporte) {
+    document.getElementById('voz-no-soporte').style.display = 'block';
+    mostrarToast('⚠️ Tu navegador no soporta control por voz. Usa Chrome.');
+    return;
+  }
+  if (vozActiva) {
+    detenerVoz();
+  } else {
+    activarVoz();
+  }
+}
+
+function activarVoz() {
+  reconocimiento = iniciarReconocimiento();
+  if (!reconocimiento) return;
+
+  reconocimiento.onstart = function() {
+    vozActiva = true;
+    actualizarBtnVoz(true);
+    document.getElementById('onda-wrap').classList.add('activa');
+    actualizarTranscript('Escuchando… habla ahora');
+    mostrarToast('🎙️ Control por voz activado — habla en español');
+  };
+
+  reconocimiento.onresult = function(event) {
+    let transcript = '';
+    for (let i = event.resultIndex; i < event.results.length; i++) {
+      transcript += event.results[i][0].transcript;
+    }
+    actualizarTranscript(transcript);
+    if (event.results[event.results.length - 1].isFinal) {
+      procesarComando(transcript.toLowerCase().trim());
+    }
+  };
+
+  reconocimiento.onerror = function(event) {
+    if (event.error === 'not-allowed') {
+      mostrarToast('⚠️ Permiso de micrófono denegado');
+      detenerVoz();
+    } else if (event.error === 'no-speech') {
+      actualizarTranscript('Sin audio detectado. Sigue hablando…');
+    }
+  };
+
+  reconocimiento.onend = function() {
+    if (vozActiva) {
+      try { reconocimiento.start(); } catch(e) {}
+    }
+  };
+
+  try {
+    reconocimiento.start();
+  } catch(e) {
+    mostrarToast('Error al iniciar micrófono: ' + e.message);
+  }
+}
+
+function detenerVoz() {
+  vozActiva = false;
+  if (reconocimiento) { try { reconocimiento.stop(); } catch(e) {} }
+  actualizarBtnVoz(false);
+  document.getElementById('onda-wrap').classList.remove('activa');
+  actualizarTranscript('Control por voz desactivado');
+  mostrarToast('🎙️ Control por voz desactivado');
+}
+
+function actualizarBtnVoz(activo) {
+  const btn = document.getElementById('btn-voz-activar');
+  const icono = document.getElementById('voz-icono');
+  const texto = document.getElementById('voz-texto-btn');
+  btn.classList.toggle('escuchando', activo);
+  btn.setAttribute('aria-pressed', activo.toString());
+  icono.textContent = activo ? '🔴' : '🎙️';
+  texto.textContent = activo ? 'Detener control por voz' : 'Activar control por voz';
+}
+
+function actualizarTranscript(texto) {
+  const el = document.getElementById('voz-transcript-texto');
+  if (el) el.textContent = texto;
+}
+
+function procesarComando(cmd) {
+  const mapa = [
+    { palabras: ['cita', 'citas', 'agendar', 'agenda'], accion: irACitas },
+    { palabras: ['llamar', 'llama', 'teléfono', 'telefono', 'número', 'numero'], accion: llamarHospital },
+    { palabras: ['especialidad', 'especialidades', 'buscar especialidad'], accion: irAEspecialidades },
+    { palabras: ['accesibilidad', 'accesible'], accion: irAAccesibilidad },
+    { palabras: ['regresar', 'regresa', 'arriba', 'inicio', 'volver', 'home'], accion: irArriba },
+    { palabras: ['emergencia', 'urgencia', 'urgencias', 'ambulancia'], accion: llamarEmergencia },
+    { palabras: ['voz', 'demo voz', 'control de voz'], accion: irAVoz },
+  ];
+
+  let encontrado = false;
+  for (const entrada of mapa) {
+    if (entrada.palabras.some(p => cmd.includes(p))) {
+      entrada.accion();
+      document.getElementById('voz-comando-ejecutado').textContent = '✓ Ejecutado: "' + cmd + '"';
+      encontrado = true;
+      break;
+    }
+  }
+  if (!encontrado) {
+    document.getElementById('voz-comando-ejecutado').textContent = '? No reconocido: "' + cmd + '"';
+  }
+}
+
+function irACitas() { document.getElementById('citas').scrollIntoView({ behavior: 'smooth' }); mostrarToast('📅 Yendo a Agendar Cita'); }
+function llamarHospital() { mostrarToast('📞 Llamando a Hospital Galenia…'); setTimeout(function(){ window.location.href = 'tel:9988915200'; }, 800); }
+function irAEspecialidades() { document.getElementById('especialidades').scrollIntoView({ behavior: 'smooth' }); mostrarToast('🩺 Yendo a Especialidades'); }
+function irAAccesibilidad() { document.getElementById('accesibilidad').scrollIntoView({ behavior: 'smooth' }); mostrarToast('♿ Yendo a Accesibilidad'); }
+function irArriba() { window.scrollTo({ top: 0, behavior: 'smooth' }); mostrarToast('⬆️ Regresando al inicio'); }
+function irAVoz() { document.getElementById('demo-voz').scrollIntoView({ behavior: 'smooth' }); mostrarToast('🎙️ Yendo a Demo de Voz'); }
+function llamarEmergencia() {
+  mostrarToast('🚨 URGENCIAS — Llamando a (998) 222-4363…');
+  setTimeout(function(){ window.location.href = 'tel:9982224363'; }, 600);
+}
+
+// ============================================================
+// 4. NAVEGACIÓN POR TECLADO EN ESPECIALIDADES (FLECHAS)
+// ============================================================
+function navEspecialidad(event) {
+  const cards = Array.from(document.querySelectorAll('.esp-card'));
+  const idx = cards.indexOf(event.currentTarget);
+  if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+    event.preventDefault();
+    const sig = cards[idx + 1];
+    if (sig) sig.focus();
+  } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+    event.preventDefault();
+    const ant = cards[idx - 1];
+    if (ant) ant.focus();
+  } else if (event.key === 'Enter' || event.key === ' ') {
+    event.preventDefault();
+    const h3 = event.currentTarget.querySelector('h3');
+    if (h3) mostrarToast('🩺 Seleccionado: ' + h3.textContent);
+  }
+}
+
+// ============================================================
+// 5. WIZARD DEL FORMULARIO
+// ============================================================
+var pasoActual = 1;
+
+function irPaso(n) {
+  // Ocultar paso actual
+  const panelActual = document.getElementById('paso-' + pasoActual);
+  if (panelActual) panelActual.hidden = true;
+  const tabActual = document.getElementById('paso-tab-' + pasoActual);
+  if (tabActual) {
+    tabActual.classList.remove('activo');
+    tabActual.setAttribute('aria-selected', 'false');
+    if (n > pasoActual) tabActual.classList.add('completo');
+  }
+
+  pasoActual = n;
+
+  // Mostrar paso nuevo
+  const panelNuevo = document.getElementById('paso-' + pasoActual);
+  if (panelNuevo) panelNuevo.hidden = false;
+  const tabNuevo = document.getElementById('paso-tab-' + pasoActual);
+  if (tabNuevo) {
+    tabNuevo.classList.add('activo');
+    tabNuevo.setAttribute('aria-selected', 'true');
+  }
+
+  if (n === 3) generarResumen();
+
+  // Mover foco al primer elemento interactivo del nuevo panel
+  const primerFocusable = panelNuevo ? panelNuevo.querySelector('input, select, textarea, button, [tabindex="0"]') : null;
+  if (primerFocusable) {
+    primerFocusable.focus();
+  } else if (panelNuevo) {
+    panelNuevo.setAttribute('tabindex', '-1');
+    panelNuevo.focus();
+  }
+  mostrarToast('Paso ' + n + ' de 3');
+}
+
+function generarResumen() {
+  const nombre = document.getElementById('nombre').value || '—';
+  const telefono = document.getElementById('telefono').value || '—';
+  const esp = document.getElementById('especialidad-cita');
+  const especialidad = esp.options[esp.selectedIndex] ? esp.options[esp.selectedIndex].text : '—';
+  const fecha = document.getElementById('fecha').value || '—';
+  const conf = document.getElementById('confirmacion');
+  const confirmacion = conf.options[conf.selectedIndex] ? conf.options[conf.selectedIndex].text : '—';
+
+  document.getElementById('resumen-contenido').innerHTML =
+    '<strong>Nombre:</strong> ' + nombre + '<br>' +
+    '<strong>Teléfono/WhatsApp:</strong> ' + telefono + '<br>' +
+    '<strong>Especialidad:</strong> ' + especialidad + '<br>' +
+    '<strong>Fecha preferida:</strong> ' + fecha + '<br>' +
+    '<strong>Confirmación vía:</strong> ' + confirmacion;
+}
+
+function enviarCita() {
+  // Validar campos requeridos de todos los pasos
+  var camposRequeridos = document.querySelectorAll('#cita-form [required],[aria-required="true"]');
+  var hayErrores = false;
+  var primerError = null;
+  camposRequeridos.forEach(function(campo) {
+    if (!campo.value || !campo.value.trim()) {
+      campo.setAttribute('aria-invalid', 'true');
+      campo.classList.add('invalido');
+      hayErrores = true;
+      if (!primerError) primerError = campo;
+      // Mostrar hint de error si existe
+      var hintId = campo.getAttribute('aria-describedby');
+      if (hintId) {
+        var hint = document.getElementById(hintId);
+        if (hint && !hint.textContent.includes('Este campo')) {
+          hint.textContent = 'Este campo es requerido';
+          hint.className = 'form-hint error';
+        }
+      }
+    } else {
+      campo.setAttribute('aria-invalid', 'false');
+    }
+  });
+  if (hayErrores) {
+    mostrarToast('⚠️ Por favor completa los campos requeridos antes de confirmar');
+    if (primerError) primerError.focus();
+    return;
+  }
+
+  guardarFormulario();
+  mostrarToast('✅ Solicitud enviada — recibirás confirmación pronto');
+  const resumen = document.getElementById('resumen-cita');
+  resumen.innerHTML = '<div style="text-align:center;padding:20px;" role="status" aria-live="assertive"><div style="font-size:2.5rem;margin-bottom:10px;" aria-hidden="true">✅</div><h3 style="color:var(--verde);font-size:1.1rem;margin-bottom:8px;">¡Cita solicitada exitosamente!</h3><p style="color:var(--gris-texto);font-size:0.9rem;">Recibirás confirmación por el método elegido. Si necesitas cambios, llama al <a href="tel:9988915200" style="color:var(--azul);font-weight:700;">998 891 5200</a>.</p></div>';
+  // Mover foco al mensaje de confirmación
+  const confirmEl = resumen.querySelector('[role="status"]') || resumen;
+  confirmEl.setAttribute('tabindex', '-1');
+  confirmEl.focus();
+  localStorage.removeItem('galenia-form');
+}
+
+// ============================================================
+// 6. GUARDADO AUTOMÁTICO EN localStorage c/30 segundos
+// ============================================================
+function guardarFormulario() {
+  const datos = {
+    nombre: (document.getElementById('nombre') || {}).value || '',
+    telefono: (document.getElementById('telefono') || {}).value || '',
+    email: (document.getElementById('email') || {}).value || '',
+    discapacidad: (document.getElementById('discapacidad') || {}).value || '',
+    especialidad: (document.getElementById('especialidad-cita') || {}).value || '',
+    fecha: (document.getElementById('fecha') || {}).value || '',
+    horario: (document.getElementById('horario') || {}).value || '',
+    confirmacion: (document.getElementById('confirmacion') || {}).value || '',
+    notas: (document.getElementById('notas') || {}).value || '',
+    pasoActual: pasoActual
+  };
+  localStorage.setItem('galenia-form', JSON.stringify(datos));
+  const ts = new Date().toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' });
+  const msg = document.getElementById('texto-guardado');
+  if (msg) msg.textContent = 'Guardado automáticamente a las ' + ts;
+}
+
+function cargarFormulario() {
+  const raw = localStorage.getItem('galenia-form');
+  if (!raw) return;
+  try {
+    const d = JSON.parse(raw);
+    const set = function(id, val) { const el = document.getElementById(id); if (el && val) el.value = val; };
+    set('nombre', d.nombre); set('telefono', d.telefono); set('email', d.email);
+    set('discapacidad', d.discapacidad); set('especialidad-cita', d.especialidad);
+    set('fecha', d.fecha); set('horario', d.horario); set('confirmacion', d.confirmacion);
+    set('notas', d.notas);
+    if (d.pasoActual && d.pasoActual > 1) {
+      const ts = new Date().toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' });
+      const msg = document.getElementById('texto-guardado');
+      if (msg) msg.textContent = '💾 Datos restaurados de sesión anterior';
+    }
+  } catch(e) {}
+}
+
+setInterval(guardarFormulario, 30000);
+cargarFormulario();
+
+// Fecha mínima: hoy
+(function() {
+  const hoy = new Date().toISOString().split('T')[0];
+  const fechaInput = document.getElementById('fecha');
+  if (fechaInput) fechaInput.min = hoy;
+})();
+
+// ============================================================
+// 7. VALIDACIÓN INLINE
+// ============================================================
+
+// Inicializar aria-invalid en campos requeridos
+(function inicializarAriaInvalid() {
+  document.querySelectorAll('[required],[aria-required="true"]').forEach(function(campo) {
+    campo.setAttribute('aria-invalid', 'false');
+  });
+})();
+
+function validarCampo(el) {
+  const hint = document.getElementById(el.id + '-hint');
+  if (el.value.trim().length < 2) {
+    el.classList.add('invalido'); el.classList.remove('valido');
+    el.setAttribute('aria-invalid', 'true');
+    if (hint) { hint.textContent = 'Por favor ingresa al menos 2 caracteres'; hint.className = 'form-hint error'; }
+  } else {
+    el.classList.remove('invalido'); el.classList.add('valido');
+    el.setAttribute('aria-invalid', 'false');
+    if (hint) { hint.textContent = '✓ Correcto'; hint.className = 'form-hint ok'; }
+  }
+}
+
+function validarTel(el) {
+  const hint = document.getElementById('tel-hint');
+  if (!hint) return;
+  const limpio = el.value.replace(/\D/g, '');
+  if (limpio.length < 10) {
+    el.classList.add('invalido'); el.classList.remove('valido');
+    el.setAttribute('aria-invalid', 'true');
+    hint.textContent = 'Ingresa un número de 10 dígitos';
+    hint.className = 'form-hint error';
+  } else {
+    el.classList.remove('invalido'); el.classList.add('valido');
+    el.setAttribute('aria-invalid', 'false');
+    hint.textContent = '✓ También puedes usar WhatsApp con este número';
+    hint.className = 'form-hint ok';
+  }
+  guardarFormulario();
+}
+
+function validarEmail(el) {
+  const hint = document.getElementById('email-hint');
+  if (!hint || !el.value) return;
+  const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value);
+  el.classList.toggle('invalido', !ok); el.classList.toggle('valido', ok);
+  el.setAttribute('aria-invalid', ok ? 'false' : 'true');
+  hint.textContent = ok ? '✓ Correo válido' : 'Formato de correo no válido';
+  hint.className = 'form-hint ' + (ok ? 'ok' : 'error');
+  guardarFormulario();
+}
+
+// ============================================================
+// 8. TOAST / NOTIFICACIÓN
+// ============================================================
+var _toastTimeout = null;
+function mostrarToast(mensaje) {
+  const toast = document.getElementById('toast');
+  if (!toast) return;
+  toast.textContent = mensaje;
+  toast.classList.add('visible');
+  if (_toastTimeout) clearTimeout(_toastTimeout);
+  _toastTimeout = setTimeout(function() {
+    toast.classList.remove('visible');
+  }, 3000);
+}
+
+// ============================================================
+// 9. TECLADO GLOBAL — ACCESOS DIRECTOS
+// ============================================================
+document.addEventListener('keydown', function(e) {
+  // Alt+C = ir a citas
+  if (e.altKey && e.key === 'c') { e.preventDefault(); irACitas(); }
+  // Alt+E = ir a especialidades
+  if (e.altKey && e.key === 'e') { e.preventDefault(); irAEspecialidades(); }
+  // Alt+V = toggle voz
+  if (e.altKey && e.key === 'v') { e.preventDefault(); toggleVoz(); }
+  // Alt+T = toggle modo teclado
+  if (e.altKey && e.key === 't') { e.preventDefault(); toggleModoTeclado(); }
+  // Escape = detener voz
+  if (e.key === 'Escape' && vozActiva) { detenerVoz(); }
+});
+
+// ============================================================
+// 10. CHECAR SOPORTE VOZ AL CARGAR + ACCESOS RÁPIDOS
+// ============================================================
+window.addEventListener('DOMContentLoaded', function() {
+  if (!soporte) {
+    const noSoporte = document.getElementById('voz-no-soporte');
+    if (noSoporte) noSoporte.style.display = 'block';
+    const btnVoz = document.getElementById('btn-voz-activar');
+    if (btnVoz) {
+      btnVoz.disabled = true;
+      btnVoz.style.opacity = '0.6';
+      btnVoz.setAttribute('aria-disabled', 'true');
+      btnVoz.title = 'Control por voz no disponible en este navegador (requiere Chrome/Edge)';
+    }
+  }
+  // Mostrar tip de accesibilidad después de 1 segundo
+  setTimeout(function() {
+    mostrarToast('♿ Alt+T: teclado · Alt+V: voz · Alt+C: citas');
+  }, 1000);
+});
+</script>
+<script>
+(function(){
+var rm=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+var CFG={hero:'https://d8j0ntlcm91z4.cloudfront.net/user_2xDKzgUHSbZ2WsUfnTEP222ovTJ/hf_20260510_051027_0ccda72e-4c63-42d7-a7fa-164d8d79a298.png',gal:['https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=900&q=80','https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=900&q=80','https://images.unsplash.com/photo-1551601651-2a8555f1a136?auto=format&fit=crop&w=900&q=80'],alt:['Consulta medica especializada','Equipo medico de vanguardia','Atencion personalizada Galenia'],galLabel:'Galería Hospital Galenia',ov1:'rgba(12,40,80,0.88)',ov2:'rgba(0,100,200,0.45)',gl:'rgba(0,120,200,0.09)'};
+var cur=document.createElement('div');
+cur.style.cssText='position:fixed;width:360px;height:360px;border-radius:50%;pointer-events:none;transform:translate(-50%,-50%);z-index:9990;opacity:0;transition:opacity .5s;background:radial-gradient(circle,'+CFG.gl+' 0%,transparent 68%);';
+document.body.appendChild(cur);
+var mx=innerWidth/2,my=innerHeight/2;
+document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;cur.style.opacity='1';});
+document.addEventListener('mouseleave',function(){cur.style.opacity='0';});
+!function t(){cur.style.left=mx+'px';cur.style.top=my+'px';requestAnimationFrame(t);}();
+var hero=document.querySelector('#inicio,#home,.hero-section,section.hero')||document.querySelector('body>section,main>section,section');
+if(hero&&CFG.hero){
+if(getComputedStyle(hero).position==='static')hero.style.position='relative';
+hero.style.overflow='hidden';
+var il=document.createElement('div');il.style.cssText='position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;';
+var himg=document.createElement('img');himg.src=CFG.hero;himg.alt='';himg.setAttribute('aria-hidden','true');
+himg.style.cssText='width:100%;height:100%;object-fit:cover;object-position:center 30%;filter:brightness(.25) saturate(1.3);transition:transform 8s ease;';
+il.appendChild(himg);
+var hov=document.createElement('div');hov.style.cssText='position:absolute;inset:0;background:linear-gradient(145deg,'+CFG.ov1+' 0%,'+CFG.ov2+' 100%);';il.appendChild(hov);
+hero.insertBefore(il,hero.firstChild);
+[].slice.call(hero.children).forEach(function(c){if(c!==il){c.style.position='relative';c.style.zIndex='2';}});
+setTimeout(function(){himg.style.transform='scale(1.0)';},100);
+if(!rm)window.addEventListener('scroll',function(){if(window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;himg.style.transform='scale(1.08) translateY('+(window.scrollY*.1)+'px)';},{passive:true});
+}
+var gs=document.createElement('section');gs.setAttribute('aria-label',CFG.galLabel);gs.style.cssText='margin:0;padding:0;line-height:0;display:block;';
+var gi='<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:#000;max-height:380px;overflow:hidden;">';
+CFG.gal.forEach(function(u,i){gi+='<div class="lxgc" style="aspect-ratio:4/3;"><img src="'+u+'" alt="'+CFG.alt[i]+'" loading="lazy"><div class="lxov"></div></div>';});
+gi+='</div>';gs.innerHTML=gi;
+if(hero&&hero.parentNode)hero.parentNode.insertBefore(gs,hero.nextSibling);
+var cards=[].slice.call(document.querySelectorAll('[class*=card],[class*=plan],[class*=beneficio],[class*=caracteristica],[class*=servicio],[class*=feature],[class*=habitacion],[class*=platillo],[class*=especialidad],[class*=propiedad],[class*=modelo]')).filter(function(c){return !c.closest('[class*=toolbar],[class*=toggle],[class*=a11y],[class*=nav],[role=tablist],[class*=filtro],[data-paso]');});
+cards.forEach(function(c){
+c.addEventListener('mousemove',function(e){if(window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;var r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform='perspective(800px) rotateY('+(x*12)+'deg) rotateX('+(-y*8)+'deg) translateY(-8px) scale(1.01)';c.style.boxShadow='0 24px 70px rgba(0,0,0,.25)';});
+c.addEventListener('mouseleave',function(){c.style.transform='';c.style.boxShadow='';});
+});
+[].slice.call(document.querySelectorAll('a[class*=cta],a[class*=btn],a[class*=reserva],a[class*=cita],button[type=submit],.btn-cta,.btn-primary')).forEach(function(b){if(b.closest('[class*=toolbar],[class*=a11y],[class*=toggle],[class*=nav],[role=tablist]'))return;b.addEventListener('mousemove',function(e){if(window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;var r=b.getBoundingClientRect(),x=(e.clientX-r.left-r.width/2)*.22,y=(e.clientY-r.top-r.height/2)*.22;b.style.transform='translate('+x+'px,'+y+'px)';});b.addEventListener('mouseleave',function(){b.style.transform='';});});
+if('IntersectionObserver' in window){var io=new IntersectionObserver(function(ents){ents.filter(function(e){return e.isIntersecting;}).forEach(function(e,i){setTimeout(function(){e.target.style.opacity='1';e.target.style.transform='';},i*90);io.unobserve(e.target);});},{threshold:.1});cards.forEach(function(c){c.style.opacity='0';c.style.transform='translateY(24px)';c.style.transition=(c.style.transition?c.style.transition+',':'')+' opacity .75s ease,transform .75s cubic-bezier(.23,1,.32,1)';io.observe(c);});}
+})();
+</script>
+<script>
+(function(){
+if(window.__ip)return;window.__ip=1;
+/* --- progress bar --- */
+const bar=document.createElement('div');bar.className='ip-bar';document.body.prepend(bar);
+const updScroll=()=>{
+  const r=window.scrollY/Math.max(1,document.documentElement.scrollHeight-window.innerHeight);
+  document.documentElement.style.setProperty('--scroll-raw',r.toFixed(4));
+};
+window.addEventListener('scroll',updScroll,{passive:true});
+updScroll();
+
+/* --- mouse ambient glow vars --- */
+window.addEventListener('mousemove',e=>{
+  document.documentElement.style.setProperty('--mpos-x',e.clientX+'px');
+  document.documentElement.style.setProperty('--mpos-y',e.clientY+'px');
+},{passive:true});
+
+/* --- floating particles on hero --- */
+const hero=document.querySelector('.hero,section.hero,[class*="hero-section"],section:first-of-type,header.site-header,header');
+if(hero){
+  const pos=getComputedStyle(hero).position;
+  if(pos==='static')hero.style.position='relative';
+  hero.style.overflow='hidden';
+  const cvs=document.createElement('canvas');
+  cvs.style.cssText='position:absolute;inset:0;pointer-events:none;z-index:4;opacity:.38;';
+  hero.appendChild(cvs);
+  const ctx=cvs.getContext('2d');
+  const sz=()=>{cvs.width=hero.offsetWidth;cvs.height=hero.offsetHeight||window.innerHeight;};
+  sz();new ResizeObserver(sz).observe(hero);
+  const N=55;
+  const pts=Array.from({length:N},(_,i)=>({
+    x:Math.random()*cvs.width,y:Math.random()*cvs.height,
+    r:Math.random()*2.2+.4,
+    vx:(Math.random()-.5)*.25,vy:-(Math.random()*.45+.08),
+    o:Math.random()*.55+.15,
+    pulse:Math.random()*Math.PI*2
+  }));
+  let t=0;
+  const draw=()=>{
+    ctx.clearRect(0,0,cvs.width,cvs.height);
+    t+=.012;
+    pts.forEach(p=>{
+      p.pulse+=.025;
+      const ro=p.o*(0.7+0.3*Math.sin(p.pulse));
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,6.2832);
+      ctx.fillStyle='rgba(255,255,255,'+ro+')';ctx.fill();
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.y<-8){p.y=cvs.height+8;p.x=Math.random()*cvs.width;}
+      if(p.x<-8)p.x=cvs.width+8;if(p.x>cvs.width+8)p.x=-8;
+    });
+    requestAnimationFrame(draw);
+  };
+  draw();
+
+  /* Add shimmer overlay to hero */
+  const hl=document.createElement('div');hl.className='ip-hero-layer';
+  hero.appendChild(hl);
+
+  /* hero text parallax */
+  const htxt=hero.querySelector('h1,.hero-title,[class*="hero"] h1,.main-title');
+  if(htxt&&!window.matchMedia('(prefers-reduced-motion:reduce)').matches){
+    htxt.classList.add('ip-parallax');
+    window.addEventListener('scroll',()=>{
+      htxt.style.transform='translateY('+Math.round(window.scrollY*.12)+'px)';
+    },{passive:true});
+  }
+}
+
+/* --- pulse on CTA buttons --- */
+document.querySelectorAll('a[class*="cta"],a[class*="btn-primary"],button[class*="cta"],button[class*="primary"],.btn-primary,.cta,.book-btn,.contact-btn,.btn-cta,.hero a').forEach(el=>{
+  el.classList.add('ip-pulse');
+});
+
+/* --- counter animation --- */
+const numRx=/^([\D]*?)([\d][\d,. ]*)([\D]*)$/;
+function tryCountEl(el){
+  if(el.dataset.ipC)return;
+  const txt=el.textContent.trim();
+  if(!txt)return;
+  const m=txt.match(numRx);
+  if(!m)return;
+  const target=parseFloat(m[2].replace(/[, ]/g,''));
+  if(isNaN(target)||target<2)return;
+  el.dataset.ipC='1';
+  const pre=m[1],suf=m[3];
+  const isDecimal=m[2].includes('.');
+  const obs=new IntersectionObserver(([e],o)=>{
+    if(!e.isIntersecting)return;o.disconnect();
+    let start=null;const dur=1600;
+    const step=ts=>{
+      if(!start)start=ts;
+      const p=Math.min((ts-start)/dur,1);
+      const ease=1-Math.pow(1-p,3);
+      const val=isDecimal?(target*ease).toFixed(1):Math.round(target*ease);
+      el.textContent=pre+(typeof val==='number'&&val>=1000?val.toLocaleString():val)+suf;
+      if(p<1)requestAnimationFrame(step);else el.classList.add('ip-counted');
+    };
+    requestAnimationFrame(step);
+  },{threshold:.6});
+  obs.observe(el);
+}
+document.querySelectorAll('[class*="stat"],[class*="metric"],[class*="num"],[class*="count"],[class*="data-"],[class*="figure"],[class*="score"]').forEach(tryCountEl);
+/* Also scan .hero and stats sections broadly */
+document.querySelectorAll('.stats-grid>*,.metrics>*,.hero-stats>*,.awards>*,.kpi>*,.highlights>*').forEach(el=>{
+  el.querySelectorAll('*').forEach(tryCountEl);
+});
+
+/* --- section reveal with alternating directions --- */
+const dirs=['ip-rb','ip-rl','ip-rr'];
+let ri=0;
+const skipSel=new Set(['A11Y-BAR','NAV','HEADER','FOOTER','SCRIPT','STYLE','CANVAS','NOSCRIPT']);
+document.querySelectorAll('section>*,main>section,.grid>*,[class*="grid"]>*,article').forEach(el=>{
+  if(skipSel.has(el.tagName)||el.dataset.ip||el.classList.contains('ip-rb'))return;
+  if(el.offsetHeight===0)return;
+  el.dataset.ip='1';
+  const d=dirs[ri%3];ri++;
+  el.classList.add(d);
+  const obs=new IntersectionObserver(([e],o)=>{
+    if(!e.isIntersecting)return;
+    el.classList.add('ip-rv');
+    o.disconnect();
+  },{threshold:.12,rootMargin:'0px 0px -30px 0px'});
+  obs.observe(el);
+});
+
+/* --- lxgc gallery: stagger reveal --- */
+document.querySelectorAll('.lxgc').forEach((el,i)=>{
+  el.style.transitionDelay=(i*.07)+'s';
+});
+
+/* --- nav highlight on scroll --- */
+const nav=document.querySelector('nav,.nav-bar,.site-nav,header nav');
+if(nav){
+  const navBg=getComputedStyle(nav).backgroundColor;
+  window.addEventListener('scroll',()=>{
+    const past=window.scrollY>80;
+    nav.style.backdropFilter=past?'blur(18px)':'none';
+    nav.style.boxShadow=past?'0 4px 32px rgba(0,0,0,.18)':'none';
+  },{passive:true});
+}
+})();
+</script>
+</body>
+</html>
+
+
+

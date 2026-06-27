@@ -1,0 +1,1985 @@
+﻿<!DOCTYPE html>
+<html lang="es" data-theme="">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>KAÁN Expeditions — Above the jungle. Below the sea.</title>
+<meta name="description" content="Ecoturismo y aventura en Quintana Roo. Tours en cenotes, selva, arrecife y cavernas. Accesible para comunidad sorda — guías certificados en LSM."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet"/>
+
+<style>
+/* ===========================
+   RESET & VARIABLES
+=========================== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --verde:#1A4A2E;
+  --azul:#1A6B8A;
+  --arena:#F2EBD9;
+  --terracota:#C4601A;
+  --oscuro:#12241A;
+  --muted:rgba(26,74,46,0.5);
+  --blanco:#FFFFFF;
+  --gris:#4A5568;
+  --radius:12px;
+  --sombra:0 8px 32px rgba(18,36,26,0.15);
+  --trans:0.3s ease;
+}
+[data-theme="contrast"]{
+  --verde:#003300;
+  --azul:#004466;
+  --arena:#FFFFFF;
+  --terracota:#FF6600;
+  --oscuro:#000000;
+  background:#000!important;
+  color:#FFFF00!important;
+}
+[data-theme="contrast"] .nav-bar,
+[data-theme="contrast"] .hero,
+[data-theme="contrast"] footer{background:#000!important;}
+[data-theme="contrast"] *{color:#FFFF00!important;border-color:#FFFF00!important;}
+[data-theme="contrast"] .btn-primary{background:#FFFF00!important;color:#000!important;}
+
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Syne',sans-serif;
+  background:var(--arena);
+  color:var(--oscuro);
+  line-height:1.6;
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+button{cursor:pointer;font-family:inherit;}
+
+/* ===========================
+   UTILIDADES
+=========================== */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+.container{max-width:1200px;margin:0 auto;padding:0 1.5rem;}
+.text-center{text-align:center;}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease;}
+.reveal.visible{opacity:1;transform:none;}
+
+/* ===========================
+   BOTONES
+=========================== */
+.btn-primary{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:var(--terracota);color:var(--blanco);
+  padding:.85rem 2rem;border:none;border-radius:50px;
+  font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;
+  letter-spacing:.05em;text-transform:uppercase;
+  transition:background var(--trans),transform var(--trans),box-shadow var(--trans);
+  cursor:pointer;
+}
+.btn-primary:hover,.btn-primary:focus-visible{
+  background:#a84e15;transform:translateY(-2px);
+  box-shadow:0 6px 20px rgba(196,96,26,.35);
+}
+.btn-secondary{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:transparent;color:var(--arena);
+  padding:.8rem 1.8rem;border:2px solid var(--arena);border-radius:50px;
+  font-family:'Syne',sans-serif;font-size:.95rem;font-weight:600;
+  transition:background var(--trans),color var(--trans);
+}
+.btn-secondary:hover,.btn-secondary:focus-visible{background:var(--arena);color:var(--oscuro);}
+.btn-outline{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:transparent;color:var(--verde);
+  padding:.7rem 1.6rem;border:2px solid var(--verde);border-radius:50px;
+  font-family:'Syne',sans-serif;font-size:.9rem;font-weight:600;
+  transition:background var(--trans),color var(--trans);
+}
+.btn-outline:hover,.btn-outline:focus-visible{background:var(--verde);color:var(--arena);}
+
+/* ===========================
+   ACCESSIBILITY BAR
+=========================== */
+#a11y-bar{
+  background:var(--oscuro);
+  padding:.5rem 1.5rem;
+  display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;
+  position:sticky;top:0;z-index:1000;
+  border-bottom:2px solid var(--verde);
+}
+#a11y-bar .a11y-label{
+  color:var(--arena);font-size:.75rem;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;opacity:.7;
+  margin-right:.25rem;white-space:nowrap;
+}
+.a11y-btn{
+  background:rgba(255,255,255,.08);
+  color:var(--arena);
+  border:1px solid rgba(255,255,255,.2);
+  border-radius:6px;
+  padding:.3rem .75rem;
+  font-size:.75rem;font-weight:600;letter-spacing:.04em;
+  transition:background var(--trans),border-color var(--trans);
+  white-space:nowrap;
+}
+.a11y-btn:hover{background:rgba(255,255,255,.18);}
+.a11y-btn[aria-pressed="true"]{
+  background:var(--azul);
+  border-color:var(--azul);
+  color:#fff;
+}
+.a11y-font-ctrl{display:flex;align-items:center;gap:.25rem;margin-left:auto;}
+.a11y-font-ctrl span{color:var(--arena);font-size:.75rem;opacity:.6;}
+
+/* ===========================
+   NAV BAR
+=========================== */
+.nav-bar{
+  background:rgba(26,74,46,.97);
+  backdrop-filter:blur(12px);
+  padding:.9rem 1.5rem;
+  display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:calc(2.5rem + 2px);z-index:990;
+  border-bottom:1px solid rgba(242,235,217,.1);
+}
+.nav-logo svg{height:48px;width:auto;}
+.nav-links{display:flex;align-items:center;gap:2rem;list-style:none;}
+.nav-links a{
+  color:var(--arena);font-size:.9rem;font-weight:600;
+  letter-spacing:.06em;text-transform:uppercase;
+  opacity:.85;transition:opacity var(--trans);
+  position:relative;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;
+  background:var(--terracota);transition:width var(--trans);
+}
+.nav-links a:hover,.nav-links a:focus-visible{opacity:1;}
+.nav-links a:hover::after,.nav-links a:focus-visible::after{width:100%;}
+.nav-cta{margin-left:1rem;}
+
+/* Hamburger */
+.nav-toggle{
+  display:none;background:none;border:2px solid var(--arena);
+  border-radius:6px;padding:.4rem .6rem;color:var(--arena);
+  font-size:1.2rem;line-height:1;
+}
+@media(max-width:768px){
+  .nav-toggle{display:block;}
+  .nav-links{
+    display:none;flex-direction:column;align-items:flex-start;gap:1rem;
+    position:absolute;top:100%;left:0;right:0;
+    background:rgba(26,74,46,.98);padding:1.5rem;
+  }
+  .nav-links.open{display:flex;}
+  .nav-cta{display:none;}
+}
+
+/* ===========================
+   HERO
+=========================== */
+.hero{
+  min-height:92vh;
+  background:linear-gradient(160deg,#12241A 0%,#1A4A2E 45%,#1A6B8A 100%);
+  position:relative;overflow:hidden;
+  display:flex;align-items:center;
+}
+.hero-jungle{position:absolute;inset:0;pointer-events:none;}
+.hero-content{
+  position:relative;z-index:2;
+  padding:6rem 1.5rem 4rem;
+  max-width:780px;
+  margin:0 auto 0 8vw;
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:.6rem;
+  background:rgba(242,235,217,.08);
+  border:1px solid rgba(242,235,217,.25);
+  border-radius:50px;padding:.4rem 1.2rem;
+  color:var(--arena);font-size:.8rem;font-weight:600;letter-spacing:.12em;
+  text-transform:uppercase;margin-bottom:1.5rem;
+}
+.hero h1{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(3rem,7vw,5.5rem);
+  font-weight:800;
+  color:var(--arena);
+  line-height:1.05;
+  letter-spacing:-.02em;
+  margin-bottom:.5rem;
+}
+.hero h2{
+  font-family:'DM Serif Display',serif;
+  font-style:italic;
+  font-size:clamp(2rem,5vw,3.8rem);
+  color:#7CC8DC;
+  margin-bottom:1.5rem;
+  line-height:1.15;
+}
+.hero-sub{
+  color:rgba(242,235,217,.75);
+  font-size:1.1rem;line-height:1.7;
+  max-width:520px;margin-bottom:2.5rem;
+}
+.hero-badges{display:flex;flex-wrap:wrap;gap:.75rem;margin-bottom:2.5rem;}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:.4rem;
+  padding:.45rem 1rem;border-radius:50px;
+  font-size:.78rem;font-weight:600;letter-spacing:.06em;
+  text-transform:uppercase;
+}
+.badge-wcag{background:rgba(26,107,138,.3);color:#7CC8DC;border:1px solid rgba(26,107,138,.5);}
+.badge-lsm{background:rgba(196,96,26,.25);color:#F4A572;border:1px solid rgba(196,96,26,.4);}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;}
+.hero-scroll{
+  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+  color:rgba(242,235,217,.4);font-size:.75rem;letter-spacing:.1em;
+  text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:.5rem;
+  animation:bounce 2s ease-in-out infinite;
+}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(6px);}}
+
+/* ===========================
+   SECTIONS
+=========================== */
+.section{padding:5rem 0;}
+.section-label{
+  display:inline-block;
+  font-size:.75rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--terracota);margin-bottom:.75rem;
+}
+.section-title{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(2rem,4.5vw,3rem);font-weight:800;
+  color:var(--oscuro);line-height:1.1;margin-bottom:1rem;
+}
+.section-sub{
+  font-size:1.05rem;color:var(--gris);max-width:560px;line-height:1.7;
+}
+
+/* ===========================
+   ACCESSIBILITY SECTION
+=========================== */
+.a11y-section{background:var(--oscuro);padding:5rem 0;}
+.a11y-section .section-title{color:var(--arena);}
+.a11y-section .section-sub{color:rgba(242,235,217,.65);}
+.a11y-section .section-label{color:#7CC8DC;}
+.a11y-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:1.5rem;margin-top:3rem;
+}
+.a11y-card{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:var(--radius);
+  padding:2rem 1.5rem;
+  transition:background var(--trans),border-color var(--trans),transform var(--trans);
+}
+.a11y-card:hover{
+  background:rgba(255,255,255,.08);
+  border-color:rgba(26,107,138,.5);
+  transform:translateY(-4px);
+}
+.a11y-card-icon{
+  width:56px;height:56px;margin-bottom:1.25rem;
+}
+.a11y-card h3{
+  font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;
+  color:var(--arena);margin-bottom:.5rem;
+}
+.a11y-card p{font-size:.9rem;color:rgba(242,235,217,.6);line-height:1.6;}
+
+/* ===========================
+   TOURS SECTION
+=========================== */
+.tours-section{background:var(--arena);padding:5.5rem 0;}
+.tours-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+  gap:2rem;margin-top:3rem;
+}
+.tour-card{
+  background:var(--blanco);
+  border:1px solid rgba(26,74,46,.1);
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:var(--sombra);
+  transition:transform var(--trans),box-shadow var(--trans);
+  display:flex;flex-direction:column;
+}
+.tour-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 16px 48px rgba(18,36,26,.18);
+}
+.tour-card-visual{
+  height:200px;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.tour-card-body{padding:1.5rem;flex:1;display:flex;flex-direction:column;}
+.tour-card-meta{
+  display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;
+  margin-bottom:.75rem;
+}
+.tour-tag{
+  font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  padding:.25rem .7rem;border-radius:50px;
+}
+.tag-aventura{background:rgba(196,96,26,.12);color:var(--terracota);}
+.tag-eco{background:rgba(26,74,46,.1);color:var(--verde);}
+.tag-cultura{background:rgba(26,107,138,.1);color:var(--azul);}
+.lsm-badge{
+  display:inline-flex;align-items:center;gap:.3rem;
+  background:var(--verde);color:var(--arena);
+  font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  padding:.2rem .6rem;border-radius:50px;
+}
+.tour-card h3{
+  font-family:'Syne',sans-serif;font-size:1.25rem;font-weight:700;
+  color:var(--oscuro);margin-bottom:.4rem;
+}
+.tour-card-desc{font-size:.9rem;color:var(--gris);line-height:1.6;margin-bottom:1rem;flex:1;}
+.tour-card-info{
+  display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1.25rem;
+}
+.tour-info-item{
+  display:flex;align-items:center;gap:.35rem;
+  font-size:.8rem;color:var(--gris);
+}
+.tour-footer{
+  display:flex;align-items:center;justify-content:space-between;
+  padding-top:1rem;border-top:1px solid rgba(26,74,46,.08);
+}
+.tour-price{
+  font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:var(--verde);
+}
+.tour-price span{font-size:.75rem;font-weight:400;color:var(--gris);}
+
+/* ===========================
+   GUIDES SECTION
+=========================== */
+.guides-section{
+  background:linear-gradient(180deg,#12241A 0%,#1A4A2E 100%);
+  padding:5.5rem 0;
+}
+.guides-section .section-title{color:var(--arena);}
+.guides-section .section-label{color:#7CC8DC;}
+.guides-section .section-sub{color:rgba(242,235,217,.6);}
+.guides-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:2rem;margin-top:3rem;
+}
+.guide-card{
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:16px;padding:2.5rem 2rem;
+  text-align:center;
+  transition:background var(--trans),transform var(--trans);
+}
+.guide-card:hover{background:rgba(255,255,255,.09);transform:translateY(-4px);}
+.guide-avatar{
+  width:100px;height:100px;margin:0 auto 1.5rem;
+  border-radius:50%;overflow:hidden;
+  border:3px solid var(--azul);
+}
+.guide-card h3{
+  font-family:'Syne',sans-serif;font-size:1.15rem;font-weight:700;
+  color:var(--arena);margin-bottom:.35rem;
+}
+.guide-role{font-size:.85rem;color:rgba(242,235,217,.55);margin-bottom:.75rem;}
+.guide-badges{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;}
+.guide-cert{
+  font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  padding:.25rem .7rem;border-radius:50px;
+}
+.cert-lsm{background:rgba(26,107,138,.3);color:#7CC8DC;border:1px solid rgba(26,107,138,.4);}
+.cert-years{background:rgba(242,235,217,.1);color:var(--arena);border:1px solid rgba(242,235,217,.2);}
+.cert-esp{background:rgba(196,96,26,.25);color:#F4A572;border:1px solid rgba(196,96,26,.35);}
+
+/* ===========================
+   BOOKING SECTION
+=========================== */
+.booking-section{background:var(--arena);padding:5.5rem 0;}
+.booking-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;}
+@media(max-width:768px){.booking-grid{grid-template-columns:1fr;gap:2rem;}}
+.booking-aside h3{
+  font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:700;
+  color:var(--oscuro);margin-bottom:1rem;
+}
+.booking-features{list-style:none;display:flex;flex-direction:column;gap:.75rem;}
+.booking-features li{
+  display:flex;align-items:flex-start;gap:.75rem;
+  font-size:.9rem;color:var(--gris);line-height:1.5;
+}
+.booking-features .feat-icon{
+  width:22px;height:22px;flex-shrink:0;margin-top:1px;
+}
+.booking-form-wrap{
+  background:var(--blanco);
+  border-radius:16px;padding:2.5rem;
+  box-shadow:var(--sombra);
+  border:1px solid rgba(26,74,46,.08);
+}
+.form-title{
+  font-family:'Syne',sans-serif;font-size:1.35rem;font-weight:700;
+  color:var(--oscuro);margin-bottom:1.75rem;
+}
+.form-group{margin-bottom:1.25rem;}
+.form-group label{
+  display:block;font-size:.85rem;font-weight:700;color:var(--oscuro);
+  margin-bottom:.45rem;letter-spacing:.03em;
+}
+.form-group label .req{color:var(--terracota);margin-left:.2rem;}
+.form-group select,
+.form-group input,
+.form-group textarea{
+  width:100%;padding:.8rem 1rem;
+  border:2px solid rgba(26,74,46,.15);
+  border-radius:8px;
+  font-family:'Syne',sans-serif;font-size:.9rem;color:var(--oscuro);
+  background:var(--blanco);
+  transition:border-color var(--trans),box-shadow var(--trans);
+  appearance:none;
+}
+.form-group select:focus,
+.form-group input:focus,
+.form-group textarea:focus{
+  outline:none;border-color:var(--azul);
+  box-shadow:0 0 0 3px rgba(26,107,138,.15);
+}
+.form-group select[aria-invalid="true"],
+.form-group input[aria-invalid="true"]{
+  border-color:#dc3545;
+  box-shadow:0 0 0 3px rgba(220,53,69,.15);
+}
+.form-group textarea{resize:vertical;min-height:100px;}
+.form-error{
+  color:#dc3545;font-size:.8rem;margin-top:.35rem;
+  display:flex;align-items:center;gap:.3rem;
+}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+@media(max-width:500px){.form-row{grid-template-columns:1fr;}}
+#booking-success{
+  background:rgba(26,74,46,.08);
+  border:2px solid var(--verde);
+  border-radius:8px;padding:1rem 1.25rem;
+  margin-top:1rem;
+  font-size:.9rem;color:var(--verde);font-weight:600;
+}
+
+/* ===========================
+   STATS SECTION
+=========================== */
+.stats-section{
+  background:var(--verde);
+  padding:3.5rem 0;
+}
+.stats-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;
+}
+@media(max-width:640px){.stats-grid{grid-template-columns:repeat(2,1fr);}}
+.stat-item{text-align:center;}
+.stat-num{
+  font-family:'Syne',sans-serif;font-size:2.5rem;font-weight:800;
+  color:var(--arena);display:block;line-height:1;margin-bottom:.3rem;
+}
+.stat-label{font-size:.8rem;color:rgba(242,235,217,.6);letter-spacing:.06em;text-transform:uppercase;}
+
+/* ===========================
+   FOOTER
+=========================== */
+footer{
+  background:var(--oscuro);
+  padding:4rem 0 2rem;
+  border-top:2px solid var(--verde);
+}
+.footer-grid{
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem;
+}
+@media(max-width:768px){.footer-grid{grid-template-columns:1fr 1fr;gap:2rem;}}
+@media(max-width:480px){.footer-grid{grid-template-columns:1fr;}}
+.footer-brand p{
+  color:rgba(242,235,217,.55);font-size:.88rem;line-height:1.7;
+  margin-top:1rem;max-width:280px;
+}
+.footer-col h4{
+  font-family:'Syne',sans-serif;font-size:.85rem;font-weight:700;
+  color:var(--arena);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem;
+}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.6rem;}
+.footer-col ul li a{
+  color:rgba(242,235,217,.5);font-size:.88rem;
+  transition:color var(--trans);
+}
+.footer-col ul li a:hover{color:var(--arena);}
+.footer-bottom{
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;
+  padding-top:2rem;border-top:1px solid rgba(255,255,255,.08);
+}
+.footer-bottom p{color:rgba(242,235,217,.35);font-size:.8rem;}
+.footer-victor{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(196,96,26,.15);border:1px solid rgba(196,96,26,.3);
+  border-radius:50px;padding:.35rem 1rem;
+  color:rgba(242,235,217,.6);font-size:.75rem;font-weight:600;letter-spacing:.06em;
+}
+.footer-victor strong{color:var(--terracota);}
+
+/* ===========================
+   SUBTITULOS PANEL
+=========================== */
+#subtitulos-panel{
+  position:fixed;bottom:0;left:0;right:0;
+  background:rgba(0,0,0,.88);color:#fff;
+  padding:1rem 2rem;font-size:1.1rem;text-align:center;z-index:500;
+  border-top:3px solid var(--azul);
+  font-family:'Syne',sans-serif;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+@media(max-width:768px){
+  .hero-content{margin:0 auto;text-align:center;}
+  .hero-sub{margin:0 auto 2rem;}
+  .hero-actions{justify-content:center;}
+  .hero-badges{justify-content:center;}
+}
+
+/* ===========================
+   FOCUS STYLES
+=========================== */
+:focus-visible{
+  outline:3px solid var(--terracota);
+  outline-offset:3px;
+}
+</style>
+<style>
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");opacity:.028;pointer-events:none;z-index:9995;}
+.lxgc{cursor:default;position:relative;overflow:hidden;}
+.lxgc img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.23,1,.32,1),filter .5s;filter:brightness(.82);}
+.lxgc:hover img{transform:scale(1.09);filter:brightness(1);}
+.lxgc .lxov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55) 0%,transparent 55%);transition:opacity .4s;}
+.lxgc:hover .lxov{opacity:.3;}
+</style>
+<!-- lux-patch -->
+<style>
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");opacity:.028;pointer-events:none;z-index:9995;}
+.lxgc{cursor:default;position:relative;overflow:hidden;}.lxgc img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.23,1,.32,1),filter .5s;filter:brightness(.82);}.lxgc:hover img{transform:scale(1.09);filter:brightness(1);}.lxgc .lxov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55) 0%,transparent 55%);transition:opacity .4s;}.lxgc:hover .lxov{opacity:.3;}
+</style>
+<!-- interact-patch -->
+<style>
+:root{--mpos-x:50%;--mpos-y:50%;--scroll-pct:0%;}
+/* Progress bar */
+.ip-bar{position:fixed;top:0;left:0;height:3px;z-index:10001;pointer-events:none;background:linear-gradient(90deg,#C4601A,#1A4A2E);transform-origin:left;transform:scaleX(var(--scroll-raw,0));transition:transform .08s linear;}
+/* Mouse-responsive ambient glow */
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(circle 700px at var(--mpos-x) var(--mpos-y),rgba(196,96,26,.12),transparent 70%);transition:background .4s;}
+/* Hero shimmer overlay */
+@keyframes ipShimmer{0%,100%{opacity:.6}50%{opacity:1}}
+@keyframes ipFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes ipPulse{0%,100%{box-shadow:0 0 0 0 rgba(196,96,26,.4)}70%{box-shadow:0 0 0 14px rgba(196,96,26,0)}}
+@keyframes ipSpin{to{transform:rotate(360deg)}}
+@keyframes ipCountUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+/* CTA pulse */
+.ip-pulse{animation:ipPulse 2.4s ease-in-out infinite;}
+/* Section reveal directions */
+.ip-rl{opacity:0;transform:translateX(-42px);transition:opacity .75s ease,transform .75s cubic-bezier(.23,1,.32,1);}
+.ip-rr{opacity:0;transform:translateX(42px);transition:opacity .75s ease,transform .75s cubic-bezier(.23,1,.32,1);}
+.ip-rb{opacity:0;transform:translateY(38px);transition:opacity .75s ease,transform .75s cubic-bezier(.23,1,.32,1);}
+.ip-rv{opacity:1!important;transform:none!important;}
+/* Stat counter */
+.ip-counted{animation:ipCountUp .5s ease forwards;}
+/* Animated border gradient on cards on hover */
+.card,.card-inclusivo,.specialty-card,.a11y-card,.feature-card,.plan-card,.tour-card,.menu-card,.exp-card,.service-card,.property-card,.tour-item,.reason-card{
+  position:relative;
+  transition:box-shadow .35s,border-color .35s,transform .35s;
+}
+.card:hover,.specialty-card:hover,.a11y-card:hover,.feature-card:hover,.plan-card:hover,.tour-card:hover,.menu-card:hover,.exp-card:hover,.property-card:hover,.tour-item:hover,.reason-card:hover{
+  box-shadow:0 16px 48px rgba(196,96,26,.22),0 4px 16px rgba(196,96,26,.14)!important;
+}
+/* Hero animated gradient layer */
+.ip-hero-layer{
+  position:absolute;inset:0;pointer-events:none;z-index:3;
+  background:linear-gradient(-45deg,rgba(196,96,26,.35),rgba(196,96,26,.05) 40%,transparent 60%);
+  background-size:300% 300%;
+  animation:ipShimmer 5s ease-in-out infinite;
+}
+/* Parallax text nudge */
+.ip-parallax{will-change:transform;}
+/* Scroll-linked image brightness */
+.lxgc:hover img{filter:brightness(1.05) saturate(1.08)!important;}
+</style>
+</head>
+<body>
+
+<!-- SKIP LINK -->
+<a href="#main" class="sr-only" style="position:absolute;top:1rem;left:1rem;background:var(--terracota);color:#fff;padding:.5rem 1rem;border-radius:6px;z-index:9999;font-weight:700;" onfocus="this.style.clip='auto';this.style.width='auto';this.style.height='auto';">Saltar al contenido</a>
+
+<!-- ===========================
+     ACCESSIBILITY BAR
+=========================== -->
+<div id="a11y-bar" role="toolbar" aria-label="Herramientas de accesibilidad">
+  <span class="a11y-label" aria-hidden="true">Accesibilidad:</span>
+
+  <button class="a11y-btn" data-toggle="alertasVisuales" aria-pressed="false" aria-label="Activar alertas visuales en lugar de sonidos">
+    <span aria-hidden="true">⚡</span> Alertas visuales
+  </button>
+
+  <button class="a11y-btn" data-toggle="subtitulos" aria-pressed="false" aria-label="Mostrar subtítulos visuales">
+    <span aria-hidden="true">💬</span> Subtítulos
+  </button>
+
+  <button class="a11y-btn" data-toggle="lsm" aria-pressed="false" aria-label="Mostrar guías con Lengua de Señas Mexicana">
+    <span aria-hidden="true">🤟</span> LSM
+  </button>
+
+  <button class="a11y-btn" data-toggle="sinAudio" aria-pressed="false" aria-label="Marcar experiencias que no requieren audio">
+    <span aria-hidden="true">🔇</span> Sin audio
+  </button>
+
+  <button class="a11y-btn" data-toggle="contraste" aria-pressed="false" aria-label="Activar alto contraste">
+    <span aria-hidden="true">◑</span> Contraste
+  </button>
+
+  <div class="a11y-font-ctrl" role="group" aria-label="Tamaño de texto">
+    <button class="a11y-btn" data-action="font-down" aria-label="Reducir tamaño de texto">A−</button>
+    <span aria-hidden="true" style="color:rgba(242,235,217,.4);font-size:.75rem;">Texto</span>
+    <button class="a11y-btn" data-action="font-up" aria-label="Aumentar tamaño de texto">A+</button>
+  </div>
+</div>
+
+<!-- ===========================
+     NAV BAR
+=========================== -->
+<nav class="nav-bar" aria-label="Navegación principal">
+  <a href="#" class="nav-logo" aria-label="KAÁN Expeditions — inicio">
+    <svg viewBox="0 0 220 56" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+      <path d="M8 28 Q16 10 24 20 Q32 30 40 16 Q44 8 48 16" stroke="#7CC8DC" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+      <circle cx="48" cy="14" r="3" fill="#C4601A"/>
+      <text x="60" y="36" font-family="Syne, sans-serif" font-size="22" font-weight="700" letter-spacing="4" fill="#F2EBD9">KAÁN</text>
+      <text x="60" y="50" font-family="DM Serif Display, serif" font-style="italic" font-size="10" letter-spacing="3" fill="#7CC8DC" opacity="0.9">Expeditions</text>
+    </svg>
+  </a>
+
+  <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menú">&#9776;</button>
+
+  <ul class="nav-links" id="nav-menu" role="list">
+    <li><a href="#tours">Tours</a></li>
+    <li><a href="#destinos">Destinos</a></li>
+    <li><a href="#guias">Guías</a></li>
+    <li><a href="#reservar">Reservar</a></li>
+  </ul>
+
+  <a href="#reservar" class="btn-primary nav-cta" style="padding:.65rem 1.5rem;font-size:.85rem;" data-audio-label>
+    Reservar ahora
+  </a>
+</nav>
+
+<!-- ===========================
+     HERO
+=========================== -->
+<main id="main">
+<section class="hero" aria-labelledby="hero-h1">
+
+  <!-- SVG Selva Abstracta -->
+  <div class="hero-jungle" aria-hidden="true">
+    <svg viewBox="0 0 1440 700" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax slice" style="position:absolute;bottom:0;left:0;width:100%;height:100%;opacity:.22;">
+      <!-- Árbol 1 -->
+      <polygon points="80,680 140,420 200,680" fill="#1A4A2E"/>
+      <polygon points="100,560 145,360 190,560" fill="#1F5C38"/>
+      <polygon points="115,480 145,310 175,480" fill="#2A7048"/>
+      <!-- Árbol 2 -->
+      <polygon points="260,680 340,380 420,680" fill="#12241A"/>
+      <polygon points="280,580 340,340 400,580" fill="#1A4A2E"/>
+      <polygon points="300,500 340,290 380,500" fill="#1F5C38"/>
+      <!-- Árbol 3 -->
+      <polygon points="500,680 590,350 680,680" fill="#1A4A2E"/>
+      <polygon points="520,570 590,310 660,570" fill="#2A7048"/>
+      <!-- Árbol 4 -->
+      <polygon points="780,680 870,400 960,680" fill="#12241A"/>
+      <polygon points="800,590 870,360 940,590" fill="#1A4A2E"/>
+      <polygon points="815,510 870,315 925,510" fill="#1F5C38"/>
+      <!-- Árbol 5 -->
+      <polygon points="1060,680 1160,340 1260,680" fill="#1A4A2E"/>
+      <polygon points="1080,570 1160,295 1240,570" fill="#2A7048"/>
+      <!-- Árbol 6 -->
+      <polygon points="1310,680 1390,410 1470,680" fill="#12241A"/>
+      <polygon points="1330,590 1390,370 1450,590" fill="#1A4A2E"/>
+      <!-- Cenote círculo -->
+      <circle cx="1100" cy="200" r="120" fill="rgba(26,107,138,0.2)" stroke="rgba(26,107,138,0.3)" stroke-width="2"/>
+      <circle cx="1100" cy="200" r="80" fill="rgba(26,107,138,0.15)"/>
+      <circle cx="1100" cy="200" r="40" fill="rgba(26,107,138,0.2)"/>
+      <!-- Ondas agua -->
+      <ellipse cx="1100" cy="450" rx="200" ry="30" fill="none" stroke="rgba(26,107,138,0.3)" stroke-width="1.5"/>
+      <ellipse cx="1100" cy="470" rx="160" ry="22" fill="none" stroke="rgba(26,107,138,0.2)" stroke-width="1"/>
+      <ellipse cx="1100" cy="490" rx="120" ry="15" fill="none" stroke="rgba(26,107,138,0.15)" stroke-width="1"/>
+    </svg>
+
+    <!-- Partículas estrellas -->
+    <svg viewBox="0 0 1440 700" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:.3;" aria-hidden="true">
+      <circle cx="120" cy="80" r="1.5" fill="#F2EBD9"/>
+      <circle cx="340" cy="120" r="1" fill="#7CC8DC"/>
+      <circle cx="580" cy="60" r="1.5" fill="#F2EBD9"/>
+      <circle cx="820" cy="100" r="1" fill="#7CC8DC"/>
+      <circle cx="1020" cy="70" r="1.5" fill="#F2EBD9"/>
+      <circle cx="1240" cy="90" r="1" fill="#7CC8DC"/>
+      <circle cx="200" cy="200" r="1" fill="#F2EBD9" opacity=".6"/>
+      <circle cx="440" cy="180" r="1.5" fill="#7CC8DC"/>
+      <circle cx="660" cy="220" r="1" fill="#F2EBD9" opacity=".7"/>
+      <circle cx="900" cy="160" r="1.5" fill="#7CC8DC"/>
+      <circle cx="1140" cy="200" r="1" fill="#F2EBD9"/>
+      <circle cx="1380" cy="140" r="1.5" fill="#7CC8DC"/>
+    </svg>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="5" stroke="#7CC8DC" stroke-width="1.5"/><circle cx="6" cy="6" r="2" fill="#C4601A"/></svg>
+      Playa del Carmen · Quintana Roo · Est. 2014
+    </div>
+
+    <h1 id="hero-h1">Above the jungle.</h1>
+    <h2>Below the sea.</h2>
+
+    <p class="hero-sub">
+      KAÁN —cielo en Maya— nació de la convicción de que el Caribe mexicano debe vivirse a fondo. Cenotes, selva, arrecife y cavernas con guías certificados en Lengua de Señas Mexicana.
+    </p>
+
+    <div class="hero-badges">
+      <span class="hero-badge badge-wcag">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 1L8.5 5.5H13L9.5 8L10.5 12.5L7 10L3.5 12.5L4.5 8L1 5.5H5.5L7 1Z" stroke="#7CC8DC" stroke-width="1.2" fill="none"/></svg>
+        WCAG 2.2 AA
+      </span>
+      <span class="hero-badge badge-lsm">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><rect x="1" y="4" width="3" height="7" rx="1" fill="#F4A572"/><rect x="5" y="2" width="3" height="9" rx="1" fill="#F4A572"/><rect x="9" y="3" width="3" height="8" rx="1" fill="#F4A572"/></svg>
+        Diseñado para comunidad sorda
+      </span>
+      <span class="hero-badge badge-wcag">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7C2 4.24 4.24 2 7 2s5 2.24 5 5-2.24 5-5 5-5-2.24-5-5Z" stroke="#7CC8DC" stroke-width="1.2"/><path d="M5 7l1.5 1.5L9 5" stroke="#7CC8DC" stroke-width="1.2" stroke-linecap="round"/></svg>
+        Guías LSM certificados
+      </span>
+    </div>
+
+    <div class="hero-actions">
+      <a href="#tours" class="btn-primary" data-audio-label>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1v14M1 8h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        Explorar tours
+      </a>
+      <a href="#reservar" class="btn-secondary">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="1" y="3" width="14" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M5 1v4M11 1v4M1 7h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Reservar
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-scroll" aria-hidden="true">
+    <span style="font-size:.65rem;">Scroll</span>
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10l6 6 6-6" stroke="rgba(242,235,217,.4)" stroke-width="1.5" stroke-linecap="round"/></svg>
+  </div>
+</section>
+
+<!-- ===========================
+     STATS
+=========================== -->
+<div class="stats-section" aria-label="Estadísticas de KAÁN Expeditions">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <span class="stat-num">+8,400</span>
+        <span class="stat-label">Viajeros anuales</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">12</span>
+        <span class="stat-label">Guías certificados LSM</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">5</span>
+        <span class="stat-label">Ecosistemas explorados</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">98%</span>
+        <span class="stat-label">Satisfacción</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================
+     ACCESIBILIDAD AUDITIVA
+=========================== -->
+<section class="a11y-section" aria-labelledby="a11y-title">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">Inclusión total</span>
+      <h2 class="section-title" id="a11y-title">Diseñado para la comunidad sorda</h2>
+      <p class="section-sub">En KAÁN creemos que la aventura no tiene barreras. Cada tour, cada interacción y cada experiencia está diseñada para personas con discapacidad auditiva o sordera.</p>
+    </div>
+
+    <div class="a11y-grid" role="list">
+      <!-- Card 1 -->
+      <div class="a11y-card reveal" role="listitem">
+        <div class="a11y-card-icon" aria-hidden="true">
+          <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="28" cy="28" r="26" stroke="#7CC8DC" stroke-width="2" fill="rgba(26,107,138,0.1)"/>
+            <path d="M18 28l3 3 6-6" stroke="#7CC8DC" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M32 22l6 6-6 6" stroke="#C4601A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="28" cy="16" r="3" fill="#C4601A"/>
+            <circle cx="28" cy="40" r="3" fill="#C4601A"/>
+          </svg>
+        </div>
+        <h3>Alertas visuales</h3>
+        <p>Ninguna información crítica depende del audio. Todas las alertas, notificaciones y avisos de seguridad son completamente visuales: luces, destellos y señales físicas.</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="a11y-card reveal" role="listitem">
+        <div class="a11y-card-icon" aria-hidden="true">
+          <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="8" width="48" height="32" rx="6" stroke="#7CC8DC" stroke-width="2" fill="rgba(26,107,138,0.1)"/>
+            <path d="M12 44h32" stroke="#7CC8DC" stroke-width="2" stroke-linecap="round"/>
+            <path d="M28 40v4" stroke="#7CC8DC" stroke-width="2" stroke-linecap="round"/>
+            <rect x="10" y="32" width="36" height="5" rx="2" fill="rgba(26,107,138,0.3)" stroke="#7CC8DC" stroke-width="1"/>
+            <line x1="13" y1="16" x2="43" y2="16" stroke="#F2EBD9" stroke-width="1.5" stroke-linecap="round" opacity=".5"/>
+            <line x1="13" y1="21" x2="35" y2="21" stroke="#F2EBD9" stroke-width="1.5" stroke-linecap="round" opacity=".4"/>
+          </svg>
+        </div>
+        <h3>Subtítulos siempre</h3>
+        <p>Captions en tiempo real en cada video, presentación y multimedia del sitio. Active el toggle para ver subtítulos visuales en toda la experiencia digital.</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="a11y-card reveal" role="listitem">
+        <div class="a11y-card-icon" aria-hidden="true">
+          <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Mano estilizada LSM -->
+            <rect x="20" y="28" width="4" height="14" rx="2" fill="#7CC8DC"/>
+            <rect x="26" y="22" width="4" height="20" rx="2" fill="#7CC8DC"/>
+            <rect x="32" y="24" width="4" height="18" rx="2" fill="#7CC8DC"/>
+            <rect x="38" y="30" width="4" height="12" rx="2" fill="#7CC8DC"/>
+            <rect x="14" y="32" width="4" height="10" rx="2" fill="#C4601A"/>
+            <path d="M14 32 Q10 26 14 22" stroke="#C4601A" stroke-width="2" stroke-linecap="round" fill="none"/>
+          </svg>
+        </div>
+        <h3>LSM disponible</h3>
+        <p>Todos nuestros guías de expedición están certificados o tienen formación básica en Lengua de Señas Mexicana. La comunicación es fluida, directa y segura.</p>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="a11y-card reveal" role="listitem">
+        <div class="a11y-card-icon" aria-hidden="true">
+          <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="28" cy="28" r="26" stroke="#C4601A" stroke-width="2" fill="rgba(196,96,26,0.08)"/>
+            <!-- Speaker tachado -->
+            <path d="M16 22h6l8-6v24l-8-6h-6z" stroke="#7CC8DC" stroke-width="2" fill="rgba(26,107,138,0.2)"/>
+            <path d="M38 20L48 36M48 20L38 36" stroke="#C4601A" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>Sin audio obligatorio</h3>
+        <p>Toda la experiencia —desde la reservación hasta el regreso— funciona en silencio total. Cero dependencia de audio. Señas, texto y visual son suficientes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================
+     TOURS
+=========================== -->
+<section class="tours-section" id="tours" aria-labelledby="tours-title">
+  <div class="container">
+    <div class="reveal text-center">
+      <span class="section-label">Nuestras expediciones</span>
+      <h2 class="section-title" id="tours-title" style="margin:0 auto 1rem;">Tours que transforman</h2>
+      <p class="section-sub" style="margin:0 auto;">Cada expedición es una inmersión profunda en los ecosistemas más extraordinarios del Caribe mexicano.</p>
+    </div>
+
+    <div class="tours-grid" id="tours-grid">
+
+      <!-- TOUR 1: Cenote Expedition -->
+      <article class="tour-card reveal" tabindex="0" aria-label="Tour Cenote Expedition">
+        <div class="tour-card-visual" style="background:linear-gradient(160deg,#0D3B52,#1A6B8A);">
+          <svg viewBox="0 0 200 180" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="width:180px;height:160px;">
+            <!-- Cenote: círculo con agua y rayos de luz -->
+            <circle cx="100" cy="100" r="65" fill="rgba(26,107,138,0.25)" stroke="rgba(124,200,220,0.6)" stroke-width="2"/>
+            <circle cx="100" cy="100" r="45" fill="rgba(26,107,138,0.35)" stroke="rgba(124,200,220,0.4)" stroke-width="1.5"/>
+            <circle cx="100" cy="100" r="28" fill="rgba(26,107,138,0.5)"/>
+            <!-- Rayos de luz -->
+            <line x1="100" y1="10" x2="100" y2="55" stroke="rgba(242,235,217,0.4)" stroke-width="2" stroke-linecap="round"/>
+            <line x1="140" y1="26" x2="118" y2="58" stroke="rgba(242,235,217,0.3)" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="60" y1="26" x2="82" y2="58" stroke="rgba(242,235,217,0.3)" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="162" y1="60" x2="130" y2="78" stroke="rgba(242,235,217,0.2)" stroke-width="1" stroke-linecap="round"/>
+            <line x1="38" y1="60" x2="70" y2="78" stroke="rgba(242,235,217,0.2)" stroke-width="1" stroke-linecap="round"/>
+            <!-- Burbuja -->
+            <circle cx="95" cy="95" r="3" fill="rgba(242,235,217,0.5)"/>
+            <circle cx="108" cy="105" r="2" fill="rgba(242,235,217,0.4)"/>
+            <circle cx="100" cy="115" r="2.5" fill="rgba(242,235,217,0.3)"/>
+          </svg>
+        </div>
+        <div class="tour-card-body">
+          <div class="tour-card-meta">
+            <span class="tour-tag tag-aventura">Aventura</span>
+            <span class="lsm-badge" hidden aria-label="LSM disponible">🤟 LSM</span>
+          </div>
+          <h3>Cenote Expedition</h3>
+          <p class="tour-card-desc" data-caption="Buceo en sistemas de cavernas subacuáticas. Explora el mundo subterráneo maya iluminado por rayos de luz.">Buceo en sistemas de cavernas subacuáticas del sistema Ox Bel Ha. Explora el mundo subterráneo maya iluminado por rayos de luz filtrándose desde la bóveda calcárea.</p>
+          <div class="tour-card-info">
+            <span class="tour-info-item">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="6" stroke="#1A6B8A" stroke-width="1.5"/><path d="M7 4v3l2 2" stroke="#1A6B8A" stroke-width="1.5" stroke-linecap="round"/></svg>
+              4.5 horas
+            </span>
+            <span class="tour-info-item">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 1.5C4.5 1.5 2.5 3.5 2.5 6c0 3.5 4.5 6.5 4.5 6.5S11.5 9.5 11.5 6c0-2.5-2-4.5-4.5-4.5Z" stroke="#1A6B8A" stroke-width="1.5"/><circle cx="7" cy="6" r="1.5" stroke="#1A6B8A" stroke-width="1"/></svg>
+              Aktun Chen
+            </span>
+            <span class="tour-info-item">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 1l1.5 4.5H13L9.5 8l1 4L7 10l-3.5 2 1-4L1 5.5h4.5L7 1Z" stroke="#C4601A" stroke-width="1" fill="#C4601A"/></svg>
+              Guía LSM incluido
+            </span>
+          </div>
+          <div class="tour-footer">
+            <div>
+              <div class="tour-price">$2,800 <span>MXN/persona</span></div>
+            </div>
+            <a href="#reservar" class="btn-primary" style="padding:.65rem 1.3rem;font-size:.82rem;" aria-label="Reservar Cenote Expedition — $2,800 MXN" data-audio-label>
+              Reservar
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- TOUR 2: Jungle Trek -->
+      <article class="tour-card reveal" tabindex="0" aria-label="Tour Jungle Trek">
+        <div class="tour-card-visual" style="background:linear-gradient(160deg,#0B1F12,#1A4A2E);">
+          <svg viewBox="0 0 200 180" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="width:180px;height:160px;">
+            <!-- Selva de triángulos y estrellas -->
+            <polygon points="100,30 130,100 70,100" fill="#2A7048" opacity=".9"/>
+            <polygon points="100,60 125,110 75,110" fill="#1F5C38"/>
+            <polygon points="55,60 80,120 30,120" fill="#1A4A2E" opacity=".8"/>
+            <polygon points="145,60 170,120 120,120" fill="#1A4A2E" opacity=".8"/>
+            <polygon points="55,85 73,130 37,130" fill="#12241A"/>
+            <polygon points="145,85 163,130 127,130" fill="#12241A"/>
+            <!-- Troncos -->
+            <rect x="96" y="100" width="8" height="50" rx="3" fill="#0B1F12"/>
+            <rect x="52" y="120" width="6" height="40" rx="2" fill="#0B1F12"/>
+            <rect x="142" y="120" width="6" height="40" rx="2" fill="#0B1F12"/>
+            <!-- Estrellas -->
+            <circle cx="30" cy="25" r="2" fill="#F2EBD9" opacity=".8"/>
+            <circle cx="170" cy="20" r="1.5" fill="#7CC8DC" opacity=".7"/>
+            <circle cx="100" cy="10" r="2.5" fill="#F2EBD9" opacity=".6"/>
+            <circle cx="55" cy="15" r="1" fill="#7CC8DC"/>
+            <circle cx="145" cy="35" r="1.5" fill="#F2EBD9" opacity=".8"/>
+            <!-- Luna -->
+            <path d="M160 30 A 15 15 0 1 0 160 56 A 10 10 0 1 1 160 30" fill="rgba(242,235,217,0.3)"/>
+          </svg>
+        </div>
+        <div class="tour-card-body">
+          <div class="tour-card-meta">
+            <span class="tour-tag tag-eco">Ecoturismo</span>
+            <span class="lsm-badge" hidden aria-label="LSM disponible">🤟 LSM</span>
+          </div>
+          <h3>Jungle Trek</h3>
+          <p class="tour-card-desc" data-caption="Senderismo nocturno con astrónomos profesionales en la selva maya.">Senderismo nocturno por senderos vírgenes de la selva maya acompañado de astrónomos certificados. Fauna nocturna, constelaciones mayas y fogón tradicional.</p>
+          <div class="tour-card-info">
+            <span class="tour-info-item">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="6" stroke="#1A6B8A" stroke-width="1.5"/><path d="M7 4v3l2 2" stroke="#1A6B8A" stroke-width="1.5" stroke-linecap="round"/></svg>
+              5 horas
+            </span>
+            <span class="tour-info-item">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 1.5C4.5 1.5 2.5 3.5 2.5 6c0 3.5 4.5 6.5 4.5 6.5S11.5 9.5 11.5 6c0-2.5-2-4.5-4.5-4.5Z" stroke="#1A6B8A" stroke-width="1.5"/><circle cx="7" cy="6" r="1.5" stroke="#1A6B8A" stroke-width="1"/></svg>
+              Reserva Sian Ka'an
+            </span>
+            <span class="tour-info-item">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 1l1.5 4.5H13L9.5 8l1 4L7 10l-3.5 2 1-4L1 5.5h4.5L7 1Z" stroke="#C4601A" stroke-width="1" fill="#C4601A"/></svg>
+              Guía LSM incluido
+            </span>
+          </div>
+          <div class="tour-footer">
+            <div>
+              <div class="tour-price">$1,400 <span>MXN/persona</span></div>
+            </div>
+            <a href="#reservar" class="btn-primary" style="padding:.65rem 1.3rem;font-size:.82rem;" aria-label="Reservar Jungle Trek — $1,400 MXN" data-audio-label>
+              Reservar
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- TOUR 3: Reef Safari -->
+      <article class="tour-card reveal" tabindex="0" aria-label="Tour Reef Safari">
+        <div class="tour-card-visual" style="background:linear-gradient(160deg,#0D3B52,#0A5068);">
+          <svg viewBox="0 0 200 180" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="width:180px;height:160px;">
+            <!-- Ondas del mar -->
+            <path d="M10,100 Q50,75 90,100 Q130,125 170,100 Q190,87 200,95" stroke="rgba(124,200,220,0.5)" stroke-width="2" fill="none"/>
+            <path d="M10,115 Q50,90 90,115 Q130,140 170,115 Q190,102 200,110" stroke="rgba(124,200,220,0.35)" stroke-width="1.5" fill="none"/>
+            <path d="M10,130 Q50,105 90,130 Q130,155 170,130 Q190,117 200,125" stroke="rgba(124,200,220,0.2)" stroke-width="1" fill="none"/>
+            <!-- Pez abstracto -->
+            <ellipse cx="100" cy="80" rx="28" ry="14" fill="rgba(196,96,26,0.7)"/>
+            <polygon points="128,80 145,68 145,92" fill="rgba(196,96,26,0.6)"/>
+            <circle cx="82" cy="76" r="4" fill="rgba(26,26,26,0.8)"/>
+            <circle cx="83" cy="75" r="1.5" fill="rgba(242,235,217,0.9)"/>
+            <path d="M100 72 Q108 68 116 72" stroke="rgba(242,235,217,0.4)" stroke-width="1" fill="none"/>
+            <!-- Coral -->
+            <path d="M30,160 L30,130 M22,145 L30,135 M38,140 L30,132" stroke="#C4601A" stroke-width="3" stroke-linecap="round"/>
+            <path d="M155,160 L155,125 M147,138 L155,128 M163,132 L155,126" stroke="#C4601A" stroke-width="3" stroke-linecap="round"/>
+            <path d="M80,160 L80,140 M73,150 L80,143 M87,147 L80,142" stroke="rgba(124,200,220,0.7)" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M125,160 L125,138 M118,148 L125,141 M132,145 L125,140" stroke="rgba(124,200,220,0.7)" stroke-width="2.5" stroke-linecap="round"/>
+            <!-- Burbujas -->
+            <circle cx="60" cy="55" r="5" stroke="rgba(242,235,217,0.4)" stroke-width="1" fill="none"/>
+            <circle cx="72" cy="42" r="3" stroke="rgba(242,235,217,0.3)" stroke-width="1" fill="none"/>
+            <circle cx="140" cy="50" r="4" stroke="rgba(242,235,217,0.4)" stroke-width="1" fill="none"/>
+          </svg>
+        </div>
+        <div class="tour-card-body">
+          <div class="tour-card-meta">
+            <span class="tour-tag tag-eco">Ecoturismo</span>
+            <span class="lsm-badge" hidden aria-label="LSM disponible">🤟 LSM</span>
+          </div>
+          <h3>Reef Safari</h3>
+          <p class="tour-card-desc" data-caption="Snorkel en el Mesoamerican Barrier Reef, el segundo arrecife más grande del mundo.">Snorkel guiado en el segundo arrecife de barrera más grande del mundo. Tortugas marinas, manta rayas y más de 500 especies de peces tropicales en su hábitat natural.</p>
+          <div class="tour-card-info">
+            <span class="tour-info-item">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="6" stroke="#1A6B8A" stroke-width="1.5"/><path d="M7 4v3l2 2" stroke="#1A6B8A" stroke-width="1.5" stroke-linecap="round"/></svg>
+              3 horas
+            </span>
+            <span class="tour-info-item">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 1.5C4.5 1.5 2.5 3.5 2.5 6c0 3.5 4.5 6.5 4.5 6.5S11.5 9.5 11.5 6c0-2.5-2-4.5-4.5-4.5Z" stroke="#1A6B8A" stroke-width="1.5"/><circle cx="7" cy="6" r="1.5" stroke="#1A6B8A" stroke-width="1"/></svg>
+              Puerto Morelos
+            </span>
+            <span class="tour-info-item">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 1l1.5 4.5H13L9.5 8l1 4L7 10l-3.5 2 1-4L1 5.5h4.5L7 1Z" stroke="#C4601A" stroke-width="1" fill="#C4601A"/></svg>
+              Equipo incluido
+            </span>
+          </div>
+          <div class="tour-footer">
+            <div>
+              <div class="tour-price">$980 <span>MXN/persona</span></div>
+            </div>
+            <a href="#reservar" class="btn-primary" style="padding:.65rem 1.3rem;font-size:.82rem;" aria-label="Reservar Reef Safari — $980 MXN" data-audio-label>
+              Reservar
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- TOUR 4: Cave Diving -->
+      <article class="tour-card reveal" tabindex="0" aria-label="Tour Cave Diving">
+        <div class="tour-card-visual" style="background:linear-gradient(160deg,#050D08,#12241A);">
+          <svg viewBox="0 0 200 180" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="width:180px;height:160px;">
+            <!-- Caverna: arco oscuro -->
+            <path d="M10,170 Q10,50 100,30 Q190,50 190,170" stroke="rgba(124,200,220,0.5)" stroke-width="2.5" fill="rgba(18,36,26,0.6)"/>
+            <!-- Stalactitas -->
+            <polygon points="60,30 55,65 65,65" fill="rgba(124,200,220,0.3)"/>
+            <polygon points="90,26 85,55 95,55" fill="rgba(124,200,220,0.25)"/>
+            <polygon points="120,28 115,60 125,60" fill="rgba(124,200,220,0.3)"/>
+            <polygon points="148,38 143,68 153,68" fill="rgba(124,200,220,0.2)"/>
+            <!-- Stalagmitas -->
+            <polygon points="40,170 35,130 45,130" fill="rgba(242,235,217,0.2)"/>
+            <polygon points="70,170 65,140 75,140" fill="rgba(242,235,217,0.15)"/>
+            <polygon points="130,170 125,145 135,145" fill="rgba(242,235,217,0.2)"/>
+            <polygon points="160,170 155,135 165,135" fill="rgba(242,235,217,0.15)"/>
+            <!-- Luz de linterna -->
+            <path d="M100,120 L70,90 M100,120 L130,90 M100,120 L100,80" stroke="rgba(242,235,217,0.25)" stroke-width="1" stroke-linecap="round"/>
+            <!-- Buzo abstracto -->
+            <circle cx="100" cy="125" r="8" fill="rgba(26,107,138,0.8)"/>
+            <rect x="94" y="133" width="12" height="18" rx="4" fill="rgba(26,107,138,0.7)"/>
+            <!-- Linterna -->
+            <circle cx="100" cy="117" r="5" fill="rgba(242,235,217,0.6)"/>
+          </svg>
+        </div>
+        <div class="tour-card-body">
+          <div class="tour-card-meta">
+            <span class="tour-tag tag-aventura">Aventura extrema</span>
+            <span class="lsm-badge" hidden aria-label="LSM disponible">🤟 LSM</span>
+          </div>
+          <h3>Cave Diving</h3>
+          <p class="tour-card-desc" data-caption="Inmersión guiada y certificada en cavernas subacuáticas del sistema maya.">Inmersión guiada certificada PADI/NAUI en los sistemas de cavernas más espectaculares de la Península. Requiere certificación open water previa. Guía LSM disponible.</p>
+          <div class="tour-card-info">
+            <span class="tour-info-item">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="6" stroke="#1A6B8A" stroke-width="1.5"/><path d="M7 4v3l2 2" stroke="#1A6B8A" stroke-width="1.5" stroke-linecap="round"/></svg>
+              6 horas
+            </span>
+            <span class="tour-info-item">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 1.5C4.5 1.5 2.5 3.5 2.5 6c0 3.5 4.5 6.5 4.5 6.5S11.5 9.5 11.5 6c0-2.5-2-4.5-4.5-4.5Z" stroke="#1A6B8A" stroke-width="1.5"/><circle cx="7" cy="6" r="1.5" stroke="#1A6B8A" stroke-width="1"/></svg>
+              Tulum
+            </span>
+            <span class="tour-info-item">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 1l1.5 4.5H13L9.5 8l1 4L7 10l-3.5 2 1-4L1 5.5h4.5L7 1Z" stroke="#C4601A" stroke-width="1" fill="#C4601A"/></svg>
+              Equipo completo
+            </span>
+          </div>
+          <div class="tour-footer">
+            <div>
+              <div class="tour-price">$4,500 <span>MXN/persona</span></div>
+            </div>
+            <a href="#reservar" class="btn-primary" style="padding:.65rem 1.3rem;font-size:.82rem;" aria-label="Reservar Cave Diving — $4,500 MXN" data-audio-label>
+              Reservar
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- TOUR 5: Milpa Cultural -->
+      <article class="tour-card reveal" tabindex="0" aria-label="Tour Milpa Cultural">
+        <div class="tour-card-visual" style="background:linear-gradient(160deg,#2A1A0A,#6B3A0A);">
+          <svg viewBox="0 0 200 180" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="width:180px;height:160px;">
+            <!-- Hojas de maíz y milpa -->
+            <path d="M100,160 Q80,120 70,80 Q85,95 100,130 Q115,95 130,80 Q120,120 100,160" fill="rgba(26,74,46,0.8)"/>
+            <path d="M100,160 Q85,125 60,85 Q78,100 100,140" fill="rgba(42,112,72,0.6)"/>
+            <path d="M100,160 Q115,125 140,85 Q122,100 100,140" fill="rgba(42,112,72,0.6)"/>
+            <!-- Hojas laterales -->
+            <path d="M80,110 Q50,90 30,60 Q55,75 80,110" fill="rgba(26,74,46,0.7)" stroke="rgba(26,74,46,0.9)" stroke-width="1"/>
+            <path d="M120,110 Q150,90 170,60 Q145,75 120,110" fill="rgba(26,74,46,0.7)" stroke="rgba(26,74,46,0.9)" stroke-width="1"/>
+            <!-- Mazorca abstracta -->
+            <rect x="92" y="85" width="16" height="35" rx="6" fill="#C4601A" opacity=".9"/>
+            <line x1="96" y1="85" x2="96" y2="120" stroke="rgba(242,235,217,0.3)" stroke-width="1"/>
+            <line x1="100" y1="85" x2="100" y2="120" stroke="rgba(242,235,217,0.3)" stroke-width="1"/>
+            <line x1="104" y1="85" x2="104" y2="120" stroke="rgba(242,235,217,0.3)" stroke-width="1"/>
+            <!-- Sol maya -->
+            <circle cx="100" cy="40" r="18" stroke="rgba(244,165,114,0.5)" stroke-width="1.5" fill="rgba(196,96,26,0.2)"/>
+            <circle cx="100" cy="40" r="10" fill="rgba(196,96,26,0.4)"/>
+            <line x1="100" y1="18" x2="100" y2="12" stroke="rgba(244,165,114,0.5)" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="100" y1="62" x2="100" y2="68" stroke="rgba(244,165,114,0.5)" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="78" y1="40" x2="72" y2="40" stroke="rgba(244,165,114,0.5)" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="122" y1="40" x2="128" y2="40" stroke="rgba(244,165,114,0.5)" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="tour-card-body">
+          <div class="tour-card-meta">
+            <span class="tour-tag tag-cultura">Cultural</span>
+            <span class="lsm-badge" hidden aria-label="LSM disponible">🤟 LSM</span>
+          </div>
+          <h3>Milpa Cultural</h3>
+          <p class="tour-card-desc" data-caption="Experiencia maya con cocina tradicional — la triada milpa: maíz, frijol y calabaza en manos mayas.">Experiencia inmersiva en una comunidad maya activa. Cocina la triada sagrada —maíz, frijol, calabaza— con abuela maya. Historia oral, rituales agrícolas y gastronomía ancestral.</p>
+          <div class="tour-card-info">
+            <span class="tour-info-item">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="6" stroke="#1A6B8A" stroke-width="1.5"/><path d="M7 4v3l2 2" stroke="#1A6B8A" stroke-width="1.5" stroke-linecap="round"/></svg>
+              7 horas
+            </span>
+            <span class="tour-info-item">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 1.5C4.5 1.5 2.5 3.5 2.5 6c0 3.5 4.5 6.5 4.5 6.5S11.5 9.5 11.5 6c0-2.5-2-4.5-4.5-4.5Z" stroke="#1A6B8A" stroke-width="1.5"/><circle cx="7" cy="6" r="1.5" stroke="#1A6B8A" stroke-width="1"/></svg>
+              Felipe Carrillo Puerto
+            </span>
+            <span class="tour-info-item">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 1l1.5 4.5H13L9.5 8l1 4L7 10l-3.5 2 1-4L1 5.5h4.5L7 1Z" stroke="#C4601A" stroke-width="1" fill="#C4601A"/></svg>
+              Comida incluida
+            </span>
+          </div>
+          <div class="tour-footer">
+            <div>
+              <div class="tour-price">$1,200 <span>MXN/persona</span></div>
+            </div>
+            <a href="#reservar" class="btn-primary" style="padding:.65rem 1.3rem;font-size:.82rem;" aria-label="Reservar Milpa Cultural — $1,200 MXN" data-audio-label>
+              Reservar
+            </a>
+          </div>
+        </div>
+      </article>
+
+    </div><!-- /tours-grid -->
+  </div>
+</section>
+
+<!-- ===========================
+     PANEL SUBTÍTULOS
+=========================== -->
+<div id="subtitulos-panel" hidden role="status" aria-live="polite">
+  [Subtítulos activados — los textos alternativos aparecerán aquí al interactuar con el sitio]
+</div>
+
+<!-- ===========================
+     GUÍAS
+=========================== -->
+<section class="guides-section" id="guias" aria-labelledby="guides-title">
+  <div class="container">
+    <div class="reveal text-center">
+      <span class="section-label">El equipo</span>
+      <h2 class="section-title" id="guides-title">Nuestros guías</h2>
+      <p class="section-sub" style="margin:0 auto;">Bilingues en LSM. Expertos en sus ecosistemas. Comprometidos con la seguridad y la experiencia auténtica.</p>
+    </div>
+
+    <div class="guides-grid">
+
+      <!-- Guía 1 -->
+      <div class="guide-card reveal">
+        <div class="guide-avatar" aria-hidden="true">
+          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="100" height="100" fill="#1A4A2E"/>
+            <!-- Avatar abstracto - silueta femenina -->
+            <circle cx="50" cy="35" r="18" fill="#2A7048"/>
+            <path d="M20,95 Q25,60 50,58 Q75,60 80,95" fill="#1F5C38"/>
+            <circle cx="44" cy="33" r="3" fill="#F2EBD9" opacity=".9"/>
+            <circle cx="56" cy="33" r="3" fill="#F2EBD9" opacity=".9"/>
+            <path d="M43 42 Q50 47 57 42" stroke="#F2EBD9" stroke-width="1.5" stroke-linecap="round" fill="none" opacity=".8"/>
+            <!-- Cabello -->
+            <path d="M32,32 Q35,18 50,17 Q65,18 68,32 Q68,24 50,22 Q32,24 32,32Z" fill="#0B1F12"/>
+          </svg>
+        </div>
+        <h3>Izel Canché</h3>
+        <p class="guide-role">Guía de cenotes y sistemas subacuáticos · 8 años de experiencia</p>
+        <p style="font-size:.82rem;color:rgba(242,235,217,.5);margin-bottom:1rem;line-height:1.6;">
+          Nacida en Valladolid, Yucatán. Bióloga acuática por la UNAM con especialidad en ecosistemas kársticos. Su conocimiento del sistema Ox Bel Ha es enciclopédico.
+        </p>
+        <div class="guide-badges">
+          <span class="guide-cert cert-lsm">LSM Certificada</span>
+          <span class="guide-cert cert-years">8 años</span>
+          <span class="guide-cert cert-esp">Cenotes</span>
+        </div>
+      </div>
+
+      <!-- Guía 2 -->
+      <div class="guide-card reveal">
+        <div class="guide-avatar" aria-hidden="true">
+          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="100" height="100" fill="#1A6B8A"/>
+            <!-- Avatar abstracto - silueta masculina -->
+            <circle cx="50" cy="34" r="17" fill="#0D4F6B"/>
+            <path d="M22,96 Q28,62 50,60 Q72,62 78,96" fill="#0A3E58"/>
+            <circle cx="44" cy="33" r="3" fill="#F2EBD9" opacity=".9"/>
+            <circle cx="56" cy="33" r="3" fill="#F2EBD9" opacity=".9"/>
+            <path d="M43 41 Q50 46 57 41" stroke="#F2EBD9" stroke-width="1.5" stroke-linecap="round" fill="none" opacity=".8"/>
+            <!-- Gorra de snorkel -->
+            <ellipse cx="50" cy="20" rx="18" ry="6" fill="#C4601A" opacity=".8"/>
+          </svg>
+        </div>
+        <h3>Rodrigo Tun</h3>
+        <p class="guide-role">Biólogo marino · Especialista en arrecifes · 6 años de experiencia</p>
+        <p style="font-size:.82rem;color:rgba(242,235,217,.5);margin-bottom:1rem;line-height:1.6;">
+          Doctor en Biología Marina por el CINVESTAV. Ha documentado más de 120 especies coralinas en el Mesoamerican Barrier Reef. Consultor de CONABIO en ecosistemas marinos.
+        </p>
+        <div class="guide-badges">
+          <span class="guide-cert cert-lsm">LSM Básico</span>
+          <span class="guide-cert cert-years">6 años</span>
+          <span class="guide-cert cert-esp">Arrecife</span>
+        </div>
+      </div>
+
+      <!-- Guía 3 -->
+      <div class="guide-card reveal">
+        <div class="guide-avatar" aria-hidden="true">
+          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="100" height="100" fill="#6B3A0A"/>
+            <!-- Avatar abstracto - silueta femenina con peinado maya -->
+            <circle cx="50" cy="35" r="18" fill="#8B4E16"/>
+            <path d="M20,95 Q25,60 50,58 Q75,60 80,95" fill="#7A3E0C"/>
+            <circle cx="44" cy="33" r="3" fill="#F2EBD9" opacity=".9"/>
+            <circle cx="56" cy="33" r="3" fill="#F2EBD9" opacity=".9"/>
+            <path d="M44 42 Q50 48 56 42" stroke="#F2EBD9" stroke-width="1.5" stroke-linecap="round" fill="none" opacity=".8"/>
+            <!-- Trenza maya -->
+            <path d="M50,17 L50,8 M46,17 L43,8 M54,17 L57,8" stroke="#F2EBD9" stroke-width="2" stroke-linecap="round" opacity=".6"/>
+          </svg>
+        </div>
+        <h3>Sofía Mex</h3>
+        <p class="guide-role">Guía cultural maya · Historia, gastronomía y rituales · 10 años</p>
+        <p style="font-size:.82rem;color:rgba(242,235,217,.5);margin-bottom:1rem;line-height:1.6;">
+          Originaria de Felipe Carrillo Puerto, descendiente directa de comunidad maya yucateca. Maestra en Antropología Social por la UADY. Embajadora cultural del Programa Nacional de Pueblos Indígenas.
+        </p>
+        <div class="guide-badges">
+          <span class="guide-cert cert-lsm">LSM Certificada</span>
+          <span class="guide-cert cert-years">10 años</span>
+          <span class="guide-cert cert-esp">Cultura Maya</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===========================
+     DESTINOS
+=========================== -->
+<section id="destinos" style="background:var(--arena);padding:5.5rem 0;" aria-labelledby="destinos-title">
+  <div class="container">
+    <div class="reveal text-center">
+      <span class="section-label">Ecosistemas</span>
+      <h2 class="section-title" id="destinos-title" style="margin:0 auto 1rem;">Quintana Roo a fondo</h2>
+      <p class="section-sub" style="margin:0 auto 3rem;">Cinco ecosistemas únicos en el planeta. Todos accesibles. Todos con guía LSM certificado.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;">
+      <!-- Destino 1 -->
+      <div class="reveal" style="background:linear-gradient(135deg,#1A4A2E,#2A7048);border-radius:16px;padding:2rem 1.5rem;color:var(--arena);">
+        <div style="font-size:2rem;margin-bottom:.75rem;" aria-hidden="true">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="20" stroke="rgba(242,235,217,0.4)" stroke-width="1.5"/><circle cx="24" cy="24" r="12" stroke="rgba(242,235,217,0.6)" stroke-width="1.5"/><circle cx="24" cy="24" r="5" fill="rgba(124,200,220,0.8)"/></svg>
+        </div>
+        <h3 style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:.5rem;">Cenotes</h3>
+        <p style="font-size:.85rem;opacity:.7;line-height:1.6;">Más de 6,000 cenotes en la Península. Los sagrados ojos de agua maya, portales al inframundo Xibalbá.</p>
+        <p style="font-size:.75rem;opacity:.5;margin-top:.75rem;font-weight:600;">Sistema Ox Bel Ha · Dos Ojos · Gran Cenote</p>
+      </div>
+      <!-- Destino 2 -->
+      <div class="reveal" style="background:linear-gradient(135deg,#1A6B8A,#0D4F6B);border-radius:16px;padding:2rem 1.5rem;color:var(--arena);">
+        <div style="font-size:2rem;margin-bottom:.75rem;" aria-hidden="true">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><path d="M4 30 Q12 20 20 30 Q28 40 36 30 Q42 22 48 26" stroke="rgba(124,200,220,0.7)" stroke-width="2" fill="none"/><path d="M4 36 Q12 26 20 36 Q28 46 36 36 Q42 28 48 32" stroke="rgba(124,200,220,0.4)" stroke-width="1.5" fill="none"/><ellipse cx="22" cy="20" rx="8" ry="4" fill="rgba(196,96,26,0.6)"/></svg>
+        </div>
+        <h3 style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:.5rem;">Arrecife Mesoamericano</h3>
+        <p style="font-size:.85rem;opacity:.7;line-height:1.6;">El segundo arrecife de barrera más grande del mundo, corriendo 1,000 km desde Cancún hasta Honduras.</p>
+        <p style="font-size:.75rem;opacity:.5;margin-top:.75rem;font-weight:600;">Puerto Morelos · Cozumel · Chinchorro</p>
+      </div>
+      <!-- Destino 3 -->
+      <div class="reveal" style="background:linear-gradient(135deg,#12241A,#1A4A2E);border-radius:16px;padding:2rem 1.5rem;color:var(--arena);">
+        <div style="font-size:2rem;margin-bottom:.75rem;" aria-hidden="true">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><polygon points="24,8 30,24 24,40 18,24" fill="none" stroke="rgba(242,235,217,0.5)" stroke-width="1.5"/><polygon points="14,14 30,14 30,34 14,34" fill="none" stroke="rgba(242,235,217,0.3)" stroke-width="1"/><circle cx="24" cy="24" r="4" fill="rgba(42,112,72,0.8)"/></svg>
+        </div>
+        <h3 style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:.5rem;">Selva Maya</h3>
+        <p style="font-size:.85rem;opacity:.7;line-height:1.6;">La segunda selva tropical más grande de América. Jaguar, tapir, quetzal y miles de especies en 3.5 millones de hectáreas.</p>
+        <p style="font-size:.75rem;opacity:.5;margin-top:.75rem;font-weight:600;">Sian Ka'an · Calakmul · Yum Balam</p>
+      </div>
+      <!-- Destino 4 -->
+      <div class="reveal" style="background:linear-gradient(135deg,#3D1A0A,#6B3A0A);border-radius:16px;padding:2rem 1.5rem;color:var(--arena);">
+        <div style="font-size:2rem;margin-bottom:.75rem;" aria-hidden="true">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><path d="M8 44 Q8 20 24 8 Q40 20 40 44" stroke="rgba(244,165,114,0.6)" stroke-width="2" fill="rgba(196,96,26,0.1)"/><rect x="16" y="28" width="16" height="16" rx="2" fill="rgba(196,96,26,0.4)"/><path d="M16 28 L24 20 L32 28" stroke="rgba(244,165,114,0.7)" stroke-width="1.5" fill="none"/></svg>
+        </div>
+        <h3 style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:.5rem;">Zonas Arqueológicas</h3>
+        <p style="font-size:.85rem;opacity:.7;line-height:1.6;">Tulum sobre el mar, Cobá en la selva, Muyil en la laguna. Tres civilizaciones, tres paisajes, una sola cultura.</p>
+        <p style="font-size:.75rem;opacity:.5;margin-top:.75rem;font-weight:600;">Tulum · Cobá · Muyil · Xel-Há</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================
+     BOOKING FORM
+=========================== -->
+<section class="booking-section" id="reservar" aria-labelledby="booking-title">
+  <div class="container">
+    <div class="booking-grid">
+      <div class="booking-aside reveal">
+        <span class="section-label">Reservaciones</span>
+        <h2 class="section-title" id="booking-title">¿Listo para la expedición?</h2>
+        <p class="section-sub" style="margin-bottom:2rem;">Nuestro equipo confirma tu reservación en menos de 2 horas. Guía LSM garantizado con al menos 48h de anticipación.</p>
+
+        <ul class="booking-features" aria-label="Beneficios de reservar con KAÁN">
+          <li>
+            <svg class="feat-icon" viewBox="0 0 22 22" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="10" stroke="#1A4A2E" stroke-width="1.5"/><path d="M7 11l3 3 5-5" stroke="#1A4A2E" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Confirmación en menos de 2 horas hábiles
+          </li>
+          <li>
+            <svg class="feat-icon" viewBox="0 0 22 22" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="10" stroke="#1A4A2E" stroke-width="1.5"/><path d="M7 11l3 3 5-5" stroke="#1A4A2E" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Guía LSM disponible con 48h de anticipación
+          </li>
+          <li>
+            <svg class="feat-icon" viewBox="0 0 22 22" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="10" stroke="#1A4A2E" stroke-width="1.5"/><path d="M7 11l3 3 5-5" stroke="#1A4A2E" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Cancelación gratuita hasta 72h antes
+          </li>
+          <li>
+            <svg class="feat-icon" viewBox="0 0 22 22" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="10" stroke="#1A4A2E" stroke-width="1.5"/><path d="M7 11l3 3 5-5" stroke="#1A4A2E" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Traslado desde Playa del Carmen incluido
+          </li>
+          <li>
+            <svg class="feat-icon" viewBox="0 0 22 22" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="10" stroke="#1A4A2E" stroke-width="1.5"/><path d="M7 11l3 3 5-5" stroke="#1A4A2E" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Seguro de responsabilidad civil incluido
+          </li>
+          <li>
+            <svg class="feat-icon" viewBox="0 0 22 22" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="10" stroke="#1A4A2E" stroke-width="1.5"/><path d="M7 11l3 3 5-5" stroke="#1A4A2E" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Grupos máximo 8 personas para experiencia íntima
+          </li>
+        </ul>
+
+        <!-- Contacto rápido -->
+        <div style="margin-top:2rem;padding:1.25rem;background:rgba(26,74,46,.08);border-radius:12px;border-left:3px solid var(--verde);">
+          <p style="font-size:.85rem;font-weight:700;color:var(--oscuro);margin-bottom:.5rem;">¿Prefieres comunicarte por señas?</p>
+          <p style="font-size:.82rem;color:var(--gris);line-height:1.6;">Agenda una videollamada con nuestra coordinadora Izel Canché vía WhatsApp Video o Google Meet. Disponible lunes a sábado, 8am–6pm.</p>
+          <a href="#" style="display:inline-block;margin-top:.75rem;font-size:.82rem;font-weight:700;color:var(--azul);">Agendar videollamada →</a>
+        </div>
+      </div>
+
+      <div class="booking-form-wrap reveal">
+        <p class="form-title">Solicitar reservación</p>
+        <form id="booking-form" novalidate aria-label="Formulario de reservación de tour">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nombre">Nombre completo <span class="req" aria-hidden="true">*</span></label>
+              <input type="text" id="nombre" name="nombre" aria-required="true" autocomplete="name" placeholder="Tu nombre"/>
+              <p class="form-error" id="nombre-error" hidden role="alert" aria-live="assertive"></p>
+            </div>
+            <div class="form-group">
+              <label for="email">Correo electrónico <span class="req" aria-hidden="true">*</span></label>
+              <input type="email" id="email" name="email" aria-required="true" autocomplete="email" placeholder="correo@ejemplo.com"/>
+              <p class="form-error" id="email-error" hidden role="alert" aria-live="assertive"></p>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="tour">Seleccionar tour <span class="req" aria-hidden="true">*</span></label>
+            <select id="tour" name="tour" aria-required="true">
+              <option value="">— Elige una expedición —</option>
+              <option value="cenote">Cenote Expedition · $2,800 MXN</option>
+              <option value="jungle">Jungle Trek · $1,400 MXN</option>
+              <option value="reef">Reef Safari · $980 MXN</option>
+              <option value="cave">Cave Diving · $4,500 MXN</option>
+              <option value="milpa">Milpa Cultural · $1,200 MXN</option>
+            </select>
+            <p class="form-error" id="tour-error" hidden role="alert" aria-live="assertive"></p>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fecha">Fecha preferida <span class="req" aria-hidden="true">*</span></label>
+              <input type="date" id="fecha" name="fecha" aria-required="true" min="2026-05-10"/>
+              <p class="form-error" id="fecha-error" hidden role="alert" aria-live="assertive"></p>
+            </div>
+            <div class="form-group">
+              <label for="personas">Número de personas <span class="req" aria-hidden="true">*</span></label>
+              <select id="personas" name="personas" aria-required="true">
+                <option value="">—</option>
+                <option value="1">1 persona</option>
+                <option value="2">2 personas</option>
+                <option value="3">3 personas</option>
+                <option value="4">4 personas</option>
+                <option value="5">5 personas</option>
+                <option value="6">6 personas</option>
+                <option value="7">7 personas</option>
+                <option value="8">8 personas (grupo)</option>
+              </select>
+              <p class="form-error" id="personas-error" hidden role="alert" aria-live="assertive"></p>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="necesidades">Necesidades especiales y accesibilidad</label>
+            <select id="lsm-select" name="lsm" style="margin-bottom:.5rem;width:100%;padding:.8rem 1rem;border:2px solid rgba(26,74,46,.15);border-radius:8px;font-family:'Syne',sans-serif;font-size:.9rem;color:var(--oscuro);background:var(--blanco);">
+              <option value="">Sin necesidades específicas</option>
+              <option value="lsm-usuario">Soy usuario de LSM — solicito guía certificado</option>
+              <option value="lsm-acompanante">Acompaño a usuario de LSM</option>
+              <option value="hipoacusia">Hipoacusia — prefiero comunicación escrita</option>
+              <option value="otro">Otra necesidad de accesibilidad</option>
+            </select>
+            <textarea id="necesidades" name="necesidades" placeholder="Cuéntanos más sobre cómo podemos hacer tu expedición perfecta…" aria-label="Descripción de necesidades especiales"></textarea>
+          </div>
+
+          <div style="margin-bottom:1.25rem;">
+            <label style="display:flex;align-items:flex-start;gap:.75rem;cursor:pointer;font-size:.87rem;color:var(--gris);">
+              <input type="checkbox" style="margin-top:3px;accent-color:var(--verde);width:16px;height:16px;" required/>
+              <span>Acepto los <a href="#" style="color:var(--azul);text-decoration:underline;">términos y condiciones</a> y la <a href="#" style="color:var(--azul);text-decoration:underline;">política de privacidad</a> de KAÁN Expeditions.</span>
+            </label>
+          </div>
+
+          <button type="submit" class="btn-primary" style="width:100%;justify-content:center;" data-audio-label>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M2 9h14M9 2l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Enviar solicitud de reservación
+          </button>
+
+          <div id="booking-success" hidden tabindex="-1" role="status">
+            ✓ ¡Gracias! Tu solicitud fue enviada. Te confirmamos en menos de 2 horas hábiles.
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================
+     FOOTER
+=========================== -->
+<!-- luxury-photos-patch -->
+<section aria-labelledby="exp-h" style="padding:6rem 1.5rem;background:#F2EBD9;">
+<div style="max-width:1200px;margin:0 auto;">
+<p style="font-size:.62rem;letter-spacing:.32em;text-transform:uppercase;color:#C4601A;margin-bottom:.8rem;">Expediciones</p>
+<h2 id="exp-h" style="font-family:'DM Serif Display',serif;font-size:clamp(2rem,4vw,3rem);font-weight:400;color:#1A4A2E;margin-bottom:2.5rem;line-height:1.1;">Tres rutas.<br><em>Una naturaleza.</em></h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:1.5rem;">
+<article class="card" style="background:#fff;overflow:hidden;">
+<div class="lxgc" style="aspect-ratio:4/3;"><img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80" alt="Expedición selva maya KAÁN trekking entre ceibas y ruinas mayas" loading="lazy"><div class="lxov"></div><div style="position:absolute;bottom:1.2rem;left:1.2rem;z-index:2;"><p style="font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:#C4601A;">Selva maya · 3 días</p><p style="font-family:'DM Serif Display',serif;font-size:1.3rem;color:#fff;">Ruta Ancestral</p></div></div>
+<div style="padding:1.5rem;"><p style="font-size:.84rem;color:rgba(26,74,46,.65);line-height:1.75;margin-bottom:.8rem;">Trekking de 28km entre ceibas milenarias, nidos de quetzal y ruinas mayas no excavadas. Guías bilingues certificados.</p><p style="font-family:'DM Serif Display',serif;color:#1A4A2E;">Desde <strong style="color:#C4601A;">$4,200 MXN</strong>/persona</p></div>
+</article>
+<article class="card" style="background:#fff;overflow:hidden;">
+<div class="lxgc" style="aspect-ratio:4/3;"><img src="https://images.unsplash.com/photo-1564518096611-2bc5adf5e680?auto=format&fit=crop&w=800&q=80" alt="Expedición cenote KAÁN buceo libre y exploración subterránea" loading="lazy"><div class="lxov"></div><div style="position:absolute;bottom:1.2rem;left:1.2rem;z-index:2;"><p style="font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:#C4601A;">Cenotes · 2 días</p><p style="font-family:'DM Serif Display',serif;font-size:1.3rem;color:#fff;">Ruta Subterránea</p></div></div>
+<div style="padding:1.5rem;"><p style="font-size:.84rem;color:rgba(26,74,46,.65);line-height:1.75;margin-bottom:.8rem;">Sistema de cavernas del mundo maya. Buceo libre en cenotes vírgenes con formaciones de estalactitas únicas.</p><p style="font-family:'DM Serif Display',serif;color:#1A4A2E;">Desde <strong style="color:#C4601A;">$3,600 MXN</strong>/persona</p></div>
+</article>
+<article class="card" style="background:#fff;overflow:hidden;">
+<div class="lxgc" style="aspect-ratio:4/3;"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80" alt="Expedición costera KAÁN kayak y snorkeling en arrecife de coral" loading="lazy"><div class="lxov"></div><div style="position:absolute;bottom:1.2rem;left:1.2rem;z-index:2;"><p style="font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:#C4601A;">Costa · 4 días</p><p style="font-family:'DM Serif Display',serif;font-size:1.3rem;color:#fff;">Ruta Costera</p></div></div>
+<div style="padding:1.5rem;"><p style="font-size:.84rem;color:rgba(26,74,46,.65);line-height:1.75;margin-bottom:.8rem;">Kayak en manglares, snorkeling en arrecife, campamento en playa virgen. Avistamiento de tortugas garantizado.</p><p style="font-family:'DM Serif Display',serif;color:#1A4A2E;">Desde <strong style="color:#C4601A;">$5,800 MXN</strong>/persona</p></div>
+</article>
+</div></div></section>
+
+<section aria-label="Hábitats KAÁN" style="display:grid;grid-template-columns:1fr 1fr;min-height:520px;">
+<div style="background:#1A4A2E;padding:5rem 3.5rem;display:flex;flex-direction:column;justify-content:center;">
+<p style="font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:#C4601A;margin-bottom:1.2rem;">Nuestro impacto</p>
+<h2 style="font-family:'DM Serif Display',serif;font-size:clamp(1.6rem,3vw,2.5rem);color:#F2EBD9;line-height:1.1;margin-bottom:1.2rem;">La selva es <em>nuestra casa.</em></h2>
+<p style="color:rgba(242,235,217,.7);line-height:1.8;font-size:.88rem;margin-bottom:1.8rem;">El 15% de cada expedición va directamente a comunidades mayas locales. Nuestros guías son ejidatarios certificados con conocimiento ancestral del territorio.</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;">
+<div><p style="font-family:'DM Serif Display',serif;font-size:1.8rem;color:#C4601A;">340+</p><p style="font-size:.65rem;color:rgba(242,235,217,.45);text-transform:uppercase;letter-spacing:.1em;">Especies registradas</p></div>
+<div><p style="font-family:'DM Serif Display',serif;font-size:1.8rem;color:#C4601A;">12</p><p style="font-size:.65rem;color:rgba(242,235,217,.45);text-transform:uppercase;letter-spacing:.1em;">Comunidades aliadas</p></div>
+<div><p style="font-family:'DM Serif Display',serif;font-size:1.8rem;color:#C4601A;">8k ha</p><p style="font-size:.65rem;color:rgba(242,235,217,.45);text-transform:uppercase;letter-spacing:.1em;">Territorio protegido</p></div>
+<div><p style="font-family:'DM Serif Display',serif;font-size:1.8rem;color:#C4601A;">2009</p><p style="font-size:.65rem;color:rgba(242,235,217,.45);text-transform:uppercase;letter-spacing:.1em;">Desde</p></div>
+</div></div>
+<div class="lxgc"><img src="https://images.unsplash.com/photo-1518638150340-f706e86654de?auto=format&fit=crop&w=900&q=80" alt="Costa de Quintana Roo con selva maya hasta el Mar Caribe" loading="lazy"><div class="lxov"></div></div>
+</section>
+
+<section aria-labelledby="gal-k" style="padding:5rem 1.5rem;background:#1A4A2E;">
+<div style="max-width:1200px;margin:0 auto;">
+<h2 id="gal-k" style="font-family:'DM Serif Display',serif;font-size:clamp(1.6rem,3vw,2.5rem);color:#F2EBD9;text-align:center;margin-bottom:2.5rem;">Galería de expediciones</h2>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:3px;">
+<div class="lxgc" style="aspect-ratio:4/3;"><img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=700&q=80" alt="Senda en la selva maya" loading="lazy"><div class="lxov"></div></div>
+<div class="lxgc" style="grid-row:1/3;"><img src="https://images.unsplash.com/photo-1564518096611-2bc5adf5e680?auto=format&fit=crop&w=700&q=80" alt="Cenote virgen con luz natural" loading="lazy" style="height:100%;object-fit:cover;"><div class="lxov"></div></div>
+<div class="lxgc" style="aspect-ratio:4/3;"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=700&q=80" alt="Playa virgen sin desarrollo turístico" loading="lazy"><div class="lxov"></div></div>
+<div class="lxgc" style="grid-column:1/1;aspect-ratio:4/3;"><img src="https://images.unsplash.com/photo-1518638150340-f706e86654de?auto=format&fit=crop&w=700&q=80" alt="Atardecer desde la cima del dosel selvático" loading="lazy"><div class="lxov"></div></div>
+</div></div></section>
+
+<section aria-labelledby="rev-k" style="padding:5rem 1.5rem;background:#F2EBD9;">
+<div style="max-width:960px;margin:0 auto;text-align:center;">
+<p style="font-size:.62rem;letter-spacing:.32em;text-transform:uppercase;color:#C4601A;margin-bottom:.8rem;">Aventureros reales</p>
+<h2 id="rev-k" style="font-family:'DM Serif Display',serif;font-size:clamp(1.5rem,2.5vw,2.2rem);color:#1A4A2E;margin-bottom:2.5rem;">Lo que dicen quienes <em>fueron.</em></h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;text-align:left;">
+<blockquote style="background:#fff;padding:1.8rem;border-left:3px solid #C4601A;"><p style="font-family:'DM Serif Display',serif;font-style:italic;font-size:.93rem;color:#1A4A2E;line-height:1.7;margin-bottom:1rem;">"La Ruta Subterránea me cambió por completo. Bucear en un cenote virgen con guías mayas es algo que no se puede describir."</p><footer style="font-size:.73rem;color:rgba(26,74,46,.5);">— Marco G. · CDMX · ★★★★★</footer></blockquote>
+<blockquote style="background:#fff;padding:1.8rem;border-left:3px solid #C4601A;"><p style="font-family:'DM Serif Display',serif;font-style:italic;font-size:.93rem;color:#1A4A2E;line-height:1.7;margin-bottom:1rem;">"Mis hijos tienen discapacidad auditiva y el equipo usó LSM durante todo el recorrido. Primera vez en que nadie se quedó atrás."</p><footer style="font-size:.73rem;color:rgba(26,74,46,.5);">— Patricia H. · Monterrey · ★★★★★</footer></blockquote>
+<blockquote style="background:#fff;padding:1.8rem;border-left:3px solid #C4601A;"><p style="font-family:'DM Serif Display',serif;font-style:italic;font-size:.93rem;color:#1A4A2E;line-height:1.7;margin-bottom:1rem;">"Los guías conocen cada árbol, cada pájaro, cada ruta como si fuera su casa — porque lo es. La selva en sus manos es magia."</p><footer style="font-size:.73rem;color:rgba(26,74,46,.5);">— Alain B. · Lyon · ★★★★★</footer></blockquote>
+</div></div></section>
+<!-- hf-photos-patch -->
+<section aria-label="KAÁN Expeditions · Tulum — Galería fotográfica" id="galeria-hf-kaan" style="background:#060F08;padding:5rem 1.5rem 4rem;margin:0;overflow:hidden;">
+<div style="max-width:1100px;margin:0 auto;">
+<p style="font-size:.6rem;letter-spacing:.32em;text-transform:uppercase;color:#C4601A;margin-bottom:.7rem;display:flex;align-items:center;gap:.65rem;"><span style="display:inline-block;width:2.2rem;height:1px;background:currentColor;"></span>KAÁN Expeditions · Tulum</p>
+<h2 style="font-family:'DM Serif Display','Instrument Serif',Georgia,serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#FDF5EE;margin-bottom:2.5rem;line-height:1.1;font-weight:400;font-style:italic;">La selva. Viva. Presente.</h2>
+<div style="display:grid;gap:4px;">
+<div class="lxgc" style="aspect-ratio:16/9;border-radius:0;"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_2xDKzgUHSbZ2WsUfnTEP222ovTJ/hf_20260510_051048_88375a9c-ec1f-4803-b301-dd7bd4971aca.png" alt="Grupo expedicionario KAÁN con guía maya en cenote, selva Tulum" loading="lazy" style="width:100%;height:100%;object-fit:cover;"><div class="lxov"></div></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;">
+<div class="lxgc" style="aspect-ratio:4/3;"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_2xDKzgUHSbZ2WsUfnTEP222ovTJ/hf_20260510_051050_e8d059f1-277b-43d5-8758-8c00358ac834.png" alt="Jaguar en selva yucateca, retrato con ojos ámbar intensos KAÁN Expeditions" loading="lazy" style="width:100%;height:100%;object-fit:cover;"><div class="lxov"></div></div>
+<div class="lxgc" style="aspect-ratio:4/3;"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_2xDKzgUHSbZ2WsUfnTEP222ovTJ/hf_20260510_051052_9dd8e804-0daf-42d6-909e-9cd289023ad3.png" alt="Kayakistas en manglar dorado al amanecer, Tulum México KAÁN Expeditions" loading="lazy" style="width:100%;height:100%;object-fit:cover;"><div class="lxov"></div></div>
+</div>
+</div>
+</div>
+</section>
+<footer role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <svg viewBox="0 0 220 56" fill="none" xmlns="http://www.w3.org/2000/svg" style="height:44px;width:auto;" aria-label="KAÁN Expeditions">
+          <path d="M8 28 Q16 10 24 20 Q32 30 40 16 Q44 8 48 16" stroke="#7CC8DC" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          <circle cx="48" cy="14" r="3" fill="#C4601A"/>
+          <text x="60" y="36" font-family="Syne, sans-serif" font-size="22" font-weight="700" letter-spacing="4" fill="#F2EBD9">KAÁN</text>
+          <text x="60" y="50" font-family="DM Serif Display, serif" font-style="italic" font-size="10" letter-spacing="3" fill="#7CC8DC" opacity="0.9">Expeditions</text>
+        </svg>
+        <p>Ecoturismo y aventura en Quintana Roo desde 2014. Comprometidos con la naturaleza, las comunidades mayas y la accesibilidad total para la comunidad sorda.</p>
+        <div style="display:flex;gap:.75rem;margin-top:1.25rem;flex-wrap:wrap;">
+          <span style="background:rgba(26,107,138,.2);color:#7CC8DC;border:1px solid rgba(26,107,138,.35);padding:.25rem .75rem;border-radius:50px;font-size:.7rem;font-weight:600;">WCAG 2.2 AA</span>
+          <span style="background:rgba(26,74,46,.2);color:rgba(242,235,217,.6);border:1px solid rgba(26,74,46,.35);padding:.25rem .75rem;border-radius:50px;font-size:.7rem;font-weight:600;">LSM Certificado</span>
+          <span style="background:rgba(196,96,26,.15);color:#F4A572;border:1px solid rgba(196,96,26,.3);padding:.25rem .75rem;border-radius:50px;font-size:.7rem;font-weight:600;">SEMARNAT</span>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Tours</h4>
+        <ul>
+          <li><a href="#tours">Cenote Expedition</a></li>
+          <li><a href="#tours">Jungle Trek</a></li>
+          <li><a href="#tours">Reef Safari</a></li>
+          <li><a href="#tours">Cave Diving</a></li>
+          <li><a href="#tours">Milpa Cultural</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Accesibilidad</h4>
+        <ul>
+          <li><a href="#">Guías LSM</a></li>
+          <li><a href="#">Alertas visuales</a></li>
+          <li><a href="#">Política inclusión</a></li>
+          <li><a href="#">WCAG 2.2 AA</a></li>
+          <li><a href="#">Videollamada en señas</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Empresa</h4>
+        <ul>
+          <li><a href="#">Nosotros</a></li>
+          <li><a href="#">Sostenibilidad</a></li>
+          <li><a href="#">Nuestros guías</a></li>
+          <li><a href="#">Prensa</a></li>
+          <li><a href="#">Contacto</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2026 KAÁN Expeditions S. de R.L. · Playa del Carmen, Quintana Roo, México · RFC: KAAN140312QR1 · <a href="#" style="color:rgba(242,235,217,.35);">Privacidad</a></p>
+      <div class="footer-victor">
+        Sitio creado por <strong>VICTOR IA</strong>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</main>
+
+<!-- ===========================
+     JAVASCRIPT
+=========================== -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const html = document.documentElement;
+  const body = document.body;
+  const KEY = 'kaan-a11y';
+  let prefs = {};
+  try { prefs = JSON.parse(localStorage.getItem(KEY)||'{}'); } catch(e){}
+  const save = () => { try { localStorage.setItem(KEY, JSON.stringify(prefs)); } catch(e){} };
+
+  function injectCSS(id, css) {
+    let el = document.getElementById(id);
+    if (!el) { el = document.createElement('style'); el.id = id; document.head.appendChild(el); }
+    el.textContent = css;
+  }
+  function removeCSS(id) { const el = document.getElementById(id); if(el) el.textContent = ''; }
+
+  let live = document.getElementById('sr-live');
+  if (!live) {
+    live = document.createElement('div');
+    live.id='sr-live';
+    live.setAttribute('aria-live','polite');
+    live.setAttribute('aria-atomic','true');
+    live.className='sr-only';
+    document.body.appendChild(live);
+  }
+  const announce = msg => { live.textContent=''; requestAnimationFrame(()=>{ live.textContent=msg; }); };
+
+  function flashAlert(msg) {
+    let el = document.getElementById('visual-alert');
+    if (!el) {
+      el = document.createElement('div');
+      el.id='visual-alert';
+      el.setAttribute('role','alert');
+      el.style.cssText='position:fixed;top:5rem;right:1rem;background:#1A6B8A;color:#fff;padding:.75rem 1.5rem;font-weight:600;z-index:9999;opacity:0;transition:opacity .3s;max-width:300px;border-left:4px solid #C4601A;border-radius:8px;font-family:Syne,sans-serif;font-size:.9rem;line-height:1.5;';
+      document.body.appendChild(el);
+    }
+    el.textContent = msg;
+    el.style.opacity = '1';
+    clearTimeout(el._t);
+    el._t = setTimeout(() => el.style.opacity='0', 3000);
+    announce(msg);
+  }
+
+  const toggleMap = {
+    alertasVisuales: {
+      on: () => {
+        injectCSS('alertas-css', '.tour-card:focus-within{box-shadow:0 0 0 4px #C4601A!important;animation:pulse-border 1s ease-in-out infinite} @keyframes pulse-border{0%,100%{box-shadow:0 0 0 4px #C4601A}50%{box-shadow:0 0 0 8px rgba(196,96,26,.4)}}');
+        flashAlert('Alertas visuales activadas');
+      },
+      off: () => removeCSS('alertas-css')
+    },
+    subtitulos: {
+      on: () => {
+        const p = document.getElementById('subtitulos-panel');
+        if(p) p.hidden=false;
+        injectCSS('sub-css','[data-caption]::after{content:attr(data-caption);display:block;background:#1A4A2E;color:#F2EBD9;padding:.4rem .8rem;font-size:.8rem;margin-top:.5rem;border-radius:0;}');
+        announce('Subtítulos visuales activados');
+      },
+      off: () => {
+        const p = document.getElementById('subtitulos-panel');
+        if(p) p.hidden=true;
+        removeCSS('sub-css');
+      }
+    },
+    lsm: {
+      on: () => {
+        document.querySelectorAll('.lsm-badge').forEach(b=>b.hidden=false);
+        announce('Guías con Lengua de Señas Mexicana marcados');
+      },
+      off: () => document.querySelectorAll('.lsm-badge').forEach(b=>b.hidden=true)
+    },
+    sinAudio: {
+      on: () => {
+        document.querySelectorAll('[data-audio-label]').forEach(el=>{
+          if(!el.querySelector('.sin-audio-label')) {
+            const span=document.createElement('span');
+            span.textContent=' (sin audio requerido)';
+            span.className='sin-audio-label';
+            span.style.cssText='font-size:.7em;opacity:.7;display:block;';
+            el.appendChild(span);
+          }
+        });
+        announce('Experiencias sin audio marcadas');
+      },
+      off: () => document.querySelectorAll('.sin-audio-label').forEach(s=>s.remove())
+    },
+    contraste: {
+      on: () => html.setAttribute('data-theme','contrast'),
+      off: () => html.removeAttribute('data-theme')
+    }
+  };
+
+  Object.entries(prefs).forEach(([k,v]) => { if(v && toggleMap[k]) toggleMap[k].on(); });
+  if(prefs.fontSize) body.style.fontSize = prefs.fontSize+'%';
+
+  document.querySelectorAll('[data-toggle]').forEach(btn => {
+    const key = btn.getAttribute('data-toggle');
+    if(prefs[key]) btn.setAttribute('aria-pressed','true');
+    btn.addEventListener('click', function() {
+      prefs[key] = !prefs[key];
+      this.setAttribute('aria-pressed', String(prefs[key]));
+      if(prefs[key]) { if(toggleMap[key]) toggleMap[key].on(); }
+      else { if(toggleMap[key]) toggleMap[key].off(); }
+      save();
+    });
+  });
+
+  let fontSize = prefs.fontSize||100;
+  document.querySelectorAll('[data-action="font-up"]').forEach(b=>b.addEventListener('click',()=>{
+    fontSize=Math.min(180,fontSize+10);
+    body.style.fontSize=fontSize+'%';
+    prefs.fontSize=fontSize;
+    save();
+    announce('Texto: '+fontSize+'%');
+  }));
+  document.querySelectorAll('[data-action="font-down"]').forEach(b=>b.addEventListener('click',()=>{
+    fontSize=Math.max(70,fontSize-10);
+    body.style.fontSize=fontSize+'%';
+    prefs.fontSize=fontSize;
+    save();
+    announce('Texto: '+fontSize+'%');
+  }));
+
+  // Nav toggle
+  const navToggle = document.querySelector('.nav-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  if(navToggle && navLinks) {
+    navToggle.addEventListener('click', function() {
+      const expanded = this.getAttribute('aria-expanded')==='true';
+      this.setAttribute('aria-expanded', String(!expanded));
+      navLinks.classList.toggle('open');
+    });
+    // Cerrar al hacer click en link
+    navLinks.querySelectorAll('a').forEach(a=>{
+      a.addEventListener('click',()=>{
+        navLinks.classList.remove('open');
+        navToggle.setAttribute('aria-expanded','false');
+      });
+    });
+  }
+
+  // Formulario
+  const form = document.getElementById('booking-form');
+  if(form) form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    let valid=true;
+    this.querySelectorAll('[aria-required="true"]').forEach(f=>{
+      const err=document.getElementById(f.id+'-error');
+      if(!f.value.trim()){
+        valid=false;
+        f.setAttribute('aria-invalid','true');
+        if(err){err.textContent='Este campo es requerido.';err.hidden=false;}
+      } else {
+        f.removeAttribute('aria-invalid');
+        if(err){err.textContent='';err.hidden=true;}
+      }
+    });
+    if(valid){
+      flashAlert('Reservación enviada correctamente');
+      const s=document.getElementById('booking-success');
+      if(s){s.hidden=false;s.focus();}
+    } else {
+      announce('Por favor completa los campos requeridos.');
+    }
+  });
+
+  // Intersection Observer para reveals
+  if(!window.matchMedia('(prefers-reduced-motion:reduce)').matches) {
+    const obs = new IntersectionObserver(entries=>entries.forEach(e=>{
+      if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}
+    }),{threshold:.12});
+    document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+  } else {
+    document.querySelectorAll('.reveal').forEach(el=>el.classList.add('visible'));
+  }
+
+  // Smooth scroll para anclas
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click', function(e) {
+      const id = this.getAttribute('href');
+      if(id==='#') return;
+      const target = document.querySelector(id);
+      if(target){
+        e.preventDefault();
+        target.scrollIntoView({behavior:'smooth',block:'start'});
+        target.setAttribute('tabindex','-1');
+        target.focus({preventScroll:true});
+      }
+    });
+  });
+});
+</script>
+
+<script>
+(function(){
+var rm=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+var CFG={hero:'https://d8j0ntlcm91z4.cloudfront.net/user_2xDKzgUHSbZ2WsUfnTEP222ovTJ/hf_20260510_051048_88375a9c-ec1f-4803-b301-dd7bd4971aca.png',gal:['https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80','https://images.unsplash.com/photo-1518638150340-f706e86654de?auto=format&fit=crop&w=900&q=80','https://images.unsplash.com/photo-1564518096611-2bc5adf5e680?auto=format&fit=crop&w=900&q=80'],alt:['Playa del Caribe mexicano','Costa tropical Riviera Maya','Cenote sagrado maya'],galLabel:'Galería KAAN Expeditions',ov1:'rgba(26,74,46,0.88)',ov2:'rgba(26,107,138,0.45)',gl:'rgba(196,96,26,0.09)'};
+var cur=document.createElement('div');
+cur.style.cssText='position:fixed;width:360px;height:360px;border-radius:50%;pointer-events:none;transform:translate(-50%,-50%);z-index:9990;opacity:0;transition:opacity .5s;background:radial-gradient(circle,'+CFG.gl+' 0%,transparent 68%);';
+document.body.appendChild(cur);
+var mx=innerWidth/2,my=innerHeight/2;
+document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;cur.style.opacity='1';});
+document.addEventListener('mouseleave',function(){cur.style.opacity='0';});
+!function t(){cur.style.left=mx+'px';cur.style.top=my+'px';requestAnimationFrame(t);}();
+var hero=document.querySelector('#inicio,#home,.hero-section,section.hero')||document.querySelector('body>section,main>section,section');
+if(hero&&CFG.hero){
+if(getComputedStyle(hero).position==='static')hero.style.position='relative';
+hero.style.overflow='hidden';
+var il=document.createElement('div');il.style.cssText='position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;';
+var himg=document.createElement('img');himg.src=CFG.hero;himg.alt='';himg.setAttribute('aria-hidden','true');
+himg.style.cssText='width:100%;height:100%;object-fit:cover;object-position:center 30%;filter:brightness(.25) saturate(1.3);transition:transform 8s ease;';
+il.appendChild(himg);
+var hov=document.createElement('div');hov.style.cssText='position:absolute;inset:0;background:linear-gradient(145deg,'+CFG.ov1+' 0%,'+CFG.ov2+' 100%);';il.appendChild(hov);
+hero.insertBefore(il,hero.firstChild);
+[].slice.call(hero.children).forEach(function(c){if(c!==il){c.style.position='relative';c.style.zIndex='2';}});
+setTimeout(function(){himg.style.transform='scale(1.0)';},100);
+if(!rm)window.addEventListener('scroll',function(){if(window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;himg.style.transform='scale(1.08) translateY('+(window.scrollY*.1)+'px)';},{passive:true});
+}
+var gs=document.createElement('section');gs.setAttribute('aria-label',CFG.galLabel);gs.style.cssText='margin:0;padding:0;line-height:0;display:block;';
+var gi='<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:#000;max-height:380px;overflow:hidden;">';
+CFG.gal.forEach(function(u,i){gi+='<div class="lxgc" style="aspect-ratio:4/3;"><img src="'+u+'" alt="'+CFG.alt[i]+'" loading="lazy"><div class="lxov"></div></div>';});
+gi+='</div>';gs.innerHTML=gi;
+if(hero&&hero.parentNode)hero.parentNode.insertBefore(gs,hero.nextSibling);
+var cards=[].slice.call(document.querySelectorAll('[class*=card],[class*=plan],[class*=beneficio],[class*=caracteristica],[class*=servicio],[class*=feature],[class*=habitacion],[class*=platillo],[class*=especialidad],[class*=propiedad],[class*=modelo]')).filter(function(c){return !c.closest('[class*=toolbar],[class*=toggle],[class*=a11y],[class*=nav],[role=tablist],[class*=filtro],[data-paso]');});
+cards.forEach(function(c){
+c.addEventListener('mousemove',function(e){if(window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;var r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform='perspective(800px) rotateY('+(x*12)+'deg) rotateX('+(-y*8)+'deg) translateY(-8px) scale(1.01)';c.style.boxShadow='0 24px 70px rgba(0,0,0,.25)';});
+c.addEventListener('mouseleave',function(){c.style.transform='';c.style.boxShadow='';});
+});
+[].slice.call(document.querySelectorAll('a[class*=cta],a[class*=btn],a[class*=reserva],a[class*=cita],button[type=submit],.btn-cta,.btn-primary')).forEach(function(b){if(b.closest('[class*=toolbar],[class*=a11y],[class*=toggle],[class*=nav],[role=tablist]'))return;b.addEventListener('mousemove',function(e){if(window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;var r=b.getBoundingClientRect(),x=(e.clientX-r.left-r.width/2)*.22,y=(e.clientY-r.top-r.height/2)*.22;b.style.transform='translate('+x+'px,'+y+'px)';});b.addEventListener('mouseleave',function(){b.style.transform='';});});
+if('IntersectionObserver' in window){var io=new IntersectionObserver(function(ents){ents.filter(function(e){return e.isIntersecting;}).forEach(function(e,i){setTimeout(function(){e.target.style.opacity='1';e.target.style.transform='';},i*90);io.unobserve(e.target);});},{threshold:.1});cards.forEach(function(c){c.style.opacity='0';c.style.transform='translateY(24px)';c.style.transition=(c.style.transition?c.style.transition+',':'')+' opacity .75s ease,transform .75s cubic-bezier(.23,1,.32,1)';io.observe(c);});}
+})();
+</script>
+<script>
+(function(){
+if(window.__ip)return;window.__ip=1;
+/* --- progress bar --- */
+const bar=document.createElement('div');bar.className='ip-bar';document.body.prepend(bar);
+const updScroll=()=>{
+  const r=window.scrollY/Math.max(1,document.documentElement.scrollHeight-window.innerHeight);
+  document.documentElement.style.setProperty('--scroll-raw',r.toFixed(4));
+};
+window.addEventListener('scroll',updScroll,{passive:true});
+updScroll();
+
+/* --- mouse ambient glow vars --- */
+window.addEventListener('mousemove',e=>{
+  document.documentElement.style.setProperty('--mpos-x',e.clientX+'px');
+  document.documentElement.style.setProperty('--mpos-y',e.clientY+'px');
+},{passive:true});
+
+/* --- floating particles on hero --- */
+const hero=document.querySelector('.hero,section.hero,[class*="hero-section"],section:first-of-type,header.site-header,header');
+if(hero){
+  const pos=getComputedStyle(hero).position;
+  if(pos==='static')hero.style.position='relative';
+  hero.style.overflow='hidden';
+  const cvs=document.createElement('canvas');
+  cvs.style.cssText='position:absolute;inset:0;pointer-events:none;z-index:4;opacity:.38;';
+  hero.appendChild(cvs);
+  const ctx=cvs.getContext('2d');
+  const sz=()=>{cvs.width=hero.offsetWidth;cvs.height=hero.offsetHeight||window.innerHeight;};
+  sz();new ResizeObserver(sz).observe(hero);
+  const N=55;
+  const pts=Array.from({length:N},(_,i)=>({
+    x:Math.random()*cvs.width,y:Math.random()*cvs.height,
+    r:Math.random()*2.2+.4,
+    vx:(Math.random()-.5)*.25,vy:-(Math.random()*.45+.08),
+    o:Math.random()*.55+.15,
+    pulse:Math.random()*Math.PI*2
+  }));
+  let t=0;
+  const draw=()=>{
+    ctx.clearRect(0,0,cvs.width,cvs.height);
+    t+=.012;
+    pts.forEach(p=>{
+      p.pulse+=.025;
+      const ro=p.o*(0.7+0.3*Math.sin(p.pulse));
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,6.2832);
+      ctx.fillStyle='rgba(255,255,255,'+ro+')';ctx.fill();
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.y<-8){p.y=cvs.height+8;p.x=Math.random()*cvs.width;}
+      if(p.x<-8)p.x=cvs.width+8;if(p.x>cvs.width+8)p.x=-8;
+    });
+    requestAnimationFrame(draw);
+  };
+  draw();
+
+  /* Add shimmer overlay to hero */
+  const hl=document.createElement('div');hl.className='ip-hero-layer';
+  hero.appendChild(hl);
+
+  /* hero text parallax */
+  const htxt=hero.querySelector('h1,.hero-title,[class*="hero"] h1,.main-title');
+  if(htxt&&!window.matchMedia('(prefers-reduced-motion:reduce)').matches){
+    htxt.classList.add('ip-parallax');
+    window.addEventListener('scroll',()=>{
+      htxt.style.transform='translateY('+Math.round(window.scrollY*.12)+'px)';
+    },{passive:true});
+  }
+}
+
+/* --- pulse on CTA buttons --- */
+document.querySelectorAll('a[class*="cta"],a[class*="btn-primary"],button[class*="cta"],button[class*="primary"],.btn-primary,.cta,.book-btn,.contact-btn,.btn-cta,.hero a').forEach(el=>{
+  el.classList.add('ip-pulse');
+});
+
+/* --- counter animation --- */
+const numRx=/^([\D]*?)([\d][\d,. ]*)([\D]*)$/;
+function tryCountEl(el){
+  if(el.dataset.ipC)return;
+  const txt=el.textContent.trim();
+  if(!txt)return;
+  const m=txt.match(numRx);
+  if(!m)return;
+  const target=parseFloat(m[2].replace(/[, ]/g,''));
+  if(isNaN(target)||target<2)return;
+  el.dataset.ipC='1';
+  const pre=m[1],suf=m[3];
+  const isDecimal=m[2].includes('.');
+  const obs=new IntersectionObserver(([e],o)=>{
+    if(!e.isIntersecting)return;o.disconnect();
+    let start=null;const dur=1600;
+    const step=ts=>{
+      if(!start)start=ts;
+      const p=Math.min((ts-start)/dur,1);
+      const ease=1-Math.pow(1-p,3);
+      const val=isDecimal?(target*ease).toFixed(1):Math.round(target*ease);
+      el.textContent=pre+(typeof val==='number'&&val>=1000?val.toLocaleString():val)+suf;
+      if(p<1)requestAnimationFrame(step);else el.classList.add('ip-counted');
+    };
+    requestAnimationFrame(step);
+  },{threshold:.6});
+  obs.observe(el);
+}
+document.querySelectorAll('[class*="stat"],[class*="metric"],[class*="num"],[class*="count"],[class*="data-"],[class*="figure"],[class*="score"]').forEach(tryCountEl);
+/* Also scan .hero and stats sections broadly */
+document.querySelectorAll('.stats-grid>*,.metrics>*,.hero-stats>*,.awards>*,.kpi>*,.highlights>*').forEach(el=>{
+  el.querySelectorAll('*').forEach(tryCountEl);
+});
+
+/* --- section reveal with alternating directions --- */
+const dirs=['ip-rb','ip-rl','ip-rr'];
+let ri=0;
+const skipSel=new Set(['A11Y-BAR','NAV','HEADER','FOOTER','SCRIPT','STYLE','CANVAS','NOSCRIPT']);
+document.querySelectorAll('section>*,main>section,.grid>*,[class*="grid"]>*,article').forEach(el=>{
+  if(skipSel.has(el.tagName)||el.dataset.ip||el.classList.contains('ip-rb'))return;
+  if(el.offsetHeight===0)return;
+  el.dataset.ip='1';
+  const d=dirs[ri%3];ri++;
+  el.classList.add(d);
+  const obs=new IntersectionObserver(([e],o)=>{
+    if(!e.isIntersecting)return;
+    el.classList.add('ip-rv');
+    o.disconnect();
+  },{threshold:.12,rootMargin:'0px 0px -30px 0px'});
+  obs.observe(el);
+});
+
+/* --- lxgc gallery: stagger reveal --- */
+document.querySelectorAll('.lxgc').forEach((el,i)=>{
+  el.style.transitionDelay=(i*.07)+'s';
+});
+
+/* --- nav highlight on scroll --- */
+const nav=document.querySelector('nav,.nav-bar,.site-nav,header nav');
+if(nav){
+  const navBg=getComputedStyle(nav).backgroundColor;
+  window.addEventListener('scroll',()=>{
+    const past=window.scrollY>80;
+    nav.style.backdropFilter=past?'blur(18px)':'none';
+    nav.style.boxShadow=past?'0 4px 32px rgba(0,0,0,.18)':'none';
+  },{passive:true});
+}
+})();
+</script>
+</body>
+</html>
+
+
+
+
+

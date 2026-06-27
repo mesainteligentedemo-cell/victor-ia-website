@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <!-- SEO & Meta -->
+  <title>Propuesta: Sistema Customer Service + Vigilancia para Central de Alarmas | Victor IA</title>
+  <meta name="description" content="Propuesta técnica completa: Agente IA 24/7 en WhatsApp + Automatización vigilancia + Tracker centralizado. Instalación $10,000 MXN + $6,500/mes.">
+  <meta name="keywords" content="customer service, whatsapp, vigilancia, tracking, automatización, IA, central alarmas">
+  <meta name="author" content="Victor IA">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#000000">
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="document">
+  <meta property="og:url" content="https://victor-ia.xyz/propuestas/central-alarmas-eduardo-pimentel.html">
+  <meta property="og:title" content="Propuesta: Sistema integrado WhatsApp + Vigilancia para Central de Alarmas">
+  <meta property="og:description" content="Solución completa: Agente IA respondiendo 24/7 vía WhatsApp + Automatización de ingresos/eventos de vigilancia + Central de control Tracker. $10,000 instalación.">
+  <meta property="og:site_name" content="Victor IA">
+  <meta property="og:locale" content="es_MX">
+
+  <!-- Twitter / X -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:title" content="Propuesta: Central de Alarmas + IA + Vigilancia">
+  <meta property="twitter:description" content="Sistema integrado de customer service vía WhatsApp + automatización vigilancia para Eduardo Pimentel.">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://victor-ia.xyz/propuestas/central-alarmas-eduardo-pimentel.html">
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --font-display: 'Plus Jakarta Sans', sans-serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --color-bg: #FFFFFF;
+  --color-text: #000000;
+  --color-text-light: #666666;
+  --color-accent: #1A1A1A;
+  --color-border: rgba(0,0,0,.08);
+  --color-card: #FAFAFA;
+  --color-divider: #E5E5E5;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 500;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  transition: background .5s, border-color .5s;
+  border-bottom: 1px solid transparent;
+}
+
+header.scrolled {
+  background: rgba(255,255,255,.96);
+  border-bottom-color: rgba(255,255,255,.06);
+  backdrop-filter: blur(18px);
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: -.02em;
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.header-actions {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.nav-a {
+  position: relative;
+  color: var(--color-text-light);
+  font-size: 13px;
+  letter-spacing: .07em;
+  font-weight: 300;
+  transition: color .3s;
+  text-decoration: none;
+}
+
+.nav-a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--color-accent);
+  transition: width .45s cubic-bezier(.16,1,.3,1);
+}
+
+.nav-a:hover {
+  color: var(--color-accent);
+}
+
+.nav-a:hover::after {
+  width: 100%;
+}
+
+.btn-p {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  letter-spacing: .09em;
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  background: var(--color-accent);
+  color: white;
+  border: 1px solid transparent;
+  padding: 11px 26px;
+  transition: background .25s, transform .2s;
+  cursor: pointer;
+}
+
+.btn-p:hover {
+  background: #2A2A2A;
+  transform: translateY(-2px);
+}
+
+.btn-p:active {
+  transform: translateY(0);
+}
+
+main {
+  padding-top: 100px;
+  min-height: 100vh;
+}
+
+section {
+  padding: 80px 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.hero {
+  padding: 120px 40px 80px;
+  text-align: center;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 13px;
+  font-family: var(--font-body);
+  font-size: 10.5px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: fadeIn .8s ease-out forwards;
+}
+
+.eyebrow::before {
+  content: '';
+  display: block;
+  width: 26px;
+  height: 1px;
+  background: var(--color-accent);
+}
+
+h1 {
+  font-family: var(--font-display);
+  font-size: 56px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -.02em;
+  margin-bottom: 24px;
+  color: var(--color-accent);
+  opacity: 0;
+  animation: fadeIn .8s ease-out .15s forwards;
+}
+
+h2 {
+  font-family: var(--font-display);
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -.01em;
+  margin-bottom: 32px;
+  color: var(--color-accent);
+}
+
+h3 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 20px;
+  color: var(--color-accent);
+}
+
+.subtitle {
+  font-size: 18px;
+  color: var(--color-text-light);
+  max-width: 700px;
+  margin: 0 auto 48px;
+  opacity: 0;
+  animation: fadeIn .8s ease-out .3s forwards;
+  line-height: 1.8;
+}
+
+.cta-group {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeIn .8s ease-out .45s forwards;
+  margin-top: 48px;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 60px;
+}
+
+@media (max-width: 768px) {
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 40px;
+  transition: border-color .45s, transform .3s;
+}
+
+.card:hover {
+  border-color: rgba(0,0,0,.2);
+  transform: translateY(-4px);
+}
+
+.card h3 {
+  margin-bottom: 16px;
+  font-size: 24px;
+}
+
+.card p {
+  color: var(--color-text-light);
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+
+.price-box {
+  background: #F5F5F5;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 24px;
+  margin-top: 32px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+}
+
+.price-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(0,0,0,.05);
+}
+
+.price-item:last-child {
+  border-bottom: none;
+  padding-top: 16px;
+  border-top: 1px solid var(--color-border);
+  font-weight: 700;
+}
+
+.timeline {
+  position: relative;
+  padding: 40px 0;
+}
+
+.timeline-item {
+  display: flex;
+  gap: 32px;
+  margin-bottom: 40px;
+  opacity: 0;
+  animation: slideIn .6s ease-out forwards;
+}
+
+.timeline-item:nth-child(1) { animation-delay: .1s; }
+.timeline-item:nth-child(2) { animation-delay: .2s; }
+.timeline-item:nth-child(3) { animation-delay: .3s; }
+.timeline-item:nth-child(4) { animation-delay: .4s; }
+
+.timeline-dot {
+  width: 12px;
+  height: 12px;
+  background: var(--color-accent);
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+
+.timeline-content h4 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--color-accent);
+}
+
+.timeline-content p {
+  color: var(--color-text-light);
+  font-size: 14px;
+}
+
+.feature-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 32px 0;
+}
+
+@media (max-width: 768px) {
+  .feature-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+.feature-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--color-text-light);
+  font-size: 14px;
+}
+
+.feature-list li::before {
+  content: '✓';
+  color: var(--color-accent);
+  font-weight: 700;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.divider {
+  height: 1px;
+  background: var(--color-divider);
+  margin: 60px 0;
+}
+
+.cta-section {
+  background: var(--color-accent);
+  color: white;
+  border-radius: 12px;
+  padding: 60px 40px;
+  text-align: center;
+  margin: 80px 0;
+}
+
+.cta-section h2 {
+  color: white;
+  margin-bottom: 24px;
+}
+
+.cta-section p {
+  font-size: 18px;
+  color: rgba(255,255,255,.8);
+  margin-bottom: 40px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  letter-spacing: .09em;
+  font-weight: 500;
+  padding: 11px 26px;
+  background: white;
+  color: var(--color-accent);
+  border: 1px solid white;
+  transition: background .25s, transform .2s;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background: rgba(255,255,255,.9);
+  transform: translateY(-2px);
+}
+
+footer {
+  background: #F5F5F5;
+  padding: 40px;
+  text-align: center;
+  color: var(--color-text-light);
+  font-size: 13px;
+  border-top: 1px solid var(--color-divider);
+}
+
+.flow-diagram {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 32px;
+  margin: 40px 0;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.8;
+  overflow-x: auto;
+  color: var(--color-text-light);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 768px) {
+  header {
+    padding: 0 20px;
+  }
+
+  section {
+    padding: 60px 20px;
+  }
+
+  .hero {
+    padding: 80px 20px 60px;
+  }
+
+  h1 {
+    font-size: 36px;
+  }
+
+  h2 {
+    font-size: 28px;
+  }
+
+  .card {
+    padding: 24px;
+  }
+}
+</style>
+</head>
+<body>
+
+<header id="header">
+  <a href="/" class="logo">Victor IA</a>
+  <div class="header-actions">
+    <a href="/#servicios" class="nav-a">Servicios</a>
+    <a href="javascript:void(0)" class="btn-p" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})">Contactar</a>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="eyebrow">PROPUESTA TÉCNICA</div>
+    <h1>Sistema Integrado de Customer Service + Vigilancia</h1>
+    <p class="subtitle">Automatización completa para Central de Alarmas con agente IA 24/7, respuestas inteligentes, integración de vigilancia y tracking centralizado.</p>
+    <div class="cta-group">
+      <a href="#detalles" class="btn-p">Ver Detalles</a>
+      <a href="#costos" class="btn-p">Presupuesto</a>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- PROBLEMA & SOLUCIÓN -->
+  <section id="detalles">
+    <h2>El Desafío</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h3>❌ Situación Actual</h3>
+        <ul class="feature-list">
+          <li style="--list-color: #E74C3C;">Clientes esperan vía WhatsApp sin respuesta automática</li>
+          <li style="--list-color: #E74C3C;">Preguntas repetidas consumen tiempo de equipo</li>
+          <li style="--list-color: #E74C3C;">Sin historial centralizado de conversaciones</li>
+          <li style="--list-color: #E74C3C;">Ingresos de clientes NO se registran automáticamente</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>✅ Solución Propuesta</h3>
+        <ul class="feature-list">
+          <li>Agente IA 24/7 respondiendo en WhatsApp</li>
+          <li>Escalado automático a humanos si es complejo</li>
+          <li>Historial completo en Tracker centralizado</li>
+          <li>Automatización ingreso/eventos de vigilancia</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CUSTOMER SERVICE -->
+  <section>
+    <h2>Módulo 1: Customer Service Inteligente</h2>
+    <p style="color: var(--color-text-light); font-size: 16px; margin-bottom: 40px;">Tu equipo responde preguntas repetidas 100+ veces al mes. El agente IA lo hará automáticamente 24/7.</p>
+
+    <div class="flow-diagram">
+<pre>Cliente envía WhatsApp
+        ↓
+¿Es una pregunta FAQ?
+    ├─ SÍ → Bot responde INMEDIATAMENTE (2 segundos)
+    │       ✓ 24/7 · $0 humano · $0 tiempo
+    │
+    └─ NO → Escala a tu INBOX en Tracker
+            ↓
+         Tu equipo ve en Tracker
+            ↓
+         Responde desde Tracker
+            ↓
+         Mensaje va automáticamente a WhatsApp
+            ↓
+         ✓ Historial guardado
+</pre>
+    </div>
+
+    <h3 style="margin-top: 48px;">Ejemplo Real</h3>
+    <div class="grid-2">
+      <div style="background: #F5F5F5; padding: 32px; border-radius: 8px; border: 1px solid var(--color-border);">
+        <strong style="color: #1A1A1A;">Cliente:</strong>
+        <p style="margin: 12px 0; font-size: 14px;">¿Cuál es el costo del plan básico?</p>
+        <strong style="color: #1A1A1A;">Bot IA (en 2 segundos):</strong>
+        <p style="margin: 12px 0; font-size: 14px; color: #666;">El plan básico cuesta $299 MXN/mes e incluye monitoreo de 8am a 8pm. ¿Te interesa?</p>
+      </div>
+      <div style="background: #F5F5F5; padding: 32px; border-radius: 8px; border: 1px solid var(--color-border);">
+        <strong style="color: #1A1A1A;">Cliente:</strong>
+        <p style="margin: 12px 0; font-size: 14px;">Me pasaron a otro domicilio, ¿se puede transferir el contrato?</p>
+        <strong style="color: #1A1A1A;">Sistema:</strong>
+        <p style="margin: 12px 0; font-size: 14px; color: #666;">🔔 [Ticket creado en Tracker para tu equipo]<br/>Tu equipo responde en 5 minutos desde Tracker</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- VIGILANCIA -->
+  <section>
+    <h2>Módulo 2: Automatización de Vigilancia</h2>
+    <p style="color: var(--color-text-light); font-size: 16px; margin-bottom: 40px;">Cuando un cliente ingresa a su zona, se crea automáticamente un ticket en Tracker. Cero clicks manuales.</p>
+
+    <div class="flow-diagram">
+<pre>Software vigilancia detecta INGRESO
+        ↓
+Envía evento a nuestro sistema
+        ↓
+Creamos TICKET automático en Tracker
+        ├─ Hora exacta
+        ├─ Cliente identificado
+        ├─ Foto del evento
+        └─ Estado (normal/alerta)
+        ↓
+NOTIFICACIÓN INSTANTÁNEA a tu equipo
+        ├─ Telegram (tiempo real)
+        └─ Email (registro)
+</pre>
+    </div>
+
+    <h3 style="margin-top: 48px;">¿Qué pasa con cada evento?</h3>
+    <div class="card" style="margin-top: 32px;">
+      <strong style="color: #1A1A1A; display: block; margin-bottom: 20px;">Ingreso Normal (09:45 AM)</strong>
+      <div style="background: white; padding: 16px; border-radius: 6px; border-left: 4px solid #27AE60;">
+        <p style="font-size: 14px; margin: 8px 0;"><strong>Cliente:</strong> Juan García - Edificio A</p>
+        <p style="font-size: 14px; margin: 8px 0;"><strong>Foto:</strong> ✓ Capturada</p>
+        <p style="font-size: 14px; margin: 8px 0;"><strong>Duración esperada:</strong> 2 horas</p>
+        <p style="font-size: 14px; margin: 8px 0;"><strong>Estado:</strong> ✓ NORMAL · Sin novedad</p>
+      </div>
+
+      <strong style="color: #1A1A1A; display: block; margin: 20px 0 12px 0;">Alerta Anómala (12:15 PM)</strong>
+      <div style="background: white; padding: 16px; border-radius: 6px; border-left: 4px solid #E74C3C;">
+        <p style="font-size: 14px; margin: 8px 0;"><strong>Evento:</strong> Movimiento anómalo detectado</p>
+        <p style="font-size: 14px; margin: 8px 0;"><strong>Ubicación:</strong> Almacén zona 2</p>
+        <p style="font-size: 14px; margin: 8px 0;"><strong>Acción:</strong> Revisar video + confirmar en Tracker</p>
+        <p style="font-size: 14px; margin: 8px 0;"><strong>🔔 Notificación:</strong> Inmediata a tu equipo</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- TRACKER INTEGRATION -->
+  <section>
+    <h2>Módulo 3: Tracker — Central de Control</h2>
+    <p style="color: var(--color-text-light); font-size: 16px; margin-bottom: 40px;">Una sola plataforma para todo: mensajes, eventos, historial de clientes y respuestas.</p>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3 style="font-size: 20px;">📩 Bandeja WhatsApp</h3>
+        <p>Todos los mensajes sin responder en un lugar. Haces clic en "RESPONDER" y el mensaje va automáticamente a WhatsApp.</p>
+        <ul style="list-style: none; margin-top: 16px;">
+          <li style="font-size: 14px; margin: 8px 0; color: #666;">✓ Respuestas automáticas con un clic</li>
+          <li style="font-size: 14px; margin: 8px 0; color: #666;">✓ Historial de conversación visible</li>
+          <li style="font-size: 14px; margin: 8px 0; color: #666;">✓ Estado: [Sin responder] [Respondido] [Resuelto]</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 style="font-size: 20px;">🚨 Eventos de Vigilancia</h3>
+        <p>Todos los ingresos y anomalías registrados automáticamente. Puedes cambiar estado, agregar notas, revisar video.</p>
+        <ul style="list-style: none; margin-top: 16px;">
+          <li style="font-size: 14px; margin: 8px 0; color: #666;">✓ Foto/video de cada evento</li>
+          <li style="font-size: 14px; margin: 8px 0; color: #666;">✓ Alertas automáticas si hay anomalía</li>
+          <li style="font-size: 14px; margin: 8px 0; color: #666;">✓ Historial completo por cliente</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- COSTOS -->
+  <section id="costos">
+    <h2>Presupuesto</h2>
+
+    <h3 style="margin-top: 48px;">Opción Recomendada: Standard</h3>
+
+    <div class="card" style="margin-top: 32px; max-width: 600px; margin-left: auto; margin-right: auto;">
+      <h3 style="font-size: 24px; margin-bottom: 24px;">Instalación (one-time)</h3>
+      <div class="price-box">
+        <div class="price-item">
+          <span>Análisis software vigilancia</span>
+          <span>$2,000</span>
+        </div>
+        <div class="price-item">
+          <span>Integración con Tracker</span>
+          <span>$3,000</span>
+        </div>
+        <div class="price-item">
+          <span>Setup WhatsApp + IA</span>
+          <span>$2,500</span>
+        </div>
+        <div class="price-item">
+          <span>Carga de FAQ (20-30 preguntas)</span>
+          <span>$1,500</span>
+        </div>
+        <div class="price-item">
+          <span>Capacitación equipo (4 horas)</span>
+          <span>$1,000</span>
+        </div>
+        <div class="price-item">
+          <span>INSTALACIÓN TOTAL</span>
+          <span>$10,000</span>
+        </div>
+      </div>
+
+      <h3 style="font-size: 24px; margin: 40px 0 24px 0;">Gastos Mensuales (Recurrentes)</h3>
+      <div class="price-box">
+        <div class="price-item">
+          <span>Infraestructura (Claude, ElevenLabs, etc)</span>
+          <span>$3,600</span>
+        </div>
+        <div class="price-item">
+          <span>Mantenimiento + soporte (4 hrs/mes)</span>
+          <span>$1,600</span>
+        </div>
+        <div class="price-item">
+          <span>WhatsApp API (según mensajes)</span>
+          <span>Desde $0</span>
+        </div>
+        <div class="price-item">
+          <span>PRECIO AL CLIENTE</span>
+          <span>$6,500/mes</span>
+        </div>
+      </div>
+
+      <div style="background: #F5F5F5; padding: 20px; border-radius: 8px; margin-top: 24px; border-left: 4px solid var(--color-accent);">
+        <strong style="color: #1A1A1A; display: block; margin-bottom: 8px;">📋 Con Factura (+ 16% IVA)</strong>
+        <p style="font-size: 14px; color: #666;">Instalación: $11,600 MXN · Mensual: $7,540 MXN</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top: 60px; text-align: center;">¿Qué está incluido en $6,500/mes?</h3>
+    <ul class="feature-list" style="margin-top: 32px; grid-template-columns: 1fr;">
+      <li style="--list-color: #27AE60;">Agente IA 24/7 respondiendo preguntas</li>
+      <li style="--list-color: #27AE60;">Escalado automático a humanos (Tracker)</li>
+      <li style="--list-color: #27AE60;">Automatización ingreso/eventos vigilancia</li>
+      <li style="--list-color: #27AE60;">Notificaciones Telegram + Email</li>
+      <li style="--list-color: #27AE60;">Historial completo de conversaciones</li>
+      <li style="--list-color: #27AE60;">Soporte técnico (email/WhatsApp)</li>
+      <li style="--list-color: #27AE60;">Actualizaciones de FAQ</li>
+      <li style="--list-color: #27AE60;">1,000 mensajes/mes incluidos</li>
+      <li style="--list-color: #27AE60;">Hasta 100 eventos vigilancia/día</li>
+    </ul>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- TIMELINE -->
+  <section>
+    <h2>Timeline de Implementación</h2>
+    <p style="color: var(--color-text-light); font-size: 16px; margin-bottom: 48px;">15 días hábiles desde inicio hasta go-live.</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h4>Semana 1: Análisis y Setup</h4>
+          <p>Reunión de especificaciones, análisis software vigilancia, setup inicial Tracker + WhatsApp, testing internos.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h4>Semana 2: Integración</h4>
+          <p>Integración IA + FAQ, webhook vigilancia configurado, testing con datos reales, capacitación tu equipo.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h4>Semana 3: Go-live</h4>
+          <p>Lanzamiento a producción, monitoreo 24/7, ajustes finales, retrospectiva.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- INFORMACIÓN REQUERIDA -->
+  <section>
+    <h2>Información que Necesitamos</h2>
+    <p style="color: var(--color-text-light); font-size: 16px; margin-bottom: 40px;">Para empezar, necesitamos que completes estos datos:</p>
+
+    <div class="card" style="margin-bottom: 24px;">
+      <h3 style="font-size: 20px;">1️⃣ Datos de Empresa</h3>
+      <ul style="list-style: none; color: #666; font-size: 14px;">
+        <li style="margin: 12px 0;">• Nombre legal, RFC, teléfono principal</li>
+        <li style="margin: 12px 0;">• Horario de atención (¿24/7 o específico?)</li>
+        <li style="margin: 12px 0;">• Zonas cubiertas (CDMX, Estado de México, etc)</li>
+      </ul>
+    </div>
+
+    <div class="card" style="margin-bottom: 24px;">
+      <h3 style="font-size: 20px;">2️⃣ WhatsApp Business</h3>
+      <ul style="list-style: none; color: #666; font-size: 14px;">
+        <li style="margin: 12px 0;">• Número de WhatsApp Business (+52...)</li>
+        <li style="margin: 12px 0;">• Responsable de WhatsApp (nombre + email)</li>
+        <li style="margin: 12px 0;">• Usuarios que responderán desde Tracker</li>
+      </ul>
+    </div>
+
+    <div class="card" style="margin-bottom: 24px;">
+      <h3 style="font-size: 20px;">3️⃣ Planes y Servicios</h3>
+      <ul style="list-style: none; color: #666; font-size: 14px;">
+        <li style="margin: 12px 0;">• Excel con planes (nombre, descripción, precio)</li>
+        <li style="margin: 12px 0;">• Costos adicionales (instalación, cambios, etc)</li>
+      </ul>
+    </div>
+
+    <div class="card" style="margin-bottom: 24px;">
+      <h3 style="font-size: 20px;">4️⃣ FAQ (Preguntas Frecuentes)</h3>
+      <ul style="list-style: none; color: #666; font-size: 14px;">
+        <li style="margin: 12px 0;">• TOP 20-30 preguntas que reciben frecuentemente</li>
+        <li style="margin: 12px 0;">• Respuestas predefinidas para cada una</li>
+      </ul>
+    </div>
+
+    <div class="card" style="border: 2px solid var(--color-accent);">
+      <h3 style="font-size: 20px;">5️⃣ 🔑 Software de Vigilancia (CRÍTICO)</h3>
+      <p style="color: #666; font-size: 14px; margin: 16px 0;">Esta es la información más importante. Necesitamos toda la documentación técnica:</p>
+      <ul style="list-style: none; color: #666; font-size: 14px;">
+        <li style="margin: 12px 0;">• Nombre del software + versión</li>
+        <li style="margin: 12px 0;">• Manual técnico (PDF)</li>
+        <li style="margin: 12px 0;">• API documentation</li>
+        <li style="margin: 12px 0;">• Especificación de eventos (qué datos envía)</li>
+        <li style="margin: 12px 0;">• Formatos (JSON, XML, etc)</li>
+        <li style="margin: 12px 0;">• Ejemplos de eventos (ingreso, movimiento, alarma)</li>
+        <li style="margin: 12px 0;">• Configuración de webhooks</li>
+        <li style="margin: 12px 0;">• Credenciales API</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <h2>¿Listo para Empezar?</h2>
+    <p>La propuesta está lista. El siguiente paso es que completes la información anterior para que analicemos tu software de vigilancia y te confirme la viabilidad técnica.</p>
+    <div class="cta-group" style="justify-content: center;">
+      <a href="mailto:mesainteligentedemo@gmail.com?subject=Central de Alarmas - Propuesta Sistema WhatsApp%2BTracker" class="btn-secondary">Contactar Ahora</a>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <p>Propuesta técnica preparada por Victor IA · © 2026</p>
+  <p style="margin-top: 12px; font-size: 12px;">Para Central de Alarmas Eduardo Pimentel</p>
+</footer>
+
+<script>
+// Smooth scroll header
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 50) {
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+  }
+});
+
+// Scroll to top behavior
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    if (this.getAttribute('href') !== '#') {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  });
+});
+</script>
+
+</body>
+</html>

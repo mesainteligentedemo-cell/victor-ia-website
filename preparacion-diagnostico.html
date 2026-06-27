@@ -1,0 +1,392 @@
+<!-- Victor IA — Preparación para tu Diagnóstico -->
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Victor IA | Prepara tu Diagnóstico Gratuito</title>
+<meta name="description" content="Lista de preparación para tu diagnóstico de automatización con VICTOR IA. Llega listo y aprovecha al máximo tu sesión."/>
+<meta name="robots" content="noindex"/>
+<meta name="theme-color" content="#070708"/>
+<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#070708;
+  --ink2:#0c0c0f;
+  --panel:#101015;
+  --panel2:#16161c;
+  --line:rgba(205,178,140,.14);
+  --line2:rgba(255,255,255,.07);
+  --gold:#B89A6A;
+  --gold2:#CDB28C;
+  --txt:#EDEAE3;
+  --muted:#8C887F;
+  --faint:rgba(255,255,255,.42);
+  --serif:Georgia,'Times New Roman',serif;
+  --display:'Plus Jakarta Sans',Georgia,serif;
+  --body:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+body{
+  background:var(--ink);
+  color:var(--txt);
+  font-family:var(--body);
+  font-weight:400;
+  line-height:1.6;
+  overflow-x:hidden;
+  min-height:100vh;
+}
+/* ambient gold glow */
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(60vw 40vh at 78% -8%, rgba(184,154,106,.10), transparent 60%),
+    radial-gradient(50vw 50vh at 8% 110%, rgba(184,154,106,.05), transparent 65%);
+}
+/* film grain */
+#noise{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.025;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+a{color:inherit}
+:focus-visible{outline:2px solid var(--gold2);outline-offset:3px;border-radius:3px}
+
+/* HEADER */
+header{position:fixed;top:0;left:0;right:0;z-index:50;height:64px;
+  background:rgba(7,7,8,.72);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line2)}
+.hd-in{max-width:1100px;margin:0 auto;height:100%;padding:0 24px;
+  display:flex;align-items:center;justify-content:space-between}
+.brand{font-family:var(--display);font-size:20px;font-weight:300;letter-spacing:.04em;color:var(--txt);text-decoration:none}
+.brand span{color:var(--gold);font-weight:500}
+.back{font-family:var(--body);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:color .3s}
+.back:hover{color:var(--gold2)}
+.back svg{width:13px;height:13px}
+
+main{position:relative;z-index:2;max-width:760px;margin:0 auto;padding:104px 24px 96px}
+
+/* HERO */
+.eyebrow{display:inline-flex;align-items:center;gap:12px;
+  font-size:10.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);margin-bottom:22px}
+.eyebrow::before{content:'';display:block;width:28px;height:1px;background:currentColor}
+h1{font-family:var(--serif);font-weight:400;font-size:clamp(34px,6.4vw,56px);
+  line-height:1.08;letter-spacing:-.01em;color:#fff;margin-bottom:18px}
+h1 em{font-style:italic;color:var(--gold2)}
+.lede{font-size:16px;line-height:1.75;color:var(--muted);max-width:560px}
+
+/* APPOINTMENT CARD */
+.appt{margin:38px 0 12px;background:linear-gradient(180deg,var(--panel),var(--ink2));
+  border:1px solid var(--line);border-radius:14px;padding:26px 28px;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:22px 28px}
+.appt-item .k{font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:7px}
+.appt-item .v{font-family:var(--serif);font-size:18px;color:var(--txt);line-height:1.3}
+.appt-item .v.dim{color:var(--muted);font-style:italic}
+
+.rule{height:1px;background:var(--line2);margin:48px 0 40px}
+
+/* PROGRESS */
+.prog-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:14px}
+.prog-head h2{font-family:var(--serif);font-size:clamp(22px,4vw,30px);font-weight:400;color:#fff;line-height:1.2}
+.prog-count{font-family:var(--display);font-size:13px;letter-spacing:.04em;color:var(--gold2);white-space:nowrap}
+.prog-count b{color:#fff;font-weight:500}
+.prog-track{height:4px;border-radius:99px;background:rgba(255,255,255,.07);overflow:hidden;margin-bottom:34px}
+.prog-bar{height:100%;width:0;border-radius:99px;
+  background:linear-gradient(90deg,var(--gold),var(--gold2));
+  transition:width .55s cubic-bezier(.16,1,.3,1)}
+
+/* CHECKLIST */
+.list{list-style:none;display:flex;flex-direction:column;gap:14px}
+.item{position:relative}
+.item input{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
+.item label{display:flex;align-items:flex-start;gap:16px;cursor:pointer;
+  background:var(--panel);border:1px solid var(--line2);border-radius:12px;
+  padding:18px 20px;transition:border-color .35s,background .35s,transform .25s}
+.item label:hover{border-color:var(--line);background:var(--panel2);transform:translateY(-1px)}
+.box{flex:0 0 auto;width:24px;height:24px;margin-top:1px;border-radius:7px;
+  border:1.5px solid rgba(205,178,140,.4);background:transparent;
+  display:flex;align-items:center;justify-content:center;transition:background .3s,border-color .3s}
+.box svg{width:13px;height:13px;opacity:0;transform:scale(.4);transition:opacity .3s,transform .35s cubic-bezier(.34,1.56,.64,1)}
+.txt{flex:1}
+.txt .t{font-size:15.5px;font-weight:500;color:var(--txt);line-height:1.45;transition:color .3s}
+.txt .d{font-size:13px;color:var(--muted);line-height:1.6;margin-top:5px}
+.item input:checked + label{border-color:var(--line);background:linear-gradient(180deg,rgba(184,154,106,.07),rgba(184,154,106,.02))}
+.item input:checked + label .box{background:var(--gold);border-color:var(--gold)}
+.item input:checked + label .box svg{opacity:1;transform:scale(1)}
+.item input:checked + label .txt .t{color:#fff}
+.item input:focus-visible + label{outline:2px solid var(--gold2);outline-offset:3px}
+
+/* CONFIRM */
+.confirm-wrap{margin-top:44px;text-align:center}
+.confirm-note{font-size:13px;color:var(--muted);margin-bottom:20px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.65}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;
+  font-family:var(--body);font-size:14px;letter-spacing:.06em;font-weight:500;
+  border-radius:8px;padding:16px 38px;border:1px solid var(--gold);
+  background:var(--gold);color:#0b0b0d;text-decoration:none;cursor:pointer;
+  transition:background .3s,color .3s,transform .25s,opacity .3s}
+.btn:hover{background:var(--gold2);transform:translateY(-2px)}
+.btn:disabled{cursor:not-allowed;opacity:.55;transform:none}
+.btn svg{width:15px;height:15px}
+
+/* SUCCESS / ERROR */
+.toast{margin-top:22px;border-radius:10px;padding:16px 20px;font-size:14px;
+  line-height:1.55;display:none;text-align:left}
+.toast.ok{display:block;background:rgba(184,154,106,.1);border:1px solid var(--line);color:var(--gold2)}
+.toast.err{display:block;background:rgba(220,90,80,.1);border:1px solid rgba(220,90,80,.3);color:#e9a6a0}
+.toast.ok b{color:#fff}
+
+/* FOOTER */
+footer{position:relative;z-index:2;border-top:1px solid var(--line2);
+  padding:34px 24px;text-align:center}
+footer p{font-size:10.5px;letter-spacing:.1em;color:rgba(140,136,127,.5)}
+
+/* ANIM */
+.rv{opacity:0;transform:translateY(22px);animation:rv .8s cubic-bezier(.16,1,.3,1) forwards}
+@keyframes rv{to{opacity:1;transform:none}}
+.d1{animation-delay:.05s}.d2{animation-delay:.13s}.d3{animation-delay:.22s}.d4{animation-delay:.3s}
+@media(prefers-reduced-motion:reduce){
+  .rv{animation:none;opacity:1;transform:none}
+  *{transition:none!important}
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  main{padding:92px 18px 80px}
+  .appt{padding:22px 20px;gap:18px 20px}
+  .item label{padding:16px 16px;gap:13px}
+  .hd-in{padding:0 16px}
+}
+@media(max-width:420px){
+  .appt{grid-template-columns:1fr 1fr}
+  .btn{width:100%;padding:16px 24px}
+}
+</style>
+</head>
+<body>
+<div id="noise"></div>
+
+<header>
+  <div class="hd-in">
+    <a class="brand" href="/index.html">Victor <span>IA</span></a>
+    <a class="back" href="/agendar-videollamada">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Reagendar
+    </a>
+  </div>
+</header>
+
+<main>
+  <div class="rv d1">
+    <span class="eyebrow">Antes de tu diagnóstico</span>
+    <h1>Llega listo para <em>descubrir</em> dónde automatizar.</h1>
+    <p class="lede">Tu diagnóstico gratuito dura 30 minutos. Para sacarle el máximo provecho, prepara esta breve lista. Mientras más claro llegues, más preciso será el plan que diseñemos para ti.</p>
+  </div>
+
+  <!-- Appointment details -->
+  <section class="appt rv d2" id="appt" aria-label="Detalles de tu cita">
+    <div class="appt-item"><div class="k">Nombre</div><div class="v" id="ap-nombre">—</div></div>
+    <div class="appt-item"><div class="k">Empresa</div><div class="v" id="ap-empresa">—</div></div>
+    <div class="appt-item"><div class="k">Fecha</div><div class="v" id="ap-fecha">—</div></div>
+    <div class="appt-item"><div class="k">Hora</div><div class="v" id="ap-hora">—</div></div>
+  </section>
+
+  <div class="rule rv d2"></div>
+
+  <!-- Progress -->
+  <div class="prog-head rv d3">
+    <h2>Tu lista de preparación</h2>
+    <div class="prog-count"><b id="pc-done">0</b> / <span id="pc-total">5</span> listas</div>
+  </div>
+  <div class="prog-track rv d3" role="progressbar" aria-label="Progreso de preparación" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="pbar-aria">
+    <div class="prog-bar" id="pbar"></div>
+  </div>
+
+  <!-- Checklist -->
+  <ul class="list" id="list">
+    <li class="item rv d3">
+      <input type="checkbox" id="c1" data-key="procesos"/>
+      <label for="c1">
+        <span class="box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.2 4.2L19 6.5" stroke="#0b0b0d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="txt">
+          <span class="t">Lista de los 3 a 5 procesos que más tiempo consumen</span>
+          <span class="d">Identifica las tareas repetitivas que más horas se llevan en tu operación día a día.</span>
+        </span>
+      </label>
+    </li>
+    <li class="item rv d3">
+      <input type="checkbox" id="c2" data-key="costo"/>
+      <label for="c2">
+        <span class="box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.2 4.2L19 6.5" stroke="#0b0b0d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="txt">
+          <span class="t">Costo mensual aproximado de esos procesos</span>
+          <span class="d">Un estimado de horas × personas al mes. No tiene que ser exacto, solo un rango realista.</span>
+        </span>
+      </label>
+    </li>
+    <li class="item rv d3">
+      <input type="checkbox" id="c3" data-key="dolor"/>
+      <label for="c3">
+        <span class="box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.2 4.2L19 6.5" stroke="#0b0b0d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="txt">
+          <span class="t">Tus principales puntos de dolor</span>
+          <span class="d">Atención al cliente, reportes, seguimiento de ventas, facturación… ¿Qué duele más hoy?</span>
+        </span>
+      </label>
+    </li>
+    <li class="item rv d4">
+      <input type="checkbox" id="c4" data-key="decisor"/>
+      <label for="c4">
+        <span class="box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.2 4.2L19 6.5" stroke="#0b0b0d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="txt">
+          <span class="t">Acceso a quien decide tecnología o presupuesto</span>
+          <span class="d">Idealmente esa persona está en la llamada, o puedes consultarle rápido después.</span>
+        </span>
+      </label>
+    </li>
+    <li class="item rv d4">
+      <input type="checkbox" id="c5" data-key="intentos"/>
+      <label for="c5">
+        <span class="box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.2 4.2L19 6.5" stroke="#0b0b0d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="txt">
+          <span class="t">Cualquier intento previo de automatización</span>
+          <span class="d">Qué herramientas probaste antes y por qué no funcionaron. Esto nos ahorra repetir errores.</span>
+        </span>
+      </label>
+    </li>
+  </ul>
+
+  <!-- Confirm -->
+  <div class="confirm-wrap rv d4">
+    <p class="confirm-note">Cuando hayas revisado tu preparación, confírmalo y nuestro equipo lo verá antes de tu sesión.</p>
+    <button class="btn" id="btn-confirm" type="button">
+      <span id="btn-label">Confirmar que leí la preparación</span>
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </div>
+</main>
+
+<footer>
+  <p>© 2026 INFLUENCE IA S.A. DE C.V. — VICTOR IA · victor-ia.xyz</p>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+
+  // ---- URL params (nombre, empresa, fecha, hora, email) ----
+  var params = new URLSearchParams(window.location.search);
+  function g(k){ var v = params.get(k); return v ? v.trim() : ''; }
+  var data = {
+    email:   g('email'),
+    nombre:  g('nombre'),
+    empresa: g('empresa'),
+    fecha:   g('fecha'),
+    hora:    g('hora')
+  };
+
+  function setText(id, val, dimIfEmpty){
+    var el = document.getElementById(id);
+    if(!el) return;
+    if(val){ el.textContent = val; el.classList.remove('dim'); }
+    else { el.textContent = dimIfEmpty || 'Por confirmar'; el.classList.add('dim'); }
+  }
+  setText('ap-nombre',  data.nombre);
+  setText('ap-empresa', data.empresa);
+  setText('ap-fecha',   data.fecha);
+  setText('ap-hora',    data.hora ? (/hrs|hr|hora/i.test(data.hora) ? data.hora : data.hora + ' hrs') : '');
+
+  // ---- localStorage persistence (scoped by email so cada prospecto guarda lo suyo) ----
+  var STORE_KEY = 'vi_prep_' + (data.email ? data.email.toLowerCase() : 'anon');
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('#list input[type=checkbox]'));
+  var total = boxes.length;
+  document.getElementById('pc-total').textContent = total;
+
+  function loadState(){
+    var saved;
+    try { saved = JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); } catch(e){ saved = {}; }
+    boxes.forEach(function(b){ if(saved[b.dataset.key]) b.checked = true; });
+  }
+  function saveState(){
+    var state = {};
+    boxes.forEach(function(b){ state[b.dataset.key] = b.checked; });
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch(e){}
+  }
+
+  function checkedKeys(){
+    return boxes.filter(function(b){ return b.checked; }).map(function(b){ return b.dataset.key; });
+  }
+
+  function updateProgress(){
+    var done = checkedKeys().length;
+    var pct = total ? Math.round((done/total)*100) : 0;
+    document.getElementById('pc-done').textContent = done;
+    document.getElementById('pbar').style.width = pct + '%';
+    var aria = document.getElementById('pbar-aria');
+    aria.setAttribute('aria-valuenow', String(pct));
+  }
+
+  boxes.forEach(function(b){
+    b.addEventListener('change', function(){ saveState(); updateProgress(); });
+  });
+
+  loadState();
+  updateProgress();
+
+  // ---- Confirm submit ----
+  var btn = document.getElementById('btn-confirm');
+  var btnLabel = document.getElementById('btn-label');
+  var toast = document.getElementById('toast');
+
+  function showToast(kind, html){
+    toast.className = 'toast ' + kind;
+    toast.innerHTML = html;
+  }
+
+  btn.addEventListener('click', function(){
+    btn.disabled = true;
+    btnLabel.textContent = 'Enviando…';
+    toast.className = 'toast';
+
+    var payload = {
+      email: data.email || '',
+      nombre: data.nombre || '',
+      empresa: data.empresa || '',
+      fecha: data.fecha || '',
+      hora: data.hora || '',
+      checked_items: checkedKeys(),
+      confirmado: true,
+      ts: new Date().toISOString(),
+      source_url: window.location.href
+    };
+
+    fetch('/api/agenda-confirm', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    .then(function(res){ return res.json().catch(function(){ return {}; }).then(function(j){ return { ok: res.ok, j: j }; }); })
+    .then(function(r){
+      if(r.ok && r.j && r.j.success){
+        btnLabel.textContent = 'Preparación confirmada';
+        showToast('ok', '<b>' + (r.j.mensaje || 'Gracias, confirmamos tu preparación') + '</b><br>Nos vemos en tu sesión. Si tienes dudas antes, escríbenos por WhatsApp.');
+        try { localStorage.setItem(STORE_KEY + '_confirmed', '1'); } catch(e){}
+      } else {
+        throw new Error('bad-response');
+      }
+    })
+    .catch(function(){
+      btn.disabled = false;
+      btnLabel.textContent = 'Confirmar que leí la preparación';
+      showToast('err', 'No pudimos registrar tu confirmación en este momento. Inténtalo de nuevo en unos segundos o escríbenos directamente.');
+    });
+  });
+})();
+</script>
+</body>
+</html>

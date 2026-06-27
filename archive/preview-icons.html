@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Victor Icons — Preview</title>
+  <style>
+    /* Dark luxury theme matching Victor IA brand */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0a0a0a;
+      color: #e8e8e8;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100vh;
+      padding: 48px 32px;
+    }
+    h1 {
+      font-size: 28px;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .subtitle {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 48px;
+      letter-spacing: 0.05em;
+    }
+    .section-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #444;
+      margin-bottom: 24px;
+      margin-top: 40px;
+      border-bottom: 1px solid #1a1a1a;
+      padding-bottom: 8px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 16px;
+    }
+    .icon-card {
+      background: #111;
+      border: 1px solid #1e1e1e;
+      border-radius: 8px;
+      padding: 24px 16px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      transition: border-color 0.2s, background 0.2s;
+      cursor: default;
+    }
+    .icon-card:hover {
+      border-color: #333;
+      background: #161616;
+    }
+    .icon-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      background: #0d0d0d;
+      border: 1px solid #222;
+      border-radius: 6px;
+    }
+    .icon-wrapper svg {
+      color: #e8e8e8;
+    }
+    .icon-name {
+      font-size: 11px;
+      color: #555;
+      text-align: center;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      letter-spacing: 0.02em;
+    }
+    /* 16px legibility test */
+    .legibility-test {
+      background: #111;
+      border: 1px solid #1e1e1e;
+      border-radius: 8px;
+      padding: 24px;
+      margin-top: 16px;
+    }
+    .legibility-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+    .legibility-label {
+      font-size: 12px;
+      color: #444;
+      width: 40px;
+    }
+    .legibility-icons {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #1a1a1a;
+      border: 1px solid #252525;
+      border-radius: 4px;
+      padding: 6px 10px;
+      font-size: 12px;
+      color: #999;
+    }
+  </style>
+</head>
+<body>
+  <h1>Victor Icons</h1>
+  <p class="subtitle">40 iconos propietarios · viewBox 0 0 24 · strokeWidth 2 · Angular DNA</p>
+
+  <!-- SECTION: Agent/Category Icons -->
+  <div class="section-title">Iconos de Categorías (21)</div>
+  <div class="grid" id="category-icons"></div>
+
+  <!-- SECTION: UI Icons -->
+  <div class="section-title">Iconos UI (15)</div>
+  <div class="grid" id="ui-icons"></div>
+
+  <!-- SECTION: Status Icons -->
+  <div class="section-title">Iconos de Estado (4)</div>
+  <div class="grid" id="status-icons"></div>
+
+  <!-- SECTION: Legibility test at 16px -->
+  <div class="section-title">Test de Legibilidad — 16px</div>
+  <div class="legibility-test">
+    <div class="legibility-row">
+      <span class="legibility-label">16px</span>
+      <div class="legibility-icons" id="legibility-16"></div>
+    </div>
+    <div class="legibility-row">
+      <span class="legibility-label">24px</span>
+      <div class="legibility-icons" id="legibility-24"></div>
+    </div>
+    <div class="legibility-row">
+      <span class="legibility-label">32px</span>
+      <div class="legibility-icons" id="legibility-32"></div>
+    </div>
+  </div>
+
+  <!-- SECTION: Badge usage demo -->
+  <div class="section-title">Uso en Badges</div>
+  <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:0;" id="badge-demo"></div>
+
+  <script src="assets/icons/victor-icons/victor-icons.js"></script>
+  <script>
+    const CATEGORY_ICONS = [
+      'maestria','creatividad','codigo','datos','seguridad',
+      'automatizacion','inteligencia','web','video','audio',
+      'copy','seo','analitica','marketing','finanzas',
+      'cliente','integraciones','documentacion','devops','tresd','scraping'
+    ];
+    const UI_ICONS = [
+      'home','menu','search','settings','close',
+      'arrow','check','warning','info','plus',
+      'minus','chevron','edit','trash','send'
+    ];
+    const STATUS_ICONS = ['loading','success','error','pending'];
+
+    function createCard(name, size = 24) {
+      const card = document.createElement('div');
+      card.className = 'icon-card';
+      const wrapper = document.createElement('div');
+      wrapper.className = 'icon-wrapper';
+      wrapper.innerHTML = VictorIcons.render(name, { size });
+      const label = document.createElement('div');
+      label.className = 'icon-name';
+      label.textContent = name;
+      card.appendChild(wrapper);
+      card.appendChild(label);
+      return card;
+    }
+
+    // Populate sections
+    const catGrid = document.getElementById('category-icons');
+    CATEGORY_ICONS.forEach(n => catGrid.appendChild(createCard(n)));
+
+    const uiGrid = document.getElementById('ui-icons');
+    UI_ICONS.forEach(n => uiGrid.appendChild(createCard(n)));
+
+    const statusGrid = document.getElementById('status-icons');
+    STATUS_ICONS.forEach(n => statusGrid.appendChild(createCard(n)));
+
+    // Legibility test — use a sample of key icons
+    const sampleIcons = ['maestria','check','close','search','home','settings','warning','info','send','arrow'];
+    ['16','24','32'].forEach(sz => {
+      const container = document.getElementById('legibility-' + sz);
+      sampleIcons.forEach(name => {
+        const wrap = document.createElement('span');
+        wrap.style.display = 'inline-flex';
+        wrap.style.alignItems = 'center';
+        wrap.style.color = '#e8e8e8';
+        wrap.innerHTML = VictorIcons.render(name, { size: parseInt(sz) });
+        container.appendChild(wrap);
+      });
+    });
+
+    // Badge demo
+    const badgeDemo = document.getElementById('badge-demo');
+    const badgeItems = [
+      ['maestria','Maestría'], ['creatividad','Creatividad'], ['codigo','Código'],
+      ['web','Web'], ['video','Video'], ['seo','SEO'], ['check','Completado'],
+      ['warning','Alerta'], ['settings','Config'], ['search','Buscar']
+    ];
+    badgeItems.forEach(([icon, label]) => {
+      const badge = document.createElement('span');
+      badge.className = 'badge';
+      badge.innerHTML = VictorIcons.render(icon, { size: 14 }) + label;
+      badgeDemo.appendChild(badge);
+    });
+  </script>
+</body>
+</html>

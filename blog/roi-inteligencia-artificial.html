@@ -1,0 +1,338 @@
+<!DOCTYPE html><html lang="es"><head>
+<meta charset="utf-8"/><meta content="width=device-width,initial-scale=1.0" name="viewport"/>
+<title>ROI de la Inteligencia Artificial: Cómo Medir el Retorno de tu Inversión en IA | Victor IA Blog</title>
+<meta name="description" content="Framework completo para medir el ROI de la IA en tu empresa. Los 3 tipos de valor, 5 dimensiones de medición, benchmarks por industria en México y timeframe realista."/>
+<link rel="canonical" href="https://victor-ia.xyz/blog/roi-inteligencia-artificial.html"/>
+<meta name="robots" content="index, follow"/>
+<meta http-equiv="content-language" content="es-MX"/>
+<meta name="geo.region" content="MX"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"ROI de la Inteligencia Artificial: Cómo Medir el Retorno de tu Inversión en IA","description":"Framework completo para medir el ROI de la IA en tu empresa. Los 3 tipos de valor, 5 dimensiones de medición, benchmarks por industria en México y timeframe realista.","datePublished":"2026-05-27","dateModified":"2026-05-27","author":{"@type":"Organization","name":"Victor IA","url":"https://victor-ia.xyz"},"publisher":{"@type":"Organization","name":"Victor IA"},"inLanguage":"es-MX"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;0,500;1,200;1,300;1,400;1,500&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com" integrity="sha384-igm5BeiBt36UU4gqwWS7imYmelpTsZlQ45FZf+XBn9MuJbn4nQr7yx1yFydocC/K" crossorigin="anonymous"></script>
+<script>tailwind.config={darkMode:'class',theme:{extend:{colors:{ink:'#070708',cream:'#EAE6DF',muted:'#706C66',gold:'#B89A6A'},fontFamily:{display:['Cormorant Garamond','Georgia','serif'],body:['Inter','sans-serif']}}}}</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased;scroll-behavior:auto}
+body{background:#070708;color:#EAE6DF;font-family:'Inter',sans-serif;overflow-x:hidden;font-weight:300}
+@media(pointer:fine){html,body,*{cursor:none!important}}
+@media(prefers-contrast:more){html,body,*{cursor:auto!important}#cur-d,#cur-r{display:none!important}}
+#cur-d{position:fixed;width:5px;height:5px;background:#B89A6A;border-radius:50%;pointer-events:none!important;z-index:2147483647;transform:translate(-50%,-50%)}
+#cur-r{position:fixed;width:36px;height:36px;border:1px solid rgba(184,154,106,.42);border-radius:50%;pointer-events:none!important;z-index:2147483646;transform:translate(-50%,-50%);transition:width .4s,height .4s}
+#pbar{position:fixed;top:0;left:0;height:1px;background:#B89A6A;z-index:100000;width:0}
+#noise{position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.024;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+header{position:fixed;top:0;left:0;right:0;z-index:500;height:68px;transition:background .5s,border-color .5s;border-bottom:1px solid transparent}
+header.scrolled{background:rgba(7,7,8,.92);border-bottom-color:rgba(255,255,255,.06);backdrop-filter:blur(18px)}
+.nav-a{position:relative;color:#706C66;font-size:13px;letter-spacing:.07em;font-weight:300;transition:color .3s;text-decoration:none}
+.nav-a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:#B89A6A;transition:width .45s}
+.nav-a:hover{color:#EAE6DF}.nav-a:hover::after{width:100%}
+.btn-p{display:inline-flex;align-items:center;border-radius:5px;font-family:'Inter',sans-serif;font-size:13px;letter-spacing:.09em;font-weight:500;background:#EAE6DF;color:#070708;padding:11px 26px;text-decoration:none;transition:background .25s,transform .2s}
+.btn-p:hover{background:#fff;transform:translateY(-2px)}
+.rv{opacity:0;transform:translateY(30px)}
+.prose h2{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,3vw,30px);font-weight:300;color:#EAE6DF;margin:48px 0 16px}
+.prose h3{font-size:13px;font-weight:500;color:#B89A6A;margin:32px 0 12px;letter-spacing:.1em;text-transform:uppercase}
+.prose p{font-size:16px;line-height:1.85;color:rgba(234,230,223,.75);margin-bottom:20px}
+.prose ul{margin:0 0 20px 24px;list-style:disc}
+.prose ul li{font-size:15.5px;line-height:1.75;color:rgba(234,230,223,.72);margin-bottom:8px}
+.prose a{color:#B89A6A;text-decoration:none;border-bottom:1px solid rgba(184,154,106,.3)}
+.prose blockquote{border-left:2px solid #B89A6A;padding-left:20px;margin:28px 0;font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;color:rgba(234,230,223,.8);font-style:italic}
+.img-placeholder{width:100%;aspect-ratio:16/9;border-radius:10px;background:linear-gradient(135deg,#0c0a18 0%,#1a1035 50%,#0a0808 100%);border:1px solid rgba(184,154,106,.12);display:flex;align-items:center;justify-content:center;margin:32px 0}
+.img-caption{font-size:11.5px;letter-spacing:.08em;color:#706C66;text-align:center;margin-top:-24px;margin-bottom:32px;text-transform:uppercase}
+.tag{display:inline-block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#B89A6A;border:1px solid rgba(184,154,106,.25);border-radius:3px;padding:3px 10px}
+.dim-card{padding:20px 24px;background:#0F0F12;border:1px solid rgba(255,255,255,.054);border-radius:10px;margin-bottom:12px;display:grid;grid-template-columns:1fr 2fr;gap:20px;align-items:start}
+.dim-label{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#B89A6A;margin-bottom:6px}
+.dim-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:#EAE6DF}
+.dim-metrics{font-size:13.5px;color:rgba(234,230,223,.6);line-height:1.65}
+.timeline-row{display:grid;grid-template-columns:100px 1fr;gap:24px;margin-bottom:20px;align-items:start}
+.timeline-period{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:300;color:#B89A6A;padding-top:2px}
+.timeline-content{font-size:14.5px;color:rgba(234,230,223,.7);line-height:1.65;border-left:1px solid rgba(184,154,106,.2);padding-left:20px}
+.timeline-content strong{color:#EAE6DF;display:block;font-weight:500;margin-bottom:4px}
+</style>
+</head>
+<body class="dark">
+<div id="noise"></div><div id="cur-d"></div><div id="cur-r"></div><div id="pbar"></div>
+<header id="hdr">
+  <div class="flex justify-between items-center max-w-[1200px] mx-auto px-6 md:px-16 h-full relative z-10">
+    <a href="../index.html" class="font-display text-[21px] font-light tracking-[.04em] text-cream" style="text-decoration:none">Victor <span style="color:#B89A6A">IA</span></a>
+    <nav class="hidden md:flex gap-9 items-center">
+      <a class="nav-a" href="../agentes.html">Agentes</a>
+      <a class="nav-a" href="../como-funciona.html">Cómo Funciona</a>
+      <a class="nav-a" href="../precios.html">Precios</a>
+      <a class="nav-a" href="index.html" style="color:#EAE6DF">Blog</a>
+      <a class="nav-a" href="../telemetria.html">Eficiencia IoT</a>
+    </nav>
+    <div class="flex items-center gap-5">
+      <a class="nav-a hidden sm:block" href="../app.html">Iniciar sesión</a>
+      <a class="btn-p" href="../app.html">Empezar gratis</a>
+    </div>
+  </div>
+</header>
+
+<main style="padding-top:68px;position:relative;z-index:10">
+
+  <!-- Hero -->
+  <section style="padding:96px 0 64px;border-bottom:1px solid rgba(255,255,255,.05)">
+    <div style="max-width:780px;margin:0 auto;padding:0 32px">
+      <div class="rv" style="display:flex;gap:10px;margin-bottom:24px;flex-wrap:wrap">
+        <span class="tag">Estrategia</span>
+        <span class="tag">ROI</span>
+        <span class="tag">Medición</span>
+      </div>
+      <h1 class="rv" style="font-family:'Cormorant Garamond',serif;font-size:clamp(32px,5vw,54px);font-weight:300;line-height:1.18;color:#EAE6DF;margin-bottom:24px">
+        ROI de la Inteligencia Artificial: Cómo Medir el Retorno de tu Inversión en IA
+      </h1>
+      <p class="rv" style="font-size:18px;line-height:1.75;color:rgba(234,230,223,.6);margin-bottom:32px">
+        La inteligencia artificial es diferente a cualquier otro proyecto de tecnología que hayas implementado antes. Sus retornos son más complejos, se materializan en un timeframe distinto y algunas de sus ganancias más valiosas son las más difíciles de medir. Entender esto antes de empezar es la diferencia entre una implementación exitosa y una que se abandona a los tres meses.
+      </p>
+      <div class="rv" style="display:flex;gap:24px;align-items:center;font-size:12px;color:#706C66;letter-spacing:.07em">
+        <span>27 de mayo, 2026</span>
+        <span style="color:rgba(112,108,102,.3)">·</span>
+        <span>10 min de lectura</span>
+        <span style="color:rgba(112,108,102,.3)">·</span>
+        <span>Victor IA</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contenido -->
+  <article style="max-width:780px;margin:0 auto;padding:64px 32px 96px" class="prose">
+
+    <div class="rv img-placeholder">
+      <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="40" cy="40" r="28" stroke="#B89A6A" stroke-width="1.5" fill="none" opacity=".2"/>
+        <path d="M16 56 Q24 20 40 28 Q56 36 64 16" stroke="#B89A6A" stroke-width="2" fill="none"/>
+        <path d="M16 56 Q24 20 40 28 Q56 36 64 16 L64 56 Z" fill="#B89A6A" opacity=".07"/>
+        <circle cx="40" cy="28" r="4" fill="#B89A6A" opacity=".6"/>
+        <circle cx="64" cy="16" r="4" fill="#B89A6A" opacity=".9"/>
+        <line x1="16" y1="58" x2="68" y2="58" stroke="#B89A6A" stroke-width=".5" opacity=".25"/>
+        <text x="58" y="28" fill="#B89A6A" font-size="8" font-family="serif" opacity=".7">4.1×</text>
+      </svg>
+    </div>
+    <p class="img-caption rv">El ROI de la IA se compone de múltiples curvas de valor que se superponen en el tiempo</p>
+
+    <h2 class="rv">Por qué el ROI de la IA es diferente</h2>
+    <p class="rv">Cuando una empresa compra un software de contabilidad, el ROI es lineal y directo: tiempo ahorrado en cierres contables multiplicado por el costo de ese tiempo. La variable es conocida, el resultado es predecible y se puede medir desde el primer mes.</p>
+    <p class="rv">La inteligencia artificial no funciona así. Sus retornos son compuestos, no lineales. Un agente de IA que reduce el tiempo de atención al cliente también libera a los asesores para cerrar más ventas. Esas ventas adicionales financian la expansión de la operación. La operación expandida genera más datos. Más datos mejoran al agente. El agente mejorado cierra más ventas todavía. Este ciclo de retroalimentación positiva es lo que genera los números extraordinarios que reportan las empresas que implementan IA correctamente, pero también es lo que hace imposible predecir el ROI con una hoja de cálculo simple.</p>
+    <p class="rv">El error más costoso no es implementar mal, es medir mal. Una empresa que espera ver el retorno en el mes uno y no lo ve abandona antes de que el ciclo virtuoso comience. Por eso el framework de medición es tan importante como la implementación misma.</p>
+
+    <blockquote class="rv">"El ROI de la IA no se mide en el mes uno. Se mide en el mes doce, cuando el agente ya conoce tu negocio mejor que muchos de tus empleados y trabaja 24/7 sin vacaciones ni rotación."</blockquote>
+
+    <div class="rv" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:32px 0">
+      <div style="background:#0F0F12;border:1px solid rgba(255,255,255,.054);border-radius:10px;padding:24px;text-align:center">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:300;color:#B89A6A">4.1×</div>
+        <div style="font-size:12px;color:#706C66;margin-top:6px;letter-spacing:.06em">ROI promedio en el primer año</div>
+      </div>
+      <div style="background:#0F0F12;border:1px solid rgba(255,255,255,.054);border-radius:10px;padding:24px;text-align:center">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:300;color:#B89A6A">84%</div>
+        <div style="font-size:12px;color:#706C66;margin-top:6px;letter-spacing:.06em">Reportan payback &lt; 12 meses</div>
+      </div>
+      <div style="background:#0F0F12;border:1px solid rgba(255,255,255,.054);border-radius:10px;padding:24px;text-align:center">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:300;color:#B89A6A">90</div>
+        <div style="font-size:12px;color:#706C66;margin-top:6px;letter-spacing:.06em">Días de inversión neta al inicio</div>
+      </div>
+    </div>
+
+    <h2 class="rv">Los 3 tipos de valor que genera la IA</h2>
+    <p class="rv">Para construir un framework de medición correcto, primero hay que entender que la IA genera tres categorías distintas de valor. La mayoría de las empresas miden solo la primera y pierden de vista las otras dos, que son con frecuencia las más significativas a largo plazo.</p>
+
+    <h3 class="rv">Tipo 1: Eficiencia operativa</h3>
+    <p class="rv">Es el valor más visible y el más fácil de medir: tiempo ahorrado, errores reducidos, costos de operación disminuidos. Este es el ROI que se puede proyectar en una hoja de cálculo antes de implementar. Es real y significativo, pero representa solo entre el 30% y el 40% del valor total que genera la IA en una implementación madura.</p>
+
+    <h3 class="rv">Tipo 2: Crecimiento de ingresos</h3>
+    <p class="rv">Cuando los equipos se liberan de trabajo repetitivo, tienen capacidad para actividades de mayor valor: ventas, desarrollo de clientes, innovación de producto. Este crecimiento de ingresos es consecuencia directa de la implementación de IA pero no aparece en la línea "ahorro de costos" de ningún reporte. Es el tipo de valor más subestimado y, en muchos casos, el más importante.</p>
+
+    <h3 class="rv">Tipo 3: Habilitación de nuevas capacidades</h3>
+    <p class="rv">Hay cosas que la empresa simplemente no podía hacer antes de la IA y que ahora puede: personalización a escala de millones de interacciones, análisis en tiempo real de patrones de comportamiento de clientes, disponibilidad 24/7 en todos los canales, experimentos de producto en paralelo con múltiples variantes. El valor de estas capacidades nuevas no es directamente medible en el corto plazo, pero define la posición competitiva de la empresa a mediano y largo plazo.</p>
+
+    <div class="rv img-placeholder">
+      <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M40 12 L68 56 H12 Z" stroke="#B89A6A" stroke-width="1.5" fill="none" opacity=".3"/>
+        <path d="M40 24 L60 56 H20 Z" stroke="#B89A6A" stroke-width="1" fill="#B89A6A" opacity=".06"/>
+        <path d="M40 36 L52 56 H28 Z" stroke="#B89A6A" stroke-width="1" fill="#B89A6A" opacity=".12"/>
+        <line x1="40" y1="12" x2="40" y2="56" stroke="#B89A6A" stroke-width=".5" opacity=".3" stroke-dasharray="3,3"/>
+        <circle cx="40" cy="12" r="2.5" fill="#B89A6A" opacity=".8"/>
+        <text x="43" y="25" fill="#B89A6A" font-size="7" opacity=".6">Nuevas cap.</text>
+        <text x="43" y="40" fill="#B89A6A" font-size="7" opacity=".6">Crecimiento</text>
+        <text x="43" y="52" fill="#B89A6A" font-size="7" opacity=".6">Eficiencia</text>
+      </svg>
+    </div>
+    <p class="img-caption rv">El iceberg del ROI en IA: la eficiencia es la punta visible, el crecimiento y las nuevas capacidades son la base</p>
+
+    <h2 class="rv">Framework de medición en 5 dimensiones</h2>
+    <p class="rv">Las empresas que obtienen los mejores resultados de sus implementaciones de IA miden el valor en cinco dimensiones simultáneamente. No todas las dimensiones aplican a todos los proyectos, pero considerar las cinco garantiza que no se pierda de vista ningún tipo de valor significativo.</p>
+
+    <div class="rv">
+      <div class="dim-card">
+        <div><div class="dim-label">D1</div><div class="dim-name">Tiempo</div></div>
+        <div class="dim-metrics">Horas ahorradas por proceso, tiempo de respuesta al cliente, velocidad de decisión. La métrica más directa y la primera en aparecer. Benchmark: -40% en procesos automatizados en los primeros 60 días.</div>
+      </div>
+      <div class="dim-card">
+        <div><div class="dim-label">D2</div><div class="dim-name">Costo</div></div>
+        <div class="dim-metrics">Reducción en costos de nómina operativa, menor costo de adquisición de clientes, reducción de errores y retrabajo. El benchmark varía por industria: entre 25% y 45% de reducción en el área implementada.</div>
+      </div>
+      <div class="dim-card">
+        <div><div class="dim-label">D3</div><div class="dim-name">Calidad</div></div>
+        <div class="dim-metrics">Tasa de error en procesos automatizados vs. manual, satisfacción de clientes (NPS, CSAT), consistencia de output. Los agentes bien entrenados superan la tasa de error humano en procesos repetitivos desde el mes 3.</div>
+      </div>
+      <div class="dim-card">
+        <div><div class="dim-label">D4</div><div class="dim-name">Velocidad</div></div>
+        <div class="dim-metrics">Tiempo de go-to-market de nuevos productos, velocidad de respuesta competitiva, ciclos de iteración. La IA comprime los ciclos de decisión de semanas a horas, generando ventaja competitiva difícil de cuantificar pero real.</div>
+      </div>
+      <div class="dim-card">
+        <div><div class="dim-label">D5</div><div class="dim-name">Satisfacción</div></div>
+        <div class="dim-metrics">Employee Net Promoter Score (eNPS), retención de talento, engagement del equipo. Los colaboradores liberados de trabajo repetitivo reportan mayor satisfacción y menor intención de abandono. Efecto indirecto en costos de rotación.</div>
+      </div>
+    </div>
+
+    <h2 class="rv">Cómo construir el business case para IA</h2>
+    <p class="rv">El business case para una implementación de IA no debe ser un documento de proyecciones optimistas. Debe ser un marco de toma de decisiones que la dirección pueda usar para evaluar el progreso y decidir sobre la expansión o ajuste del proyecto.</p>
+
+    <h3 class="rv">Los componentes esenciales del business case</h3>
+    <ul class="rv">
+      <li><strong style="color:#EAE6DF">Inversión total de año 1:</strong> licencias, implementación, capacitación, tiempo interno del equipo. Sin omitir el costo real del tiempo humano dedicado al proyecto.</li>
+      <li><strong style="color:#EAE6DF">Ahorro identificado en D1 y D2:</strong> calculado con el método de mapeo de procesos descrito antes. Solo considerar el 70% del ahorro identificado para ser conservador.</li>
+      <li><strong style="color:#EAE6DF">Upside de ingresos (D4, D5):</strong> estimación conservadora del crecimiento de ingresos habilitado por la liberación de capacidad del equipo. Típicamente entre 10% y 25% del ahorro operativo.</li>
+      <li><strong style="color:#EAE6DF">Punto de equilibrio esperado:</strong> mes en que el valor acumulado supera la inversión acumulada. Para implementaciones bien ejecutadas, este punto suele ocurrir entre el mes 5 y el mes 8.</li>
+      <li><strong style="color:#EAE6DF">Métricas de control mensual:</strong> los tres o cuatro indicadores que se revisarán en cada reunión para evaluar el progreso del proyecto.</li>
+    </ul>
+
+    <h2 class="rv">El error de medir demasiado pronto</h2>
+    <p class="rv">En los primeros 90 días de una implementación de IA, las métricas de negocio casi nunca muestran el retorno esperado. Esto no indica que el proyecto esté fallando: indica que el sistema está en proceso de aprendizaje y que el equipo está en proceso de adaptación. Medir el ROI en este período y tomar decisiones con base en esos datos es como evaluar un ejercicio de entrenamiento físico a los tres días de empezar.</p>
+    <p class="rv">El período de medición significativa comienza en el mes 4, cuando los agentes ya tienen suficiente experiencia con los datos y procesos de la empresa para operar con autonomía real. Las métricas que se monitorean durante los primeros tres meses deben ser de proceso, no de resultado: ¿cuántas tareas ya están automatizadas?, ¿qué porcentaje del volumen está siendo manejado por los agentes?, ¿cuántas intervenciones humanas se requieren por cada 100 interacciones?</p>
+
+    <div class="rv img-placeholder">
+      <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="12" y1="65" x2="68" y2="65" stroke="#B89A6A" stroke-width=".5" opacity=".3"/>
+        <line x1="12" y1="65" x2="12" y2="15" stroke="#B89A6A" stroke-width=".5" opacity=".3"/>
+        <path d="M12 65 Q18 62 24 58 Q30 54 36 55 Q42 56 48 45 Q54 34 60 22 Q64 14 68 12" stroke="#B89A6A" stroke-width="2" fill="none"/>
+        <path d="M12 65 Q18 62 24 58 Q30 54 36 55 Q42 56 48 45 Q54 34 60 22 Q64 14 68 12 L68 65 Z" fill="#B89A6A" opacity=".06"/>
+        <line x1="36" y1="15" x2="36" y2="65" stroke="#B89A6A" stroke-width=".5" stroke-dasharray="3,3" opacity=".4"/>
+        <text x="13" y="75" fill="#B89A6A" font-size="7" opacity=".5">Mes 1</text>
+        <text x="31" y="75" fill="#B89A6A" font-size="7" opacity=".5">Mes 3</text>
+        <text x="52" y="75" fill="#B89A6A" font-size="7" opacity=".5">Mes 6</text>
+        <text x="30" y="25" fill="#B89A6A" font-size="7" opacity=".6">Punto de</text>
+        <text x="30" y="33" fill="#B89A6A" font-size="7" opacity=".6">inflexión</text>
+      </svg>
+    </div>
+    <p class="img-caption rv">La curva de valor de la IA: inversión neta los primeros meses, retorno acelerado a partir del punto de inflexión</p>
+
+    <h2 class="rv">Benchmarks por industria en México</h2>
+    <p class="rv">Los siguientes benchmarks se basan en implementaciones reales en el mercado mexicano. Representan resultados típicos de proyectos bien ejecutados, no casos extremos ni proyecciones optimistas.</p>
+
+    <div class="rv" style="overflow-x:auto;margin:28px 0">
+      <table style="width:100%;border-collapse:collapse;font-size:13.5px">
+        <thead>
+          <tr style="border-bottom:1px solid rgba(184,154,106,.2)">
+            <th style="text-align:left;padding:10px 12px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#706C66;font-weight:400">Industria</th>
+            <th style="text-align:center;padding:10px 12px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#706C66;font-weight:400">ROI año 1</th>
+            <th style="text-align:center;padding:10px 12px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#706C66;font-weight:400">Payback</th>
+            <th style="text-align:left;padding:10px 12px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#706C66;font-weight:400">Principal driver</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid rgba(255,255,255,.04)">
+            <td style="padding:12px;color:rgba(234,230,223,.75)">Retail / E-commerce</td>
+            <td style="padding:12px;text-align:center;color:#B89A6A;font-family:'Cormorant Garamond',serif;font-size:18px">3.8×</td>
+            <td style="padding:12px;text-align:center;color:rgba(234,230,223,.6)">5.2 meses</td>
+            <td style="padding:12px;color:rgba(234,230,223,.6)">Servicio al cliente + personalización</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,.04)">
+            <td style="padding:12px;color:rgba(234,230,223,.75)">Servicios profesionales</td>
+            <td style="padding:12px;text-align:center;color:#B89A6A;font-family:'Cormorant Garamond',serif;font-size:18px">4.5×</td>
+            <td style="padding:12px;text-align:center;color:rgba(234,230,223,.6)">4.1 meses</td>
+            <td style="padding:12px;color:rgba(234,230,223,.6)">Productividad billeable + propuestas</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,.04)">
+            <td style="padding:12px;color:rgba(234,230,223,.75)">Hotelería</td>
+            <td style="padding:12px;text-align:center;color:#B89A6A;font-family:'Cormorant Garamond',serif;font-size:18px">4.2×</td>
+            <td style="padding:12px;text-align:center;color:rgba(234,230,223,.6)">4.8 meses</td>
+            <td style="padding:12px;color:rgba(234,230,223,.6)">Revenue management + experiencia</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,.04)">
+            <td style="padding:12px;color:rgba(234,230,223,.75)">Manufactura</td>
+            <td style="padding:12px;text-align:center;color:#B89A6A;font-family:'Cormorant Garamond',serif;font-size:18px">3.4×</td>
+            <td style="padding:12px;text-align:center;color:rgba(234,230,223,.6)">6.8 meses</td>
+            <td style="padding:12px;color:rgba(234,230,223,.6)">Mantenimiento predictivo + QC</td>
+          </tr>
+          <tr>
+            <td style="padding:12px;color:rgba(234,230,223,.75)">Salud</td>
+            <td style="padding:12px;text-align:center;color:#B89A6A;font-family:'Cormorant Garamond',serif;font-size:18px">5.1×</td>
+            <td style="padding:12px;text-align:center;color:rgba(234,230,223,.6)">3.9 meses</td>
+            <td style="padding:12px;color:rgba(234,230,223,.6)">Admin clínica + retención pacientes</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="rv">Timeframe realista: 90 días, 6 meses, 1 año</h2>
+
+    <div class="rv" style="margin:28px 0">
+      <div class="timeline-row">
+        <div class="timeline-period">Mes 1–3</div>
+        <div class="timeline-content"><strong>Inversión neta · Configuración y aprendizaje</strong>Los agentes están aprendiendos los procesos, los datos y la voz de la empresa. El equipo interno está adaptando su forma de trabajar. Las métricas de proceso suben (volumen automatizado, tiempo de respuesta) pero el impacto en el resultado final todavía no es visible. Este es el período donde más abandona quien no tiene expectativas correctas.</div>
+      </div>
+      <div class="timeline-row">
+        <div class="timeline-period">Mes 4–6</div>
+        <div class="timeline-content"><strong>Primer retorno visible · Optimización activa</strong>Los agentes operan con autonomía real en las áreas implementadas. Los primeros ahorros aparecen en los estados financieros. Se identifican casos de uso adicionales no contemplados originalmente. El payback acumulado comienza a recuperarse. El equipo empieza a ver la IA como un aliado, no como un experimento.</div>
+      </div>
+      <div class="timeline-row">
+        <div class="timeline-period">Mes 7–12</div>
+        <div class="timeline-content"><strong>ROI positivo · Expansión y efecto compuesto</strong>La inversión inicial está recuperada o próxima a recuperarse. Se activan nuevas áreas. Los agentes ya tienen suficiente historial para hacer predicciones precisas. El valor empieza a acumularse de forma no lineal: cada mejora del sistema impacta en todas las áreas donde opera. Aquí se mide el ROI real del año.</div>
+      </div>
+    </div>
+
+    <div class="rv img-placeholder">
+      <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="10" y="10" width="60" height="60" rx="6" stroke="#B89A6A" stroke-width="1.5" fill="none" opacity=".2"/>
+        <path d="M25 50 L35 35 L45 42 L58 22" stroke="#B89A6A" stroke-width="2" fill="none"/>
+        <circle cx="25" cy="50" r="3" fill="#B89A6A" opacity=".4"/>
+        <circle cx="35" cy="35" r="3" fill="#B89A6A" opacity=".5"/>
+        <circle cx="45" cy="42" r="3" fill="#B89A6A" opacity=".6"/>
+        <circle cx="58" cy="22" r="4" fill="#B89A6A" opacity=".9"/>
+        <line x1="10" y1="55" x2="70" y2="55" stroke="#B89A6A" stroke-width=".5" opacity=".2" stroke-dasharray="4,4"/>
+        <text x="48" y="58" fill="#B89A6A" font-size="7" opacity=".5">Break even</text>
+      </svg>
+    </div>
+    <p class="img-caption rv">El punto de equilibrio típico ocurre entre el mes 5 y el mes 8 en implementaciones correctamente ejecutadas</p>
+
+    <h2 class="rv">Calculadora de ROI básica</h2>
+    <p class="rv">Antes de iniciar cualquier conversación formal sobre implementación, puedes hacer un cálculo rápido con estas tres variables:</p>
+
+    <div class="rv" style="background:#0F0F12;border:1px solid rgba(184,154,106,.15);border-radius:12px;padding:28px;margin:28px 0">
+      <h4 style="font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#B89A6A;margin-bottom:20px">Fórmula básica</h4>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:18px;color:rgba(234,230,223,.8);line-height:1.6;margin-bottom:20px">
+        Ahorro anual = (Horas mensuales en tareas repetitivas × 12 × Costo hora promedio) × Factor de automatización (0.70)
+      </div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:18px;color:rgba(234,230,223,.8);line-height:1.6;margin-bottom:20px">
+        ROI año 1 = Ahorro anual ÷ Inversión total
+      </div>
+      <p style="font-size:13.5px;color:#706C66;line-height:1.6;margin:0">El factor de automatización del 0.70 es conservador. En la práctica, la mayoría de las implementaciones logran entre 0.75 y 0.85 en el año 1. El ingreso adicional por liberar capacidad del equipo se contabiliza aparte y en promedio representa entre el 15% y el 30% del ahorro operativo calculado.</p>
+    </div>
+
+    <h2 class="rv">El paso siguiente</h2>
+    <p class="rv">Medir el ROI potencial de la IA en tu empresa no requiere un consultor ni semanas de análisis. Requiere honestidad sobre cuánto tiempo se dedica hoy a tareas repetitivas y qué haría tu equipo con ese tiempo de vuelta.</p>
+    <p class="rv">Conoce <a href="../como-funciona.html">cómo funciona Victor IA</a> y agenda un diagnóstico gratuito donde calculamos el potencial de ahorro específico para tu operación. También puedes revisar los <a href="../precios.html">planes disponibles</a> para tener una referencia de inversión y calcular el payback esperado con tus propios números. Para un análisis más profundo del proceso de implementación, lee <a href="implementar-ia-empresa-mexico.html">Cómo implementar IA en tu empresa en México: la guía paso a paso</a>.</p>
+
+  </article>
+
+  <!-- CTA -->
+  <section class="rv" style="padding:80px 32px;border-top:1px solid rgba(255,255,255,.05);text-align:center">
+    <p style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:#706C66;margin-bottom:16px">Calcula tu ROI antes de decidir</p>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,44px);font-weight:300;color:#EAE6DF;margin-bottom:28px;max-width:600px;margin-left:auto;margin-right:auto">Un diagnóstico gratuito<br><em style="font-weight:200">con números reales de tu operación</em></h2>
+    <a class="btn-p" href="../app.html" style="margin-bottom:12px">Solicitar diagnóstico</a>
+    <p style="font-size:12px;color:#706C66;margin-top:16px">Sin compromiso · Análisis entregado en 48 horas</p>
+  </section>
+
+</main>
+
+<footer style="background:#040406;border-top:1px solid rgba(255,255,255,.05);padding:64px 0 40px;position:relative;z-index:10">
+  <div style="max-width:1200px;margin:0 auto;padding:0 64px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:48px">
+    <div><div style="font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:300;color:#EAE6DF;margin-bottom:14px">Victor <span style="color:#B89A6A">IA</span></div><p style="font-size:13.5px;line-height:1.7;color:#706C66;max-width:260px">El primer supercerebro de IA en LATAM.</p></div>
+    <div><h4 style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(112,108,102,.35);margin-bottom:18px">Producto</h4><ul style="list-style:none;display:flex;flex-direction:column;gap:11px"><li><a class="nav-a" href="../agentes.html">Agentes IA</a></li><li><a class="nav-a" href="../precios.html">Precios</a></li></ul></div>
+    <div><h4 style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(112,108,102,.35);margin-bottom:18px">Blog</h4><ul style="list-style:none;display:flex;flex-direction:column;gap:11px"><li><a class="nav-a" href="index.html">Todos los artículos</a></li></ul></div>
+  </div>
+  <div style="max-width:1200px;margin:48px auto 0;padding:28px 64px 0;border-top:1px solid rgba(255,255,255,.05)"><p style="font-size:10.5px;letter-spacing:.09em;color:rgba(112,108,102,.28)">© 2026 INFLUENCE IA S.A. DE C.V.</p></div>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d" crossorigin="anonymous"></script>
+<script>(()=>{gsap.registerPlugin(ScrollTrigger);const dot=document.getElementById('cur-d'),ring=document.getElementById('cur-r');let cx=0,cy=0,rx=0,ry=0;document.addEventListener('mousemove',e=>{cx=e.clientX;cy=e.clientY;});(function animC(){rx+=(cx-rx)*.10;ry+=(cy-ry)*.10;dot.style.left=cx+'px';dot.style.top=cy+'px';ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animC);})();window.addEventListener('scroll',()=>{const d=document.documentElement;document.getElementById('pbar').style.width=((d.scrollTop)/(d.scrollHeight-d.clientHeight)*100)+'%';document.getElementById('hdr').classList.toggle('scrolled',window.scrollY>40);});gsap.utils.toArray('.rv').forEach(el=>{const rc=el.getBoundingClientRect();if(rc.top<window.innerHeight*.92){gsap.to(el,{opacity:1,y:0,duration:.8,ease:'power3.out'});}else{gsap.to(el,{opacity:1,y:0,duration:1,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 88%'}});}});})();</script>
+</body></html>

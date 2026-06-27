@@ -1,0 +1,241 @@
+{
+  "generated_at": "2026-06-18T03:59:12.525270",
+  "total_scripts": 18,
+  "total_processed": 18,
+  "scripts": [
+    {
+      "slug": "sitios-web",
+      "title": "Sitios Web Cinemátográficos",
+      "file": "C:\\Users\\inbou\\victor-ia-website\\public\\audio\\content\\sitios-web.mp3",
+      "duration_seconds": 120.032653,
+      "url": "/audio/content/sitios-web.mp3",
+      "vo_metadata": {
+        "duration_ms": 0,
+        "characters": 826,
+        "model": "eleven_turbo_v2_5"
+      },
+      "processed_at": "2026-06-18T03:57:28.533764"
+    },
+    {
+      "slug": "videojuegos",
+      "title": "Mini Videojuegos",
+      "file": "C:\\Users\\inbou\\victor-ia-website\\public\\audio\\content\\videojuegos.mp3",
+      "duration_seconds": 120.032653,
+      "url": "/audio/content/videojuegos.mp3",
+      "vo_metadata": {
+        "duration_ms": 0,
+        "characters": 776,
+        "model": "eleven_turbo_v2_5"
+      },
+      "processed_at": "2026-06-18T03:57:33.762074"
+    },
+    {
+      "slug": "modelos-3d",
+      "title": "Modelos 3D",
+      "file": "C:\\Users\\inbou\\victor-ia-website\\public\\audio\\content\\modelos-3d.mp3",
+      "duration_seconds": 120.032653,
+      "url": "/audio/content/modelos-3d.mp3",
+      "vo_metadata": {
+        "duration_ms": 0,
+        "characters": 783,
+        "model": "eleven_turbo_v2_5"
+      },
+      "processed_at": "2026-06-18T03:57:39.167066"
+    },
+    {
+      "slug": "ar-experiencias",
+      "title": "Experiencias en Realidad Aumentada",
+      "file": "C:\\Users\\inbou\\victor-ia-website\\public\\audio\\content\\ar-experiencias.mp3",
+      "duration_seconds": 120.032653,
+      "url": "/audio/content/ar-experiencias.mp3",
+      "vo_metadata": {
+        "duration_ms": 0,
+        "characters": 746,
+        "model": "eleven_turbo_v2_5"
+      },
+      "processed_at": "2026-06-18T03:57:44.901681"
+    },
+    {
+      "slug": "dashboards-dinamicos",
+      "title": "Dashboards Dinámicos",
+      "file": "C:\\Users\\inbou\\victor-ia-website\\public\\audio\\content\\dashboards-dinamicos.mp3",
+      "duration_seconds": 120.032653,
+      "url": "/audio/content/dashboards-dinamicos.mp3",
+      "vo_metadata": {
+        "duration_ms": 0,
+        "characters": 795,
+        "model": "eleven_turbo_v2_5"
+      },
+      "processed_at": "2026-06-18T03:57:50.436752"
+    },
+    {
+      "slug": "chatbots-ia",
+      "title": "Chatbots con IA",
+      "file": "C:\\Users\\inbou\\victor-ia-website\\public\\audio\\content\\chatbots-ia.mp3",
+      "duration_seconds": 120.032653,
+      "url": "/audio/content/chatbots-ia.mp3",
+      "vo_metadata": {
+        "duration_ms": 0,
+        "characters": 788,
+        "model": "eleven_turbo_v2_5"
+      },
+      "processed_at": "2026-06-18T03:57:55.876265"
+    },
+    {
+      "slug": "campanas-video",
+      "title": "Campañas de Video",
+      "file": "C:\\Users\\inbou\\victor-ia-website\\public\\audio\\content\\campanas-video.mp3",
+      "duration_seconds": 120.032653,
+      "url": "/audio/content/campanas-video.mp3",
+      "vo_metadata": {
+        "duration_ms": 0,
+        "characters": 741,
+        "model": "eleven_turbo_v2_5"
+      },
+      "processed_at": "2026-06-18T03:58:01.077858"
+    },
+    {
+      "slug": "generador-contenido",
+      "title": "Generador de Contenido",
+      "file": "C:\\Users\\inbou\\victor-ia-website\\public\\audio\\content\\generador-contenido.mp3",
+      "duration_seconds": 120.032653,
+      "url": "/audio/content/generador-contenido.mp3",
+      "vo_metadata": {
+        "duration_ms": 0,
+        "characters": 773,
+        "model": "eleven_turbo_v2_5"
+      },
+      "processed_at": "2026-06-18T03:58:06.557693"
+    },
+    {
+      "slug": "segmentacion-usuarios",
+      "title": "Segmentación de Usuarios",
+      "file": "C:\\Users\\inbou\\victor-ia-website\\public\\audio\\content\\segmentacion-usuarios.mp3",
+      "duration_seconds": 120.032653,
+      "url": "/audio/content/segmentacion-usuarios.mp3",
+      "vo_metadata": {
+        "duration_ms": 0,
+        "characters": 809,
+        "model": "eleven_turbo_v2_5"
+      },
+      "processed_at": "2026-06-18T03:58:12.011266"
+    },
+    {
+      "slug": "landing-pages",
+      "title": "Landing Pages Optimizadas",
+      "file": "C:\\Users\\inbou\\victor-ia-website\\public\\audio\\content\\landing-pages.mp3",
+      "duration_seconds": 120.032653,
+      "url": "/audio/content/landing-pages.mp3",
+      "vo_metadata": {
+        "duration_ms": 0,
+        "characters": 763,
+        "model": "eleven_turbo_v2_5"
+      },
+      "processed_at": "2026-06-18T03:58:18.912019"
+    },
+    {
+      "slug": "integraciones-api",
+      "title": "Integraciones API",
+      "file": "C:\\Users\\inbou\\victor-ia-website\\public\\audio\\content\\integraciones-api.mp3",
+      "duration_seconds": 120.032653,
+      "url": "/audio/content/integraciones-api.mp3",
+      "vo_metadata": {
+        "duration_ms": 0,
+        "characters": 744,
+        "model": "eleven_turbo_v2_5"
+      },
+      "processed_at": "2026-06-18T03:58:24.509211"
+    },
+    {
+      "slug": "email-marketing",
+      "title": "Campañas de Email",
+      "file": "C:\\Users\\inbou\\victor-ia-website\\public\\audio\\content\\email-marketing.mp3",
+      "duration_seconds": 120.032653,
+      "url": "/audio/content/email-marketing.mp3",
+      "vo_metadata": {
+        "duration_ms": 0,
+        "characters": 757,
+        "model": "eleven_turbo_v2_5"
+      },
+      "processed_at": "2026-06-18T03:58:33.774073"
+    },
+    {
+      "slug": "analisis-competencia",
+      "title": "Análisis de Competencia",
+      "file": "C:\\Users\\inbou\\victor-ia-website\\public\\audio\\content\\analisis-competencia.mp3",
+      "duration_seconds": 120.032653,
+      "url": "/audio/content/analisis-competencia.mp3",
+      "vo_metadata": {
+        "duration_ms": 0,
+        "characters": 715,
+        "model": "eleven_turbo_v2_5"
+      },
+      "processed_at": "2026-06-18T03:58:39.577865"
+    },
+    {
+      "slug": "seo-estrategico",
+      "title": "SEO Estratégico",
+      "file": "C:\\Users\\inbou\\victor-ia-website\\public\\audio\\content\\seo-estrategico.mp3",
+      "duration_seconds": 120.032653,
+      "url": "/audio/content/seo-estrategico.mp3",
+      "vo_metadata": {
+        "duration_ms": 0,
+        "characters": 782,
+        "model": "eleven_turbo_v2_5"
+      },
+      "processed_at": "2026-06-18T03:58:45.307263"
+    },
+    {
+      "slug": "video-testimonios",
+      "title": "Videos de Testimonios",
+      "file": "C:\\Users\\inbou\\victor-ia-website\\public\\audio\\content\\video-testimonios.mp3",
+      "duration_seconds": 120.032653,
+      "url": "/audio/content/video-testimonios.mp3",
+      "vo_metadata": {
+        "duration_ms": 0,
+        "characters": 793,
+        "model": "eleven_turbo_v2_5"
+      },
+      "processed_at": "2026-06-18T03:58:50.965066"
+    },
+    {
+      "slug": "automatizacion-ventas",
+      "title": "Automatización de Ventas",
+      "file": "C:\\Users\\inbou\\victor-ia-website\\public\\audio\\content\\automatizacion-ventas.mp3",
+      "duration_seconds": 120.032653,
+      "url": "/audio/content/automatizacion-ventas.mp3",
+      "vo_metadata": {
+        "duration_ms": 0,
+        "characters": 835,
+        "model": "eleven_turbo_v2_5"
+      },
+      "processed_at": "2026-06-18T03:58:56.932858"
+    },
+    {
+      "slug": "personalizacion-dinamica",
+      "title": "Personalización Dinámica",
+      "file": "C:\\Users\\inbou\\victor-ia-website\\public\\audio\\content\\personalizacion-dinamica.mp3",
+      "duration_seconds": 120.032653,
+      "url": "/audio/content/personalizacion-dinamica.mp3",
+      "vo_metadata": {
+        "duration_ms": 0,
+        "characters": 821,
+        "model": "eleven_turbo_v2_5"
+      },
+      "processed_at": "2026-06-18T03:59:02.759452"
+    },
+    {
+      "slug": "marketing-automation",
+      "title": "Marketing Automation",
+      "file": "C:\\Users\\inbou\\victor-ia-website\\public\\audio\\content\\marketing-automation.mp3",
+      "duration_seconds": 120.032653,
+      "url": "/audio/content/marketing-automation.mp3",
+      "vo_metadata": {
+        "duration_ms": 0,
+        "characters": 866,
+        "model": "eleven_turbo_v2_5"
+      },
+      "processed_at": "2026-06-18T03:59:10.522714"
+    }
+  ]
+}

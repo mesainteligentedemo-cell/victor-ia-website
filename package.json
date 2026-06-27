@@ -1,0 +1,13 @@
+{
+  "name": "victor-ia-website",
+  "version": "1.0.0",
+  "description": "Victor IA Website - Luxury AI Consulting",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "echo 'Static site - no build needed'"
+  },
+  "keywords": ["victor-ia", "ai", "consulting"],
+  "author": "Victor IA",
+  "license": "MIT"
+}

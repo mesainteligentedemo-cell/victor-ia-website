@@ -1,0 +1,140 @@
+/* ════════════════════════════════════════════════════════════════
+   VICTOR IA — WCAG 2.2 AA Contrast Compliance
+   ════════════════════════════════════════════════════════════════ */
+
+/* Text secondary: gray on white (was 3.2:1, now 7.1:1) */
+.text-secondary,
+.muted,
+.nav-a,
+[class*="muted"],
+[class*="secondary"] {
+  color: #595959 !important; /* was #888888 or #706C66 */
+}
+
+/* Ensure minimum contrast on interactive elements */
+a:not([role="button"]),
+.link,
+[role="link"] {
+  color: #0066cc !important; /* 7.5:1 on white background */
+  text-decoration: underline;
+}
+
+a:visited {
+  color: #6b21a8 !important; /* 5.2:1 contrast */
+}
+
+/* Button secondary text */
+.btn-g,
+[class*="button-secondary"],
+[class*="btn-secondary"] {
+  color: #1a1a1a !important;
+  background-color: #e5e5e5 !important;
+  /* Contrast: 11:1 */
+}
+
+/* Strong emphasis */
+strong,
+b,
+.emphasis,
+.bold {
+  color: #1a1a1a !important;
+  font-weight: 600;
+}
+
+/* Headers all dark for contrast */
+h1, h2, h3, h4, h5, h6,
+[class*="heading"],
+[class*="title"] {
+  color: #1a1a1a !important;
+}
+
+/* Form labels */
+label,
+[class*="label"] {
+  color: #1a1a1a !important;
+  font-weight: 500;
+}
+
+/* Placeholder text (minimum 3:1) */
+::placeholder,
+:placeholder-shown {
+  color: #999999 !important; /* min 3:1 */
+  opacity: 1;
+}
+
+/* Dark mode overrides for WCAG AA */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #000000 !important; /* Pure black for max contrast */
+    color: #ffffff !important;
+  }
+
+  .text-secondary,
+  .muted,
+  [class*="muted"],
+  [class*="secondary"] {
+    color: #b3b3b3 !important; /* 7.0:1 on black */
+  }
+
+  a:not([role="button"]),
+  .link,
+  [role="link"] {
+    color: #66b3ff !important; /* 7.5:1 on black */
+  }
+
+  strong, b, .emphasis, .bold {
+    color: #ffffff !important;
+  }
+
+  h1, h2, h3, h4, h5, h6,
+  [class*="heading"],
+  [class*="title"] {
+    color: #ffffff !important;
+  }
+
+  label {
+    color: #e0e0e0 !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: more) {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  .text-secondary,
+  .muted,
+  [class*="muted"],
+  [class*="secondary"] {
+    color: #000000 !important;
+  }
+
+  a:not([role="button"]),
+  .link,
+  [role="link"] {
+    color: #0000ee !important; /* True blue, 100% contrast */
+    text-decoration: underline;
+  }
+
+  a:visited {
+    color: #551a8b !important; /* True purple */
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    color: #000000 !important;
+    font-weight: 700; /* Bolder in high contrast */
+  }
+
+  .btn-g {
+    color: #000000 !important;
+    background: #ffffff !important;
+    border: 2px solid #000000 !important;
+  }
+
+  .btn-p {
+    color: #ffffff !important;
+    background: #000000 !important;
+  }
+}

@@ -1,0 +1,1775 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Victor IA Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha384-ZZ1pncU3bQe8y31yfZdMFdSpttDoPmOZg2wguVK9almUodir1PghgT0eY7Mrty8H" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" integrity="sha384-JcnsjUPPylna1s1fvi1u12X5qjY5OL56iySh75FdtrwhO/SWXgMjoVqcKyIIWOLk" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/pptxgenjs@3.10.0/dist/pptxgen.bundle.js" integrity="sha384-h3kViBHPGNDvDy5s/CYwq/4IAvRnsLB3VYjM/LfKc8aEQIMxnSTx8beR7J5bT+hn" crossorigin="anonymous"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0E0F12;--ink2:#16181d;--ink3:#1e2026;
+  --warm:#F8F7F5;--bone:#F2EEE5;
+  --gold:#FFAA17;--gold2:#e69900;
+  --muted:rgba(248,247,245,0.4);--rule:rgba(255,255,255,0.06);
+  --sans:'Space Grotesk',sans-serif;--serif:'Instrument Serif',serif;
+  --radius:10px;--chat:340px;
+}
+html,body{height:100%;overflow:hidden;font-family:var(--sans);background:var(--ink);color:var(--warm)}
+
+/* ─── TOP BAR ─── */
+#bar{
+  height:48px;display:flex;align-items:center;gap:8px;padding:0 20px;
+  background:var(--ink2);border-bottom:1px solid var(--rule);flex-shrink:0;z-index:50;
+}
+.logo{font-family:var(--serif);font-size:1.05rem;color:var(--warm);white-space:nowrap;margin-right:4px}
+.logo em{color:var(--gold);font-style:normal}
+.sep{width:1px;height:20px;background:var(--rule);margin:0 4px}
+.bar-btn{
+  display:flex;align-items:center;gap:5px;padding:5px 11px;
+  border-radius:7px;border:1px solid var(--rule);background:rgba(255,255,255,0.03);
+  color:rgba(248,247,245,0.75);font-size:0.7rem;font-family:var(--sans);cursor:pointer;
+  transition:.15s;white-space:nowrap;font-weight:500;letter-spacing:.01em;
+}
+.bar-btn:hover{background:rgba(255,255,255,0.08);color:var(--warm);border-color:rgba(255,255,255,0.12)}
+.bar-btn svg{width:12px;height:12px;opacity:.8}
+.spacer{flex:1}
+#slug-chip{
+  font-size:.65rem;color:var(--muted);padding:3px 10px;
+  background:rgba(255,255,255,0.04);border:1px solid var(--rule);border-radius:5px;
+}
+.btn-deploy{
+  display:flex;align-items:center;gap:6px;padding:7px 16px;
+  background:var(--gold);color:var(--ink);border:none;border-radius:7px;
+  font-size:.72rem;font-weight:700;font-family:var(--sans);cursor:pointer;
+  transition:.15s;letter-spacing:.02em;
+}
+.btn-deploy:hover{background:var(--gold2)}
+.btn-deploy svg{width:12px;height:12px}
+
+/* ─── LAYOUT ─── */
+#wrap{display:flex;flex:1;overflow:hidden;height:calc(100vh - 48px)}
+
+/* ─── CHAT ─── */
+#chat{
+  width:var(--chat);flex-shrink:0;display:flex;flex-direction:column;
+  background:var(--ink2);border-right:1px solid var(--rule);overflow:hidden;
+}
+#chat-head{
+  padding:12px 16px 10px;border-bottom:1px solid var(--rule);
+  display:flex;align-items:center;gap:8px;
+}
+#chat-head .dot{width:6px;height:6px;background:var(--gold);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+#chat-head span{font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+#msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth}
+#msgs::-webkit-scrollbar{width:2px}
+#msgs::-webkit-scrollbar-thumb{background:rgba(255,255,255,.08);border-radius:2px}
+
+.m{display:flex;flex-direction:column;gap:3px}
+.m.u{align-self:flex-end;align-items:flex-end;max-width:88%}
+.m.a{align-self:flex-start;align-items:flex-start;max-width:95%}
+.bubble{
+  padding:9px 13px;border-radius:11px;font-size:.78rem;line-height:1.65;
+  white-space:pre-wrap;word-break:break-word;
+}
+.m.u .bubble{background:var(--gold);color:var(--ink);border-bottom-right-radius:3px;font-weight:500}
+.m.a .bubble{background:rgba(255,255,255,.06);color:var(--warm);border-bottom-left-radius:3px;border:1px solid var(--rule)}
+.m.a.typing .bubble::after{content:'';animation:none}
+.cursor{display:inline-block;color:var(--gold);animation:blink .55s infinite}
+@keyframes blink2{0%,100%{opacity:1}50%{opacity:0}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.meta{font-size:.58rem;color:rgba(248,247,245,.25)}
+.action-chip{
+  margin-top:5px;display:inline-flex;align-items:center;gap:4px;
+  padding:4px 10px;border-radius:6px;border:1px solid rgba(255,170,23,.25);
+  background:rgba(255,170,23,.07);color:var(--gold);font-size:.65rem;cursor:pointer;
+  transition:.15s;
+}
+.action-chip:hover{background:rgba(255,170,23,.15)}
+
+/* ─── INPUT ─── */
+#input-area{
+  padding:12px;border-top:1px solid var(--rule);
+  display:flex;flex-direction:column;gap:8px;
+}
+#input-row{display:flex;gap:7px;align-items:flex-end}
+#txt{
+  flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);
+  border-radius:9px;padding:9px 12px;color:var(--warm);font-family:var(--sans);
+  font-size:.78rem;resize:none;min-height:38px;max-height:110px;line-height:1.55;outline:none;
+  transition:border .2s;
+}
+#txt:focus{border-color:var(--gold)}
+#txt::placeholder{color:rgba(248,247,245,.25)}
+.icon-btn{
+  width:36px;height:36px;border-radius:8px;border:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.04);color:rgba(248,247,245,.7);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:.15s;
+}
+.icon-btn:hover{background:rgba(255,255,255,.1);color:var(--warm)}
+.icon-btn.active{background:rgba(220,50,50,.2);border-color:rgba(220,50,50,.4);animation:rpulse 1s infinite}
+@keyframes rpulse{0%,100%{box-shadow:0 0 0 0 rgba(220,50,50,.3)}50%{box-shadow:0 0 0 5px transparent}}
+#btn-send{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+#btn-send:hover{background:var(--gold2)}
+.hint{font-size:.6rem;color:rgba(248,247,245,.2);text-align:center}
+
+/* ─── ACTIONS GRID ─── */
+#actions-section{
+  padding:10px 12px 8px;border-top:1px solid var(--rule);
+}
+#actions-label{
+  font-size:.58rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(248,247,245,.25);margin-bottom:7px;display:flex;align-items:center;gap:5px;
+}
+#actions-label::before{content:'';flex:1;height:1px;background:var(--rule)}
+#actions-label::after{content:'';flex:1;height:1px;background:var(--rule)}
+#actions-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:4px;
+}
+.action-btn{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+  padding:7px 4px;border-radius:7px;border:1px solid rgba(255,255,255,.07);
+  background:rgba(255,255,255,.025);color:rgba(248,247,245,.7);
+  font-size:.58rem;font-family:var(--sans);font-weight:500;cursor:pointer;
+  transition:all .18s;line-height:1.1;text-align:center;
+}
+.action-btn .ab-icon{font-size:1rem;line-height:1}
+.action-btn:hover{
+  background:rgba(255,255,255,.07);color:var(--warm);
+  border-color:rgba(255,170,23,.35);
+  border-left-color:var(--gold);transform:translateY(-1px);
+}
+
+/* ─── EXPORTS ─── */
+#exports{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:4px;
+  padding:10px 12px;border-top:1px solid var(--rule);
+}
+.exp{
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+  padding:7px 4px;border-radius:7px;border:1px solid rgba(255,255,255,.06);
+  background:rgba(255,255,255,.02);color:rgba(248,247,245,.6);
+  font-size:.6rem;cursor:pointer;transition:.15s;font-family:var(--sans);font-weight:500;
+}
+.exp:hover{background:rgba(255,255,255,.07);color:var(--warm);border-color:rgba(255,255,255,.12)}
+.exp svg{width:14px;height:14px;opacity:.7}
+.sh-btn{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 6px;border-radius:9px;background:rgba(255,255,255,.04);border:1px solid var(--rule);color:rgba(248,247,245,.75);font-size:.6rem;font-weight:500;cursor:pointer;transition:.15s;font-family:var(--sans)}
+.sh-btn span{font-size:1.2rem}
+.sh-btn:hover{background:rgba(255,255,255,.1);color:var(--warm);border-color:rgba(255,255,255,.15);transform:translateY(-2px)}
+
+/* ─── CANVAS ─── */
+#canvas-wrap{
+  flex:1;display:flex;flex-direction:column;overflow:hidden;position:relative;
+  background:#e8e8e8;
+}
+#canvas-toolbar{
+  height:36px;display:flex;align-items:center;gap:6px;padding:0 14px;
+  background:var(--ink3);border-bottom:1px solid var(--rule);flex-shrink:0;
+}
+#canvas-toolbar span{font-size:.62rem;color:var(--muted)}
+.c-btn{
+  padding:3px 9px;border-radius:5px;border:1px solid var(--rule);
+  background:rgba(255,255,255,.03);color:rgba(248,247,245,.6);
+  font-size:.63rem;cursor:pointer;font-family:var(--sans);transition:.15s;
+}
+.c-btn:hover{background:rgba(255,255,255,.08);color:var(--warm)}
+#device-btns{display:flex;gap:3px;margin-left:auto}
+.dev-btn{
+  width:26px;height:22px;border-radius:4px;border:1px solid var(--rule);
+  background:rgba(255,255,255,.03);color:rgba(248,247,245,.5);
+  font-size:.6rem;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:.15s;
+}
+.dev-btn.on,.dev-btn:hover{background:rgba(255,255,255,.1);color:var(--warm)}
+
+#frame-wrap{
+  flex:1;overflow:auto;display:flex;justify-content:center;
+  padding:20px;
+}
+#frame-wrap.desk #preview{width:100%;max-width:1280px}
+#frame-wrap.tablet #preview{width:768px}
+#frame-wrap.mobile #preview{width:390px}
+
+#preview{
+  background:#fff;border-radius:6px;
+  box-shadow:0 4px 40px rgba(0,0,0,.35),0 1px 8px rgba(0,0,0,.2);
+  min-height:400px;overflow:hidden;transition:width .3s;
+}
+#preview iframe{width:100%;border:none;display:block;min-height:500px}
+
+/* ─── FLOATING TOOLBAR ─── */
+#float-bar{
+  position:fixed;display:none;background:var(--ink);border:1px solid rgba(255,255,255,.12);
+  border-radius:8px;padding:4px;gap:2px;z-index:9999;
+  box-shadow:0 8px 30px rgba(0,0,0,.5);
+  align-items:center;
+}
+#float-bar.show{display:flex}
+.f-btn{
+  padding:5px 10px;border-radius:5px;border:none;background:transparent;
+  color:rgba(248,247,245,.8);font-size:.65rem;cursor:pointer;font-family:var(--sans);
+  transition:.1s;white-space:nowrap;
+}
+.f-btn:hover{background:rgba(255,255,255,.1);color:var(--warm)}
+.f-btn.danger:hover{background:rgba(220,50,50,.2);color:#ff6b6b}
+.f-sep{width:1px;height:18px;background:rgba(255,255,255,.08)}
+
+/* ─── MODAL (existing) ─── */
+#modal-bg{
+  display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);
+  z-index:1000;align-items:center;justify-content:center;
+}
+#modal-bg.open{display:flex}
+#modal{
+  background:var(--ink2);border:1px solid rgba(255,255,255,.1);
+  border-radius:12px;padding:28px;width:min(440px,92vw);
+}
+#modal h3{font-family:var(--serif);font-size:1.1rem;margin-bottom:14px}
+#modal input,#modal select,#modal textarea{
+  width:100%;padding:9px 12px;border-radius:7px;
+  border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);
+  color:var(--warm);font-family:var(--sans);font-size:.8rem;outline:none;
+  margin-bottom:10px;
+}
+#modal input:focus,#modal select:focus{border-color:var(--gold)}
+#modal label{font-size:.65rem;color:var(--muted);display:block;margin-bottom:4px;margin-top:-4px}
+.m-btns{display:flex;gap:8px;justify-content:flex-end;margin-top:8px}
+.m-btns button{padding:8px 18px;border-radius:7px;border:none;cursor:pointer;font-family:var(--sans);font-size:.78rem;font-weight:500}
+.m-cancel{background:rgba(255,255,255,.06);color:var(--warm)}
+.m-ok{background:var(--gold);color:var(--ink);font-weight:600}
+
+/* ─── POPUP OVERLAY (NEW) ─── */
+#popup-overlay{
+  display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);
+  z-index:2000;align-items:center;justify-content:center;
+  backdrop-filter:blur(4px);
+}
+#popup-overlay.open{display:flex}
+#popup-box{
+  background:var(--ink2);border:1px solid rgba(255,255,255,.1);
+  border-radius:16px;width:min(520px,94vw);max-height:90vh;
+  display:flex;flex-direction:column;overflow:hidden;
+  box-shadow:0 24px 80px rgba(0,0,0,.7),0 2px 12px rgba(0,0,0,.4);
+}
+#popup-head{
+  display:flex;align-items:center;gap:10px;padding:18px 20px 14px;
+  border-bottom:1px solid var(--rule);flex-shrink:0;
+}
+#popup-icon{font-size:1.4rem;line-height:1}
+#popup-title{font-family:var(--serif);font-size:1.05rem;flex:1;color:var(--warm)}
+#popup-close{
+  width:30px;height:30px;border-radius:7px;border:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.04);color:rgba(248,247,245,.6);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;font-size:.85rem;
+  transition:.15s;flex-shrink:0;
+}
+#popup-close:hover{background:rgba(255,255,255,.12);color:var(--warm)}
+
+/* Tabs */
+#popup-tabs{
+  display:flex;gap:0;padding:0 20px;border-bottom:1px solid var(--rule);flex-shrink:0;
+}
+.ptab{
+  padding:9px 16px;font-size:.7rem;font-weight:500;cursor:pointer;
+  color:rgba(248,247,245,.4);border-bottom:2px solid transparent;
+  transition:.15s;font-family:var(--sans);background:transparent;border-top:none;border-left:none;border-right:none;
+}
+.ptab.active{color:var(--gold);border-bottom-color:var(--gold)}
+.ptab:hover:not(.active){color:rgba(248,247,245,.7)}
+
+/* Body */
+#popup-body{
+  flex:1;overflow-y:auto;padding:18px 20px;display:flex;flex-direction:column;gap:0;
+}
+#popup-body::-webkit-scrollbar{width:2px}
+#popup-body::-webkit-scrollbar-thumb{background:rgba(255,255,255,.08);border-radius:2px}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* Form fields inside popup */
+.pf-label{
+  font-size:.62rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  color:rgba(248,247,245,.35);margin-bottom:5px;margin-top:12px;display:block;
+}
+.pf-label:first-child{margin-top:0}
+.pfield{
+  width:100%;padding:9px 12px;border-radius:8px;
+  border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.04);
+  color:var(--warm);font-family:var(--sans);font-size:.8rem;outline:none;
+  transition:border .2s;margin-bottom:0;
+}
+.pfield:focus{border-color:var(--gold)}
+.pfield::placeholder{color:rgba(248,247,245,.2)}
+select.pfield option{background:var(--ink2);color:var(--warm)}
+textarea.pfield{resize:vertical;min-height:80px;line-height:1.55}
+
+/* Range sliders */
+.range-wrap{display:flex;align-items:center;gap:10px;margin-bottom:0}
+.range-wrap input[type=range]{
+  flex:1;accent-color:var(--gold);cursor:pointer;height:4px;
+}
+.range-val{font-size:.7rem;color:var(--gold);min-width:28px;text-align:right;font-weight:600}
+
+/* Checkboxes */
+.cb-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:0}
+.cb-item{
+  display:flex;align-items:center;gap:6px;padding:6px 9px;
+  border-radius:6px;border:1px solid rgba(255,255,255,.07);
+  background:rgba(255,255,255,.025);cursor:pointer;transition:.12s;
+}
+.cb-item:hover{background:rgba(255,255,255,.06);border-color:rgba(255,170,23,.2)}
+.cb-item input[type=checkbox]{accent-color:var(--gold);cursor:pointer;flex-shrink:0}
+.cb-item label{font-size:.68rem;color:rgba(248,247,245,.7);cursor:pointer}
+
+/* Footer CTA */
+#popup-footer{
+  padding:14px 20px;border-top:1px solid var(--rule);flex-shrink:0;
+}
+#popup-generate{
+  width:100%;padding:12px;border-radius:9px;border:none;
+  background:var(--gold);color:var(--ink);font-family:var(--sans);
+  font-size:.85rem;font-weight:700;cursor:pointer;letter-spacing:.02em;
+  transition:.18s;display:flex;align-items:center;justify-content:center;gap:8px;
+}
+#popup-generate:hover{background:var(--gold2);transform:translateY(-1px)}
+#popup-generate:disabled{background:rgba(255,170,23,.35);color:rgba(14,15,18,.5);cursor:not-allowed;transform:none}
+.gen-spinner{
+  width:14px;height:14px;border:2px solid rgba(14,15,18,.2);border-top-color:var(--ink);
+  border-radius:50%;animation:spin .6s linear infinite;display:none;
+}
+#popup-generate.loading .gen-spinner{display:block}
+#popup-generate.loading .gen-label::after{content:'...'}
+
+/* ─── TOAST ─── */
+#toast{
+  position:fixed;bottom:24px;right:24px;
+  background:var(--ink2);border:1px solid rgba(255,170,23,.2);
+  color:var(--warm);padding:10px 18px;border-radius:8px;
+  font-size:.73rem;z-index:9998;display:flex;align-items:center;gap:9px;
+  transform:translateY(70px);opacity:0;transition:all .3s;pointer-events:none;
+}
+#toast.show{transform:translateY(0);opacity:1}
+#toast .ti{color:var(--gold);font-size:.85rem}
+
+/* ─── LOADING OVERLAY ─── */
+#loading{
+  position:absolute;inset:0;background:rgba(14,15,18,.85);
+  display:none;align-items:center;justify-content:center;flex-direction:column;
+  gap:14px;z-index:100;border-radius:6px;
+}
+#loading.show{display:flex}
+.spinner{width:32px;height:32px;border:2px solid rgba(255,170,23,.15);border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+#loading p{font-size:.78rem;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<!-- BAR -->
+<div id="bar">
+  <span class="logo">Victor IA <em>Studio</em></span>
+  <div class="sep"></div>
+  <button class="bar-btn" onclick="newDoc()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Nuevo</button>
+  <button class="bar-btn" onclick="histUndo()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 10h10a5 5 0 010 10H9"/><path d="M3 10l4-4-4-4"/></svg>Deshacer</button>
+  <button class="bar-btn" onclick="preview()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>Preview</button>
+  <div class="sep"></div>
+  <a href="/image-lab.html" class="bar-btn" style="text-decoration:none;color:inherit">🎨 Image Lab</a>
+  <a href="/video-studio.html" class="bar-btn" style="text-decoration:none;color:inherit">🎬 Video Studio</a>
+  <a href="/cms.html" class="bar-btn" style="text-decoration:none;color:inherit">🌐 CMS</a>
+  <button class="bar-btn" onclick="openVoiceover()">🎙 Voiceover</button>
+  <div class="spacer"></div>
+  <span id="slug-chip">sin-titulo</span>
+  <button class="btn-deploy" onclick="openDeploy()">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 19.7h20L12 2z"/></svg>Deploy
+  </button>
+</div>
+
+<!-- WRAP -->
+<div id="wrap">
+
+  <!-- CHAT -->
+  <div id="chat">
+    <div id="chat-head">
+      <div class="dot"></div>
+      <span>Asistente IA</span>
+    </div>
+    <div id="msgs">
+      <div class="m a">
+        <div class="bubble">Hola. Describe lo que quieres crear o modificar:
+
+• <strong>Crear</strong> una landing, presentación, infografía, propuesta…
+• <strong>Modificar</strong> el contenido actual — "cambia el fondo a oscuro", "añade precios"…
+• <strong>Habla</strong> con el micrófono 🎙
+• <strong>Acciones</strong> — usa los botones de abajo para generar con IA</div>
+        <span class="meta">Victor IA Studio</span>
+      </div>
+    </div>
+    <div id="input-area">
+      <div id="input-row">
+        <textarea id="txt" rows="1" placeholder="Escribe aquí o habla…" onkeydown="onKey(event)" oninput="resize(this)"></textarea>
+        <button class="icon-btn" id="mic-btn" title="Voz" onclick="toggleMic()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M19 10a7 7 0 01-14 0"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/></svg>
+        </button>
+        <button class="icon-btn" id="btn-send" onclick="send()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="15"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </div>
+      <div class="hint">↵ enviar · Shift+↵ nueva línea</div>
+    </div>
+
+    <!-- ─── ACCIONES ─── -->
+    <div id="actions-section">
+      <div id="actions-label">Acciones</div>
+      <div id="actions-grid">
+        <button class="action-btn" onclick="openPopup('image')">
+          <span class="ab-icon">🖼</span>Imagen
+        </button>
+        <button class="action-btn" onclick="openPopup('video')">
+          <span class="ab-icon">🎬</span>Video
+        </button>
+        <button class="action-btn" onclick="openPopup('presentation')">
+          <span class="ab-icon">📊</span>Presenta.
+        </button>
+        <button class="action-btn" onclick="openPopup('web')">
+          <span class="ab-icon">🌐</span>Web
+        </button>
+        <button class="action-btn" onclick="openPopup('voice')">
+          <span class="ab-icon">🎙</span>Voz
+        </button>
+        <button class="action-btn" onclick="openPopup('training')">
+          <span class="ab-icon">📚</span>Capaci.
+        </button>
+        <button class="action-btn" onclick="openPopup('admin')">
+          <span class="ab-icon">⚙️</span>Admin
+        </button>
+        <button class="action-btn" onclick="openPopup('dashboard')">
+          <span class="ab-icon">📈</span>Dashboard
+        </button>
+      </div>
+    </div>
+
+    <div id="exports">
+      <button class="exp" onclick="expPDF()">📄 PDF</button>
+      <button class="exp" onclick="expPPT()">📊 PPT</button>
+      <button class="exp" onclick="dlHTML()">⬇️ HTML</button>
+      <button class="exp" onclick="openVoiceover()">🎙 Voz</button>
+      <button class="exp" onclick="openShareMenu()">📤 Compartir</button>
+      <button class="exp" onclick="openSlug()">✏️ Renombrar</button>
+      <button class="exp" onclick="openDeploy()">🚀 Deploy</button>
+      <button class="exp" onclick="openTracker()">📊 Tracker</button>
+    </div>
+
+    <!-- SHARE MENU -->
+    <div id="st-share-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:600;align-items:center;justify-content:center">
+      <div style="background:var(--ink2);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:24px;width:min(460px,92vw)">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+          <div style="font-family:var(--serif);font-size:1.05rem">Compartir / Deploy</div>
+          <button onclick="document.getElementById('st-share-overlay').style.display='none'" style="background:transparent;color:var(--muted);font-size:1.1rem;border:none;cursor:pointer">✕</button>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px">
+          <button class="sh-btn" onclick="stShare('vercel')"><span>🚀</span>Vercel</button>
+          <button class="sh-btn" onclick="stShare('copy')"><span>📋</span>Copiar</button>
+          <button class="sh-btn" onclick="stShare('download')"><span>⬇️</span>Descargar</button>
+          <button class="sh-btn" onclick="stShare('qr')"><span>📲</span>QR</button>
+          <button class="sh-btn" onclick="stShare('email')"><span>📧</span>Email</button>
+          <button class="sh-btn" onclick="stShare('whatsapp')"><span>💬</span>WhatsApp</button>
+          <button class="sh-btn" onclick="stShare('telegram')"><span>✈️</span>Telegram</button>
+          <button class="sh-btn" onclick="stShare('twitter')"><span>🐦</span>X/Twitter</button>
+          <button class="sh-btn" onclick="stShare('instagram')"><span>📸</span>Instagram</button>
+          <button class="sh-btn" onclick="stShare('messenger')"><span>💬</span>Messenger</button>
+          <button class="sh-btn" onclick="stShare('tiktok')"><span>🎵</span>TikTok</button>
+          <button class="sh-btn" onclick="stShare('linkedin')"><span>💼</span>LinkedIn</button>
+        </div>
+        <div style="padding-top:10px;border-top:1px solid var(--rule)">
+          <label style="font-size:.6rem;color:var(--muted);display:block;margin-bottom:5px">URL del deploy (para compartir)</label>
+          <input id="st-share-url" type="url" placeholder="https://mi-sitio.vercel.app" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:7px 10px;color:var(--warm);font-size:.73rem">
+        </div>
+        <div id="st-share-fb" style="margin-top:10px;font-size:.7rem;color:var(--muted);min-height:20px"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CANVAS -->
+  <div id="canvas-wrap">
+    <div id="canvas-toolbar">
+      <span>Canvas</span>
+      <button class="c-btn" onclick="injectEdit()">✏️ Modo edición</button>
+      <button class="c-btn" onclick="exitEdit()">👁 Solo vista</button>
+      <div id="device-btns">
+        <button class="dev-btn on" id="d-desk" onclick="setDevice('desk')" title="Desktop">🖥</button>
+        <button class="dev-btn" id="d-tablet" onclick="setDevice('tablet')" title="Tablet">📱</button>
+        <button class="dev-btn" id="d-mobile" onclick="setDevice('mobile')" title="Móvil">📱</button>
+      </div>
+    </div>
+    <div id="frame-wrap" class="desk">
+      <div id="preview">
+        <div id="loading">
+          <div class="spinner"></div>
+          <p id="loading-msg">Generando con Victor IA...</p>
+        </div>
+        <iframe id="frame" scrolling="yes"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FLOAT TOOLBAR -->
+<div id="float-bar">
+  <button class="f-btn" onclick="fEdit()">✏️ Editar texto</button>
+  <div class="f-sep"></div>
+  <button class="f-btn" onclick="fColor()">🎨 Color</button>
+  <button class="f-btn" onclick="fBg()">🖼 Fondo</button>
+  <button class="f-btn" onclick="fFont()">Aa Fuente</button>
+  <div class="f-sep"></div>
+  <button class="f-btn" onclick="fDup()">⊕ Duplicar</button>
+  <button class="f-btn danger" onclick="fDel()">✕ Eliminar</button>
+</div>
+
+<!-- MODAL (existing) -->
+<div id="modal-bg" onclick="closeModal(event)">
+  <div id="modal">
+    <h3 id="modal-title"></h3>
+    <div id="modal-body"></div>
+    <div class="m-btns">
+      <button class="m-cancel" onclick="closeModal()">Cancelar</button>
+      <button class="m-ok" onclick="modalOK()">Aceptar</button>
+    </div>
+  </div>
+</div>
+
+<!-- POPUP OVERLAY (NEW) -->
+<div id="popup-overlay" onclick="closePopupOutside(event)">
+  <div id="popup-box">
+    <div id="popup-head">
+      <span id="popup-icon">🖼</span>
+      <span id="popup-title">Generar Imagen</span>
+      <button id="popup-close" onclick="closePopup()">✕</button>
+    </div>
+    <div id="popup-tabs"></div>
+    <div id="popup-body"></div>
+    <div id="popup-footer">
+      <button id="popup-generate" onclick="popupGenerate()">
+        <div class="gen-spinner"></div>
+        <span class="gen-label">Generar →</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast"><span class="ti">✓</span><span id="toast-msg"></span></div>
+
+<script>
+// ═══════════════════════════════════════════
+// CONFIG
+// ═══════════════════════════════════════════
+const GK = 'AIzaSyDOGzkPLHus-AxYvglAulpvPdzMbz65iCc';
+const GM = 'gemini-3.5-flash';
+const TGT = '8947226533:AAFe0_15zEHfDSBJ29TDvSO823IQB2CTa80';
+const TGC = '8937658296';
+const ELK = 'sk_87d5a7899d6c489c94232248c4880a0c4fe317adb3701e67';
+const ELV = 'iDEmt5MnqUotdwCIVplo';
+const API_URL = 'https://victor-ia-app.vercel.app/api/create';
+
+let slug = 'sin-titulo';
+let htmlContent = '';
+let history = [];
+let histIdx = -1;
+let selectedEl = null;
+let listening = false;
+let rec = null;
+let modalCb = null;
+let currentPopupAction = null;
+
+// Action labels for display
+const actionLabels = {
+  image: 'Imagen',
+  video: 'Video',
+  presentation: 'Presentación',
+  web: 'Sitio web',
+  voice: 'Voz',
+  training: 'Capacitación',
+  admin: 'Documento admin',
+  dashboard: 'Dashboard'
+};
+
+// ═══════════════════════════════════════════
+// IFRAME
+// ═══════════════════════════════════════════
+function setFrame(html) {
+  htmlContent = html;
+  pushHistory(html);
+  const frame = document.getElementById('frame');
+  const body = html.match(/<body[^>]*>([\s\S]*)<\/body>/i)?.[1] ?? html;
+  const styleBlocks = [...html.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/gi)].map(m=>m[1]).join('\n');
+  const linkTags = [...html.matchAll(/<link[^>]+>/gi)].join('\n');
+
+  const doc = `<!DOCTYPE html><html><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+${linkTags}
+<style>${styleBlocks}</style>
+</head><body>${body}</body></html>`;
+
+  frame.srcdoc = doc;
+  frame.onload = () => {
+    autoHeight();
+    injectEdit();
+  };
+}
+
+function autoHeight() {
+  const f = document.getElementById('frame');
+  try {
+    const h = f.contentDocument?.body?.scrollHeight;
+    if (h) f.style.height = Math.max(h + 40, 500) + 'px';
+  } catch(e) {}
+}
+
+function getFrameHTML() {
+  try {
+    const f = document.getElementById('frame');
+    return f.contentDocument?.documentElement?.outerHTML ?? '';
+  } catch(e) { return htmlContent; }
+}
+
+// ═══════════════════════════════════════════
+// INLINE EDIT
+// ═══════════════════════════════════════════
+function injectEdit() {
+  const f = document.getElementById('frame');
+  const d = f.contentDocument;
+  if (!d) return;
+
+  d.querySelectorAll('[data-editable]').forEach(el => {
+    el.removeAttribute('contenteditable');
+    el.removeAttribute('data-editable');
+    el.style.outline = '';
+    el.style.cursor = '';
+  });
+
+  const targets = d.querySelectorAll('h1,h2,h3,h4,h5,h6,p,a,span,li,button,div,section,article,header,footer,nav');
+  targets.forEach(el => {
+    if (el.children.length > 3) return;
+    el.setAttribute('data-editable','1');
+    el.style.cursor = 'pointer';
+    el.style.outline = 'none';
+    el.style.transition = 'outline .1s';
+
+    el.addEventListener('mouseenter', () => { el.style.outline = '2px dashed rgba(255,170,23,.5)'; }, {passive:true});
+    el.addEventListener('mouseleave', () => { if(selectedEl!==el) el.style.outline='none'; }, {passive:true});
+    el.addEventListener('click', (e) => { e.stopPropagation(); selectEl(el, e); });
+  });
+
+  d.addEventListener('click', () => {
+    if (selectedEl) {
+      selectedEl.style.outline = 'none';
+      selectedEl.contentEditable = 'false';
+      selectedEl = null;
+      hideFloatBar();
+    }
+  });
+
+  toast('Modo edición activo — click en cualquier elemento');
+}
+
+function exitEdit() {
+  const f = document.getElementById('frame');
+  const d = f.contentDocument;
+  if (!d) return;
+  d.querySelectorAll('[data-editable]').forEach(el => {
+    el.removeAttribute('contenteditable');
+    el.style.outline = '';
+    el.style.cursor = '';
+  });
+  hideFloatBar();
+  toast('Modo vista');
+}
+
+function selectEl(el, evt) {
+  if (selectedEl && selectedEl !== el) {
+    selectedEl.style.outline = 'none';
+    selectedEl.contentEditable = 'false';
+  }
+  selectedEl = el;
+  el.style.outline = '2px solid #FFAA17';
+
+  const f = document.getElementById('frame');
+  const fRect = f.getBoundingClientRect();
+  const elRect = el.getBoundingClientRect();
+  const frameDoc = f.contentDocument;
+  const scrollY = frameDoc.documentElement.scrollTop || frameDoc.body.scrollTop || 0;
+
+  const absTop = fRect.top + elRect.top - scrollY;
+  const absLeft = fRect.left + elRect.left;
+  const bar = document.getElementById('float-bar');
+  bar.style.left = Math.max(8, Math.min(absLeft, window.innerWidth - 420)) + 'px';
+  bar.style.top = Math.max(8, absTop - 44) + 'px';
+  bar.classList.add('show');
+}
+
+function hideFloatBar() {
+  document.getElementById('float-bar').classList.remove('show');
+}
+
+function fEdit() {
+  if (!selectedEl) return;
+  selectedEl.contentEditable = 'true';
+  selectedEl.focus();
+  toast('Editando — clic fuera para terminar');
+}
+function fColor() {
+  if (!selectedEl) return;
+  openModal('Color de texto', `<label>Color</label><input type="color" id="m-color" value="${rgbToHex(selectedEl.style.color||'#000000')}">`,
+    () => { selectedEl.style.color = document.getElementById('m-color').value; syncHTML(); });
+}
+function fBg() {
+  if (!selectedEl) return;
+  openModal('Color de fondo', `<label>Fondo</label><input type="color" id="m-bg" value="${rgbToHex(selectedEl.style.backgroundColor||'#ffffff')}">`,
+    () => { selectedEl.style.backgroundColor = document.getElementById('m-bg').value; syncHTML(); });
+}
+function fFont() {
+  if (!selectedEl) return;
+  openModal('Fuente y tamaño', `
+    <label>Fuente</label>
+    <select id="m-font">
+      <option value="'Space Grotesk',sans-serif">Space Grotesk</option>
+      <option value="'Instrument Serif',serif">Instrument Serif</option>
+      <option value="Georgia,serif">Georgia</option>
+      <option value="Arial,sans-serif">Arial</option>
+    </select>
+    <label>Tamaño</label>
+    <input type="text" id="m-size" placeholder="ej: 2rem, 18px" value="${selectedEl.style.fontSize||''}">
+  `, () => {
+    selectedEl.style.fontFamily = document.getElementById('m-font').value;
+    const sz = document.getElementById('m-size').value;
+    if (sz) selectedEl.style.fontSize = sz;
+    syncHTML();
+  });
+}
+function fDup() {
+  if (!selectedEl) return;
+  const clone = selectedEl.cloneNode(true);
+  selectedEl.parentNode.insertBefore(clone, selectedEl.nextSibling);
+  syncHTML();
+  toast('Elemento duplicado');
+}
+function fDel() {
+  if (!selectedEl) return;
+  selectedEl.remove();
+  selectedEl = null;
+  hideFloatBar();
+  syncHTML();
+  toast('Elemento eliminado');
+}
+
+function syncHTML() {
+  try {
+    const f = document.getElementById('frame');
+    htmlContent = f.contentDocument.documentElement.outerHTML;
+    pushHistory(htmlContent);
+  } catch(e) {}
+}
+
+function rgbToHex(rgb) {
+  if (!rgb || rgb.startsWith('#')) return rgb || '#000000';
+  const m = rgb.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
+  if (!m) return '#000000';
+  return '#' + [m[1],m[2],m[3]].map(x=>parseInt(x).toString(16).padStart(2,'0')).join('');
+}
+
+// ═══════════════════════════════════════════
+// HISTORY
+// ═══════════════════════════════════════════
+function pushHistory(html) {
+  history = history.slice(0, histIdx + 1);
+  history.push(html);
+  histIdx = history.length - 1;
+}
+function histUndo() {
+  if (histIdx <= 0) { toast('Sin más pasos'); return; }
+  histIdx--;
+  setFrameDirect(history[histIdx]);
+}
+function setFrameDirect(html) {
+  htmlContent = html;
+  const f = document.getElementById('frame');
+  f.srcdoc = html;
+  f.onload = () => { autoHeight(); injectEdit(); };
+}
+
+// ═══════════════════════════════════════════
+// DEVICE PREVIEW
+// ═══════════════════════════════════════════
+function setDevice(d) {
+  document.getElementById('frame-wrap').className = d;
+  ['desk','tablet','mobile'].forEach(x => document.getElementById('d-'+x).classList.toggle('on', x===d));
+  autoHeight();
+}
+
+// ═══════════════════════════════════════════
+// CHAT
+// ═══════════════════════════════════════════
+function getCtx() {
+  if (!htmlContent) return '';
+  return `\n\nCONTENIDO ACTUAL EN EL EDITOR:\n${htmlContent.slice(0, 8000)}`;
+}
+
+async function send() {
+  const inp = document.getElementById('txt');
+  const text = inp.value.trim();
+  if (!text) return;
+  inp.value = ''; resize(inp);
+  addMsg('u', text);
+
+  const ctx = getCtx();
+  const hasContent = ctx.length > 0;
+
+  const sys = hasContent
+    ? `Eres un experto diseñador web de Victor IA Studio. Tienes el HTML actual del editor. El usuario quiere modificarlo.
+Aplica los cambios pedidos al HTML existente y devuelve el HTML COMPLETO modificado entre marcadores exactos: <<<HTML>>> y <<<END_HTML>>>.
+Si la petición es solo una pregunta sin cambios visuales, responde normalmente sin HTML.
+Design system Victor IA: colores #0E0F12, #F8F7F5, #FFAA17, fonts Instrument Serif + Space Grotesk.${ctx}`
+    : `Eres un experto diseñador web de Victor IA Studio. Cuando el usuario pida crear contenido (landing, presentación, infografía, propuesta, etc.), genera HTML COMPLETO y bien diseñado entre marcadores exactos: <<<HTML>>> y <<<END_HTML>>>.
+Design system Victor IA: bg #F8F7F5, texto #0E0F12, acento #FFAA17, fonts Google Fonts Instrument Serif (headlines) + Space Grotesk (body).
+Para presentaciones: slides con navegación JS. Para infografías: SVG inline.
+Si el usuario saluda o pregunta algo general, responde sin HTML.`;
+
+  const aiDiv = addMsg('a', '', true);
+  showLoading(hasContent ? 'Aplicando cambios...' : 'Generando contenido...');
+
+  try {
+    const resp = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/${GM}:streamGenerateContent?alt=sse&key=${GK}`,
+      {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({
+          system_instruction:{ parts:[{text:sys}] },
+          contents:[{role:'user',parts:[{text}]}],
+          generationConfig:{temperature:.7, maxOutputTokens:16000}
+        })
+      }
+    );
+    const reader = resp.body.getReader();
+    const dec = new TextDecoder();
+    let full = '';
+    const bubble = aiDiv.querySelector('.bubble');
+
+    while(true) {
+      const {done,value} = await reader.read();
+      if(done) break;
+      const lines = dec.decode(value).split('\n');
+      for(const l of lines) {
+        if(!l.startsWith('data: ')) continue;
+        try {
+          const piece = JSON.parse(l.slice(6)).candidates?.[0]?.content?.parts?.[0]?.text||'';
+          full += piece;
+          let display = full;
+          const htmlStart = full.indexOf('<<<HTML>>>');
+          if(htmlStart >= 0) {
+            const beforeHtml = full.slice(0, htmlStart).trim();
+            const hasEnd = full.includes('<<<END_HTML>>>');
+            const suffix = hasEnd ? '\n\n✓ Diseño generado — cargando en editor...' : '\n\n⚡ Generando diseño...';
+            display = beforeHtml + suffix;
+          }
+          bubble.innerHTML = display
+            .replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>')
+            .replace(/\*(.*?)\*/g,'<em>$1</em>')
+            .replace(/\n/g,'<br>')
+            + '<span class="cursor">▋</span>';
+          const msgs = document.getElementById('msgs');
+          msgs.scrollTop = msgs.scrollHeight;
+        } catch(e){}
+      }
+    }
+
+    aiDiv.classList.remove('typing');
+    hideLoading();
+    bubble.querySelectorAll('.cursor').forEach(c => c.remove());
+
+    const m = full.match(/<<<HTML>>>([\s\S]*?)<<<END_HTML>>>/);
+    if(m) {
+      const gen = m[1].trim();
+      setFrame(gen);
+      const beforeHtml = full.slice(0, full.indexOf('<<<HTML>>>')).trim();
+      bubble.innerHTML = (beforeHtml ? beforeHtml.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>') + '<br><br>' : '')
+        + (hasContent ? '✓ Cambios aplicados en el editor.' : '✓ Contenido generado y listo para editar.');
+      const chip = document.createElement('div');
+      chip.className = 'action-chip';
+      chip.textContent = '⚡ Ver resultado →';
+      chip.onclick = () => document.getElementById('frame').scrollIntoView({behavior:'smooth'});
+      aiDiv.appendChild(chip);
+      toast(hasContent ? 'Editor actualizado' : 'Contenido listo');
+      logTracker(hasContent ? 'Contenido editado en Studio' : 'Contenido creado en Studio', slug);
+
+      if(!hasContent) {
+        const titleMatch = gen.match(/<title[^>]*>([^<]+)<\/title>/i);
+        if(titleMatch) {
+          slug = titleMatch[1].toLowerCase().replace(/[^a-z0-9]+/g,'-').slice(0,30);
+          document.getElementById('slug-chip').textContent = slug;
+        }
+      }
+    }
+    if(!m) {
+      bubble.querySelectorAll('.cursor').forEach(c => c.remove());
+      bubble.innerHTML = full
+        .replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>')
+        .replace(/\*(.*?)\*/g,'<em>$1</em>')
+        .replace(/\n/g,'<br>');
+    }
+    scrollMsgs();
+  } catch(err) {
+    hideLoading();
+    aiDiv.classList.remove('typing');
+    aiDiv.querySelector('.bubble').querySelectorAll('.cursor').forEach(c=>c.remove());
+    aiDiv.querySelector('.bubble').textContent = 'Error: ' + err.message;
+  }
+}
+
+function addMsg(role, text, typing=false) {
+  const wrap = document.getElementById('msgs');
+  const d = document.createElement('div');
+  d.className = `m ${role}${typing?' typing':''}`;
+  const b = document.createElement('div');
+  b.className = 'bubble';
+  b.innerHTML = text.replace(/\n/g,'<br>');
+  const m = document.createElement('span');
+  m.className = 'meta';
+  m.textContent = role==='u' ? 'Tú' : 'Victor IA';
+  d.appendChild(b); d.appendChild(m);
+  wrap.appendChild(d);
+  scrollMsgs();
+  return d;
+}
+function scrollMsgs(){ const m=document.getElementById('msgs'); m.scrollTop=m.scrollHeight; }
+
+function onKey(e){ if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send();} }
+function resize(el){ el.style.height='auto'; el.style.height=Math.min(el.scrollHeight,110)+'px'; }
+
+// ═══════════════════════════════════════════
+// VOICE
+// ═══════════════════════════════════════════
+function toggleMic() {
+  const SR = window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SR){toast('Navegador sin soporte de voz');return;}
+  if(listening){rec?.stop();return;}
+  rec = new SR();
+  rec.lang='es-MX'; rec.continuous=false; rec.interimResults=false;
+  rec.onstart=()=>{listening=true;document.getElementById('mic-btn').classList.add('active');toast('Escuchando...');};
+  rec.onresult=(e)=>{ const t=e.results[0][0].transcript; document.getElementById('txt').value=t; resize(document.getElementById('txt')); setTimeout(send,200); };
+  rec.onend=()=>{listening=false;document.getElementById('mic-btn').classList.remove('active');};
+  rec.onerror=(e)=>{listening=false;document.getElementById('mic-btn').classList.remove('active');toast('Error: '+e.error);};
+  rec.start();
+}
+
+// ═══════════════════════════════════════════
+// LOADING
+// ═══════════════════════════════════════════
+function showLoading(msg='Generando...') {
+  const l=document.getElementById('loading');
+  document.getElementById('loading-msg').textContent=msg;
+  l.classList.add('show');
+}
+function hideLoading(){ document.getElementById('loading').classList.remove('show'); }
+
+// ═══════════════════════════════════════════
+// UTILS
+// ═══════════════════════════════════════════
+function newDoc() {
+  if(htmlContent&&!confirm('¿Limpiar el editor?'))return;
+  htmlContent=''; histIdx=-1; history=[];
+  document.getElementById('frame').srcdoc='';
+  slug='sin-titulo'; document.getElementById('slug-chip').textContent=slug;
+  toast('Editor limpio');
+}
+function preview() {
+  if(!htmlContent){toast('Sin contenido');return;}
+  const b=new Blob([htmlContent],{type:'text/html'});
+  window.open(URL.createObjectURL(b),'_blank');
+}
+function buildHTML() {
+  return htmlContent || document.getElementById('frame').srcdoc || '';
+}
+
+// ═══════════════════════════════════════════
+// EXPORTS
+// ═══════════════════════════════════════════
+async function expPDF() {
+  if(!htmlContent){toast('Sin contenido');return;}
+  toast('Generando PDF...');
+  const {jsPDF}=window.jspdf;
+  const doc=new jsPDF({orientation:'landscape',unit:'mm',format:'a4'});
+  const f=document.getElementById('frame');
+  try{
+    const canvas=await html2canvas(f.contentDocument.body,{scale:1.5,useCORS:true,allowTaint:true});
+    const img=canvas.toDataURL('image/jpeg',.92);
+    const pw=doc.internal.pageSize.getWidth();
+    const ph=(canvas.height*pw)/canvas.width;
+    doc.addImage(img,'JPEG',0,0,pw,Math.min(ph,doc.internal.pageSize.getHeight()));
+    doc.save(`${slug}.pdf`);
+    toast('PDF descargado');
+  }catch(e){toast('Error PDF: '+e.message);}
+}
+
+async function expPPT() {
+  if(!htmlContent){toast('Sin contenido');return;}
+  toast('Generando PowerPoint...');
+  const pptx=new PptxGenJS();
+  pptx.layout='LAYOUT_WIDE';
+  const f=document.getElementById('frame');
+  try{
+    const canvas=await html2canvas(f.contentDocument.body,{scale:1,useCORS:true});
+    const img=canvas.toDataURL('image/png');
+    const s=pptx.addSlide();
+    s.addImage({data:img,x:0,y:0,w:'100%',h:'100%'});
+    pptx.writeFile({fileName:`${slug}.pptx`});
+    toast('PowerPoint descargado');
+  }catch(e){toast('Error PPT: '+e.message);}
+}
+
+function dlHTML() {
+  if(!htmlContent){toast('Sin contenido');return;}
+  const b=new Blob([htmlContent],{type:'text/html'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(b); a.download=`${slug}.html`; a.click();
+  toast('HTML descargado');
+}
+
+function openEmail() {
+  openModal('Enviar por Email',`
+    <label>Destinatario</label><input id="m-to" type="email" placeholder="email@ejemplo.com">
+    <label>Asunto</label><input id="m-sub" type="text" value="Contenido de Victor IA Studio">
+  `,()=>{
+    const to=document.getElementById('m-to').value;
+    const sub=document.getElementById('m-sub').value;
+    window.location.href=`mailto:${to}?subject=${encodeURIComponent(sub)}&body=${encodeURIComponent('Adjunto contenido generado con Victor IA Studio: '+slug)}`;
+    toast('Abriendo email...');
+  });
+}
+
+async function tg() {
+  if(!htmlContent){toast('Sin contenido');return;}
+  toast('Enviando a Telegram...');
+  const text=`📄 *${slug}*\n\nGenerado con Victor IA Studio\n_${new Date().toLocaleString('es-MX')}_`;
+  const r=await fetch(`https://api.telegram.org/bot${TGT}/sendMessage`,{
+    method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({chat_id:TGC,text,parse_mode:'Markdown'})
+  });
+  const d=await r.json();
+  if(d.ok) toast('✓ Enviado a Telegram');
+  else toast('Error Telegram: '+d.description);
+}
+
+function wa() {
+  if(!htmlContent){toast('Sin contenido');return;}
+  window.open(`https://wa.me/?text=${encodeURIComponent('Victor IA Studio: '+slug+'\n\nContenido listo para compartir.')}`, '_blank');
+}
+
+function dlDrive() { dlHTML(); toast('Descarga lista — súbela a Drive'); }
+
+function openSlug() {
+  openModal('Renombrar documento',`<input id="m-sl" type="text" placeholder="nombre-documento" value="${slug}">`,()=>{
+    const v=document.getElementById('m-sl').value.trim().replace(/\s+/g,'-').toLowerCase();
+    if(v){slug=v;document.getElementById('slug-chip').textContent=v;toast('Renombrado: '+v);}
+  });
+}
+
+function openDeploy() {
+  openModal('Deploy a Vercel',`
+    <label>Nombre del sitio</label>
+    <input id="m-dslug" type="text" placeholder="mi-sitio" value="${slug}">
+    <label>Vercel API Token</label>
+    <input id="m-tok" type="password" placeholder="xxxxxxxxxxxxxxxxxxxxxxxx">
+    <p style="font-size:.65rem;color:rgba(255,255,255,.3);margin-top:-4px">Obtén tu token en vercel.com/account/tokens</p>
+  `, async ()=>{
+    const s=document.getElementById('m-dslug').value.trim().replace(/\s+/g,'-');
+    const t=document.getElementById('m-tok').value.trim();
+    if(!s||!t){toast('Completa nombre y token');return;}
+    slug=s; document.getElementById('slug-chip').textContent=s;
+    closeModal(); toast('Desplegando...');
+    const h=buildHTML();
+    try{
+      const r=await fetch('https://api.vercel.com/v13/deployments',{
+        method:'POST',
+        headers:{'Authorization':'Bearer '+t,'Content-Type':'application/json'},
+        body:JSON.stringify({
+          name:s,
+          files:[{file:'index.html',data:btoa(unescape(encodeURIComponent(h))),encoding:'base64'}],
+          projectSettings:{framework:null},target:'production'
+        })
+      });
+      const d=await r.json();
+      if(d.url){
+        const url='https://'+d.url;
+        addMsg('a','🚀 Deploy exitoso:\n'+url);
+        navigator.clipboard?.writeText(url);
+        toast('✓ Live — URL copiada');
+        fetch(`https://api.telegram.org/bot${TGT}/sendMessage`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:TGC,text:`🚀 *Deploy: ${s}*\n${url}`,parse_mode:'Markdown'})});
+      } else { toast('Error: '+(d.error?.message||'desconocido')); }
+    }catch(e){toast('Error: '+e.message);}
+  });
+}
+
+// ═══════════════════════════════════════════
+// MODAL (existing)
+// ═══════════════════════════════════════════
+function openModal(title, body, cb) {
+  document.getElementById('modal-title').textContent=title;
+  document.getElementById('modal-body').innerHTML=body;
+  document.getElementById('modal-bg').classList.add('open');
+  modalCb=cb;
+}
+function closeModal(e) {
+  if(e&&e.target!==document.getElementById('modal-bg'))return;
+  document.getElementById('modal-bg').classList.remove('open');
+  modalCb=null;
+}
+function modalOK() {
+  if(modalCb) modalCb();
+  document.getElementById('modal-bg').classList.remove('open');
+}
+
+// ═══════════════════════════════════════════
+// TOAST
+// ═══════════════════════════════════════════
+let toastTimer;
+function toast(msg,ms=3200) {
+  clearTimeout(toastTimer);
+  document.getElementById('toast-msg').textContent=msg;
+  document.getElementById('toast').classList.add('show');
+  toastTimer=setTimeout(()=>document.getElementById('toast').classList.remove('show'),ms);
+}
+
+// ═══════════════════════════════════════════
+// ELEVENLABS VOICEOVER
+// ═══════════════════════════════════════════
+const TRACKER_URL = 'https://victor-ia-brain-tracker.vercel.app';
+
+async function logTracker(action, detail='') {
+  const msg = `🎨 *Studio Victor IA*\n\n✅ ${action}${detail?'\n_'+detail+'_':''}\n\n_${new Date().toLocaleString('es-MX')}_`;
+  try {
+    await fetch(`https://api.telegram.org/bot${TGT}/sendMessage`, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({chat_id:TGC,text:msg,parse_mode:'Markdown'}) });
+  } catch(e){}
+}
+
+function openTracker() { window.open(TRACKER_URL, '_blank'); }
+
+// ═══════════════════════════════════════════
+// SHARE MENU
+// ═══════════════════════════════════════════
+function openShareMenu() { document.getElementById('st-share-overlay').style.display='flex'; }
+
+function setStShareFb(msg) {
+  const el = document.getElementById('st-share-fb');
+  el.textContent = msg; el.style.color = 'var(--green)';
+  setTimeout(() => el.textContent = '', 4000);
+}
+
+async function stShare(platform) {
+  const url = document.getElementById('st-share-url')?.value || 'https://victor-ia-website.vercel.app/' + slug + '.html';
+  const title = slug || 'Victor IA Studio';
+  const msg = `${title} — ${url}`;
+  const actions = {
+    vercel: () => { document.getElementById('st-share-overlay').style.display='none'; openDeploy(); },
+    copy: () => { navigator.clipboard?.writeText(url); setStShareFb('✓ Enlace copiado'); toast('✓ Copiado'); logTracker('Enlace copiado', url); },
+    download: () => { dlHTML(); setStShareFb('✓ Descargando'); logTracker('HTML descargado', slug); },
+    qr: () => { const w=window.open('','_blank'); w.document.write(`<html><body style="background:#0E0F12;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;font-family:sans-serif;color:#F8F7F5"><img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(url)}" style="border-radius:12px;border:4px solid #FFAA17"><p style="margin-top:16px;color:#FFAA17">${url}</p></body></html>`); logTracker('QR generado', url); },
+    email: () => { window.location.href=`mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(msg)}`; logTracker('Compartido Email', url); },
+    whatsapp: () => { window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`,'_blank'); logTracker('Compartido WhatsApp', url); },
+    telegram: async () => { await fetch(`https://api.telegram.org/bot${TGT}/sendMessage`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:TGC,text:`📤 *${title}*\n${url}`,parse_mode:'Markdown'})}); setStShareFb('✓ Enviado a Telegram'); toast('✓ Telegram'); logTracker('Compartido Telegram', url); },
+    twitter: () => { window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(msg)}`,'_blank'); logTracker('Compartido Twitter', url); },
+    instagram: () => { navigator.clipboard?.writeText(url); setStShareFb('✓ Enlace copiado — Abre Instagram → Historia → Sticker Enlace'); toast('Listo para Instagram'); logTracker('Compartido Instagram', url); },
+    messenger: () => { window.open(`https://www.facebook.com/dialog/send?link=${encodeURIComponent(url)}&app_id=291494419107&redirect_uri=${encodeURIComponent(url)}`,'_blank'); logTracker('Compartido Messenger', url); },
+    tiktok: () => { navigator.clipboard?.writeText(url); setStShareFb('✓ Enlace copiado — En TikTok: Perfil → Bio → Enlace'); toast('Listo para TikTok'); logTracker('Compartido TikTok', url); },
+    linkedin: () => { window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`,'_blank'); logTracker('Compartido LinkedIn', url); }
+  };
+  (actions[platform] || (() => toast('No disponible')))();
+}
+
+function openVoiceover() {
+  openModal('Generar Voiceover — Victor IA', `
+    <label>Texto a narrar</label>
+    <textarea id="vo-text" rows="5" placeholder="Escribe aquí el texto que quieres narrar con la voz de Victor IA...">${getVisibleText()}</textarea>
+    <label>Velocidad</label>
+    <input type="range" id="vo-speed" min="0.5" max="2" step="0.1" value="1" style="width:100%;accent-color:var(--gold)">
+    <label>Estabilidad de voz</label>
+    <input type="range" id="vo-stab" min="0" max="1" step="0.05" value="0.5" style="width:100%;accent-color:var(--gold)">
+    <label>Tipo</label>
+    <select id="vo-type">
+      <option value="tts">Narración (TTS)</option>
+      <option value="sfx">Efecto de sonido</option>
+    </select>
+  `, genVoiceover);
+}
+
+function getVisibleText() {
+  try {
+    const f = document.getElementById('frame');
+    return (f.contentDocument?.body?.innerText || '').slice(0, 500).replace(/\s+/g,' ').trim();
+  } catch(e) { return ''; }
+}
+
+async function genVoiceover() {
+  const text = document.getElementById('vo-text')?.value?.trim();
+  const type = document.getElementById('vo-type')?.value;
+  if(!text) { toast('Escribe el texto'); return; }
+  toast('Generando con ElevenLabs...');
+
+  if(type === 'sfx') {
+    await genSFX(text);
+    return;
+  }
+
+  try {
+    const r = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${ELV}`, {
+      method: 'POST',
+      headers: { 'xi-api-key': ELK, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        text,
+        model_id: 'eleven_multilingual_v2',
+        voice_settings: {
+          stability: parseFloat(document.getElementById('vo-stab')?.value || '0.5'),
+          similarity_boost: 0.75,
+          speed: parseFloat(document.getElementById('vo-speed')?.value || '1')
+        }
+      })
+    });
+    if(!r.ok) throw new Error('ElevenLabs error: ' + r.status);
+    const blob = await r.blob();
+    const url = URL.createObjectURL(blob);
+    const audio = new Audio(url);
+    audio.play();
+    addMsg('a', '🎙 Voiceover generado con la voz de Victor IA.\n\n▶ Reproduciendo ahora...');
+    const chip = document.createElement('div');
+    chip.className = 'action-chip';
+    chip.textContent = '⬇ Descargar MP3';
+    chip.onclick = () => { const a = document.createElement('a'); a.href = url; a.download = 'voiceover-victor-ia.mp3'; a.click(); };
+    document.getElementById('msgs').lastChild.appendChild(chip);
+    toast('✓ Voiceover listo — reproduciendo');
+  } catch(e) { toast('Error ElevenLabs: ' + e.message); addMsg('a', '❌ Error generando voz: ' + e.message); }
+}
+
+async function genSFX(prompt) {
+  try {
+    const r = await fetch('https://api.elevenlabs.io/v1/sound-generation', {
+      method: 'POST',
+      headers: { 'xi-api-key': ELK, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text: prompt, duration_seconds: 3, prompt_influence: 0.3 })
+    });
+    if(!r.ok) throw new Error('SFX error: ' + r.status);
+    const blob = await r.blob();
+    const url = URL.createObjectURL(blob);
+    new Audio(url).play();
+    toast('✓ SFX generado');
+  } catch(e) { toast('Error SFX: ' + e.message); }
+}
+
+// ═══════════════════════════════════════════
+// POPUP SYSTEM — 8 ACTIONS
+// ═══════════════════════════════════════════
+
+// Popup configs: icon, title, tabs, panels
+const POPUP_CONFIGS = {
+  image: {
+    icon: '🖼',
+    title: 'Generar Imagen',
+    tabs: ['Básico'],
+    panels: {
+      0: `
+        <label class="pf-label">Prompt de imagen</label>
+        <textarea class="pfield" id="pf-prompt" placeholder="Describe la imagen que quieres generar con detalle…" rows="4" required></textarea>
+        <label class="pf-label" style="margin-top:14px">Estilo visual</label>
+        <select class="pfield" id="pf-style">
+          <option value="Fotorrealista">Fotorrealista</option>
+          <option value="Cinematográfico">Cinematográfico</option>
+          <option value="Ilustración">Ilustración</option>
+          <option value="Minimalista">Minimalista</option>
+          <option value="Arquitectónico">Arquitectónico</option>
+          <option value="Abstracto">Abstracto</option>
+        </select>
+        <label class="pf-label" style="margin-top:14px">Formato</label>
+        <select class="pfield" id="pf-ratio">
+          <option value="16:9">16:9 — Landscape</option>
+          <option value="1:1">1:1 — Cuadrado</option>
+          <option value="9:16">9:16 — Vertical</option>
+          <option value="4:3">4:3 — Clásico</option>
+        </select>
+        <label class="pf-label" style="margin-top:14px">Calidad</label>
+        <select class="pfield" id="pf-quality">
+          <option value="Estándar">Estándar</option>
+          <option value="HD">HD</option>
+          <option value="4K">4K</option>
+        </select>
+      `
+    },
+    collect: () => ({
+      prompt: document.getElementById('pf-prompt')?.value?.trim(),
+      style: document.getElementById('pf-style')?.value,
+      aspectRatio: document.getElementById('pf-ratio')?.value,
+      quality: document.getElementById('pf-quality')?.value
+    }),
+    validate: (cfg) => cfg.prompt ? null : 'Escribe un prompt de imagen'
+  },
+
+  video: {
+    icon: '🎬',
+    title: 'Generar Video',
+    tabs: ['Básico', 'Avanzado'],
+    panels: {
+      0: `
+        <label class="pf-label">Descripción del video</label>
+        <textarea class="pfield" id="pf-vdesc" placeholder="Describe la escena: qué sucede, quién aparece, dónde…" rows="4" required></textarea>
+        <label class="pf-label" style="margin-top:14px">Duración</label>
+        <select class="pfield" id="pf-vdur">
+          <option value="3s">3 segundos</option>
+          <option value="5s" selected>5 segundos</option>
+          <option value="8s">8 segundos</option>
+          <option value="10s">10 segundos</option>
+        </select>
+        <label class="pf-label" style="margin-top:14px">Estilo visual</label>
+        <select class="pfield" id="pf-vstyle">
+          <option value="Cinemático">Cinemático</option>
+          <option value="Documental">Documental</option>
+          <option value="Publicidad">Publicidad</option>
+          <option value="Animación">Animación</option>
+          <option value="Timelapse">Timelapse</option>
+        </select>
+      `,
+      1: `
+        <label class="pf-label">Movimiento de cámara</label>
+        <select class="pfield" id="pf-vcam">
+          <option value="Estática">Estática</option>
+          <option value="Zoom in">Zoom in</option>
+          <option value="Zoom out">Zoom out</option>
+          <option value="Pan izquierda">Pan izquierda</option>
+          <option value="Pan derecha">Pan derecha</option>
+          <option value="Orbital">Orbital 360°</option>
+        </select>
+        <label class="pf-label" style="margin-top:14px">Notas adicionales</label>
+        <textarea class="pfield" id="pf-vnotes" placeholder="Colores, iluminación, estado de ánimo…" rows="3"></textarea>
+      `
+    },
+    collect: () => ({
+      prompt: document.getElementById('pf-vdesc')?.value?.trim(),
+      duration: document.getElementById('pf-vdur')?.value,
+      style: document.getElementById('pf-vstyle')?.value,
+      camera: document.getElementById('pf-vcam')?.value || 'Estática'
+    }),
+    validate: (cfg) => cfg.prompt ? null : 'Describe el video'
+  },
+
+  presentation: {
+    icon: '📊',
+    title: 'Generar Presentación',
+    tabs: ['Básico', 'Avanzado'],
+    panels: {
+      0: `
+        <label class="pf-label">Tema de la presentación</label>
+        <input class="pfield" type="text" id="pf-ptopic" placeholder="Ej: Estrategia de ventas Q3 2026" required>
+        <label class="pf-label" style="margin-top:14px">Número de slides</label>
+        <select class="pfield" id="pf-pslides">
+          <option value="5">5 slides</option>
+          <option value="8" selected>8 slides</option>
+          <option value="10">10 slides</option>
+          <option value="15">15 slides</option>
+          <option value="20">20 slides</option>
+        </select>
+        <label class="pf-label" style="margin-top:14px">Audiencia</label>
+        <select class="pfield" id="pf-paud">
+          <option value="Clientes">Clientes</option>
+          <option value="Inversores">Inversores</option>
+          <option value="Equipo interno">Equipo interno</option>
+          <option value="Público general">Público general</option>
+        </select>
+      `,
+      1: `
+        <label class="pf-label">Estilo visual</label>
+        <select class="pfield" id="pf-pstyle">
+          <option value="Luxury Dark">Luxury Dark</option>
+          <option value="Corporativo">Corporativo</option>
+          <option value="Minimalista">Minimalista</option>
+          <option value="Colorido">Colorido</option>
+          <option value="Tech">Tech / SaaS</option>
+        </select>
+        <label class="pf-label" style="margin-top:14px">Contexto adicional</label>
+        <textarea class="pfield" id="pf-pctx" placeholder="Datos clave, cifras, puntos que NO pueden faltar…" rows="4"></textarea>
+      `
+    },
+    collect: () => ({
+      topic: document.getElementById('pf-ptopic')?.value?.trim(),
+      slides: parseInt(document.getElementById('pf-pslides')?.value || '8'),
+      audience: document.getElementById('pf-paud')?.value,
+      style: document.getElementById('pf-pstyle')?.value || 'Luxury Dark'
+    }),
+    validate: (cfg) => cfg.topic ? null : 'Escribe el tema de la presentación'
+  },
+
+  web: {
+    icon: '🌐',
+    title: 'Generar Sitio Web',
+    tabs: ['Básico', 'Secciones'],
+    panels: {
+      0: `
+        <label class="pf-label">Descripción del sitio</label>
+        <textarea class="pfield" id="pf-wdesc" placeholder="¿Qué hace tu empresa? ¿Para quién es el sitio? ¿Qué objetivo tiene?" rows="4" required></textarea>
+        <label class="pf-label" style="margin-top:14px">Tipo de sitio</label>
+        <select class="pfield" id="pf-wtype">
+          <option value="Landing page">Landing page</option>
+          <option value="Portafolio">Portafolio</option>
+          <option value="E-commerce">E-commerce</option>
+          <option value="Blog">Blog</option>
+          <option value="SaaS">SaaS / App</option>
+        </select>
+        <label class="pf-label" style="margin-top:14px">Estilo visual</label>
+        <select class="pfield" id="pf-wstyle">
+          <option value="Luxury Dark">Luxury Dark</option>
+          <option value="Minimalista">Minimalista</option>
+          <option value="Colorido">Colorido y moderno</option>
+          <option value="Corporativo">Corporativo</option>
+          <option value="Web 4.0">Web 4.0 — 3D / shaders</option>
+        </select>
+      `,
+      1: `
+        <label class="pf-label">Secciones a incluir</label>
+        <div class="cb-grid">
+          <div class="cb-item"><input type="checkbox" id="sec-hero" checked><label for="sec-hero">Hero</label></div>
+          <div class="cb-item"><input type="checkbox" id="sec-servicios" checked><label for="sec-servicios">Servicios</label></div>
+          <div class="cb-item"><input type="checkbox" id="sec-precios"><label for="sec-precios">Precios</label></div>
+          <div class="cb-item"><input type="checkbox" id="sec-testi" checked><label for="sec-testi">Testimonios</label></div>
+          <div class="cb-item"><input type="checkbox" id="sec-contacto" checked><label for="sec-contacto">Contacto</label></div>
+          <div class="cb-item"><input type="checkbox" id="sec-faq"><label for="sec-faq">FAQ</label></div>
+        </div>
+      `
+    },
+    collect: () => {
+      const sections = [];
+      ['hero','servicios','precios','testi','contacto','faq'].forEach(s => {
+        const el = document.getElementById('sec-'+s);
+        if (el?.checked) sections.push(el.nextElementSibling?.textContent || s);
+      });
+      return {
+        description: document.getElementById('pf-wdesc')?.value?.trim(),
+        type: document.getElementById('pf-wtype')?.value,
+        style: document.getElementById('pf-wstyle')?.value,
+        sections: sections.length ? sections : ['Hero','Servicios','Contacto']
+      };
+    },
+    validate: (cfg) => cfg.description ? null : 'Describe el sitio web'
+  },
+
+  voice: {
+    icon: '🎙',
+    title: 'Generar Voz',
+    tabs: ['Básico', 'Avanzado'],
+    panels: {
+      0: `
+        <label class="pf-label">Texto a narrar</label>
+        <textarea class="pfield" id="pf-votext" placeholder="Escribe el texto que Victor IA va a narrar…" rows="5" required></textarea>
+        <label class="pf-label" style="margin-top:14px">Tipo de narración</label>
+        <select class="pfield" id="pf-votype">
+          <option value="Narración">Narración</option>
+          <option value="Pitch comercial">Pitch comercial</option>
+          <option value="Instrucciones">Instrucciones</option>
+          <option value="Noticias">Noticias</option>
+        </select>
+      `,
+      1: `
+        <label class="pf-label">Velocidad de habla</label>
+        <div class="range-wrap">
+          <input type="range" id="pf-vospd" min="0.5" max="2.0" step="0.1" value="1.0" oninput="document.getElementById('spd-val').textContent=this.value">
+          <span class="range-val" id="spd-val">1.0</span>
+        </div>
+        <label class="pf-label" style="margin-top:14px">Estabilidad de voz</label>
+        <div class="range-wrap">
+          <input type="range" id="pf-vostab" min="0" max="1" step="0.05" value="0.5" oninput="document.getElementById('stab-val').textContent=this.value">
+          <span class="range-val" id="stab-val">0.50</span>
+        </div>
+      `
+    },
+    collect: () => ({
+      text: document.getElementById('pf-votext')?.value?.trim(),
+      speed: parseFloat(document.getElementById('pf-vospd')?.value || '1.0'),
+      stability: parseFloat(document.getElementById('pf-vostab')?.value || '0.5'),
+      type: document.getElementById('pf-votype')?.value
+    }),
+    validate: (cfg) => cfg.text ? null : 'Escribe el texto a narrar'
+  },
+
+  training: {
+    icon: '📚',
+    title: 'Generar Capacitación',
+    tabs: ['Básico', 'Avanzado'],
+    panels: {
+      0: `
+        <label class="pf-label">Tema del curso / módulo</label>
+        <input class="pfield" type="text" id="pf-ttopic" placeholder="Ej: Técnicas de cierre de ventas para vendedores junior" required>
+        <label class="pf-label" style="margin-top:14px">Formato de entrega</label>
+        <select class="pfield" id="pf-tformat">
+          <option value="Módulos HTML">Módulos HTML interactivos</option>
+          <option value="Video script">Script para video</option>
+          <option value="Quiz interactivo">Quiz interactivo</option>
+          <option value="Manual PDF">Manual (listo para PDF)</option>
+          <option value="Presentación">Presentación de diapositivas</option>
+        </select>
+        <label class="pf-label" style="margin-top:14px">Nivel del público</label>
+        <select class="pfield" id="pf-tlevel">
+          <option value="Básico">Básico</option>
+          <option value="Intermedio">Intermedio</option>
+          <option value="Avanzado">Avanzado</option>
+          <option value="Ejecutivo">Ejecutivo</option>
+        </select>
+      `,
+      1: `
+        <label class="pf-label">Duración estimada</label>
+        <select class="pfield" id="pf-tdur">
+          <option value="15 min">15 minutos</option>
+          <option value="30 min">30 minutos</option>
+          <option value="1 hora" selected>1 hora</option>
+          <option value="2 horas">2 horas</option>
+        </select>
+        <label class="pf-label" style="margin-top:14px">Objetivos de aprendizaje</label>
+        <textarea class="pfield" id="pf-tobj" placeholder="¿Qué debe saber o poder hacer el participante al terminar?" rows="4"></textarea>
+      `
+    },
+    collect: () => ({
+      topic: document.getElementById('pf-ttopic')?.value?.trim(),
+      format: document.getElementById('pf-tformat')?.value,
+      level: document.getElementById('pf-tlevel')?.value,
+      duration: document.getElementById('pf-tdur')?.value || '1 hora'
+    }),
+    validate: (cfg) => cfg.topic ? null : 'Escribe el tema de capacitación'
+  },
+
+  admin: {
+    icon: '⚙️',
+    title: 'Documento Administrativo',
+    tabs: ['Básico'],
+    panels: {
+      0: `
+        <label class="pf-label">Tipo de documento</label>
+        <select class="pfield" id="pf-atask">
+          <option value="Resumen ejecutivo">Resumen ejecutivo</option>
+          <option value="Reporte de avance">Reporte de avance</option>
+          <option value="Template email">Template de email</option>
+          <option value="Política interna">Política interna</option>
+          <option value="Acta de reunión">Acta de reunión</option>
+        </select>
+        <label class="pf-label" style="margin-top:14px">Contexto / información relevante</label>
+        <textarea class="pfield" id="pf-actx" placeholder="¿Sobre qué trata? Incluye datos, fechas, personas involucradas…" rows="5"></textarea>
+        <label class="pf-label" style="margin-top:14px">Destinatario</label>
+        <input class="pfield" type="text" id="pf-arec" placeholder="Ej: Consejo directivo, equipo de ventas, cliente Acme…">
+      `
+    },
+    collect: () => ({
+      task: document.getElementById('pf-atask')?.value,
+      context: document.getElementById('pf-actx')?.value?.trim(),
+      recipient: document.getElementById('pf-arec')?.value?.trim()
+    }),
+    validate: (cfg) => cfg.context ? null : 'Agrega el contexto del documento'
+  },
+
+  dashboard: {
+    icon: '📈',
+    title: 'Generar Dashboard',
+    tabs: ['Básico', 'Métricas'],
+    panels: {
+      0: `
+        <label class="pf-label">Período de análisis</label>
+        <select class="pfield" id="pf-dperiod">
+          <option value="Esta semana">Esta semana</option>
+          <option value="Este mes" selected>Este mes</option>
+          <option value="Último trimestre">Último trimestre</option>
+          <option value="Este año">Este año</option>
+        </select>
+        <label class="pf-label" style="margin-top:14px">Formato de salida</label>
+        <select class="pfield" id="pf-dformat">
+          <option value="Dashboard HTML">Dashboard HTML interactivo</option>
+          <option value="Reporte ejecutivo">Reporte ejecutivo</option>
+          <option value="Gráficas SVG">Gráficas SVG</option>
+        </select>
+      `,
+      1: `
+        <label class="pf-label">Métricas a incluir</label>
+        <div class="cb-grid">
+          <div class="cb-item"><input type="checkbox" id="met-ing" checked><label for="met-ing">Ingresos</label></div>
+          <div class="cb-item"><input type="checkbox" id="met-cli" checked><label for="met-cli">Clientes</label></div>
+          <div class="cb-item"><input type="checkbox" id="met-proj" checked><label for="met-proj">Proyectos</label></div>
+          <div class="cb-item"><input type="checkbox" id="met-conv"><label for="met-conv">Conversiones</label></div>
+          <div class="cb-item"><input type="checkbox" id="met-roi"><label for="met-roi">ROI</label></div>
+        </div>
+        <label class="pf-label" style="margin-top:14px">Contexto adicional</label>
+        <textarea class="pfield" id="pf-dctx" placeholder="Valores reales, metas, datos históricos que quieras incluir…" rows="3"></textarea>
+      `
+    },
+    collect: () => {
+      const metrics = [];
+      [{id:'met-ing',label:'Ingresos'},{id:'met-cli',label:'Clientes'},{id:'met-proj',label:'Proyectos'},{id:'met-conv',label:'Conversiones'},{id:'met-roi',label:'ROI'}].forEach(m => {
+        if (document.getElementById(m.id)?.checked) metrics.push(m.label);
+      });
+      return {
+        period: document.getElementById('pf-dperiod')?.value,
+        metrics: metrics.length ? metrics : ['Ingresos','Clientes','Proyectos'],
+        format: document.getElementById('pf-dformat')?.value
+      };
+    },
+    validate: () => null
+  }
+};
+
+// Active popup tab
+let currentPopupTab = 0;
+
+function openPopup(action) {
+  const cfg = POPUP_CONFIGS[action];
+  if (!cfg) return;
+  currentPopupAction = action;
+  currentPopupTab = 0;
+
+  // Set header
+  document.getElementById('popup-icon').textContent = cfg.icon;
+  document.getElementById('popup-title').textContent = cfg.title;
+
+  // Set tabs
+  const tabsEl = document.getElementById('popup-tabs');
+  if (cfg.tabs.length <= 1) {
+    tabsEl.style.display = 'none';
+  } else {
+    tabsEl.style.display = 'flex';
+    tabsEl.innerHTML = cfg.tabs.map((t, i) =>
+      `<button class="ptab ${i === 0 ? 'active' : ''}" onclick="switchPopupTab(${i})">${t}</button>`
+    ).join('');
+  }
+
+  // Set body panels
+  const bodyEl = document.getElementById('popup-body');
+  bodyEl.innerHTML = Object.entries(cfg.panels).map(([idx, html]) =>
+    `<div class="tab-panel ${idx === '0' ? 'active' : ''}" data-tab="${idx}">${html}</div>`
+  ).join('');
+
+  // Reset generate button
+  const btn = document.getElementById('popup-generate');
+  btn.disabled = false;
+  btn.classList.remove('loading');
+  btn.querySelector('.gen-label').textContent = 'Generar →';
+
+  // Show
+  document.getElementById('popup-overlay').classList.add('open');
+}
+
+function switchPopupTab(idx) {
+  currentPopupTab = idx;
+  document.querySelectorAll('.ptab').forEach((t, i) => t.classList.toggle('active', i === idx));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.toggle('active', parseInt(p.dataset.tab) === idx));
+}
+
+function closePopup() {
+  document.getElementById('popup-overlay').classList.remove('open');
+  currentPopupAction = null;
+}
+
+function closePopupOutside(e) {
+  if (e.target === document.getElementById('popup-overlay')) closePopup();
+}
+
+async function popupGenerate() {
+  const action = currentPopupAction;
+  if (!action) return;
+  const cfg = POPUP_CONFIGS[action];
+  if (!cfg) return;
+
+  const config = cfg.collect();
+  const err = cfg.validate(config);
+  if (err) { toast('⚠ ' + err); return; }
+
+  // Loading state
+  const btn = document.getElementById('popup-generate');
+  btn.disabled = true;
+  btn.classList.add('loading');
+  btn.querySelector('.gen-label').textContent = 'Generando';
+
+  closePopup();
+  showLoading('Generando con Victor IA...');
+
+  try {
+    const resp = await fetch(API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action, config, userId: 'studio-user' })
+    });
+    const data = await resp.json();
+    hideLoading();
+    handleResult(action, data);
+  } catch(e) {
+    hideLoading();
+    addMsg('a', '❌ Error: ' + e.message);
+    toast('Error al conectar con Victor IA');
+  } finally {
+    btn.disabled = false;
+    btn.classList.remove('loading');
+    btn.querySelector('.gen-label').textContent = 'Generar →';
+  }
+}
+
+function handleResult(action, data) {
+  if (data.html_content) {
+    setFrame(data.html_content);
+    addMsg('a', '✓ ' + (actionLabels[action] || action) + ' generado y listo en el editor.');
+  } else if (data.result_url && action === 'image') {
+    setFrame(`<!DOCTYPE html><html><head><meta charset="UTF-8"><style>body{margin:0;background:#000;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px;box-sizing:border-box}</style></head><body><img src="${data.result_url}" style="max-width:100%;border-radius:12px;box-shadow:0 20px 80px rgba(0,0,0,.5)"></body></html>`);
+    addMsg('a', '✓ Imagen generada y lista en el canvas.');
+  } else if (action === 'voice' && data.result_url) {
+    const audio = new Audio(data.result_url);
+    audio.play();
+    const msgEl = addMsg('a', '✓ Voz generada — reproduciendo ahora.');
+    const chip = document.createElement('div');
+    chip.className = 'action-chip';
+    chip.textContent = '⬇ Descargar MP3';
+    chip.onclick = () => { const a = document.createElement('a'); a.href = data.result_url; a.download = 'voiceover.mp3'; a.click(); };
+    msgEl.querySelector('.bubble')?.appendChild(chip);
+  } else if (data.job_id) {
+    addMsg('a', '⏳ ' + (data.message || 'Procesando...') + '\n\nJob ID: ' + data.job_id + '\n\nEl resultado estará listo en ~30 segundos.');
+    startPolling(data.job_id, action);
+  } else if (data.message) {
+    addMsg('a', 'ℹ ' + data.message);
+  } else {
+    addMsg('a', '✓ Solicitud enviada. Revisa los resultados en tu cuenta.');
+  }
+  toast('✓ ' + (actionLabels[action] || action) + ' completado');
+  logTracker('Acción: ' + (actionLabels[action] || action), slug);
+}
+
+// Polling for async jobs (e.g. video generation)
+function startPolling(jobId, action) {
+  let attempts = 0;
+  const poll = setInterval(async () => {
+    attempts++;
+    if (attempts > 24) {
+      clearInterval(poll);
+      addMsg('a', '⚠ El job tardó más de lo esperado. Consulta tu dashboard.\n\nJob ID: ' + jobId);
+      return;
+    }
+    try {
+      const r = await fetch(API_URL + '/status?job_id=' + jobId);
+      if (!r.ok) return;
+      const d = await r.json();
+      if (d.status === 'completed') {
+        clearInterval(poll);
+        handleResult(action, d);
+      } else if (d.status === 'failed') {
+        clearInterval(poll);
+        addMsg('a', '❌ El job falló: ' + (d.error || 'Error desconocido'));
+      }
+    } catch(e) {}
+  }, 5000);
+}
+
+// Init
+document.getElementById('txt').focus();
+</script>
+</body>
+</html>

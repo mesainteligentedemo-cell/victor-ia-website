@@ -1,0 +1,720 @@
+{
+  "name": "01_hyperframes_60s",
+  "voice_id": "iDEmt5MnqUotdwCIVplo",
+  "model": "eleven_multilingual_v2",
+  "duration_seconds": 59.396,
+  "word_count": 141,
+  "voice_settings": {
+    "stability": 0.45,
+    "similarity_boost": 0.8,
+    "style": 0.35,
+    "use_speaker_boost": true
+  },
+  "words": [
+    {
+      "word": "En",
+      "start": 0.0,
+      "end": 0.139
+    },
+    {
+      "word": "Victor",
+      "start": 0.186,
+      "end": 0.511
+    },
+    {
+      "word": "IA",
+      "start": 0.592,
+      "end": 0.871
+    },
+    {
+      "word": "no",
+      "start": 1.022,
+      "end": 1.126
+    },
+    {
+      "word": "vendemos",
+      "start": 1.173,
+      "end": 1.544
+    },
+    {
+      "word": "tecnologia.",
+      "start": 1.591,
+      "end": 2.287
+    },
+    {
+      "word": "Construimos",
+      "start": 2.612,
+      "end": 3.204
+    },
+    {
+      "word": "negocios",
+      "start": 3.251,
+      "end": 3.808
+    },
+    {
+      "word": "que",
+      "start": 3.866,
+      "end": 3.936
+    },
+    {
+      "word": "piensan,",
+      "start": 4.005,
+      "end": 4.621
+    },
+    {
+      "word": "que",
+      "start": 4.656,
+      "end": 4.737
+    },
+    {
+      "word": "aprenden...",
+      "start": 4.76,
+      "end": 5.538
+    },
+    {
+      "word": "y",
+      "start": 5.631,
+      "end": 5.7
+    },
+    {
+      "word": "que",
+      "start": 5.793,
+      "end": 5.863
+    },
+    {
+      "word": "crecen",
+      "start": 5.909,
+      "end": 6.269
+    },
+    {
+      "word": "contigo.",
+      "start": 6.327,
+      "end": 6.943
+    },
+    {
+      "word": "Desde",
+      "start": 7.152,
+      "end": 7.419
+    },
+    {
+      "word": "Playa",
+      "start": 7.477,
+      "end": 7.779
+    },
+    {
+      "word": "del",
+      "start": 7.825,
+      "end": 7.918
+    },
+    {
+      "word": "Carmen,",
+      "start": 7.976,
+      "end": 8.487
+    },
+    {
+      "word": "para",
+      "start": 8.603,
+      "end": 8.824
+    },
+    {
+      "word": "todo",
+      "start": 8.893,
+      "end": 9.125
+    },
+    {
+      "word": "Mexico.",
+      "start": 9.183,
+      "end": 9.752
+    },
+    {
+      "word": "Disenamos",
+      "start": 10.077,
+      "end": 10.67
+    },
+    {
+      "word": "sitios",
+      "start": 10.704,
+      "end": 11.099
+    },
+    {
+      "word": "web",
+      "start": 11.169,
+      "end": 11.378
+    },
+    {
+      "word": "de",
+      "start": 11.447,
+      "end": 11.517
+    },
+    {
+      "word": "lujo.",
+      "start": 11.61,
+      "end": 12.121
+    },
+    {
+      "word": "Automatizamos",
+      "start": 12.399,
+      "end": 13.27
+    },
+    {
+      "word": "lo",
+      "start": 13.305,
+      "end": 13.386
+    },
+    {
+      "word": "que",
+      "start": 13.433,
+      "end": 13.502
+    },
+    {
+      "word": "te",
+      "start": 13.56,
+      "end": 13.63
+    },
+    {
+      "word": "quita",
+      "start": 13.688,
+      "end": 13.92
+    },
+    {
+      "word": "el",
+      "start": 13.944,
+      "end": 14.002
+    },
+    {
+      "word": "tiempo.",
+      "start": 14.083,
+      "end": 14.652
+    },
+    {
+      "word": "Creamos",
+      "start": 14.826,
+      "end": 15.279
+    },
+    {
+      "word": "video",
+      "start": 15.337,
+      "end": 15.766
+    },
+    {
+      "word": "y",
+      "start": 15.801,
+      "end": 15.824
+    },
+    {
+      "word": "contenido",
+      "start": 15.871,
+      "end": 16.335
+    },
+    {
+      "word": "que",
+      "start": 16.393,
+      "end": 16.463
+    },
+    {
+      "word": "vende.",
+      "start": 16.509,
+      "end": 16.962
+    },
+    {
+      "word": "Y",
+      "start": 17.09,
+      "end": 17.159
+    },
+    {
+      "word": "hacemos",
+      "start": 17.217,
+      "end": 17.566
+    },
+    {
+      "word": "algo",
+      "start": 17.647,
+      "end": 17.879
+    },
+    {
+      "word": "que",
+      "start": 17.926,
+      "end": 18.007
+    },
+    {
+      "word": "nadie",
+      "start": 18.065,
+      "end": 18.286
+    },
+    {
+      "word": "mas",
+      "start": 18.332,
+      "end": 18.471
+    },
+    {
+      "word": "hace",
+      "start": 18.518,
+      "end": 18.692
+    },
+    {
+      "word": "en",
+      "start": 18.727,
+      "end": 18.773
+    },
+    {
+      "word": "Mexico:",
+      "start": 18.831,
+      "end": 19.435
+    },
+    {
+      "word": "interfaces",
+      "start": 19.76,
+      "end": 20.457
+    },
+    {
+      "word": "verdaderamente",
+      "start": 20.503,
+      "end": 21.281
+    },
+    {
+      "word": "inclusivas,",
+      "start": 21.316,
+      "end": 22.21
+    },
+    {
+      "word": "y",
+      "start": 22.488,
+      "end": 22.535
+    },
+    {
+      "word": "un",
+      "start": 22.593,
+      "end": 22.674
+    },
+    {
+      "word": "Agente",
+      "start": 22.721,
+      "end": 23.046
+    },
+    {
+      "word": "de",
+      "start": 23.092,
+      "end": 23.15
+    },
+    {
+      "word": "Reactivacion",
+      "start": 23.22,
+      "end": 23.8
+    },
+    {
+      "word": "que",
+      "start": 23.858,
+      "end": 23.94
+    },
+    {
+      "word": "despierta",
+      "start": 23.986,
+      "end": 24.485
+    },
+    {
+      "word": "a",
+      "start": 24.52,
+      "end": 24.543
+    },
+    {
+      "word": "tus",
+      "start": 24.59,
+      "end": 24.752
+    },
+    {
+      "word": "clientes",
+      "start": 24.776,
+      "end": 25.147
+    },
+    {
+      "word": "dormidos.",
+      "start": 25.17,
+      "end": 25.879
+    },
+    {
+      "word": "Dieciocho",
+      "start": 26.122,
+      "end": 26.738
+    },
+    {
+      "word": "servicios.",
+      "start": 26.784,
+      "end": 27.574
+    },
+    {
+      "word": "Una",
+      "start": 27.899,
+      "end": 28.131
+    },
+    {
+      "word": "sola",
+      "start": 28.189,
+      "end": 28.386
+    },
+    {
+      "word": "obsesion:",
+      "start": 28.409,
+      "end": 29.001
+    },
+    {
+      "word": "que",
+      "start": 29.28,
+      "end": 29.373
+    },
+    {
+      "word": "tu",
+      "start": 29.431,
+      "end": 29.512
+    },
+    {
+      "word": "negocio",
+      "start": 29.547,
+      "end": 29.86
+    },
+    {
+      "word": "gane.",
+      "start": 29.907,
+      "end": 30.325
+    },
+    {
+      "word": "Y",
+      "start": 30.568,
+      "end": 30.626
+    },
+    {
+      "word": "los",
+      "start": 30.708,
+      "end": 30.801
+    },
+    {
+      "word": "resultados?",
+      "start": 30.824,
+      "end": 31.625
+    },
+    {
+      "word": "Hablan",
+      "start": 31.95,
+      "end": 32.264
+    },
+    {
+      "word": "solos.",
+      "start": 32.31,
+      "end": 32.832
+    },
+    {
+      "word": "Tres",
+      "start": 33.041,
+      "end": 33.366
+    },
+    {
+      "word": "punto",
+      "start": 33.425,
+      "end": 33.692
+    },
+    {
+      "word": "dos",
+      "start": 33.738,
+      "end": 33.854
+    },
+    {
+      "word": "veces",
+      "start": 33.901,
+      "end": 34.249
+    },
+    {
+      "word": "mas",
+      "start": 34.318,
+      "end": 34.516
+    },
+    {
+      "word": "retorno",
+      "start": 34.574,
+      "end": 34.98
+    },
+    {
+      "word": "de",
+      "start": 35.027,
+      "end": 35.096
+    },
+    {
+      "word": "inversion.",
+      "start": 35.154,
+      "end": 35.77
+    },
+    {
+      "word": "Sesenta",
+      "start": 36.211,
+      "end": 36.594
+    },
+    {
+      "word": "y",
+      "start": 36.664,
+      "end": 36.687
+    },
+    {
+      "word": "ocho",
+      "start": 36.722,
+      "end": 36.884
+    },
+    {
+      "word": "por",
+      "start": 36.931,
+      "end": 37.047
+    },
+    {
+      "word": "ciento",
+      "start": 37.093,
+      "end": 37.465
+    },
+    {
+      "word": "mas",
+      "start": 37.558,
+      "end": 37.755
+    },
+    {
+      "word": "conversion.",
+      "start": 37.813,
+      "end": 38.498
+    },
+    {
+      "word": "Cuarenta",
+      "start": 38.939,
+      "end": 39.415
+    },
+    {
+      "word": "por",
+      "start": 39.473,
+      "end": 39.601
+    },
+    {
+      "word": "ciento",
+      "start": 39.647,
+      "end": 40.007
+    },
+    {
+      "word": "menos",
+      "start": 40.089,
+      "end": 40.367
+    },
+    {
+      "word": "costos.",
+      "start": 40.437,
+      "end": 41.11
+    },
+    {
+      "word": "Cincuenta",
+      "start": 41.435,
+      "end": 41.946
+    },
+    {
+      "word": "y",
+      "start": 42.004,
+      "end": 42.027
+    },
+    {
+      "word": "cinco",
+      "start": 42.074,
+      "end": 42.364
+    },
+    {
+      "word": "por",
+      "start": 42.411,
+      "end": 42.538
+    },
+    {
+      "word": "ciento",
+      "start": 42.585,
+      "end": 43.014
+    },
+    {
+      "word": "menos",
+      "start": 43.107,
+      "end": 43.409
+    },
+    {
+      "word": "tiempo",
+      "start": 43.479,
+      "end": 43.781
+    },
+    {
+      "word": "perdido.",
+      "start": 43.827,
+      "end": 44.431
+    },
+    {
+      "word": "Esto",
+      "start": 44.64,
+      "end": 44.93
+    },
+    {
+      "word": "no",
+      "start": 44.988,
+      "end": 45.058
+    },
+    {
+      "word": "es",
+      "start": 45.093,
+      "end": 45.139
+    },
+    {
+      "word": "promesa",
+      "start": 45.186,
+      "end": 45.546
+    },
+    {
+      "word": "de",
+      "start": 45.592,
+      "end": 45.65
+    },
+    {
+      "word": "vendedor.",
+      "start": 45.685,
+      "end": 46.242
+    },
+    {
+      "word": "Son",
+      "start": 46.451,
+      "end": 46.625
+    },
+    {
+      "word": "numeros",
+      "start": 46.649,
+      "end": 46.974
+    },
+    {
+      "word": "reales,",
+      "start": 47.009,
+      "end": 47.415
+    },
+    {
+      "word": "de",
+      "start": 47.438,
+      "end": 47.508
+    },
+    {
+      "word": "clientes",
+      "start": 47.543,
+      "end": 47.879
+    },
+    {
+      "word": "reales.",
+      "start": 47.914,
+      "end": 48.425
+    },
+    {
+      "word": "El",
+      "start": 48.599,
+      "end": 48.704
+    },
+    {
+      "word": "futuro",
+      "start": 48.738,
+      "end": 49.156
+    },
+    {
+      "word": "de",
+      "start": 49.203,
+      "end": 49.249
+    },
+    {
+      "word": "tu",
+      "start": 49.296,
+      "end": 49.377
+    },
+    {
+      "word": "negocio",
+      "start": 49.435,
+      "end": 49.865
+    },
+    {
+      "word": "no",
+      "start": 49.923,
+      "end": 50.004
+    },
+    {
+      "word": "se",
+      "start": 50.05,
+      "end": 50.108
+    },
+    {
+      "word": "espera.",
+      "start": 50.132,
+      "end": 50.689
+    },
+    {
+      "word": "Se",
+      "start": 50.863,
+      "end": 51.014
+    },
+    {
+      "word": "construye.",
+      "start": 51.072,
+      "end": 51.931
+    },
+    {
+      "word": "Y",
+      "start": 52.047,
+      "end": 52.117
+    },
+    {
+      "word": "nosotros",
+      "start": 52.198,
+      "end": 52.732
+    },
+    {
+      "word": "sabemos",
+      "start": 52.755,
+      "end": 53.266
+    },
+    {
+      "word": "como.",
+      "start": 53.382,
+      "end": 53.905
+    },
+    {
+      "word": "Victor",
+      "start": 54.149,
+      "end": 54.59
+    },
+    {
+      "word": "IA.",
+      "start": 54.659,
+      "end": 55.228
+    },
+    {
+      "word": "Inteligencia",
+      "start": 55.67,
+      "end": 56.529
+    },
+    {
+      "word": "que",
+      "start": 56.622,
+      "end": 56.726
+    },
+    {
+      "word": "entiende",
+      "start": 56.761,
+      "end": 57.26
+    },
+    {
+      "word": "tu",
+      "start": 57.307,
+      "end": 57.399
+    },
+    {
+      "word": "negocio.",
+      "start": 57.457,
+      "end": 58.05
+    },
+    {
+      "word": "Hablemos",
+      "start": 58.259,
+      "end": 58.769
+    },
+    {
+      "word": "hoy.",
+      "start": 58.827,
+      "end": 59.396
+    }
+  ]
+}

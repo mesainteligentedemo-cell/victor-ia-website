@@ -1,0 +1,1958 @@
+﻿<!DOCTYPE html>
+<html lang="es" data-theme="">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALMA DESARROLLOS — Tu espacio. Tu historia. | Riviera Maya</title>
+<meta name="description" content="ALMA DESARROLLOS: 15 años construyendo hogares en el Caribe mexicano. Proyectos residenciales premium en Tulum, Puerto Morelos y Playa del Carmen. Accesibilidad cognitiva WCAG 2.2.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Nunito+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+/* ===========================
+   RESET & CUSTOM PROPERTIES
+   =========================== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --piedra:    #7C6552;
+  --azul:      #1E2D4A;
+  --crema:     #F7F4EF;
+  --dorado:    #C9A84C;
+  --salvia:    #6B8F6B;
+  --muted:     rgba(30,45,74,0.45);
+  --piedra-oscuro: #5a4a3c;
+  --crema-dark:#EDE8DF;
+  --sombra:    0 2px 20px rgba(30,45,74,0.10);
+  --sombra-hover: 0 8px 40px rgba(30,45,74,0.18);
+  --radio:     4px;
+  --radio-lg:  8px;
+  --transicion: 0.28s ease;
+}
+
+/* ===========================
+   ALTO CONTRASTE
+   =========================== */
+[data-theme="contrast"] {
+  --piedra:    #000000;
+  --azul:      #000000;
+  --crema:     #ffffff;
+  --dorado:    #000000;
+  --salvia:    #000000;
+  --muted:     #000000;
+  --crema-dark:#ffffff;
+}
+[data-theme="contrast"] body { background: #fff; color: #000; }
+[data-theme="contrast"] a, [data-theme="contrast"] button { color: #000 !important; border-color: #000 !important; }
+[data-theme="contrast"] .a11y-bar { background: #000 !important; color: #fff !important; }
+[data-theme="contrast"] .a11y-bar button { color: #fff !important; border-color: #fff !important; }
+[data-theme="contrast"] .nav-bar { background: #fff !important; border-bottom: 2px solid #000; }
+[data-theme="contrast"] .proyecto-card, [data-theme="contrast"] .a11y-feature-card,
+[data-theme="contrast"] .valor-card, [data-theme="contrast"] .paso-item { background: #fff !important; border: 2px solid #000 !important; }
+[data-theme="contrast"] .hero-section { background: #fff !important; }
+[data-theme="contrast"] .hero-badge { background: #000 !important; color: #fff !important; }
+[data-theme="contrast"] .btn-primary { background: #000 !important; color: #fff !important; }
+[data-theme="contrast"] .btn-secondary { background: #fff !important; color: #000 !important; border: 2px solid #000 !important; }
+[data-theme="contrast"] .footer-section { background: #000 !important; color: #fff !important; }
+
+/* ===========================
+   BASE
+   =========================== */
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'Nunito Sans', sans-serif;
+  background: var(--crema);
+  color: var(--azul);
+  line-height: 1.65;
+}
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+:focus-visible {
+  outline: 3px solid var(--dorado) !important;
+  outline-offset: 4px !important;
+  box-shadow: 0 0 0 6px rgba(201,168,76,0.28) !important;
+}
+img, svg { max-width: 100%; }
+a { color: var(--azul); text-decoration: none; }
+ul { list-style: none; }
+
+/* ===========================
+   SKIP LINK
+   =========================== */
+.skip-link {
+  position: absolute; top: -100px; left: 1rem;
+  background: var(--dorado); color: var(--azul);
+  padding: .6rem 1.2rem; font-weight: 600;
+  border-radius: var(--radio);
+  z-index: 9999; transition: top .2s;
+}
+.skip-link:focus { top: 1rem; }
+
+/* ===========================
+   ACCESSIBILITY BAR
+   =========================== */
+.a11y-bar {
+  background: var(--piedra-oscuro);
+  color: #f0ebe3;
+  padding: .45rem 1.5rem;
+  display: flex; flex-wrap: wrap; align-items: center;
+  gap: .35rem .6rem;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: .78rem;
+  position: sticky; top: 0; z-index: 900;
+}
+.a11y-bar-label {
+  font-size: .72rem; letter-spacing: .06em;
+  text-transform: uppercase; color: rgba(240,235,227,0.7);
+  margin-right: .4rem; white-space: nowrap;
+}
+.a11y-btn {
+  background: transparent;
+  border: 1px solid rgba(240,235,227,0.35);
+  color: #f0ebe3;
+  padding: .3rem .65rem;
+  border-radius: 20px;
+  font-size: .75rem;
+  cursor: pointer;
+  transition: background var(--transicion), border-color var(--transicion);
+  font-family: 'Nunito Sans', sans-serif;
+  white-space: nowrap;
+}
+.a11y-btn:hover, .a11y-btn:focus-visible {
+  background: rgba(240,235,227,0.15);
+  border-color: rgba(240,235,227,0.7);
+}
+.a11y-btn[aria-pressed="true"] {
+  background: var(--dorado);
+  border-color: var(--dorado);
+  color: var(--azul);
+  font-weight: 600;
+}
+.a11y-sep {
+  width: 1px; height: 1.4rem;
+  background: rgba(240,235,227,0.25);
+  flex-shrink: 0;
+}
+.font-ctrl { display: flex; align-items: center; gap: .25rem; }
+.font-ctrl button {
+  background: transparent; border: 1px solid rgba(240,235,227,0.35);
+  color: #f0ebe3; width: 28px; height: 28px; border-radius: 50%;
+  font-size: .95rem; cursor: pointer; display: grid; place-items: center;
+  font-family: 'Nunito Sans', sans-serif; line-height: 1;
+}
+.font-ctrl button:hover { background: rgba(240,235,227,0.15); }
+
+/* ===========================
+   NAVIGATION
+   =========================== */
+.nav-bar {
+  background: rgba(247,244,239,0.96);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(124,101,82,0.15);
+  padding: 1rem 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 38px; z-index: 800;
+  gap: 1rem;
+}
+.nav-logo { display: flex; align-items: center; }
+.nav-logo svg { height: 44px; width: auto; }
+.nav-links {
+  display: flex; align-items: center; gap: 2rem;
+}
+.nav-links a {
+  font-size: .88rem; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--azul);
+  font-weight: 400; font-family: 'Nunito Sans', sans-serif;
+  transition: color var(--transicion);
+  position: relative; padding-bottom: 2px;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 0; height: 1px; background: var(--dorado);
+  transition: width var(--transicion);
+}
+.nav-links a:hover::after, .nav-links a:focus-visible::after { width: 100%; }
+.nav-links a:hover { color: var(--piedra); }
+.nav-cta {
+  background: var(--azul); color: var(--crema) !important;
+  padding: .55rem 1.3rem; border-radius: var(--radio);
+  font-size: .82rem; letter-spacing: .1em; font-weight: 600;
+  transition: background var(--transicion);
+}
+.nav-cta:hover { background: var(--piedra) !important; color: var(--crema) !important; }
+.nav-cta::after { display: none !important; }
+
+/* ===========================
+   HERO SECTION
+   =========================== */
+.hero-section {
+  background: linear-gradient(150deg, #F7F4EF 0%, #EDE8DF 50%, #E0D8CC 100%);
+  min-height: calc(100vh - 82px);
+  display: grid; grid-template-columns: 1fr 1fr;
+  align-items: center; gap: 0;
+  position: relative; overflow: hidden;
+  padding: 4rem 2rem 4rem;
+}
+.hero-bg-pattern {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+}
+.hero-content {
+  position: relative; z-index: 1;
+  padding: 2rem 3rem 2rem 4rem;
+}
+.hero-eyebrow {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: .8rem; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--piedra);
+  margin-bottom: 1.5rem; display: block;
+}
+.hero-h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3.5rem, 6vw, 6rem);
+  font-weight: 300; line-height: 1;
+  color: var(--azul); display: block;
+}
+.hero-h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3.2rem, 5.5vw, 5.5rem);
+  font-weight: 300; font-style: italic;
+  line-height: 1; color: var(--piedra);
+  display: block; margin-bottom: 1.8rem;
+}
+.hero-desc {
+  font-size: 1rem; color: var(--muted);
+  line-height: 1.75; max-width: 400px;
+  margin-bottom: 2.2rem;
+  font-weight: 300;
+}
+.hero-badges {
+  display: flex; gap: .75rem; flex-wrap: wrap;
+  margin-bottom: 2.4rem;
+}
+.hero-badge {
+  background: var(--azul); color: var(--crema);
+  font-size: .7rem; letter-spacing: .1em; text-transform: uppercase;
+  padding: .35rem .9rem; border-radius: 20px;
+  font-family: 'Nunito Sans', sans-serif; font-weight: 600;
+}
+.hero-badge.badge-dorado {
+  background: var(--dorado); color: var(--azul);
+}
+.hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn-primary {
+  background: var(--azul); color: var(--crema);
+  padding: .9rem 2rem; border-radius: var(--radio);
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: .88rem; font-weight: 600; letter-spacing: .08em;
+  border: none; cursor: pointer; text-transform: uppercase;
+  transition: background var(--transicion), transform var(--transicion), box-shadow var(--transicion);
+  display: inline-flex; align-items: center; gap: .5rem;
+  text-decoration: none;
+}
+.btn-primary:hover, .btn-primary:focus-visible {
+  background: var(--piedra); transform: translateY(-2px);
+  box-shadow: var(--sombra-hover);
+}
+.btn-secondary {
+  background: transparent; color: var(--azul);
+  padding: .85rem 2rem; border-radius: var(--radio);
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: .88rem; font-weight: 600; letter-spacing: .08em;
+  border: 1.5px solid var(--azul); cursor: pointer; text-transform: uppercase;
+  transition: background var(--transicion), color var(--transicion), transform var(--transicion);
+  display: inline-flex; align-items: center; gap: .5rem;
+  text-decoration: none;
+}
+.btn-secondary:hover, .btn-secondary:focus-visible {
+  background: var(--azul); color: var(--crema); transform: translateY(-2px);
+}
+
+/* Hero ilustración */
+.hero-illustration {
+  position: relative; z-index: 1;
+  display: flex; justify-content: center; align-items: center;
+  padding: 2rem;
+}
+.hero-illustration svg { width: 100%; max-width: 480px; filter: drop-shadow(0 20px 60px rgba(30,45,74,0.12)); }
+
+/* Stats hero */
+.hero-stats {
+  position: absolute; bottom: 2.5rem; left: 4rem;
+  display: flex; gap: 3rem; z-index: 2;
+}
+.hero-stat-item { text-align: left; }
+.hero-stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.2rem; font-weight: 300; color: var(--azul);
+  display: block; line-height: 1;
+}
+.hero-stat-label {
+  font-size: .75rem; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--muted);
+  font-weight: 400;
+}
+
+/* ===========================
+   SECTIONS — COMUNES
+   =========================== */
+.section { padding: 6rem 2rem; }
+.section-inner { max-width: 1160px; margin: 0 auto; }
+.section-tag {
+  font-size: .72rem; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--dorado); font-weight: 600; display: block;
+  margin-bottom: .75rem;
+}
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 300; color: var(--azul);
+  line-height: 1.15; margin-bottom: 1rem;
+}
+.section-title em { font-style: italic; color: var(--piedra); }
+.section-subtitle {
+  font-size: 1rem; color: var(--muted); max-width: 560px;
+  line-height: 1.75; font-weight: 300;
+}
+.section-header { margin-bottom: 3.5rem; }
+
+/* ===========================
+   REVEAL ANIMATION
+   =========================== */
+.reveal {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity .65s ease, transform .65s ease;
+}
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ===========================
+   A11Y FEATURES SECTION
+   =========================== */
+.a11y-section { background: var(--azul); }
+.a11y-section .section-tag { color: var(--dorado); }
+.a11y-section .section-title { color: var(--crema); }
+.a11y-section .section-subtitle { color: rgba(247,244,239,0.65); }
+.a11y-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem; margin-top: 3rem;
+}
+.a11y-feature-card {
+  background: rgba(247,244,239,0.06);
+  border: 1px solid rgba(247,244,239,0.12);
+  border-radius: var(--radio-lg); padding: 2rem 1.6rem;
+  transition: background var(--transicion), border-color var(--transicion), transform var(--transicion);
+}
+.a11y-feature-card:hover {
+  background: rgba(247,244,239,0.1);
+  border-color: rgba(201,168,76,0.4);
+  transform: translateY(-4px);
+}
+.a11y-feature-icon {
+  width: 48px; height: 48px; border-radius: 50%;
+  background: rgba(201,168,76,0.15);
+  display: grid; place-items: center; margin-bottom: 1.2rem;
+  border: 1px solid rgba(201,168,76,0.3);
+}
+.a11y-feature-icon svg { width: 22px; height: 22px; }
+.a11y-feature-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem; font-weight: 300;
+  color: var(--crema); margin-bottom: .6rem; line-height: 1.2;
+}
+.a11y-feature-desc {
+  font-size: .88rem; color: rgba(247,244,239,0.6);
+  line-height: 1.65; font-weight: 300;
+}
+.a11y-feature-btn {
+  margin-top: 1.2rem; display: inline-flex; align-items: center;
+  gap: .4rem; font-size: .8rem; color: var(--dorado);
+  border: 1px solid rgba(201,168,76,0.4);
+  background: transparent; cursor: pointer; border-radius: 20px;
+  padding: .35rem .9rem; font-family: 'Nunito Sans', sans-serif;
+  font-weight: 600; transition: background var(--transicion), border-color var(--transicion);
+}
+.a11y-feature-btn:hover { background: rgba(201,168,76,0.12); border-color: var(--dorado); }
+.a11y-feature-btn[aria-pressed="true"] {
+  background: var(--dorado); color: var(--azul); border-color: var(--dorado);
+}
+
+/* ===========================
+   PROYECTOS SECTION
+   =========================== */
+.proyectos-section { background: var(--crema); }
+.proyectos-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+.proyecto-card {
+  background: #fff; border-radius: var(--radio-lg);
+  overflow: hidden; box-shadow: var(--sombra);
+  transition: box-shadow var(--transicion), transform var(--transicion);
+  display: flex; flex-direction: column;
+}
+.proyecto-card:hover { box-shadow: var(--sombra-hover); transform: translateY(-6px); }
+.proyecto-visual {
+  height: 200px; display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.proyecto-visual svg { width: 100%; height: 100%; }
+.proyecto-body { padding: 1.8rem; flex: 1; display: flex; flex-direction: column; }
+.proyecto-location {
+  font-size: .72rem; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--piedra); font-weight: 600; margin-bottom: .4rem;
+}
+.proyecto-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.7rem; font-weight: 300; color: var(--azul);
+  margin-bottom: .3rem; line-height: 1.1;
+}
+.proyecto-precio {
+  font-size: .82rem; color: var(--muted); margin-bottom: 1rem;
+  font-weight: 300;
+}
+.proyecto-precio strong { color: var(--dorado); font-weight: 600; font-size: .9rem; }
+.proyecto-desc {
+  font-size: .88rem; color: var(--muted); line-height: 1.65;
+  font-weight: 300; margin-bottom: 1.2rem; flex: 1;
+}
+.proyecto-bullets { list-style: none; margin-bottom: 1.5rem; }
+.proyecto-bullets li {
+  font-size: .84rem; color: var(--azul); padding: .2rem 0;
+  display: flex; align-items: center; gap: .5rem;
+}
+.proyecto-bullets li span[aria-hidden="true"] { font-size: 1rem; flex-shrink: 0; }
+.proyecto-actions { display: flex; gap: .75rem; }
+.btn-proyecto {
+  flex: 1; text-align: center; padding: .7rem .5rem;
+  border-radius: var(--radio); font-size: .8rem;
+  font-weight: 600; letter-spacing: .07em; text-transform: uppercase;
+  cursor: pointer; transition: all var(--transicion);
+  font-family: 'Nunito Sans', sans-serif; border: none;
+  text-decoration: none; display: inline-flex; align-items: center; justify-content: center;
+}
+.btn-proyecto-ver {
+  background: var(--azul); color: var(--crema);
+}
+.btn-proyecto-ver:hover { background: var(--piedra); }
+.btn-proyecto-cotizar {
+  background: transparent; color: var(--dorado);
+  border: 1.5px solid var(--dorado);
+}
+.btn-proyecto-cotizar:hover { background: var(--dorado); color: var(--azul); }
+
+/* ===========================
+   PROCESO SECTION
+   =========================== */
+.proceso-section {
+  background: linear-gradient(180deg, #EDE8DF 0%, #F7F4EF 100%);
+}
+.proceso-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 2rem; position: relative;
+}
+.proceso-grid::before {
+  content: '';
+  position: absolute; top: 2.8rem; left: 12%; right: 12%; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--dorado) 20%, var(--dorado) 80%, transparent);
+  z-index: 0;
+}
+.paso-item {
+  background: #fff; border-radius: var(--radio-lg);
+  padding: 2rem 1.5rem 2rem;
+  text-align: center; position: relative; z-index: 1;
+  box-shadow: var(--sombra);
+  transition: box-shadow var(--transicion), transform var(--transicion);
+}
+.paso-item:hover { box-shadow: var(--sombra-hover); transform: translateY(-4px); }
+.paso-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.5rem; font-weight: 300; font-style: italic;
+  color: var(--dorado); line-height: 1;
+  display: block; margin-bottom: .6rem;
+}
+.paso-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.25rem; font-weight: 300; color: var(--azul);
+  margin-bottom: .6rem; line-height: 1.2;
+}
+.paso-desc {
+  font-size: .84rem; color: var(--muted); line-height: 1.65; font-weight: 300;
+}
+.paso-tag {
+  display: inline-block; margin-top: 1rem;
+  background: rgba(201,168,76,0.12); color: var(--piedra);
+  font-size: .72rem; letter-spacing: .1em; padding: .25rem .7rem;
+  border-radius: 20px; font-weight: 600; text-transform: uppercase;
+}
+
+/* ===========================
+   NOSOTROS / VALORES
+   =========================== */
+.nosotros-section { background: #fff; }
+.nosotros-inner {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 5rem; align-items: center;
+}
+.nosotros-text .section-subtitle { margin-bottom: 2rem; }
+.nosotros-stat-row {
+  display: flex; gap: 2.5rem; margin-top: 2.5rem;
+}
+.nosotros-stat { }
+.nosotros-stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.8rem; font-weight: 300; color: var(--dorado);
+  line-height: 1; display: block;
+}
+.nosotros-stat-lbl {
+  font-size: .78rem; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--muted); font-weight: 400;
+}
+.valores-grid {
+  display: flex; flex-direction: column; gap: 1.5rem;
+}
+.valor-card {
+  display: flex; gap: 1.4rem; align-items: flex-start;
+  padding: 1.6rem; background: var(--crema);
+  border-radius: var(--radio-lg); border-left: 3px solid var(--dorado);
+  transition: transform var(--transicion), box-shadow var(--transicion);
+}
+.valor-card:hover { transform: translateX(4px); box-shadow: var(--sombra); }
+.valor-icon {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--azul); display: grid; place-items: center; flex-shrink: 0;
+}
+.valor-icon svg { width: 20px; height: 20px; }
+.valor-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem; font-weight: 300; color: var(--azul);
+  margin-bottom: .35rem;
+}
+.valor-desc { font-size: .88rem; color: var(--muted); line-height: 1.65; font-weight: 300; }
+
+/* ===========================
+   CONTACTO SECTION
+   =========================== */
+.contacto-section {
+  background: linear-gradient(150deg, #F7F4EF 0%, #EDE8DF 100%);
+}
+.contacto-inner {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 5rem; align-items: start;
+}
+.contacto-info { padding-top: 1rem; }
+.contacto-info p { font-size: .94rem; color: var(--muted); line-height: 1.75; font-weight: 300; margin-bottom: 2rem; }
+.contacto-item {
+  display: flex; gap: .75rem; align-items: center;
+  margin-bottom: 1rem; font-size: .9rem; color: var(--azul);
+}
+.contacto-item svg { flex-shrink: 0; }
+.contacto-form-card {
+  background: #fff; border-radius: var(--radio-lg);
+  padding: 2.5rem; box-shadow: var(--sombra);
+}
+.form-field { margin-bottom: 1.4rem; }
+.form-label {
+  display: block; font-size: .82rem; font-weight: 600;
+  letter-spacing: .08em; text-transform: uppercase;
+  color: var(--azul); margin-bottom: .5rem;
+}
+.form-input, .form-select {
+  width: 100%; padding: .85rem 1rem;
+  border: 1.5px solid rgba(30,45,74,0.2);
+  border-radius: var(--radio); font-size: .94rem;
+  font-family: 'Nunito Sans', sans-serif; color: var(--azul);
+  background: var(--crema);
+  transition: border-color var(--transicion), box-shadow var(--transicion);
+  appearance: none;
+}
+.form-input:focus, .form-select:focus {
+  outline: none; border-color: var(--dorado);
+  box-shadow: 0 0 0 3px rgba(201,168,76,0.18);
+}
+.form-input[aria-invalid="true"], .form-select[aria-invalid="true"] {
+  border-color: #c0392b;
+}
+.form-error {
+  font-size: .8rem; color: #c0392b; margin-top: .35rem;
+  font-weight: 600; display: block;
+}
+.btn-submit {
+  width: 100%; padding: 1rem;
+  background: var(--azul); color: var(--crema);
+  border: none; border-radius: var(--radio);
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: .92rem; font-weight: 600; letter-spacing: .1em;
+  text-transform: uppercase; cursor: pointer;
+  transition: background var(--transicion), transform var(--transicion), box-shadow var(--transicion);
+}
+.btn-submit:hover, .btn-submit:focus-visible {
+  background: var(--piedra); transform: translateY(-2px); box-shadow: var(--sombra-hover);
+}
+.form-success {
+  background: rgba(107,143,107,0.12); border: 1.5px solid var(--salvia);
+  border-radius: var(--radio); padding: 1.2rem; text-align: center;
+  color: var(--salvia); font-weight: 600; font-size: .94rem;
+  margin-top: 1rem;
+}
+
+/* ===========================
+   FOOTER
+   =========================== */
+.footer-section {
+  background: var(--azul); color: rgba(247,244,239,0.75);
+  padding: 4rem 2rem 2rem;
+}
+.footer-inner { max-width: 1160px; margin: 0 auto; }
+.footer-top {
+  display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 3rem; padding-bottom: 3rem;
+  border-bottom: 1px solid rgba(247,244,239,0.12);
+  margin-bottom: 2rem;
+}
+.footer-logo { margin-bottom: 1rem; }
+.footer-logo svg { height: 40px; }
+.footer-tagline {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-size: 1rem; font-weight: 300;
+  color: rgba(247,244,239,0.55); margin-bottom: 1.2rem;
+}
+.footer-col-title {
+  font-size: .72rem; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--dorado); font-weight: 600; margin-bottom: 1.2rem;
+}
+.footer-col a {
+  display: block; font-size: .86rem;
+  color: rgba(247,244,239,0.65); margin-bottom: .6rem;
+  transition: color var(--transicion);
+}
+.footer-col a:hover { color: var(--crema); }
+.footer-bottom {
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 1rem;
+}
+.footer-legal {
+  font-size: .76rem; color: rgba(247,244,239,0.4);
+}
+.footer-credit {
+  font-size: .76rem; color: rgba(247,244,239,0.4);
+}
+.footer-credit a { color: var(--dorado); }
+.footer-credit a:hover { color: var(--crema); }
+
+/* ===========================
+   RESPONSIVE
+   =========================== */
+@media (max-width: 1100px) {
+  .a11y-grid { grid-template-columns: repeat(2, 1fr); }
+  .proyectos-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+}
+@media (max-width: 900px) {
+  .hero-section { grid-template-columns: 1fr; padding: 3rem 1.5rem 2rem; min-height: auto; }
+  .hero-content { padding: 1.5rem; }
+  .hero-illustration { padding: 1rem; }
+  .hero-stats { position: static; margin-top: 2rem; display: flex; gap: 2rem; }
+  .proceso-grid { grid-template-columns: repeat(2, 1fr); }
+  .proceso-grid::before { display: none; }
+  .nosotros-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .contacto-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .nav-links { display: none; }
+}
+@media (max-width: 600px) {
+  .a11y-bar { padding: .4rem .75rem; }
+  .a11y-bar-label { display: none; }
+  .a11y-grid { grid-template-columns: 1fr; }
+  .proyectos-grid { grid-template-columns: 1fr; }
+  .proceso-grid { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr; gap: 1.5rem; }
+  .hero-h1 { font-size: 3rem; }
+  .hero-h2 { font-size: 2.6rem; }
+  .nosotros-stat-row { gap: 1.5rem; }
+}
+
+/* ===========================
+   MODO DECORATIVO DESACTIVADO
+   =========================== */
+.decorativo { pointer-events: none; }
+
+/* ===========================
+   DIVISOR DORADO
+   =========================== */
+.divisor {
+  width: 60px; height: 1px; background: var(--dorado);
+  margin: 1.2rem 0 2rem;
+}
+</style>
+<style>
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");opacity:.028;pointer-events:none;z-index:9995;}
+.lxgc{cursor:default;position:relative;overflow:hidden;}
+.lxgc img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.23,1,.32,1),filter .5s;filter:brightness(.82);}
+.lxgc:hover img{transform:scale(1.09);filter:brightness(1);}
+.lxgc .lxov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55) 0%,transparent 55%);transition:opacity .4s;}
+.lxgc:hover .lxov{opacity:.3;}
+</style>
+<!-- lux-patch -->
+<style>
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");opacity:.028;pointer-events:none;z-index:9995;}
+.lxgc{cursor:default;position:relative;overflow:hidden;}.lxgc img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.23,1,.32,1),filter .5s;filter:brightness(.82);}.lxgc:hover img{transform:scale(1.09);filter:brightness(1);}.lxgc .lxov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55) 0%,transparent 55%);transition:opacity .4s;}.lxgc:hover .lxov{opacity:.3;}
+</style>
+<!-- interact-patch -->
+<style>
+:root{--mpos-x:50%;--mpos-y:50%;--scroll-pct:0%;}
+/* Progress bar */
+.ip-bar{position:fixed;top:0;left:0;height:3px;z-index:10001;pointer-events:none;background:linear-gradient(90deg,#C9A84C,#7C6552);transform-origin:left;transform:scaleX(var(--scroll-raw,0));transition:transform .08s linear;}
+/* Mouse-responsive ambient glow */
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(circle 700px at var(--mpos-x) var(--mpos-y),rgba(201,168,76,.12),transparent 70%);transition:background .4s;}
+/* Hero shimmer overlay */
+@keyframes ipShimmer{0%,100%{opacity:.6}50%{opacity:1}}
+@keyframes ipFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes ipPulse{0%,100%{box-shadow:0 0 0 0 rgba(201,168,76,.4)}70%{box-shadow:0 0 0 14px rgba(201,168,76,0)}}
+@keyframes ipSpin{to{transform:rotate(360deg)}}
+@keyframes ipCountUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+/* CTA pulse */
+.ip-pulse{animation:ipPulse 2.4s ease-in-out infinite;}
+/* Section reveal directions */
+.ip-rl{opacity:0;transform:translateX(-42px);transition:opacity .75s ease,transform .75s cubic-bezier(.23,1,.32,1);}
+.ip-rr{opacity:0;transform:translateX(42px);transition:opacity .75s ease,transform .75s cubic-bezier(.23,1,.32,1);}
+.ip-rb{opacity:0;transform:translateY(38px);transition:opacity .75s ease,transform .75s cubic-bezier(.23,1,.32,1);}
+.ip-rv{opacity:1!important;transform:none!important;}
+/* Stat counter */
+.ip-counted{animation:ipCountUp .5s ease forwards;}
+/* Animated border gradient on cards on hover */
+.card,.card-inclusivo,.specialty-card,.a11y-card,.feature-card,.plan-card,.tour-card,.menu-card,.exp-card,.service-card,.property-card,.tour-item,.reason-card{
+  position:relative;
+  transition:box-shadow .35s,border-color .35s,transform .35s;
+}
+.card:hover,.specialty-card:hover,.a11y-card:hover,.feature-card:hover,.plan-card:hover,.tour-card:hover,.menu-card:hover,.exp-card:hover,.property-card:hover,.tour-item:hover,.reason-card:hover{
+  box-shadow:0 16px 48px rgba(201,168,76,.22),0 4px 16px rgba(201,168,76,.14)!important;
+}
+/* Hero animated gradient layer */
+.ip-hero-layer{
+  position:absolute;inset:0;pointer-events:none;z-index:3;
+  background:linear-gradient(-45deg,rgba(201,168,76,.35),rgba(201,168,76,.05) 40%,transparent 60%);
+  background-size:300% 300%;
+  animation:ipShimmer 5s ease-in-out infinite;
+}
+/* Parallax text nudge */
+.ip-parallax{will-change:transform;}
+/* Scroll-linked image brightness */
+.lxgc:hover img{filter:brightness(1.05) saturate(1.08)!important;}
+</style>
+</head>
+<body>
+
+<!-- SKIP LINK -->
+<a class="skip-link" href="#main-content">Saltar al contenido principal</a>
+
+<!-- SR LIVE REGION (inyectado por JS también) -->
+<div id="sr-live" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+
+<!-- ============================================================
+     BARRA DE ACCESIBILIDAD COGNITIVA
+     ============================================================ -->
+<div class="a11y-bar" role="toolbar" aria-label="Opciones de accesibilidad cognitiva">
+  <span class="a11y-bar-label" aria-hidden="true">Accesibilidad</span>
+
+  <button class="a11y-btn" data-toggle="dislexia" aria-pressed="false">
+    <span aria-hidden="true">Aa</span> Fuente dislexia
+  </button>
+
+  <button class="a11y-btn" data-toggle="lenguajeSimple" aria-pressed="false">
+    <span aria-hidden="true">📖</span> Lenguaje simple
+  </button>
+
+  <button class="a11y-btn" data-toggle="sinDistracciones" aria-pressed="false">
+    <span aria-hidden="true">◉</span> Sin distracciones
+  </button>
+
+  <button class="a11y-btn" data-toggle="resaltado" aria-pressed="false">
+    <span aria-hidden="true">✦</span> Resaltado lector
+  </button>
+
+  <button class="a11y-btn" data-toggle="simple" aria-pressed="false">
+    <span aria-hidden="true">▤</span> Modo simple
+  </button>
+
+  <button class="a11y-btn" data-toggle="contraste" aria-pressed="false">
+    <span aria-hidden="true">◑</span> Alto contraste
+  </button>
+
+  <div class="a11y-sep" aria-hidden="true"></div>
+
+  <div class="font-ctrl" role="group" aria-label="Tamaño de texto">
+    <button data-action="font-down" aria-label="Reducir texto" title="Texto más pequeño">A−</button>
+    <button data-action="font-up"   aria-label="Aumentar texto" title="Texto más grande">A+</button>
+  </div>
+</div>
+
+<!-- ============================================================
+     NAVEGACIÓN
+     ============================================================ -->
+<header role="banner">
+  <nav class="nav-bar" aria-label="Navegación principal">
+    <a class="nav-logo" href="#" aria-label="ALMA DESARROLLOS — página de inicio">
+      <svg viewBox="0 0 220 56" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+        <path d="M6 44 L6 22 Q6 8 18 8 Q30 8 30 22 L30 44" stroke="#C9A84C" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <line x1="4" y1="44" x2="32" y2="44" stroke="#C9A84C" stroke-width="1.5"/>
+        <text x="44" y="30" font-family="Cormorant Garamond, serif" font-size="22" font-weight="300" letter-spacing="5" fill="#1E2D4A">ALMA</text>
+        <text x="44" y="46" font-family="Nunito Sans, sans-serif" font-size="8" font-weight="300" letter-spacing="4" fill="#7C6552">DESARROLLOS</text>
+      </svg>
+    </a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="#proyectos">Proyectos</a></li>
+      <li><a href="#proceso">Proceso</a></li>
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#contacto" class="nav-cta">Hablar con asesor</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- ============================================================
+     MAIN CONTENT
+     ============================================================ -->
+<main id="main-content">
+
+  <!-- ==================== HERO ==================== -->
+  <section class="hero-section" aria-labelledby="hero-heading">
+    <!-- Patrón arquitectónico decorativo -->
+    <div class="hero-bg-pattern decorativo animation-el" aria-hidden="true">
+      <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <pattern id="arch-grid" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
+            <path d="M0 80 L0 0 L80 0" fill="none" stroke="rgba(124,101,82,0.07)" stroke-width="1"/>
+            <line x1="40" y1="0" x2="40" y2="80" stroke="rgba(124,101,82,0.04)" stroke-width="1"/>
+            <line x1="0" y1="40" x2="80" y2="40" stroke="rgba(124,101,82,0.04)" stroke-width="1"/>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#arch-grid)"/>
+      </svg>
+    </div>
+
+    <!-- Contenido hero -->
+    <div class="hero-content">
+      <span class="hero-eyebrow">Riviera Maya · Desde 2011</span>
+      <span class="hero-h1" id="hero-heading">Tu espacio.</span>
+      <span class="hero-h2">Tu historia.</span>
+
+      <p class="hero-desc"
+         data-simple-text="Vendemos casas y departamentos en la playa. Llevamos 15 años ayudando a familias a encontrar su hogar ideal en el Caribe mexicano.">
+        15 años construyendo hogares en el Caribe mexicano. Más de 2,400 familias viven en desarrollos ALMA desde Tulum hasta Puerto Morelos.
+      </p>
+
+      <div class="hero-badges" aria-label="Certificaciones">
+        <span class="hero-badge">WCAG 2.2 AA</span>
+        <span class="hero-badge badge-dorado">Cognitivamente accesible</span>
+        <span class="hero-badge">2,400+ familias</span>
+      </div>
+
+      <div class="hero-ctas">
+        <a href="#proyectos" class="btn-primary">
+          Ver proyectos
+        </a>
+        <a href="#contacto" class="btn-secondary">
+          Hablar con asesor
+        </a>
+      </div>
+    </div>
+
+    <!-- Ilustración geométrica hero -->
+    <div class="hero-illustration decorativo animation-el" aria-hidden="true">
+      <svg viewBox="0 0 480 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Edificio principal -->
+        <rect x="180" y="120" width="120" height="250" fill="rgba(30,45,74,0.06)" stroke="rgba(30,45,74,0.18)" stroke-width="1"/>
+        <!-- Torre izquierda -->
+        <rect x="90" y="200" width="80" height="170" fill="rgba(124,101,82,0.06)" stroke="rgba(124,101,82,0.2)" stroke-width="1"/>
+        <!-- Torre derecha -->
+        <rect x="310" y="170" width="90" height="200" fill="rgba(30,45,74,0.05)" stroke="rgba(30,45,74,0.15)" stroke-width="1"/>
+        <!-- Acceso arco edificio principal -->
+        <path d="M220 370 L220 300 Q240 280 260 300 L260 370" fill="rgba(201,168,76,0.1)" stroke="#C9A84C" stroke-width="1.5"/>
+        <!-- Ventanas edificio principal -->
+        <rect x="192" y="140" width="14" height="18" fill="rgba(201,168,76,0.15)" stroke="rgba(30,45,74,0.15)" stroke-width="1"/>
+        <rect x="214" y="140" width="14" height="18" fill="rgba(201,168,76,0.15)" stroke="rgba(30,45,74,0.15)" stroke-width="1"/>
+        <rect x="252" y="140" width="14" height="18" fill="rgba(201,168,76,0.15)" stroke="rgba(30,45,74,0.15)" stroke-width="1"/>
+        <rect x="274" y="140" width="14" height="18" fill="rgba(201,168,76,0.15)" stroke="rgba(30,45,74,0.15)" stroke-width="1"/>
+        <rect x="192" y="168" width="14" height="18" fill="rgba(201,168,76,0.12)" stroke="rgba(30,45,74,0.15)" stroke-width="1"/>
+        <rect x="214" y="168" width="14" height="18" fill="rgba(201,168,76,0.12)" stroke="rgba(30,45,74,0.15)" stroke-width="1"/>
+        <rect x="252" y="168" width="14" height="18" fill="rgba(201,168,76,0.12)" stroke="rgba(30,45,74,0.15)" stroke-width="1"/>
+        <rect x="274" y="168" width="14" height="18" fill="rgba(201,168,76,0.12)" stroke="rgba(30,45,74,0.15)" stroke-width="1"/>
+        <rect x="192" y="196" width="14" height="18" fill="rgba(30,45,74,0.06)" stroke="rgba(30,45,74,0.15)" stroke-width="1"/>
+        <rect x="214" y="196" width="14" height="18" fill="rgba(30,45,74,0.06)" stroke="rgba(30,45,74,0.15)" stroke-width="1"/>
+        <rect x="252" y="196" width="14" height="18" fill="rgba(30,45,74,0.06)" stroke="rgba(30,45,74,0.15)" stroke-width="1"/>
+        <rect x="274" y="196" width="14" height="18" fill="rgba(30,45,74,0.06)" stroke="rgba(30,45,74,0.15)" stroke-width="1"/>
+        <rect x="192" y="224" width="14" height="18" fill="rgba(30,45,74,0.06)" stroke="rgba(30,45,74,0.15)" stroke-width="1"/>
+        <rect x="214" y="224" width="14" height="18" fill="rgba(30,45,74,0.06)" stroke="rgba(30,45,74,0.15)" stroke-width="1"/>
+        <rect x="252" y="224" width="14" height="18" fill="rgba(30,45,74,0.06)" stroke="rgba(30,45,74,0.15)" stroke-width="1"/>
+        <rect x="274" y="224" width="14" height="18" fill="rgba(30,45,74,0.06)" stroke="rgba(30,45,74,0.15)" stroke-width="1"/>
+        <!-- Ventanas torre izq -->
+        <rect x="104" y="216" width="12" height="16" fill="rgba(201,168,76,0.1)" stroke="rgba(124,101,82,0.2)" stroke-width="1"/>
+        <rect x="122" y="216" width="12" height="16" fill="rgba(201,168,76,0.1)" stroke="rgba(124,101,82,0.2)" stroke-width="1"/>
+        <rect x="104" y="240" width="12" height="16" fill="rgba(201,168,76,0.08)" stroke="rgba(124,101,82,0.2)" stroke-width="1"/>
+        <rect x="122" y="240" width="12" height="16" fill="rgba(201,168,76,0.08)" stroke="rgba(124,101,82,0.2)" stroke-width="1"/>
+        <!-- Palmeras decorativas -->
+        <line x1="60" y1="370" x2="60" y2="280" stroke="rgba(107,143,107,0.4)" stroke-width="2"/>
+        <ellipse cx="60" cy="278" rx="22" ry="10" fill="rgba(107,143,107,0.2)" stroke="rgba(107,143,107,0.35)" stroke-width="1"/>
+        <ellipse cx="44" cy="285" rx="18" ry="7" fill="rgba(107,143,107,0.15)" stroke="rgba(107,143,107,0.3)" stroke-width="1" transform="rotate(-25 44 285)"/>
+        <ellipse cx="76" cy="285" rx="18" ry="7" fill="rgba(107,143,107,0.15)" stroke="rgba(107,143,107,0.3)" stroke-width="1" transform="rotate(25 76 285)"/>
+        <line x1="420" y1="370" x2="420" y2="300" stroke="rgba(107,143,107,0.4)" stroke-width="2"/>
+        <ellipse cx="420" cy="298" rx="22" ry="10" fill="rgba(107,143,107,0.2)" stroke="rgba(107,143,107,0.35)" stroke-width="1"/>
+        <ellipse cx="404" cy="305" rx="18" ry="7" fill="rgba(107,143,107,0.15)" stroke="rgba(107,143,107,0.3)" stroke-width="1" transform="rotate(-25 404 305)"/>
+        <ellipse cx="436" cy="305" rx="18" ry="7" fill="rgba(107,143,107,0.15)" stroke="rgba(107,143,107,0.3)" stroke-width="1" transform="rotate(25 436 305)"/>
+        <!-- Línea de suelo -->
+        <line x1="40" y1="370" x2="440" y2="370" stroke="rgba(124,101,82,0.3)" stroke-width="1.5"/>
+        <!-- Línea dorada decorativa -->
+        <path d="M240 60 L240 110" stroke="#C9A84C" stroke-width="1" stroke-dasharray="4 3"/>
+        <circle cx="240" cy="58" r="4" fill="none" stroke="#C9A84C" stroke-width="1"/>
+      </svg>
+    </div>
+
+    <!-- Stats -->
+    <div class="hero-stats" role="list" aria-label="Datos de ALMA DESARROLLOS">
+      <div class="hero-stat-item" role="listitem">
+        <span class="hero-stat-num">15</span>
+        <span class="hero-stat-label">Años de experiencia</span>
+      </div>
+      <div class="hero-stat-item" role="listitem">
+        <span class="hero-stat-num">2,400+</span>
+        <span class="hero-stat-label">Familias en hogares ALMA</span>
+      </div>
+      <div class="hero-stat-item" role="listitem">
+        <span class="hero-stat-num">364</span>
+        <span class="hero-stat-label">Unidades disponibles</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== ACCESIBILIDAD COGNITIVA ==================== -->
+  <section class="section a11y-section" aria-labelledby="a11y-heading">
+    <div class="section-inner">
+      <div class="section-header">
+        <span class="section-tag">Accesibilidad cognitiva</span>
+        <h2 class="section-title" id="a11y-heading">Comprar una casa debe ser <em>sencillo para todos</em></h2>
+        <p class="section-subtitle">Activá las opciones de accesibilidad desde la barra superior. Estas preferencias se guardan automáticamente.</p>
+      </div>
+
+      <div class="a11y-grid">
+        <!-- Card 1: Dislexia -->
+        <div class="a11y-feature-card reveal" aria-label="Función: Fuente para dislexia">
+          <div class="a11y-feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round">
+              <path d="M4 6h16M4 12h10M4 18h7"/>
+              <circle cx="18" cy="17" r="3"/>
+            </svg>
+          </div>
+          <h3 class="a11y-feature-title">Fuente para dislexia</h3>
+          <p class="a11y-feature-desc">Tipografía monoespaciada con mayor separación entre letras y líneas, diseñada para facilitar la lectura fluida.</p>
+          <button class="a11y-feature-btn" data-toggle="dislexia" aria-pressed="false">
+            Activar fuente
+          </button>
+        </div>
+
+        <!-- Card 2: Lenguaje simple -->
+        <div class="a11y-feature-card reveal" aria-label="Función: Lenguaje simple">
+          <div class="a11y-feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M9 12h6M12 9v6"/>
+            </svg>
+          </div>
+          <h3 class="a11y-feature-title">Lenguaje simple</h3>
+          <p class="a11y-feature-desc">Sin tecnicismos ni términos jurídicos. Todo en palabras de todos los días para que entiendas perfectamente lo que compras.</p>
+          <button class="a11y-feature-btn" data-toggle="lenguajeSimple" aria-pressed="false">
+            Activar lenguaje
+          </button>
+        </div>
+
+        <!-- Card 3: Sin distracciones -->
+        <div class="a11y-feature-card reveal" aria-label="Función: Modo sin distracciones">
+          <div class="a11y-feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round">
+              <rect x="3" y="6" width="18" height="12" rx="2"/>
+              <path d="M7 10h10M7 14h7"/>
+            </svg>
+          </div>
+          <h3 class="a11y-feature-title">Modo sin distracciones</h3>
+          <p class="a11y-feature-desc">Oculta animaciones, patrones de fondo y elementos decorativos. Solo lo importante aparece en pantalla.</p>
+          <button class="a11y-feature-btn" data-toggle="sinDistracciones" aria-pressed="false">
+            Activar modo
+          </button>
+        </div>
+
+        <!-- Card 4: Resaltado -->
+        <div class="a11y-feature-card reveal" aria-label="Función: Resaltado de lectura">
+          <div class="a11y-feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+          </div>
+          <h3 class="a11y-feature-title">Resaltado de lectura</h3>
+          <p class="a11y-feature-desc">El párrafo donde está tu cursor se ilumina con dorado suave. Navega con Tab para seguir el texto sin perder el hilo.</p>
+          <button class="a11y-feature-btn" data-toggle="resaltado" aria-pressed="false">
+            Activar resaltado
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PROYECTOS ==================== -->
+  <section class="section proyectos-section" id="proyectos" aria-labelledby="proyectos-heading">
+    <div class="section-inner">
+      <div class="section-header">
+        <span class="section-tag">Proyectos residenciales</span>
+        <h2 class="section-title" id="proyectos-heading">Encuentra tu lugar <em>en el Caribe</em></h2>
+        <div class="divisor" aria-hidden="true"></div>
+        <p class="section-subtitle">Tres desarrollos únicos, cada uno pensado para un estilo de vida diferente. Todos con la calidad ALMA.</p>
+      </div>
+
+      <div class="proyectos-grid">
+
+        <!-- PROYECTO 1: ALMA Selva -->
+        <article class="proyecto-card reveal" aria-labelledby="selva-name">
+          <div class="proyecto-visual" style="background: linear-gradient(160deg, #e8f0e8 0%, #c8ddc8 100%);">
+            <svg viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <!-- Selva: triángulos verdes + cenotes -->
+              <rect width="400" height="200" fill="rgba(107,143,107,0.06)"/>
+              <!-- Copas de árboles -->
+              <polygon points="60,160 90,80 120,160" fill="rgba(107,143,107,0.25)" stroke="rgba(107,143,107,0.5)" stroke-width="1"/>
+              <polygon points="50,160 85,70 120,160" fill="rgba(107,143,107,0.18)" stroke="rgba(107,143,107,0.35)" stroke-width="1"/>
+              <polygon points="130,160 165,85 200,160" fill="rgba(107,143,107,0.3)" stroke="rgba(107,143,107,0.55)" stroke-width="1"/>
+              <polygon points="120,160 160,72 200,160" fill="rgba(107,143,107,0.2)" stroke="rgba(107,143,107,0.4)" stroke-width="1"/>
+              <polygon points="200,160 235,90 270,160" fill="rgba(107,143,107,0.25)" stroke="rgba(107,143,107,0.45)" stroke-width="1"/>
+              <polygon points="270,160 305,78 340,160" fill="rgba(107,143,107,0.22)" stroke="rgba(107,143,107,0.4)" stroke-width="1"/>
+              <polygon points="320,160 350,88 380,160" fill="rgba(107,143,107,0.3)" stroke="rgba(107,143,107,0.5)" stroke-width="1"/>
+              <!-- Edificio entre selva -->
+              <rect x="165" y="100" width="70" height="60" fill="rgba(247,244,239,0.8)" stroke="rgba(124,101,82,0.3)" stroke-width="1"/>
+              <path d="M160 100 L200 72 L240 100" fill="rgba(201,168,76,0.2)" stroke="#C9A84C" stroke-width="1.5"/>
+              <!-- Cenote -->
+              <ellipse cx="320" cy="155" rx="25" ry="10" fill="rgba(30,45,74,0.12)" stroke="rgba(30,45,74,0.25)" stroke-width="1"/>
+              <!-- Línea suelo -->
+              <line x1="0" y1="160" x2="400" y2="160" stroke="rgba(107,143,107,0.3)" stroke-width="1"/>
+              <!-- Letras proyecto -->
+              <text x="200" y="192" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="13" font-weight="300" letter-spacing="4" fill="rgba(30,45,74,0.5)">TULUM</text>
+            </svg>
+          </div>
+          <div class="proyecto-body">
+            <span class="proyecto-location">Tulum, Quintana Roo</span>
+            <h3 class="proyecto-name" id="selva-name">ALMA Selva</h3>
+            <p class="proyecto-precio">
+              Desde <strong>$3,200,000</strong> hasta $8,500,000 MXN
+            </p>
+            <p class="proyecto-desc"
+               data-simple-text="Son 84 departamentos rodeados de selva. Tienen jardín zen y son muy tranquilos. Perfectos para quien quiere vivir en contacto con la naturaleza cerca de Tulum."
+               data-simple-text-attr="true">
+              84 departamentos residenciales integrados al entorno selvático de Tulum. Diseño bioclimático con jardín zen comunitario, senderos de meditación y tecnología domótica.
+            </p>
+            <ul class="proyecto-bullets" aria-label="Características ALMA Selva">
+              <li><span aria-hidden="true">🌿</span> 84 departamentos · 1 a 3 recámaras</li>
+              <li><span aria-hidden="true">🧘</span> Jardín zen + sendero de meditación</li>
+              <li><span aria-hidden="true">🏊</span> Cenote privado + alberca infinity</li>
+            </ul>
+            <div class="proyecto-actions">
+              <a href="#contacto" class="btn-proyecto btn-proyecto-ver" aria-label="Ver más detalles de ALMA Selva">Ver proyecto</a>
+              <a href="#contacto" class="btn-proyecto btn-proyecto-cotizar" aria-label="Cotizar ALMA Selva">Cotizar</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- PROYECTO 2: ALMA Frente Mar -->
+        <article class="proyecto-card reveal" aria-labelledby="frente-mar-name">
+          <div class="proyecto-visual" style="background: linear-gradient(160deg, #e8eef5 0%, #c8d8ea 100%);">
+            <svg viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect width="400" height="200" fill="rgba(30,45,74,0.04)"/>
+              <!-- Olas del mar -->
+              <path d="M0 130 Q50 110 100 130 Q150 150 200 130 Q250 110 300 130 Q350 150 400 130 L400 200 L0 200 Z" fill="rgba(30,45,74,0.12)" stroke="none"/>
+              <path d="M0 145 Q60 125 120 145 Q180 165 240 145 Q300 125 360 145 Q390 155 400 145" fill="none" stroke="rgba(30,45,74,0.25)" stroke-width="1.5"/>
+              <path d="M0 158 Q70 142 140 158 Q210 174 280 158 Q340 144 400 158" fill="none" stroke="rgba(30,45,74,0.15)" stroke-width="1"/>
+              <!-- Edificios frente al mar -->
+              <rect x="80" y="70" width="60" height="80" fill="rgba(247,244,239,0.9)" stroke="rgba(124,101,82,0.3)" stroke-width="1"/>
+              <rect x="170" y="50" width="70" height="100" fill="rgba(247,244,239,0.95)" stroke="rgba(124,101,82,0.35)" stroke-width="1"/>
+              <rect x="260" y="65" width="60" height="85" fill="rgba(247,244,239,0.9)" stroke="rgba(124,101,82,0.3)" stroke-width="1"/>
+              <!-- Ventanas en azul -->
+              <rect x="92" y="82" width="10" height="12" fill="rgba(30,45,74,0.15)" stroke="rgba(30,45,74,0.2)" stroke-width="1"/>
+              <rect x="110" y="82" width="10" height="12" fill="rgba(30,45,74,0.15)" stroke="rgba(30,45,74,0.2)" stroke-width="1"/>
+              <rect x="92" y="102" width="10" height="12" fill="rgba(201,168,76,0.3)" stroke="rgba(201,168,76,0.4)" stroke-width="1"/>
+              <rect x="110" y="102" width="10" height="12" fill="rgba(201,168,76,0.3)" stroke="rgba(201,168,76,0.4)" stroke-width="1"/>
+              <rect x="185" y="65" width="10" height="12" fill="rgba(30,45,74,0.15)" stroke="rgba(30,45,74,0.2)" stroke-width="1"/>
+              <rect x="203" y="65" width="10" height="12" fill="rgba(30,45,74,0.15)" stroke="rgba(30,45,74,0.2)" stroke-width="1"/>
+              <rect x="221" y="65" width="10" height="12" fill="rgba(30,45,74,0.15)" stroke="rgba(30,45,74,0.2)" stroke-width="1"/>
+              <rect x="185" y="85" width="10" height="12" fill="rgba(201,168,76,0.3)" stroke="rgba(201,168,76,0.4)" stroke-width="1"/>
+              <rect x="203" y="85" width="10" height="12" fill="rgba(201,168,76,0.3)" stroke="rgba(201,168,76,0.4)" stroke-width="1"/>
+              <rect x="221" y="85" width="10" height="12" fill="rgba(201,168,76,0.3)" stroke="rgba(201,168,76,0.4)" stroke-width="1"/>
+              <!-- Arco acceso torre central -->
+              <path d="M195 150 L195 115 Q205 104 215 115 L215 150" fill="rgba(201,168,76,0.1)" stroke="#C9A84C" stroke-width="1.5"/>
+              <!-- Sol -->
+              <circle cx="360" cy="30" r="18" fill="rgba(201,168,76,0.25)" stroke="rgba(201,168,76,0.5)" stroke-width="1"/>
+              <text x="200" y="192" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="13" font-weight="300" letter-spacing="4" fill="rgba(30,45,74,0.5)">PUERTO MORELOS</text>
+            </svg>
+          </div>
+          <div class="proyecto-body">
+            <span class="proyecto-location">Puerto Morelos, Quintana Roo</span>
+            <h3 class="proyecto-name" id="frente-mar-name">ALMA Frente Mar</h3>
+            <p class="proyecto-precio">
+              Desde <strong>$6,800,000</strong> hasta $18,000,000 MXN
+            </p>
+            <p class="proyecto-desc"
+               data-simple-text="Son 40 condominios de lujo con vista al mar. La playa está a unos pasos. Es el proyecto más exclusivo de ALMA, en Puerto Morelos."
+               data-simple-text-attr="true">
+              40 condominios de lujo con acceso directo a la playa de Puerto Morelos. Vista panorámica al Mar Caribe, marina privada y club de playa exclusivo para residentes.
+            </p>
+            <ul class="proyecto-bullets" aria-label="Características ALMA Frente Mar">
+              <li><span aria-hidden="true">🌊</span> 40 condominios · Vista al mar garantizada</li>
+              <li><span aria-hidden="true">⛵</span> Marina privada · Club de playa</li>
+              <li><span aria-hidden="true">🍽️</span> Restaurante · Spa · Concierge 24h</li>
+            </ul>
+            <div class="proyecto-actions">
+              <a href="#contacto" class="btn-proyecto btn-proyecto-ver" aria-label="Ver más detalles de ALMA Frente Mar">Ver proyecto</a>
+              <a href="#contacto" class="btn-proyecto btn-proyecto-cotizar" aria-label="Cotizar ALMA Frente Mar">Cotizar</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- PROYECTO 3: ALMA Residencial -->
+        <article class="proyecto-card reveal" aria-labelledby="residencial-name">
+          <div class="proyecto-visual" style="background: linear-gradient(160deg, #f0ede8 0%, #e0d8cc 100%);">
+            <svg viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect width="400" height="200" fill="rgba(124,101,82,0.04)"/>
+              <!-- Grid de casas ordenadas -->
+              <!-- Fila 1 -->
+              <rect x="30" y="90" width="56" height="50" fill="rgba(247,244,239,0.9)" stroke="rgba(124,101,82,0.3)" stroke-width="1"/>
+              <polygon points="30,90 58,60 86,90" fill="rgba(201,168,76,0.2)" stroke="rgba(201,168,76,0.4)" stroke-width="1.2"/>
+              <rect x="46" y="110" width="14" height="30" fill="rgba(124,101,82,0.15)" stroke="rgba(124,101,82,0.2)" stroke-width="1"/>
+              <rect x="36" y="96" width="10" height="10" fill="rgba(30,45,74,0.1)" stroke="rgba(30,45,74,0.2)" stroke-width="1"/>
+              <rect x="70" y="96" width="10" height="10" fill="rgba(30,45,74,0.1)" stroke="rgba(30,45,74,0.2)" stroke-width="1"/>
+
+              <rect x="106" y="90" width="56" height="50" fill="rgba(247,244,239,0.9)" stroke="rgba(124,101,82,0.3)" stroke-width="1"/>
+              <polygon points="106,90 134,60 162,90" fill="rgba(124,101,82,0.15)" stroke="rgba(124,101,82,0.3)" stroke-width="1.2"/>
+              <rect x="122" y="110" width="14" height="30" fill="rgba(124,101,82,0.15)" stroke="rgba(124,101,82,0.2)" stroke-width="1"/>
+              <rect x="112" y="96" width="10" height="10" fill="rgba(30,45,74,0.1)" stroke="rgba(30,45,74,0.2)" stroke-width="1"/>
+              <rect x="146" y="96" width="10" height="10" fill="rgba(30,45,74,0.1)" stroke="rgba(30,45,74,0.2)" stroke-width="1"/>
+
+              <rect x="182" y="90" width="56" height="50" fill="rgba(247,244,239,0.9)" stroke="rgba(124,101,82,0.3)" stroke-width="1"/>
+              <polygon points="182,90 210,62 238,90" fill="rgba(201,168,76,0.2)" stroke="rgba(201,168,76,0.4)" stroke-width="1.2"/>
+              <rect x="198" y="110" width="14" height="30" fill="rgba(124,101,82,0.15)" stroke="rgba(124,101,82,0.2)" stroke-width="1"/>
+
+              <rect x="258" y="90" width="56" height="50" fill="rgba(247,244,239,0.9)" stroke="rgba(124,101,82,0.3)" stroke-width="1"/>
+              <polygon points="258,90 286,64 314,90" fill="rgba(124,101,82,0.15)" stroke="rgba(124,101,82,0.3)" stroke-width="1.2"/>
+              <rect x="274" y="110" width="14" height="30" fill="rgba(124,101,82,0.15)" stroke="rgba(124,101,82,0.2)" stroke-width="1"/>
+
+              <rect x="334" y="90" width="50" height="50" fill="rgba(247,244,239,0.9)" stroke="rgba(124,101,82,0.3)" stroke-width="1"/>
+              <polygon points="334,90 359,66 384,90" fill="rgba(201,168,76,0.2)" stroke="rgba(201,168,76,0.4)" stroke-width="1.2"/>
+              <rect x="350" y="110" width="14" height="30" fill="rgba(124,101,82,0.15)" stroke="rgba(124,101,82,0.2)" stroke-width="1"/>
+
+              <!-- Área verde comunitaria -->
+              <ellipse cx="200" cy="170" rx="40" ry="8" fill="rgba(107,143,107,0.2)" stroke="rgba(107,143,107,0.4)" stroke-width="1"/>
+              <!-- Calle -->
+              <line x1="0" y1="140" x2="400" y2="140" stroke="rgba(124,101,82,0.2)" stroke-width="8"/>
+              <line x1="0" y1="140" x2="400" y2="140" stroke="rgba(247,244,239,0.5)" stroke-width="1" stroke-dasharray="20 15"/>
+
+              <text x="200" y="192" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="13" font-weight="300" letter-spacing="4" fill="rgba(30,45,74,0.5)">PLAYA DEL CARMEN</text>
+            </svg>
+          </div>
+          <div class="proyecto-body">
+            <span class="proyecto-location">Playa del Carmen, Quintana Roo</span>
+            <h3 class="proyecto-name" id="residencial-name">ALMA Residencial</h3>
+            <p class="proyecto-precio">
+              Desde <strong>$1,800,000</strong> hasta $4,200,000 MXN
+            </p>
+            <p class="proyecto-desc"
+               data-simple-text="Son 240 casas en un fraccionamiento tranquilo en Playa del Carmen. Tienen alberca, parque y seguridad las 24 horas. Ideal para familias."
+               data-simple-text-attr="true">
+              240 casas en fraccionamiento cerrado con amenidades completas en Playa del Carmen. El proyecto más accesible de ALMA, pensado para familias que buscan seguridad, comunidad y calidad de vida.
+            </p>
+            <ul class="proyecto-bullets" aria-label="Características ALMA Residencial">
+              <li><span aria-hidden="true">🏠</span> 240 casas · 2 a 4 recámaras</li>
+              <li><span aria-hidden="true">🔒</span> Seguridad 24h · Acceso controlado</li>
+              <li><span aria-hidden="true">🌳</span> Parque, alberca y área de juegos</li>
+            </ul>
+            <div class="proyecto-actions">
+              <a href="#contacto" class="btn-proyecto btn-proyecto-ver" aria-label="Ver más detalles de ALMA Residencial">Ver proyecto</a>
+              <a href="#contacto" class="btn-proyecto btn-proyecto-cotizar" aria-label="Cotizar ALMA Residencial">Cotizar</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PROCESO ==================== -->
+  <section class="section proceso-section" id="proceso" aria-labelledby="proceso-heading">
+    <div class="section-inner">
+      <div class="section-header" style="text-align:center;">
+        <span class="section-tag" style="display:block;">Proceso de compra</span>
+        <h2 class="section-title" id="proceso-heading">Cuatro pasos <em>sin complicaciones</em></h2>
+        <div class="divisor" aria-hidden="true" style="margin:1rem auto 0;"></div>
+        <p class="section-subtitle" style="margin:0 auto;">En ALMA te acompañamos en cada etapa. Sin letras pequeñas, sin sorpresas.</p>
+      </div>
+
+      <div class="proceso-grid">
+
+        <div class="paso-item reveal" aria-labelledby="paso1-title">
+          <span class="paso-num" aria-hidden="true">01</span>
+          <h3 class="paso-title" id="paso1-title">Elige tu espacio</h3>
+          <p class="paso-desc"
+             data-simple-text="Mira los proyectos. Elige el que más te guste. Un asesor te ayuda sin presión.">
+            Explora nuestros tres desarrollos y encuentra el que se ajusta a tu estilo de vida y presupuesto. Un asesor personal te guía sin presión.
+          </p>
+          <span class="paso-tag">Sin compromiso</span>
+        </div>
+
+        <div class="paso-item reveal" aria-labelledby="paso2-title">
+          <span class="paso-num" aria-hidden="true">02</span>
+          <h3 class="paso-title" id="paso2-title">Aparta con $50,000</h3>
+          <p class="paso-desc"
+             data-simple-text="Para que nadie más compre tu casa o departamento, pagas $50,000 pesos. Si cambias de opinión, te lo devolvemos.">
+            Con un apartado de $50,000 MXN aseguras tu unidad preferida. Este depósito es reembolsable si cambias de decisión en los primeros 30 días.
+          </p>
+          <span class="paso-tag">100% reembolsable · 30 días</span>
+        </div>
+
+        <div class="paso-item reveal" aria-labelledby="paso3-title">
+          <span class="paso-num" aria-hidden="true">03</span>
+          <h3 class="paso-title" id="paso3-title">Firma el contrato</h3>
+          <p class="paso-desc"
+             data-simple-text="Firmas un contrato. Te explicamos todo con palabras claras antes de firmar. Puedes leerlo con calma y preguntar lo que quieras.">
+            Revisamos juntos cada cláusula en lenguaje simple. Puedes traer a tu abogado. Firmamos cuando tú estés ciento por ciento seguro.
+          </p>
+          <span class="paso-tag">Con acompañamiento legal</span>
+        </div>
+
+        <div class="paso-item reveal" aria-labelledby="paso4-title">
+          <span class="paso-num" aria-hidden="true">04</span>
+          <h3 class="paso-title" id="paso4-title">Recibe tu llave</h3>
+          <p class="paso-desc"
+             data-simple-text="El día que está listo tu hogar, te entregamos la llave. ¡Ya es tuyo!">
+            En la fecha de entrega te esperamos con las llaves de tu nuevo hogar. Incluye recorrido de bienvenida y guía de todos los servicios del desarrollo.
+          </p>
+          <span class="paso-tag">¡Es tuyo!</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== NOSOTROS ==================== -->
+  <section class="section nosotros-section" id="nosotros" aria-labelledby="nosotros-heading">
+    <div class="section-inner">
+      <div class="nosotros-inner">
+        <div class="nosotros-text reveal">
+          <span class="section-tag">Quiénes somos</span>
+          <h2 class="section-title" id="nosotros-heading">15 años <em>construyendo</em> el Caribe</h2>
+          <div class="divisor" aria-hidden="true"></div>
+          <p class="section-subtitle"
+             data-simple-text="ALMA DESARROLLOS lleva 15 años construyendo casas y departamentos en la Riviera Maya. Más de 2,400 familias viven en nuestros desarrollos. Trabajamos con honestidad y claridad.">
+            Fundada en 2011 en Playa del Carmen, ALMA DESARROLLOS nació con una convicción clara: que adquirir una propiedad en el Caribe mexicano debe ser una experiencia transparente, sencilla y memorable para cada familia.
+          </p>
+          <p class="section-subtitle" style="margin-top:1rem;"
+             data-simple-text="Tenemos proyectos en Tulum, Puerto Morelos y Playa del Carmen. En cada proyecto usamos materiales de calidad y diseño honesto.">
+            Hoy operamos tres desarrollos activos en Tulum, Puerto Morelos y Playa del Carmen, con más de 364 unidades disponibles y el mismo compromiso de calidad con el que entregamos nuestra primera casa hace 15 años.
+          </p>
+          <div class="nosotros-stat-row" role="list" aria-label="Logros ALMA DESARROLLOS">
+            <div class="nosotros-stat" role="listitem">
+              <span class="nosotros-stat-num">2,400+</span>
+              <span class="nosotros-stat-lbl">Familias ALMA</span>
+            </div>
+            <div class="nosotros-stat" role="listitem">
+              <span class="nosotros-stat-num">3</span>
+              <span class="nosotros-stat-lbl">Desarrollos activos</span>
+            </div>
+            <div class="nosotros-stat" role="listitem">
+              <span class="nosotros-stat-num">15</span>
+              <span class="nosotros-stat-lbl">Años en Riviera Maya</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="valores-grid reveal">
+          <div class="valor-card" aria-labelledby="valor1-title">
+            <div class="valor-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round">
+                <path d="M12 2l2 7h7l-5.5 4 2 7L12 16l-5.5 4 2-7L3 9h7z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="valor-title" id="valor1-title">Claridad total</h3>
+              <p class="valor-desc"
+                 data-simple-text="No hay letras pequeñas. Lo que te decimos es lo que hay. Sin sorpresas.">
+                Sin letras pequeñas ni cláusulas confusas. Cada contrato, precio y condición se explica de manera directa y comprensible para cualquier persona.
+              </p>
+            </div>
+          </div>
+
+          <div class="valor-card" aria-labelledby="valor2-title">
+            <div class="valor-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+                <polyline points="9 22 9 12 15 12 15 22"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="valor-title" id="valor2-title">Calidad comprobada</h3>
+              <p class="valor-desc"
+                 data-simple-text="15 años de experiencia construyendo casas en la Riviera Maya. Usamos buenos materiales y lo hacemos bien desde el principio.">
+                15 años de experiencia constructiva en la Riviera Maya con materiales de primera, procesos certificados y acabados que resisten el clima tropical.
+              </p>
+            </div>
+          </div>
+
+          <div class="valor-card" aria-labelledby="valor3-title">
+            <div class="valor-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 8v4l3 3"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="valor-title" id="valor3-title">Comunidad viva</h3>
+              <p class="valor-desc"
+                 data-simple-text="Más de 2,400 familias ya viven en nuestros desarrollos. Cuando compras con ALMA, entras a una comunidad de vecinos reales.">
+                Más de 2,400 familias forman la comunidad ALMA. Organizamos actividades, mantenemos espacios comunes y acompañamos a nuestros vecinos mucho después de la entrega.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CONTACTO ==================== -->
+  <section class="section contacto-section" id="contacto" aria-labelledby="contacto-heading">
+    <div class="section-inner">
+      <div class="contacto-inner">
+        <div class="contacto-info reveal">
+          <span class="section-tag">Contáctanos</span>
+          <h2 class="section-title" id="contacto-heading">Hablemos de <em>tu próximo hogar</em></h2>
+          <div class="divisor" aria-hidden="true"></div>
+          <p
+             data-simple-text="Escríbenos o llámanos. Un asesor real te responde en menos de 24 horas. Sin presión.">
+            Un asesor especializado te contactará en menos de 24 horas. Sin presión, sin compromisos. Solo información clara para que tomes la mejor decisión.
+          </p>
+
+          <div class="contacto-item" aria-label="Dirección">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+            <span>Av. Constituyentes 105, Playa del Carmen, Q.R.</span>
+          </div>
+
+          <div class="contacto-item" aria-label="Teléfono">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 9.91a16 16 0 006.16 6.16l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+            </svg>
+            <span>(984) 123 4567</span>
+          </div>
+
+          <div class="contacto-item" aria-label="Correo electrónico">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+            <span>contacto@almadesarrollos.mx</span>
+          </div>
+
+          <div class="contacto-item" aria-label="Horario de atención">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+            <span>Lun–Vie 9:00–19:00 · Sáb 9:00–14:00</span>
+          </div>
+        </div>
+
+        <!-- Formulario -->
+        <div class="contacto-form-card reveal">
+          <form id="contact-form" novalidate aria-label="Formulario de contacto">
+            <div class="form-field">
+              <label class="form-label" for="nombre">Tu nombre <span aria-hidden="true">*</span></label>
+              <input
+                class="form-input" type="text" id="nombre" name="nombre"
+                autocomplete="name" placeholder="¿Cómo te llamas?"
+                aria-required="true" aria-describedby="nombre-error"
+              >
+              <span class="form-error" id="nombre-error" role="alert" hidden></span>
+            </div>
+
+            <div class="form-field">
+              <label class="form-label" for="telefono">Tu teléfono <span aria-hidden="true">*</span></label>
+              <input
+                class="form-input" type="tel" id="telefono" name="telefono"
+                autocomplete="tel" placeholder="10 dígitos"
+                aria-required="true" aria-describedby="telefono-error"
+              >
+              <span class="form-error" id="telefono-error" role="alert" hidden></span>
+            </div>
+
+            <div class="form-field">
+              <label class="form-label" for="proyecto">Proyecto de interés <span aria-hidden="true">*</span></label>
+              <select
+                class="form-select" id="proyecto" name="proyecto"
+                aria-required="true" aria-describedby="proyecto-error"
+              >
+                <option value="">Elige un proyecto…</option>
+                <option value="selva">ALMA Selva — Tulum</option>
+                <option value="frentemar">ALMA Frente Mar — Puerto Morelos</option>
+                <option value="residencial">ALMA Residencial — Playa del Carmen</option>
+                <option value="todos">Quiero conocer todos</option>
+              </select>
+              <span class="form-error" id="proyecto-error" role="alert" hidden></span>
+            </div>
+
+            <button type="submit" class="btn-submit">
+              Quiero información
+            </button>
+
+            <div class="form-success" id="form-success" hidden role="status" tabindex="-1" aria-live="polite">
+              Tu información fue enviada correctamente. Un asesor te contactará pronto.
+            </div>
+
+            <p style="font-size:.75rem;color:var(--muted);margin-top:1rem;text-align:center;line-height:1.5;">
+              Al enviar aceptas nuestra <a href="#" style="color:var(--dorado);">Política de privacidad</a>. Tus datos no se comparten con terceros.
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<!-- luxury-photos-patch -->
+<section aria-labelledby="mod-h" style="padding:6rem 1.5rem;background:#F7F4EF;">
+<div style="max-width:1200px;margin:0 auto;">
+<p style="font-size:.62rem;letter-spacing:.32em;text-transform:uppercase;color:#C9A84C;margin-bottom:.8rem;">Modelos de vivienda</p>
+<h2 id="mod-h" style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3rem);font-weight:300;color:#1E2D4A;margin-bottom:2.5rem;line-height:1.1;">Diseñados para <em>tu historia.</em></h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:1.5rem;">
+<article class="card" style="background:#fff;overflow:hidden;">
+<div class="lxgc" style="aspect-ratio:4/3;"><img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80" alt="Modelo Jade ALMA Desarrollos sala de estar con acabados de mármol y madera natural" loading="lazy"><div class="lxov"></div><div style="position:absolute;bottom:1.2rem;left:1.2rem;z-index:2;"><p style="font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:#C9A84C;">Desde 95 m²</p><p style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300;color:#fff;">Modelo Jade</p></div></div>
+<div style="padding:1.5rem;"><p style="font-size:.84rem;color:rgba(30,45,74,.6);line-height:1.75;margin-bottom:.8rem;">2 recámaras · 2 baños · Balcón con vista a jardín · Acabados de travertino y madera teca.</p><p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:#1E2D4A;">Desde <strong style="color:#C9A84C;">$3.2M MXN</strong></p></div>
+</article>
+<article class="card" style="background:#fff;overflow:hidden;">
+<div class="lxgc" style="aspect-ratio:4/3;"><img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=800&q=80" alt="Modelo Ónix ALMA sala-comedor de concepto abierto con cocina de isla integrada" loading="lazy"><div class="lxov"></div><div style="position:absolute;bottom:1.2rem;left:1.2rem;z-index:2;"><p style="font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:#C9A84C;">Desde 130 m²</p><p style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300;color:#fff;">Modelo Ónix</p></div></div>
+<div style="padding:1.5rem;"><p style="font-size:.84rem;color:rgba(30,45,74,.6);line-height:1.75;margin-bottom:.8rem;">3 recámaras · 2.5 baños · Terraza panorámica · Cocina integral Miele · Smart home integrado.</p><p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:#1E2D4A;">Desde <strong style="color:#C9A84C;">$4.8M MXN</strong></p></div>
+</article>
+<article class="card" style="background:#fff;overflow:hidden;">
+<div class="lxgc" style="aspect-ratio:4/3;"><img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=800&q=80" alt="Penthouse Zafiro ALMA terrazas privadas con vista a la Riviera Maya y alberca propia" loading="lazy"><div class="lxov"></div><div style="position:absolute;bottom:1.2rem;left:1.2rem;z-index:2;"><p style="font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:#C9A84C;">Penthouse · 290 m²</p><p style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300;color:#fff;">Zafiro</p></div></div>
+<div style="padding:1.5rem;"><p style="font-size:.84rem;color:rgba(30,45,74,.6);line-height:1.75;margin-bottom:.8rem;">4 recámaras · 4 baños · 2 terrazas · Alberca privada · Vista 360° a laguna y selva.</p><p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:#1E2D4A;">Desde <strong style="color:#C9A84C;">$9.1M MXN</strong></p></div>
+</article>
+</div></div></section>
+
+<section aria-label="Amenidades ALMA" style="display:grid;grid-template-columns:1fr 1fr;min-height:520px;">
+<div class="lxgc"><img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=900&q=80" alt="Amenidades ALMA Desarrollos alberca infinity rooftop con vista a la Riviera Maya" loading="lazy"><div class="lxov"></div></div>
+<div style="background:#1E2D4A;padding:5rem 3.5rem;display:flex;flex-direction:column;justify-content:center;">
+<p style="font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:#C9A84C;margin-bottom:1.2rem;">Amenidades</p>
+<h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,3vw,2.5rem);font-weight:300;color:#F7F4EF;line-height:1.1;margin-bottom:1.2rem;">Vivir bien <em>es un arte.</em></h2>
+<p style="color:rgba(247,244,239,.65);line-height:1.8;font-size:.88rem;margin-bottom:1.8rem;">ALMA Desarrollos integra espacios biofílicos certificados LEED Gold, donde la naturaleza de la Riviera Maya convive con arquitectura de autor internacional.</p>
+<ul style="list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:.8rem 1.5rem;">
+<li style="font-size:.82rem;color:rgba(247,244,239,.7);display:flex;gap:.5rem;align-items:center;"><span style="color:#C9A84C;">✦</span> Alberca infinity 40m</li>
+<li style="font-size:.82rem;color:rgba(247,244,239,.7);display:flex;gap:.5rem;align-items:center;"><span style="color:#C9A84C;">✦</span> Gym con vista panorámica</li>
+<li style="font-size:.82rem;color:rgba(247,244,239,.7);display:flex;gap:.5rem;align-items:center;"><span style="color:#C9A84C;">✦</span> Spa + sauna finlandés</li>
+<li style="font-size:.82rem;color:rgba(247,244,239,.7);display:flex;gap:.5rem;align-items:center;"><span style="color:#C9A84C;">✦</span> Co-working lounge</li>
+<li style="font-size:.82rem;color:rgba(247,244,239,.7);display:flex;gap:.5rem;align-items:center;"><span style="color:#C9A84C;">✦</span> Jardín Zen 2,000 m²</li>
+<li style="font-size:.82rem;color:rgba(247,244,239,.7);display:flex;gap:.5rem;align-items:center;"><span style="color:#C9A84C;">✦</span> Acceso cenote privado</li>
+<li style="font-size:.82rem;color:rgba(247,244,239,.7);display:flex;gap:.5rem;align-items:center;"><span style="color:#C9A84C;">✦</span> Concierge 24h</li>
+<li style="font-size:.82rem;color:rgba(247,244,239,.7);display:flex;gap:.5rem;align-items:center;"><span style="color:#C9A84C;">✦</span> Pet-friendly total</li>
+</ul>
+</div></section>
+
+<section aria-labelledby="gal-a" style="padding:5rem 1.5rem;background:#1E2D4A;">
+<div style="max-width:1200px;margin:0 auto;">
+<h2 id="gal-a" style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,3vw,2.5rem);font-weight:300;color:#F7F4EF;text-align:center;margin-bottom:2.5rem;">Galería ALMA</h2>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:3px;">
+<div class="lxgc" style="grid-column:1/3;aspect-ratio:16/9;"><img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1100&q=80" alt="Torre ALMA Desarrollos con arquitectura orgánica en la Riviera Maya" loading="lazy"><div class="lxov"></div></div>
+<div class="lxgc" style="aspect-ratio:3/4;"><img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=600&q=80" alt="Cocina integral con isla de cuarzo y vista al jardín" loading="lazy"><div class="lxov"></div></div>
+<div class="lxgc" style="aspect-ratio:4/3;"><img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=700&q=80" alt="Rooftop con alberca infinity y vista a 360 grados" loading="lazy"><div class="lxov"></div></div>
+<div class="lxgc" style="grid-column:2/4;aspect-ratio:16/9;"><img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1000&q=80" alt="Sala de estar Modelo Ónix con mobiliario de diseño mexicano" loading="lazy"><div class="lxov"></div></div>
+</div></div></section>
+
+<section aria-labelledby="rev-a" style="padding:5rem 1.5rem;background:#7C6552;">
+<div style="max-width:960px;margin:0 auto;text-align:center;">
+<p style="font-size:.62rem;letter-spacing:.32em;text-transform:uppercase;color:#C9A84C;margin-bottom:.8rem;">Familias ALMA</p>
+<h2 id="rev-a" style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.5rem,2.5vw,2.2rem);font-weight:300;color:#F7F4EF;margin-bottom:2.5rem;">Historias que <em>viven aquí.</em></h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;text-align:left;">
+<blockquote style="background:rgba(247,244,239,.08);padding:1.8rem;border-left:3px solid #C9A84C;"><p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;color:#F7F4EF;line-height:1.7;margin-bottom:1rem;">"Dejamos la Ciudad de México para buscar paz. El Modelo Ónix nos dio eso y una comunidad que no esperábamos encontrar."</p><footer style="font-size:.73rem;color:rgba(247,244,239,.45);">— Carlos M. · Ex-CDMX · Modelo Ónix 2023 · ★★★★★</footer></blockquote>
+<blockquote style="background:rgba(247,244,239,.08);padding:1.8rem;border-left:3px solid #C9A84C;"><p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;color:#F7F4EF;line-height:1.7;margin-bottom:1rem;">"El acceso al cenote privado y la integración inteligente del smart home hacen de ALMA Selva un lugar sin comparación en la Riviera."</p><footer style="font-size:.73rem;color:rgba(247,244,239,.45);">— Ana G. · Monterrey · Modelo Jade 2024 · ★★★★★</footer></blockquote>
+<blockquote style="background:rgba(247,244,239,.08);padding:1.8rem;border-left:3px solid #C9A84C;"><p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;color:#F7F4EF;line-height:1.7;margin-bottom:1rem;">"El penthouse Zafiro fue nuestra mayor inversión. En 18 meses valorizó 31%. El equipo de ALMA cumple cada promesa."</p><footer style="font-size:.73rem;color:rgba(247,244,239,.45);">— Grupo Inversiones MR · Penthouse Zafiro 2022 · ★★★★★</footer></blockquote>
+</div></div></section>
+<!-- hf-photos-patch -->
+<section aria-label="ALMA Desarrollos · Cancún — Galería fotográfica" id="galeria-hf-alma" style="background:#110C08;padding:5rem 1.5rem 4rem;margin:0;overflow:hidden;">
+<div style="max-width:1100px;margin:0 auto;">
+<p style="font-size:.6rem;letter-spacing:.32em;text-transform:uppercase;color:#C9A84C;margin-bottom:.7rem;display:flex;align-items:center;gap:.65rem;"><span style="display:inline-block;width:2.2rem;height:1px;background:currentColor;"></span>ALMA Desarrollos · Cancún</p>
+<h2 style="font-family:'DM Serif Display','Instrument Serif',Georgia,serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#FDF6E3;margin-bottom:2.5rem;line-height:1.1;font-weight:400;font-style:italic;">Tu identidad. Hecha espacio.</h2>
+<div style="display:grid;gap:4px;">
+<div class="lxgc" style="aspect-ratio:16/9;border-radius:0;"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_2xDKzgUHSbZ2WsUfnTEP222ovTJ/hf_20260510_051059_398cc4f2-fc25-4d95-930c-2427a5503c49.png" alt="Edificio residencial ALMA Desarrollos, fachada terracota y piedra natural Cancún" loading="lazy" style="width:100%;height:100%;object-fit:cover;"><div class="lxov"></div></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;">
+<div class="lxgc" style="aspect-ratio:4/3;"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_2xDKzgUHSbZ2WsUfnTEP222ovTJ/hf_20260510_051100_ed9eccce-977f-4ff8-b627-30442d221a91.png" alt="Cenote privado amenidad exclusiva ALMA Desarrollos, agua cristalina y palmas" loading="lazy" style="width:100%;height:100%;object-fit:cover;"><div class="lxov"></div></div>
+<div class="lxgc" style="aspect-ratio:4/3;"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_2xDKzgUHSbZ2WsUfnTEP222ovTJ/hf_20260510_051102_2b1e7792-88c7-4152-937c-c6bc682c4755.png" alt="Sala de estar departamento ALMA, paleta terracota y muebles artesanales mexicanos" loading="lazy" style="width:100%;height:100%;object-fit:cover;"><div class="lxov"></div></div>
+</div>
+</div>
+</div>
+</section>
+<footer class="footer-section" role="contentinfo" aria-label="Pie de página ALMA DESARROLLOS">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo" aria-label="ALMA DESARROLLOS">
+          <svg viewBox="0 0 220 56" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+            <path d="M6 44 L6 22 Q6 8 18 8 Q30 8 30 22 L30 44" stroke="#C9A84C" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <line x1="4" y1="44" x2="32" y2="44" stroke="#C9A84C" stroke-width="1.5"/>
+            <text x="44" y="30" font-family="Cormorant Garamond, serif" font-size="22" font-weight="300" letter-spacing="5" fill="#F7F4EF">ALMA</text>
+            <text x="44" y="46" font-family="Nunito Sans, sans-serif" font-size="8" font-weight="300" letter-spacing="4" fill="rgba(247,244,239,0.6)">DESARROLLOS</text>
+          </svg>
+        </div>
+        <p class="footer-tagline">"Tu espacio. Tu historia."</p>
+        <p style="font-size:.84rem;color:rgba(247,244,239,0.5);line-height:1.7;max-width:280px;">Desarrolladora inmobiliaria premium con 15 años de presencia en la Riviera Maya. Transparencia, calidad y comunidad en cada proyecto.</p>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-col-title">Proyectos</p>
+        <a href="#proyectos">ALMA Selva · Tulum</a>
+        <a href="#proyectos">ALMA Frente Mar · Puerto Morelos</a>
+        <a href="#proyectos">ALMA Residencial · Playa del Carmen</a>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-col-title">Empresa</p>
+        <a href="#nosotros">Quiénes somos</a>
+        <a href="#proceso">Proceso de compra</a>
+        <a href="#contacto">Contacto</a>
+        <a href="#">Trabaja con nosotros</a>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-col-title">Legal</p>
+        <a href="#">Aviso de privacidad</a>
+        <a href="#">Términos y condiciones</a>
+        <a href="#">PROFECO</a>
+        <a href="#">Accesibilidad</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-legal">
+        © 2026 ALMA DESARROLLOS S.A. de C.V. · RFC: ADE110423AB1 · Todos los derechos reservados.
+        <br>Inmuebles ofertados conforme a la NOM-247-SE-2021. Precios sujetos a cambio sin previo aviso.
+      </p>
+      <p class="footer-credit">
+        Sitio diseñado con accesibilidad cognitiva por <a href="https://victor-ia.com.mx" target="_blank" rel="noopener">VICTOR IA</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================
+     JAVASCRIPT
+     ============================================================ -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var html = document.documentElement;
+  var body = document.body;
+  var KEY = 'alma-a11y';
+  var prefs = {};
+  try { prefs = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch(e) {}
+  var save = function() { try { localStorage.setItem(KEY, JSON.stringify(prefs)); } catch(e) {} };
+
+  function injectCSS(id, css) {
+    var el = document.getElementById(id);
+    if (!el) { el = document.createElement('style'); el.id = id; document.head.appendChild(el); }
+    el.textContent = css;
+  }
+  function removeCSS(id) {
+    var el = document.getElementById(id);
+    if (el) el.textContent = '';
+  }
+
+  var live = document.getElementById('sr-live');
+  if (!live) {
+    live = document.createElement('div');
+    live.id = 'sr-live';
+    live.setAttribute('aria-live', 'polite');
+    live.className = 'sr-only';
+    document.body.appendChild(live);
+  }
+  var announce = function(msg) {
+    live.textContent = '';
+    requestAnimationFrame(function() { live.textContent = msg; });
+  };
+
+  var toggleMap = {
+    dislexia: {
+      on: function() {
+        injectCSS('dislexia-css',
+          'body,p,li,h1,h2,h3,h4,button,label,input,select,span,a{font-family:monospace!important;letter-spacing:.06em!important;word-spacing:.16em!important;line-height:2!important}'
+        );
+        announce('Fuente para dislexia activada');
+      },
+      off: function() { removeCSS('dislexia-css'); announce('Fuente para dislexia desactivada'); }
+    },
+    simple: {
+      on: function() {
+        injectCSS('simple-css',
+          '.decorativo{display:none!important}[class*="grid"]{grid-template-columns:1fr!important}.nosotros-inner,.contacto-inner,.footer-top{grid-template-columns:1fr!important}body{font-size:1.1rem}'
+        );
+        document.querySelectorAll('[data-full]').forEach(function(e) { e.hidden = true; });
+        document.querySelectorAll('[data-simple]').forEach(function(e) { e.hidden = false; });
+        announce('Modo simple activado: una columna, texto ampliado');
+      },
+      off: function() {
+        removeCSS('simple-css');
+        document.querySelectorAll('[data-full]').forEach(function(e) { e.hidden = false; });
+        document.querySelectorAll('[data-simple]').forEach(function(e) { e.hidden = true; });
+        announce('Modo simple desactivado');
+      }
+    },
+    resaltado: {
+      on: function() {
+        injectCSS('resaltado-css',
+          'p:focus-within,p:hover{background:rgba(201,168,76,.15)!important;border-left:3px solid #C9A84C!important;padding-left:.5rem!important;transition:background .2s;}'
+        );
+        document.querySelectorAll('p').forEach(function(p) { p.setAttribute('tabindex', '0'); });
+        announce('Resaltado de lectura activado: navega con Tab para resaltar párrafos');
+      },
+      off: function() {
+        removeCSS('resaltado-css');
+        document.querySelectorAll('p[tabindex="0"]').forEach(function(p) { p.removeAttribute('tabindex'); });
+        announce('Resaltado de lectura desactivado');
+      }
+    },
+    lenguajeSimple: {
+      on: function() {
+        document.querySelectorAll('[data-simple-text]').forEach(function(el) {
+          if (!el.dataset.originalText) el.dataset.originalText = el.textContent;
+          el.textContent = el.dataset.simpleText;
+        });
+        announce('Lenguaje simple activado');
+      },
+      off: function() {
+        document.querySelectorAll('[data-simple-text]').forEach(function(el) {
+          if (el.dataset.originalText) el.textContent = el.dataset.originalText;
+        });
+        announce('Lenguaje simple desactivado');
+      }
+    },
+    sinDistracciones: {
+      on: function() {
+        injectCSS('nodistract-css',
+          '.decorativo,.animation-el,.bg-pattern,.hero-bg-pattern{display:none!important}*{animation:none!important;transition:background .2s,color .2s!important}'
+        );
+        announce('Modo sin distracciones activado');
+      },
+      off: function() { removeCSS('nodistract-css'); announce('Modo sin distracciones desactivado'); }
+    },
+    contraste: {
+      on: function() { html.setAttribute('data-theme', 'contrast'); announce('Alto contraste activado'); },
+      off: function() { html.removeAttribute('data-theme'); announce('Alto contraste desactivado'); }
+    }
+  };
+
+  // Restaurar preferencias guardadas
+  Object.keys(prefs).forEach(function(k) {
+    if (k !== 'fontSize' && prefs[k] && toggleMap[k]) toggleMap[k].on();
+  });
+  if (prefs.fontSize) body.style.fontSize = prefs.fontSize + '%';
+
+  // Botones de toggle en barra a11y
+  document.querySelectorAll('[data-toggle]').forEach(function(btn) {
+    var key = btn.getAttribute('data-toggle');
+    if (prefs[key]) btn.setAttribute('aria-pressed', 'true');
+    btn.addEventListener('click', function() {
+      prefs[key] = !prefs[key];
+      this.setAttribute('aria-pressed', String(prefs[key]));
+      if (prefs[key]) { if (toggleMap[key]) toggleMap[key].on(); }
+      else { if (toggleMap[key]) toggleMap[key].off(); }
+      save();
+    });
+  });
+
+  // Botones de features a11y (sección cards) — sincronizar con barra
+  document.querySelectorAll('.a11y-feature-btn[data-toggle]').forEach(function(btn) {
+    var key = btn.getAttribute('data-toggle');
+    if (prefs[key]) btn.setAttribute('aria-pressed', 'true');
+    btn.addEventListener('click', function() {
+      // Sincronizar con barra superior
+      var barBtn = document.querySelector('.a11y-bar [data-toggle="' + key + '"]');
+      prefs[key] = !prefs[key];
+      btn.setAttribute('aria-pressed', String(prefs[key]));
+      if (barBtn) barBtn.setAttribute('aria-pressed', String(prefs[key]));
+      if (prefs[key]) { if (toggleMap[key]) toggleMap[key].on(); }
+      else { if (toggleMap[key]) toggleMap[key].off(); }
+      save();
+    });
+  });
+
+  // Control de tamaño de fuente
+  var fontSize = prefs.fontSize || 100;
+  document.querySelectorAll('[data-action="font-up"]').forEach(function(b) {
+    b.addEventListener('click', function() {
+      fontSize = Math.min(180, fontSize + 10);
+      body.style.fontSize = fontSize + '%';
+      prefs.fontSize = fontSize;
+      save();
+      announce('Texto: ' + fontSize + '%');
+    });
+  });
+  document.querySelectorAll('[data-action="font-down"]').forEach(function(b) {
+    b.addEventListener('click', function() {
+      fontSize = Math.max(70, fontSize - 10);
+      body.style.fontSize = fontSize + '%';
+      prefs.fontSize = fontSize;
+      save();
+      announce('Texto: ' + fontSize + '%');
+    });
+  });
+
+  // Formulario accesible
+  var form = document.getElementById('contact-form');
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var valid = true;
+      this.querySelectorAll('[aria-required="true"]').forEach(function(f) {
+        var err = document.getElementById(f.id + '-error');
+        if (!f.value.trim()) {
+          valid = false;
+          f.setAttribute('aria-invalid', 'true');
+          if (err) { err.textContent = 'Por favor llena este campo.'; err.hidden = false; }
+        } else {
+          f.removeAttribute('aria-invalid');
+          if (err) { err.textContent = ''; err.hidden = true; }
+        }
+      });
+      if (valid) {
+        announce('Tu información fue enviada. Te contactamos pronto.');
+        var s = document.getElementById('form-success');
+        if (s) { s.hidden = false; s.focus(); }
+        form.reset();
+      }
+    });
+  }
+
+  // Reveal on scroll con IntersectionObserver
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el) { el.classList.add('visible'); });
+  }
+
+  // Nav: marcar activo al hacer scroll
+  var sections = document.querySelectorAll('section[id]');
+  var navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+  var scrollHandler = function() {
+    var scrollY = window.scrollY;
+    sections.forEach(function(s) {
+      var top = s.offsetTop - 100;
+      var bottom = top + s.offsetHeight;
+      var id = s.getAttribute('id');
+      if (scrollY >= top && scrollY < bottom) {
+        navLinks.forEach(function(a) {
+          if (a.getAttribute('href') === '#' + id) a.style.color = 'var(--dorado)';
+          else a.style.color = '';
+        });
+      }
+    });
+  };
+  window.addEventListener('scroll', scrollHandler, { passive: true });
+});
+</script>
+<script>
+(function(){
+var rm=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+var CFG={hero:'https://d8j0ntlcm91z4.cloudfront.net/user_2xDKzgUHSbZ2WsUfnTEP222ovTJ/hf_20260510_051059_398cc4f2-fc25-4d95-930c-2427a5503c49.png',gal:['https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=900&q=80','https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=900&q=80','https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=900&q=80'],alt:['Residencia ALMA Desarrollos','Interiores minimalistas de lujo','Conjunto residencial moderno'],galLabel:'Galería ALMA Desarrollos',ov1:'rgba(124,101,82,0.88)',ov2:'rgba(30,45,74,0.5)',gl:'rgba(201,168,76,0.09)'};
+var cur=document.createElement('div');
+cur.style.cssText='position:fixed;width:360px;height:360px;border-radius:50%;pointer-events:none;transform:translate(-50%,-50%);z-index:9990;opacity:0;transition:opacity .5s;background:radial-gradient(circle,'+CFG.gl+' 0%,transparent 68%);';
+document.body.appendChild(cur);
+var mx=innerWidth/2,my=innerHeight/2;
+document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;cur.style.opacity='1';});
+document.addEventListener('mouseleave',function(){cur.style.opacity='0';});
+!function t(){cur.style.left=mx+'px';cur.style.top=my+'px';requestAnimationFrame(t);}();
+var hero=document.querySelector('#inicio,#home,.hero-section,section.hero')||document.querySelector('body>section,main>section,section');
+if(hero&&CFG.hero){
+if(getComputedStyle(hero).position==='static')hero.style.position='relative';
+hero.style.overflow='hidden';
+var il=document.createElement('div');il.style.cssText='position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;';
+var himg=document.createElement('img');himg.src=CFG.hero;himg.alt='';himg.setAttribute('aria-hidden','true');
+himg.style.cssText='width:100%;height:100%;object-fit:cover;object-position:center 30%;filter:brightness(.25) saturate(1.3);transition:transform 8s ease;';
+il.appendChild(himg);
+var hov=document.createElement('div');hov.style.cssText='position:absolute;inset:0;background:linear-gradient(145deg,'+CFG.ov1+' 0%,'+CFG.ov2+' 100%);';il.appendChild(hov);
+hero.insertBefore(il,hero.firstChild);
+[].slice.call(hero.children).forEach(function(c){if(c!==il){c.style.position='relative';c.style.zIndex='2';}});
+setTimeout(function(){himg.style.transform='scale(1.0)';},100);
+if(!rm)window.addEventListener('scroll',function(){if(window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;himg.style.transform='scale(1.08) translateY('+(window.scrollY*.1)+'px)';},{passive:true});
+}
+var gs=document.createElement('section');gs.setAttribute('aria-label',CFG.galLabel);gs.style.cssText='margin:0;padding:0;line-height:0;display:block;';
+var gi='<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:#000;max-height:380px;overflow:hidden;">';
+CFG.gal.forEach(function(u,i){gi+='<div class="lxgc" style="aspect-ratio:4/3;"><img src="'+u+'" alt="'+CFG.alt[i]+'" loading="lazy"><div class="lxov"></div></div>';});
+gi+='</div>';gs.innerHTML=gi;
+if(hero&&hero.parentNode)hero.parentNode.insertBefore(gs,hero.nextSibling);
+var cards=[].slice.call(document.querySelectorAll('[class*=card],[class*=plan],[class*=beneficio],[class*=caracteristica],[class*=servicio],[class*=feature],[class*=habitacion],[class*=platillo],[class*=especialidad],[class*=propiedad],[class*=modelo]')).filter(function(c){return !c.closest('[class*=toolbar],[class*=toggle],[class*=a11y],[class*=nav],[role=tablist],[class*=filtro],[data-paso]');});
+cards.forEach(function(c){
+c.addEventListener('mousemove',function(e){if(window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;var r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform='perspective(800px) rotateY('+(x*12)+'deg) rotateX('+(-y*8)+'deg) translateY(-8px) scale(1.01)';c.style.boxShadow='0 24px 70px rgba(0,0,0,.25)';});
+c.addEventListener('mouseleave',function(){c.style.transform='';c.style.boxShadow='';});
+});
+[].slice.call(document.querySelectorAll('a[class*=cta],a[class*=btn],a[class*=reserva],a[class*=cita],button[type=submit],.btn-cta,.btn-primary')).forEach(function(b){if(b.closest('[class*=toolbar],[class*=a11y],[class*=toggle],[class*=nav],[role=tablist]'))return;b.addEventListener('mousemove',function(e){if(window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;var r=b.getBoundingClientRect(),x=(e.clientX-r.left-r.width/2)*.22,y=(e.clientY-r.top-r.height/2)*.22;b.style.transform='translate('+x+'px,'+y+'px)';});b.addEventListener('mouseleave',function(){b.style.transform='';});});
+if('IntersectionObserver' in window){var io=new IntersectionObserver(function(ents){ents.filter(function(e){return e.isIntersecting;}).forEach(function(e,i){setTimeout(function(){e.target.style.opacity='1';e.target.style.transform='';},i*90);io.unobserve(e.target);});},{threshold:.1});cards.forEach(function(c){c.style.opacity='0';c.style.transform='translateY(24px)';c.style.transition=(c.style.transition?c.style.transition+',':'')+' opacity .75s ease,transform .75s cubic-bezier(.23,1,.32,1)';io.observe(c);});}
+})();
+</script>
+<script>
+(function(){
+if(window.__ip)return;window.__ip=1;
+/* --- progress bar --- */
+const bar=document.createElement('div');bar.className='ip-bar';document.body.prepend(bar);
+const updScroll=()=>{
+  const r=window.scrollY/Math.max(1,document.documentElement.scrollHeight-window.innerHeight);
+  document.documentElement.style.setProperty('--scroll-raw',r.toFixed(4));
+};
+window.addEventListener('scroll',updScroll,{passive:true});
+updScroll();
+
+/* --- mouse ambient glow vars --- */
+window.addEventListener('mousemove',e=>{
+  document.documentElement.style.setProperty('--mpos-x',e.clientX+'px');
+  document.documentElement.style.setProperty('--mpos-y',e.clientY+'px');
+},{passive:true});
+
+/* --- floating particles on hero --- */
+const hero=document.querySelector('.hero,section.hero,[class*="hero-section"],section:first-of-type,header.site-header,header');
+if(hero){
+  const pos=getComputedStyle(hero).position;
+  if(pos==='static')hero.style.position='relative';
+  hero.style.overflow='hidden';
+  const cvs=document.createElement('canvas');
+  cvs.style.cssText='position:absolute;inset:0;pointer-events:none;z-index:4;opacity:.38;';
+  hero.appendChild(cvs);
+  const ctx=cvs.getContext('2d');
+  const sz=()=>{cvs.width=hero.offsetWidth;cvs.height=hero.offsetHeight||window.innerHeight;};
+  sz();new ResizeObserver(sz).observe(hero);
+  const N=55;
+  const pts=Array.from({length:N},(_,i)=>({
+    x:Math.random()*cvs.width,y:Math.random()*cvs.height,
+    r:Math.random()*2.2+.4,
+    vx:(Math.random()-.5)*.25,vy:-(Math.random()*.45+.08),
+    o:Math.random()*.55+.15,
+    pulse:Math.random()*Math.PI*2
+  }));
+  let t=0;
+  const draw=()=>{
+    ctx.clearRect(0,0,cvs.width,cvs.height);
+    t+=.012;
+    pts.forEach(p=>{
+      p.pulse+=.025;
+      const ro=p.o*(0.7+0.3*Math.sin(p.pulse));
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,6.2832);
+      ctx.fillStyle='rgba(255,255,255,'+ro+')';ctx.fill();
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.y<-8){p.y=cvs.height+8;p.x=Math.random()*cvs.width;}
+      if(p.x<-8)p.x=cvs.width+8;if(p.x>cvs.width+8)p.x=-8;
+    });
+    requestAnimationFrame(draw);
+  };
+  draw();
+
+  /* Add shimmer overlay to hero */
+  const hl=document.createElement('div');hl.className='ip-hero-layer';
+  hero.appendChild(hl);
+
+  /* hero text parallax */
+  const htxt=hero.querySelector('h1,.hero-title,[class*="hero"] h1,.main-title');
+  if(htxt&&!window.matchMedia('(prefers-reduced-motion:reduce)').matches){
+    htxt.classList.add('ip-parallax');
+    window.addEventListener('scroll',()=>{
+      htxt.style.transform='translateY('+Math.round(window.scrollY*.12)+'px)';
+    },{passive:true});
+  }
+}
+
+/* --- pulse on CTA buttons --- */
+document.querySelectorAll('a[class*="cta"],a[class*="btn-primary"],button[class*="cta"],button[class*="primary"],.btn-primary,.cta,.book-btn,.contact-btn,.btn-cta,.hero a').forEach(el=>{
+  el.classList.add('ip-pulse');
+});
+
+/* --- counter animation --- */
+const numRx=/^([\D]*?)([\d][\d,. ]*)([\D]*)$/;
+function tryCountEl(el){
+  if(el.dataset.ipC)return;
+  const txt=el.textContent.trim();
+  if(!txt)return;
+  const m=txt.match(numRx);
+  if(!m)return;
+  const target=parseFloat(m[2].replace(/[, ]/g,''));
+  if(isNaN(target)||target<2)return;
+  el.dataset.ipC='1';
+  const pre=m[1],suf=m[3];
+  const isDecimal=m[2].includes('.');
+  const obs=new IntersectionObserver(([e],o)=>{
+    if(!e.isIntersecting)return;o.disconnect();
+    let start=null;const dur=1600;
+    const step=ts=>{
+      if(!start)start=ts;
+      const p=Math.min((ts-start)/dur,1);
+      const ease=1-Math.pow(1-p,3);
+      const val=isDecimal?(target*ease).toFixed(1):Math.round(target*ease);
+      el.textContent=pre+(typeof val==='number'&&val>=1000?val.toLocaleString():val)+suf;
+      if(p<1)requestAnimationFrame(step);else el.classList.add('ip-counted');
+    };
+    requestAnimationFrame(step);
+  },{threshold:.6});
+  obs.observe(el);
+}
+document.querySelectorAll('[class*="stat"],[class*="metric"],[class*="num"],[class*="count"],[class*="data-"],[class*="figure"],[class*="score"]').forEach(tryCountEl);
+/* Also scan .hero and stats sections broadly */
+document.querySelectorAll('.stats-grid>*,.metrics>*,.hero-stats>*,.awards>*,.kpi>*,.highlights>*').forEach(el=>{
+  el.querySelectorAll('*').forEach(tryCountEl);
+});
+
+/* --- section reveal with alternating directions --- */
+const dirs=['ip-rb','ip-rl','ip-rr'];
+let ri=0;
+const skipSel=new Set(['A11Y-BAR','NAV','HEADER','FOOTER','SCRIPT','STYLE','CANVAS','NOSCRIPT']);
+document.querySelectorAll('section>*,main>section,.grid>*,[class*="grid"]>*,article').forEach(el=>{
+  if(skipSel.has(el.tagName)||el.dataset.ip||el.classList.contains('ip-rb'))return;
+  if(el.offsetHeight===0)return;
+  el.dataset.ip='1';
+  const d=dirs[ri%3];ri++;
+  el.classList.add(d);
+  const obs=new IntersectionObserver(([e],o)=>{
+    if(!e.isIntersecting)return;
+    el.classList.add('ip-rv');
+    o.disconnect();
+  },{threshold:.12,rootMargin:'0px 0px -30px 0px'});
+  obs.observe(el);
+});
+
+/* --- lxgc gallery: stagger reveal --- */
+document.querySelectorAll('.lxgc').forEach((el,i)=>{
+  el.style.transitionDelay=(i*.07)+'s';
+});
+
+/* --- nav highlight on scroll --- */
+const nav=document.querySelector('nav,.nav-bar,.site-nav,header nav');
+if(nav){
+  const navBg=getComputedStyle(nav).backgroundColor;
+  window.addEventListener('scroll',()=>{
+    const past=window.scrollY>80;
+    nav.style.backdropFilter=past?'blur(18px)':'none';
+    nav.style.boxShadow=past?'0 4px 32px rgba(0,0,0,.18)':'none';
+  },{passive:true});
+}
+})();
+</script>
+</body>
+</html>
+
+
+
+
+

@@ -1,0 +1,575 @@
+{
+  "name": "03_remotion_45s",
+  "voice_id": "iDEmt5MnqUotdwCIVplo",
+  "model": "eleven_multilingual_v2",
+  "duration_seconds": 46.347,
+  "word_count": 112,
+  "voice_settings": {
+    "stability": 0.55,
+    "similarity_boost": 0.8,
+    "style": 0.25,
+    "use_speaker_boost": true
+  },
+  "words": [
+    {
+      "word": "Todos",
+      "start": 0.0,
+      "end": 0.406
+    },
+    {
+      "word": "prometen",
+      "start": 0.453,
+      "end": 0.824
+    },
+    {
+      "word": "resultados.",
+      "start": 0.894,
+      "end": 1.637
+    },
+    {
+      "word": "Nosotros",
+      "start": 1.916,
+      "end": 2.357
+    },
+    {
+      "word": "los",
+      "start": 2.38,
+      "end": 2.496
+    },
+    {
+      "word": "medimos.",
+      "start": 2.543,
+      "end": 3.135
+    },
+    {
+      "word": "Estos",
+      "start": 3.46,
+      "end": 3.796
+    },
+    {
+      "word": "son",
+      "start": 3.82,
+      "end": 3.982
+    },
+    {
+      "word": "los",
+      "start": 4.017,
+      "end": 4.133
+    },
+    {
+      "word": "numeros",
+      "start": 4.191,
+      "end": 4.493
+    },
+    {
+      "word": "reales",
+      "start": 4.54,
+      "end": 4.911
+    },
+    {
+      "word": "de",
+      "start": 4.934,
+      "end": 5.004
+    },
+    {
+      "word": "Victor",
+      "start": 5.062,
+      "end": 5.433
+    },
+    {
+      "word": "IA.",
+      "start": 5.503,
+      "end": 6.072
+    },
+    {
+      "word": "Sin",
+      "start": 6.351,
+      "end": 6.734
+    },
+    {
+      "word": "maquillaje.",
+      "start": 6.803,
+      "end": 7.651
+    },
+    {
+      "word": "Empecemos",
+      "start": 8.034,
+      "end": 8.568
+    },
+    {
+      "word": "por",
+      "start": 8.626,
+      "end": 8.742
+    },
+    {
+      "word": "lo",
+      "start": 8.789,
+      "end": 8.87
+    },
+    {
+      "word": "que",
+      "start": 8.916,
+      "end": 8.998
+    },
+    {
+      "word": "mas",
+      "start": 9.067,
+      "end": 9.265
+    },
+    {
+      "word": "importa:",
+      "start": 9.346,
+      "end": 9.938
+    },
+    {
+      "word": "el",
+      "start": 10.112,
+      "end": 10.263
+    },
+    {
+      "word": "dinero.",
+      "start": 10.333,
+      "end": 10.89
+    },
+    {
+      "word": "Tres",
+      "start": 11.064,
+      "end": 11.401
+    },
+    {
+      "word": "punto",
+      "start": 11.482,
+      "end": 11.831
+    },
+    {
+      "word": "dos",
+      "start": 11.889,
+      "end": 12.028
+    },
+    {
+      "word": "veces.",
+      "start": 12.086,
+      "end": 12.643
+    },
+    {
+      "word": "Eso",
+      "start": 12.852,
+      "end": 13.084
+    },
+    {
+      "word": "es",
+      "start": 13.119,
+      "end": 13.166
+    },
+    {
+      "word": "lo",
+      "start": 13.201,
+      "end": 13.282
+    },
+    {
+      "word": "que",
+      "start": 13.328,
+      "end": 13.398
+    },
+    {
+      "word": "multiplica",
+      "start": 13.444,
+      "end": 14.071
+    },
+    {
+      "word": "tu",
+      "start": 14.118,
+      "end": 14.199
+    },
+    {
+      "word": "inversion,",
+      "start": 14.257,
+      "end": 14.838
+    },
+    {
+      "word": "en",
+      "start": 14.884,
+      "end": 15.035
+    },
+    {
+      "word": "promedio,",
+      "start": 15.105,
+      "end": 15.743
+    },
+    {
+      "word": "con",
+      "start": 15.824,
+      "end": 16.01
+    },
+    {
+      "word": "nosotros.",
+      "start": 16.056,
+      "end": 16.753
+    },
+    {
+      "word": "Mas",
+      "start": 17.194,
+      "end": 17.38
+    },
+    {
+      "word": "visitas",
+      "start": 17.426,
+      "end": 17.868
+    },
+    {
+      "word": "no",
+      "start": 17.926,
+      "end": 18.053
+    },
+    {
+      "word": "es",
+      "start": 18.111,
+      "end": 18.169
+    },
+    {
+      "word": "igual",
+      "start": 18.251,
+      "end": 18.518
+    },
+    {
+      "word": "a",
+      "start": 18.576,
+      "end": 18.599
+    },
+    {
+      "word": "mas",
+      "start": 18.657,
+      "end": 18.854
+    },
+    {
+      "word": "ventas?",
+      "start": 18.924,
+      "end": 19.563
+    },
+    {
+      "word": "Lo",
+      "start": 19.772,
+      "end": 19.911
+    },
+    {
+      "word": "sabemos.",
+      "start": 19.946,
+      "end": 20.55
+    },
+    {
+      "word": "Por",
+      "start": 20.724,
+      "end": 20.886
+    },
+    {
+      "word": "eso",
+      "start": 20.921,
+      "end": 21.026
+    },
+    {
+      "word": "subimos",
+      "start": 21.06,
+      "end": 21.443
+    },
+    {
+      "word": "tu",
+      "start": 21.49,
+      "end": 21.548
+    },
+    {
+      "word": "conversion",
+      "start": 21.606,
+      "end": 22.14
+    },
+    {
+      "word": "un",
+      "start": 22.256,
+      "end": 22.372
+    },
+    {
+      "word": "sesenta",
+      "start": 22.43,
+      "end": 22.813
+    },
+    {
+      "word": "y",
+      "start": 22.895,
+      "end": 22.918
+    },
+    {
+      "word": "ocho",
+      "start": 22.976,
+      "end": 23.139
+    },
+    {
+      "word": "por",
+      "start": 23.185,
+      "end": 23.301
+    },
+    {
+      "word": "ciento.",
+      "start": 23.336,
+      "end": 23.835
+    },
+    {
+      "word": "Visitantes",
+      "start": 24.009,
+      "end": 24.636
+    },
+    {
+      "word": "que",
+      "start": 24.683,
+      "end": 24.764
+    },
+    {
+      "word": "si",
+      "start": 24.81,
+      "end": 24.903
+    },
+    {
+      "word": "compran.",
+      "start": 24.973,
+      "end": 25.53
+    },
+    {
+      "word": "Y",
+      "start": 25.739,
+      "end": 25.797
+    },
+    {
+      "word": "mientras",
+      "start": 25.867,
+      "end": 26.25
+    },
+    {
+      "word": "ganas",
+      "start": 26.296,
+      "end": 26.598
+    },
+    {
+      "word": "mas,",
+      "start": 26.68,
+      "end": 27.028
+    },
+    {
+      "word": "gastas",
+      "start": 27.109,
+      "end": 27.585
+    },
+    {
+      "word": "menos.",
+      "start": 27.666,
+      "end": 28.235
+    },
+    {
+      "word": "Cuarenta",
+      "start": 28.479,
+      "end": 28.909
+    },
+    {
+      "word": "por",
+      "start": 28.955,
+      "end": 29.071
+    },
+    {
+      "word": "ciento",
+      "start": 29.106,
+      "end": 29.408
+    },
+    {
+      "word": "menos",
+      "start": 29.489,
+      "end": 29.803
+    },
+    {
+      "word": "en",
+      "start": 29.884,
+      "end": 29.954
+    },
+    {
+      "word": "costos.",
+      "start": 30.035,
+      "end": 30.627
+    },
+    {
+      "word": "Cincuenta",
+      "start": 30.801,
+      "end": 31.335
+    },
+    {
+      "word": "y",
+      "start": 31.37,
+      "end": 31.393
+    },
+    {
+      "word": "cinco",
+      "start": 31.44,
+      "end": 31.73
+    },
+    {
+      "word": "por",
+      "start": 31.776,
+      "end": 31.893
+    },
+    {
+      "word": "ciento",
+      "start": 31.939,
+      "end": 32.276
+    },
+    {
+      "word": "menos",
+      "start": 32.369,
+      "end": 32.659
+    },
+    {
+      "word": "tiempo",
+      "start": 32.717,
+      "end": 32.996
+    },
+    {
+      "word": "perdido",
+      "start": 33.042,
+      "end": 33.413
+    },
+    {
+      "word": "en",
+      "start": 33.437,
+      "end": 33.483
+    },
+    {
+      "word": "tareas",
+      "start": 33.541,
+      "end": 33.866
+    },
+    {
+      "word": "que",
+      "start": 33.913,
+      "end": 33.994
+    },
+    {
+      "word": "la",
+      "start": 34.04,
+      "end": 34.122
+    },
+    {
+      "word": "IA",
+      "start": 34.191,
+      "end": 34.458
+    },
+    {
+      "word": "hace",
+      "start": 34.493,
+      "end": 34.772
+    },
+    {
+      "word": "por",
+      "start": 34.83,
+      "end": 34.969
+    },
+    {
+      "word": "ti.",
+      "start": 35.027,
+      "end": 35.364
+    },
+    {
+      "word": "Mas",
+      "start": 35.689,
+      "end": 35.863
+    },
+    {
+      "word": "retorno.",
+      "start": 35.91,
+      "end": 36.42
+    },
+    {
+      "word": "Mas",
+      "start": 36.804,
+      "end": 36.989
+    },
+    {
+      "word": "ventas.",
+      "start": 37.047,
+      "end": 37.628
+    },
+    {
+      "word": "Menos",
+      "start": 38.011,
+      "end": 38.301
+    },
+    {
+      "word": "costos.",
+      "start": 38.359,
+      "end": 39.01
+    },
+    {
+      "word": "Menos",
+      "start": 39.393,
+      "end": 39.718
+    },
+    {
+      "word": "tiempo.",
+      "start": 39.776,
+      "end": 40.298
+    },
+    {
+      "word": "Cuatro",
+      "start": 40.739,
+      "end": 41.134
+    },
+    {
+      "word": "numeros",
+      "start": 41.181,
+      "end": 41.575
+    },
+    {
+      "word": "que",
+      "start": 41.633,
+      "end": 41.715
+    },
+    {
+      "word": "cambian",
+      "start": 41.773,
+      "end": 42.109
+    },
+    {
+      "word": "tu",
+      "start": 42.156,
+      "end": 42.237
+    },
+    {
+      "word": "negocio.",
+      "start": 42.295,
+      "end": 42.922
+    },
+    {
+      "word": "Victor",
+      "start": 43.305,
+      "end": 43.746
+    },
+    {
+      "word": "IA.",
+      "start": 43.828,
+      "end": 44.362
+    },
+    {
+      "word": "Resultados",
+      "start": 44.745,
+      "end": 45.337
+    },
+    {
+      "word": "que",
+      "start": 45.383,
+      "end": 45.453
+    },
+    {
+      "word": "se",
+      "start": 45.511,
+      "end": 45.592
+    },
+    {
+      "word": "miden.",
+      "start": 45.65,
+      "end": 46.347
+    }
+  ]
+}

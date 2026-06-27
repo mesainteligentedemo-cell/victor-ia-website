@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 80" fill="none">
+  <circle cx="40" cy="40" r="36" stroke="#003087" stroke-width="2.5"/>
+  <circle cx="40" cy="40" r="28" stroke="#003087" stroke-width="1.5"/>
+  <text x="40" y="47" font-family="Arial" font-size="22" font-weight="700" fill="#003087" text-anchor="middle">VW</text>
+  <text x="110" y="34" font-family="Arial" font-size="13" font-weight="700" fill="#003087" text-anchor="middle" letter-spacing="2">VOLKSWAGEN</text>
+  <text x="110" y="52" font-family="Arial" font-size="9" fill="#003087" text-anchor="middle" letter-spacing="4" opacity="0.7">DE MÉXICO</text>
+</svg>

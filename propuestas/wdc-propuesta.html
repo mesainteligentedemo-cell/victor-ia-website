@@ -1,0 +1,2397 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#000000">
+  <title>Propuesta Estratégica | Wedding Destination Cancun</title>
+  <meta name="description" content="Propuesta de posicionamiento digital: SEO + AEO + GEO para Wedding Destination Cancun. Estrategia integral 12 meses.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --ink: #0a0a0a;
+      --ink-2: #1a1a1a;
+      --ink-3: #333333;
+      --muted: #666666;
+      --muted-2: #999999;
+      --border: rgba(0,0,0,0.08);
+      --border-strong: rgba(0,0,0,0.14);
+      --bg: #ffffff;
+      --bg-2: #f8f8f7;
+      --bg-3: #f2f2f0;
+      --accent: #0a0a0a;
+      --gold: #b8960c;
+      --gold-light: #d4ac0d;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--ink-2);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 68px;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      z-index: 900;
+    }
+
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .logo-badge {
+      width: 32px;
+      height: 32px;
+      background: var(--ink);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-badge svg {
+      width: 18px;
+      height: 18px;
+      fill: white;
+    }
+
+    .logo-text {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+
+    .logo-text span {
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    .nav-meta {
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 24px;
+      background: var(--ink);
+      color: white;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn:hover {
+      background: #000;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--ink);
+      border: 1.5px solid var(--border-strong);
+    }
+
+    .btn-ghost:hover {
+      background: var(--bg-2);
+      box-shadow: none;
+    }
+
+    /* ── LAYOUT ── */
+    main {
+      margin-top: 68px;
+    }
+
+    section {
+      padding: 96px 48px;
+    }
+
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 120px 48px 96px;
+      background: var(--bg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px;
+      right: -200px;
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(184,150,12,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease-out 0.1s forwards;
+    }
+
+    .eyebrow::before,
+    .eyebrow::after {
+      content: '';
+      width: 28px;
+      height: 1px;
+      background: var(--border-strong);
+    }
+
+    h1 {
+      font-size: clamp(38px, 5.5vw, 64px);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease-out 0.2s forwards;
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 640px;
+      margin: 0 auto 48px;
+      line-height: 1.75;
+      opacity: 0;
+      animation: fadeUp 0.7s ease-out 0.3s forwards;
+    }
+
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      padding-top: 48px;
+      border-top: 1px solid var(--border);
+      margin-top: 48px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease-out 0.45s forwards;
+    }
+
+    .hero-stat {
+      text-align: center;
+    }
+
+    .hero-stat-num {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      display: block;
+    }
+
+    .hero-stat-label {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 4px;
+      display: block;
+    }
+
+    .divider {
+      width: 1px;
+      height: 40px;
+      background: var(--border-strong);
+    }
+
+    /* ── SECTION TITLES ── */
+    .section-eyebrow {
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 16px;
+    }
+
+    h2 {
+      font-size: clamp(28px, 3.5vw, 42px);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.2;
+      color: var(--ink);
+      margin-bottom: 20px;
+    }
+
+    h3 {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--ink-2);
+      margin-bottom: 12px;
+    }
+
+    .section-lead {
+      font-size: 17px;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 680px;
+      margin-bottom: 56px;
+    }
+
+    /* ── DIVIDER LINE ── */
+    .hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0;
+    }
+
+    /* ── ALT BG ── */
+    .bg-alt {
+      background: var(--bg-2);
+    }
+
+    .bg-dark {
+      background: var(--ink);
+      color: white;
+    }
+
+    .bg-dark h2,
+    .bg-dark h3 {
+      color: white;
+    }
+
+    .bg-dark .section-eyebrow,
+    .bg-dark p {
+      color: rgba(255,255,255,0.55);
+    }
+
+    /* ── PILLARS (ESTRATEGIA) ── */
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin: 48px 0;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .pillar {
+      padding: 40px 36px;
+      background: var(--bg);
+      position: relative;
+    }
+
+    .pillar + .pillar {
+      border-left: 1px solid var(--border);
+    }
+
+    .pillar-pct {
+      font-size: 52px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 12px;
+      color: var(--ink);
+    }
+
+    .pillar-name {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-2);
+      margin-bottom: 8px;
+    }
+
+    .pillar-desc {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .pillar-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 3px;
+      background: var(--ink);
+      transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* ── OBJECTIVE BOX ── */
+    .objective-box {
+      background: var(--ink);
+      color: white;
+      border-radius: 12px;
+      padding: 48px;
+      margin-bottom: 56px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .objective-box::before {
+      content: '"';
+      position: absolute;
+      top: -20px;
+      left: 36px;
+      font-size: 200px;
+      font-weight: 900;
+      color: rgba(255,255,255,0.04);
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .objective-box p {
+      font-size: 20px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.88);
+      position: relative;
+    }
+
+    .objective-box strong {
+      color: white;
+    }
+
+    /* ── VIDEO MODELS ── */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin: 48px 0;
+    }
+
+    .video-card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 36px 32px;
+      position: relative;
+      transition: all 0.25s;
+      background: var(--bg);
+    }
+
+    .video-card:hover {
+      border-color: var(--border-strong);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+      transform: translateY(-2px);
+    }
+
+    .video-card.featured {
+      border-color: var(--ink);
+      background: var(--ink);
+      color: white;
+    }
+
+    .video-card.featured h3 {
+      color: white;
+    }
+
+    .video-card.featured p {
+      color: rgba(255,255,255,0.65);
+    }
+
+    .video-badge {
+      display: inline-block;
+      font-size: 9px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 5px 10px;
+      border-radius: 4px;
+      margin-bottom: 24px;
+      font-weight: 700;
+    }
+
+    .badge-standard { background: var(--bg-3); color: var(--ink-3); }
+    .badge-featured { background: rgba(255,255,255,0.12); color: white; }
+    .badge-premium { background: rgba(184,150,12,0.1); color: var(--gold); border: 1px solid rgba(184,150,12,0.25); }
+
+    .video-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .icon-dark { background: var(--bg-3); }
+    .icon-white { background: rgba(255,255,255,0.1); }
+    .icon-gold { background: rgba(184,150,12,0.1); }
+
+    .video-icon svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .feature-list {
+      list-style: none;
+      margin-top: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .feature-list li {
+      font-size: 14px;
+      color: var(--muted);
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      line-height: 1.5;
+    }
+
+    .feature-list li::before {
+      content: '✓';
+      font-weight: 700;
+      color: var(--ink-3);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .video-card.featured .feature-list li {
+      color: rgba(255,255,255,0.65);
+    }
+
+    .video-card.featured .feature-list li::before {
+      color: rgba(255,255,255,0.9);
+    }
+
+    /* ── TIMELINE ── */
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 48px 0;
+    }
+
+    .tl-quarter {
+      padding: 36px 28px;
+      border-right: 1px solid var(--border);
+      position: relative;
+    }
+
+    .tl-quarter:last-child {
+      border-right: none;
+    }
+
+    .tl-label {
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted-2);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .tl-quarter h3 {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .tl-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .tl-list li {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+      padding-left: 14px;
+      position: relative;
+    }
+
+    .tl-list li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--muted-2);
+    }
+
+    .tl-progress {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--border);
+    }
+
+    .tl-progress-fill {
+      height: 100%;
+      background: var(--ink);
+    }
+
+    /* ── DELIVERABLES ── */
+    .deliverables-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin: 48px 0;
+    }
+
+    .deliverable-card {
+      background: var(--bg-2);
+      border-radius: 12px;
+      padding: 32px;
+    }
+
+    .deliverable-num {
+      font-size: 48px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: var(--ink);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .deliverable-type {
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .deliverable-desc {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ── RESULTS ── */
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin: 48px 0;
+    }
+
+    .result-card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 36px;
+    }
+
+    .result-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: var(--bg-2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .result-icon svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .result-timeframe {
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted-2);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    /* ── PRICING ── */
+    .pricing-section {
+      background: var(--bg);
+    }
+
+    .pricing-card {
+      border: 1.5px solid var(--ink);
+      border-radius: 16px;
+      padding: 64px;
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+    }
+
+    .pricing-card::before {
+      content: 'PROPUESTA ECONÓMICA';
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      background: white;
+      padding: 0 16px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .price-amount {
+      font-size: clamp(52px, 8vw, 80px);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: var(--ink);
+      margin: 32px 0 8px;
+    }
+
+    .price-currency {
+      font-size: 22px;
+      font-weight: 600;
+      vertical-align: super;
+      letter-spacing: 0;
+      color: var(--ink-3);
+    }
+
+    .price-period {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 40px;
+    }
+
+    /* ── TWO-PHASE PRICING ── */
+    .phase-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin: 32px 0 8px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      background: var(--border);
+    }
+
+    .phase-col {
+      background: var(--bg);
+      padding: 36px 32px;
+      text-align: center;
+      position: relative;
+    }
+
+    .phase-col.phase-2 {
+      background: var(--ink);
+    }
+
+    .phase-tag {
+      display: inline-block;
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 4px;
+      margin-bottom: 18px;
+    }
+
+    .phase-tag.tag-1 { background: var(--bg-3); color: var(--ink-3); }
+    .phase-tag.tag-2 { background: rgba(184,150,12,0.18); color: var(--gold-light); }
+
+    .phase-months {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .phase-2 .phase-months { color: rgba(255,255,255,0.5); }
+
+    .phase-price {
+      font-size: clamp(40px, 6vw, 56px);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: var(--ink);
+      margin: 8px 0 2px;
+    }
+
+    .phase-2 .phase-price { color: white; }
+
+    .phase-price .cur {
+      font-size: 18px;
+      font-weight: 600;
+      vertical-align: super;
+      color: var(--ink-3);
+    }
+
+    .phase-2 .phase-price .cur { color: rgba(255,255,255,0.6); }
+
+    .phase-unit {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .phase-2 .phase-unit { color: rgba(255,255,255,0.5); }
+
+    .phase-note {
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.6;
+      text-align: left;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .phase-2 .phase-note {
+      color: rgba(255,255,255,0.6);
+      border-top: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .phase-note strong { color: var(--ink-2); }
+    .phase-2 .phase-note strong { color: white; }
+
+    .totals-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 32px 0 8px;
+    }
+
+    .totals-row-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .total-cell {
+      padding: 22px 18px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--bg-2);
+      text-align: center;
+    }
+
+    .total-cell.highlight {
+      background: var(--ink);
+      border-color: var(--ink);
+    }
+
+    .total-cell-label {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .total-cell.highlight .total-cell-label { color: rgba(255,255,255,0.55); }
+
+    .total-cell-num {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+    }
+
+    .total-cell.highlight .total-cell-num { color: white; }
+
+    .total-cell-num .cur {
+      font-size: 13px;
+      font-weight: 600;
+      vertical-align: super;
+      color: var(--muted);
+    }
+
+    .total-cell.highlight .total-cell-num .cur { color: rgba(255,255,255,0.6); }
+
+    /* ── LINK BUILDING SECTION ── */
+    .lb-intro {
+      background: var(--ink);
+      color: white;
+      border-radius: 14px;
+      padding: 40px 44px;
+      margin: 48px 0 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .lb-intro p {
+      font-size: 18px;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.85);
+    }
+
+    .lb-intro strong { color: white; }
+
+    .lb-intro .lb-accent {
+      color: var(--gold-light);
+      font-weight: 700;
+    }
+
+    .lb-sources {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+      margin: 40px 0;
+    }
+
+    .lb-source {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px 22px;
+      background: var(--bg);
+      transition: all 0.25s;
+    }
+
+    .lb-source:hover {
+      border-color: var(--border-strong);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.07);
+      transform: translateY(-2px);
+    }
+
+    .lb-source-num {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--gold);
+      margin-bottom: 14px;
+      letter-spacing: 0.04em;
+    }
+
+    .lb-source h3 {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .lb-source p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .lb-invest {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 24px;
+      align-items: stretch;
+      margin-top: 40px;
+    }
+
+    .lb-invest-box {
+      border: 1.5px solid var(--ink);
+      border-radius: 14px;
+      padding: 36px;
+    }
+
+    .lb-invest-box.dark {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: white;
+    }
+
+    .lb-invest-amount {
+      font-size: clamp(32px, 5vw, 46px);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: var(--ink);
+      margin: 4px 0 6px;
+    }
+
+    .lb-invest-box.dark .lb-invest-amount { color: white; }
+
+    .lb-invest-amount .cur {
+      font-size: 16px;
+      font-weight: 600;
+      vertical-align: super;
+      color: var(--muted);
+    }
+
+    .lb-invest-box.dark .lb-invest-amount .cur { color: rgba(255,255,255,0.6); }
+
+    .lb-invest-label {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .lb-invest-box.dark .lb-invest-label { color: rgba(255,255,255,0.5); }
+
+    .lb-invest-list {
+      list-style: none;
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .lb-invest-list li {
+      font-size: 14px;
+      color: rgba(255,255,255,0.7);
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      line-height: 1.5;
+    }
+
+    .lb-invest-list li::before {
+      content: '→';
+      color: var(--gold-light);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .lb-invest-list li strong { color: white; }
+
+    /* ── LINK BUILDING · TABLA DE COSTOS REALES ── */
+    .lb-cost-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      font-size: 14px;
+    }
+
+    .lb-cost-table th,
+    .lb-cost-table td {
+      text-align: left;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.78);
+      line-height: 1.45;
+    }
+
+    .lb-cost-table th {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      font-weight: 600;
+      padding-top: 0;
+    }
+
+    .lb-cost-table td.lb-cost-concept strong { color: #fff; }
+
+    .lb-cost-table td.lb-cost-amount {
+      text-align: right;
+      white-space: nowrap;
+      color: var(--gold-light);
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .lb-cost-table tr.lb-cost-total td {
+      border-bottom: none;
+      padding-top: 18px;
+      font-size: 15px;
+      color: #fff;
+      font-weight: 800;
+    }
+
+    .lb-cost-table tr.lb-cost-total td.lb-cost-amount {
+      color: var(--gold-light);
+      font-size: 17px;
+    }
+
+    .lb-cost-note {
+      font-size: 12px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.6;
+      margin-top: 16px;
+      font-style: italic;
+    }
+
+    .price-note {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      background: var(--bg-2);
+      padding: 8px 18px;
+      border-radius: 100px;
+      margin-bottom: 12px;
+    }
+
+    .price-conditions {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin: 40px 0;
+      text-align: left;
+    }
+
+    .price-condition {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--bg-2);
+    }
+
+    .condition-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .condition-icon svg {
+      width: 16px;
+      height: 16px;
+      stroke: white;
+      fill: none;
+    }
+
+    .condition-body {
+      flex: 1;
+    }
+
+    .condition-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 2px;
+    }
+
+    .condition-detail {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .iva-note {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--muted);
+      padding: 16px;
+      border: 1px dashed var(--border-strong);
+      border-radius: 8px;
+      margin-bottom: 40px;
+    }
+
+    .iva-note strong {
+      color: var(--ink-2);
+    }
+
+    /* ── TERMS ── */
+    .terms-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin: 40px 0;
+    }
+
+    .term-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 16px 20px;
+      background: var(--bg-2);
+      border-radius: 8px;
+    }
+
+    .term-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--ink);
+      flex-shrink: 0;
+      margin-top: 7px;
+    }
+
+    .term-text {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── FOOTER / CTA ── */
+    .cta-section {
+      background: var(--ink);
+      padding: 96px 48px;
+      text-align: center;
+    }
+
+    .cta-section h2 {
+      color: white;
+      max-width: 560px;
+      margin: 0 auto 24px;
+    }
+
+    .cta-section p {
+      color: rgba(255,255,255,0.55);
+      max-width: 480px;
+      margin: 0 auto 40px;
+    }
+
+    .cta-btns {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-white {
+      background: white;
+      color: var(--ink);
+    }
+
+    .btn-white:hover {
+      background: var(--bg-2);
+    }
+
+    .btn-outline-white {
+      background: transparent;
+      color: white;
+      border: 1.5px solid rgba(255,255,255,0.25);
+    }
+
+    .btn-outline-white:hover {
+      background: rgba(255,255,255,0.08);
+      box-shadow: none;
+    }
+
+    footer {
+      padding: 32px 48px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: var(--muted-2);
+    }
+
+    .footer-brand {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .footer-brand strong {
+      color: var(--ink-2);
+    }
+
+    .footer-mail {
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border-strong);
+      transition: color 0.2s ease;
+      word-break: break-word;
+    }
+
+    .footer-mail:hover {
+      color: var(--ink-2);
+    }
+
+    /* Salvaguarda global anti-corte: números/cifras largas nunca desbordan */
+    .price-amount,
+    .total-cell-num,
+    .deliverable-num,
+    .pillar-pct,
+    .hero-stat-num,
+    .lb-invest-amount,
+    .lb-cost-amount {
+      overflow-wrap: anywhere;
+      word-break: normal;
+      max-width: 100%;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Curva de easing luxury compartida por todas las animaciones de scroll */
+    :root {
+      --ease-lux: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Base reveal: estado oculto + transición. El delay de stagger
+       se inyecta inline desde JS (--reveal-delay). */
+    .reveal,
+    .reveal-fade,
+    .reveal-left,
+    .reveal-right,
+    .reveal-scale {
+      opacity: 0;
+      transition:
+        opacity 0.6s var(--ease-lux),
+        transform 0.6s var(--ease-lux);
+      transition-delay: var(--reveal-delay, 0ms);
+      will-change: opacity, transform;
+    }
+
+    /* fadeUp (default) */
+    .reveal            { transform: translateY(24px); }
+    /* fadeIn */
+    .reveal-fade       { transform: none; }
+    /* slideInLeft */
+    .reveal-left       { transform: translateX(-40px); }
+    /* slideInRight */
+    .reveal-right      { transform: translateX(40px); }
+    /* scaleIn */
+    .reveal-scale      { transform: scale(0.95); }
+
+    .reveal.visible,
+    .reveal-fade.visible,
+    .reveal-left.visible,
+    .reveal-right.visible,
+    .reveal-scale.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* Respeta usuarios con reduce-motion: aparece sin movimiento */
+    @media (prefers-reduced-motion: reduce) {
+      .reveal, .reveal-fade, .reveal-left, .reveal-right, .reveal-scale {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+    }
+
+    /* ──────────────────────────────────────────────
+       HOVER EFFECTS — elegantes, luxury, no excesivos
+    ────────────────────────────────────────────── */
+
+    /* Cards genéricas: lift + sombra + borde. transition base aquí
+       para que el hover sea suave aunque la card también haga reveal. */
+    .deliverable-card,
+    .result-card,
+    .term-item,
+    .price-condition {
+      transition:
+        transform 0.3s var(--ease-lux),
+        box-shadow 0.3s var(--ease-lux),
+        border-color 0.3s var(--ease-lux),
+        background 0.3s var(--ease-lux);
+    }
+
+    .deliverable-card:hover,
+    .result-card:hover {
+      transform: translateY(-4px) scale(1.015);
+      box-shadow: 0 14px 40px rgba(0,0,0,0.10);
+      border-color: var(--border-strong);
+    }
+
+    /* Cards sobre fondo claro (deliverable usa bg-2): aclarar al hover */
+    .deliverable-card:hover {
+      background: var(--bg);
+    }
+
+    /* Número grande dentro de la card → realce de color al pasar mouse */
+    .deliverable-card:hover .deliverable-num,
+    .result-card:hover h3 {
+      color: var(--gold);
+      transition: color 0.3s var(--ease-lux);
+    }
+
+    /* Iconos de result: glow sutil al hover de la card */
+    .result-card:hover .result-icon {
+      background: rgba(184,150,12,0.10);
+      transform: scale(1.05);
+      transition: background 0.3s var(--ease-lux), transform 0.3s var(--ease-lux);
+    }
+
+    /* term-item y price-condition: highlight sutil */
+    .term-item:hover,
+    .price-condition:hover {
+      background: var(--bg-3);
+      transform: translateX(4px);
+    }
+
+    /* Pillars: realce del % y barra al hover */
+    .pillar {
+      transition: background 0.3s var(--ease-lux);
+    }
+    .pillar:hover {
+      background: var(--bg-2);
+    }
+    .pillar:hover .pillar-pct {
+      color: var(--gold);
+      transition: color 0.3s var(--ease-lux);
+    }
+
+    /* ── Números grandes: glow + scale ligero al hover individual ── */
+    .price-amount,
+    .phase-price,
+    .total-cell-num,
+    .deliverable-num,
+    .pillar-pct,
+    .hero-stat-num,
+    .lb-invest-amount {
+      transition: color 0.3s var(--ease-lux), transform 0.3s var(--ease-lux), text-shadow 0.3s var(--ease-lux);
+    }
+
+    .price-amount:hover,
+    .lb-invest-amount:hover,
+    .hero-stat-num:hover {
+      color: var(--gold);
+      transform: scale(1.03);
+      text-shadow: 0 0 24px rgba(184,150,12,0.25);
+    }
+
+    .lb-invest-box.dark .lb-invest-amount:hover {
+      color: var(--gold-light);
+      text-shadow: 0 0 28px rgba(212,172,13,0.45);
+    }
+
+    /* ── Pricing totals: glow highlight al hover ── */
+    .total-cell {
+      transition:
+        transform 0.3s var(--ease-lux),
+        box-shadow 0.3s var(--ease-lux),
+        border-color 0.3s var(--ease-lux);
+    }
+    .total-cell:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.10);
+      border-color: var(--border-strong);
+    }
+    .total-cell.highlight:hover {
+      box-shadow: 0 12px 40px rgba(184,150,12,0.30);
+      border-color: var(--gold);
+    }
+
+    /* Pricing card completa: glow dorado envolvente al hover */
+    .pricing-card {
+      transition: box-shadow 0.4s var(--ease-lux);
+    }
+    .pricing-card:hover {
+      box-shadow: 0 24px 70px rgba(184,150,12,0.14);
+    }
+
+    /* lb-invest-box: lift al hover */
+    .lb-invest-box {
+      transition: transform 0.3s var(--ease-lux), box-shadow 0.3s var(--ease-lux);
+    }
+    .lb-invest-box:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 44px rgba(0,0,0,0.10);
+    }
+    .lb-invest-box.dark:hover {
+      box-shadow: 0 14px 44px rgba(184,150,12,0.20);
+    }
+
+    /* ── Tabla de costos: highlight de fila al hover ── */
+    .lb-cost-table tbody tr {
+      transition: background 0.25s var(--ease-lux);
+    }
+    .lb-cost-table tbody tr:hover {
+      background: rgba(255,255,255,0.05);
+    }
+    .lb-cost-table tbody tr:hover td.lb-cost-amount {
+      color: #fff;
+    }
+
+    /* ── Links: underline animado ── */
+    .footer-mail {
+      position: relative;
+      border-bottom: none;
+      background-image: linear-gradient(var(--border-strong), var(--border-strong));
+      background-size: 100% 1px;
+      background-position: 0 100%;
+      background-repeat: no-repeat;
+      transition: color 0.25s ease;
+    }
+    .footer-mail::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: -1px;
+      width: 0; height: 1px;
+      background: var(--ink-2);
+      transition: width 0.35s var(--ease-lux);
+    }
+    .footer-mail:hover::after {
+      width: 100%;
+    }
+
+    /* Timeline quarters: realce al hover */
+    .tl-quarter {
+      transition: background 0.3s var(--ease-lux);
+    }
+    .tl-quarter:hover {
+      background: var(--bg-2);
+    }
+
+    /* ── RESPONSIVE ── */
+
+    /* ≤ 1200px — laptops chicos: aflojar paddings laterales */
+    @media (max-width: 1200px) {
+      section { padding: 88px 40px; }
+      header { padding: 0 40px; }
+      .hero { padding: 112px 40px 88px; }
+      .objective-box { padding: 40px; }
+      .lb-invest { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* ≤ 900px — tablets: grids de 3-4 col bajan a 2 o 1 */
+    @media (max-width: 900px) {
+      section { padding: 72px 28px; }
+      header { padding: 0 24px; }
+      .hero { padding: 96px 28px 72px; }
+
+      .pillars { grid-template-columns: 1fr; }
+      .pillar + .pillar { border-left: none; border-top: 1px solid var(--border); }
+
+      .video-grid { grid-template-columns: 1fr; }
+      .timeline { grid-template-columns: repeat(2, 1fr); }
+      .tl-quarter:nth-child(2) { border-right: none; }
+      .tl-quarter:nth-child(2), .tl-quarter:nth-child(3) { border-top: 1px solid var(--border); }
+
+      .deliverables-grid { grid-template-columns: repeat(2, 1fr); }
+      .results-grid { grid-template-columns: 1fr; }
+      .pricing-card { padding: 40px 28px; }
+      .terms-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; text-align: center; }
+      .nav-meta { display: none; }
+
+      .lb-sources { grid-template-columns: repeat(2, 1fr); }
+      .lb-invest { grid-template-columns: 1fr; }
+      .lb-invest-box { padding: 28px; }
+      .lb-intro { padding: 32px 28px; }
+      .lb-intro p { font-size: 16px; }
+      .objective-box { padding: 36px 28px; }
+      .objective-box p { font-size: 18px; }
+    }
+
+    /* ≤ 600px — móvil grande: TODO a 1 columna */
+    @media (max-width: 600px) {
+      section { padding: 60px 20px; }
+      header { height: 60px; padding: 0 18px; }
+      main { margin-top: 60px; }
+      .hero { padding: 84px 20px 60px; }
+
+      .logo-badge { width: 28px; height: 28px; }
+      .logo-badge svg { width: 16px; height: 16px; }
+      .logo-text { font-size: 14px; }
+      /* El nombre del cliente ya aparece grande en el H1 del hero;
+         lo ocultamos en el header para que quede 1 línea limpia */
+      .logo-client { display: none; }
+
+      .section-lead { font-size: 15px; margin-bottom: 40px; }
+
+      .timeline { grid-template-columns: 1fr; }
+      .tl-quarter { border-right: none; border-top: 1px solid var(--border); }
+      .tl-quarter:first-child { border-top: none; }
+
+      .deliverables-grid { grid-template-columns: 1fr; }
+
+      /* Hero stats: 2x2 limpio, sin divisores */
+      .hero-meta { gap: 0; padding-top: 36px; margin-top: 36px; }
+      .hero-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 28px 16px; }
+      .hero-meta .divider { display: none; }
+      .hero-stat-num { font-size: 28px; }
+
+      .phase-grid { grid-template-columns: 1fr; }
+      .phase-col { padding: 28px 22px; }
+      .totals-row,
+      .totals-row-2 { grid-template-columns: 1fr; }
+      .lb-sources { grid-template-columns: 1fr; }
+
+      .objective-box { padding: 28px 22px; border-radius: 10px; }
+      .objective-box p { font-size: 16px; }
+      .objective-box::before { font-size: 140px; left: 20px; }
+
+      .pricing-card { padding: 36px 20px; }
+      .deliverable-card { padding: 26px 22px; }
+      .result-card { padding: 28px 22px; }
+      .lb-source { padding: 24px 20px; }
+
+      /* Tabla de costos: permitir wrap para que no se corte */
+      .lb-cost-table { font-size: 13px; }
+      .lb-cost-table td.lb-cost-amount { white-space: normal; }
+
+      /* Condiciones de precio: stack vertical del icono */
+      .price-condition { flex-direction: column; gap: 12px; padding: 18px; }
+    }
+
+    /* ≤ 400px — iPhone mini / SE: tipografía y números compactos */
+    @media (max-width: 400px) {
+      section { padding: 52px 16px; }
+      .hero { padding: 78px 16px 52px; }
+      .hero-stat-num { font-size: 24px; }
+      .pillar-pct { font-size: 44px; }
+      .deliverable-num { font-size: 40px; }
+      .price-amount { margin: 24px 0 8px; }
+      .total-cell-num { font-size: 21px; }
+      .lb-cost-table th,
+      .lb-cost-table td { font-size: 12px; }
+    }
+
+    /* ≤ 340px — iPhone SE 1ª gen / Galaxy Fold cerrado: compactar rangos largos */
+    @media (max-width: 340px) {
+      section { padding: 48px 14px; }
+      .hero { padding: 74px 14px 48px; }
+      .total-cell { padding: 20px 12px; }
+      .total-cell-num { font-size: 19px; letter-spacing: -0.04em; }
+      .price-amount { font-size: 46px; }
+      .pillar-pct { font-size: 40px; }
+      .deliverable-num { font-size: 36px; }
+      .lb-invest-amount { font-size: 28px; }
+      .lb-invest-box { padding: 24px 18px; }
+      .footer-brand,
+      .footer-copy { font-size: 11px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ──────────────────────────────────────────────────────
+     HEADER
+────────────────────────────────────────────────────── -->
+<header>
+  <a href="#" class="logo-wrap">
+    <div class="logo-badge">
+      <svg viewBox="0 0 20 20"><path d="M10 2L3 7v6l7 5 7-5V7L10 2zm0 2.5L15.5 8v4.5L10 16l-5.5-3.5V8L10 4.5z"/></svg>
+    </div>
+    <span class="logo-text">Victor IA <span class="logo-client">/ Wedding Destination Cancun</span></span>
+  </a>
+  <span class="nav-meta">Propuesta Estratégica · Junio 2026</span>
+</header>
+
+<main>
+
+<!-- ──────────────────────────────────────────────────────
+     HERO
+────────────────────────────────────────────────────── -->
+<div class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">Estrategia Digital · Cancún, Quintana Roo</p>
+    <h1>Posiciona Wedding Destination Cancun como referente global</h1>
+    <p class="hero-sub">
+      Propuesta de posicionamiento digital 360°: SEO + AEO + GEO.
+      Domina las búsquedas tradicionales, los asistentes de IA y la geolocalización
+      para captar novias y coordinadores de boda en México y USA.
+    </p>
+
+    <div class="hero-meta" data-stagger>
+      <div class="hero-stat reveal">
+        <span class="hero-stat-num">12</span>
+        <span class="hero-stat-label">Meses de campaña</span>
+      </div>
+      <div class="divider"></div>
+      <div class="hero-stat reveal">
+        <span class="hero-stat-num">149</span>
+        <span class="hero-stat-label">Piezas de contenido</span>
+      </div>
+      <div class="divider"></div>
+      <div class="hero-stat reveal">
+        <span class="hero-stat-num">3</span>
+        <span class="hero-stat-label">Pilares estratégicos</span>
+      </div>
+      <div class="divider"></div>
+      <div class="hero-stat reveal">
+        <span class="hero-stat-num">TOP 3</span>
+        <span class="hero-stat-label">Objetivo en buscadores</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="hr">
+
+<!-- ──────────────────────────────────────────────────────
+     ESTRATEGIA
+────────────────────────────────────────────────────── -->
+<section id="estrategia">
+  <div class="container">
+    <span class="section-eyebrow">01 — Estrategia</span>
+    <h2>Un sistema de posicionamiento que trabaja 24/7</h2>
+    <p class="section-lead">
+      El mercado de bodas destino en Cancún es altamente competitivo y globalizado.
+      La estrategia no es solo aparecer en Google: es dominar cada punto de contacto donde
+      una novia busca información, sea un buscador, un asistente de IA o una recomendación local.
+    </p>
+
+    <div class="objective-box reveal">
+      <p>
+        <strong>Objetivo central:</strong> posicionar Wedding Destination Cancun en los primeros 3 resultados
+        para las palabras clave con mayor intención de compra en el segmento de bodas destino en el Caribe,
+        captando tráfico orgánico de parejas en México y USA que buscan activamente
+        coordinadores y venues para su boda en Cancún.
+      </p>
+    </div>
+
+    <div class="pillars" data-stagger>
+      <div class="pillar reveal">
+        <div class="pillar-pct">30%</div>
+        <div class="pillar-name">SEO</div>
+        <p class="pillar-desc">
+          Search Engine Optimization. Estructura técnica impecable, velocidad de carga,
+          arquitectura de contenido y link building para Google y Bing.
+        </p>
+        <div class="pillar-bar" style="width: 30%"></div>
+      </div>
+      <div class="pillar reveal">
+        <div class="pillar-pct">35%</div>
+        <div class="pillar-name">AEO</div>
+        <p class="pillar-desc">
+          Answer Engine Optimization. Contenido estructurado para que ChatGPT, Perplexity,
+          Google AI Overview y Bing Copilot respondan con información de WDC.
+        </p>
+        <div class="pillar-bar" style="width: 35%"></div>
+      </div>
+      <div class="pillar reveal">
+        <div class="pillar-pct">35%</div>
+        <div class="pillar-name">GEO</div>
+        <p class="pillar-desc">
+          Generative Engine Optimization. Presencia en Google Maps, reseñas estratégicas
+          y señales locales para captar búsquedas con intención geográfica de Cancún.
+        </p>
+        <div class="pillar-bar" style="width: 35%"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="hr">
+
+<!-- ──────────────────────────────────────────────────────
+     TIMELINE 12 MESES
+────────────────────────────────────────────────────── -->
+<section id="timeline">
+  <div class="container">
+    <span class="section-eyebrow">03 — Cronograma</span>
+    <h2>12 meses hacia el liderazgo digital</h2>
+    <p class="section-lead">
+      La estrategia se ejecuta en cuatro fases trimestrales progresivas.
+      Cada fase construye sobre la anterior, acumulando autoridad y visibilidad de manera sostenida.
+    </p>
+
+    <div class="timeline" data-stagger>
+
+      <div class="tl-quarter reveal">
+        <span class="tl-label">Meses 1–3</span>
+        <h3>Fundamentos</h3>
+        <ul class="tl-list">
+          <li>Auditoría técnica SEO completa</li>
+          <li>Investigación de keywords primarias y secundarias</li>
+          <li>Configuración de Google Search Console y Analytics 4</li>
+          <li>Optimización de Google Business Profile</li>
+          <li>Arquitectura del sitio y estructura de URLs</li>
+          <li>30 artículos SEO base (categorías principales)</li>
+          <li>3 landing pages de alta conversión</li>
+          <li>5 páginas AEO con formato FAQ</li>
+        </ul>
+        <div class="tl-progress"><div class="tl-progress-fill" style="width:25%"></div></div>
+      </div>
+
+      <div class="tl-quarter reveal">
+        <span class="tl-label">Meses 4–6</span>
+        <h3>Aceleración</h3>
+        <ul class="tl-list">
+          <li>30 artículos de contenido intermedio</li>
+          <li>3 landing pages de destinos específicos</li>
+          <li>5 páginas AEO de preguntas frecuentes</li>
+          <li>Estrategia de link building interno</li>
+          <li>Inicio de outreach para backlinks de calidad</li>
+          <li>Primeras piezas de video integradas al contenido</li>
+          <li>Reporte mensual con KPIs y ajustes</li>
+        </ul>
+        <div class="tl-progress"><div class="tl-progress-fill" style="width:50%"></div></div>
+      </div>
+
+      <div class="tl-quarter reveal">
+        <span class="tl-label">Meses 7–9</span>
+        <h3>Dominio</h3>
+        <ul class="tl-list">
+          <li><strong>Link building intensificado: guest posts y PR</strong></li>
+          <li>30 artículos de long-tail de alta conversión</li>
+          <li>3 landing pages de temporada (diciembre, febrero, junio)</li>
+          <li>5 páginas AEO para integraciones con IA</li>
+          <li>Campañas de reseñas Google estratégicas</li>
+          <li>Expansión de contenido en inglés para mercado México y USA</li>
+          <li>Segundo bloque de piezas de video</li>
+        </ul>
+        <div class="tl-progress"><div class="tl-progress-fill" style="width:75%"></div></div>
+      </div>
+
+      <div class="tl-quarter reveal">
+        <span class="tl-label">Meses 10–12</span>
+        <h3>Liderazgo</h3>
+        <ul class="tl-list">
+          <li>30 artículos de autoridad y casos de éxito</li>
+          <li>Cierre total: 9 landing pages + 20 páginas AEO</li>
+          <li>Auditoría final y correcciones técnicas</li>
+          <li>Estrategia de retención de posicionamiento</li>
+          <li>Piezas de video de cierre de año / campañas especiales</li>
+          <li>Reporte anual completo con ROI documentado</li>
+        </ul>
+        <div class="tl-progress"><div class="tl-progress-fill" style="width:100%"></div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="hr">
+
+<!-- ──────────────────────────────────────────────────────
+     DELIVERABLES
+────────────────────────────────────────────────────── -->
+<section id="entregables" class="bg-alt">
+  <div class="container">
+    <span class="section-eyebrow">04 — Entregables</span>
+    <h2>Lo que recibes al final de los 12 meses</h2>
+    <p class="section-lead">
+      Un ecosistema de contenido construido para durar. Cada pieza es de tu propiedad total
+      y sigue generando tráfico mucho más allá del contrato.
+    </p>
+
+    <div class="deliverables-grid" data-stagger>
+
+      <div class="deliverable-card reveal">
+        <div class="deliverable-num">120</div>
+        <div class="deliverable-type">Artículos SEO</div>
+        <p class="deliverable-desc">
+          Artículos optimizados de 800–1,500 palabras, orientados a palabras clave con intención
+          de búsqueda específica. Cada uno publicado, indexado y enlazado estratégicamente.
+          Cubre desde "boda en playa Cancún" hasta nichos de temporada, presupuesto y venues.
+        </p>
+      </div>
+
+      <div class="deliverable-card reveal">
+        <div class="deliverable-num">9</div>
+        <div class="deliverable-type">Landing Pages</div>
+        <p class="deliverable-desc">
+          Páginas de destino de alta conversión, cada una enfocada en un servicio, venue o
+          segmento específico: bodas íntimas, bodas grandes, all-inclusive, cenote,
+          coordinación completa, etc. Con CTA optimizado y formulario de contacto.
+        </p>
+      </div>
+
+      <div class="deliverable-card reveal">
+        <div class="deliverable-num">20</div>
+        <div class="deliverable-type">Páginas AEO</div>
+        <p class="deliverable-desc">
+          Páginas de preguntas frecuentes en formato estructurado (FAQ Schema) diseñadas
+          para que los asistentes de IA (ChatGPT, Perplexity, Gemini) recomienden
+          Wedding Destination Cancun directamente en sus respuestas.
+        </p>
+      </div>
+
+      <div class="deliverable-card reveal">
+        <div class="deliverable-num">12</div>
+        <div class="deliverable-type">Reportes Mensuales</div>
+        <p class="deliverable-desc">
+          Reporte mensual con posicionamiento de keywords, tráfico orgánico, comportamiento
+          de usuarios, conversiones y ajustes de la estrategia. Reunión de seguimiento
+          mensual incluida.
+        </p>
+      </div>
+
+      <div class="deliverable-card reveal">
+        <div class="deliverable-num">GBP</div>
+        <div class="deliverable-type">Google Business Optimizado</div>
+        <p class="deliverable-desc">
+          Configuración y optimización completa de Google Business Profile: categorías,
+          atributos, Q&A estratégico, publicaciones regulares y estrategia de reseñas
+          para dominar búsquedas locales de Cancún y Riviera Maya.
+        </p>
+      </div>
+
+      <div class="deliverable-card reveal">
+        <div class="deliverable-num">∞</div>
+        <div class="deliverable-type">Propiedad Total</div>
+        <p class="deliverable-desc">
+          Todo el contenido generado es 100% tuyo. Textos, páginas, optimizaciones y datos
+          de analytics quedan en tu propiedad al finalizar el contrato sin costo adicional
+          ni restricciones de uso.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="hr">
+
+<!-- ──────────────────────────────────────────────────────
+     EXPECTED RESULTS
+────────────────────────────────────────────────────── -->
+<section id="resultados">
+  <div class="container">
+    <span class="section-eyebrow">05 — Resultados Esperados</span>
+    <h2>Métricas reales en tiempos reales</h2>
+    <p class="section-lead">
+      El SEO es un juego de mediano plazo. Estos son los resultados conservadores basados
+      en proyectos similares en el sector hospitality y turismo de bodas en México.
+    </p>
+
+    <div class="results-grid" data-stagger>
+
+      <div class="result-card reveal">
+        <div class="result-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
+            <polyline points="16 7 22 7 22 13"/>
+          </svg>
+        </div>
+        <span class="result-timeframe">Mes 3 — 6</span>
+        <h3>Primeras posiciones y tráfico inicial</h3>
+        <p style="font-size:14px; color:var(--muted); line-height:1.7;">
+          Aparición en top 10-20 para keywords de baja competencia. Primeros 100–250 visitantes
+          orgánicos mensuales. Google Business Profile con primeras reseñas estratégicas.
+          Indexación completa del contenido base.
+        </p>
+      </div>
+
+      <div class="result-card reveal">
+        <div class="result-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="2" y1="12" x2="22" y2="12"/>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+        </div>
+        <span class="result-timeframe">Mes 6 — 9</span>
+        <h3>Presencia en motores de IA</h3>
+        <p style="font-size:14px; color:var(--muted); line-height:1.7;">
+          Wedding Destination Cancun empieza a aparecer en respuestas de ChatGPT, Perplexity
+          y Google AI Overview. Top 10-15 en keywords principales. 300–700 visitantes orgánicos
+          mensuales. Primeras consultas directas atribuibles a contenido orgánico.
+        </p>
+      </div>
+
+      <div class="result-card reveal">
+        <div class="result-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+          </svg>
+        </div>
+        <span class="result-timeframe">Mes 9 — 12</span>
+        <h3>Liderazgo en búsquedas clave</h3>
+        <p style="font-size:14px; color:var(--muted); line-height:1.7;">
+          Top 5-10 en las keywords objetivo de mayor conversión. 800–1,500 visitantes orgánicos
+          mensuales. Presencia consistente en asistentes de IA. ROI documentado y estrategia
+          de mantenimiento para sostener posicionamiento sin inversión incremental.
+        </p>
+      </div>
+
+      <div class="result-card reveal">
+        <div class="result-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        <span class="result-timeframe">Impacto Comercial</span>
+        <h3>Consultas y conversiones orgánicas</h3>
+        <p style="font-size:14px; color:var(--muted); line-height:1.7;">
+          El tráfico de intención de compra (parejas buscando coordinador, venues y todo
+          incluido para bodas en Cancún) convierte a una tasa de 2–4%. Con 800-1,500 visitantes/mes,
+          eso representa 15–50 consultas mensuales sin pagar publicidad.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="hr">
+
+<!-- ──────────────────────────────────────────────────────
+     LINK BUILDING — EL MOTOR DE POSICIONAMIENTO
+────────────────────────────────────────────────────── -->
+<section id="link-building" class="bg-alt">
+  <div class="container">
+    <span class="section-eyebrow">06 — Servicio Adicional (Opcional)</span>
+    <h2>Link Building — Servicio Adicional (Opcional)</h2>
+    <p class="section-lead">
+      El link building es el <strong>motor de posicionamiento</strong>. Los <strong>backlinks</strong>
+      —enlaces de otros sitios de autoridad apuntando al tuyo— son lo que efectivamente te empuja
+      a las primeras posiciones. Si deseas incluirlo, está disponible como servicio adicional.
+    </p>
+
+    <div class="lb-intro reveal">
+      <p>
+        Seamos transparentes: en un mercado tan competido como bodas destino en Cancún,
+        <span class="lb-accent">los backlinks de autoridad son lo que acelera el Top 5.</span>
+        Google premia la confianza, y la confianza se construye con enlaces reales de sitios
+        relevantes del sector. <strong>Este servicio es independiente de la propuesta base</strong>
+        y se contrata por separado si el cliente lo desea: te lo presentamos de forma abierta para
+        que sepas exactamente a dónde va cada peso.
+      </p>
+    </div>
+
+    <h3 style="margin-bottom:8px;">Las 5 fuentes de backlinks que trabajamos</h3>
+    <p style="font-size:14px; color:var(--muted); max-width:680px; margin-bottom:8px; line-height:1.7;">
+      No compramos enlaces basura. Construimos un perfil de backlinks diverso, natural y
+      sostenible a partir de cinco fuentes legítimas:
+    </p>
+
+    <div class="lb-sources" data-stagger>
+
+      <div class="lb-source reveal">
+        <div class="lb-source-num">01</div>
+        <h3>Vendors &amp; Proveedores</h3>
+        <p>
+          Fotógrafos, floristas, catering, planners y proveedores del ecosistema de bodas
+          que enlazan a WDC como aliado. Enlaces de alta relevancia temática.
+        </p>
+      </div>
+
+      <div class="lb-source reveal">
+        <div class="lb-source-num">02</div>
+        <h3>Blogs &amp; Guest Posts</h3>
+        <p>
+          Artículos invitados en blogs de bodas, lifestyle y turismo con audiencia real.
+          Contenido de valor con enlace contextual hacia WDC.
+        </p>
+      </div>
+
+      <div class="lb-source reveal">
+        <div class="lb-source-num">03</div>
+        <h3>Directorios de Autoridad</h3>
+        <p>
+          Inscripción en directorios premium de bodas y wedding planners (nacionales e
+          internacionales) con dominio fuerte y tráfico cualificado.
+        </p>
+      </div>
+
+      <div class="lb-source reveal">
+        <div class="lb-source-num">04</div>
+        <h3>Resorts &amp; Venues</h3>
+        <p>
+          Alianzas con hoteles, resorts all-inclusive y venues que listan a WDC como
+          coordinador recomendado. Enlaces de altísima autoridad local.
+        </p>
+      </div>
+
+      <div class="lb-source reveal">
+        <div class="lb-source-num">05</div>
+        <h3>PR &amp; Prensa</h3>
+        <p>
+          Notas de prensa y menciones en medios de turismo y bodas. Press releases
+          distribuidos que generan enlaces de medios con reputación.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="lb-invest">
+
+      <div class="lb-invest-box reveal-left">
+        <div class="lb-invest-label">Servicio link building · Año (opcional)</div>
+        <div class="lb-invest-amount"><span class="cur">$</span>20,000 – 40,000</div>
+        <p style="font-size:13px; color:var(--muted); line-height:1.7;">
+          MXN anuales destinados <strong>exclusivamente</strong> a la adquisición de backlinks
+          de calidad. <strong>Este servicio es independiente de la propuesta base</strong> y se
+          contrata por separado si el cliente lo desea. Lo desglosamos para que tengas total
+          claridad de a dónde va el dinero.
+        </p>
+      </div>
+
+      <div class="lb-invest-box dark reveal-right">
+        <div class="lb-invest-label" style="color:rgba(255,255,255,0.5);">Desglose del presupuesto de backlinks</div>
+        <p style="font-size:15px; color:rgba(255,255,255,0.82); line-height:1.65;">
+          Estos son los <strong style="color:#fff;">costos reales</strong> de adquisición de
+          backlinks de autoridad. Sin intermediarios ni cargos inflados: cada peso va directo
+          a un enlace publicado.
+        </p>
+
+        <table class="lb-cost-table">
+          <thead>
+            <tr>
+              <th>Concepto</th>
+              <th style="text-align:right;">Costo anual</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="lb-cost-concept">
+                <strong>Guest posts pagados</strong><br>
+                <span style="color:rgba(255,255,255,0.5); font-size:13px;">4–6 posts × $3,000–4,000 MXN c/u</span>
+              </td>
+              <td class="lb-cost-amount">$12,000 – 24,000 MXN</td>
+            </tr>
+            <tr>
+              <td class="lb-cost-concept">
+                <strong>Press releases</strong><br>
+                <span style="color:rgba(255,255,255,0.5); font-size:13px;">3 releases × $2,500–3,500 MXN c/u</span>
+              </td>
+              <td class="lb-cost-amount">$7,500 – 10,500 MXN</td>
+            </tr>
+            <tr>
+              <td class="lb-cost-concept">
+                <strong>Directorios de autoridad</strong><br>
+                <span style="color:rgba(255,255,255,0.5); font-size:13px;">5–10 directorios × $1,500–2,000 MXN c/u</span>
+              </td>
+              <td class="lb-cost-amount">$7,500 – 20,000 MXN</td>
+            </tr>
+            <tr class="lb-cost-total">
+              <td>Total estimado · Año</td>
+              <td class="lb-cost-amount">$20,000 – 40,000 MXN</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p class="lb-cost-note">
+          * Los costos de guest posts y press releases varían según la fluctuación del dólar.
+          Los montos se actualizan según el tipo de cambio vigente.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="totals-row" data-stagger style="margin-top:40px;">
+      <div class="total-cell reveal-scale">
+        <div class="total-cell-label">Servicio base · Año (obligatorio)</div>
+        <div class="total-cell-num"><span class="cur">$</span>144,000</div>
+      </div>
+      <div class="total-cell reveal-scale">
+        <div class="total-cell-label">Link building · Año (opcional)</div>
+        <div class="total-cell-num"><span class="cur">$</span>20,000 – 40,000</div>
+      </div>
+      <div class="total-cell highlight reveal-scale">
+        <div class="total-cell-label">Total si contratas ambos</div>
+        <div class="total-cell-num"><span class="cur">$</span>164,000 – 184,000</div>
+      </div>
+    </div>
+
+    <p style="font-size:13px; color:var(--muted); margin-top:24px; max-width:720px; line-height:1.7;">
+      <strong style="color:var(--ink-2);">Aclaración:</strong> este servicio es independiente de la
+      propuesta base. Se contrata por separado si el cliente lo desea. La propuesta base de
+      $144,000 MXN/año no incluye el link building; ambos servicios se facturan de forma independiente.
+    </p>
+  </div>
+</section>
+
+<hr class="hr">
+
+<!-- ──────────────────────────────────────────────────────
+     PRICING
+────────────────────────────────────────────────────── -->
+<section id="inversion" class="pricing-section">
+  <div class="container">
+    <span class="section-eyebrow" style="text-align:center; display:block;">07 — Inversión</span>
+    <h2 style="text-align:center; max-width:560px; margin: 0 auto 16px;">Una inversión clara y fija</h2>
+    <p class="section-lead" style="text-align:center; margin: 0 auto 56px;">
+      Sin letra pequeña. Sin comisiones ocultas. Sin subidas de precio a mitad del contrato.
+      Una tarifa fija mensual durante los 12 meses, con todo lo esencial incluido.
+    </p>
+
+    <div class="pricing-card reveal">
+
+      <p style="font-size:14px; color:var(--muted); margin-bottom:0;">Propuesta base · Retención mensual fija · Todo incluido</p>
+
+      <div class="price-amount"><span class="price-currency">$</span>12,000</div>
+      <p class="price-period">MXN / mes · fijo durante los 12 meses</p>
+
+      <ul class="feature-list" style="max-width:520px; margin:0 auto 8px; text-align:left;">
+        <li>120 artículos SEO optimizados</li>
+        <li>9 landing pages de alta conversión</li>
+        <li>20 páginas AEO (FAQ estructurado para IA)</li>
+        <li>Google Business Profile optimizado (GBP)</li>
+        <li>12 reportes mensuales con KPIs y reunión de seguimiento</li>
+      </ul>
+
+      <div class="totals-row totals-row-2" data-stagger>
+        <div class="total-cell reveal-scale">
+          <div class="total-cell-label">Precio mensual fijo</div>
+          <div class="total-cell-num"><span class="cur">$</span>12,000</div>
+        </div>
+        <div class="total-cell highlight reveal-scale">
+          <div class="total-cell-label">Total anual (12 meses)</div>
+          <div class="total-cell-num"><span class="cur">$</span>144,000</div>
+        </div>
+      </div>
+
+      <p style="font-size:12px; color:var(--muted-2); margin:14px auto 32px; letter-spacing:0.04em;">
+        Todas las cifras en pesos mexicanos (MXN) · 12 meses × $12,000 MXN/mes = $144,000 MXN
+        · El link building está disponible como servicio adicional opcional (ver sección siguiente)
+      </p>
+
+      <div class="iva-note">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="8" x2="12" y2="12"/>
+          <line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
+        <span>Precio <strong>+ IVA</strong> si se requiere factura. Si no se factura, el precio es el publicado.</span>
+      </div>
+
+      <div class="price-conditions" data-stagger data-stagger-step="80">
+
+        <div class="price-condition reveal">
+          <div class="condition-icon">
+            <svg viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <div class="condition-body">
+            <div class="condition-label">Contrato anual por $144,000 MXN · Pagos mensuales</div>
+            <div class="condition-detail">
+              El compromiso es de 12 meses para garantizar resultados sostenibles:
+              12 meses × $12,000 MXN/mes = $144,000 MXN. El precio es fijo durante todo el
+              contrato y el pago se realiza mes a mes, sin desembolso total por adelantado.
+              El link building está disponible como servicio adicional bajo contrato separado.
+            </div>
+          </div>
+        </div>
+
+        <div class="price-condition reveal">
+          <div class="condition-icon">
+            <svg viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+            </svg>
+          </div>
+          <div class="condition-body">
+            <div class="condition-label">Dominio y hosting corren por cuenta del cliente</div>
+            <div class="condition-detail">
+              El costo de dominio (.com, .mx o el que uses) y del servicio de hosting son
+              responsabilidad del cliente y no están incluidos en el retiro mensual.
+              Te asesoramos en la elección si es necesario.
+            </div>
+          </div>
+        </div>
+
+        <div class="price-condition reveal">
+          <div class="condition-icon">
+            <svg viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+          </div>
+          <div class="condition-body">
+            <div class="condition-label">Todo el contenido es propiedad del cliente</div>
+            <div class="condition-detail">
+              Artículos, landing pages, textos y optimizaciones son 100% tuyas desde el día 1.
+              Al finalizar el contrato, recibes acceso completo a todos los entregables sin costo adicional.
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+</section>
+
+<hr class="hr">
+
+<!-- ──────────────────────────────────────────────────────
+     TERMS
+────────────────────────────────────────────────────── -->
+<section id="terminos" class="bg-alt">
+  <div class="container">
+    <span class="section-eyebrow">08 — Términos Generales</span>
+    <h2>Lo importante, sin letra pequeña</h2>
+
+    <div class="terms-grid" data-stagger data-stagger-step="60">
+      <div class="term-item reveal">
+        <div class="term-dot"></div>
+        <span class="term-text">
+          <strong>Duración:</strong> Contrato de 12 meses contados a partir de la fecha de firma y pago del primer mes.
+        </span>
+      </div>
+      <div class="term-item reveal">
+        <div class="term-dot"></div>
+        <span class="term-text">
+          <strong>Inversión base:</strong> Contrato anual por $144,000 MXN (12 meses × $12,000 MXN/mes). Precio fijo durante todo el contrato.
+        </span>
+      </div>
+      <div class="term-item reveal">
+        <div class="term-dot"></div>
+        <span class="term-text">
+          <strong>Link building (opcional):</strong> Disponible como servicio adicional bajo contrato separado, $20,000–$40,000 MXN/año. No está incluido en la propuesta base.
+        </span>
+      </div>
+      <div class="term-item reveal">
+        <div class="term-dot"></div>
+        <span class="term-text">
+          <strong>Forma de pago:</strong> Transferencia bancaria o depósito en los primeros 5 días de cada mes.
+        </span>
+      </div>
+      <div class="term-item reveal">
+        <div class="term-dot"></div>
+        <span class="term-text">
+          <strong>Inicio:</strong> La estrategia arranca 5 días hábiles después del primer pago recibido.
+        </span>
+      </div>
+      <div class="term-item reveal">
+        <div class="term-dot"></div>
+        <span class="term-text">
+          <strong>Dominio y hosting:</strong> Son responsabilidad y costo del cliente. Victor IA puede asesorar en la elección.
+        </span>
+      </div>
+      <div class="term-item reveal">
+        <div class="term-dot"></div>
+        <span class="term-text">
+          <strong>Reportes:</strong> Reporte mensual por escrito con métricas de posicionamiento, tráfico y KPIs acordados.
+        </span>
+      </div>
+      <div class="term-item reveal">
+        <div class="term-dot"></div>
+        <span class="term-text">
+          <strong>Accesos requeridos:</strong> Google Search Console, Google Analytics 4 y Google Business Profile del cliente.
+        </span>
+      </div>
+      <div class="term-item reveal">
+        <div class="term-dot"></div>
+        <span class="term-text">
+          <strong>Cancelación anticipada:</strong> Con 30 días de aviso. El contenido generado queda en propiedad del cliente.
+        </span>
+      </div>
+      <div class="term-item reveal">
+        <div class="term-dot"></div>
+        <span class="term-text">
+          <strong>Facturación:</strong> Disponible. Precio + IVA (16%) cuando se requiera comprobante fiscal.
+        </span>
+      </div>
+    </div>
+
+    <p style="font-size:13px; color:var(--muted-2); margin-top:32px;">
+      Propuesta válida por 30 días a partir de la fecha de emisión.
+      Esta propuesta es confidencial y está dirigida exclusivamente a Wedding Destination Cancun.
+    </p>
+  </div>
+</section>
+
+
+</main>
+
+<!-- ──────────────────────────────────────────────────────
+     FOOTER
+────────────────────────────────────────────────────── -->
+<footer>
+  <span class="footer-copy">© 2026 Wedding Destination Cancun · Propuesta confidencial</span>
+  <span class="footer-brand">Elaborado por <strong>Victor IA</strong> · <a href="mailto:info@victor-ia.com.mx" class="footer-mail">info@victor-ia.com.mx</a> · victor-ia.xyz</span>
+</footer>
+
+<script>
+  // ── Scroll reveal con stagger ──────────────────────────────
+  // Selecciona todas las variantes de animación
+  const REVEAL_SELECTOR = '.reveal, .reveal-fade, .reveal-left, .reveal-right, .reveal-scale';
+
+  // Calcula el delay de stagger ANTES de observar:
+  // para cada contenedor [data-stagger], sus hijos animables reciben
+  // un --reveal-delay incremental (index × step). El step puede
+  // personalizarse con data-stagger-step (ms), default 90ms.
+  document.querySelectorAll('[data-stagger]').forEach(container => {
+    const step = parseInt(container.getAttribute('data-stagger-step'), 10) || 90;
+    const kids = container.querySelectorAll(REVEAL_SELECTOR);
+    kids.forEach((el, i) => {
+      el.style.setProperty('--reveal-delay', (i * step) + 'ms');
+    });
+  });
+
+  const revealEls = document.querySelectorAll(REVEAL_SELECTOR);
+
+  // Si el navegador no soporta IO o el usuario prefiere reduce-motion,
+  // mostrar todo de inmediato sin animación.
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!('IntersectionObserver' in window) || prefersReduced) {
+    revealEls.forEach(el => el.classList.add('visible'));
+  } else {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2, rootMargin: '0px 0px -10% 0px' });
+
+    revealEls.forEach(el => io.observe(el));
+  }
+
+  // Animate pillar bars on scroll
+  const pillarBars = document.querySelectorAll('.pillar-bar');
+  const barWidths = ['30%', '35%', '35%'];
+  pillarBars.forEach(bar => bar.style.width = '0%');
+
+  const barObserver = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      pillarBars.forEach((bar, i) => {
+        setTimeout(() => {
+          bar.style.width = barWidths[i];
+        }, i * 150);
+      });
+      barObserver.disconnect();
+    }
+  }, { threshold: 0.3 });
+
+  const pillarsEl = document.querySelector('.pillars');
+  if (pillarsEl) barObserver.observe(pillarsEl);
+</script>
+
+</body>
+</html>

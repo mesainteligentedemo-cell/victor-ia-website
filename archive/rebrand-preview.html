@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Victor IA — Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+    :root {
+      --bg:     #FFFFFF;
+      --bg-sub: #F7F7F7;
+      --bg-card:#FAFAFA;
+      --border: #E8E8E8;
+      --text:   #0A0A0A;
+      --muted:  #6B7280;
+      --dim:    #9CA3AF;
+      --gold:   #B8860B;
+      --ink:    #111111;
+    }
+
+    html { font-size:16px; }
+
+    body {
+      background:var(--bg); color:var(--text);
+      font-family:'Inter',-apple-system,sans-serif;
+      font-weight:400; overflow-x:hidden; cursor:none;
+      -webkit-font-smoothing:antialiased;
+      padding-bottom:72px;
+    }
+
+    #cur  { position:fixed; width:5px; height:5px; background:#0A0A0A; border-radius:50%; pointer-events:none; z-index:10000; transform:translate(-50%,-50%); }
+    #cur-r{ position:fixed; width:28px; height:28px; border:1px solid rgba(10,10,10,.12); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); transition:width .3s,height .3s; }
+
+    /* ─── ICON BASE ─── */
+    .icon { display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+
+    /* ─── NAV ─── */
+    nav {
+      position:fixed; top:0; left:0; right:0; z-index:500;
+      height:58px; display:flex; align-items:center; justify-content:space-between;
+      padding:0 40px;
+      background:rgba(255,255,255,.93); backdrop-filter:blur(16px);
+      border-bottom:1px solid var(--border);
+    }
+
+    .nav-l { display:flex; align-items:center; gap:36px; }
+
+    .logo { display:flex; align-items:center; gap:8px; text-decoration:none; color:var(--text); }
+    .logo-txt { font-size:14px; font-weight:600; letter-spacing:-.01em; }
+
+    .nav-links { display:flex; gap:2px; }
+    .nav-links a {
+      font-size:13.5px; color:var(--muted); text-decoration:none;
+      padding:5px 11px; border-radius:6px; transition:color .18s,background .18s;
+    }
+    .nav-links a:hover { color:var(--text); background:#F3F3F3; }
+
+    .nav-r { display:flex; align-items:center; gap:8px; }
+
+    .btn-plain {
+      font-size:13.5px; color:var(--muted); background:none;
+      border:1px solid var(--border); border-radius:7px;
+      padding:6px 16px; cursor:pointer; font-family:inherit;
+      text-decoration:none; transition:all .18s;
+    }
+    .btn-plain:hover { color:var(--text); border-color:#CCC; }
+
+    .btn-dark {
+      font-size:13.5px; font-weight:500; color:#FFF;
+      background:var(--ink); border:none; border-radius:7px;
+      padding:6px 18px; cursor:pointer; font-family:inherit;
+      text-decoration:none; transition:background .18s;
+    }
+    .btn-dark:hover { background:#333; }
+
+    /* ─── HERO ─── */
+    .hero {
+      padding:130px 40px 100px;
+      text-align:center; position:relative;
+      border-bottom:1px solid var(--border);
+    }
+
+    .hero-badge {
+      display:inline-flex; align-items:center; gap:7px;
+      border:1px solid var(--border); border-radius:100px;
+      padding:4px 12px 4px 10px;
+      font-size:12px; color:var(--muted);
+      margin-bottom:32px;
+      opacity:0; animation:up .5s .1s forwards;
+    }
+
+    .badge-dot { width:6px; height:6px; border-radius:50%; background:#22C55E; box-shadow:0 0 0 2px rgba(34,197,94,.2); }
+
+    .hero-h1 {
+      font-size:clamp(40px,5.5vw,72px); font-weight:600;
+      line-height:1.08; letter-spacing:-.035em; color:var(--ink);
+      max-width:680px; margin:0 auto 20px;
+      opacity:0; animation:up .65s .2s forwards;
+    }
+
+    .hero-sub {
+      font-size:17px; color:var(--muted); font-weight:400;
+      line-height:1.65; max-width:460px; margin:0 auto 36px;
+      opacity:0; animation:up .6s .32s forwards;
+    }
+
+    .hero-ctas {
+      display:flex; align-items:center; gap:10px; justify-content:center;
+      margin-bottom:14px; opacity:0; animation:up .55s .44s forwards;
+    }
+
+    .hero-btn-main {
+      display:inline-flex; align-items:center; gap:7px;
+      background:var(--ink); color:#FFF;
+      font-size:14px; font-weight:500;
+      padding:11px 26px; border-radius:8px; text-decoration:none;
+      transition:background .18s,transform .18s;
+    }
+    .hero-btn-main:hover { background:#222; transform:translateY(-1px); }
+
+    .hero-btn-sec {
+      display:inline-flex; align-items:center; gap:7px;
+      background:#F5F5F5; color:var(--muted);
+      font-size:14px; padding:11px 26px; border-radius:8px;
+      text-decoration:none; border:1px solid var(--border); transition:all .18s;
+    }
+    .hero-btn-sec:hover { color:var(--text); background:#EEEEEE; }
+
+    .hero-note { font-size:12px; color:var(--dim); opacity:0; animation:up .5s .55s forwards; }
+
+    /* Product window */
+    .hero-window {
+      margin:64px auto 0; max-width:860px;
+      border:1px solid var(--border); border-radius:12px; overflow:hidden;
+      box-shadow:0 2px 4px rgba(0,0,0,.03),0 20px 56px rgba(0,0,0,.08);
+      background:#FEFEFE; opacity:0; animation:up .7s .4s forwards;
+    }
+
+    .win-bar {
+      display:flex; align-items:center; gap:7px;
+      padding:12px 18px; border-bottom:1px solid var(--border); background:#FAFAFA;
+    }
+    .win-dot { width:10px; height:10px; border-radius:50%; }
+    .win-url {
+      margin-left:10px; background:#FFF; border:1px solid var(--border);
+      border-radius:5px; padding:3px 14px;
+      font-size:12px; color:var(--dim); flex:1; max-width:280px;
+      font-family:'Menlo','Monaco',monospace;
+    }
+
+    .win-body { display:grid; grid-template-columns:220px 1fr; min-height:460px; }
+
+    .win-sidebar { border-right:1px solid var(--border); padding:16px 12px; background:#FAFAFA; }
+    .ws-label { font-size:10px; font-weight:500; color:var(--dim); letter-spacing:.06em; text-transform:uppercase; padding:8px 8px 4px; }
+    .ws-item {
+      display:flex; align-items:center; gap:9px;
+      padding:7px 9px; border-radius:6px; font-size:13px; color:var(--muted); cursor:default;
+    }
+    .ws-item.on { background:#F0F0F0; color:var(--text); }
+
+    .win-main { padding:24px 28px; display:flex; flex-direction:column; gap:20px; }
+    .wm-head { display:flex; align-items:center; justify-content:space-between; }
+    .wm-title { font-size:15px; font-weight:500; }
+    .wm-chips { display:flex; gap:6px; }
+    .chip {
+      font-size:11px; color:var(--muted);
+      border:1px solid var(--border); border-radius:5px;
+      padding:3px 10px; display:flex; align-items:center; gap:5px;
+    }
+    .chip-dot { width:5px; height:5px; border-radius:50%; }
+
+    .chat { display:flex; flex-direction:column; gap:14px; flex:1; }
+    .msg-u { display:flex; justify-content:flex-end; }
+    .msg-u .bub { background:#F3F3F3; border:1px solid var(--border); border-radius:10px; padding:10px 14px; font-size:13px; line-height:1.6; max-width:400px; }
+    .msg-a { display:flex; gap:10px; align-items:flex-start; }
+    .msg-av { width:26px; height:26px; border-radius:7px; background:var(--ink); flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:600; color:#FFF; }
+    .msg-a .bub { background:#FFF; border:1px solid var(--border); border-radius:10px; padding:10px 14px; font-size:13px; line-height:1.6; max-width:440px; }
+    .typing { display:flex; gap:4px; align-items:center; padding:6px 0; }
+    .td { width:5px; height:5px; border-radius:50%; background:var(--dim); animation:pulse 1.3s ease-in-out infinite; }
+    .td:nth-child(2){animation-delay:.15s} .td:nth-child(3){animation-delay:.3s}
+    .chat-input { border-top:1px solid var(--border); padding:14px 0 0; display:flex; gap:10px; align-items:center; }
+    .ci-field { flex:1; background:#F7F7F7; border:1px solid var(--border); border-radius:7px; padding:9px 14px; font-size:13px; color:var(--dim); }
+    .ci-btn { width:32px; height:32px; border-radius:7px; background:var(--ink); display:flex; align-items:center; justify-content:center; color:#FFF; font-size:13px; }
+
+    @keyframes up   { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:none} }
+    @keyframes pulse{ 0%,60%,100%{opacity:.2} 30%{opacity:.8} }
+
+    /* ─── TECH STACK BAR ─── */
+    .stack-bar {
+      padding:28px 40px;
+      border-bottom:1px solid var(--border);
+      display:flex; align-items:center; gap:40px;
+    }
+    .stack-lbl { font-size:11px; color:var(--dim); letter-spacing:.06em; text-transform:uppercase; white-space:nowrap; }
+    .stack-models { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+    .model-tag {
+      display:flex; align-items:center; gap:6px;
+      border:1px solid var(--border); border-radius:6px;
+      padding:5px 10px; font-size:12px; font-weight:500; color:var(--muted);
+    }
+    .model-tag svg { flex-shrink:0; }
+
+    /* ─── SECTION ─── */
+    section { padding:80px 40px; }
+    section + section { border-top:1px solid var(--border); }
+    .s-eye { font-size:12px; font-weight:500; color:var(--dim); letter-spacing:.06em; text-transform:uppercase; margin-bottom:14px; }
+    .s-h2 { font-size:clamp(26px,3vw,40px); font-weight:600; letter-spacing:-.025em; line-height:1.12; color:var(--ink); max-width:520px; margin-bottom:48px; }
+
+    /* ─── AGENTS ─── */
+    .agents-grid {
+      display:grid; grid-template-columns:repeat(3,1fr);
+      gap:1px; background:var(--border); border:1px solid var(--border);
+    }
+    .agent-card { background:var(--bg); padding:36px 32px; transition:background .18s; }
+    .agent-card:hover { background:var(--bg-sub); }
+
+    .agent-ico {
+      width:38px; height:38px; border-radius:9px;
+      background:var(--bg-sub); border:1px solid var(--border);
+      display:flex; align-items:center; justify-content:center;
+      margin-bottom:18px;
+    }
+
+    .agent-card h3 { font-size:15px; font-weight:500; margin-bottom:8px; }
+    .agent-card p  { font-size:13.5px; line-height:1.65; color:var(--muted); }
+    .agent-models  { display:flex; flex-wrap:wrap; gap:5px; margin-top:16px; }
+    .am-tag {
+      font-size:10.5px; color:var(--dim); font-weight:500;
+      border:1px solid var(--border); border-radius:4px; padding:2px 7px;
+    }
+
+    /* ─── STATS ─── */
+    .stats { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); border:1px solid var(--border); }
+    .stat { background:var(--bg); padding:36px 32px; }
+    .stat-n { font-size:clamp(36px,4vw,56px); font-weight:600; letter-spacing:-.04em; line-height:1; margin-bottom:6px; }
+    .stat-n sub { font-size:.45em; color:var(--gold); vertical-align:baseline; font-weight:400; }
+    .stat-l { font-size:13px; color:var(--muted); }
+
+    /* ─── CAPS ─── */
+    .caps-grid { display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:start; }
+    .cap-list { display:flex; flex-direction:column; }
+    .cap-row { display:flex; gap:16px; align-items:flex-start; padding:20px 0; border-bottom:1px solid var(--border); }
+    .cap-row:first-child { border-top:1px solid var(--border); }
+    .cap-n { font-size:11px; color:var(--dim); font-weight:500; width:24px; flex-shrink:0; padding-top:1px; }
+    .cap-name { font-size:14px; font-weight:500; margin-bottom:4px; }
+    .cap-desc { font-size:13px; color:var(--muted); line-height:1.6; }
+
+    .cap-card { background:var(--bg-card); border:1px solid var(--border); border-radius:10px; overflow:hidden; }
+    .cc-head { padding:13px 18px; border-bottom:1px solid var(--border); font-size:12px; color:var(--dim); display:flex; align-items:center; gap:8px; }
+    .cc-body { padding:20px; display:flex; flex-direction:column; gap:10px; }
+    .cc-row { display:flex; align-items:center; gap:12px; background:#FFF; border:1px solid var(--border); border-radius:8px; padding:11px 14px; }
+    .cc-ico { width:30px; height:30px; border-radius:7px; background:var(--bg-sub); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .cc-name { font-size:13px; font-weight:500; }
+    .cc-sub  { font-size:11px; color:var(--dim); }
+    .cc-badge { margin-left:auto; font-size:11px; padding:2px 8px; border-radius:4px; font-weight:500; }
+    .badge-green { background:#F0FDF4; color:#15803D; }
+    .badge-yellow{ background:#FEFCE8; color:#A16207; }
+    .badge-blue  { background:#EFF6FF; color:#1D4ED8; }
+    .badge-gray  { background:#F5F5F5; color:#6B7280; }
+
+    /* ─── BLOG ─── */
+    .blog-grid { display:grid; grid-template-columns:1.2fr 1fr 1fr; gap:20px; }
+    .blog-card { border:1px solid var(--border); border-radius:10px; overflow:hidden; transition:box-shadow .2s,border-color .2s; }
+    .blog-card:hover { box-shadow:0 4px 20px rgba(0,0,0,.07); border-color:#DDD; }
+    .bc-img { height:160px; background:var(--bg-sub); display:flex; align-items:center; justify-content:center; border-bottom:1px solid var(--border); }
+    .blog-card:nth-child(2) .bc-img { background:#FDF9F0; }
+    .blog-card:nth-child(3) .bc-img { background:#F5F9FF; }
+    .bc-body { padding:20px; }
+    .bc-tag  { font-size:11px; font-weight:500; color:var(--dim); letter-spacing:.06em; text-transform:uppercase; margin-bottom:8px; }
+    .bc-title{ font-size:14px; font-weight:500; line-height:1.4; margin-bottom:10px; }
+    .bc-meta { font-size:12px; color:var(--dim); }
+
+    /* ─── PRICING ─── */
+    .pricing-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); }
+    .pc { background:var(--bg); padding:36px 32px; position:relative; }
+    .pc.hi { background:var(--ink); color:#FFF; }
+    .pc-badge { position:absolute; top:18px; right:18px; background:var(--ink); color:#FFF; font-size:10px; font-weight:500; padding:2px 9px; border-radius:100px; }
+    .pc.hi .pc-badge { background:#FFF; color:var(--ink); }
+    .pc-plan { font-size:11px; font-weight:500; color:var(--dim); letter-spacing:.08em; text-transform:uppercase; margin-bottom:14px; }
+    .pc.hi .pc-plan { color:rgba(255,255,255,.5); }
+    .pc-price { font-size:40px; font-weight:600; letter-spacing:-.04em; margin-bottom:4px; }
+    .pc-price s { font-size:16px; font-weight:400; margin-right:3px; }
+    .pc-per { font-size:13px; color:var(--dim); margin-bottom:20px; }
+    .pc.hi .pc-per { color:rgba(255,255,255,.45); }
+    .pc-desc { font-size:13.5px; line-height:1.65; color:var(--muted); margin-bottom:24px; }
+    .pc.hi .pc-desc { color:rgba(255,255,255,.6); }
+    .pc-btn { display:block; text-align:center; padding:10px; border-radius:7px; text-decoration:none; font-size:13.5px; font-weight:500; border:1px solid var(--border); color:var(--muted); transition:all .18s; }
+    .pc-btn:hover { color:var(--text); border-color:#CCC; background:#F5F5F5; }
+    .pc.hi .pc-btn { background:#FFF; color:var(--ink); border-color:#FFF; }
+    .pc.hi .pc-btn:hover { background:#EEE; }
+
+    /* ─── CTA FINAL ─── */
+    .cta-sec { padding:100px 40px; text-align:center; background:var(--ink); }
+    .cta-eye { font-size:12px; color:rgba(255,255,255,.4); letter-spacing:.06em; text-transform:uppercase; margin-bottom:16px; }
+    .cta-h2  { font-size:clamp(36px,5vw,62px); font-weight:600; letter-spacing:-.035em; line-height:1.05; color:#FFF; margin-bottom:18px; }
+    .cta-sub { font-size:16px; color:rgba(255,255,255,.5); margin-bottom:36px; }
+    .cta-btns{ display:flex; gap:10px; justify-content:center; }
+    .cta-main{ display:inline-flex; align-items:center; gap:7px; background:#FFF; color:var(--ink); font-size:14px; font-weight:500; padding:11px 28px; border-radius:8px; text-decoration:none; transition:background .18s; }
+    .cta-main:hover { background:#EEE; }
+    .cta-sec-btn{ display:inline-flex; align-items:center; gap:7px; background:rgba(255,255,255,.08); color:rgba(255,255,255,.7); font-size:14px; padding:11px 28px; border-radius:8px; text-decoration:none; border:1px solid rgba(255,255,255,.12); transition:all .18s; }
+    .cta-sec-btn:hover{ background:rgba(255,255,255,.14); color:#FFF; }
+
+    /* ─── FOOTER ─── */
+    footer { border-top:1px solid var(--border); padding:48px 40px 36px; display:grid; grid-template-columns:200px 1fr auto; gap:40px; align-items:start; }
+    .ft-logo-row { display:flex; align-items:center; gap:7px; margin-bottom:8px; }
+    .ft-logo-txt { font-size:14px; font-weight:600; }
+    .ft-tagline  { font-size:13px; color:var(--dim); line-height:1.6; }
+    .ft-cols { display:grid; grid-template-columns:repeat(4,1fr); gap:32px; }
+    .ft-col-h { font-size:12px; font-weight:500; color:var(--dim); letter-spacing:.05em; text-transform:uppercase; margin-bottom:14px; }
+    .ft-col a { display:block; font-size:13px; color:var(--muted); text-decoration:none; margin-bottom:9px; transition:color .15s; }
+    .ft-col a:hover { color:var(--text); }
+    .ft-copy { font-size:12px; color:var(--dim); text-align:right; }
+
+    /* Reveal */
+    .rv { opacity:0; transform:translateY(14px); }
+
+    /* Preview bar */
+    .pb-bar { position:fixed; bottom:0; left:0; right:0; z-index:2000; background:rgba(255,255,255,.95); backdrop-filter:blur(20px); border-top:1px solid var(--border); padding:13px 40px; display:flex; align-items:center; justify-content:space-between; }
+    .pb-tag  { font-size:10px; color:var(--dim); letter-spacing:.08em; text-transform:uppercase; margin-bottom:2px; }
+    .pb-ttl  { font-size:14px; font-weight:500; }
+    .pb-btns { display:flex; gap:8px; }
+    .pb-ok   { background:var(--ink); color:#FFF; border:none; font-family:inherit; font-size:13px; font-weight:500; padding:9px 22px; border-radius:7px; cursor:pointer; transition:background .18s; }
+    .pb-ok:hover { background:#222; }
+    .pb-chg  { background:none; color:var(--muted); border:1px solid var(--border); font-family:inherit; font-size:13px; padding:9px 22px; border-radius:7px; cursor:pointer; transition:all .18s; }
+    .pb-chg:hover { color:var(--text); border-color:#CCC; }
+  </style>
+</head>
+<body>
+<div id="cur"></div>
+<div id="cur-r"></div>
+
+<!-- ─── SVG ICON DEFS (inline, reusable) ─── -->
+<svg style="display:none">
+  <defs>
+    <!-- Chat -->
+    <symbol id="ic-chat" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M17 10C17 13.3 13.9 16 10 16c-1.1 0-2.1-.2-3-.6L3 17l1-3.3C3.4 12.7 3 11.4 3 10c0-3.3 3.1-6 7-6s7 2.7 7 6Z"/>
+      <path d="M7.5 10h5M7.5 12.5H11"/>
+    </symbol>
+    <!-- Video camera -->
+    <symbol id="ic-video" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2" y="5.5" width="11" height="9" rx="2"/>
+      <path d="M13 9L18 7V13L13 11"/>
+    </symbol>
+    <!-- Image frame -->
+    <symbol id="ic-image" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2.5" y="3" width="15" height="14" rx="2"/>
+      <circle cx="7" cy="7.5" r="1.5"/>
+      <path d="M2.5 14L7 9.5 10 12.5 13 9 17.5 14"/>
+    </symbol>
+    <!-- Lightning (automation) -->
+    <symbol id="ic-bolt" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M11.5 2L4.5 11H10L8.5 18L15.5 9H10L11.5 2Z"/>
+    </symbol>
+    <!-- Globe (web) -->
+    <symbol id="ic-globe" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="10" cy="10" r="7.5"/>
+      <path d="M2.5 10h15"/>
+      <path d="M10 2.5c-2.5 2.5-2.5 12.5 0 15M10 2.5c2.5 2.5 2.5 12.5 0 15"/>
+    </symbol>
+    <!-- Microphone (voice) -->
+    <symbol id="ic-mic" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="7.5" y="2" width="5" height="8.5" rx="2.5"/>
+      <path d="M4.5 10.5a5.5 5.5 0 0011 0"/>
+      <path d="M10 16V19M7.5 19h5"/>
+    </symbol>
+    <!-- Bar chart (analytics) -->
+    <symbol id="ic-chart" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M2 17.5h16"/>
+      <path d="M5 17.5V11M10 17.5V5.5M15 17.5V9"/>
+    </symbol>
+    <!-- Layers / stack (memory) -->
+    <symbol id="ic-layers" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M10 2L18 6.5 10 11 2 6.5 10 2Z"/>
+      <path d="M2 10L10 14.5 18 10"/>
+      <path d="M2 13.5L10 18 18 13.5"/>
+    </symbol>
+    <!-- Git branch (parallel) -->
+    <symbol id="ic-branch" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="5.5" cy="5" r="2"/>
+      <circle cx="5.5" cy="15" r="2"/>
+      <circle cx="14.5" cy="7" r="2"/>
+      <path d="M5.5 7V13"/>
+      <path d="M5.5 5C5.5 5 9 5 11 6.5"/>
+    </symbol>
+    <!-- Arrow up in circle (deploy) -->
+    <symbol id="ic-deploy" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="10" cy="10" r="7.5"/>
+      <path d="M10 13.5V7M7.5 9.5L10 7 12.5 9.5"/>
+    </symbol>
+    <!-- CPU chip (infrastructure) -->
+    <symbol id="ic-cpu" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="5" y="5" width="10" height="10" rx="1.5"/>
+      <rect x="7.5" y="7.5" width="5" height="5" rx=".75"/>
+      <path d="M5 8H2.5M5 12H2.5M15 8H17.5M15 12H17.5M8 5V2.5M12 5V2.5M8 15v2.5M12 15v2.5"/>
+    </symbol>
+    <!-- Link / chain (connect) -->
+    <symbol id="ic-link" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M8.5 11.5a4.5 4.5 0 006.36 0l2-2a4.5 4.5 0 00-6.36-6.36L9 4.64"/>
+      <path d="M11.5 8.5a4.5 4.5 0 00-6.36 0l-2 2a4.5 4.5 0 006.36 6.36L11 15.36"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <div class="nav-l">
+    <a class="logo" href="#">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+        <path d="M9 1.5L16 16.5L9 13L2 16.5Z" stroke="#B8860B" stroke-width="1.2" stroke-linejoin="round"/>
+        <circle cx="9" cy="9" r="1.4" fill="#0A0A0A"/>
+      </svg>
+      <span class="logo-txt">Victor IA</span>
+    </a>
+    <div class="nav-links">
+      <a href="#">Producto</a>
+      <a href="#">Modelos</a>
+      <a href="#">Agentes</a>
+      <a href="#">Precios</a>
+      <a href="#">Blog</a>
+    </div>
+  </div>
+  <div class="nav-r">
+    <a href="#" class="btn-plain">Iniciar sesión</a>
+    <a href="#" class="btn-dark">Empezar gratis →</a>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div class="hero-badge">
+    <span class="badge-dot"></span>
+    136 agentes especializados disponibles ahora
+  </div>
+
+  <h1 class="hero-h1">La IA que trabaja<br>por ti, no contigo.</h1>
+
+  <p class="hero-sub">
+    Plataforma todo-en-uno que corre los mejores modelos del mundo — Claude, Higgsfield, ElevenLabs, Runway, n8n — coordinados por agentes inteligentes.
+  </p>
+
+  <div class="hero-ctas">
+    <a href="#" class="hero-btn-main">Empezar gratis →</a>
+    <a href="#" class="hero-btn-sec">Ver demo</a>
+  </div>
+  <p class="hero-note">Sin tarjeta de crédito · Listo en 2 minutos</p>
+
+  <div class="hero-window">
+    <div class="win-bar">
+      <span class="win-dot" style="background:#FF5F57"></span>
+      <span class="win-dot" style="background:#FEBC2E"></span>
+      <span class="win-dot" style="background:#28C840"></span>
+      <div class="win-url">app.victor-ia.xyz</div>
+    </div>
+    <div class="win-body">
+      <div class="win-sidebar">
+        <div class="ws-label">Workspace</div>
+        <div class="ws-item on">
+          <svg class="icon" width="16" height="16"><use href="#ic-chat"/></svg> Chat IA
+        </div>
+        <div class="ws-item">
+          <svg class="icon" width="16" height="16"><use href="#ic-video"/></svg> Video Studio
+        </div>
+        <div class="ws-item">
+          <svg class="icon" width="16" height="16"><use href="#ic-image"/></svg> Imagen IA
+        </div>
+        <div class="ws-item">
+          <svg class="icon" width="16" height="16"><use href="#ic-bolt"/></svg> Automatización
+        </div>
+        <div class="ws-item">
+          <svg class="icon" width="16" height="16"><use href="#ic-chart"/></svg> Analytics
+        </div>
+        <div class="ws-label" style="margin-top:12px">Recientes</div>
+        <div class="ws-item" style="font-size:12px">Video campaña ROES</div>
+        <div class="ws-item" style="font-size:12px">Landing Seabird Hotel</div>
+        <div class="ws-item" style="font-size:12px">Pipeline CRM n8n</div>
+      </div>
+      <div class="win-main">
+        <div class="wm-head">
+          <span class="wm-title">Chat IA</span>
+          <div class="wm-chips">
+            <div class="chip"><span class="chip-dot" style="background:#22C55E"></span>Seedance 2.0</div>
+            <div class="chip"><span class="chip-dot" style="background:#6366F1"></span>Claude</div>
+          </div>
+        </div>
+        <div class="chat">
+          <div class="msg-u">
+            <div class="bub">Genera un video de 15s para campaña de verano, estilo cinematográfico, costa y palmeras</div>
+          </div>
+          <div class="msg-a">
+            <div class="msg-av">V</div>
+            <div class="bub">
+              Usando <strong>Higgsfield Seedance 2.0</strong> — mejor relación calidad/costo para video cinematográfico.<br><br>
+              ✓ Multi-shot · 3 escenas · 16:9 · 720p · audio generativo<br>
+              ⏳ Estimado: 60–90 segundos
+            </div>
+          </div>
+          <div class="msg-a" style="align-items:center">
+            <div class="msg-av">V</div>
+            <div class="typing"><span class="td"></span><span class="td"></span><span class="td"></span></div>
+            <span style="font-size:12px;color:var(--dim);margin-left:8px">Renderizando escenas...</span>
+          </div>
+        </div>
+        <div class="chat-input">
+          <div class="ci-field">Escribe o usa / para comandos...</div>
+          <div class="ci-btn">↑</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TECH STACK ─── -->
+<div class="stack-bar">
+  <span class="stack-lbl">Modelos activos</span>
+  <div class="stack-models">
+    <div class="model-tag">
+      <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="#6366F1" stroke-width="1.4" stroke-linecap="round"><use href="#ic-cpu"/></svg>
+      Claude 4 Sonnet
+    </div>
+    <div class="model-tag">
+      <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="#22C55E" stroke-width="1.4" stroke-linecap="round"><use href="#ic-video"/></svg>
+      Higgsfield Seedance 2.0
+    </div>
+    <div class="model-tag">
+      <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="#F59E0B" stroke-width="1.4" stroke-linecap="round"><use href="#ic-video"/></svg>
+      Kling 3.0
+    </div>
+    <div class="model-tag">
+      <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="#EF4444" stroke-width="1.4" stroke-linecap="round"><use href="#ic-mic"/></svg>
+      ElevenLabs
+    </div>
+    <div class="model-tag">
+      <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="#8B5CF6" stroke-width="1.4" stroke-linecap="round"><use href="#ic-image"/></svg>
+      Runway Gen-4
+    </div>
+    <div class="model-tag">
+      <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="#0EA5E9" stroke-width="1.4" stroke-linecap="round"><use href="#ic-bolt"/></svg>
+      n8n · Agentes
+    </div>
+    <div class="model-tag">
+      <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="#10B981" stroke-width="1.4" stroke-linecap="round"><use href="#ic-deploy"/></svg>
+      Vercel
+    </div>
+  </div>
+</div>
+
+<!-- ─── AGENTS / CAPABILITIES ─── -->
+<section>
+  <p class="s-eye rv">136 agentes especializados</p>
+  <h2 class="s-h2 rv">Cada tarea, el agente correcto. Automáticamente.</h2>
+  <div class="agents-grid">
+    <div class="agent-card rv">
+      <div class="agent-ico">
+        <svg width="20" height="20" fill="none" stroke="#0A0A0A" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><use href="#ic-video"/></svg>
+      </div>
+      <h3>Video Studio</h3>
+      <p>Spots, ads, videos de marca y contenido cinematográfico. Auto-selección de modelo por tipo de video.</p>
+      <div class="agent-models">
+        <span class="am-tag">Seedance 2.0</span>
+        <span class="am-tag">Kling 3.0</span>
+        <span class="am-tag">Runway Gen-4</span>
+      </div>
+    </div>
+    <div class="agent-card rv">
+      <div class="agent-ico">
+        <svg width="20" height="20" fill="none" stroke="#0A0A0A" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><use href="#ic-bolt"/></svg>
+      </div>
+      <h3>Automatización IA</h3>
+      <p>Flujos de trabajo, CRM, pipelines de contenido y procesos empresariales completos sin código.</p>
+      <div class="agent-models">
+        <span class="am-tag">n8n</span>
+        <span class="am-tag">Claude Agents</span>
+        <span class="am-tag">Zapier</span>
+      </div>
+    </div>
+    <div class="agent-card rv">
+      <div class="agent-ico">
+        <svg width="20" height="20" fill="none" stroke="#0A0A0A" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><use href="#ic-globe"/></svg>
+      </div>
+      <h3>Web 4.0</h3>
+      <p>Sitios premium con WebGL, GSAP, IA generativa. De brief a producción y deploy en menos de 24 horas.</p>
+      <div class="agent-models">
+        <span class="am-tag">React</span>
+        <span class="am-tag">Three.js</span>
+        <span class="am-tag">Vercel</span>
+      </div>
+    </div>
+    <div class="agent-card rv">
+      <div class="agent-ico">
+        <svg width="20" height="20" fill="none" stroke="#0A0A0A" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><use href="#ic-image"/></svg>
+      </div>
+      <h3>Imagen IA</h3>
+      <p>Retratos, editorial, ads, renders 3D, logos con texto. Modelo elegido automáticamente por contexto.</p>
+      <div class="agent-models">
+        <span class="am-tag">Higgsfield</span>
+        <span class="am-tag">Flux 2</span>
+        <span class="am-tag">GPT Image 2</span>
+      </div>
+    </div>
+    <div class="agent-card rv">
+      <div class="agent-ico">
+        <svg width="20" height="20" fill="none" stroke="#0A0A0A" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><use href="#ic-mic"/></svg>
+      </div>
+      <h3>Voz e IA Conversacional</h3>
+      <p>Agente de voz 24/7, clonación de voz, narración de contenido y audio generativo en cualquier idioma.</p>
+      <div class="agent-models">
+        <span class="am-tag">ElevenLabs</span>
+        <span class="am-tag">Voice ID</span>
+        <span class="am-tag">Whisper</span>
+      </div>
+    </div>
+    <div class="agent-card rv">
+      <div class="agent-ico">
+        <svg width="20" height="20" fill="none" stroke="#0A0A0A" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><use href="#ic-chart"/></svg>
+      </div>
+      <h3>Analytics & BI</h3>
+      <p>Dashboards predictivos, KPIs en tiempo real, reportes ejecutivos generados con lenguaje natural.</p>
+      <div class="agent-models">
+        <span class="am-tag">Claude</span>
+        <span class="am-tag">Recharts</span>
+        <span class="am-tag">Google Sheets</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── STATS ─── -->
+<section style="padding-top:0">
+  <div class="stats">
+    <div class="stat rv">
+      <div class="stat-n">136<sub>+</sub></div>
+      <div class="stat-l">Agentes especializados</div>
+    </div>
+    <div class="stat rv">
+      <div class="stat-n">12<sub>+</sub></div>
+      <div class="stat-l">Modelos IA conectados</div>
+    </div>
+    <div class="stat rv">
+      <div class="stat-n">24<sub>h</sub></div>
+      <div class="stat-l">Ciclo promedio de entrega</div>
+    </div>
+    <div class="stat rv">
+      <div class="stat-n">100<sub>%</sub></div>
+      <div class="stat-l">IA nativa en todo</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── HOW IT WORKS ─── -->
+<section>
+  <p class="s-eye rv">Cómo funciona</p>
+  <h2 class="s-h2 rv">Infraestructura de IA coordinada por agentes.</h2>
+  <div class="caps-grid">
+    <div class="cap-list">
+      <div class="cap-row rv">
+        <span class="cap-n">01</span>
+        <div>
+          <p class="cap-name">Selección automática de modelo</p>
+          <p class="cap-desc">Cada tarea activa el modelo óptimo: Seedance para video cinematic, ElevenLabs para voz, Flux para renders. Sin configurar nada.</p>
+        </div>
+      </div>
+      <div class="cap-row rv">
+        <span class="cap-n">02</span>
+        <div>
+          <p class="cap-name">Memoria de proyecto persistente</p>
+          <p class="cap-desc">Victor IA recuerda tu marca, clientes, estilo y contexto entre sesiones. Sin briefings repetidos, sin pérdida de contexto.</p>
+        </div>
+      </div>
+      <div class="cap-row rv">
+        <span class="cap-n">03</span>
+        <div>
+          <p class="cap-name">Agentes paralelos</p>
+          <p class="cap-desc">Múltiples agentes especializados trabajando simultáneamente. Un proyecto que tomaba días toma horas.</p>
+        </div>
+      </div>
+      <div class="cap-row rv">
+        <span class="cap-n">04</span>
+        <div>
+          <p class="cap-name">Deploy y entrega instantáneos</p>
+          <p class="cap-desc">Genera y publica directamente desde el chat a Vercel, HubSpot, o el servidor del cliente. Sin pasos intermedios.</p>
+        </div>
+      </div>
+    </div>
+    <div class="cap-card rv">
+      <div class="cc-head">
+        <svg width="12" height="12" fill="none" stroke="#22C55E" stroke-width="1.5" stroke-linecap="round"><circle cx="6" cy="6" r="3" fill="#22C55E"/></svg>
+        Agentes activos — en tiempo real
+      </div>
+      <div class="cc-body">
+        <div class="cc-row">
+          <div class="cc-ico">
+            <svg width="16" height="16" fill="none" stroke="#0A0A0A" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><use href="#ic-video"/></svg>
+          </div>
+          <div>
+            <p class="cc-name">Video Studio</p>
+            <p class="cc-sub">Seedance 2.0 · 3 clips · campaña ROES</p>
+          </div>
+          <span class="cc-badge badge-green">Renderizando</span>
+        </div>
+        <div class="cc-row">
+          <div class="cc-ico">
+            <svg width="16" height="16" fill="none" stroke="#0A0A0A" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><use href="#ic-globe"/></svg>
+          </div>
+          <div>
+            <p class="cc-name">Web 4.0 Builder</p>
+            <p class="cc-sub">React · Seabird Hotel landing</p>
+          </div>
+          <span class="cc-badge badge-yellow">Desplegando</span>
+        </div>
+        <div class="cc-row">
+          <div class="cc-ico">
+            <svg width="16" height="16" fill="none" stroke="#0A0A0A" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><use href="#ic-bolt"/></svg>
+          </div>
+          <div>
+            <p class="cc-name">Automatización</p>
+            <p class="cc-sub">n8n · Pipeline CRM activo</p>
+          </div>
+          <span class="cc-badge badge-blue">Activo</span>
+        </div>
+        <div class="cc-row">
+          <div class="cc-ico">
+            <svg width="16" height="16" fill="none" stroke="#0A0A0A" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><use href="#ic-chart"/></svg>
+          </div>
+          <div>
+            <p class="cc-name">Analytics Agent</p>
+            <p class="cc-sub">Reporte Q2 · Claude + Sheets</p>
+          </div>
+          <span class="cc-badge badge-gray">En cola</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── BLOG ─── -->
+<section>
+  <p class="s-eye rv">Blog</p>
+  <h2 class="s-h2 rv">Perspectivas desde la primera línea.</h2>
+  <div class="blog-grid">
+    <div class="blog-card rv">
+      <div class="bc-img">
+        <svg width="56" height="56" fill="none" stroke="#D1D5DB" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><use href="#ic-video"/></svg>
+      </div>
+      <div class="bc-body">
+        <p class="bc-tag">Video IA</p>
+        <h3 class="bc-title">Seedance 2.0: el modelo que está reemplazando equipos de producción</h3>
+        <p class="bc-meta">Mayo 20, 2026 · 6 min</p>
+      </div>
+    </div>
+    <div class="blog-card rv">
+      <div class="bc-img">
+        <svg width="56" height="56" fill="none" stroke="#D1D5DB" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><use href="#ic-bolt"/></svg>
+      </div>
+      <div class="bc-body">
+        <p class="bc-tag">Automatización</p>
+        <h3 class="bc-title">40 horas de trabajo automatizadas con 3 nodos de n8n</h3>
+        <p class="bc-meta">Mayo 15, 2026 · 4 min</p>
+      </div>
+    </div>
+    <div class="blog-card rv">
+      <div class="bc-img">
+        <svg width="56" height="56" fill="none" stroke="#D1D5DB" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><use href="#ic-globe"/></svg>
+      </div>
+      <div class="bc-body">
+        <p class="bc-tag">Diseño</p>
+        <h3 class="bc-title">El branding generativo — y casi nadie lo está aprovechando</h3>
+        <p class="bc-meta">Mayo 8, 2026 · 5 min</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PRICING ─── -->
+<section>
+  <p class="s-eye rv">Precios</p>
+  <h2 class="s-h2 rv">Elige el plan que escala contigo.</h2>
+  <div class="pricing-grid">
+    <div class="pc rv">
+      <p class="pc-plan">Starter</p>
+      <p class="pc-price">$0</p>
+      <p class="pc-per">gratis para siempre</p>
+      <p class="pc-desc">Acceso a modelos base, 50 generaciones/mes, deploy básico, 1 usuario.</p>
+      <a href="#" class="pc-btn">Empezar gratis</a>
+    </div>
+    <div class="pc hi rv">
+      <span class="pc-badge">Popular</span>
+      <p class="pc-plan">Pro</p>
+      <p class="pc-price"><s>$</s>99</p>
+      <p class="pc-per">/ mes · USD</p>
+      <p class="pc-desc">Todos los modelos premium, generaciones ilimitadas, memoria de proyecto, agentes paralelos, deploy instantáneo.</p>
+      <a href="#" class="pc-btn">Empezar Pro</a>
+    </div>
+    <div class="pc rv">
+      <p class="pc-plan">Enterprise</p>
+      <p class="pc-price" style="font-size:32px">Custom</p>
+      <p class="pc-per">contactar para cotizar</p>
+      <p class="pc-desc">SLA garantizado, onboarding dedicado, modelos fine-tuned, integraciones personalizadas, soporte 24/7.</p>
+      <a href="#" class="pc-btn">Contactar ventas</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA ─── -->
+<div class="cta-sec">
+  <p class="cta-eye rv">¿Listo?</p>
+  <h2 class="cta-h2 rv">Comienza gratis hoy.</h2>
+  <p class="cta-sub rv">Sin tarjeta de crédito · Configuración en 2 minutos</p>
+  <div class="cta-btns rv">
+    <a href="#" class="cta-main">Crear cuenta gratis →</a>
+    <a href="#" class="cta-sec-btn">Ver demo en vivo</a>
+  </div>
+</div>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div>
+    <div class="ft-logo-row">
+      <svg width="16" height="16" viewBox="0 0 18 18" fill="none">
+        <path d="M9 1.5L16 16.5L9 13L2 16.5Z" stroke="#B8860B" stroke-width="1.2" stroke-linejoin="round"/>
+        <circle cx="9" cy="9" r="1.4" fill="#0A0A0A"/>
+      </svg>
+      <span class="ft-logo-txt">Victor IA</span>
+    </div>
+    <p class="ft-tagline">Inteligencia Dimensional.<br>México · victor-ia.xyz</p>
+  </div>
+  <div class="ft-cols">
+    <div class="ft-col">
+      <p class="ft-col-h">Producto</p>
+      <a href="#">Chat IA</a><a href="#">Video Studio</a>
+      <a href="#">Automatización</a><a href="#">Analytics</a><a href="#">API</a>
+    </div>
+    <div class="ft-col">
+      <p class="ft-col-h">Modelos</p>
+      <a href="#">Claude</a><a href="#">Higgsfield</a>
+      <a href="#">ElevenLabs</a><a href="#">Runway</a><a href="#">n8n</a>
+    </div>
+    <div class="ft-col">
+      <p class="ft-col-h">Empresa</p>
+      <a href="#">Nosotros</a><a href="#">Blog</a>
+      <a href="#">Carreras</a><a href="#">Prensa</a>
+    </div>
+    <div class="ft-col">
+      <p class="ft-col-h">Legal</p>
+      <a href="#">Privacidad</a><a href="#">Términos</a><a href="#">Seguridad</a>
+    </div>
+  </div>
+  <p class="ft-copy">© 2026 Victor IA<br>Todos los derechos reservados</p>
+</footer>
+
+<!-- ─── PREVIEW BAR ─── -->
+<div class="pb-bar">
+  <div>
+    <p class="pb-tag">Design Preview · v5 — Blanco Luxury · Iconos propios</p>
+    <p class="pb-ttl">Corporativo minimalista · estilo Manus — modelos IA + infraestructura de agentes</p>
+  </div>
+  <div class="pb-btns">
+    <a href="/victor-ia-manual-identidad-2026.pdf" download class="pb-chg" style="display:inline-flex;align-items:center;gap:6px;text-decoration:none">
+      <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3v10M5 13l5 5 5-5"/><path d="M3 18h14"/></svg>
+      Manual PDF
+    </a>
+    <button class="pb-ok" id="pb-ok">✓ Me gusta, construir todo</button>
+    <button class="pb-chg" id="pb-chg">Cambiar algo</button>
+  </div>
+</div>
+
+<!-- ─── MODALS ─── -->
+<style>
+  .modal-overlay{position:fixed;inset:0;z-index:9000;background:rgba(10,10,10,.45);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .25s}
+  .modal-overlay.open{opacity:1;pointer-events:all}
+  .modal-box{background:#FFF;border:1px solid var(--border);border-radius:14px;width:100%;max-width:440px;box-shadow:0 8px 60px rgba(0,0,0,.12);transform:translateY(16px);transition:transform .3s cubic-bezier(.16,1,.3,1);padding:32px}
+  .modal-overlay.open .modal-box{transform:translateY(0)}
+  .modal-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:22px}
+  .modal-logo{display:flex;align-items:center;gap:8px}
+  .modal-logo-txt{font-size:14px;font-weight:600;letter-spacing:-.01em;color:var(--ink)}
+  .modal-close{width:28px;height:28px;border-radius:6px;border:1px solid var(--border);background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--dim);font-size:16px;font-family:inherit;transition:all .15s;flex-shrink:0}
+  .modal-close:hover{background:var(--sub);color:var(--text)}
+  .modal-ttl{font-size:22px;font-weight:600;letter-spacing:-.025em;color:var(--ink);margin-bottom:6px}
+  .modal-sub{font-size:13.5px;color:var(--muted);line-height:1.6;margin-bottom:24px}
+  .modal-field{margin-bottom:14px}
+  .modal-label{display:block;font-size:12px;font-weight:500;color:var(--text);margin-bottom:5px}
+  .modal-input{width:100%;background:var(--sub);border:1px solid var(--border);border-radius:7px;padding:9px 14px;font-size:14px;color:var(--text);font-family:'Inter',sans-serif;outline:none;transition:border-color .15s,background .15s}
+  .modal-input:focus{border-color:#0A0A0A;background:#FFF}
+  .modal-input::placeholder{color:var(--dim)}
+  .modal-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 7L11 1' stroke='%239CA3AF' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px;cursor:pointer}
+  .modal-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .modal-submit{width:100%;background:var(--ink);color:#FFF;border:none;border-radius:8px;padding:12px;font-size:14px;font-weight:500;font-family:'Inter',sans-serif;cursor:pointer;transition:background .18s;margin-top:8px}
+  .modal-submit:hover{background:#333}
+  .modal-note{font-size:11.5px;color:var(--dim);text-align:center;margin-top:12px}
+  .modal-divider{display:flex;align-items:center;gap:10px;margin:16px 0}
+  .modal-divider::before,.modal-divider::after{content:'';flex:1;height:1px;background:var(--border)}
+  .modal-divider span{font-size:11px;color:var(--dim)}
+  /* Success state */
+  .modal-success{display:none;text-align:center;padding:16px 0}
+  .modal-success-ico{width:48px;height:48px;border-radius:50%;background:#F0FDF4;border:1px solid #BBF7D0;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:20px}
+  .modal-success h3{font-size:18px;font-weight:600;letter-spacing:-.02em;color:var(--ink);margin-bottom:6px}
+  .modal-success p{font-size:13px;color:var(--muted);line-height:1.6}
+  /* Demo modal wider */
+  .modal-demo .modal-box{max-width:560px}
+  .demo-video-wrap{background:var(--ink);border-radius:10px;overflow:hidden;aspect-ratio:16/9;width:100%;margin-bottom:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;position:relative;cursor:pointer}
+  .demo-play{width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;transition:background .2s}
+  .demo-video-wrap:hover .demo-play{background:rgba(255,255,255,.25)}
+  .demo-play svg{margin-left:3px}
+  .demo-video-label{font-size:12px;color:rgba(255,255,255,.4)}
+  .demo-iframe{display:none;width:100%;aspect-ratio:16/9;border:none;border-radius:10px}
+  .demo-video-wrap.playing{background:none;padding:0}
+  .demo-video-wrap.playing .demo-play,.demo-video-wrap.playing .demo-video-label{display:none}
+  .demo-video-wrap.playing .demo-iframe{display:block}
+  .demo-options{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .demo-opt{border:1px solid var(--border);border-radius:9px;padding:14px;cursor:pointer;transition:all .18s;text-decoration:none;display:block}
+  .demo-opt:hover{border-color:#CCC;background:var(--sub)}
+  .demo-opt-ttl{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:3px}
+  .demo-opt-sub{font-size:11.5px;color:var(--muted)}
+</style>
+
+<!-- MODAL 1: SIGN UP -->
+<div class="modal-overlay" id="modal-signup" role="dialog" aria-modal="true" aria-labelledby="signup-title">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div class="modal-logo">
+        <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><path d="M9 1.5L16 16.5L9 13L2 16.5Z" stroke="#B8860B" stroke-width="1.2" stroke-linejoin="round"/><circle cx="9" cy="9" r="1.4" fill="#111"/></svg>
+        <span class="modal-logo-txt">Victor IA</span>
+      </div>
+      <button class="modal-close" data-close="modal-signup">✕</button>
+    </div>
+
+    <div id="signup-form-wrap">
+      <h2 class="modal-ttl" id="signup-title">Empieza gratis hoy</h2>
+      <p class="modal-sub">Sin tarjeta de crédito · Listo en 2 minutos · 136 agentes listos para trabajar.</p>
+
+      <form id="signup-form" novalidate>
+        <div class="modal-row">
+          <div class="modal-field">
+            <label class="modal-label" for="f-name">Nombre</label>
+            <input class="modal-input" id="f-name" type="text" placeholder="Tu nombre" autocomplete="given-name" required>
+          </div>
+          <div class="modal-field">
+            <label class="modal-label" for="f-last">Apellido</label>
+            <input class="modal-input" id="f-last" type="text" placeholder="Tu apellido" autocomplete="family-name">
+          </div>
+        </div>
+        <div class="modal-field">
+          <label class="modal-label" for="f-email">Correo electrónico</label>
+          <input class="modal-input" id="f-email" type="email" placeholder="tu@empresa.com" autocomplete="email" required>
+        </div>
+        <div class="modal-field">
+          <label class="modal-label" for="f-empresa">Empresa (opcional)</label>
+          <input class="modal-input" id="f-empresa" type="text" placeholder="Nombre de tu empresa" autocomplete="organization">
+        </div>
+        <div class="modal-field">
+          <label class="modal-label" for="f-plan">Plan</label>
+          <select class="modal-input modal-select" id="f-plan">
+            <option value="starter">Starter — Gratis</option>
+            <option value="pro">Pro — $1,499 MXN/mes</option>
+            <option value="enterprise">Enterprise — Contactar ventas</option>
+          </select>
+        </div>
+        <button class="modal-submit" type="submit" id="signup-btn">Crear cuenta gratis →</button>
+      </form>
+      <p class="modal-note">Al registrarte aceptas los <a href="#" style="color:var(--gold)">Términos de Uso</a> y la <a href="#" style="color:var(--gold)">Política de Privacidad</a>.</p>
+      <div class="modal-divider"><span>¿Ya tienes cuenta?</span></div>
+      <button style="width:100%;background:none;border:1px solid var(--border);border-radius:8px;padding:10px;font-size:13.5px;font-weight:500;color:var(--muted);font-family:'Inter',sans-serif;cursor:pointer;transition:all .18s" onmouseover="this.style.borderColor='#CCC';this.style.color='var(--text)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">Iniciar sesión</button>
+    </div>
+
+    <div class="modal-success" id="signup-success">
+      <div class="modal-success-ico">✓</div>
+      <h3>¡Cuenta creada!</h3>
+      <p>Revisa tu correo para confirmar y acceder a los 136 agentes de Victor IA.</p>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL 2: DEMO -->
+<div class="modal-overlay modal-demo" id="modal-demo" role="dialog" aria-modal="true" aria-labelledby="demo-title">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div class="modal-logo">
+        <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><path d="M9 1.5L16 16.5L9 13L2 16.5Z" stroke="#B8860B" stroke-width="1.2" stroke-linejoin="round"/><circle cx="9" cy="9" r="1.4" fill="#111"/></svg>
+        <span class="modal-logo-txt">Victor IA — Demo</span>
+      </div>
+      <button class="modal-close" data-close="modal-demo">✕</button>
+    </div>
+
+    <h2 class="modal-ttl" id="demo-title">Ve Victor IA en acción</h2>
+    <p class="modal-sub">Mira cómo 136 agentes ejecutan un proyecto completo — diseño, video, copy y deploy — en 24 horas.</p>
+
+    <div class="demo-video-wrap" id="demo-video-thumb">
+      <div class="demo-play">
+        <svg width="18" height="18" viewBox="0 0 20 20" fill="white"><path d="M7 5.5L15 10L7 14.5V5.5Z"/></svg>
+      </div>
+      <span class="demo-video-label">Demo · 3:42 min</span>
+      <iframe class="demo-iframe" id="demo-iframe" src="" allow="autoplay; fullscreen" allowfullscreen title="Demo Victor IA"></iframe>
+    </div>
+
+    <p style="font-size:12px;color:var(--dim);text-align:center;margin-bottom:18px">O elige cómo quieres conocer más:</p>
+
+    <div class="demo-options">
+      <a href="https://cal.com/victor-ia" target="_blank" class="demo-opt">
+        <div class="demo-opt-ttl">📅 Agendar llamada</div>
+        <div class="demo-opt-sub">30 min con el equipo · Sin compromiso</div>
+      </a>
+      <div class="demo-opt" onclick="openModal('modal-signup')" style="cursor:pointer">
+        <div class="demo-opt-ttl">⚡ Empezar gratis</div>
+        <div class="demo-opt-sub">Accede ahora · 136 agentes listos</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d" crossorigin="anonymous"></script>
+<script>
+  const dot=document.getElementById('cur'), ring=document.getElementById('cur-r');
+  let mx=window.innerWidth/2, my=window.innerHeight/2, rx=mx, ry=my;
+
+  document.addEventListener('mousemove', e=>{
+    mx=e.clientX; my=e.clientY;
+    dot.style.left=mx+'px'; dot.style.top=my+'px';
+  });
+
+  (function lerp(){
+    rx+=(mx-rx)*.1; ry+=(my-ry)*.1;
+    ring.style.left=rx+'px'; ring.style.top=ry+'px';
+    requestAnimationFrame(lerp);
+  })();
+
+  document.querySelectorAll('a,button,.ws-item,.cap-row,.blog-card,.agent-card').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{ dot.style.transform='translate(-50%,-50%) scale(1.8)'; ring.style.width='40px'; ring.style.height='40px'; });
+    el.addEventListener('mouseleave',()=>{ dot.style.transform='translate(-50%,-50%) scale(1)'; ring.style.width='28px'; ring.style.height='28px'; });
+  });
+
+  gsap.registerPlugin(ScrollTrigger);
+  document.querySelectorAll('.rv').forEach(el=>{
+    gsap.to(el,{ opacity:1, y:0, duration:.75, ease:'power3.out',
+      scrollTrigger:{trigger:el, start:'top 92%', once:true} });
+  });
+
+  document.getElementById('pb-ok').addEventListener('click',()=>{
+    document.querySelector('.pb-bar').innerHTML='<p style="font-family:Inter,sans-serif;font-size:14px;font-weight:500">✓ Aprobado — comenzando construcción completa...</p>';
+  });
+  document.getElementById('pb-chg').addEventListener('click',()=>{
+    alert('Dile a Claude qué cambiar específicamente y lo ajustamos.');
+  });
+
+  /* ─── MODALS ─── */
+  function openModal(id){
+    const ov=document.getElementById(id);
+    if(!ov) return;
+    ov.classList.add('open');
+    document.body.style.overflow='hidden';
+  }
+  function closeModal(id){
+    const ov=document.getElementById(id);
+    if(!ov) return;
+    ov.classList.remove('open');
+    document.body.style.overflow='';
+    // Stop demo video if playing
+    if(id==='modal-demo'){
+      const iframe=document.getElementById('demo-iframe');
+      if(iframe) iframe.src=iframe.src; // reset
+    }
+  }
+
+  // Close on overlay click
+  document.querySelectorAll('.modal-overlay').forEach(ov=>{
+    ov.addEventListener('click', e=>{ if(e.target===ov) closeModal(ov.id); });
+  });
+
+  // Close buttons
+  document.querySelectorAll('[data-close]').forEach(btn=>{
+    btn.addEventListener('click',()=> closeModal(btn.dataset.close));
+  });
+
+  // Escape key
+  document.addEventListener('keydown', e=>{
+    if(e.key==='Escape')
+      document.querySelectorAll('.modal-overlay.open').forEach(ov=>closeModal(ov.id));
+  });
+
+  // Wire up SIGN-UP CTAs
+  const signupSelectors=[
+    '.btn-dark',          // nav "Empezar gratis"
+    '.hero-btn-main',     // hero "Empezar gratis"
+    '.cta-main',          // final CTA "Crear cuenta gratis"
+  ];
+  signupSelectors.forEach(sel=>{
+    document.querySelectorAll(sel).forEach(el=>{
+      el.addEventListener('click', e=>{ e.preventDefault(); openModal('modal-signup'); });
+    });
+  });
+
+  // "Iniciar sesión" nav
+  document.querySelector('.btn-plain')?.addEventListener('click', e=>{
+    e.preventDefault();
+    openModal('modal-signup');
+  });
+
+  // Pricing buttons — set plan and open signup
+  document.querySelectorAll('.pc-btn').forEach(btn=>{
+    btn.addEventListener('click', e=>{
+      e.preventDefault();
+      const txt=btn.textContent.trim().toLowerCase();
+      const sel=document.getElementById('f-plan');
+      if(txt.includes('pro')) sel.value='pro';
+      else if(txt.includes('ventas') || txt.includes('enterprise')) sel.value='enterprise';
+      else sel.value='starter';
+      openModal('modal-signup');
+    });
+  });
+
+  // Wire up DEMO CTAs
+  ['.hero-btn-sec','.cta-sec-btn'].forEach(sel=>{
+    document.querySelectorAll(sel).forEach(el=>{
+      el.addEventListener('click', e=>{ e.preventDefault(); openModal('modal-demo'); });
+    });
+  });
+
+  // Demo video play button
+  document.getElementById('demo-video-thumb')?.addEventListener('click', function(){
+    const iframe=document.getElementById('demo-iframe');
+    // Replace with actual demo URL when available:
+    iframe.src='https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1';
+    this.classList.add('playing');
+  });
+
+  // Sign-up form submission
+  document.getElementById('signup-form')?.addEventListener('submit', e=>{
+    e.preventDefault();
+    const email=document.getElementById('f-email').value.trim();
+    const name=document.getElementById('f-name').value.trim();
+    if(!email || !email.includes('@')){ document.getElementById('f-email').focus(); return; }
+    if(!name){ document.getElementById('f-name').focus(); return; }
+    // Show success
+    document.getElementById('signup-form-wrap').style.display='none';
+    document.getElementById('signup-success').style.display='block';
+    // Auto-close after 3s
+    setTimeout(()=> closeModal('modal-signup'), 3000);
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920, initial-scale=1">
+<title>Victor IA en 60s — HyperFrames Stage</title>
+
+<!-- ════════════════════════════════════════════════════════════════
+  VIDEO 1 — HYPERFRAMES · "Victor IA en 60s"
+  INFLUENCE IA S.A. DE C.V. · Playa del Carmen, Quintana Roo
+  ────────────────────────────────────────────────────────────────
+  Stage: 1920x1080 @ 30fps · Duración 60.0s (VO real 59.40s)
+  Audio VO : ../audio/vo-influence-ia/01_hyperframes_60s.mp3 (Victor)
+  Música   : track1_corporativo.m4a (98 BPM, fade-in 2s / out 3s)
+  ────────────────────────────────────────────────────────────────
+  Toda animación está sincronizada al timestamp REAL de la palabra
+  (with-timestamps). Cada count-up de KPI arranca en la sílaba
+  tónica del número (Regla 1 de producción de video).
+  data-* attrs siguen el contrato HyperFrames (HeyGen open-source).
+═════════════════════════════════════════════════════════════════ -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+<style>
+:root{
+  /* ── Paleta Victor IA ── */
+  --vi-bg:        #050608;   /* mármol negro base */
+  --vi-bg-2:      #0a0d12;
+  --vi-deep:      #0b2545;   /* azul deep */
+  --vi-deep-2:    #123a6b;
+  --vi-blue:      #2e6fd6;   /* azul activo */
+  --vi-blue-lt:   #6ba3ff;
+  --vi-gold:      #c9a35a;   /* dorado sutil */
+  --vi-gold-lt:   #e8cd8f;
+  --vi-ink:       #f4f6fb;   /* texto principal */
+  --vi-muted:     #8794a8;   /* texto secundario */
+  --vi-line:      rgba(201,163,90,0.18);
+  --vi-red:       #d65a5a;
+  --vi-green:     #4cc38a;
+  --stage-w: 1920px;
+  --stage-h: 1080px;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{
+  width:100%;height:100%;
+  background:#000;
+  overflow:hidden;
+  font-family:'Space Grotesk',system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ── STAGE (área renderizada) ── */
+#stage{
+  position:relative;
+  width:var(--stage-w);
+  height:var(--stage-h);
+  margin:0 auto;
+  background:
+    radial-gradient(120% 90% at 50% 0%, #0c1119 0%, var(--vi-bg) 55%, #020304 100%);
+  overflow:hidden;
+  transform-origin:top left;
+}
+
+/* Marble texture overlay (procedural veins) */
+.marble{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(60% 40% at 18% 22%, rgba(46,111,214,0.07), transparent 60%),
+    radial-gradient(50% 50% at 82% 78%, rgba(201,163,90,0.06), transparent 60%),
+    repeating-linear-gradient(115deg, rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 1px, transparent 1px, transparent 7px);
+  mix-blend-mode:screen;opacity:.9;
+}
+.vignette{
+  position:absolute;inset:0;pointer-events:none;
+  box-shadow:inset 0 0 320px 60px rgba(0,0,0,0.85);
+}
+
+/* ── SLIDES ── */
+.slide{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  opacity:0;
+  padding:90px;
+}
+
+/* ── Tipografía ── */
+.eyebrow{
+  font-size:22px;font-weight:500;letter-spacing:.42em;
+  text-transform:uppercase;color:var(--vi-gold);
+  margin-bottom:34px;
+}
+.kicker{
+  font-size:26px;font-weight:400;letter-spacing:.06em;
+  color:var(--vi-muted);
+}
+.headline{
+  font-size:96px;font-weight:600;line-height:1.02;
+  letter-spacing:-.02em;color:var(--vi-ink);text-align:center;
+}
+.headline .accent{
+  background:linear-gradient(120deg,var(--vi-gold-lt),var(--vi-gold));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+
+/* ── SLIDE 1 · Logo reveal ── */
+.logo-wordmark{
+  font-size:150px;font-weight:700;letter-spacing:-.03em;
+  color:var(--vi-ink);position:relative;
+  text-align:center;line-height:.95;
+}
+.logo-wordmark .ia{
+  background:linear-gradient(120deg,var(--vi-blue-lt),var(--vi-blue));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.logo-sub{
+  margin-top:30px;font-size:24px;letter-spacing:.30em;
+  text-transform:uppercase;color:var(--vi-muted);font-weight:400;
+}
+.s1-line{
+  margin-top:60px;font-size:44px;font-weight:300;
+  color:var(--vi-ink);text-align:center;line-height:1.25;max-width:1200px;
+}
+.s1-line b{font-weight:600;color:var(--vi-gold-lt)}
+
+/* ── SLIDE 2 · Grid de 18 servicios ── */
+.s2-head{font-size:30px;font-weight:500;letter-spacing:.04em;color:var(--vi-muted);margin-bottom:46px}
+.svc-grid{
+  display:grid;grid-template-columns:repeat(6,1fr);gap:26px;
+  width:1500px;
+}
+.svc{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:14px;padding:26px 14px;border-radius:20px;
+  background:linear-gradient(160deg,rgba(255,255,255,0.04),rgba(255,255,255,0.012));
+  border:1px solid rgba(255,255,255,0.06);
+  transition:none;opacity:0;
+}
+.svc svg{width:46px;height:46px;display:block}
+.svc .ic{stroke:var(--vi-blue-lt);stroke-width:1.6;fill:none;
+  stroke-linecap:round;stroke-linejoin:round}
+.svc .ic-f{fill:rgba(107,163,255,0.10);stroke:var(--vi-blue-lt);stroke-width:1.4}
+.svc label{font-size:16px;color:var(--vi-ink);font-weight:400;text-align:center;letter-spacing:.01em}
+/* highlighted (Inclusivo + Reactivación) */
+.svc.dim{filter:grayscale(.85) brightness(.5);opacity:.35}
+.svc.glow{
+  border-color:rgba(201,163,90,0.7);
+  background:linear-gradient(160deg,rgba(201,163,90,0.18),rgba(201,163,90,0.04));
+  box-shadow:0 0 44px rgba(201,163,90,0.35);
+}
+.svc.glow .ic,.svc.glow .ic-f{stroke:var(--vi-gold-lt)}
+.svc.glow .ic-f{fill:rgba(232,205,143,0.14)}
+.svc.glow label{color:var(--vi-gold-lt);font-weight:600}
+
+/* Contador "18" */
+.counter18{
+  position:absolute;top:64px;right:96px;
+  font-size:150px;font-weight:700;line-height:1;
+  color:var(--vi-gold);opacity:0;
+  text-shadow:0 0 60px rgba(201,163,90,0.4);
+}
+.counter18 .lbl{display:block;font-size:24px;font-weight:400;letter-spacing:.2em;
+  color:var(--vi-muted);text-align:right;margin-top:8px}
+
+/* ── SLIDE 3 · KPIs ── */
+.kpi-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:46px;
+  width:1640px;align-items:end;
+}
+.kpi{display:flex;flex-direction:column;align-items:center;gap:18px;opacity:0}
+.kpi .num{
+  font-size:118px;font-weight:700;line-height:.9;letter-spacing:-.03em;
+  color:var(--vi-ink);font-variant-numeric:tabular-nums;
+}
+.kpi.up .num{color:var(--vi-gold-lt)}
+.kpi.down .num{color:var(--vi-green)}
+.kpi .lbl{font-size:23px;color:var(--vi-muted);font-weight:400;text-align:center;line-height:1.3;max-width:300px}
+.kpi .bar-track{width:240px;height:8px;border-radius:99px;background:rgba(255,255,255,0.08);overflow:hidden}
+.kpi .bar-fill{height:100%;width:0;border-radius:99px;
+  background:linear-gradient(90deg,var(--vi-gold),var(--vi-gold-lt))}
+.kpi.down .bar-fill{background:linear-gradient(90deg,var(--vi-green),#7fe3b3)}
+.kpi.glowed{filter:drop-shadow(0 0 34px rgba(201,163,90,0.45))}
+.s3-eyebrow{position:absolute;top:90px;left:50%;transform:translateX(-50%);
+  font-size:24px;letter-spacing:.32em;text-transform:uppercase;color:var(--vi-gold);opacity:0}
+.s3-foot{position:absolute;bottom:96px;left:50%;transform:translateX(-50%);
+  font-size:28px;font-weight:300;color:var(--vi-muted);opacity:0;letter-spacing:.02em}
+.s3-foot b{color:var(--vi-ink);font-weight:500}
+
+/* ── SLIDE 4 · Industrias ── */
+.s4-head{font-size:30px;font-weight:500;letter-spacing:.05em;color:var(--vi-muted);margin-bottom:54px}
+.ind-row{display:flex;gap:40px}
+.ind{
+  width:420px;height:320px;border-radius:26px;overflow:hidden;position:relative;
+  border:1px solid var(--vi-line);opacity:0;
+  background:linear-gradient(165deg,rgba(11,37,69,0.55),rgba(5,6,8,0.9));
+  display:flex;flex-direction:column;justify-content:flex-end;padding:40px;
+}
+.ind::before{content:"";position:absolute;inset:0;opacity:.5;mix-blend-mode:screen}
+.ind.timeshare::before{background:radial-gradient(80% 60% at 30% 20%,rgba(46,111,214,0.4),transparent)}
+.ind.hoteleria::before{background:radial-gradient(80% 60% at 70% 25%,rgba(201,163,90,0.35),transparent)}
+.ind.inmobiliario::before{background:radial-gradient(80% 60% at 50% 25%,rgba(107,163,255,0.32),transparent)}
+.ind svg{width:64px;height:64px;margin-bottom:auto;stroke:var(--vi-gold-lt);stroke-width:1.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.ind h3{font-size:42px;font-weight:600;color:var(--vi-ink);letter-spacing:-.01em;position:relative}
+.ind p{font-size:20px;color:var(--vi-muted);margin-top:8px;position:relative}
+
+/* ── SLIDE 5 · CTA ── */
+.cta-logo{font-size:128px;font-weight:700;letter-spacing:-.03em;color:var(--vi-ink);opacity:0}
+.cta-logo .ia{background:linear-gradient(120deg,var(--vi-blue-lt),var(--vi-blue));-webkit-background-clip:text;background-clip:text;color:transparent}
+.cta-tag{font-size:38px;font-weight:300;color:var(--vi-gold-lt);margin-top:26px;opacity:0;letter-spacing:.01em}
+.cta-btn{
+  margin-top:54px;padding:26px 64px;border-radius:99px;opacity:0;
+  background:linear-gradient(120deg,var(--vi-gold),var(--vi-gold-lt));
+  color:#1a1304;font-size:30px;font-weight:600;letter-spacing:.02em;
+  box-shadow:0 0 60px rgba(201,163,90,0.4);
+}
+.cta-contact{margin-top:46px;font-size:24px;color:var(--vi-muted);letter-spacing:.04em;opacity:0;text-align:center;line-height:1.7}
+.cta-contact b{color:var(--vi-ink);font-weight:500}
+
+/* ── Final fade-to-black overlay ── */
+#blackout{position:absolute;inset:0;background:#000;opacity:0;pointer-events:none;z-index:50}
+
+/* ── Preload (Regla 4) ── */
+#preload{position:absolute;width:0;height:0;overflow:hidden;opacity:0;pointer-events:none}
+
+/* ── Audio (no se renderiza, lo recoge ffmpeg/HyperFrames) ── */
+audio{display:none}
+</style>
+</head>
+
+<body>
+<!-- HyperFrames stage contract: data-fps + data-duration en #stage -->
+<div id="stage"
+     data-hf-stage="true"
+     data-fps="30"
+     data-duration="60.0"
+     data-width="1920"
+     data-height="1080">
+
+  <div class="marble"></div>
+
+  <!-- ══════════════ SLIDE 1 · 0.0–10.0s · ¿Quiénes somos? ══════════════ -->
+  <section class="slide" id="s1"
+           data-scene="1" data-in="0.0" data-out="10.0">
+    <div class="logo-wordmark" id="s1-logo">Victor<span class="ia"> IA</span></div>
+    <div class="logo-sub" id="s1-sub">INFLUENCE IA · S.A. DE C.V.</div>
+    <div class="s1-line" id="s1-line">
+      No vendemos tecnología.<br>
+      Construimos negocios que piensan, que aprenden<br>
+      y que <b>crecen contigo.</b>
+    </div>
+    <div class="kicker" id="s1-place" style="margin-top:44px;opacity:0">Desde Playa del Carmen, para todo México</div>
+  </section>
+
+  <!-- ══════════════ SLIDE 2 · 10.0–30.5s · 18 servicios ══════════════ -->
+  <section class="slide" id="s2"
+           data-scene="2" data-in="10.0" data-out="30.5">
+    <div class="s2-head" id="s2-head">Lo que hacemos</div>
+    <div class="svc-grid" id="svc-grid">
+      <!-- 18 servicios — ic 17 & ic 18 = Inclusivo + Reactivación (highlight) -->
+      <div class="svc" data-svc="1"><svg viewBox="0 0 24 24"><path class="ic" d="M3 5h18v12H3z"/><path class="ic" d="M3 9h18M8 21h8"/></svg><label>Sitios Web de Lujo</label></div>
+      <div class="svc" data-svc="2"><svg viewBox="0 0 24 24"><circle class="ic" cx="12" cy="12" r="3"/><path class="ic" d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg><label>Automatización</label></div>
+      <div class="svc" data-svc="3"><svg viewBox="0 0 24 24"><path class="ic" d="m10 8 6 4-6 4z"/><rect class="ic" x="3" y="4" width="18" height="16" rx="2"/></svg><label>Video & Contenido</label></div>
+      <div class="svc" data-svc="4"><svg viewBox="0 0 24 24"><path class="ic" d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><label>Agentes de Voz IA</label></div>
+      <div class="svc" data-svc="5"><svg viewBox="0 0 24 24"><path class="ic" d="M3 3v18h18"/><path class="ic" d="M7 14l4-4 3 3 5-6"/></svg><label>Dashboards & BI</label></div>
+      <div class="svc" data-svc="6"><svg viewBox="0 0 24 24"><circle class="ic" cx="11" cy="11" r="7"/><path class="ic" d="m21 21-4.3-4.3"/></svg><label>SEO & GEO</label></div>
+      <div class="svc" data-svc="7"><svg viewBox="0 0 24 24"><path class="ic" d="M12 2 3 7v6c0 5 4 8 9 9 5-1 9-4 9-9V7z"/><path class="ic" d="m9 12 2 2 4-4"/></svg><label>Seguridad</label></div>
+      <div class="svc" data-svc="8"><svg viewBox="0 0 24 24"><rect class="ic" x="3" y="3" width="18" height="18" rx="2"/><path class="ic" d="M9 9h6v6H9z"/></svg><label>Apps & SaaS</label></div>
+      <div class="svc" data-svc="9"><svg viewBox="0 0 24 24"><path class="ic" d="M12 3v18M5 8l7-5 7 5"/><path class="ic" d="M5 8v8l7 5 7-5V8"/></svg><label>Brandbook</label></div>
+      <div class="svc" data-svc="10"><svg viewBox="0 0 24 24"><circle class="ic" cx="12" cy="8" r="4"/><path class="ic" d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg><label>CRM & Pipeline</label></div>
+      <div class="svc" data-svc="11"><svg viewBox="0 0 24 24"><path class="ic" d="m12 2 2.4 7.4H22l-6 4.4 2.3 7.2L12 16.6 5.7 21l2.3-7.2-6-4.4h7.6z"/></svg><label>Copywriting</label></div>
+      <div class="svc" data-svc="12"><svg viewBox="0 0 24 24"><rect class="ic" x="2" y="5" width="20" height="14" rx="2"/><path class="ic" d="M7 9h4M7 13h7"/></svg><label>Landing Pages</label></div>
+      <div class="svc" data-svc="13"><svg viewBox="0 0 24 24"><path class="ic" d="M4 17V9a2 2 0 0 1 2-2h2l2-3h4l2 3h2a2 2 0 0 1 2 2v8z"/><circle class="ic" cx="12" cy="13" r="3"/></svg><label>Foto & Render</label></div>
+      <div class="svc" data-svc="14"><svg viewBox="0 0 24 24"><path class="ic" d="M3 12h4l3 8 4-16 3 8h4"/></svg><label>Analítica</label></div>
+      <div class="svc" data-svc="15"><svg viewBox="0 0 24 24"><circle class="ic" cx="12" cy="12" r="9"/><path class="ic" d="M2 12h20M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18"/></svg><label>Multilingüe</label></div>
+      <div class="svc" data-svc="16"><svg viewBox="0 0 24 24"><path class="ic" d="M14 2v6h6"/><path class="ic" d="M4 2h10l6 6v14H4z"/><path class="ic" d="M8 13h8M8 17h5"/></svg><label>Documentos</label></div>
+      <!-- HIGHLIGHTS -->
+      <div class="svc" data-svc="17" data-highlight="true"><svg viewBox="0 0 24 24"><circle class="ic-f" cx="12" cy="12" r="9"/><circle class="ic" cx="12" cy="12" r="3"/><path class="ic" d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg><label>Diseño Inclusivo</label></div>
+      <div class="svc" data-svc="18" data-highlight="true"><svg viewBox="0 0 24 24"><path class="ic-f" d="M13 2 3 14h7l-1 8 11-13h-8z"/></svg><label>Agente de Reactivación</label></div>
+    </div>
+
+    <div class="counter18" id="counter18"><span id="c18num">0</span><span class="lbl">SERVICIOS</span></div>
+  </section>
+
+  <!-- ══════════════ SLIDE 3 · 30.5–48.5s · Números ══════════════ -->
+  <section class="slide" id="s3"
+           data-scene="3" data-in="30.5" data-out="48.5">
+    <div class="s3-eyebrow" id="s3-eyebrow">Los resultados hablan solos</div>
+    <div class="kpi-grid" id="kpi-grid">
+      <div class="kpi up" data-kpi="roi"><div class="num"><span id="k-roi">0.0</span>×</div><div class="bar-track"><div class="bar-fill" id="bar-roi"></div></div><div class="lbl">más retorno de inversión</div></div>
+      <div class="kpi up" data-kpi="conv"><div class="num"><span id="k-conv">0</span>%</div><div class="bar-track"><div class="bar-fill" id="bar-conv"></div></div><div class="lbl">más conversión</div></div>
+      <div class="kpi down" data-kpi="cost"><div class="num">-<span id="k-cost">0</span>%</div><div class="bar-track"><div class="bar-fill" id="bar-cost"></div></div><div class="lbl">menos costos</div></div>
+      <div class="kpi down" data-kpi="time"><div class="num">-<span id="k-time">0</span>%</div><div class="bar-track"><div class="bar-fill" id="bar-time"></div></div><div class="lbl">menos tiempo perdido</div></div>
+    </div>
+    <div class="s3-foot" id="s3-foot">No es promesa de vendedor. Son <b>números reales, de clientes reales.</b></div>
+  </section>
+
+  <!-- ══════════════ SLIDE 4 · 48.5–54.0s · Industrias ══════════════ -->
+  <section class="slide" id="s4"
+           data-scene="4" data-in="48.5" data-out="54.0">
+    <div class="s4-head" id="s4-head">Industrias que ya confían en nosotros</div>
+    <div class="ind-row">
+      <div class="ind timeshare" data-ind="1"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"/></svg><h3>Timeshare</h3><p>Reactivación y ventas</p></div>
+      <div class="ind hoteleria" data-ind="2"><svg viewBox="0 0 24 24"><path d="M3 21V7l9-4 9 4v14M3 11h18M9 21v-5h6v5"/><path d="M7 15h.01M17 15h.01"/></svg><h3>Hotelería</h3><p>Experiencia & ocupación</p></div>
+      <div class="ind inmobiliario" data-ind="3"><svg viewBox="0 0 24 24"><path d="m3 11 9-7 9 7M5 10v10h14V10M10 20v-6h4v6"/></svg><h3>Inmobiliario</h3><p>Lujo & conversión</p></div>
+    </div>
+  </section>
+
+  <!-- ══════════════ SLIDE 5 · 54.0–60.0s · CTA ══════════════ -->
+  <section class="slide" id="s5"
+           data-scene="5" data-in="54.0" data-out="60.0">
+    <div class="cta-logo" id="cta-logo">Victor<span class="ia"> IA</span></div>
+    <div class="cta-tag" id="cta-tag">Inteligencia que entiende tu negocio</div>
+    <div class="cta-btn" id="cta-btn">Diagnóstico Gratuito</div>
+    <div class="cta-contact" id="cta-contact">
+      <b>victor-ia.com.mx</b> · info@victor-ia.com.mx<br>
+      Playa del Carmen, Quintana Roo · México
+    </div>
+  </section>
+
+  <div class="vignette"></div>
+  <div id="blackout"></div>
+
+  <!-- ── AUDIO TRACKS (HyperFrames los mezcla; en preview se reproducen) ── -->
+  <audio id="vo"    data-hf-audio="vo"    data-volume="1.0"
+         src="../audio/vo-influence-ia/01_hyperframes_60s.mp3" preload="auto"></audio>
+  <audio id="music" data-hf-audio="music" data-volume="0.22"
+         data-fade-in="2.0" data-fade-out="3.0" data-fade-out-start="57.0"
+         src="./music/track1_corporativo.mp3" preload="auto"></audio>
+</div>
+
+<!-- Preload invisible (Regla 4) — fondos KPI + nada de imágenes externas aquí
+     (este video es 100% vectorial/tipográfico, sin <img>). -->
+<div id="preload"></div>
+
+<script>
+/* ════════════════════════════════════════════════════════════════
+   TIMELINE MAESTRO — sincronizado a 01_hyperframes_60s.json
+   Cada delay = word.start (sílaba tónica). GSAP timeline absoluto.
+═════════════════════════════════════════════════════════════════ */
+gsap.config({nullTargetWarn:false});
+
+/* Helper count-up sincronizado a la palabra */
+function countUp(el, to, dur, decimals){
+  const o={v:parseFloat(el.textContent)||0};
+  return gsap.to(o,{v:to,duration:dur,ease:"power2.out",
+    onUpdate(){el.textContent = decimals ? o.v.toFixed(decimals) : Math.round(o.v);}});
+}
+
+const TL = gsap.timeline({paused:true});
+
+/* ─────────── SLIDE 1 · 0.0–10.0s ─────────── */
+TL.set("#s1",{opacity:1},0);
+TL.fromTo("#s1-logo",{opacity:0,y:34,filter:"blur(14px)"},
+  {opacity:1,y:0,filter:"blur(0px)",duration:1.6,ease:"power3.out"}, 0.0);          // "En Victor IA" 0.19s
+TL.fromTo("#s1-sub",{opacity:0,y:14},{opacity:.85,y:0,duration:0.9}, 0.9);
+TL.fromTo("#s1-line",{opacity:0,y:24},{opacity:1,y:0,duration:1.1,ease:"power2.out"}, 1.0); // "No vendemos tecnología"
+/* beat de énfasis en "crecen" (5.909s) */
+TL.fromTo("#s1-line b",{scale:1},{scale:1.08,duration:.28,yoyo:true,repeat:1,ease:"power2.inOut"}, 5.91);
+TL.fromTo("#s1-place",{opacity:0,y:16},{opacity:.8,y:0,duration:0.8}, 7.15);        // "Desde Playa del Carmen" 7.15s
+/* salida slide 1 */
+TL.to("#s1",{opacity:0,duration:0.85,ease:"power2.in"}, 9.15);
+
+/* ─────────── SLIDE 2 · 10.0–30.5s ─────────── */
+TL.set("#s2",{opacity:1},9.85);
+TL.fromTo("#s2-head",{opacity:0,y:14},{opacity:1,y:0,duration:0.7}, 9.9);
+/* Grid cascada — stagger 0.12s arrancando con "Diseñamos" (10.077s) */
+TL.fromTo(".svc",{opacity:0,y:26,scale:.92},
+  {opacity:1,y:0,scale:1,duration:0.55,ease:"back.out(1.4)",stagger:0.12}, 10.08);
+/* "nadie más hace en México" (18.07s) → dim all, glow highlights */
+TL.addLabel("highlight", 18.83);
+TL.to(".svc:not([data-highlight])",{className:"+=dim",duration:0.5}, "highlight");
+TL.to('.svc[data-highlight]',{className:"+=glow",duration:0.6,ease:"power2.out"}, "highlight+=0.4"); // "inclusivas" 21.3s / "Reactivación" 23.2s
+/* restore brillo general antes del contador */
+TL.to(".svc.dim",{className:"-=dim",duration:0.5}, 25.6);
+/* Contador "18" se ensambla en "Dieciocho" (26.122s) */
+TL.fromTo("#counter18",{opacity:0,scale:.6,y:20},
+  {opacity:1,scale:1,y:0,duration:0.6,ease:"back.out(1.7)"}, 26.12);
+TL.add(countUp(document.getElementById("c18num"),18,1.1,0), 26.12);
+/* salida slide 2 */
+TL.to("#s2",{opacity:0,duration:0.8,ease:"power2.in"}, 29.7);
+
+/* ─────────── SLIDE 3 · 30.5–48.5s ─────────── */
+TL.set("#s3",{opacity:1},30.4);
+TL.fromTo("#s3-eyebrow",{opacity:0,y:-10},{opacity:.9,y:0,duration:0.6}, 30.6);     // "¿Y los resultados?" 30.6s
+
+/* KPI 1 — 3.2× · "Tres punto dos" 33.041s */
+TL.fromTo('.kpi[data-kpi="roi"]',{opacity:0,y:30},{opacity:1,y:0,duration:0.5}, 32.9);
+TL.add(countUp(document.getElementById("k-roi"),3.2,1.3,1), 33.04);
+TL.to("#bar-roi",{width:"80%",duration:1.3,ease:"power2.out"}, 33.04);
+
+/* KPI 2 — 68% · "Sesenta y ocho" 36.211s */
+TL.fromTo('.kpi[data-kpi="conv"]',{opacity:0,y:30},{opacity:1,y:0,duration:0.5}, 36.05);
+TL.add(countUp(document.getElementById("k-conv"),68,1.2,0), 36.21);
+TL.to("#bar-conv",{width:"68%",duration:1.2,ease:"power2.out"}, 36.21);
+
+/* KPI 3 — -40% · "Cuarenta" 38.939s · rojo→verde */
+TL.fromTo('.kpi[data-kpi="cost"]',{opacity:0,y:30},{opacity:1,y:0,duration:0.5}, 38.8);
+TL.fromTo('.kpi[data-kpi="cost"] .num',{color:"#d65a5a"},{color:"#4cc38a",duration:1.0,ease:"power1.inOut"}, 38.94);
+TL.add(countUp(document.getElementById("k-cost"),40,1.1,0), 38.94);
+TL.to("#bar-cost",{width:"40%",duration:1.1,ease:"power2.out"}, 38.94);
+
+/* KPI 4 — -55% · "Cincuenta y cinco" 41.435s · barra que se acorta */
+TL.fromTo('.kpi[data-kpi="time"]',{opacity:0,y:30},{opacity:1,y:0,duration:0.5}, 41.3);
+TL.add(countUp(document.getElementById("k-time"),55,1.2,0), 41.44);
+TL.fromTo("#bar-time",{width:"100%"},{width:"45%",duration:1.2,ease:"power2.inOut"}, 41.44);
+
+/* "números reales, de clientes reales" 47.009s → glow simultáneo */
+TL.to(".kpi",{className:"+=glowed",duration:0.6,ease:"power2.out"}, 47.01);
+TL.fromTo("#s3-foot",{opacity:0,y:14},{opacity:1,y:0,duration:0.7}, 44.64);          // "Esto no es promesa..." (confidencial)
+/* salida slide 3 */
+TL.to("#s3",{opacity:0,duration:0.8,ease:"power2.in"}, 48.0);
+
+/* ─────────── SLIDE 4 · 48.5–54.0s ─────────── */
+TL.set("#s4",{opacity:1},48.4);
+TL.fromTo("#s4-head",{opacity:0,y:14},{opacity:1,y:0,duration:0.6}, 48.7);
+TL.fromTo(".ind",{opacity:0,y:40,scale:.94},
+  {opacity:1,y:0,scale:1,duration:0.7,ease:"back.out(1.3)",stagger:0.18}, 48.9);    // "El futuro de tu negocio" 48.6s
+/* salida slide 4 con overlap (Regla 5: la siguiente entra antes) */
+TL.to("#s4",{opacity:0,duration:0.9,ease:"power2.in"}, 53.4);
+
+/* ─────────── SLIDE 5 · 54.0–60.0s · CTA ─────────── */
+TL.set("#s5",{opacity:1},53.7);
+TL.fromTo("#cta-logo",{opacity:0,scale:.88,filter:"blur(12px)"},
+  {opacity:1,scale:1,filter:"blur(0px)",duration:1.3,ease:"power3.out"}, 54.05);    // "Victor IA" 54.149s
+TL.fromTo("#cta-tag",{opacity:0,y:18},{opacity:1,y:0,duration:0.9}, 55.67);         // "Inteligencia que entiende tu negocio" 55.67s
+TL.fromTo("#cta-btn",{opacity:0,y:20,scale:.92},
+  {opacity:1,y:0,scale:1,duration:0.8,ease:"back.out(1.6)"}, 57.4);
+/* pulse cálido del botón */
+TL.to("#cta-btn",{boxShadow:"0 0 90px rgba(201,163,90,0.6)",duration:0.6,yoyo:true,repeat:1}, 58.2);
+TL.fromTo("#cta-contact",{opacity:0,y:14},{opacity:.85,y:0,duration:0.8}, 58.26);   // "Hablemos hoy" 58.259s
+
+/* ── Fade final a negro (Regla 5: 1.8s) ── */
+TL.to("#blackout",{opacity:1,duration:1.8,ease:"power2.inOut"}, 58.2);
+
+/* total = 60.0s */
+TL.set({},{},60.0);
+
+/* ════════════════════════════════════════════════════════════════
+   PREVIEW CONTROLLER — sólo para ver en navegador.
+   HyperFrames ignora esto y usa el timeline + data-* para renderizar.
+═════════════════════════════════════════════════════════════════ */
+function fitStage(){
+  const s=document.getElementById('stage');
+  const k=Math.min(window.innerWidth/1920, window.innerHeight/1080);
+  s.style.transform=`scale(${k})`;
+  document.body.style.display='flex';
+  document.body.style.alignItems='center';
+  document.body.style.justifyContent='center';
+}
+window.addEventListener('resize',fitStage); fitStage();
+
+const vo=document.getElementById('vo');
+const music=document.getElementById('music');
+function startPreview(){
+  TL.restart();
+  vo.currentTime=0; music.currentTime=0;
+  vo.volume=1.0; music.volume=0.0;
+  vo.play().catch(()=>{}); music.play().catch(()=>{});
+  /* fade-in música 0→2s, baja música bajo VO, fade-out 57→60 */
+  gsap.to(music,{volume:0.22,duration:2.0});
+  gsap.to(music,{volume:0.0,duration:3.0,delay:57.0});
+}
+/* click para iniciar (los navegadores bloquean autoplay con audio) */
+document.body.addEventListener('click',startPreview,{once:true});
+/* auto-arranque visual sin audio para inspección rápida */
+window.addEventListener('load',()=>{ TL.play(); });
+</script>
+</body>
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html><html lang="es"><head>
+<meta charset="utf-8"/><meta content="width=device-width,initial-scale=1.0" name="viewport"/>
+<title>Producción de Contenido con IA: 10× más Rápido sin Perder la Voz de tu Marca | Victor IA Blog</title>
+<meta name="description" content="Cómo usar inteligencia artificial para producir contenido a escala sin sacrificar la identidad de tu marca. Workflow, métricas y errores a evitar."/>
+<link rel="canonical" href="https://victor-ia.xyz/blog/produccion-contenido-ia.html"/>
+<meta name="robots" content="index, follow"/>
+<meta http-equiv="content-language" content="es-MX"/>
+<meta name="geo.region" content="MX"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Producción de Contenido con IA: 10× más Rápido sin Perder la Voz de tu Marca","description":"Cómo usar inteligencia artificial para producir contenido a escala sin sacrificar la identidad de tu marca. Workflow, métricas y errores a evitar.","datePublished":"2026-05-27","dateModified":"2026-05-27","author":{"@type":"Organization","name":"Victor IA","url":"https://victor-ia.xyz"},"publisher":{"@type":"Organization","name":"Victor IA"},"inLanguage":"es-MX"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;0,500;1,200;1,300;1,400;1,500&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com" integrity="sha384-igm5BeiBt36UU4gqwWS7imYmelpTsZlQ45FZf+XBn9MuJbn4nQr7yx1yFydocC/K" crossorigin="anonymous"></script>
+<script>tailwind.config={darkMode:'class',theme:{extend:{colors:{ink:'#070708',cream:'#EAE6DF',muted:'#706C66',gold:'#B89A6A'},fontFamily:{display:['Cormorant Garamond','Georgia','serif'],body:['Inter','sans-serif']}}}}</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased;scroll-behavior:auto}
+body{background:#070708;color:#EAE6DF;font-family:'Inter',sans-serif;overflow-x:hidden;font-weight:300}
+@media(pointer:fine){html,body,*{cursor:none!important}}
+@media(prefers-contrast:more){html,body,*{cursor:auto!important}#cur-d,#cur-r{display:none!important}}
+#cur-d{position:fixed;width:5px;height:5px;background:#B89A6A;border-radius:50%;pointer-events:none!important;z-index:2147483647;transform:translate(-50%,-50%)}
+#cur-r{position:fixed;width:36px;height:36px;border:1px solid rgba(184,154,106,.42);border-radius:50%;pointer-events:none!important;z-index:2147483646;transform:translate(-50%,-50%);transition:width .4s,height .4s}
+#pbar{position:fixed;top:0;left:0;height:1px;background:#B89A6A;z-index:100000;width:0}
+#noise{position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.024;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+header{position:fixed;top:0;left:0;right:0;z-index:500;height:68px;transition:background .5s,border-color .5s;border-bottom:1px solid transparent}
+header.scrolled{background:rgba(7,7,8,.92);border-bottom-color:rgba(255,255,255,.06);backdrop-filter:blur(18px)}
+.nav-a{position:relative;color:#706C66;font-size:13px;letter-spacing:.07em;font-weight:300;transition:color .3s;text-decoration:none}
+.nav-a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:#B89A6A;transition:width .45s}
+.nav-a:hover{color:#EAE6DF}.nav-a:hover::after{width:100%}
+.btn-p{display:inline-flex;align-items:center;border-radius:5px;font-family:'Inter',sans-serif;font-size:13px;letter-spacing:.09em;font-weight:500;background:#EAE6DF;color:#070708;padding:11px 26px;text-decoration:none;transition:background .25s,transform .2s}
+.btn-p:hover{background:#fff;transform:translateY(-2px)}
+.rv{opacity:0;transform:translateY(30px)}
+.prose h2{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,3vw,30px);font-weight:300;color:#EAE6DF;margin:48px 0 16px}
+.prose h3{font-size:13px;font-weight:500;color:#B89A6A;margin:32px 0 12px;letter-spacing:.1em;text-transform:uppercase}
+.prose p{font-size:16px;line-height:1.85;color:rgba(234,230,223,.75);margin-bottom:20px}
+.prose ul{margin:0 0 20px 24px;list-style:disc}
+.prose ul li{font-size:15.5px;line-height:1.75;color:rgba(234,230,223,.72);margin-bottom:8px}
+.prose a{color:#B89A6A;text-decoration:none;border-bottom:1px solid rgba(184,154,106,.3)}
+.prose blockquote{border-left:2px solid #B89A6A;padding-left:20px;margin:28px 0;font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;color:rgba(234,230,223,.8);font-style:italic}
+.img-placeholder{width:100%;aspect-ratio:16/9;border-radius:10px;background:linear-gradient(135deg,#0c0a18 0%,#1a1035 50%,#0a0808 100%);border:1px solid rgba(184,154,106,.12);display:flex;align-items:center;justify-content:center;margin:32px 0}
+.img-caption{font-size:11.5px;letter-spacing:.08em;color:#706C66;text-align:center;margin-top:-24px;margin-bottom:32px;text-transform:uppercase}
+.tag{display:inline-block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#B89A6A;border:1px solid rgba(184,154,106,.25);border-radius:3px;padding:3px 10px}
+.step-card{display:flex;gap:20px;align-items:flex-start;padding:20px 24px;background:#0F0F12;border:1px solid rgba(255,255,255,.054);border-radius:10px;margin-bottom:12px}
+.step-num{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:#B89A6A;line-height:1;flex-shrink:0;width:36px}
+.step-body h5{font-size:13px;font-weight:500;color:#EAE6DF;letter-spacing:.05em;margin-bottom:6px}
+.step-body p{font-size:13.5px;color:rgba(234,230,223,.6);line-height:1.6;margin:0}
+</style>
+</head>
+<body class="dark">
+<div id="noise"></div><div id="cur-d"></div><div id="cur-r"></div><div id="pbar"></div>
+<header id="hdr">
+  <div class="flex justify-between items-center max-w-[1200px] mx-auto px-6 md:px-16 h-full relative z-10">
+    <a href="../index.html" class="font-display text-[21px] font-light tracking-[.04em] text-cream" style="text-decoration:none">Victor <span style="color:#B89A6A">IA</span></a>
+    <nav class="hidden md:flex gap-9 items-center">
+      <a class="nav-a" href="../agentes.html">Agentes</a>
+      <a class="nav-a" href="../como-funciona.html">Cómo Funciona</a>
+      <a class="nav-a" href="../precios.html">Precios</a>
+      <a class="nav-a" href="index.html" style="color:#EAE6DF">Blog</a>
+      <a class="nav-a" href="../telemetria.html">Eficiencia IoT</a>
+    </nav>
+    <div class="flex items-center gap-5">
+      <a class="nav-a hidden sm:block" href="../app.html">Iniciar sesión</a>
+      <a class="btn-p" href="../app.html">Empezar gratis</a>
+    </div>
+  </div>
+</header>
+
+<main style="padding-top:68px;position:relative;z-index:10">
+
+  <!-- Hero -->
+  <section style="padding:96px 0 64px;border-bottom:1px solid rgba(255,255,255,.05)">
+    <div style="max-width:780px;margin:0 auto;padding:0 32px">
+      <div class="rv" style="display:flex;gap:10px;margin-bottom:24px;flex-wrap:wrap">
+        <span class="tag">Contenido</span>
+        <span class="tag">Marketing</span>
+        <span class="tag">Producción</span>
+      </div>
+      <h1 class="rv" style="font-family:'Cormorant Garamond',serif;font-size:clamp(32px,5vw,54px);font-weight:300;line-height:1.18;color:#EAE6DF;margin-bottom:24px">
+        Producción de Contenido con IA: 10× más Rápido sin Perder la Voz de tu Marca
+      </h1>
+      <p class="rv" style="font-size:18px;line-height:1.75;color:rgba(234,230,223,.6);margin-bottom:32px">
+        En 2026, el contenido no es el rey: es el oxígeno. Las marcas que no publican consistentemente desaparecen del radar de sus clientes potenciales. Pero producir contenido de calidad a la escala que el mercado exige, con el presupuesto real que tienen la mayoría de las empresas, requiere un cambio de enfoque radical.
+      </p>
+      <div class="rv" style="display:flex;gap:24px;align-items:center;font-size:12px;color:#706C66;letter-spacing:.07em">
+        <span>27 de mayo, 2026</span>
+        <span style="color:rgba(112,108,102,.3)">·</span>
+        <span>9 min de lectura</span>
+        <span style="color:rgba(112,108,102,.3)">·</span>
+        <span>Victor IA</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contenido -->
+  <article style="max-width:780px;margin:0 auto;padding:64px 32px 96px" class="prose">
+
+    <div class="rv img-placeholder">
+      <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="8" y="12" width="40" height="56" rx="4" stroke="#B89A6A" stroke-width="1.5" fill="none" opacity=".4"/>
+        <line x1="16" y1="24" x2="40" y2="24" stroke="#B89A6A" stroke-width="1" opacity=".5"/>
+        <line x1="16" y1="32" x2="40" y2="32" stroke="#B89A6A" stroke-width="1" opacity=".35"/>
+        <line x1="16" y1="40" x2="34" y2="40" stroke="#B89A6A" stroke-width="1" opacity=".35"/>
+        <line x1="16" y1="48" x2="38" y2="48" stroke="#B89A6A" stroke-width="1" opacity=".35"/>
+        <circle cx="60" cy="38" r="16" stroke="#B89A6A" stroke-width="1.5" fill="none"/>
+        <path d="M54 38 H66 M60 32 V44" stroke="#B89A6A" stroke-width="1.5"/>
+        <path d="M48 28 L52 32" stroke="#B89A6A" stroke-width="1" opacity=".5"/>
+      </svg>
+    </div>
+    <p class="img-caption rv">La producción de contenido con IA no elimina la creatividad humana — la amplifica</p>
+
+    <h2 class="rv">La crisis del contenido en 2026: volumen vs. calidad</h2>
+    <p class="rv">Los algoritmos de distribución de contenido —redes sociales, motores de búsqueda, email— premian la consistencia por encima de casi cualquier otra variable. Una marca que publica cuatro veces por semana con calidad buena supera en alcance a una que publica una vez con calidad excepcional. La ventana de atención se ha fragmentado, y la batalla se gana en la frecuencia, no en el evento único perfectamente producido.</p>
+    <p class="rv">El problema es que producir contenido de forma consistente y con calidad suficiente requiere equipos que la mayoría de las empresas medianas no pueden mantener. Un equipo de contenido de calidad —estratega, redactor, diseñador, editor de video, gestor de comunidad— cuesta entre 150,000 y 300,000 pesos mensuales en México. Y aun así, la velocidad de producción sigue siendo insuficiente para cubrir todos los canales y formatos necesarios.</p>
+    <p class="rv">La inteligencia artificial no reemplaza ese equipo. Lo multiplica. Un equipo de dos personas con agentes de IA correctamente configurados puede producir el volumen de contenido de un equipo de veinte, manteniendo la consistencia de voz y el nivel de calidad que la marca requiere.</p>
+
+    <blockquote class="rv">"La voz de una marca es su activo más valioso y más frágil. La IA entrenada correctamente la preserva y la escala. La IA genérica la destruye. La diferencia está en cómo la configuras, no en la tecnología en sí."</blockquote>
+
+    <div class="rv" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:32px 0">
+      <div style="background:#0F0F12;border:1px solid rgba(255,255,255,.054);border-radius:10px;padding:24px;text-align:center">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:300;color:#B89A6A">10×</div>
+        <div style="font-size:12px;color:#706C66;margin-top:6px;letter-spacing:.06em">Velocidad de producción</div>
+      </div>
+      <div style="background:#0F0F12;border:1px solid rgba(255,255,255,.054);border-radius:10px;padding:24px;text-align:center">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:300;color:#B89A6A">3×</div>
+        <div style="font-size:12px;color:#706C66;margin-top:6px;letter-spacing:.06em">Más engagement con personalización</div>
+      </div>
+      <div style="background:#0F0F12;border:1px solid rgba(255,255,255,.054);border-radius:10px;padding:24px;text-align:center">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:300;color:#B89A6A">62%</div>
+        <div style="font-size:12px;color:#706C66;margin-top:6px;letter-spacing:.06em">Ahorro en producción</div>
+      </div>
+    </div>
+
+    <h2 class="rv">Qué puede (y qué no puede) hacer la IA en contenido</h2>
+    <p class="rv">La primera regla de trabajar con IA en producción de contenido es entender con claridad los límites de cada herramienta. No todo el contenido se produce igual, y las capacidades de la IA varían significativamente por tipo.</p>
+
+    <h3 class="rv">Lo que la IA hace muy bien</h3>
+    <ul class="rv">
+      <li>Textos informativos, explicativos y educativos para blog, email y redes sociales</li>
+      <li>Adaptación de un mismo mensaje a múltiples formatos y canales simultáneamente</li>
+      <li>Generación de variantes A/B para testing de copy publicitario</li>
+      <li>Resúmenes de contenido largo para diferentes audiencias</li>
+      <li>Generación de imágenes con instrucciones visuales precisas para la marca</li>
+      <li>Guiones para video corto y estructura de video largo</li>
+      <li>Borradores de newsletters, secuencias de email y respuestas de comunidad</li>
+      <li>Transcripción y edición de audio para podcasts y contenido en video</li>
+    </ul>
+
+    <h3 class="rv">Donde el humano sigue siendo indispensable</h3>
+    <ul class="rv">
+      <li>Decisiones estratégicas: qué temas abordar, cuándo y por qué</li>
+      <li>Creatividad disruptiva: el concepto que nadie ha visto antes</li>
+      <li>Juicio editorial: qué publicar y qué guardar</li>
+      <li>Conexiones emocionales profundas con audiencias específicas</li>
+      <li>Reacción en tiempo real a eventos de coyuntura</li>
+    </ul>
+
+    <div class="rv img-placeholder">
+      <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="28" cy="28" r="14" stroke="#B89A6A" stroke-width="1.5" fill="none" opacity=".4"/>
+        <circle cx="52" cy="28" r="14" stroke="#B89A6A" stroke-width="1.5" fill="none" opacity=".4"/>
+        <path d="M36 20 Q40 28 36 36" stroke="#B89A6A" stroke-width="1.5" fill="none"/>
+        <path d="M44 20 Q40 28 44 36" stroke="#B89A6A" stroke-width="1.5" fill="none"/>
+        <rect x="22" y="52" width="36" height="16" rx="3" fill="#B89A6A" opacity=".12" stroke="#B89A6A" stroke-width="1"/>
+        <line x1="28" y1="60" x2="52" y2="60" stroke="#B89A6A" stroke-width="1" opacity=".5"/>
+      </svg>
+    </div>
+    <p class="img-caption rv">La colaboración humano-IA: la estrategia y el juicio son humanos, la ejecución y la escala son de los agentes</p>
+
+    <h2 class="rv">El entrenamiento de la voz de marca: el paso que todos omiten</h2>
+    <p class="rv">El error más común en la implementación de IA para contenido es comenzar a producir antes de entrenar. Un agente de contenido sin entrenamiento específico produce texto genérico que suena como cualquier otra marca. Un agente bien entrenado produce texto que suena exactamente como tu marca, con tus palabras preferidas, tu tono, tus referencias y tu nivel de formalidad.</p>
+    <p class="rv">El entrenamiento de voz de marca requiere al menos tres ingredientes. Primero, una muestra representativa de contenido existente aprobado: artículos de blog, posts de redes sociales, correos de marketing, scripts de video. Cuanto más volumen, mejor. Segundo, una guía explícita de estilo: palabras que se usan y palabras que se evitan, nivel de tecnicismo por canal, tono emocional preferido. Tercero, ejemplos de lo que no se debe hacer: contenido que fue rechazado o que no representa a la marca.</p>
+    <p class="rv">Con estos tres elementos, un agente puede aprender a producir contenido indistinguible del que escribe el mejor redactor de la empresa. No al primer intento, sino después de un proceso iterativo de validación y ajuste que normalmente toma entre una y tres semanas.</p>
+
+    <h2 class="rv">Workflow recomendado para equipos de 1 a 10 personas</h2>
+    <p class="rv">La implementación de IA en producción de contenido no requiere un equipo especializado. Este workflow funciona para empresas con recursos limitados que quieren maximizar su output sin sacrificar calidad.</p>
+
+    <div class="rv">
+      <div class="step-card"><div class="step-num">1</div><div class="step-body"><h5>Planificación estratégica (humano)</h5><p>Definir el calendario editorial del mes: temas, formatos, canales, objetivos por pieza. Esta parte no se delega a la IA.</p></div></div>
+      <div class="step-card"><div class="step-num">2</div><div class="step-body"><h5>Briefing por pieza (humano + IA)</h5><p>Para cada pieza, el estratega define en 3-5 líneas: objetivo, audiencia, tono, puntos clave. La IA sugiere estructura y angle adicionales.</p></div></div>
+      <div class="step-card"><div class="step-num">3</div><div class="step-body"><h5>Producción de borrador (IA)</h5><p>El agente genera el borrador completo en la voz de marca entrenada. Para texto largo: artículo completo. Para redes: 5 variantes. Para email: versión completa con subject lines.</p></div></div>
+      <div class="step-card"><div class="step-num">4</div><div class="step-body"><h5>Revisión editorial (humano)</h5><p>El editor revisa el borrador con un checklist de 10 puntos: precisión, voz, ángulo, CTA, relevancia. El objetivo es editar, no reescribir. Una revisión bien hecha tarda 15 minutos.</p></div></div>
+      <div class="step-card"><div class="step-num">5</div><div class="step-body"><h5>Adaptación multicanal (IA)</h5><p>La pieza aprobada se adapta automáticamente a todos los canales: LinkedIn, Instagram, X, newsletter, versión corta para push notifications.</p></div></div>
+      <div class="step-card"><div class="step-num">6</div><div class="step-body"><h5>Publicación y monitoreo (IA)</h5><p>El agente programa la publicación en los canales indicados y monitorea el engagement las primeras 48 horas. Genera reporte semanal de performance.</p></div></div>
+    </div>
+
+    <div class="rv img-placeholder">
+      <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M15 40 Q20 25 30 30 Q40 35 45 20 Q50 5 60 15 Q70 25 68 40" stroke="#B89A6A" stroke-width="1.5" fill="none"/>
+        <circle cx="30" cy="30" r="4" fill="#B89A6A" opacity=".4"/>
+        <circle cx="45" cy="20" r="4" fill="#B89A6A" opacity=".4"/>
+        <circle cx="60" cy="15" r="4" fill="#B89A6A" opacity=".6"/>
+        <path d="M15 55 H65" stroke="#B89A6A" stroke-width=".5" opacity=".2"/>
+        <rect x="12" y="58" width="14" height="8" rx="2" fill="#B89A6A" opacity=".2" stroke="#B89A6A" stroke-width="1"/>
+        <rect x="33" y="58" width="14" height="8" rx="2" fill="#B89A6A" opacity=".35" stroke="#B89A6A" stroke-width="1"/>
+        <rect x="54" y="58" width="14" height="8" rx="2" fill="#B89A6A" opacity=".5" stroke="#B89A6A" stroke-width="1"/>
+      </svg>
+    </div>
+    <p class="img-caption rv">La curva de engagement sube con consistencia: la IA garantiza el volumen, el humano garantiza la calidad</p>
+
+    <h2 class="rv">Métricas: IA vs. contenido 100% humano</h2>
+    <p class="rv">Los primeros estudios comparativos entre contenido producido con IA entrenada y contenido 100% humano producen resultados que muchos no esperan: en la mayoría de los casos, el rendimiento es estadísticamente equivalente o superior cuando la IA está bien calibrada.</p>
+    <p class="rv">El contenido generado por IA con entrenamiento de marca correcto muestra tiempos de lectura similares, tasas de clic equivalentes y niveles de engagement comparable al contenido humano en formatos de texto. Donde la diferencia es más marcada es en la <em>consistencia</em>: el contenido de IA mantiene niveles de calidad más estables, sin los valles que inevitablemente ocurren cuando el equipo humano está bajo presión o experimenta rotación.</p>
+    <p class="rv">La ventaja más medible es en personalización. Los agentes pueden producir versiones personalizadas del mismo mensaje para diferentes segmentos de audiencia con un costo marginal cercano a cero. Este nivel de personalización, imposible a escala para equipos humanos, genera un incremento promedio de 3× en engagement cuando se implementa correctamente.</p>
+
+    <h2 class="rv">Errores comunes que arruinan la implementación</h2>
+
+    <h3 class="rv">Error 1: Publicar sin revisar</h3>
+    <p class="rv">La velocidad de la IA es tentadora. El workflow siempre debe incluir una revisión humana antes de publicar. No para rescribir, sino para validar. Un error factual o un malentendido de tono en contenido publicado daña la credibilidad de la marca de forma desproporcionada al tiempo que habría costado revisarlo.</p>
+
+    <h3 class="rv">Error 2: No actualizar el entrenamiento</h3>
+    <p class="rv">La voz de una marca evoluciona. Si el agente se entrena una vez y no se actualiza, empieza a sonar a la versión del año pasado de la empresa. El entrenamiento debe revisarse al menos cada trimestre con nueva muestra de contenido aprobado.</p>
+
+    <h3 class="rv">Error 3: Usar la IA para todo simultáneamente</h3>
+    <p class="rv">Implementar todos los formatos y canales al mismo tiempo produce sobrecarga de configuración y resultados mediocres en todos. Comenzar por uno o dos canales, optimizar hasta que funcionen bien, y luego expandir.</p>
+
+    <h3 class="rv">Error 4: Ignorar el análisis de performance</h3>
+    <p class="rv">Los agentes pueden producir contenido indefinidamente, pero sin retroalimentación de lo que funciona, no mejoran. El ciclo de aprendizaje —publicar, medir, ajustar instrucciones, publicar de nuevo— es lo que diferencia una implementación que mejora con el tiempo de una que se estanca.</p>
+
+    <h2 class="rv">Tendencias de contenido generativo en 2026</h2>
+    <p class="rv">El ecosistema de producción de contenido con IA está evolucionando a una velocidad que ninguna categoría de herramientas había experimentado antes. Tres tendencias que ya están definiendo el estándar en este momento:</p>
+    <p class="rv"><strong style="color:#EAE6DF">Contenido interactivo generado en tiempo real:</strong> páginas web y newsletters que adaptan su contenido al perfil del lector en el momento de apertura. No versiones A/B sino personalización uno a uno.</p>
+    <p class="rv"><strong style="color:#EAE6DF">Video corto con guión y locución automatizados:</strong> de un briefing de texto a un reel listo para publicar en menos de 30 minutos, con voz clonada del vocero de la marca y visuales personalizados.</p>
+    <p class="rv"><strong style="color:#EAE6DF">Contenido multimodal coordinado:</strong> un mismo tema se publica simultáneamente como artículo largo, hilo de redes, episodio de podcast y presentación visual, todos producidos desde el mismo brief en minutos.</p>
+
+    <p class="rv">Los <a href="../agentes.html">agentes de contenido de Victor IA</a> están diseñados para operar en este nuevo paradigma. Conoce los <a href="../precios.html">planes disponibles</a> y empieza a producir contenido a escala sin perder lo que hace única a tu marca.</p>
+
+  </article>
+
+  <!-- CTA -->
+  <section class="rv" style="padding:80px 32px;border-top:1px solid rgba(255,255,255,.05);text-align:center">
+    <p style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:#706C66;margin-bottom:16px">Multiplica tu equipo de contenido</p>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,44px);font-weight:300;color:#EAE6DF;margin-bottom:28px;max-width:600px;margin-left:auto;margin-right:auto">Produce 10× más contenido<br><em style="font-weight:200">con el equipo que ya tienes</em></h2>
+    <a class="btn-p" href="../app.html" style="margin-bottom:12px">Comenzar ahora</a>
+    <p style="font-size:12px;color:#706C66;margin-top:16px">14 días gratis · Sin tarjeta de crédito</p>
+  </section>
+
+</main>
+
+<footer style="background:#040406;border-top:1px solid rgba(255,255,255,.05);padding:64px 0 40px;position:relative;z-index:10">
+  <div style="max-width:1200px;margin:0 auto;padding:0 64px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:48px">
+    <div><div style="font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:300;color:#EAE6DF;margin-bottom:14px">Victor <span style="color:#B89A6A">IA</span></div><p style="font-size:13.5px;line-height:1.7;color:#706C66;max-width:260px">El primer supercerebro de IA en LATAM.</p></div>
+    <div><h4 style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(112,108,102,.35);margin-bottom:18px">Producto</h4><ul style="list-style:none;display:flex;flex-direction:column;gap:11px"><li><a class="nav-a" href="../agentes.html">Agentes IA</a></li><li><a class="nav-a" href="../precios.html">Precios</a></li></ul></div>
+    <div><h4 style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(112,108,102,.35);margin-bottom:18px">Blog</h4><ul style="list-style:none;display:flex;flex-direction:column;gap:11px"><li><a class="nav-a" href="index.html">Todos los artículos</a></li></ul></div>
+  </div>
+  <div style="max-width:1200px;margin:48px auto 0;padding:28px 64px 0;border-top:1px solid rgba(255,255,255,.05)"><p style="font-size:10.5px;letter-spacing:.09em;color:rgba(112,108,102,.28)">© 2026 INFLUENCE IA S.A. DE C.V.</p></div>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d" crossorigin="anonymous"></script>
+<script>(()=>{gsap.registerPlugin(ScrollTrigger);const dot=document.getElementById('cur-d'),ring=document.getElementById('cur-r');let cx=0,cy=0,rx=0,ry=0;document.addEventListener('mousemove',e=>{cx=e.clientX;cy=e.clientY;});(function animC(){rx+=(cx-rx)*.10;ry+=(cy-ry)*.10;dot.style.left=cx+'px';dot.style.top=cy+'px';ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animC);})();window.addEventListener('scroll',()=>{const d=document.documentElement;document.getElementById('pbar').style.width=((d.scrollTop)/(d.scrollHeight-d.clientHeight)*100)+'%';document.getElementById('hdr').classList.toggle('scrolled',window.scrollY>40);});gsap.utils.toArray('.rv').forEach(el=>{const rc=el.getBoundingClientRect();if(rc.top<window.innerHeight*.92){gsap.to(el,{opacity:1,y:0,duration:.8,ease:'power3.out'});}else{gsap.to(el,{opacity:1,y:0,duration:1,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 88%'}});}});})();</script>
+</body></html>

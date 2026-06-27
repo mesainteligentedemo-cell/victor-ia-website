@@ -1,0 +1,2739 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VICTOR IA — Socio de Contenido · Remi Creative</title>
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/brand/favicon-192x192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/brand/favicon-180x180.png">
+<meta name="description" content="Victor IA — Sistema de Crecimiento Digital Autónomo para Remi Creative. 8 agentes IA, 99+ piezas de contenido mensuales, portal privado 24/7.">
+<meta property="og:title" content="VICTOR IA — Socio de Contenido · Remi Creative">
+<meta property="og:description" content="Sistema completamente automatizado de generación de contenido con 8 agentes IA especializados.">
+<meta property="og:url" content="https://victor-ia.xyz/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0c0b08;--bg2:#111009;--card:#16140f;--border:#272318;
+  --gold:#c9a870;--gold-dim:#7a6540;--gold-hi:#e8cc94;
+  --text1:#f0ead6;--text2:#c2b49a;--text3:#8a7d68;
+  --dur:0.8s;--ease:cubic-bezier(0.86,0,0.07,1);
+}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--text1)}
+#deck{position:fixed;inset:0;overflow:hidden}
+#track{display:flex;width:calc(14 * 100vw);height:100%;transition:transform var(--dur) var(--ease);will-change:transform}
+.slide{width:100vw;height:100vh;flex-shrink:0;position:relative;display:grid;overflow:hidden}
+#grain{position:fixed;inset:0;pointer-events:none;z-index:9000;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.38'/%3E%3C/svg%3E");
+  opacity:.05;mix-blend-mode:overlay}
+.top-bar{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:20px 64px;z-index:10}
+.logo{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;letter-spacing:.4em;color:var(--gold);text-transform:uppercase}
+.slide-label{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:400;letter-spacing:.25em;color:var(--text3)}
+#dots{position:fixed;bottom:36px;left:50%;transform:translateX(-50%);display:flex;gap:7px;z-index:9001;align-items:center}
+.dot{width:3px;height:3px;border-radius:50%;background:var(--text3);cursor:pointer;transition:all .35s ease}
+.dot.active{background:var(--gold);transform:scale(1.8)}
+.arrow{position:fixed;top:50%;transform:translateY(-50%);background:none;border:1px solid var(--border);color:var(--text3);font-size:13px;width:42px;height:42px;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:9001;transition:background .25s ease,border-color .25s ease,color .25s ease,transform .2s cubic-bezier(0.34,1.56,0.64,1);font-family:'Space Grotesk',sans-serif}
+.arrow:hover{border-color:var(--gold-dim);color:var(--gold)}
+#prev{left:20px} #next{right:20px}
+#prev.h,#next.h{opacity:0;pointer-events:none}
+@keyframes up{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fi{from{opacity:0}to{opacity:1}}
+@keyframes ct{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+.slide.on .a1{animation:up .75s var(--ease) .05s both}
+.slide.on .a2{animation:up .75s var(--ease) .18s both}
+.slide.on .a3{animation:up .75s var(--ease) .30s both}
+.slide.on .a4{animation:up .75s var(--ease) .42s both}
+.slide.on .a5{animation:up .75s var(--ease) .54s both}
+.slide.on .a6{animation:up .75s var(--ease) .66s both}
+.slide.on .c1{animation:ct .8s var(--ease) .1s both}
+.slide.on .c2{animation:ct .8s var(--ease) .25s both}
+.slide.on .c3{animation:ct .8s var(--ease) .4s both}
+.slide.on .c4{animation:ct .8s var(--ease) .55s both}
+
+/* SHARED */
+.col-l{padding:110px 56px 80px 80px;border-right:1px solid var(--border);height:100%;display:flex;flex-direction:column;justify-content:center;gap:28px}
+.col-r{padding:80px 80px 80px 56px;height:100%;display:flex;flex-direction:column;justify-content:center;gap:0}
+.big-h{font-family:'Instrument Serif',serif;font-size:clamp(36px,4vw,56px);font-weight:300;line-height:1.02;color:var(--text1)}
+.big-h em{font-style:italic;color:var(--gold)}
+.body-t{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:300;color:var(--text2);line-height:1.75;max-width:400px;text-wrap:pretty}
+.pull-q{font-family:'Instrument Serif',serif;font-size:17px;font-style:italic;color:var(--gold);line-height:1.5;max-width:360px;padding-left:20px;border-left:1px solid var(--gold-dim)}
+.hd-blk{padding:100px 80px 44px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-end}
+.hd-tag{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:600;letter-spacing:.3em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:10px}
+.hd-h{font-family:'Instrument Serif',serif;font-size:clamp(32px,3.6vw,48px);font-weight:300;color:var(--text1)}
+.hd-s{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:300;color:var(--text2);max-width:340px;text-align:right;line-height:1.6}
+.fstep{display:flex;align-items:flex-start;gap:22px;padding:18px 0;border-bottom:1px solid var(--border)}
+.fstep:last-child{border-bottom:none}
+.fn{font-family:'Instrument Serif',serif;font-size:32px;font-weight:200;color:var(--text3);line-height:1;flex-shrink:0;width:38px}
+.ft{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;color:var(--text1);margin-bottom:4px}
+.fd{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:300;color:var(--text2);line-height:1.55;text-wrap:pretty}
+.fact{border-left:1px solid var(--gold-dim);padding:0 0 0 22px}
+.fact-t{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:600;letter-spacing:.25em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:5px}
+.fact-v{font-family:'Instrument Serif',serif;font-size:clamp(22px,2.4vw,30px);font-weight:300;color:var(--text1);line-height:1}
+.fact-d{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:300;color:var(--text2);margin-top:5px;line-height:1.5}
+
+/* PORTADA */
+#s1{align-items:center;justify-items:center}
+#s1 .mb{position:absolute;inset:0;background-image:url('/assets/bg-light.jpg');background-size:cover;background-position:center;filter:sepia(.08) brightness(.28) contrast(1.1) saturate(.7)}
+#s1 .vg{position:absolute;inset:0;background:radial-gradient(ellipse 90% 80% at 50% 50%,transparent 30%,rgba(8,7,5,.85) 100%)}
+#s1 .cc{position:relative;z-index:2;text-align:center;display:flex;flex-direction:column;align-items:center}
+.eyebrow{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:600;letter-spacing:.4em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:36px}
+.cover-name{font-family:'Instrument Serif',serif;font-size:clamp(68px,8vw,108px);font-weight:300;font-style:italic;color:var(--text1);line-height:.9;letter-spacing:-.02em}
+.cover-rule{height:1px;width:220px;margin:36px 0;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.cover-svc{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:500;letter-spacing:.3em;color:var(--gold);text-transform:uppercase;margin-bottom:14px}
+.cover-co{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:300;color:var(--text2);letter-spacing:.08em}
+.cover-date{position:absolute;bottom:52px;right:64px;font-family:'Space Grotesk',sans-serif;font-size:10px;color:var(--text3);letter-spacing:.2em}
+
+/* PILARES */
+#s3{grid-template-rows:auto 1fr;padding:0}
+.pillars-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border);flex:1}
+.pillar{background:var(--bg);padding:32px 22px;display:flex;flex-direction:column;gap:14px;transition:background .3s ease;border-left:1px solid transparent}
+.pillar:hover{background:var(--card)}
+.p-num{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:600;letter-spacing:.2em;color:var(--text3)}
+.p-color{height:2px;width:32px;border-radius:1px}
+.p-name{font-family:'Instrument Serif',serif;font-size:clamp(16px,1.6vw,21px);font-weight:300;color:var(--text1);line-height:1.1}
+.p-layer{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:300;color:var(--text3)}
+.p-content{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:300;color:var(--text2);line-height:1.6;margin-top:auto}
+.c-teal{background:#4ecdc4}.c-purple{background:#9b59b6}.c-navy{background:#2c3e6e}.c-orange{background:#e67e22}.c-lime{background:#a3c935}
+
+/* CANALES */
+#s4{grid-template-rows:auto 1fr;padding:0 80px 64px}
+#s4 .hd{padding:100px 0 44px;border-bottom:1px solid var(--border)}
+#s4 .chs{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);margin-top:1px}
+.ch{background:var(--bg);padding:34px 26px;display:flex;flex-direction:column;gap:14px}
+.ch-pl{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:600;letter-spacing:.3em;color:var(--gold-dim);text-transform:uppercase}
+.ch-n{font-family:'Instrument Serif',serif;font-size:clamp(36px,3.6vw,50px);font-weight:200;color:var(--text1);line-height:.85}
+.ch-u{font-family:'Space Grotesk',sans-serif;font-size:11px;color:var(--text3);display:block;margin-top:4px}
+.ch-b{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:300;color:var(--text2);line-height:1.55;flex:1}
+.ch-tag{display:inline-block;padding:4px 10px;border:1px solid var(--border);font-family:'Space Grotesk',sans-serif;font-size:10px;color:var(--text3);letter-spacing:.15em;text-transform:uppercase;width:fit-content}
+
+/* OUTPUT */
+#s5{align-items:center;justify-items:center}
+#s5 .mbg{position:absolute;inset:0;background-image:url('/assets/bg-light.jpg');background-size:cover;background-position:center;filter:sepia(.08) brightness(.15) contrast(1.1) saturate(.6)}
+#s5 .inner{position:relative;z-index:2;width:100%;max-width:1140px;padding:0 40px}
+#s5 .pre{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:600;letter-spacing:.4em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:52px;text-align:center}
+#s5 .sg{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.04)}
+.sb{background:rgba(12,11,8,.75);backdrop-filter:blur(8px);padding:44px 36px;display:flex;flex-direction:column;gap:10px}
+.sb-n{font-family:'Instrument Serif',serif;font-size:clamp(60px,6.5vw,88px);font-weight:200;color:var(--text1);line-height:.82}
+.sb-name{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;letter-spacing:.1em;color:var(--gold);text-transform:uppercase}
+.sb-d{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:300;color:var(--text2);line-height:1.6;margin-top:4px}
+#s5 .foot{text-align:center;margin-top:44px;font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:300;color:var(--text3);letter-spacing:.1em}
+
+/* AGENTES */
+#sa{grid-template-rows:auto 1fr;padding:0 80px 56px}
+#sa .agents{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(2,1fr);gap:1px;background:var(--border);flex:1;margin-top:1px}
+.agent{background:var(--bg);padding:22px 20px;display:flex;flex-direction:column;gap:7px;transition:background .3s ease}
+.agent:hover{background:var(--card)}
+.ag-n{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:600;letter-spacing:.2em;color:var(--text3)}
+.ag-name{font-family:'Instrument Serif',serif;font-size:clamp(14px,1.4vw,18px);font-weight:300;color:var(--text1);line-height:1.1}
+.ag-role{font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:600;letter-spacing:.18em;color:var(--gold-dim);text-transform:uppercase}
+.ag-d{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:300;color:var(--text2);line-height:1.55;flex:1}
+.ag-learn{display:flex;align-items:center;gap:5px;margin-top:5px}
+.ag-dot{width:3px;height:3px;border-radius:50%;background:var(--gold-dim);flex-shrink:0}
+.ag-ls{font-family:'Space Grotesk',sans-serif;font-size:10px;color:var(--text3);font-weight:300}
+
+/* PANEL */
+#sp{grid-template-columns:5fr 4fr;align-items:stretch}
+#sp .l{padding:100px 56px 80px 80px;border-right:1px solid var(--border);height:100%;display:flex;flex-direction:column;justify-content:center;gap:0}
+#sp .sp-h{font-family:'Instrument Serif',serif;font-size:clamp(30px,3.4vw,46px);font-weight:300;color:var(--text1);margin-bottom:22px}
+.step{display:flex;gap:20px;padding:13px 0;border-bottom:1px solid var(--border)}
+.step:last-child{border-bottom:none}
+.step-n{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:600;letter-spacing:.2em;color:var(--gold-dim);width:22px;flex-shrink:0;padding-top:2px}
+.step-t{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;color:var(--text1);margin-bottom:2px}
+.step-d{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:300;color:var(--text2);line-height:1.5;text-wrap:pretty}
+#sp .r{padding:100px 80px 80px 40px;height:100%;display:flex;flex-direction:column;justify-content:center;gap:10px}
+.pm{padding:15px 18px;border:1px solid var(--border);background:var(--card);display:flex;flex-direction:column;gap:4px}
+.pm.hi{border-color:var(--gold-dim)}
+.pm-t{font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:600;letter-spacing:.25em;color:var(--text3);text-transform:uppercase}
+.pm.hi .pm-t{color:var(--gold-dim)}
+.pm-v{font-family:'Instrument Serif',serif;font-size:clamp(18px,1.8vw,24px);font-weight:300;color:var(--text1);line-height:.9}
+.pm-d{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:300;color:var(--text2);line-height:1.4}
+
+/* HORAS */
+#sh{grid-template-columns:5fr 4fr;align-items:stretch}
+#sh .l{padding:100px 56px 80px 80px;border-right:1px solid var(--border);height:100%;display:flex;flex-direction:column;justify-content:center;gap:24px}
+#sh .r{padding:100px 80px 80px 48px;height:100%;display:flex;flex-direction:column;justify-content:center;gap:0}
+.hrs-title{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:600;letter-spacing:.3em;color:var(--gold-dim);text-transform:uppercase}
+.hrs-h{font-family:'Instrument Serif',serif;font-size:clamp(32px,3.6vw,48px);font-weight:300;color:var(--text1);line-height:1}
+.hrs-body{font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:300;color:var(--text2);line-height:1.7}
+.hrs-note{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:300;color:var(--text3);line-height:1.6;padding:16px 20px;border:1px solid var(--border)}
+.cmp-header{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:0;border-bottom:1px solid var(--border);padding:0 0 10px}
+.cmp-h{font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:600;letter-spacing:.2em;color:var(--text3);text-transform:uppercase;padding:0 8px}
+.cmp-h:first-child{padding-left:0}
+.cmp-row{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:0;padding:11px 0;border-bottom:1px solid var(--border);align-items:center}
+.cmp-row:last-child{border-bottom:none}
+.cmp-row.hl{background:rgba(201,168,112,.04)}
+.cmp-cell{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:300;color:var(--text2);padding:0 8px;line-height:1.3}
+.cmp-cell:first-child{color:var(--text1);font-weight:500;padding-left:0}
+.cmp-cell.save{color:var(--gold-dim);font-weight:600}
+.cmp-cell.eq{color:var(--text3)}
+.cmp-verdict{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:300;color:var(--text3);line-height:1.6;margin-top:16px;padding-top:16px;border-top:1px solid var(--border)}
+.cmp-verdict strong{color:var(--text2)}
+
+/* INVERSIÓN */
+#s7{grid-template-columns:1fr 1fr 1fr;align-items:stretch}
+.prop{padding:72px 28px 52px;display:flex;flex-direction:column;gap:16px;height:100%;border-right:1px solid var(--border)}
+.prop:last-child{border-right:none}
+.prop-tag{font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:600;letter-spacing:.28em;color:var(--text3);text-transform:uppercase}
+.prop.feat .prop-tag{color:var(--gold)}
+.prop.mid .prop-tag{color:var(--text2)}
+.prop-name{font-family:'Instrument Serif',serif;font-size:clamp(28px,3vw,44px);font-weight:300;color:var(--text1)}
+.prop.mid .prop-name{color:var(--text2)}
+.prop-setup{font-family:'Space Grotesk',sans-serif;font-size:12px;color:var(--text2);font-weight:300;line-height:1.5}
+.prop-setup strong{font-family:'Instrument Serif',serif;font-size:20px;font-weight:300;color:var(--text1)}
+.prop.mid .prop-setup strong{color:var(--text2)}
+.prop-mo{display:flex;align-items:baseline;gap:6px;font-family:'Instrument Serif',serif;font-size:clamp(34px,3.8vw,52px);font-weight:200;color:var(--text1);line-height:.88}
+.prop.mid .prop-mo{color:var(--text2)}
+.prop-mo span{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:300;color:var(--text2)}
+.prop-div{height:1px;background:var(--border)}
+.prop-list{display:flex;flex-direction:column;gap:6px;flex:1}
+.prop-li-h{font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:600;letter-spacing:.22em;color:var(--text3);text-transform:uppercase;margin-bottom:2px}
+.prop-li{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:300;color:var(--text2);padding-left:13px;position:relative;line-height:1.5}
+.prop-li::before{content:'—';position:absolute;left:0;color:var(--gold-dim);font-size:9px;top:2px}
+.prop.feat .prop-li{color:var(--text1)}
+.prop-over{font-family:'Space Grotesk',sans-serif;font-size:11px;color:var(--text3);font-weight:300;line-height:1.5;border:1px solid var(--border);padding:11px 13px;margin-top:auto}
+.prop-over strong{color:var(--text2)}
+.prop-badge{display:inline-flex;align-items:center;padding:5px 10px;border:1px solid var(--gold-dim);font-family:'Space Grotesk',sans-serif;font-size:9px;letter-spacing:.2em;color:var(--gold-dim);text-transform:uppercase;width:fit-content}
+.prop-save{display:inline-flex;align-items:center;background:var(--gold);color:#0c0b08;font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:5px 12px;width:fit-content;margin-top:-4px}
+.ag-pill{display:inline-flex;align-items:center;padding:3px 7px;border:1px solid var(--border);font-family:'Space Grotesk',sans-serif;font-size:8.5px;font-weight:500;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;margin:2px 2px 0 0}
+.ag-pill.on{border-color:var(--gold-dim);color:var(--gold-dim)}
+.prop.feat .ag-pill.on{border-color:var(--gold);color:var(--gold)}
+.prop-strike{font-family:'Space Grotesk',sans-serif;font-size:10px;color:var(--text3);font-weight:300;line-height:1.5}
+.prop-strike s{opacity:.55}
+.prop-strike em{color:var(--gold-dim);font-style:normal;font-weight:500}
+.feat-save-note{font-family:'Space Grotesk',sans-serif;font-size:10px;color:var(--text3);font-weight:300;line-height:1.5}
+.feat-save-note em{color:var(--gold);font-style:normal;font-weight:600}
+
+/* T&C */
+#stc{grid-template-columns:1fr 1fr;align-items:stretch}
+#stc .l{padding:100px 56px 80px 80px;border-right:1px solid var(--border);height:100%;display:flex;flex-direction:column;justify-content:center;gap:0}
+#stc .r{padding:100px 80px 80px 56px;height:100%;display:flex;flex-direction:column;justify-content:center;gap:0}
+.tc-h{font-family:'Instrument Serif',serif;font-size:clamp(30px,3.2vw,42px);font-weight:300;color:var(--text1);margin-bottom:28px;line-height:1}
+.tc-item{display:flex;gap:18px;padding:14px 0;border-bottom:1px solid var(--border)}
+.tc-item:last-child{border-bottom:none}
+.tc-icon{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:600;letter-spacing:.15em;color:var(--gold-dim);width:32px;flex-shrink:0;padding-top:2px}
+.tc-t{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;color:var(--text1);margin-bottom:3px}
+.tc-d{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:300;color:var(--text2);line-height:1.5}
+
+/* CRONOGRAMA */
+#scr{grid-template-columns:1fr 1fr;align-items:stretch}
+#scr .l{padding:88px 48px 64px 80px;border-right:1px solid var(--border);height:100%;display:flex;flex-direction:column;justify-content:center;gap:0}
+#scr .r{padding:88px 80px 64px 48px;height:100%;display:flex;flex-direction:column;justify-content:center;gap:0}
+.crono-h{font-family:'Instrument Serif',serif;font-size:clamp(28px,3.2vw,42px);font-weight:300;color:var(--text1);line-height:1.02;margin-bottom:6px}
+.crono-sub{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:300;color:var(--text2);line-height:1.6;margin-bottom:18px}
+.ph{display:flex;align-items:flex-start;gap:12px;padding:9px 0;border-bottom:1px solid var(--border)}
+.ph:last-of-type{border-bottom:none}
+.ph-bar{width:3px;align-self:stretch;flex-shrink:0;border-radius:1px}
+.ph-body{flex:1}
+.ph-title{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;color:var(--text1);margin-bottom:2px}
+.ph-d{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:300;color:var(--text2);line-height:1.4}
+.ph-h{font-family:'Instrument Serif',serif;font-size:17px;font-weight:200;color:var(--text3);flex-shrink:0;line-height:1;padding-top:1px;min-width:32px;text-align:right}
+.crono-sum{margin-top:14px;padding:12px 16px;border:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.cs-l{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:300;color:var(--text2);line-height:1.5}
+.cs-v{font-family:'Instrument Serif',serif;font-size:22px;font-weight:200;color:var(--gold);line-height:1}
+.wt{display:flex;align-items:flex-start;gap:14px;padding:10px 0;border-bottom:1px solid var(--border)}
+.wt:last-child{border-bottom:none}
+.wt-ico{font-family:'Space Grotesk',sans-serif;font-size:8px;font-weight:700;letter-spacing:.08em;color:var(--text3);width:32px;flex-shrink:0;padding-top:3px;text-transform:uppercase;line-height:1.3}
+.wt-body{flex:1}
+.wt-t{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;color:var(--text1);margin-bottom:2px}
+.wt-d{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:300;color:var(--text2);line-height:1.45}
+.wt-b{display:inline-flex;align-items:center;margin-top:4px;padding:2px 8px;border:1px solid var(--border);font-family:'Space Grotesk',sans-serif;font-size:9px;color:var(--text3);letter-spacing:.08em;text-transform:uppercase}
+.wt-b.warn{border-color:var(--gold-dim);color:var(--gold-dim)}
+
+/* EMPECEMOS */
+#s9{grid-template-columns:1fr 1fr;align-items:center}
+#s9 .mb{position:absolute;inset:0;background-image:url('/assets/bg-light.jpg');background-size:cover;background-position:center;filter:sepia(.08) brightness(.18) contrast(1.1) saturate(.6)}
+#s9 .vg{position:absolute;inset:0;background:radial-gradient(ellipse 100% 100% at 0% 50%,rgba(8,7,5,.5) 0%,rgba(8,7,5,.92) 100%)}
+#s9 .l{padding:110px 56px 80px 80px;border-right:1px solid rgba(255,255,255,.06);height:100%;display:flex;flex-direction:column;justify-content:center;gap:28px;position:relative;z-index:2}
+#s9 .r{padding:80px 80px 80px 56px;height:100%;display:flex;flex-direction:column;justify-content:center;gap:0;position:relative;z-index:2}
+.ns{display:flex;align-items:flex-start;gap:22px;padding:18px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.ns:first-child{border-top:1px solid rgba(255,255,255,.06)}
+.ns-n{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:600;letter-spacing:.2em;color:var(--gold-dim);width:28px;flex-shrink:0;padding-top:2px}
+.ns-t{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:500;color:var(--text1);margin-bottom:4px}
+.ns-d{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:300;color:var(--text2);line-height:1.5;text-wrap:pretty}
+.cta-btn{display:inline-flex;align-items:center;background:var(--gold);color:#0c0b08;font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;letter-spacing:.25em;text-transform:uppercase;padding:18px 32px;text-decoration:none;width:fit-content;transition:background .2s ease,letter-spacing .4s cubic-bezier(.16,1,.3,1)}
+.cta-btn:hover{background:var(--gold-hi);letter-spacing:.32em}
+.contact-line{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:300;color:var(--text3);letter-spacing:.08em}
+
+/* ============================================================
+   TYPOGRAPHY UPGRADE — BIGGER, PREMIUM
+   ============================================================ */
+.big-h{font-size:clamp(40px,4.4vw,62px)}
+.body-t{font-size:16px;line-height:1.8}
+.hd-h{font-size:clamp(36px,3.8vw,54px)}
+.sb-n{font-size:clamp(68px,7.2vw,100px)}
+.pull-q{font-size:18px}
+.cover-name{font-size:clamp(72px,8.5vw,116px)}
+.prop-name{font-size:clamp(32px,3.2vw,48px)}
+.hrs-h{font-size:clamp(34px,3.6vw,50px)}
+
+/* ============================================================
+   AMBIENT BACKGROUND — SLOWLY MOVING GLOW
+   ============================================================ */
+@keyframes orb-drift{0%{transform:translate(0,0) scale(1)}33%{transform:translate(80px,-40px) scale(1.08)}66%{transform:translate(-60px,60px) scale(0.96)}100%{transform:translate(0,0) scale(1)}}
+@keyframes orb-drift2{0%{transform:translate(0,0) scale(1)}50%{transform:translate(-100px,50px) scale(1.12)}100%{transform:translate(0,0) scale(1)}}
+.slide::before{content:'';position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,112,.04) 0%,transparent 70%);pointer-events:none;z-index:0;top:50%;left:50%;transform:translate(-50%,-50%);animation:orb-drift 28s ease-in-out infinite}
+.slide::after{content:'';position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,112,.025) 0%,transparent 70%);pointer-events:none;z-index:0;top:30%;left:70%;transform:translate(-50%,-50%);animation:orb-drift2 36s ease-in-out infinite}
+#s1::before,#s9::before{display:none}
+#s1::after,#s9::after{display:none}
+
+/* ============================================================
+   GLASS CARDS + PREMIUM MICRO-DETAILS
+   ============================================================ */
+.agent{backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);background:rgba(22,20,15,.8)!important}
+.pm{backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.sb{background:rgba(12,11,8,.72)!important;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.prop{background:var(--bg);position:relative}
+.prop.feat{background:rgba(22,20,15,.95)}
+
+/* Featured card — animated gold border glow */
+@keyframes border-glow{0%,100%{box-shadow:inset 0 0 0 1px rgba(201,168,112,.3),0 0 30px rgba(201,168,112,.04)}50%{box-shadow:inset 0 0 0 1px rgba(201,168,112,.55),0 0 50px rgba(201,168,112,.1)}}
+.prop.feat{animation:border-glow 4s ease-in-out infinite}
+
+/* Savings badge shimmer */
+@keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
+.prop-save{background:linear-gradient(90deg,#b08840 0%,#e8cc94 40%,#c9a870 60%,#b08840 100%);background-size:200% auto;animation:shimmer 2.5s linear infinite;color:#0c0b08}
+
+/* Gold glow on key prices */
+@keyframes gold-pulse{0%,100%{text-shadow:0 0 0 transparent}50%{text-shadow:0 0 24px rgba(201,168,112,.35)}}
+.prop.feat .prop-mo{animation:gold-pulse 3.5s ease-in-out infinite}
+.prop-save{animation:shimmer 2.5s linear infinite,gold-pulse 3s ease-in-out infinite}
+
+/* ============================================================
+   MARKET COMPARISON BARS
+   ============================================================ */
+@keyframes bar-grow{from{width:0;opacity:0}to{width:var(--w);opacity:1}}
+.mc-bars{display:flex;flex-direction:column;gap:18px;margin-top:6px}
+.mc-bar{display:flex;flex-direction:column;gap:5px}
+.mc-bar-top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.mc-lbl{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:500;color:var(--text1)}
+.mc-bar.dim .mc-lbl{color:var(--text2)}
+.mc-val{font-family:'Instrument Serif',serif;font-size:19px;font-weight:200;color:var(--text2);line-height:1;flex-shrink:0}
+.mc-val.gold{color:var(--gold);font-size:21px}
+.mc-track{height:6px;background:rgba(255,255,255,.04);border-radius:3px;overflow:visible;position:relative}
+.mc-fill{height:100%;background:rgba(255,255,255,.14);border-radius:3px;width:0;animation:none}
+.mc-fill.gold{background:linear-gradient(90deg,var(--gold-dim),var(--gold))}
+.slide.on .mc-bar:nth-child(1) .mc-fill{animation:bar-grow .7s cubic-bezier(.22,1,.36,1) .1s both}
+.slide.on .mc-bar:nth-child(2) .mc-fill{animation:bar-grow .7s cubic-bezier(.22,1,.36,1) .3s both}
+.slide.on .mc-bar:nth-child(3) .mc-fill{animation:bar-grow .7s cubic-bezier(.22,1,.36,1) .5s both}
+.slide.on .mc-bar:nth-child(4) .mc-fill{animation:bar-grow .7s cubic-bezier(.22,1,.36,1) .7s both}
+.mc-note{font-family:'Space Grotesk',sans-serif;font-size:10px;color:var(--text3);font-weight:300}
+.mc-bar.feat-bar .mc-lbl{color:var(--gold)}
+.mc-bar.feat-bar .mc-note{color:var(--gold-dim)}
+
+/* ROI section */
+.roi-row{display:flex;gap:14px;padding:13px 0;border-bottom:1px solid var(--border)}
+.roi-row:last-child{border-bottom:none}
+.roi-icon{font-family:'Space Grotesk',sans-serif;font-size:12px;color:var(--gold-dim);flex-shrink:0;padding-top:3px;width:16px}
+.roi-t{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;color:var(--text1);margin-bottom:3px}
+.roi-v{font-family:'Instrument Serif',serif;font-size:clamp(16px,1.7vw,21px);font-weight:200;color:var(--gold-dim);line-height:1;margin-bottom:4px}
+.roi-d{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:300;color:var(--text2);line-height:1.55}
+
+/* ============================================================
+   HOVER IMPROVEMENTS
+   ============================================================ */
+.pillar{transition:background .25s ease,border-color .25s ease}
+.pillar:hover{background:rgba(201,168,112,.04)!important;border-left:1px solid var(--gold-dim)}
+.ch{transition:background .25s ease}
+.ch:hover{background:var(--card)}
+.agent{transition:background .25s ease}
+.agent:hover .ag-name{color:var(--gold)}
+.sb:hover{background:rgba(201,168,112,.06)!important}
+.pm{transition:border-color .25s ease,background .25s ease;cursor:default}
+.pm:hover{border-color:var(--gold-dim);background:rgba(201,168,112,.04)}
+.prop:hover .prop-name{color:var(--gold)}
+.fstep:hover .fn{color:var(--gold-dim);transition:color .2s ease}
+.ns:hover .ns-n{color:var(--gold);transition:color .2s ease}
+.step:hover .step-n{color:var(--gold);transition:color .2s ease}
+.tc-item:hover .tc-icon{color:var(--gold);transition:color .2s ease}
+.ph:hover .ph-title{color:var(--gold);transition:color .2s ease}
+.wt:hover .wt-t{color:var(--gold);transition:color .2s ease}
+
+/* ============================================================
+   SVG DECORATION — LUXURY BRAND MARK
+   ============================================================ */
+.dec{position:absolute;right:-40px;bottom:-40px;width:260px;height:260px;pointer-events:none;z-index:1;opacity:.9}
+.dec-c{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+@keyframes arc-spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes arc-spin-r{from{transform:rotate(0deg)}to{transform:rotate(-360deg)}}
+@keyframes dec-pulse{0%,100%{opacity:.7}50%{opacity:1}}
+/* portada + empecemos — centered large decoration */
+#s1 .dec,#s9 .dec{right:auto;bottom:auto;left:50%;top:50%;transform:translate(-50%,-50%);width:560px;height:560px;opacity:.35}
+/* full-bg slides */
+#s5 .dec{right:20px;bottom:20px;width:220px;height:220px}
+
+/* ============================================================
+   WORKFLOW FLOW STRIP (agents slide)
+   ============================================================ */
+.flow-strip{padding:0 80px 18px;border-bottom:1px solid var(--border)}
+.flow-strip svg{width:100%;height:152px;overflow:visible}
+@keyframes dot-fade{0%{opacity:0}20%{opacity:.9}80%{opacity:.9}100%{opacity:0}}
+.fd1,.fd2,.fd3,.fd4,.fd5{animation:dot-fade 3s linear infinite}
+.fd2{animation-delay:.5s}.fd3{animation-delay:1s}.fd4{animation-delay:1.5s}.fd5{animation-delay:2s}
+
+/* ============================================================
+   RESPONSIVE — TABLET
+   ============================================================ */
+@media(max-width:1100px){
+  .col-l,.col-r{padding-left:52px!important;padding-right:52px!important}
+  .hd-blk{padding-left:52px!important;padding-right:52px!important}
+  #sa,#s4{padding-left:52px!important;padding-right:52px!important}
+  .prop{padding-left:44px!important;padding-right:44px!important}
+  .prop:last-child{padding-left:52px!important}
+  #sp .l,#sh .l,#stc .l,#scr .l{padding-left:52px!important}
+  #sp .r,#sh .r,#stc .r,#scr .r{padding-right:52px!important}
+  .flow-strip{padding-left:52px!important;padding-right:52px!important}
+}
+
+/* ============================================================
+   RESPONSIVE — MOBILE
+   ============================================================ */
+@media(max-width:768px){
+  /* -- DECK CORE -- */
+  .slide{overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .top-bar{position:sticky!important;top:0!important;z-index:20!important;background:rgba(12,11,8,.96)!important;backdrop-filter:blur(12px)!important;-webkit-backdrop-filter:blur(12px)!important;padding:14px 20px!important}
+  .logo{font-size:12px}
+  .slide-label{font-size:9px}
+  #prev{left:4px} #next{right:4px}
+  .arrow{width:30px;height:30px;font-size:10px}
+  #dots{bottom:10px;gap:5px}
+  .dot{width:4px;height:4px}
+  .dot.active{transform:scale(1.5)}
+
+  /* -- SHARED UTILITY -- */
+  .big-h{font-size:clamp(28px,7.5vw,40px)!important}
+  .body-t{font-size:15px!important;max-width:100%!important}
+  .hd-h{font-size:clamp(24px,6vw,32px)!important}
+  .hd-blk{padding:64px 22px 22px!important;flex-direction:column!important;gap:12px!important;align-items:flex-start!important}
+  .hd-s{text-align:left!important;max-width:100%!important;font-size:14px!important}
+  .col-l{padding:64px 22px 24px!important;border-right:none!important;border-bottom:1px solid var(--border)!important}
+  .col-r{padding:24px 22px 56px!important}
+  .pull-q{font-size:15px;max-width:100%}
+  .fstep{padding:11px 0}
+  .ft{font-size:14px}
+  .fd{font-size:13px}
+
+  /* -- PORTADA -- */
+  .cover-name{font-size:clamp(44px,12vw,68px)!important}
+  .cover-rule{margin:22px 0!important;width:160px!important}
+  .cover-date{right:20px;bottom:26px}
+  #s1 .dec{width:380px!important;height:380px!important}
+
+  /* -- S2 EXPERIENCIA -- */
+  #s2{grid-template-columns:1fr!important}
+  .fact{margin-bottom:12px}
+  .fact-v{font-size:clamp(18px,5vw,24px)!important}
+  .fact-d{font-size:12px}
+
+  /* -- S3 PILARES -- */
+  .pillars-grid{grid-template-columns:1fr 1fr!important}
+  .pillar{padding:18px 14px!important}
+  .p-name{font-size:14px!important}
+  .p-content{font-size:13px!important}
+
+  /* -- S4 CANALES -- */
+  #s4{padding:0 22px 44px!important}
+  #s4 .hd{padding:64px 0 20px!important}
+  #s4 .chs{grid-template-columns:1fr 1fr!important}
+  .ch{padding:18px 14px!important}
+  .ch-n{font-size:clamp(26px,8vw,38px)!important}
+  .ch-b{font-size:12px!important}
+
+  /* -- S5 OUTPUT -- */
+  #s5{align-items:flex-start!important}
+  #s5 .inner{padding:0 20px!important;padding-top:0!important}
+  #s5 .top-bar{position:sticky!important}
+  #s5 .pre{margin-bottom:20px!important;font-size:9px!important}
+  #s5 .sg{grid-template-columns:1fr 1fr!important}
+  .sb{padding:18px 14px!important}
+  .sb-n{font-size:clamp(38px,10vw,58px)!important}
+  .sb-name{font-size:10px!important}
+  .sb-d{font-size:13px!important}
+  #s5 .foot{margin-top:18px!important;font-size:13px!important}
+
+  /* -- S6 PORTAL -- */
+  #s6{grid-template-columns:1fr!important}
+
+  /* -- SA AGENTES -- */
+  #sa{padding:0 22px 36px!important}
+  .flow-strip{padding:0 22px 18px!important;display:none}
+  #sa .agents{grid-template-columns:1fr 1fr!important;grid-template-rows:auto!important}
+  .agent{padding:14px 12px!important}
+  .ag-name{font-size:13px!important}
+  .ag-d{font-size:12px!important}
+  .ag-ls{font-size:11px!important}
+
+  /* -- SP PANEL -- */
+  #sp{grid-template-columns:1fr!important}
+  #sp .l{padding:64px 22px 22px!important;border-right:none!important;border-bottom:1px solid var(--border)!important}
+  #sp .r{padding:22px 22px 52px!important}
+  .sp-h{font-size:clamp(22px,6vw,32px)!important}
+  .step{padding:10px 0}
+  .step-t{font-size:14px!important}
+  .step-d{font-size:12px!important}
+  .pm{padding:11px 13px!important}
+  .pm-v{font-size:clamp(15px,4.5vw,21px)!important}
+  .pm-d{font-size:12px!important}
+
+  /* -- SH COMPARATIVA MERCADO -- */
+  #sh{grid-template-columns:1fr!important}
+  #sh .l{padding:64px 22px 22px!important;border-right:none!important;border-bottom:1px solid var(--border)!important}
+  #sh .r{padding:22px 22px 52px!important}
+  #cur-toggle-sh{top:42px!important;left:auto!important;transform:none!important;right:12px!important;background:rgba(12,11,8,.96)!important;backdrop-filter:blur(12px)!important;-webkit-backdrop-filter:blur(12px)!important;border-color:rgba(201,168,112,.25)!important;z-index:20!important}
+  .hrs-h{font-size:clamp(22px,6.5vw,34px)!important}
+  .hrs-body{font-size:14px!important}
+  .mc-bars{gap:12px!important}
+  .mc-lbl{font-size:13px!important}
+  .mc-val{font-size:16px!important}
+  .mc-val.gold{font-size:17px!important}
+  .mc-note{font-size:11px!important}
+  .roi-t{font-size:13px!important}
+  .roi-v{font-size:clamp(14px,4vw,18px)!important}
+  .roi-d{font-size:12px!important}
+
+  /* -- S7 INVERSIÓN -- */
+  #s7{grid-template-columns:1fr!important;padding:0!important;display:flex!important;flex-direction:column!important}
+  #cur-toggle{position:sticky!important;top:42px!important;left:0!important;transform:none!important;width:100%!important;justify-content:center!important;background:rgba(12,11,8,.96)!important;backdrop-filter:blur(12px)!important;-webkit-backdrop-filter:blur(12px)!important;border:none!important;border-bottom:1px solid rgba(201,168,112,.18)!important;z-index:15!important;flex-shrink:0!important}
+  .ct-btn{padding:7px 20px!important;font-size:9px!important}
+  .prop{padding:20px 20px 24px!important;border-right:none!important;border-bottom:1px solid var(--border)!important;overflow:visible!important}
+  .prop:last-child{padding:20px 20px 40px!important;border-bottom:none!important}
+  /* Summary mode: hide detail elements, show only name + bullets + CTA */
+  .prop > div:not(.prop-list){display:none!important}
+  .prop > button.info-btn{display:none!important}
+  .prop-ver{display:flex!important}
+  .prop-name{font-size:clamp(26px,7vw,38px)!important}
+  .prop-mo{font-size:clamp(28px,8vw,44px)!important;line-height:1!important}
+  .prop-li{font-size:13px!important}
+  .prop-setup{font-size:13px!important}
+  .prop{scroll-margin-top:90px}
+
+  /* -- STC T&C -- */
+  #stc{grid-template-columns:1fr!important}
+  #stc .l{padding:64px 22px 22px!important;border-right:none!important;border-bottom:1px solid var(--border)!important}
+  #stc .r{padding:22px 22px 52px!important}
+  .tc-h{font-size:clamp(22px,6vw,32px)!important;margin-bottom:16px!important}
+  .tc-item{padding:10px 0!important;gap:12px!important}
+  .tc-t{font-size:14px!important}
+  .tc-d{font-size:13px!important}
+  .tc-icon{font-size:9px!important;width:28px!important}
+
+  /* -- SCR CRONOGRAMA -- */
+  #scr{grid-template-columns:1fr!important}
+  #scr .l{padding:64px 22px 22px!important;border-right:none!important;border-bottom:1px solid var(--border)!important}
+  #scr .r{padding:22px 22px 52px!important}
+  .crono-h{font-size:clamp(22px,6vw,32px)!important}
+  .crono-sub{font-size:13px!important}
+  .ph{padding:8px 0!important}
+  .ph-title{font-size:13px!important}
+  .ph-d{font-size:12px!important}
+  .ph-h{font-size:15px!important}
+  .crono-sum{padding:10px 13px!important}
+  .cs-v{font-size:19px!important}
+  .wt{padding:9px 0!important}
+  .wt-t{font-size:13px!important}
+  .wt-d{font-size:11px!important}
+  .wt-ico{width:28px!important;font-size:7px!important}
+
+  /* -- S8 POR QUÉ IMPORTA -- */
+  #s8{grid-template-columns:1fr!important}
+
+  /* -- S9 EMPECEMOS -- */
+  #s9{grid-template-columns:1fr!important}
+  #s9 .l{padding:64px 22px 24px!important}
+  #s9 .r{padding:24px 22px 56px!important}
+  .ns{padding:10px 0!important}
+  .ns-t{font-size:14px!important}
+  .ns-d{font-size:13px!important}
+  .cta-btn{padding:13px 22px!important;font-size:11px!important;margin-top:4px}
+  .contact-line{font-size:12px!important}
+
+  /* -- DECORATIONS -- */
+  .dec{width:160px!important;height:160px!important;right:-20px!important;bottom:-20px!important}
+  #s1 .dec,#s9 .dec{width:300px!important;height:300px!important}
+}
+
+@media(max-width:430px){
+  .cover-name{font-size:clamp(38px,11vw,56px)!important}
+  .big-h{font-size:clamp(22px,7.5vw,30px)!important}
+  .pillars-grid{grid-template-columns:1fr!important}
+  #s4 .chs{grid-template-columns:1fr!important}
+  #sa .agents{grid-template-columns:1fr!important}
+  .prop-mo{font-size:clamp(28px,9vw,42px)!important}
+  .cmp-cell{font-size:9px!important}
+  .cmp-h{font-size:7.5px!important}
+  .hd-h{font-size:clamp(20px,6vw,26px)!important}
+  .inv-stats{grid-template-columns:repeat(2,1fr)!important}
+}
+
+/* ============================================================
+   READABILITY — LARGER BODY TEXT
+   ============================================================ */
+.ft{font-size:14px!important}.fd{font-size:13px!important;line-height:1.65!important}
+.tc-t{font-size:14px!important}.tc-d{font-size:12px!important;line-height:1.6!important}
+.step-t{font-size:14px!important}.step-d{font-size:12px!important}
+.ag-d{font-size:12px!important;line-height:1.65!important}
+.prop-li{font-size:12px!important}.hrs-body{font-size:16px!important}
+.ph-d{font-size:12px!important;line-height:1.5}.ns-t{font-size:14px!important}
+.ns-d{font-size:13px!important}.wt-t{font-size:13px!important}
+.roi-d{font-size:12px!important}.p-content{font-size:13px!important}
+.pm-d{font-size:12px!important}.sb-d{font-size:13px!important}
+.hd-s{font-size:14px!important;max-width:400px}.mc-lbl{font-size:14px!important}
+.prop-setup{font-size:13px!important}
+
+/* ============================================================
+   FORMAT PILLS — channels slide
+   ============================================================ */
+.fmt-pills{display:flex;flex-wrap:wrap;gap:5px;margin-top:auto;padding-top:14px}
+.fmt-pill{padding:3px 9px;border:1px solid var(--border);font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:500;color:var(--text3);letter-spacing:.14em;text-transform:uppercase}
+.fmt-pill.txt{border-color:rgba(78,205,196,.3);color:rgba(78,205,196,.7)}
+.fmt-pill.img{border-color:rgba(155,89,182,.3);color:rgba(155,89,182,.75)}
+.fmt-pill.vid{border-color:rgba(201,168,112,.35);color:var(--gold-dim)}
+.fmt-pill.seo{border-color:rgba(163,201,53,.3);color:rgba(163,201,53,.7)}
+.fmt-pill.car{border-color:rgba(230,126,34,.3);color:rgba(230,126,34,.7)}
+
+/* ============================================================
+   INFO BUTTON
+   ============================================================ */
+.info-btn{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border:1px solid var(--border);background:none;font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:600;letter-spacing:.24em;color:var(--text3);text-transform:uppercase;cursor:pointer;transition:all .25s ease}
+.info-btn:hover{border-color:var(--gold-dim);color:var(--gold)}
+.info-btn .ib-arr{display:inline-block;transition:transform .2s ease}
+.info-btn:hover .ib-arr{transform:translateX(3px)}
+
+/* ============================================================
+   MODAL POPUP SYSTEM
+   ============================================================ */
+#modal-ov{position:fixed;inset:0;z-index:10002;background:rgba(8,7,5,.96);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);display:flex;align-items:flex-start;justify-content:center;opacity:0;pointer-events:none;transition:opacity .32s ease;padding:28px 20px;overflow-y:auto;-webkit-overflow-scrolling:touch}
+#modal-ov.open{opacity:1;pointer-events:all}
+.m-box{background:var(--bg2);border:1px solid rgba(201,168,112,.2);width:100%;max-width:860px;position:relative;padding:0 64px 52px;margin:auto}
+.m-header{display:flex;justify-content:space-between;align-items:center;padding:18px 0 14px;border-bottom:1px solid var(--border);margin-bottom:28px;position:sticky;top:0;background:var(--bg2);z-index:5}
+.m-close{position:static;background:none;border:1px solid var(--border);color:var(--text2);font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;padding:8px 14px;cursor:pointer;transition:all .2s ease}
+.m-close:hover{border-color:var(--gold-dim);color:var(--gold)}
+@media(max-width:900px){.m-box{padding:0 36px 36px}}
+@media(max-width:600px){
+  .m-box{padding:0 18px 36px!important;margin:0 auto!important}
+  .m-header{padding:12px 0 12px!important;margin-bottom:16px!important;background:rgba(12,11,8,.97)!important;backdrop-filter:blur(8px)!important;-webkit-backdrop-filter:blur(8px)!important}
+  #modal-ov{padding:0!important}
+  .m-h{font-size:clamp(20px,6vw,28px)!important}
+  .m-sub{font-size:13px!important}
+  .vchart{height:140px!important;gap:6px!important}
+  .vbar-val{font-size:10px!important}
+  .vbar-lbl{font-size:7.5px!important}
+  .vchart-row{grid-template-columns:1fr!important}
+  .cal th,.cal td{font-size:10px!important;padding:6px 6px 6px 0!important}
+  .cal td.big{font-size:17px!important}
+}
+.m-close{position:absolute;top:20px;right:22px;background:none;border:1px solid var(--border);color:var(--text2);font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;padding:8px 14px;cursor:pointer;transition:all .2s ease}
+.m-close:hover{border-color:var(--gold-dim);color:var(--gold)}
+.m-pane{display:none}
+.m-pane.active{display:block}
+.m-tag{font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:600;letter-spacing:.32em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:10px}
+.m-h{font-family:'Instrument Serif',serif;font-size:clamp(26px,3.2vw,40px);font-weight:300;color:var(--text1);line-height:1.02;margin-bottom:16px}
+.m-sub{font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:300;color:var(--text2);line-height:1.75;margin-bottom:32px;max-width:620px}
+.m-sec{margin-bottom:28px}
+.m-sec-h{font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:600;letter-spacing:.26em;color:var(--text3);text-transform:uppercase;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.m-divider{height:1px;background:var(--border);margin:24px 0}
+.m-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--border);margin-bottom:20px}
+.m-grid.two{grid-template-columns:1fr 1fr}
+@media(max-width:600px){.m-grid,.m-grid.two{grid-template-columns:1fr}}
+.m-card{background:var(--bg);padding:22px 20px}
+.m-card.hl{background:rgba(201,168,112,.05);border:1px solid rgba(201,168,112,.18)}
+.m-card-tag{font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:600;letter-spacing:.2em;color:var(--text3);text-transform:uppercase;margin-bottom:8px}
+.m-card.hl .m-card-tag{color:var(--gold-dim)}
+.m-card-v{font-family:'Instrument Serif',serif;font-size:clamp(22px,2.6vw,32px);font-weight:200;color:var(--text1);line-height:.88;margin-bottom:6px}
+.m-card.hl .m-card-v{color:var(--gold)}
+.m-card-d{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:300;color:var(--text2);line-height:1.55}
+.mbar{display:flex;flex-direction:column;gap:5px;padding:13px 0;border-bottom:1px solid var(--border)}
+.mbar:last-child{border-bottom:none}
+.mbar-top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.mbar-lbl{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:400;color:var(--text1)}
+.mbar.dim .mbar-lbl{color:var(--text2)}
+.mbar-val{font-family:'Instrument Serif',serif;font-size:18px;font-weight:200;color:var(--text2);line-height:1;flex-shrink:0}
+.mbar-val.gold{color:var(--gold);font-size:20px}
+.mbar-track{height:5px;background:rgba(255,255,255,.04);border-radius:2px;margin-top:5px}
+.mbar-fill{height:100%;border-radius:2px;background:rgba(255,255,255,.12)}
+.mbar-fill.gold{background:linear-gradient(90deg,var(--gold-dim),var(--gold))}
+.mbar-note{font-family:'Space Grotesk',sans-serif;font-size:10px;color:var(--text3);margin-top:3px}
+.mbar.feat .mbar-lbl{color:var(--gold)}
+.cal{width:100%;border-collapse:collapse;margin-bottom:4px}
+.cal th{font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:600;letter-spacing:.2em;color:var(--text3);text-transform:uppercase;text-align:left;padding:6px 14px 6px 0;border-bottom:1px solid var(--border)}
+.cal td{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:300;color:var(--text2);padding:11px 14px 11px 0;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.45}
+.cal td:first-child{font-weight:600;color:var(--text1);white-space:nowrap}
+.cal td.big{font-family:'Instrument Serif',serif;font-size:22px;font-weight:200;color:var(--gold);line-height:1;vertical-align:middle;white-space:nowrap}
+.cal tr.tot td{border-top:1px solid rgba(201,168,112,.2);border-bottom:none;padding-top:14px}
+.cal tr.tot td:first-child{color:var(--gold)}
+.cal tr.tot .big{font-size:28px}
+.m-save{display:inline-flex;align-items:center;background:var(--gold);color:#0c0b08;font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding:8px 18px;margin:8px 0 18px}
+.m-note{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:300;color:var(--text2);line-height:1.7;padding:16px 18px;border:1px solid var(--border);margin-top:16px}
+.m-note strong{color:var(--text1)}
+.m-note .gold{color:var(--gold)}
+.ramp-row{display:grid;grid-template-columns:80px 1fr;gap:20px;align-items:start;padding:14px 0;border-bottom:1px solid var(--border)}
+.ramp-row:last-child{border-bottom:none}
+.ramp-mo{font-family:'Instrument Serif',serif;font-size:32px;font-weight:200;color:var(--gold-dim);line-height:1}
+.ramp-t{font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;color:var(--text1);margin-bottom:5px}
+.ramp-d{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:300;color:var(--text2);line-height:1.6}
+.ai-quote-end{font-family:'Instrument Serif',serif;font-size:clamp(13px,1.4vw,16px);font-style:italic;color:var(--text2);line-height:1.65;max-width:380px;padding:14px 0 0 20px;border-left:1px solid var(--gold-dim);margin-top:18px}
+.ai-quote-end em{color:var(--gold);font-style:normal}
+
+/* ═══════════════════════════════════════════════════════════════
+   LAYOUT INTEGRITY — NOTHING CLIPS, NOTHING COVERS
+   Sticky topbar · Column-level safe-scroll · Tight spacing
+   ═══════════════════════════════════════════════════════════════ */
+
+/* 1 — SLIDE-LEVEL OVERFLOW FALLBACK */
+.slide{overflow-x:hidden;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--border) transparent}
+.slide::-webkit-scrollbar{width:3px}
+.slide::-webkit-scrollbar-track{background:transparent}
+.slide::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+
+/* 2 — COLUMN HEIGHT + SCROLL
+   Explicit 100vh gives overflow-y:auto a definite height.
+   safe-center: vertically centers when content fits; falls back to flex-start
+   when content overflows so the beginning is always reachable. */
+.col-l,.col-r,
+#sp .l,#sp .r,
+#sh .l,#sh .r,
+#stc .l,#stc .r,
+#scr .l,#scr .r,
+#s9 .l,#s9 .r{
+  height:100vh!important;
+  box-sizing:border-box!important;
+  overflow-y:auto;overflow-x:hidden;
+  align-self:stretch!important;
+  scrollbar-width:thin;scrollbar-color:var(--border) transparent;
+  justify-content:flex-start!important;
+  justify-content:safe center!important;
+}
+.col-l::-webkit-scrollbar,.col-r::-webkit-scrollbar,
+#sp .l::-webkit-scrollbar,#sp .r::-webkit-scrollbar,
+#sh .l::-webkit-scrollbar,#sh .r::-webkit-scrollbar,
+#stc .l::-webkit-scrollbar,#stc .r::-webkit-scrollbar,
+#scr .l::-webkit-scrollbar,#scr .r::-webkit-scrollbar{width:3px}
+.col-l::-webkit-scrollbar-thumb,.col-r::-webkit-scrollbar-thumb,
+#sp .l::-webkit-scrollbar-thumb,#sp .r::-webkit-scrollbar-thumb,
+#sh .l::-webkit-scrollbar-thumb,#sh .r::-webkit-scrollbar-thumb,
+#stc .l::-webkit-scrollbar-thumb,#stc .r::-webkit-scrollbar-thumb,
+#scr .l::-webkit-scrollbar-thumb,#scr .r::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+
+/* Agents grid — scroll if it overflows */
+#sa .agents{overflow-y:auto;scrollbar-width:thin}
+
+/* 3 — TOPBAR: absolute, transparent — never overlaps content */
+.top-bar{
+  position:absolute!important;top:0!important;left:0!important;right:0!important;
+  z-index:10!important;
+  background:transparent!important;
+  backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+  padding:20px 56px!important;
+}
+
+/* 4 — COLUMN PADDING (topbar is absolute/out-of-flow, restore full top clearance) */
+.col-l{padding:96px 52px 56px 72px!important}
+.col-r{padding:96px 72px 56px 52px!important}
+.hd-blk{padding:96px 72px 28px!important}
+#sp .l,#sh .l,#stc .l,#scr .l{padding:96px 48px 56px 72px!important}
+#sp .r,#sh .r,#stc .r,#scr .r{padding:96px 72px 56px 48px!important}
+#sa .hd-blk{padding:96px 72px 26px!important}
+#sa{padding:0 72px 40px!important}
+#s4{padding:0 72px 48px!important}
+#s4 .hd{padding:96px 0 24px!important}
+#s3 .hd-blk{padding:96px 72px 26px!important}
+#s9 .l{padding:96px 56px 56px 80px!important}
+#s9 .r{padding:96px 80px 56px 56px!important}
+
+/* 5 — INVESTMENT CARDS */
+.prop{padding:96px 22px 16px!important;gap:8px!important}
+.prop-list{gap:3px!important}
+.ag-pill{padding:2px 5px!important;font-size:8px!important}
+.prop-mo{line-height:.84!important}
+.prop-over{margin-top:0!important}
+#s7{padding:0!important;display:block!important}
+
+/* ── SINGLE PLAN LAYOUT ──────────────────────────────────────── */
+.inv-layout{display:grid;grid-template-columns:1.05fr 1fr 1.1fr;width:100%;height:100vh;align-items:center;padding:72px 64px;gap:48px;box-sizing:border-box}
+.inv-detail{padding-right:44px;border-right:1px solid var(--border);height:100%;display:flex;flex-direction:column;justify-content:center}
+.inv-sched{display:flex;flex-direction:column;justify-content:center;padding-right:44px;border-right:1px solid var(--border);height:100%}
+/* Comparativa col */
+.inv-cmp{display:flex;flex-direction:column;justify-content:center}
+.icmp-eyebrow{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:600;letter-spacing:.35em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:20px}
+.icmp-rows{display:flex;flex-direction:column;border:1px solid var(--border);border-radius:3px;overflow:hidden;margin-bottom:22px}
+.icmp-row{display:flex;justify-content:space-between;align-items:center;padding:13px 16px;border-bottom:1px solid var(--border);gap:12px}
+.icmp-row:last-child{border-bottom:none}
+.icmp-hl{background:rgba(201,168,112,.05)}
+.icmp-info{display:flex;flex-direction:column;gap:3px;min-width:0;flex:1}
+.icmp-name{font-family:'Space Grotesk',sans-serif;font-size:12px;color:var(--text1);font-weight:500;line-height:1.3}
+.icmp-detail{font-family:'Space Grotesk',sans-serif;font-size:9px;color:var(--text3);letter-spacing:.04em;margin-top:2px}
+.icmp-val{font-family:'Instrument Serif',serif;font-size:15px;color:var(--text2);white-space:nowrap;text-align:right;flex-shrink:0}
+.icmp-val.icmp-gold{color:var(--gold);font-size:19px}
+.icmp-save{background:rgba(201,168,112,.06);border:1px solid rgba(201,168,112,.22);border-radius:3px;padding:18px 20px}
+.icmp-save-lbl{font-family:'Space Grotesk',sans-serif;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--text3);margin-bottom:10px}
+.icmp-save-num{font-family:'Instrument Serif',serif;font-size:clamp(24px,2vw,34px);color:var(--gold);line-height:1;margin-bottom:8px}
+.icmp-save-note{font-family:'Space Grotesk',sans-serif;font-size:11px;color:var(--text2);line-height:1.6}
+.inv-h{font-family:'Instrument Serif',serif;font-size:clamp(52px,5.5vw,80px);font-weight:300;color:var(--text1);line-height:1;margin-bottom:0;letter-spacing:-0.03em}
+.inv-eyebrow{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:600;letter-spacing:.35em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:24px}
+.inv-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.inv-stat{display:flex;flex-direction:column;gap:4px}
+.inv-num{font-family:'Instrument Serif',serif;font-size:clamp(30px,3vw,46px);font-weight:300;color:var(--gold);line-height:1;animation:gold-pulse 3.5s ease-in-out infinite}
+.inv-lbl{font-family:'Space Grotesk',sans-serif;font-size:9px;color:var(--text3);letter-spacing:.1em;text-transform:uppercase}
+.sched-rows{border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:16px}
+.sched-row{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;border-bottom:1px solid var(--border);font-family:'Space Grotesk',sans-serif}
+.sr-label{font-size:13px;color:var(--text2)}
+.sr-amt{font-size:14px;font-weight:500;color:var(--text1)}
+.sched-total-row{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;background:rgba(201,168,112,.06);border-top:1px solid rgba(201,168,112,.3)}
+.sr-total{font-family:'Instrument Serif',serif;font-size:clamp(24px,2.5vw,32px);color:var(--gold);font-weight:300}
+
+/* Tablet */
+@media(max-width:1100px) and (min-width:769px){
+  .inv-layout{grid-template-columns:1fr 1fr!important;padding:80px 44px!important;gap:36px!important}
+  .inv-detail{padding-right:32px!important}
+  .inv-sched{border-right:none!important;padding-right:0!important}
+  .inv-cmp{display:none!important}
+  .inv-h{font-size:clamp(44px,4.5vw,66px)!important}
+}
+
+/* Mobile */
+@media(max-width:768px){
+  #s7{overflow-y:auto!important}
+  .inv-cmp{display:none!important}
+  .inv-sched{border-right:none!important;padding-right:0!important}
+  .inv-layout{
+    grid-template-columns:1fr!important;
+    height:auto!important;
+    min-height:100%!important;
+    padding:80px 24px 48px!important;
+    gap:32px!important;
+    align-items:start!important;
+  }
+  .inv-detail{
+    padding-right:0!important;
+    border-right:none!important;
+    border-bottom:1px solid var(--border)!important;
+    padding-bottom:28px!important;
+    height:auto!important;
+  }
+  .inv-h{font-size:clamp(44px,11vw,64px)!important}
+  .inv-stats{grid-template-columns:repeat(4,1fr)!important;gap:10px!important}
+  .inv-num{font-size:clamp(26px,7vw,36px)!important}
+  .inv-lbl{font-size:8px!important}
+  .sched-row{padding:12px 16px!important}
+  .sched-total-row{padding:15px 16px!important}
+  .sr-total{font-size:clamp(22px,6vw,28px)!important}
+  .inv-eyebrow{margin-bottom:16px!important}
+  .inv-sched .info-btn{width:100%!important}
+}
+
+/* 6 — ROW SPACING (squeeze dense slides) */
+.tc-item{padding:6px 0!important}
+.tc-h{font-size:clamp(22px,2.4vw,34px)!important;margin-bottom:10px!important}
+.fstep{padding:9px 0!important}
+.step{padding:7px 0!important}
+.ns{padding:8px 0!important}
+.ph{padding:5px 0!important}
+.wt{padding:5px 0!important}
+.ramp-row{padding:6px 0!important;grid-template-columns:56px 1fr!important;gap:12px!important}
+.ramp-mo{font-size:26px!important}
+.ramp-t{font-size:12px!important;margin-bottom:2px!important}
+.ramp-d{font-size:10px!important;line-height:1.4!important}
+.roi-row{padding:8px 0!important}
+.pm{padding:10px 13px!important}
+.agent{padding:12px 12px!important}
+.crono-h{margin-bottom:2px!important}
+.crono-sub{margin-bottom:6px!important;font-size:11px!important}
+.crono-sum{margin-top:6px!important;padding:8px 12px!important}
+.cs-v{font-size:20px!important}
+
+/* 7 — CONTENT SIZING */
+.fact{padding-left:18px!important}
+.fact-v{font-size:clamp(20px,2.2vw,28px)!important}
+.fact-d{font-size:12px!important}
+.sb{padding:26px 22px!important}
+.sb-n{font-size:clamp(50px,5.4vw,74px)!important}
+.flow-strip{padding:0 68px 12px!important}
+.flow-strip svg{height:124px!important}
+
+/* 8 — TYPOGRAPHY CALIBRATION */
+.big-h{font-size:clamp(36px,3.8vw,54px)!important;letter-spacing:-.02em;line-height:1.03!important}
+.hd-h{font-size:clamp(28px,3vw,44px)!important;letter-spacing:-.015em}
+.hrs-h{font-size:clamp(28px,3.2vw,44px)!important;letter-spacing:-.015em}
+.prop-name{font-size:clamp(28px,3vw,44px)!important;letter-spacing:-.01em}
+.prop-mo{font-size:clamp(30px,3.2vw,46px)!important}
+.body-t{font-size:16px!important;line-height:1.8!important;letter-spacing:.005em}
+.pull-q{font-size:16px!important;line-height:1.6}
+.hrs-body{font-size:15px!important;line-height:1.7!important}
+.ft{font-size:15px!important;letter-spacing:.01em}
+.fd{font-size:13px!important;line-height:1.62!important;letter-spacing:.004em}
+.tc-t{font-size:15px!important;letter-spacing:.01em}
+.tc-d{font-size:13px!important;line-height:1.52!important}
+.wt-t{font-size:14px!important}
+.wt-d{font-size:12px!important;line-height:1.52!important}
+.prop-li{font-size:13px!important}
+.ag-d{font-size:12px!important;line-height:1.58!important}
+.ns-t{font-size:15px!important;letter-spacing:.01em}
+.ns-d{font-size:13px!important;line-height:1.58!important}
+.pm-d{font-size:12px!important}
+.hd-s{font-size:15px!important;max-width:360px}
+.mc-lbl{font-size:14px!important}
+.mc-val{font-size:18px!important}
+.mc-val.gold{font-size:20px!important}
+.hrs-note{padding:11px 15px!important;font-size:12px!important}
+.ai-quote-end{font-size:14px!important;margin-top:10px!important;padding:10px 0 0 16px!important}
+.sp-h{font-size:clamp(24px,2.6vw,36px)!important;margin-bottom:14px!important}
+.prop-over{font-size:12px!important}
+.fact-d{font-size:13px!important}
+
+/* 9 — SLIDE CTA */
+.slide-cta{display:inline-flex;align-items:center;gap:8px;font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-dim);background:none;border:none;border-bottom:1px solid var(--gold-dim);padding-bottom:3px;cursor:pointer;transition:color .2s,border-color .2s;margin-top:4px}
+.slide-cta:hover{color:var(--gold);border-color:var(--gold)}
+/* slides with bg images need z-index on columns */
+#s2 .col-l,#s2 .col-r,
+#s6 .col-l,#s6 .col-r,
+#s8 .col-l,#s8 .col-r{position:relative;z-index:2}
+
+/* 10 — CURRENCY TOGGLE */
+#cur-toggle,#cur-toggle-sh{position:absolute;top:64px;left:50%;transform:translateX(-50%);display:flex;z-index:20;border:1px solid rgba(201,168,112,.28);overflow:hidden}
+#cur-toggle{top:28px!important;left:auto!important;right:220px!important;transform:none!important}
+#modal-cur{display:flex;border:1px solid rgba(201,168,112,.28);overflow:hidden;flex-shrink:0}
+.ct-btn{padding:5px 16px;background:none;color:var(--text3);font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;cursor:pointer;border:none;border-right:1px solid rgba(201,168,112,.18);transition:all .2s;white-space:nowrap}
+.ct-btn:last-child{border-right:none}
+.ct-btn.ct-active{background:var(--gold);color:#0c0b08}
+.ct-btn:hover:not(.ct-active){color:var(--gold-dim)}
+
+/* 10 — BACKGROUND IMAGES: keep absolute (never fixed — transforms on #track break fixed) */
+#s1 .mb,#s9 .mb{position:absolute!important}
+#s5 .mbg{position:absolute!important}
+
+/* 10 — S5 OUTPUT: full-bg, centered */
+#s5{align-items:center!important}
+#s5 .inner{padding-top:44px!important;padding-bottom:44px!important}
+#s5 .pre{margin-bottom:28px!important}
+
+/* 11 — TABLET ADJUSTMENT */
+@media(max-width:1100px) and (min-width:769px){
+  .col-l{padding:80px 32px 36px 44px!important}
+  .col-r{padding:80px 44px 36px 32px!important}
+  #sp .l,#sh .l,#stc .l,#scr .l{padding:80px 32px 36px 44px!important}
+  #sp .r,#sh .r,#stc .r,#scr .r{padding:80px 44px 36px 32px!important}
+  .hd-blk{padding:80px 44px 22px!important}
+  #sa,#s4{padding:0 44px 28px!important}
+  #s4 .hd{padding:80px 0 18px!important}
+  #s7{padding:0 36px!important}
+  .prop{padding:90px 14px 14px!important}
+  .prop-name{font-size:clamp(22px,2.4vw,34px)!important}
+  .prop-mo{font-size:clamp(24px,2.6vw,38px)!important}
+  .big-h{font-size:clamp(28px,3.2vw,44px)!important}
+  .top-bar{padding:22px 44px!important}
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   VERTICAL BAR CHARTS — modals
+   ═══════════════════════════════════════════════════════════════ */
+.vchart-wrap{margin:4px 0 20px}
+.vchart-label{font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--text3);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.vchart{display:flex;gap:10px;align-items:flex-end;height:190px;position:relative;padding-bottom:0;border-bottom:1px solid var(--border)}
+.vbar{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;position:relative}
+.vbar-val{font-family:'Instrument Serif',serif;font-size:12px;font-weight:200;color:var(--text2);text-align:center;line-height:1;white-space:nowrap}
+.vbar-val.hi{color:var(--gold);font-size:14px;font-weight:300}
+.vbar-body{width:100%;position:relative;overflow:hidden;border-radius:2px 2px 0 0}
+.vbar-fill{width:100%;height:100%;border-radius:2px 2px 0 0;transform:scaleY(0);transform-origin:bottom;animation:vbar-grow .75s cubic-bezier(.22,1,.36,1) both}
+@keyframes vbar-grow{0%{transform:scaleY(0)}100%{transform:scaleY(1)}}
+.m-pane.active .vbar:nth-child(1) .vbar-fill{animation-delay:.08s}
+.m-pane.active .vbar:nth-child(2) .vbar-fill{animation-delay:.22s}
+.m-pane.active .vbar:nth-child(3) .vbar-fill{animation-delay:.36s}
+.m-pane.active .vbar:nth-child(4) .vbar-fill{animation-delay:.50s}
+.vf-a{background:rgba(255,255,255,.07)}
+.vf-b{background:rgba(255,255,255,.13)}
+.vf-c{background:rgba(255,255,255,.19)}
+.vf-d{background:linear-gradient(180deg,var(--gold) 0%,var(--gold-dim) 100%)}
+.vbar-lbl{margin-top:8px;font-family:'Space Grotesk',sans-serif;font-size:8.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);text-align:center;line-height:1.3}
+.vbar-lbl.hi{color:var(--gold-dim)}
+.vchart-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+@media(max-width:600px){.vchart-row{grid-template-columns:1fr}}
+.vcs{padding:12px 16px;border:1px solid var(--border);display:flex;flex-direction:column;gap:2px}
+.vcs.hi{border-color:rgba(201,168,112,.3);background:rgba(201,168,112,.04)}
+.vcs-t{font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--text3)}
+.vcs.hi .vcs-t{color:var(--gold-dim)}
+.vcs-v{font-family:'Instrument Serif',serif;font-size:clamp(18px,2vw,24px);font-weight:200;color:var(--text1);line-height:1}
+.vcs.hi .vcs-v{color:var(--gold)}
+.vcs-d{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:300;color:var(--text2);line-height:1.45;margin-top:2px}
+
+/* Donut / pie ring chart */
+.donut-wrap{display:flex;align-items:center;gap:28px;margin:16px 0}
+.donut-svg{flex-shrink:0}
+.donut-legend{display:flex;flex-direction:column;gap:8px;flex:1}
+.dl-row{display:flex;align-items:center;gap:8px}
+.dl-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.dl-lbl{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:300;color:var(--text2);line-height:1.4}
+.dl-lbl strong{color:var(--text1);font-weight:600}
+
+/* Savings hero badge */
+.savings-hero{display:flex;align-items:center;gap:16px;padding:16px 20px;border:1px solid rgba(201,168,112,.25);background:rgba(201,168,112,.04);margin:14px 0}
+.sh-arrow{font-family:'Space Grotesk',sans-serif;font-size:18px;color:var(--gold);flex-shrink:0}
+.sh-text{flex:1}
+.sh-label{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:3px}
+.sh-val{font-family:'Instrument Serif',serif;font-size:clamp(22px,2.6vw,32px);font-weight:200;color:var(--gold);line-height:1}
+.sh-sub{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:300;color:var(--text3);margin-top:3px}
+
+/* ── MOBILE PLAN SUMMARY BUTTON ──────────────────────────── */
+.prop-ver{display:none;width:100%;padding:11px 16px;background:none;border:1px solid rgba(201,168,112,.3);font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:600;letter-spacing:.24em;color:var(--gold-dim);text-transform:uppercase;cursor:pointer;align-items:center;justify-content:space-between;transition:all .22s;margin-top:4px}
+.prop-ver:hover{border-color:var(--gold);color:var(--gold)}
+.prop.feat .prop-ver{border-color:var(--gold-dim);color:var(--gold)}
+
+/* ── MOBILE PLAN OVERLAY ──────────────────────────────────── */
+#plan-ov{position:fixed;inset:0;z-index:10001;background:var(--bg);overflow-y:auto;-webkit-overflow-scrolling:touch;opacity:0;pointer-events:none;transition:opacity .25s ease}
+#plan-ov.open{opacity:1;pointer-events:all}
+#plan-ov-bar{position:sticky;top:0;z-index:10;background:rgba(12,11,8,.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid rgba(201,168,112,.18);gap:8px;flex-wrap:wrap}
+#plan-ov-name{font-family:'Instrument Serif',serif;font-size:19px;font-weight:300;color:var(--text1);flex-shrink:0}
+#plan-ov-cur{display:flex;overflow:hidden;border:1px solid rgba(201,168,112,.28)}
+#plan-ov-close{background:none;border:1px solid var(--border);color:var(--text2);font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;padding:6px 11px;cursor:pointer;white-space:nowrap;transition:all .2s;flex-shrink:0}
+#plan-ov-close:hover{border-color:var(--gold-dim);color:var(--gold)}
+#plan-ov-body{padding:24px 20px 64px}
+#plan-ov-body .prop>div:not(.prop-list){display:block!important}
+#plan-ov-body .prop>button.info-btn{display:inline-flex!important}
+#plan-ov-body .prop{border:none!important;padding:0!important;gap:14px!important;background:transparent!important;overflow:visible!important}
+#plan-ov-body .prop-ver{display:none!important}
+/* ── Gold gradient on cover name (Fraunces italic) ── */
+.cover-name em,
+.big-h em {
+  background: linear-gradient(130deg, #a07830 0%, #e8cc94 40%, #c9a870 65%, #a07830 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: goldShimmer 5s linear infinite;
+}
+@keyframes goldShimmer {
+  0%   { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+/* Holo shimmer on proposal CTA buttons */
+button.info-btn, a.info-btn {
+  position: relative; overflow: hidden;
+}
+button.info-btn::after, a.info-btn::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(201,168,112,.12) 45%, transparent 100%);
+  background-size: 200% 100%;
+  pointer-events: none;
+  animation: ctaShimmer 3.2s ease-in-out infinite;
+}
+@keyframes ctaShimmer {
+  0%   { background-position: -100% 0; opacity: 0; }
+  15%  { opacity: 1; }
+  100% { background-position: 260% 0; opacity: 0; }
+}
+
+/* ═══════════════════════════════════════════════
+   WEB 4.0 NEURAL CANVAS — dark mode
+═══════════════════════════════════════════════ */
+#neural-canvas {
+  position: fixed; inset: 0; z-index: 3;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  #neural-canvas { display: none; }
+  animate, animateMotion, animateTransform { display: none; }
+  .inv-num { animation: none !important; }
+}
+
+/* ═══════════════════════════════════════════════
+   MOBILE PREMIUM — propuesta-aldo Mobbin grade
+═══════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  :root { --sab: env(safe-area-inset-bottom,0px); --sat: env(safe-area-inset-top,0px); }
+
+  /* Arrows — larger touch targets */
+  .arrow {
+    width: 44px !important; height: 44px !important;
+    border-radius: 12px !important;
+    backdrop-filter: blur(16px) saturate(1.6) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(1.6) !important;
+  }
+  .arrow:active { transform: scale(0.91) !important; }
+
+  /* Dots — larger hit area */
+  #dots { bottom: max(14px, var(--sab)) !important; gap: 7px !important; }
+  .dot { width: 5px !important; height: 5px !important; cursor: pointer; padding: 6px; box-sizing: content-box; }
+
+  /* Top bar — safe area aware */
+  .top-bar { padding: max(14px, calc(var(--sat) + 10px)) 20px 0 !important; }
+
+  /* Cards — premium touch feedback */
+  .glass-card:active, .prop:active { transform: scale(0.975) !important; transition: transform 0.14s cubic-bezier(0.34,1.56,0.64,1) !important; }
+
+  /* Info buttons — larger touch target */
+  .info-btn { padding: 12px 20px !important; min-height: 44px !important; }
+
+  /* Plan overlay scroll — native feel */
+  #plan-ov { -webkit-overflow-scrolling: touch; }
+  #plan-ov-body { padding-bottom: max(80px, calc(var(--sab) + 64px)) !important; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MOBILE RESPONSIVE — FINAL PASS (320px–768px)
+   Full slide-by-slide audit and fix
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── GLOBAL MOBILE FOUNDATION ─────────────────────────────── */
+@media (max-width: 768px) {
+
+  /* dvh for real viewport on mobile browsers */
+  .slide {
+    height: 100dvh !important;
+    min-height: 100dvh !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Body/html must not scroll — deck handles it */
+  html, body { overflow: hidden !important; }
+
+  /* TOP BAR — sticky on mobile, resets the desktop absolute override */
+  .top-bar {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 20 !important;
+    background: rgba(12,11,8,.94) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+    padding: max(14px, calc(env(safe-area-inset-top,0px) + 10px)) 18px 12px !important;
+    border-bottom: 1px solid rgba(201,168,112,.08) !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* Logo shrink on mobile */
+  .logo img { height: 36px !important; max-width: 140px !important; }
+
+  /* Arrows — compact but tappable */
+  .arrow {
+    width: 38px !important; height: 38px !important;
+    font-size: 14px !important;
+    top: auto !important;
+    bottom: max(52px, calc(env(safe-area-inset-bottom,0px) + 44px)) !important;
+    transform: none !important;
+  }
+  #prev { left: 12px !important; }
+  #next { right: 12px !important; }
+
+  /* Dots — above bottom safe area */
+  #dots {
+    bottom: max(18px, calc(env(safe-area-inset-bottom,0px) + 10px)) !important;
+    gap: 6px !important;
+  }
+  .dot { width: 4px !important; height: 4px !important; }
+  .dot.active { transform: scale(1.7) !important; }
+
+  /* ── S1 PORTADA ─────────────────────────────────────────── */
+  #s1 { display: flex !important; flex-direction: column !important; align-items: stretch !important; justify-content: stretch !important; }
+  #s1 .top-bar { background: transparent !important; border-bottom: none !important; position: absolute !important; }
+  #s1 .cc {
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 80px 24px 80px !important;
+    text-align: center !important;
+    position: relative !important;
+    z-index: 2 !important;
+  }
+  .cover-name { font-size: clamp(40px, 11vw, 64px) !important; letter-spacing: -.02em !important; line-height: .9 !important; word-break: break-word !important; }
+  .eyebrow { font-size: 9px !important; letter-spacing: .3em !important; margin-bottom: 20px !important; }
+  .cover-svc { font-size: 10px !important; letter-spacing: .22em !important; }
+  .cover-co { font-size: 11px !important; }
+  .cover-rule { width: 120px !important; margin: 20px 0 !important; }
+  .cover-date { bottom: max(28px, calc(env(safe-area-inset-bottom,0px) + 16px)) !important; right: 18px !important; }
+  #s1 .dec { display: none !important; }
+
+  /* ── COLUMN HEIGHT OVERRIDE (desktop forces 100vh, breaks flex-col) */
+  .col-l, .col-r,
+  #sp .l, #sp .r,
+  #sh .l, #sh .r,
+  #stc .l, #stc .r,
+  #scr .l, #scr .r,
+  #s9 .l, #s9 .r {
+    height: auto !important;
+    min-height: unset !important;
+    overflow-y: visible !important;
+    justify-content: flex-start !important;
+  }
+
+  /* ── S2 TU EXPERIENCIA ─────────────────────────────────── */
+  #s2 {
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: unset !important;
+  }
+  #s2 .col-l {
+    padding: 0 20px 20px !important;
+    border-right: none !important;
+    border-bottom: 1px solid var(--border) !important;
+    height: auto !important;
+    flex-shrink: 0 !important;
+    justify-content: flex-start !important;
+  }
+  #s2 .col-r {
+    padding: 20px 20px 56px !important;
+    height: auto !important;
+    flex-shrink: 0 !important;
+    gap: 16px !important;
+    justify-content: flex-start !important;
+  }
+  .fact-v { font-size: clamp(18px, 5vw, 26px) !important; }
+
+  /* ── S3 CINCO PILARES ──────────────────────────────────── */
+  #s3 { display: flex !important; flex-direction: column !important; padding: 0 !important; }
+  #s3 .hd-blk {
+    padding: 0 20px 16px !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    align-items: flex-start !important;
+    border-bottom: 1px solid var(--border) !important;
+    flex-shrink: 0 !important;
+  }
+  .pillars-grid {
+    grid-template-columns: 1fr 1fr !important;
+    flex: 1 !important;
+    overflow-y: auto !important;
+  }
+  .pillar { padding: 16px 14px !important; }
+  .p-name { font-size: clamp(13px, 3.5vw, 17px) !important; }
+  .p-content { font-size: 11px !important; }
+
+  /* ── S4 CANALES ────────────────────────────────────────── */
+  #s4 {
+    display: flex !important;
+    flex-direction: column !important;
+    padding: 0 0 56px !important;
+    grid-template-rows: unset !important;
+  }
+  #s4 .hd {
+    padding: 0 20px 16px !important;
+    flex-shrink: 0 !important;
+  }
+  #s4 .chs {
+    grid-template-columns: 1fr 1fr !important;
+    flex: 1 !important;
+    overflow-y: auto !important;
+    margin-top: 0 !important;
+  }
+  .ch { padding: 16px 14px !important; }
+  .ch-n { font-size: clamp(24px, 7.5vw, 36px) !important; }
+  .ch-b { font-size: 11px !important; }
+
+  /* ── S5 OUTPUT / PRODUCCIÓN ────────────────────────────── */
+  #s5 {
+    align-items: flex-start !important;
+    justify-items: stretch !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  #s5 .top-bar { background: rgba(12,11,8,.94) !important; border-bottom: 1px solid rgba(201,168,112,.08) !important; }
+  #s5 .inner {
+    padding: 16px 18px 72px !important;
+    width: 100% !important;
+    flex: 1 !important;
+    overflow-y: auto !important;
+  }
+  #s5 .pre { margin-bottom: 16px !important; font-size: 9px !important; text-align: center !important; }
+  #s5 .sg { grid-template-columns: 1fr 1fr !important; }
+  .sb { padding: 16px 14px !important; }
+  .sb-n { font-size: clamp(36px, 9.5vw, 56px) !important; }
+  .sb-name { font-size: 10px !important; }
+  .sb-d { font-size: 11px !important; line-height: 1.5 !important; }
+  #s5 .foot { margin-top: 16px !important; font-size: 11px !important; padding-bottom: 8px !important; }
+
+  /* ── S6 EL PORTAL ──────────────────────────────────────── */
+  #s6 {
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: unset !important;
+  }
+  #s6 .col-l {
+    padding: 0 20px 20px !important;
+    border-right: none !important;
+    border-bottom: 1px solid rgba(255,255,255,.06) !important;
+    height: auto !important;
+    flex-shrink: 0 !important;
+    justify-content: flex-start !important;
+  }
+  #s6 .col-r {
+    padding: 20px 20px 56px !important;
+    height: auto !important;
+    flex-shrink: 0 !important;
+    gap: 0 !important;
+    justify-content: flex-start !important;
+  }
+
+  /* ── SA AGENTES ────────────────────────────────────────── */
+  #sa {
+    display: flex !important;
+    flex-direction: column !important;
+    padding: 0 0 56px !important;
+  }
+  #sa .hd-blk {
+    padding: 0 20px 16px !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    align-items: flex-start !important;
+    flex-shrink: 0 !important;
+  }
+  .flow-strip { display: none !important; }
+  #sa .agents {
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: auto !important;
+    flex: 1 !important;
+    overflow-y: auto !important;
+    margin-top: 0 !important;
+  }
+  .agent { padding: 12px 11px !important; gap: 5px !important; }
+  .ag-name { font-size: clamp(12px, 3.5vw, 16px) !important; }
+  .ag-d { font-size: 10px !important; }
+  .ag-ls { font-size: 10px !important; }
+
+  /* ── SP PANEL ──────────────────────────────────────────── */
+  #sp {
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: unset !important;
+  }
+  #sp .l {
+    padding: 0 20px 20px !important;
+    border-right: none !important;
+    border-bottom: 1px solid var(--border) !important;
+    height: auto !important;
+    flex-shrink: 0 !important;
+    justify-content: flex-start !important;
+  }
+  #sp .r {
+    padding: 20px 20px 56px !important;
+    height: auto !important;
+    flex-shrink: 0 !important;
+    justify-content: flex-start !important;
+    gap: 6px !important;
+  }
+  .sp-h { font-size: clamp(22px, 6vw, 32px) !important; margin-bottom: 12px !important; }
+
+  /* ── SH COMPARATIVA MERCADO ────────────────────────────── */
+  #sh {
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: unset !important;
+  }
+  #sh .l {
+    padding: 0 20px 20px !important;
+    border-right: none !important;
+    border-bottom: 1px solid var(--border) !important;
+    height: auto !important;
+    flex-shrink: 0 !important;
+    justify-content: flex-start !important;
+  }
+  #sh .r {
+    padding: 20px 20px 56px !important;
+    height: auto !important;
+    flex-shrink: 0 !important;
+    justify-content: flex-start !important;
+  }
+  /* Currency toggle for sh */
+  #cur-toggle-sh {
+    position: sticky !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    transform: none !important;
+    width: 100% !important;
+    justify-content: center !important;
+    background: rgba(12,11,8,.96) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border: none !important;
+    border-bottom: 1px solid rgba(201,168,112,.18) !important;
+    z-index: 15 !important;
+    flex-shrink: 0 !important;
+    order: -1 !important;
+  }
+
+  /* ── S7 INVERSIÓN ──────────────────────────────────────── */
+  #s7 {
+    display: flex !important;
+    flex-direction: column !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }
+  /* Currency toggle for s7 */
+  #cur-toggle {
+    position: sticky !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    transform: none !important;
+    width: 100% !important;
+    justify-content: center !important;
+    background: rgba(12,11,8,.96) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border: none !important;
+    border-bottom: 1px solid rgba(201,168,112,.18) !important;
+    z-index: 15 !important;
+    flex-shrink: 0 !important;
+  }
+  .inv-layout {
+    grid-template-columns: 1fr !important;
+    height: auto !important;
+    padding: 20px 20px 80px !important;
+    gap: 24px !important;
+    align-items: start !important;
+  }
+  .inv-detail {
+    border-right: none !important;
+    border-bottom: 1px solid var(--border) !important;
+    padding-right: 0 !important;
+    padding-bottom: 24px !important;
+    height: auto !important;
+  }
+  .inv-cmp { display: none !important; }
+  .inv-sched {
+    border-right: none !important;
+    padding-right: 0 !important;
+    height: auto !important;
+  }
+  .inv-h { font-size: clamp(44px, 11vw, 64px) !important; }
+  .inv-stats { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
+  .inv-num { font-size: clamp(26px, 7vw, 38px) !important; }
+  .sched-row { padding: 12px 16px !important; }
+  .sched-total-row { padding: 14px 16px !important; }
+  .sr-total { font-size: clamp(20px, 6vw, 28px) !important; }
+  .inv-sched .info-btn { width: 100% !important; justify-content: center !important; }
+
+  /* ── STC T&C ───────────────────────────────────────────── */
+  #stc {
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: unset !important;
+  }
+  #stc .l {
+    padding: 0 20px 20px !important;
+    border-right: none !important;
+    border-bottom: 1px solid var(--border) !important;
+    height: auto !important;
+    flex-shrink: 0 !important;
+    justify-content: flex-start !important;
+  }
+  #stc .r {
+    padding: 16px 20px 56px !important;
+    height: auto !important;
+    flex-shrink: 0 !important;
+    justify-content: flex-start !important;
+  }
+  #stc > div[style*="grid-column"] {
+    padding: 0 20px 20px !important;
+    margin-top: 0 !important;
+  }
+  .tc-h { font-size: clamp(22px, 6vw, 30px) !important; margin-bottom: 14px !important; }
+  .tc-t { font-size: 13px !important; }
+  .tc-d { font-size: 11px !important; }
+
+  /* ── SCR CRONOGRAMA ────────────────────────────────────── */
+  #scr {
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: unset !important;
+  }
+  #scr .l {
+    padding: 0 20px 20px !important;
+    border-right: none !important;
+    border-bottom: 1px solid var(--border) !important;
+    height: auto !important;
+    flex-shrink: 0 !important;
+    justify-content: flex-start !important;
+  }
+  #scr .r {
+    padding: 16px 20px 56px !important;
+    height: auto !important;
+    flex-shrink: 0 !important;
+    justify-content: flex-start !important;
+  }
+  .crono-h { font-size: clamp(22px, 6vw, 30px) !important; }
+
+  /* ── S8 POR QUÉ IMPORTA ────────────────────────────────── */
+  #s8 {
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: unset !important;
+  }
+  #s8 .col-l {
+    padding: 0 20px 20px !important;
+    border-right: none !important;
+    border-bottom: 1px solid rgba(255,255,255,.06) !important;
+    height: auto !important;
+    flex-shrink: 0 !important;
+    justify-content: flex-start !important;
+  }
+  #s8 .col-r {
+    padding: 16px 20px 56px !important;
+    height: auto !important;
+    flex-shrink: 0 !important;
+    gap: 0 !important;
+    justify-content: flex-start !important;
+  }
+
+  /* ── S9 EMPECEMOS ──────────────────────────────────────── */
+  #s9 {
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: unset !important;
+  }
+  #s9 .top-bar { background: transparent !important; border-bottom: none !important; position: absolute !important; }
+  #s9 .l {
+    padding: 56px 20px 20px !important;
+    border-right: none !important;
+    border-bottom: 1px solid rgba(255,255,255,.06) !important;
+    height: auto !important;
+    flex-shrink: 0 !important;
+    justify-content: flex-start !important;
+    position: relative !important;
+    z-index: 2 !important;
+    gap: 16px !important;
+  }
+  #s9 .r {
+    padding: 16px 20px 80px !important;
+    height: auto !important;
+    flex-shrink: 0 !important;
+    justify-content: flex-start !important;
+    position: relative !important;
+    z-index: 2 !important;
+  }
+  #s9 .big-h { font-size: clamp(28px, 7.5vw, 44px) !important; line-height: .97 !important; }
+  .cta-btn { width: 100% !important; justify-content: center !important; padding: 16px 20px !important; }
+  .ai-quote-end { font-size: 13px !important; }
+
+  /* ── DECORATION — hide on mobile to save space ─────────── */
+  .dec { display: none !important; }
+
+  /* ── SLIDE CTA BUTTON ──────────────────────────────────── */
+  .slide-cta { font-size: 10px !important; }
+
+  /* ── TOP BAR: S5 special case (has relative top-bar inside) */
+  #s5 .top-bar {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 10 !important;
+    background: rgba(12,11,8,.94) !important;
+    backdrop-filter: blur(14px) !important;
+    border-bottom: 1px solid rgba(201,168,112,.08) !important;
+  }
+}
+
+/* ── 430px and below: extra squeeze ──────────────────────── */
+@media (max-width: 430px) {
+  .cover-name { font-size: clamp(34px, 10.5vw, 50px) !important; }
+  .pillars-grid { grid-template-columns: 1fr !important; }
+  #s4 .chs { grid-template-columns: 1fr !important; }
+  #sa .agents { grid-template-columns: 1fr !important; }
+  #s5 .sg { grid-template-columns: 1fr 1fr !important; }
+  .inv-stats { grid-template-columns: repeat(2,1fr) !important; }
+  .big-h { font-size: clamp(22px, 7.5vw, 32px) !important; }
+  .hd-h { font-size: clamp(20px, 6vw, 28px) !important; }
+  .col-l, .col-r,
+  #sp .l, #sp .r,
+  #sh .l, #sh .r,
+  #stc .l, #stc .r,
+  #scr .l, #scr .r,
+  #s9 .l, #s9 .r { padding-left: 16px !important; padding-right: 16px !important; }
+  #sa .hd-blk, #s3 .hd-blk, #s4 .hd { padding-left: 16px !important; padding-right: 16px !important; }
+}
+</style>
+</head>
+<body data-theme="dark">
+<div id="grain"></div>
+<div id="dots" role="tablist" aria-label="Navegación de slides">
+  <div class="dot active" data-i="0" role="button" tabindex="0" aria-label="Slide 1 de 14" aria-current="true"></div><div class="dot" data-i="1" role="button" tabindex="0" aria-label="Slide 2 de 14"></div>
+  <div class="dot" data-i="2" role="button" tabindex="0" aria-label="Slide 3 de 14"></div><div class="dot" data-i="3" role="button" tabindex="0" aria-label="Slide 4 de 14"></div>
+  <div class="dot" data-i="4" role="button" tabindex="0" aria-label="Slide 5 de 14"></div><div class="dot" data-i="5" role="button" tabindex="0" aria-label="Slide 6 de 14"></div>
+  <div class="dot" data-i="6" role="button" tabindex="0" aria-label="Slide 7 de 14"></div><div class="dot" data-i="7" role="button" tabindex="0" aria-label="Slide 8 de 14"></div>
+  <div class="dot" data-i="8" role="button" tabindex="0" aria-label="Slide 9 de 14"></div><div class="dot" data-i="9" role="button" tabindex="0" aria-label="Slide 10 de 14"></div>
+  <div class="dot" data-i="10" role="button" tabindex="0" aria-label="Slide 11 de 14"></div><div class="dot" data-i="11" role="button" tabindex="0" aria-label="Slide 12 de 14"></div>
+  <div class="dot" data-i="12" role="button" tabindex="0" aria-label="Slide 13 de 14"></div><div class="dot" data-i="13" role="button" tabindex="0" aria-label="Slide 14 de 14"></div>
+</div>
+<button class="arrow h" id="prev" aria-label="Slide anterior">&#8592;</button>
+<button class="arrow" id="next" aria-label="Siguiente slide">&#8594;</button>
+<div id="deck"><div id="track">
+
+<!-- 01 PORTADA -->
+<div class="slide on" id="s1">
+  <div class="mb"></div><div class="vg"></div>
+  <div class="top-bar"><span class="logo">Victor IA</span></div>
+  <div class="cc">
+    <p class="eyebrow a1">Preparado exclusivamente para</p>
+    <h1 class="cover-name a2">Remi Creative</h1>
+    <div class="cover-rule a3"></div>
+    <p class="cover-svc a4">Sistema de Crecimiento Digital Autónomo</p>
+    <p class="cover-co a5">Aldo Rendón &nbsp;·&nbsp; Kelowna, BC &nbsp;·&nbsp; Mayo 2026</p>
+  </div>
+  <span class="cover-date a6">Mayo 2026</span>
+</div>
+
+<!-- 02 TU EXPERIENCIA -->
+<div class="slide" style="display:grid;grid-template-columns:1fr 1fr;align-items:center" id="s2">
+  <div style="position:absolute;inset:0;background-image:url('/assets/bg-light.jpg');background-size:cover;background-position:center right;filter:sepia(.25) brightness(.09) contrast(1.25) saturate(.5)"></div>
+  <div style="position:absolute;inset:0;background:linear-gradient(110deg,rgba(8,7,5,.88) 0%,rgba(8,7,5,.55) 55%,rgba(8,7,5,.80) 100%)"></div>
+  <div class="top-bar"><span class="logo">Victor IA</span><span class="slide-label">01 / 13</span></div>
+  <div class="col-l">
+    <h2 class="big-h a1">Tu experiencia<br>merece un <em>escenario.</em></h2>
+    <p class="body-t a2">Remi Creative no es una agencia generalista. Eres un especialista vertical con un sistema probado, un modelo dirigido por el fundador y una reputación impecable. Esta propuesta lo respeta.</p>
+    <span style="height:1px;background:var(--gold-dim);display:block" class="a3"></span>
+    <p class="pull-q a4">"Esta propuesta se construye sobre tu metodología. No contra ella."</p>
+    <button class="slide-cta a5" onclick="go(c+1)">Ver el sistema <span>→</span></button>
+  </div>
+  <div class="col-r" style="padding:110px 80px 80px 56px;gap:32px">
+    <div class="fact a4"><p class="fact-t">Experiencia</p><p class="fact-v">15+ años</p><p class="fact-d">Marketing digital en salud. MBA en estrategia de negocio. Cada cliente, liderado por el fundador.</p></div>
+    <div class="fact a5"><p class="fact-t">Posicionamiento</p><p class="fact-v">Especialista<br>vertical</p><p class="fact-d">Clínicas dentales y médicas en BC — la única agencia que habla su idioma.</p></div>
+    <div class="fact a6"><p class="fact-t">Reputación</p><p class="fact-v">5.0 ★ Google</p><p class="fact-d">+169% clics orgánicos · 65 citas mensuales · #1 en rankings en 90 días. Números reales de trabajo que ya viste de primera mano.</p></div>
+  </div>
+</div>
+
+<!-- 03 CINCO PILARES -->
+<div class="slide" id="s3">
+  <div class="top-bar"><span class="logo">Victor IA</span><span class="slide-label">02 / 13</span></div>
+  <div class="hd-blk">
+    <div><p class="hd-tag a1">Tus pilares de contenido</p><h2 class="hd-h a2">Cinco servicios.<br>Una sola voz.</h2></div>
+    <p class="hd-s a3">Cada uno de tus cinco servicios se convierte en un pilar de contenido — publicaciones educativas y autoritarias que demuestran tu metodología y atraen a las clínicas correctas.</p>
+  </div>
+  <div class="pillars-grid">
+    <div class="pillar a3"><p class="p-num">01</p><div class="p-color c-teal"></div><p class="p-name">Estrategia SEO</p><p class="p-layer">La capa de cimientos</p><p class="p-content">Consejos, casos de éxito, desglose de rankings. Posiciona a Remi Creative como la autoridad en SEO dental en BC.</p></div>
+    <div class="pillar a4"><p class="p-num">02</p><div class="p-color c-purple"></div><p class="p-name">Estrategia AEO</p><p class="p-layer">La capa de citación</p><p class="p-content">Liderazgo de pensamiento sobre búsqueda con IA. Educa a los dueños de clínicas sobre por qué ChatGPT y Perplexity importan a su práctica.</p></div>
+    <div class="pillar a5"><p class="p-num">03</p><div class="p-color c-navy"></div><p class="p-name">Estrategia GEO</p><p class="p-layer">La capa de recomendación</p><p class="p-content">Autoridad local en Maps. Muestra por qué la presencia en mapas es el nuevo motor de referencias dentales.</p></div>
+    <div class="pillar a5"><p class="p-num">04</p><div class="p-color c-orange"></div><p class="p-name">Diseño Web &amp; UX</p><p class="p-layer">Sitios que convierten</p><p class="p-content">Antes/después, análisis de UX, casos de conversión. Prueba que el diseño impulsa la adquisición de pacientes.</p></div>
+    <div class="pillar a6"><p class="p-num">05</p><div class="p-color c-lime"></div><p class="p-name">Medios Pagados</p><p class="p-layer">Publicidad orientada a resultados</p><p class="p-content">Desglose de ROI, resultados de campañas, rendimiento en Google y Meta. Los números que importan a los dueños de clínicas.</p></div>
+  </div>
+</div>
+
+<!-- 04 LO QUE CREAMOS -->
+<div class="slide" id="s4">
+  <div class="top-bar"><span class="logo">Victor IA</span><span class="slide-label">03 / 13</span></div>
+  <div class="hd"><h2 class="hd-h a1">Lo que creamos<br>para Remi Creative.</h2><p class="body-t a2" style="max-width:500px;margin-top:10px">Cada canal activo. Cada publicación alineada a tus cinco pilares. Con identidad de marca, experta y consistente — todos los meses, de forma automática.</p><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:14px"><button class="info-btn a2" onclick="openModal('canales')" aria-label="Ver desglose mensual de contenido">Ver desglose mensual <span class="ib-arr">→</span></button></div></div>
+  <div class="chs">
+    <div class="ch a3"><p class="ch-pl">LinkedIn</p><p class="ch-n">4<span class="ch-u">publicaciones / semana</span></p><p class="ch-b">Liderazgo de pensamiento, casos de estudio, educación de mercado. El canal principal para atraer tomadores de decisión de clínicas dentales.</p><div class="fmt-pills"><span class="fmt-pill txt">Artículo</span><span class="fmt-pill img">Infografía</span><span class="fmt-pill vid">Video 15–20s</span></div></div>
+    <div class="ch a4"><p class="ch-pl">Instagram</p><p class="ch-n">7<span class="ch-u">publicaciones / semana</span></p><p class="ch-b">Prueba visual de tu metodología. Carruseles de resultados, visualizaciones de datos, contenido detrás de la estrategia.</p><div class="fmt-pills"><span class="fmt-pill car">Carrusel</span><span class="fmt-pill vid">Reel 15–20s</span><span class="fmt-pill img">Post visual</span></div></div>
+    <div class="ch a5"><p class="ch-pl">Facebook</p><p class="ch-n">5<span class="ch-u">publicaciones / semana</span></p><p class="ch-b">Contenido de comunidad, consejos para dueños de clínicas, posts educativos. Mayor alcance en el segmento 35–60 en BC.</p><div class="fmt-pills"><span class="fmt-pill img">Post imagen</span><span class="fmt-pill vid">Video</span><span class="fmt-pill txt">Texto</span></div></div>
+    <div class="ch a6"><p class="ch-pl">Blog — remicreative.ca</p><p class="ch-n">1<span class="ch-u">artículo / día</span></p><p class="ch-b">Artículos estructurados para SEO y AEO. Cada publicación fortalece tus rankings, alimenta los motores de citación de IA y demuestra autoridad.</p><div class="fmt-pills"><span class="fmt-pill txt">Artículo +1,200 palabras</span><span class="fmt-pill img">5 Imágenes</span><span class="fmt-pill seo">AEO optimizado</span></div></div>
+  </div>
+</div>
+
+<!-- 05 PRODUCCIÓN -->
+<div class="slide" id="s5">
+  <div class="mbg"></div>
+  <div class="top-bar" style="position:relative;z-index:3"><span class="logo">Victor IA</span><span class="slide-label">04 / 13</span></div>
+  <div class="inner">
+    <p class="pre a1">Cada mes. Para Remi Creative. Automáticamente.</p>
+    <div class="sg">
+      <div class="sb c1"><p class="sb-n" data-target="69">69</p><p class="sb-name">Publicaciones</p><p class="sb-d">LinkedIn + Instagram + Facebook. Programadas en los horarios de mayor engagement por plataforma.</p></div>
+      <div class="sb c2"><p class="sb-n" data-target="30">30</p><p class="sb-name">Artículos de Blog</p><p class="sb-d">Estructurados para AEO y SEO. Cada artículo fortalece la visibilidad en Google, ChatGPT y Maps.</p></div>
+      <div class="sb c3"><p class="sb-n" data-target="28">28</p><p class="sb-name">Videos 4K</p><p class="sb-d">15–20 segundos cada uno. Narración profesional. Con identidad de marca. El 40% de todo el contenido.</p></div>
+      <div class="sb c4"><p class="sb-n" data-target="191">191</p><p class="sb-name">Imágenes</p><p class="sb-d">Calidad 4K. Visuals de marca distribuidos en publicaciones de redes y artículos de blog.</p></div>
+    </div>
+    <p class="foot a6">Todo el contenido pasa por tu portal de aprobación antes de publicarse.</p>
+  </div>
+</div>
+
+<!-- 06 EL PORTAL -->
+<div class="slide" style="display:grid;grid-template-columns:1fr 1fr;align-items:center" id="s6">
+  <div style="position:absolute;inset:0;background-image:url('/assets/bg-light.jpg');background-size:cover;background-position:40% center;filter:sepia(.15) brightness(.08) contrast(1.2) saturate(.4)"></div>
+  <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(8,7,5,.90) 0%,rgba(8,7,5,.60) 50%,rgba(8,7,5,.82) 100%)"></div>
+  <div class="top-bar"><span class="logo">Victor IA</span><span class="slide-label">05 / 13</span></div>
+  <div class="col-l">
+    <h2 class="big-h a1">Tú apruebas.<br>Luego se<br>publica.</h2>
+    <p class="body-t a2">Cada pieza de contenido llega a tu panel privado antes de aparecer en LinkedIn, Instagram, Facebook o tu blog. Nada se publica sin tu visto bueno.</p>
+    <p class="pull-q a3">"Tu marca. Tu voz. Tu decisión final — siempre."</p>
+    <button class="slide-cta a4" onclick="go(c+1)">Conoce los agentes <span>→</span></button>
+  </div>
+  <div class="col-r" style="padding:80px 80px 80px 56px">
+    <div class="fstep a4"><span class="fn">01</span><div><p class="ft">Contenido generado semanalmente</p><p class="fd">Posts, videos y artículos creados de forma automática, alineados a tus cinco pilares y a la voz de Remi Creative.</p></div></div>
+    <div class="fstep a5"><span class="fn">02</span><div><p class="ft">Recibes una notificación por correo</p><p class="fd">Una alerta te avisa que hay contenido listo para revisar en tu panel privado. Entras cuando tengas tiempo.</p></div></div>
+    <div class="fstep a5"><span class="fn">03</span><div><p class="ft">Revisas, apruebas o solicitas cambios</p><p class="fd">Lees cada caption, ves cada video, revisas cada imagen. Apruebas con un clic o dejas un comentario para ajustar.</p></div></div>
+    <div class="fstep a6"><span class="fn">04</span><div><p class="ft">Cambios aplicados — confirmación por correo</p><p class="fd">Los ajustes se realizan y recibes un correo cuando el contenido revisado está listo. Se publica automáticamente al aprobar.</p></div></div>
+  </div>
+</div>
+
+<!-- 07 AGENTES -->
+<div class="slide" id="sa">
+  <div class="top-bar"><span class="logo">Victor IA</span><span class="slide-label">06 / 13</span></div>
+  <div class="hd-blk" style="padding:100px 80px 40px">
+    <div><p class="hd-tag a1">La inteligencia detrás de tu contenido</p><h2 class="hd-h a2">Ocho agentes especializados.<br>Un sistema sin fricciones.</h2></div>
+    <p class="hd-s a3">Cada agente tiene una sola responsabilidad. Juntos producen todo lo que Remi Creative necesita — cada semana, de forma automática. Y mejoran con cada retroalimentación que nos das.</p>
+  </div>
+  <!-- WORKFLOW FLOW DIAGRAM — NETWORK / AI LEARNING -->
+  <div class="flow-strip a3">
+    <svg viewBox="0 0 960 152" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="glo" x="-60%" y="-60%" width="220%" height="220%">
+          <feGaussianBlur stdDeviation="4" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="sgl" x="-40%" y="-40%" width="180%" height="180%">
+          <feGaussianBlur stdDeviation="2.5" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <radialGradient id="of" cx="50%" cy="38%" r="60%">
+          <stop offset="0%" stop-color="#c9a870" stop-opacity="0.18"/>
+          <stop offset="100%" stop-color="#c9a870" stop-opacity="0.02"/>
+        </radialGradient>
+        <radialGradient id="af" cx="50%" cy="38%" r="60%">
+          <stop offset="0%" stop-color="#c9a870" stop-opacity="0.07"/>
+          <stop offset="100%" stop-color="#c9a870" stop-opacity="0.01"/>
+        </radialGradient>
+        <marker id="am" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="4" markerHeight="4" orient="auto">
+          <path d="M0,1 L5,3 L0,5" stroke="#c9a870" stroke-width=".8" fill="none" stroke-opacity=".45"/>
+        </marker>
+        <marker id="abr" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="5" markerHeight="5" orient="auto">
+          <path d="M0,.5 L5,3 L0,5.5" stroke="#c9a870" stroke-width="1" fill="none" stroke-opacity=".7"/>
+        </marker>
+        <!-- Animated paths -->
+        <path id="pc1" d="M186,58 Q228,35 262,35"/>
+        <path id="pc2" d="M186,58 Q264,28 342,35"/>
+        <path id="pc3" d="M186,60 Q305,22 422,35"/>
+        <path id="pc4" d="M186,63 Q352,17 502,35"/>
+        <path id="pc5" d="M186,82 Q228,105 262,105"/>
+        <path id="pc6" d="M186,82 Q264,118 342,105"/>
+        <path id="pc7" d="M186,80 Q302,122 422,105"/>
+        <path id="pc8" d="M186,77 Q352,128 502,105"/>
+        <path id="pqa" d="M540,68 L598,70"/>
+        <path id="ppor" d="M643,70 L685,70"/>
+        <path id="pli"  d="M753,62 L800,24"/>
+        <path id="pig"  d="M753,66 L800,50"/>
+        <path id="pfb"  d="M753,74 L800,80"/>
+        <path id="pbl"  d="M753,78 L800,106"/>
+        <path id="ploop" d="M519,119 Q519,140 340,140 Q162,140 152,98"/>
+      </defs>
+
+      <!-- background rings on orchestrator -->
+      <circle cx="152" cy="70" r="46" stroke="#c9a870" stroke-opacity=".06" stroke-width=".4" fill="none"/>
+      <circle cx="152" cy="70" r="62" stroke="#c9a870" stroke-opacity=".03" stroke-width=".3" fill="none"/>
+
+      <!-- ── CONNECTION LINES ── -->
+      <path d="M52,70 L117,70" stroke="#c9a870" stroke-width=".8" stroke-opacity=".5" marker-end="url(#abr)"/>
+      <!-- orch → row-1 agents -->
+      <path d="M183,56 Q224,36 258,36" stroke="#c9a870" stroke-width=".5" stroke-opacity=".28" marker-end="url(#am)"/>
+      <path d="M183,57 Q264,28 338,36" stroke="#c9a870" stroke-width=".5" stroke-opacity=".22" marker-end="url(#am)"/>
+      <path d="M183,59 Q305,22 418,36" stroke="#c9a870" stroke-width=".5" stroke-opacity=".18" marker-end="url(#am)"/>
+      <path d="M185,62 Q352,16 498,36" stroke="#c9a870" stroke-width=".5" stroke-opacity=".14" marker-end="url(#am)"/>
+      <!-- orch → row-2 agents -->
+      <path d="M183,84 Q224,104 258,104" stroke="#c9a870" stroke-width=".5" stroke-opacity=".28" marker-end="url(#am)"/>
+      <path d="M183,83 Q264,118 338,104" stroke="#c9a870" stroke-width=".5" stroke-opacity=".22" marker-end="url(#am)"/>
+      <path d="M183,81 Q305,126 418,104" stroke="#c9a870" stroke-width=".5" stroke-opacity=".18" marker-end="url(#am)"/>
+      <path d="M185,78 Q352,132 498,104" stroke="#c9a870" stroke-width=".5" stroke-opacity=".14" marker-end="url(#am)"/>
+      <!-- agents converge to QA -->
+      <path d="M278,47 Q558,52 598,70" stroke="#c9a870" stroke-width=".35" stroke-opacity=".14" marker-end="url(#am)"/>
+      <path d="M358,47 Q570,54 598,70" stroke="#c9a870" stroke-width=".35" stroke-opacity=".14" marker-end="url(#am)"/>
+      <path d="M438,47 Q582,57 598,70" stroke="#c9a870" stroke-width=".35" stroke-opacity=".14" marker-end="url(#am)"/>
+      <path d="M518,47 Q592,62 598,70" stroke="#c9a870" stroke-width=".35" stroke-opacity=".14" marker-end="url(#am)"/>
+      <path d="M278,93 Q558,88 598,70" stroke="#c9a870" stroke-width=".35" stroke-opacity=".14" marker-end="url(#am)"/>
+      <path d="M358,93 Q570,86 598,70" stroke="#c9a870" stroke-width=".35" stroke-opacity=".14" marker-end="url(#am)"/>
+      <path d="M438,93 Q582,83 598,70" stroke="#c9a870" stroke-width=".35" stroke-opacity=".14" marker-end="url(#am)"/>
+      <path d="M518,93 Q592,78 598,70" stroke="#c9a870" stroke-width=".35" stroke-opacity=".14" marker-end="url(#am)"/>
+      <!-- QA → Portal → Channels -->
+      <path d="M643,70 L684,70" stroke="#c9a870" stroke-width=".8" stroke-opacity=".5" marker-end="url(#abr)"/>
+      <path d="M753,62 L800,24" stroke="#c9a870" stroke-width=".5" stroke-opacity=".32" marker-end="url(#am)"/>
+      <path d="M753,66 L800,50" stroke="#c9a870" stroke-width=".5" stroke-opacity=".28" marker-end="url(#am)"/>
+      <path d="M753,74 L800,80" stroke="#c9a870" stroke-width=".5" stroke-opacity=".26" marker-end="url(#am)"/>
+      <path d="M753,78 L800,106" stroke="#c9a870" stroke-width=".5" stroke-opacity=".24" marker-end="url(#am)"/>
+      <!-- Learning loop (dashed) -->
+      <path d="M519,119 Q519,140 340,140 Q162,140 152,99" stroke="#c9a870" stroke-width=".5" stroke-opacity=".2" fill="none" stroke-dasharray="3 9"/>
+
+      <!-- ── TÚ (left node) ── -->
+      <circle cx="34" cy="70" r="20" fill="url(#af)" stroke="#c9a870" stroke-width=".9" stroke-opacity=".55"/>
+      <text x="34" y="67" text-anchor="middle" fill="#c9a870" fill-opacity=".85" font-size="7.5" font-family="Space Grotesk" font-weight="700">TÚ</text>
+      <text x="34" y="78" text-anchor="middle" fill="#c9a870" fill-opacity=".35" font-size="5" font-family="Space Grotesk">PORTAL</text>
+
+      <!-- ── ORCHESTRATOR (central glowing) ── -->
+      <circle cx="152" cy="70" r="34" fill="url(#of)" stroke="#c9a870" stroke-width="1.1" stroke-opacity=".6" filter="url(#glo)"/>
+      <circle cx="152" cy="70" r="22" fill="rgba(201,168,112,.04)" stroke="#c9a870" stroke-width=".4" stroke-opacity=".18"/>
+      <text x="152" y="66" text-anchor="middle" fill="#c9a870" fill-opacity=".85" font-size="7" font-family="Space Grotesk" font-weight="700" letter-spacing=".08em">VICTOR IA</text>
+      <text x="152" y="77" text-anchor="middle" fill="#c9a870" fill-opacity=".45" font-size="5.5" font-family="Space Grotesk" letter-spacing=".06em">ORQUESTADOR</text>
+      <circle cx="152" cy="70" r="34" fill="none" stroke="#c9a870" stroke-width="1">
+        <animate attributeName="r" values="34;46;34" dur="3.8s" repeatCount="indefinite"/>
+        <animate attributeName="stroke-opacity" values="0;.12;0" dur="3.8s" repeatCount="indefinite"/>
+      </circle>
+
+      <!-- ── ROW-1 AGENTS (y=36) ── -->
+      <circle cx="278" cy="36" r="18" fill="url(#af)" stroke="#c9a870" stroke-width=".5" stroke-opacity=".3"/>
+      <text x="278" y="33" text-anchor="middle" fill="#c9a870" fill-opacity=".7" font-size="5.5" font-family="Space Grotesk" font-weight="600">CONTENIDO</text>
+      <text x="278" y="42" text-anchor="middle" fill="#c9a870" fill-opacity=".3" font-size="4.5" font-family="Space Grotesk">Copy · SEO</text>
+
+      <circle cx="358" cy="36" r="18" fill="url(#af)" stroke="#c9a870" stroke-width=".5" stroke-opacity=".3"/>
+      <text x="358" y="33" text-anchor="middle" fill="#c9a870" fill-opacity=".7" font-size="5.5" font-family="Space Grotesk" font-weight="600">VISUAL</text>
+      <text x="358" y="42" text-anchor="middle" fill="#c9a870" fill-opacity=".3" font-size="4.5" font-family="Space Grotesk">Imagen 4K</text>
+
+      <circle cx="438" cy="36" r="18" fill="url(#af)" stroke="#c9a870" stroke-width=".5" stroke-opacity=".3"/>
+      <text x="438" y="33" text-anchor="middle" fill="#c9a870" fill-opacity=".7" font-size="5.5" font-family="Space Grotesk" font-weight="600">VIDEO</text>
+      <text x="438" y="42" text-anchor="middle" fill="#c9a870" fill-opacity=".3" font-size="4.5" font-family="Space Grotesk">Prod. 4K</text>
+
+      <circle cx="518" cy="36" r="18" fill="url(#af)" stroke="#c9a870" stroke-width=".5" stroke-opacity=".3"/>
+      <text x="518" y="33" text-anchor="middle" fill="#c9a870" fill-opacity=".7" font-size="5.5" font-family="Space Grotesk" font-weight="600">VOZ</text>
+      <text x="518" y="42" text-anchor="middle" fill="#c9a870" fill-opacity=".3" font-size="4.5" font-family="Space Grotesk">Narración</text>
+
+      <!-- ── ROW-2 AGENTS (y=104) ── -->
+      <circle cx="278" cy="104" r="18" fill="url(#af)" stroke="#c9a870" stroke-width=".5" stroke-opacity=".3"/>
+      <text x="278" y="101" text-anchor="middle" fill="#c9a870" fill-opacity=".7" font-size="5.5" font-family="Space Grotesk" font-weight="600">SEO/AEO</text>
+      <text x="278" y="110" text-anchor="middle" fill="#c9a870" fill-opacity=".3" font-size="4.5" font-family="Space Grotesk">Búsqueda</text>
+
+      <circle cx="358" cy="104" r="18" fill="url(#af)" stroke="#c9a870" stroke-width=".5" stroke-opacity=".3"/>
+      <text x="358" y="101" text-anchor="middle" fill="#c9a870" fill-opacity=".7" font-size="5.5" font-family="Space Grotesk" font-weight="600">PUBLISH</text>
+      <text x="358" y="110" text-anchor="middle" fill="#c9a870" fill-opacity=".3" font-size="4.5" font-family="Space Grotesk">Multi-canal</text>
+
+      <circle cx="438" cy="104" r="18" fill="url(#af)" stroke="#c9a870" stroke-width=".5" stroke-opacity=".3"/>
+      <text x="438" y="101" text-anchor="middle" fill="#c9a870" fill-opacity=".7" font-size="5.5" font-family="Space Grotesk" font-weight="600">CALIDAD</text>
+      <text x="438" y="110" text-anchor="middle" fill="#c9a870" fill-opacity=".3" font-size="4.5" font-family="Space Grotesk">QA Brand</text>
+
+      <circle cx="518" cy="104" r="18" fill="url(#af)" stroke="#c9a870" stroke-width=".5" stroke-opacity=".3" filter="url(#sgl)"/>
+      <text x="518" y="101" text-anchor="middle" fill="#c9a870" fill-opacity=".7" font-size="5.5" font-family="Space Grotesk" font-weight="600">ANALYTICS</text>
+      <text x="518" y="110" text-anchor="middle" fill="#c9a870" fill-opacity=".35" font-size="4.5" font-family="Space Grotesk">Aprende ↺</text>
+
+      <!-- ── QA HUB ── -->
+      <circle cx="621" cy="70" r="23" fill="url(#of)" stroke="#c9a870" stroke-width=".7" stroke-opacity=".42"/>
+      <text x="621" y="67" text-anchor="middle" fill="#c9a870" fill-opacity=".72" font-size="6" font-family="Space Grotesk" font-weight="600">CALIDAD</text>
+      <text x="621" y="77" text-anchor="middle" fill="#c9a870" fill-opacity=".35" font-size="5" font-family="Space Grotesk">QA CHECK</text>
+
+      <!-- ── PORTAL ── -->
+      <rect x="685" y="53" width="70" height="35" rx="1" stroke="#c9a870" stroke-width="1" stroke-opacity=".7" fill="rgba(22,20,15,.9)"/>
+      <text x="720" y="68" text-anchor="middle" fill="#c9a870" fill-opacity=".88" font-size="7" font-family="Space Grotesk" font-weight="600">PORTAL</text>
+      <text x="720" y="80" text-anchor="middle" fill="#c9a870" fill-opacity=".45" font-size="5.5" font-family="Space Grotesk">APROBACIÓN ✓</text>
+
+      <!-- ── CHANNELS ── -->
+      <text x="807" y="27" fill="#c9a870" fill-opacity=".6" font-size="7" font-family="Space Grotesk" font-weight="600">LinkedIn</text>
+      <text x="807" y="53" fill="#c9a870" fill-opacity=".6" font-size="7" font-family="Space Grotesk" font-weight="600">Instagram</text>
+      <text x="807" y="83" fill="#c9a870" fill-opacity=".6" font-size="7" font-family="Space Grotesk" font-weight="600">Facebook</text>
+      <text x="807" y="109" fill="#c9a870" fill-opacity=".6" font-size="7" font-family="Space Grotesk" font-weight="600">Blog</text>
+
+      <!-- Learning loop label -->
+      <text x="340" y="138" text-anchor="middle" fill="#c9a870" fill-opacity=".22" font-size="5.5" font-family="Space Grotesk" letter-spacing=".18em">MACHINE LEARNING — MEJORA CONTINUA AUTOMÁTICA ↺</text>
+
+      <!-- ── ANIMATED PARTICLES ── -->
+      <circle r="2.4" fill="#c9a870"><animateMotion dur="2.2s" repeatCount="indefinite" begin="0s"><mpath href="#pc1"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="2.2s" repeatCount="indefinite"/></circle>
+      <circle r="2.4" fill="#c9a870"><animateMotion dur="2.5s" repeatCount="indefinite" begin=".45s"><mpath href="#pc2"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="2.5s" repeatCount="indefinite" begin=".45s"/></circle>
+      <circle r="2.4" fill="#c9a870"><animateMotion dur="2.8s" repeatCount="indefinite" begin=".9s"><mpath href="#pc3"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="2.8s" repeatCount="indefinite" begin=".9s"/></circle>
+      <circle r="2.4" fill="#e8cc94"><animateMotion dur="3s" repeatCount="indefinite" begin="1.3s"><mpath href="#pc4"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="3s" repeatCount="indefinite" begin="1.3s"/></circle>
+      <circle r="2.4" fill="#c9a870"><animateMotion dur="2.2s" repeatCount="indefinite" begin=".3s"><mpath href="#pc5"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="2.2s" repeatCount="indefinite" begin=".3s"/></circle>
+      <circle r="2.4" fill="#c9a870"><animateMotion dur="2.5s" repeatCount="indefinite" begin=".75s"><mpath href="#pc6"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="2.5s" repeatCount="indefinite" begin=".75s"/></circle>
+      <circle r="2.4" fill="#c9a870"><animateMotion dur="2.8s" repeatCount="indefinite" begin="1.2s"><mpath href="#pc7"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="2.8s" repeatCount="indefinite" begin="1.2s"/></circle>
+      <circle r="2.8" fill="#e8cc94"><animateMotion dur="1.9s" repeatCount="indefinite" begin="1.8s"><mpath href="#pqa"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="1.9s" repeatCount="indefinite" begin="1.8s"/></circle>
+      <circle r="2.8" fill="#c9a870"><animateMotion dur="1.5s" repeatCount="indefinite" begin="2.5s"><mpath href="#ppor"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="1.5s" repeatCount="indefinite" begin="2.5s"/></circle>
+      <circle r="2" fill="#c9a870"><animateMotion dur="1.2s" repeatCount="indefinite" begin="3s"><mpath href="#pli"/></animateMotion><animate attributeName="opacity" values="0;.8;0" dur="1.2s" repeatCount="indefinite" begin="3s"/></circle>
+      <circle r="2" fill="#c9a870"><animateMotion dur="1.2s" repeatCount="indefinite" begin="3.3s"><mpath href="#pig"/></animateMotion><animate attributeName="opacity" values="0;.8;0" dur="1.2s" repeatCount="indefinite" begin="3.3s"/></circle>
+      <circle r="3" fill="#c9a870"><animateMotion dur="5.5s" repeatCount="indefinite" begin="2s"><mpath href="#ploop"/></animateMotion><animate attributeName="opacity" values="0;.55;.55;0" dur="5.5s" repeatCount="indefinite" begin="2s"/></circle>
+    </svg>
+  </div>
+
+  <div class="agents">
+    <div class="agent a3"><p class="ag-n">01</p><p class="ag-name">Agente de Contenido</p><p class="ag-role">Copy y Texto</p><p class="ag-d">Redacta cada caption, artículo y post del blog. Alineado a tus cinco pilares y a la voz de Remi Creative.</p><div class="ag-learn"><div class="ag-dot"></div><span class="ag-ls">Aprende de tus patrones de aprobación</span></div></div>
+    <div class="agent a3"><p class="ag-n">02</p><p class="ag-name">Agente Visual</p><p class="ag-role">Imágenes 4K</p><p class="ag-d">Genera todas las imágenes calibradas a tu paleta, tipografía e identidad visual de marca.</p><div class="ag-learn"><div class="ag-dot"></div><span class="ag-ls">Refina el estilo con tu retroalimentación</span></div></div>
+    <div class="agent a4"><p class="ag-n">03</p><p class="ag-name">Agente de Video</p><p class="ag-role">Producción 4K</p><p class="ag-d">Produce videos de 15–20 segundos con motion graphics, títulos y postproducción completa en 4K.</p><div class="ag-learn"><div class="ag-dot"></div><span class="ag-ls">El estilo se adapta de clips aprobados</span></div></div>
+    <div class="agent a4"><p class="ag-n">04</p><p class="ag-name">Agente de Voz</p><p class="ag-role">Narración Profesional</p><p class="ag-d">Narra todo el contenido de video en un tono calibrado a la personalidad de marca de Remi Creative.</p><div class="ag-learn"><div class="ag-dot"></div><span class="ag-ls">El tono se calibra cada 30 días</span></div></div>
+    <div class="agent a5"><p class="ag-n">05</p><p class="ag-name">Agente de Publicación</p><p class="ag-role">Programador Multi-Canal</p><p class="ag-d">Distribuye el contenido aprobado a LinkedIn, Instagram, Facebook y WordPress en los horarios óptimos por plataforma.</p><div class="ag-learn"><div class="ag-dot"></div><span class="ag-ls">Optimiza horarios con analytics mensuales</span></div></div>
+    <div class="agent a5"><p class="ag-n">06</p><p class="ag-name">Agente SEO / AEO</p><p class="ag-role">Búsqueda e IA</p><p class="ag-d">Estructura cada artículo y post para posicionarse en Google y ser citado por ChatGPT, Perplexity y Gemini.</p><div class="ag-learn"><div class="ag-dot"></div><span class="ag-ls">Se actualiza con tendencias semanales</span></div></div>
+    <div class="agent a6"><p class="ag-n">07</p><p class="ag-name">Agente de Analytics</p><p class="ag-role">Rendimiento</p><p class="ag-d">Monitorea engagement, alcance y clics. Identifica qué funciona e informa a los demás agentes mensualmente.</p><div class="ag-learn"><div class="ag-dot"></div><span class="ag-ls">Alimenta el aprendizaje de todo el sistema</span></div></div>
+    <div class="agent a6"><p class="ag-n">08</p><p class="ag-name">Agente de Calidad</p><p class="ag-role">Consistencia de Marca</p><p class="ag-d">Revisa cada pieza antes de que llegue a tu portal. Garantiza voz, consistencia visual y exactitud.</p><div class="ag-learn"><div class="ag-dot"></div><span class="ag-ls">El estándar se eleva con cada ciclo</span></div></div>
+  </div>
+</div>
+
+<!-- 08 TU PANEL -->
+<div class="slide" id="sp">
+  <div class="top-bar"><span class="logo">Victor IA</span><span class="slide-label">07 / 13</span></div>
+  <div class="l">
+    <h2 class="sp-h a1">Tu panel.<br>Control total,<br>paso a paso.</h2>
+    <div class="step a2"><span class="step-n">01</span><div><p class="step-t">Inicias sesión — tu panel privado</p><p class="step-d">Portal protegido con contraseña. Solo tú ves tu contenido. Estado completo del proyecto de un vistazo.</p></div></div>
+    <div class="step a3"><span class="step-n">02</span><div><p class="step-t">Revisas tu cola de contenido</p><p class="step-d">Cada post, video y artículo listo para aprobación. Filtra por canal o tipo. Ve exactamente qué produjo cada agente.</p></div></div>
+    <div class="step a4"><span class="step-n">03</span><div><p class="step-t">Apruebas, comentas o rechazas</p><p class="step-d">Un clic para aprobar. Escribe un comentario para solicitar cambios — correo de confirmación cuando esté listo. Rechaza para regenerar desde cero.</p></div></div>
+    <div class="step a5"><span class="step-n">04</span><div><p class="step-t">Monitoreas lo publicado y su rendimiento</p><p class="step-d">Historial completo de todo lo que salió en vivo. Datos de engagement, alcance y clics por publicación.</p></div></div>
+    <div class="step a5"><span class="step-n">05</span><div><p class="step-t">Controlas tus horas en tiempo real</p><p class="step-d">Horas del mes usadas vs. disponibles, desglosadas por agente. Sabes exactamente cuándo activa el excedente antes de que ocurra.</p></div></div>
+    <div class="step a6"><span class="step-n">06</span><div><p class="step-t">Registro de aprendizaje semanal</p><p class="step-d">Historial en vivo de cada calibración: qué cambió, qué se refinó con tu retroalimentación y cómo evoluciona tu voz de marca.</p></div></div>
+  </div>
+  <div class="r">
+    <div class="pm hi a3"><p class="pm-t">Cola de Contenido</p><p class="pm-v">12 pendientes</p><p class="pm-d">Posts, videos y artículos esperando tu aprobación esta semana</p></div>
+    <div class="pm a4"><p class="pm-t">Horas del Plan — Mayo</p><p class="pm-v">18 / 25 hrs</p><p class="pm-d">7 horas disponibles — producción + todas las solicitudes de cambio incluidas</p></div>
+    <div class="pm a4"><p class="pm-t">Publicado Este Mes</p><p class="pm-v">47 piezas</p><p class="pm-d">En LinkedIn, Instagram, Facebook y tu blog</p></div>
+    <div class="pm a5"><p class="pm-t">Cambios en Proceso</p><p class="pm-v">2 en proceso</p><p class="pm-d">Entrega en menos de 24 hrs hábiles — confirmación por correo al estar listos</p></div>
+    <div class="pm a6"><p class="pm-t">Ciclo de Aprendizaje — Semana 3</p><p class="pm-v">78% calibrado</p><p class="pm-d">Voz de marca confirmada. Estilo de video aprobado. Tono de blog refinado en 4 ciclos.</p></div>
+  </div>
+</div>
+
+<!-- 09 COMPARATIVA DE MERCADO -->
+<div class="slide" id="sh">
+  <div class="top-bar"><span class="logo">Victor IA</span><span class="slide-label">08 / 13</span></div>
+  <div id="cur-toggle-sh" role="group" aria-label="Seleccionar moneda">
+    <button class="ct-btn" data-cur="MXN" onclick="switchCur('MXN')" aria-label="Ver precios en pesos mexicanos">MXN</button>
+    <button class="ct-btn ct-active" data-cur="CAD" onclick="switchCur('CAD')" aria-label="Ver precios en dólares canadienses">CAD</button>
+  </div>
+  <div class="l">
+    <p class="hrs-title a1">Lo que pagarías con cualquier otro</p>
+    <h2 class="hrs-h a2">La diferencia<br>es <em style="font-style:italic;color:var(--gold)">irrefutable.</em></h2>
+    <p class="hrs-body a3" style="font-size:15px">Esto es lo que cuesta el mismo nivel de cobertura — LinkedIn, Instagram, Facebook y blog diario — en el mercado mexicano y canadiense.</p>
+    <!-- BAR CHART -->
+    <div class="mc-bars a3">
+      <div class="mc-bar dim">
+        <div class="mc-bar-top">
+          <span class="mc-lbl">Agencia digital en BC (equipo humano)</span>
+          <span class="mc-val">$<span data-pk="m_agency_bc_lo">14,000</span>–$<span data-pk="m_agency_bc_hi">25,000</span> <span class="pu">CAD</span></span>
+        </div>
+        <div class="mc-track"><div class="mc-fill" style="--w:100%"></div></div>
+        <span class="mc-note">Retainers en Kelowna / Vancouver · Sin IA · Sin automatización</span>
+      </div>
+      <div class="mc-bar dim">
+        <div class="mc-bar-top">
+          <span class="mc-lbl">Agencia digital en México (equipo)</span>
+          <span class="mc-val">$<span data-pk="m_agency_mx_lo">4,600</span>–$<span data-pk="m_agency_mx_hi">8,600</span> <span class="pu">CAD</span></span>
+        </div>
+        <div class="mc-track"><div class="mc-fill" style="--w:52%"></div></div>
+        <span class="mc-note">Community Manager + Diseñador + Copywriter + Editor — sin analytics unificados</span>
+      </div>
+      <div class="mc-bar dim">
+        <div class="mc-bar-top">
+          <span class="mc-lbl">Freelancers MX (4 especialistas)</span>
+          <span class="mc-val">$<span data-pk="m_freelance_lo">2,900</span>–$<span data-pk="m_freelance_hi">5,000</span> <span class="pu">CAD</span></span>
+        </div>
+        <div class="mc-track"><div class="mc-fill" style="--w:30%"></div></div>
+        <span class="mc-note">Sin integración · Sin sistema central · Difícil de coordinar</span>
+      </div>
+      <div class="mc-bar feat-bar">
+        <div class="mc-bar-top">
+          <span class="mc-lbl">Victor IA Alcance — 4 canales</span>
+          <span class="mc-val gold">$<span data-pk="a_mo">1,750</span> <span class="pu">CAD</span></span>
+        </div>
+        <div class="mc-track"><div class="mc-fill gold" style="--w:13%"></div></div>
+        <span class="mc-note">Todo automatizado · 8 agentes IA · Portal privado · Mejora continua · + IVA</span>
+      </div>
+    </div>
+    <p class="body-t a5" style="font-size:11px;color:var(--text3);margin-top:10px">* Costos estimados para 4+ canales activos con calidad profesional · precios en moneda seleccionada</p>
+  </div>
+  <div class="r" style="padding:100px 80px 80px 48px">
+    <p class="hd-tag a2" style="margin-bottom:16px">¿Cuándo se paga solo?</p>
+    <h3 class="a3" style="font-family:'Instrument Serif',serif;font-size:clamp(26px,2.8vw,36px);font-weight:300;color:var(--text1);line-height:1.05;margin-bottom:22px">Un solo cliente<br>dental nuevo en BC.</h3>
+    <div class="roi-row a4">
+      <span class="roi-icon">→</span>
+      <div>
+        <p class="roi-t">Retainer dental típico en BC</p>
+        <p class="roi-v">$<span data-pk="m_retainer_lo">2,000</span>–$<span data-pk="m_retainer_hi">5,000</span> <span class="pu" data-suf="/mes">CAD</span></p>
+        <p class="roi-d">Un cliente nuevo cubre Alcance 2×+ el primer mes — y genera ROI compuesto cada mes siguiente.</p>
+      </div>
+    </div>
+    <div class="roi-row a5">
+      <span class="roi-icon">→</span>
+      <div>
+        <p class="roi-t">Presencia en 4 canales simultáneos</p>
+        <p class="roi-v">LI · IG · FB · Blog</p>
+        <p class="roi-d">Lo que ningún equipo humano puede operar a este costo, esta calidad y sin errores de consistencia.</p>
+      </div>
+    </div>
+    <div class="roi-row a6">
+      <span class="roi-icon">→</span>
+      <div>
+        <p class="roi-t">Ahorro anual vs. agencia en BC</p>
+        <p class="roi-v" style="color:var(--gold)">hasta $<span data-pk="m_roi_bc">265,000</span> <span class="pu">CAD</span></p>
+        <p class="roi-d">Lo que pagarías a un equipo en BC para el mismo resultado. Con Victor IA, ese dinero se queda en Remi Creative.</p>
+      </div>
+    </div>
+    <div class="roi-row a6" style="border-bottom:none;background:rgba(201,168,112,.04);padding:13px 14px;border:1px solid rgba(201,168,112,.15);margin-top:12px">
+      <span class="roi-icon" style="color:var(--gold)">→</span>
+      <div>
+        <p class="roi-t" style="color:var(--gold)">Opinión objetiva</p>
+        <p class="roi-d" style="color:var(--text1);font-size:12px;line-height:1.6">No es un gasto operativo. Es la infraestructura de crecimiento de Remi Creative — y vale lo que cuesta desde el mes uno. Si consultas esta propuesta con cualquier IA (Claude, ChatGPT, Gemini), la conclusión es la misma: conviene.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 10 INVERSIÓN -->
+<div class="slide" id="s7">
+  <div class="top-bar"><span class="logo">Victor IA</span><span class="slide-label">09 / 13</span></div>
+  <div id="cur-toggle" role="group" aria-label="Seleccionar moneda">
+    <button class="ct-btn" data-cur="MXN" onclick="switchCur('MXN')" aria-label="Ver precios en pesos mexicanos">MXN</button>
+    <button class="ct-btn ct-active" data-cur="CAD" onclick="switchCur('CAD')" aria-label="Ver precios en dólares canadienses">CAD</button>
+  </div>
+  <div class="inv-layout">
+
+    <!-- IZQUIERDA: Qué incluye -->
+    <div class="inv-detail">
+      <p class="eyebrow" style="margin-bottom:16px">4 canales · 318 piezas / mes</p>
+      <h2 class="inv-h">Alcance</h2>
+      <div class="prop-div" style="margin:22px 0 18px"></div>
+      <div style="margin-bottom:14px">
+        <p class="prop-li-h" style="margin-bottom:8px">Canales activos</p>
+        <div style="display:flex;flex-wrap:wrap;gap:4px">
+          <span class="ag-pill on">LinkedIn</span>
+          <span class="ag-pill on">Instagram</span>
+          <span class="ag-pill on">Facebook</span>
+          <span class="ag-pill on">Blog</span>
+        </div>
+      </div>
+      <div style="margin-bottom:18px">
+        <p class="prop-li-h" style="margin-bottom:8px">8 agentes IA especializados</p>
+        <div style="display:flex;flex-wrap:wrap;gap:4px">
+          <span class="ag-pill on">Contenido</span><span class="ag-pill on">Visual</span><span class="ag-pill on">Video</span><span class="ag-pill on">Voz</span><span class="ag-pill on">SEO/AEO</span><span class="ag-pill on">Calidad</span><span class="ag-pill on">Analytics</span><span class="ag-pill on">Publicación</span>
+        </div>
+      </div>
+      <div class="prop-div" style="margin:24px 0 20px"></div>
+      <div class="inv-stats">
+        <div class="inv-stat"><span class="inv-num">28</span><span class="inv-lbl">Videos 4K</span></div>
+        <div class="inv-stat"><span class="inv-num">191</span><span class="inv-lbl">Imágenes</span></div>
+        <div class="inv-stat"><span class="inv-num">30</span><span class="inv-lbl">Blogs SEO</span></div>
+        <div class="inv-stat"><span class="inv-num">69</span><span class="inv-lbl">Posts</span></div>
+      </div>
+      <div class="prop-div" style="margin:18px 0 14px"></div>
+      <p style="font-family:'Space Grotesk',sans-serif;font-size:10px;color:var(--text3);letter-spacing:.12em;text-transform:uppercase;margin-bottom:7px">Horas adicionales fuera del paquete</p>
+      <p style="font-family:'Space Grotesk',sans-serif;font-size:13px;color:var(--text2)">
+        Proceso: <strong style="color:var(--text1)">$<span data-pk="a_exc">112</span> <span class="pu">CAD</span>/hr</strong>
+        &nbsp;·&nbsp;
+        Consultoría: <strong style="color:var(--text1)">$<span data-pk="consult">125</span> <span class="pu">CAD</span>/hr</strong>
+      </p>
+    </div>
+
+    <!-- DERECHA: Calendario de pagos -->
+    <div class="inv-sched">
+      <p class="inv-eyebrow">Tu inversión — trimestre piloto</p>
+      <div class="sched-rows">
+        <div class="sched-row">
+          <span class="sr-label">Setup único <em style="color:var(--text3);font-style:normal">(al firmar)</em></span>
+          <span class="sr-amt">$<span data-pk="a_setup">1,995</span> <span class="pu">CAD</span></span>
+        </div>
+        <div class="sched-row">
+          <span class="sr-label">Mes 1</span>
+          <span class="sr-amt">$<span data-pk="a_mo">1,750</span> <span class="pu">CAD</span></span>
+        </div>
+        <div class="sched-row">
+          <span class="sr-label">Mes 2</span>
+          <span class="sr-amt">$<span data-pk="a_mo">1,750</span> <span class="pu">CAD</span></span>
+        </div>
+        <div class="sched-row" style="border-bottom:none">
+          <span class="sr-label">Mes 3</span>
+          <span class="sr-amt">$<span data-pk="a_mo">1,750</span> <span class="pu">CAD</span></span>
+        </div>
+        <div class="sched-total-row">
+          <span class="sr-label" style="font-family:'Space Grotesk',sans-serif;font-size:12px;color:var(--text2);font-weight:500">Total trimestre</span>
+          <span class="sr-total">$<span data-pk="a_q3">7,245</span> <span class="pu">CAD</span></span>
+        </div>
+      </div>
+      <div style="display:inline-flex;align-items:center;border:1px solid rgba(201,168,112,.3);padding:5px 14px;font-family:'Space Grotesk',sans-serif;font-size:9px;letter-spacing:.18em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:16px">⏱ 18–21 días hábiles de implementación</div>
+      <button class="info-btn" onclick="openModal('inicio')" style="width:100%;margin-bottom:10px" aria-label="Ver comparativa real — plan Alcance">Ver comparativa real <span class="ib-arr">→</span></button>
+      <div class="prop-over"><strong style="color:var(--gold-dim)">Llave en mano:</strong> Solo revisas tu correo y apruebas. Todo lo demás es automático.</div>
+    </div>
+
+    <!-- COL 3: COMPARATIVA -->
+    <div class="inv-cmp">
+      <p class="icmp-eyebrow">Alternativas en el mercado</p>
+
+      <div class="icmp-rows">
+        <div class="icmp-row icmp-hl">
+          <div class="icmp-info">
+            <span class="icmp-name">Victor IA — Plan Alcance</span>
+            <span class="icmp-detail">4 canales · 318 piezas/mes · 8 agentes IA</span>
+          </div>
+          <span class="icmp-val icmp-gold">$<span data-pk="a_mo">1,750</span>&nbsp;<span class="pu">CAD</span>/mes</span>
+        </div>
+        <div class="icmp-row">
+          <div class="icmp-info">
+            <span class="icmp-name">Freelancers combinados</span>
+            <span class="icmp-detail">CM + diseñador + redactor + tu tiempo</span>
+          </div>
+          <span class="icmp-val">$<span data-pk="m_freelance_lo">2,900</span>–$<span data-pk="m_freelance_hi">5,000</span>&nbsp;<span class="pu">CAD</span>/mes</span>
+        </div>
+        <div class="icmp-row">
+          <div class="icmp-info">
+            <span class="icmp-name">Agencia de marketing BC</span>
+            <span class="icmp-detail">Equipo externo · sin IA · sin portal de aprobación</span>
+          </div>
+          <span class="icmp-val">$<span data-pk="m_agency_bc_lo">14,000</span>–$<span data-pk="m_agency_bc_hi">25,000</span>&nbsp;<span class="pu">CAD</span>/mes</span>
+        </div>
+      </div>
+
+      <div class="icmp-save">
+        <p class="icmp-save-lbl">Diferencia vs agencia BC</p>
+        <p class="icmp-save-num">Hasta $<span data-pk="m_agency_bc_hi">25,000</span>&nbsp;<span class="pu">CAD</span>/mes</p>
+        <p class="icmp-save-note">Con el mismo resultado — o mejor, porque los agentes no descansan, no se enferman y no renuncian.</p>
+      </div>
+
+      <div style="margin-top:20px;padding:14px 18px;border:1px solid var(--border);border-radius:3px;display:flex;flex-direction:column;gap:6px">
+        <p style="font-family:'Space Grotesk',sans-serif;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--text3)">Producción mensual incluida</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px">
+          <span style="font-family:'Space Grotesk',sans-serif;font-size:10px;color:var(--text2);background:rgba(201,168,112,.06);border:1px solid rgba(201,168,112,.18);padding:3px 8px;border-radius:2px">28 videos 4K</span>
+          <span style="font-family:'Space Grotesk',sans-serif;font-size:10px;color:var(--text2);background:rgba(201,168,112,.06);border:1px solid rgba(201,168,112,.18);padding:3px 8px;border-radius:2px">191 imágenes</span>
+          <span style="font-family:'Space Grotesk',sans-serif;font-size:10px;color:var(--text2);background:rgba(201,168,112,.06);border:1px solid rgba(201,168,112,.18);padding:3px 8px;border-radius:2px">30 blogs SEO</span>
+          <span style="font-family:'Space Grotesk',sans-serif;font-size:10px;color:var(--text2);background:rgba(201,168,112,.06);border:1px solid rgba(201,168,112,.18);padding:3px 8px;border-radius:2px">69 posts</span>
+          <span style="font-family:'Space Grotesk',sans-serif;font-size:10px;color:var(--text2);background:rgba(201,168,112,.06);border:1px solid rgba(201,168,112,.18);padding:3px 8px;border-radius:2px">Portal de aprobación</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 11 TÉRMINOS Y CONDICIONES -->
+<div class="slide" id="stc">
+  <div class="top-bar"><span class="logo">Victor IA</span><span class="slide-label">10 / 13</span></div>
+  <div class="l">
+    <h2 class="tc-h a1">Términos y<br>condiciones<br>del servicio.</h2>
+    <div class="tc-item a3">
+      <span class="tc-icon">CON</span>
+      <div><p class="tc-t">Contrato mínimo de 3 meses</p><p class="tc-d">El servicio inicia con un compromiso inicial de 3 meses. Después, renovación mensual automática con aviso de cancelación de 30 días.</p></div>
+    </div>
+    <div class="tc-item a4">
+      <span class="tc-icon">PAG</span>
+      <div><p class="tc-t">Estructura de pagos</p><p class="tc-d">Setup: 50% al firmar · 50% al entregar el sistema (día 18–21). Mensualidad: pago por adelantado el 1° de cada mes. Excedentes: facturados al cierre del mes con desglose detallado por acción.</p></div>
+    </div>
+    <div class="tc-item a5">
+      <span class="tc-icon">HRS</span>
+      <div><p class="tc-t">Horas adicionales y excedente</p><p class="tc-d">Toda solicitud de cambio se cotiza en horas antes de ejecutarse — tú autorizas. Las horas no usadas de Opción B acumulan hasta 10 por mes; se reinician al iniciar un nuevo período de 3 meses.</p></div>
+    </div>
+    <div class="tc-item a6">
+      <span class="tc-icon">CAN</span>
+      <div><p class="tc-t">Cancelación</p><p class="tc-d">Aviso por escrito con 30 días de anticipación. No hay penalización después del período mínimo de 3 meses. El contenido aprobado y publicado queda en propiedad del cliente.</p></div>
+    </div>
+  </div>
+  <div class="r">
+    <div class="tc-item a3">
+      <span class="tc-icon">PRO</span>
+      <div><p class="tc-t">Propiedad del contenido</p><p class="tc-d">Todo el contenido aprobado por el cliente es de su propiedad desde el momento de aprobación. Victor IA no utiliza el contenido de Remi Creative para ningún otro propósito.</p></div>
+    </div>
+    <div class="tc-item a4">
+      <span class="tc-icon">ACC</span>
+      <div><p class="tc-t">Accesos a plataformas</p><p class="tc-d">El cliente conserva la propiedad y administración de todas sus cuentas. Se otorga únicamente permiso de publicación. Victor IA no puede modificar configuraciones ni acceder a datos de pago.</p></div>
+    </div>
+    <div class="tc-item a5">
+      <span class="tc-icon">CON</span>
+      <div><p class="tc-t">Confidencialidad</p><p class="tc-d">Toda estrategia, resultados, datos de rendimiento y activos de marca son tratados como información confidencial. Victor IA firma NDA si el cliente lo requiere.</p></div>
+    </div>
+    <div class="tc-item a5">
+      <span class="tc-icon">ALC</span>
+      <div><p class="tc-t">Cambios de alcance</p><p class="tc-d">Agregar nuevas redes sociales, cambiar de idioma o aumentar el volumen de contenido se cotizan por separado y requieren un nuevo acuerdo de alcance.</p></div>
+    </div>
+    <div class="tc-item a6">
+      <span class="tc-icon">ENT</span>
+      <div><p class="tc-t">Plazos de entrega</p><p class="tc-d">El plazo de 18–21 días hábiles aplica una vez recibida la información completa de onboarding. Demoras por aprobación de APIs de terceros o entrega tardía de activos pueden extender el plazo, con notificación previa.</p></div>
+    </div>
+    <div class="tc-item a6">
+      <span class="tc-icon">TEC</span>
+      <div><p class="tc-t">Actualizaciones de modelos y costos</p><p class="tc-d">Los modelos de IA (imagen, video, voz) se actualizan periódicamente. Mejoras significativas se notifican por escrito. Cambios que impliquen ajuste de costo se aplican solo con autorización previa del cliente.</p></div>
+    </div>
+    <div class="tc-item a6">
+      <span class="tc-icon">VID</span>
+      <div><p class="tc-t">Limitación: video con personas hablando</p><p class="tc-d">El video realista con personas hablando (lip-sync, avatares hiperrealistas) requiere modelos de mayor costo — entre 3× y 5× el presupuesto estándar. Este servicio se cotiza por separado y no está incluido en ninguno de los planes base.</p></div>
+    </div>
+    <div class="tc-item a6">
+      <span class="tc-icon">IA</span>
+      <div><p class="tc-t">Naturaleza de la IA — mejora continua</p><p class="tc-d">La IA no es perfecta. En los primeros 90 días el sistema aprende de tus aprobaciones y retroalimentación. Victor IA garantiza mejora measurable ciclo a ciclo — el sistema se vuelve más preciso con cada pieza que revisas.</p></div>
+    </div>
+  </div>
+  <div style="padding:0 0 20px;border-top:1px solid var(--border);margin-top:16px;grid-column:1/-1">
+    <button class="info-btn" onclick="openModal('tc-extra')" style="margin-top:16px" aria-label="Ver términos completos — SLAs, incumplimientos, garantías">Ver términos completos (SLAs, incumplimientos, garantías) <span class="ib-arr">→</span></button>
+  </div>
+</div>
+
+<!-- 12 CRONOGRAMA REALISTA -->
+<div class="slide" id="scr">
+  <div class="top-bar"><span class="logo">Victor IA</span><span class="slide-label">11 / 13</span></div>
+  <div class="l">
+    <p class="hd-tag a1">Lo que construimos — fase a fase</p>
+    <h2 class="crono-h a2">Horas reales.<br>Tiempos reales.</h2>
+    <p class="crono-sub a2">Trabajo activo en paralelo a las aprobaciones externas. El sistema se construye mientras las APIs se aprueban.</p>
+    <div class="ph a3">
+      <div class="ph-bar" style="background:var(--gold-dim)"></div>
+      <div class="ph-body"><p class="ph-title">Onboarding — portal, cuentas, permisos</p><p class="ph-d">Panel privado, base de datos, correos de alerta, credenciales internas.</p></div>
+      <span class="ph-h">8 h</span>
+    </div>
+    <div class="ph a4">
+      <div class="ph-bar" style="background:#4ecdc4"></div>
+      <div class="ph-body"><p class="ph-title">Flujos de automatización — 8 agentes</p><p class="ph-d">Orquestación completa: triggers, lógica de publicación, reintentos, logs.</p></div>
+      <span class="ph-h">35 h</span>
+    </div>
+    <div class="ph a4">
+      <div class="ph-bar" style="background:#9b59b6"></div>
+      <div class="ph-body"><p class="ph-title">Integraciones API — 4 plataformas</p><p class="ph-d">LinkedIn OAuth 2.0, Meta Graph, Instagram, WordPress REST. Tests de endpoints.</p></div>
+      <span class="ph-h">20 h</span>
+    </div>
+    <div class="ph a5">
+      <div class="ph-bar" style="background:#e67e22"></div>
+      <div class="ph-body"><p class="ph-title">Pipeline de video y voz</p><p class="ph-d">Plantillas de postproducción, calibración de voz, procesado batch, marca de agua.</p></div>
+      <span class="ph-h">18 h</span>
+    </div>
+    <div class="ph a5">
+      <div class="ph-bar" style="background:#2c3e6e"></div>
+      <div class="ph-body"><p class="ph-title">Control de calidad y calibración de marca</p><p class="ph-d">QA completo, voz de marca, ciclos de revisión interna antes del piloto.</p></div>
+      <span class="ph-h">12 h</span>
+    </div>
+    <div class="ph a6">
+      <div class="ph-bar" style="background:#a3c935"></div>
+      <div class="ph-body"><p class="ph-title">Semana piloto — primer lote + ajustes</p><p class="ph-d">Producción inicial, correcciones de tu feedback, entrega del sistema.</p></div>
+      <span class="ph-h">8 h</span>
+    </div>
+    <div class="crono-sum a6">
+      <div><p class="cs-l">Horas activas de construcción</p><p style="font-family:'Space Grotesk',sans-serif;font-size:10px;color:var(--text3);margin-top:3px">Trabajo en paralelo — no secuencial</p></div>
+      <p class="cs-v">101 h</p>
+    </div>
+  </div>
+  <div class="r">
+    <p class="hd-tag a2" style="margin-bottom:16px">Lo que depende de terceros</p>
+    <div class="wt a3">
+      <span class="wt-ico">LinkedIn API</span>
+      <div class="wt-body"><p class="wt-t">Aprobación de API LinkedIn</p><p class="wt-d">LinkedIn revisa manualmente el acceso organizacional. Sin excepciones posibles.</p><span class="wt-b warn">1 — 3 semanas</span></div>
+    </div>
+    <div class="wt a4">
+      <span class="wt-ico">Meta</span>
+      <div class="wt-body"><p class="wt-t">Verificación de negocio Meta</p><p class="wt-d">Confirmación del Business Manager + acceso a páginas Facebook e Instagram.</p><span class="wt-b warn">3 — 10 días</span></div>
+    </div>
+    <div class="wt a4">
+      <span class="wt-ico">Tú</span>
+      <div class="wt-body"><p class="wt-t">Entrega de activos e información</p><p class="wt-d">Logo, paleta, guía de voz, ejemplos de contenido y accesos a todas las cuentas.</p><span class="wt-b">3 — 14 días</span></div>
+    </div>
+    <div class="wt a5">
+      <span class="wt-ico">WordPress</span>
+      <div class="wt-body"><p class="wt-t">Acceso admin de WordPress</p><p class="wt-d">Plugin REST API habilitado y Application Password generado desde tu cuenta.</p><span class="wt-b">1 — 3 días</span></div>
+    </div>
+    <div class="wt a5">
+      <span class="wt-ico">Piloto</span>
+      <div class="wt-body"><p class="wt-t">Tu aprobación del primer lote</p><p class="wt-d">El feedback de la primera semana calibra los 8 agentes para todos los meses siguientes.</p><span class="wt-b">1 — 5 días hábiles</span></div>
+    </div>
+    <div class="wt a6" style="background:rgba(201,168,112,.03);padding:12px 14px;border:1px solid var(--gold-dim);margin-top:10px">
+      <span class="wt-ico" style="color:var(--gold-dim)">Total</span>
+      <div class="wt-body"><p class="wt-t" style="color:var(--gold)">Calendario real: 6 a 8 semanas</p><p class="wt-d">Trabajo activo: 18–21 días hábiles. Con tiempos de aprobación externa en paralelo, el lanzamiento real toma entre 6 y 8 semanas desde el primer pago. Sin excesos ni promesas falsas.</p></div>
+    </div>
+    <p class="hd-tag a2" style="margin-bottom:14px;margin-top:22px">Por qué el mínimo es 3 meses</p>
+    <div class="ramp-row a3" style="padding:12px 0">
+      <p class="ramp-mo">M1</p>
+      <div><p class="ramp-t">Arranque — base de conocimiento</p><p class="ramp-d">Construimos manualmente los activos que entrenan a los 8 agentes: voz de marca, tono editorial, referencias visuales, keywords dentales de BC y ejemplos de contenido aprobados. Esta base es el cerebro del sistema — sin ella, la IA genera contenido genérico. Con ella, genera contenido de Remi Creative.</p></div>
+    </div>
+    <div class="ramp-row a4" style="padding:12px 0">
+      <p class="ramp-mo">M2</p>
+      <div><p class="ramp-t">Ajustes — patrones consolidados</p><p class="ramp-d">Con 4 semanas de aprobaciones, los modelos ya reconocen tu marca. Se aplican correcciones de estilo, tono y formato. El 80% del contenido llega listo a primera vez.</p></div>
+    </div>
+    <div class="ramp-row a5" style="padding:12px 0">
+      <p class="ramp-mo">M3</p>
+      <div><p class="ramp-t">Comparativa — resultados medibles</p><p class="ramp-d">Primer análisis de engagement, alcance y clics. La IA tiene suficiente data para optimizar horarios, formatos y pilares. Aquí empiezan los resultados que demuestran el ROI.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- 13 POR QUÉ IMPORTA -->
+<div class="slide" style="display:grid;grid-template-columns:1fr 1fr;align-items:center" id="s8">
+  <div style="position:absolute;inset:0;background-image:url('/assets/bg-light.jpg');background-size:cover;background-position:50% 25%;filter:sepia(.10) brightness(.14) contrast(1.15) saturate(.7)"></div>
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 120% 100% at 75% 50%,rgba(8,7,5,.40) 0%,rgba(8,7,5,.88) 55%,rgba(8,7,5,.96) 100%)"></div>
+  <div class="top-bar"><span class="logo">Victor IA</span><span class="slide-label">12 / 13</span></div>
+  <div class="col-l">
+    <h2 class="big-h a1">El contenido es<br>como <em>escalas.</em></h2>
+    <p class="body-t a2">Tu estrategia de tres capas — SEO, AEO, GEO — funciona con contenido. Cuanto más publicas bajo tu marca, más te cita Google, más te referencian los motores de IA y más te consolidas como la autoridad local en BC.</p>
+    <p class="body-t a3" style="color:var(--text2);font-size:14px">El 62% de las búsquedas locales de salud terminan en respuestas generadas por IA. Tu blog alimenta esas respuestas directamente.</p>
+    <button class="slide-cta a4" onclick="go(c+1)">Ver la propuesta de inversión <span>→</span></button>
+  </div>
+  <div class="col-r" style="padding:80px 80px 80px 56px">
+    <div class="fstep a4"><span class="fn">01</span><div><p class="ft">Tu blog potencia tu propio AEO</p><p class="fd">30 artículos al mes = 30 nuevas señales para que ChatGPT, Perplexity y Gemini citen a Remi Creative como autoridad en marketing dental.</p></div></div>
+    <div class="fstep a5"><span class="fn">02</span><div><p class="ft">Tu presencia social valida tu pitch</p><p class="fd">Cuando un dueño de clínica revisa tu LinkedIn antes de contratar, encuentra una presencia experta y consistente que prueba que practicas lo que vendes.</p></div></div>
+    <div class="fstep a6"><span class="fn">03</span><div><p class="ft">Diriges un equipo pequeño y enfocado</p><p class="fd">Nunca tienes que elegir entre atender clientes y hacer marketing para tu agencia. Los dos ocurren simultáneamente, de forma automática.</p></div></div>
+  </div>
+</div>
+
+<!-- 14 EMPECEMOS -->
+<div class="slide" id="s9">
+  <div class="mb"></div><div class="vg"></div>
+  <div class="top-bar" style="position:relative;z-index:3"><span class="logo">Victor IA</span><span class="slide-label">13 / 13</span></div>
+  <div class="l">
+    <h2 class="big-h a1" style="font-size:clamp(38px,4.6vw,64px);line-height:.95">Cada semana sin<br>contenido, una<br>clínica en BC<br>elige a tu <em>competidor.</em></h2>
+    <p class="body-t a2" style="font-size:15px;margin-top:8px">Aldo, ya conoces cómo trabajamos. Esta propuesta no es para convencerte de que podemos — es para mostrarte exactamente cómo lo vamos a hacer para Remi Creative, con números reales y sin sorpresas.</p>
+    <div class="a3" style="border:1px solid rgba(201,168,112,.35);background:rgba(201,168,112,.04);padding:18px 20px">
+      <p style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:600;letter-spacing:.28em;color:var(--gold);text-transform:uppercase;margin-bottom:12px">★ &nbsp;Ventajas del Cliente Fundador</p>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <p style="font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:300;color:var(--text2);line-height:1.55">→ Precio de lanzamiento <strong style="color:var(--text1);font-weight:500">bloqueado de por vida</strong> — nunca sube contigo</p>
+        <p style="font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:300;color:var(--text2);line-height:1.55">→ Acceso directo al fundador los primeros <strong style="color:var(--text1);font-weight:500">6 meses</strong>, sin intermediarios</p>
+        <p style="font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:300;color:var(--text2);line-height:1.55">→ Tu retroalimentación moldea el sistema — ventajas que <strong style="color:var(--text1);font-weight:500">ningún cliente posterior tendrá</strong></p>
+        <p style="font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:300;color:var(--text2);line-height:1.55">→ Garantía real: si en <strong style="color:var(--gold-dim);font-weight:500">90 días el sistema no cumple lo prometido</strong>, devolvemos el 100% del setup sin preguntas</p>
+      </div>
+    </div>
+    <a class="cta-btn a4" href="https://victor-ia.xyz/agenda" target="_blank" rel="noopener">Hablamos esta semana — 30 min</a>
+    <p class="contact-line a5" style="margin-top:12px">victor-ia.xyz &nbsp;·&nbsp; Playa del Carmen, México</p>
+    <p class="contact-line a6" style="margin-top:5px">INFLUENCE IA S.A. DE C.V.</p>
+    <blockquote class="ai-quote-end a6">"La inteligencia artificial no reemplaza lo que eres — <em>amplifica quién ya eres</em> hasta donde ningún equipo humano puede llegar solo."</blockquote>
+  </div>
+  <div class="r">
+    <div class="ns a3"><span class="ns-n">01</span><div><p class="ns-t">Llamada de descubrimiento — 30 min</p><p class="ns-d">Escuchamos tu visión, alineamos estrategia y respondemos todas tus preguntas. Sin presión.</p></div></div>
+    <div class="ns a4"><span class="ns-n">02</span><div><p class="ns-t">Firma y primer pago — 50% del setup</p><p class="ns-d">Contrato digital en minutos. El reloj empieza: 18–21 días hábiles hacia tu sistema activo.</p></div></div>
+    <div class="ns a5"><span class="ns-n">03</span><div><p class="ns-t">Kit de onboarding — 48 horas</p><p class="ns-d">Recibes el checklist completo. Tú provees logos, accesos y guía de voz — lo demás va por cuenta nuestra.</p></div></div>
+    <div class="ns a6"><span class="ns-n">04</span><div><p class="ns-t">Construcción completa — semanas 1–3</p><p class="ns-d">Portal, automaciones, integraciones API, pipeline de video y voz. Tú apruebas el piloto antes de lanzar.</p></div></div>
+    <div class="ns a3"><span class="ns-n">05</span><div><p class="ns-t">Lanzamiento y segundo pago — día 18–21</p><p class="ns-d">Sistema activo. Contenido publicándose. Remi Creative creciendo 24/7 — sin que tú muevas un dedo.</p></div></div>
+    <div class="ns a4" style="border-bottom:none;border-top:1px solid rgba(201,168,112,.15);background:rgba(201,168,112,.04);padding:14px 0">
+      <span class="ns-n" style="color:var(--gold)">★</span>
+      <div>
+        <p class="ns-t" style="color:var(--gold)">Únete al Programa de Referidos Victor IA</p>
+        <p class="ns-d">¿Conoces otra agencia, consultor o empresa que necesite este sistema? Por cada cliente que nos refiereas y firme, recibes <strong style="color:var(--gold)">10% del primer mes de su plan</strong> — directo a tu cuenta. Sin límites, sin techo.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div></div>
+
+<!-- ═══════════════════════════════════════════════════════
+     MODAL OVERLAY — 5 PANES
+     ═══════════════════════════════════════════════════════ -->
+<div id="modal-ov" onclick="if(event.target===this)closeModal()" role="dialog" aria-modal="true" aria-label="Comparativa de inversión">
+  <div class="m-box">
+    <div class="m-header">
+      <div id="modal-cur" role="group" aria-label="Seleccionar moneda">
+        <button class="ct-btn" data-cur="MXN" onclick="switchCur('MXN')" aria-label="Ver precios en pesos mexicanos">MXN</button>
+        <button class="ct-btn ct-active" data-cur="CAD" onclick="switchCur('CAD')" aria-label="Ver precios en dólares canadienses">CAD</button>
+      </div>
+      <button class="m-close" onclick="closeModal()" aria-label="Cerrar comparativa">Cerrar &times;</button>
+    </div>
+
+    <!-- ─── CANALES — Desglose mensual ─── -->
+    <div class="m-pane" id="m-canales">
+      <p class="m-tag">Producción mensual</p>
+      <h2 class="m-h">Tu calendario de contenido mensual</h2>
+      <p class="m-sub">Esto es exactamente lo que se produce y publica automáticamente cada mes para Remi Creative — antes de llegar a tu portal de aprobación.</p>
+      <div class="m-sec">
+        <p class="m-sec-h">Desglose por canal</p>
+        <table class="cal">
+          <tr><th>Canal</th><th>Frecuencia</th><th class="big" style="text-align:right">/ mes</th><th>Formatos producidos</th></tr>
+          <tr><td>LinkedIn</td><td>4 posts / semana</td><td class="big">~17</td><td>Artículos de liderazgo · Infografías · Videos 15–20s</td></tr>
+          <tr><td>Instagram</td><td>7 posts / semana</td><td class="big">~30</td><td>Carruseles de resultados · Reels · Posts de marca</td></tr>
+          <tr><td>Facebook</td><td>5 posts / semana</td><td class="big">~22</td><td>Posts educativos · Videos · Contenido de comunidad</td></tr>
+          <tr><td>Blog</td><td>1 artículo / día</td><td class="big">30</td><td>+1,200 palabras · SEO/AEO · 5 imágenes únicas c/u</td></tr>
+          <tr class="tot"><td>Total</td><td>~38 piezas / semana</td><td class="big">99+</td><td>Posts sociales + artículos + todos sus recursos visuales</td></tr>
+        </table>
+      </div>
+      <div class="m-sec">
+        <p class="m-sec-h">Recursos visuales generados automáticamente</p>
+        <div class="m-grid">
+          <div class="m-card"><p class="m-card-tag">Videos 4K</p><p class="m-card-v">28</p><p class="m-card-d">15–20 seg cada uno. Narración profesional. Motion graphics calibrados a tu marca.</p></div>
+          <div class="m-card"><p class="m-card-tag">Imágenes únicas</p><p class="m-card-v">191</p><p class="m-card-d">Generadas con tu paleta, tipografía e identidad visual. Nunca repetidas.</p></div>
+          <div class="m-card hl"><p class="m-card-tag">Total piezas</p><p class="m-card-v">318+</p><p class="m-card-d">Posts + artículos + imágenes de blog + videos. Todo en un mes, todo automático.</p></div>
+        </div>
+      </div>
+      <div class="m-note"><strong>Todo pasa por tu portal antes de publicarse.</strong> Recibes una notificación por correo. Tú apruebas con un clic o dejas un comentario. Las correcciones regresan automáticamente en menos de 24 hrs hábiles. Nada sale sin tu visto bueno.</div>
+    </div>
+
+    <!-- ─── ALCANCE — comparativa real ─── -->
+    <div class="m-pane" id="m-inicio">
+      <p class="m-tag">Plan Alcance — comparativa real</p>
+      <h2 class="m-h">4 canales con un equipo humano. Esto cuesta.</h2>
+      <p class="m-sub">Para tener LinkedIn, Instagram, Facebook y blog diario con calidad profesional, videos y SEO necesitas un equipo. Aquí está la cuenta real — en tu moneda.</p>
+
+      <div class="vchart-wrap">
+        <p class="vchart-label">Costo mensual por especialista vs. Victor IA Plan Alcance (<span class="pu">CAD</span>)</p>
+        <div class="vchart">
+          <div class="vbar">
+            <span class="vbar-val">$<span data-pk="m_cm">1,650</span></span>
+            <div class="vbar-body" style="height:140px"><div class="vbar-fill vf-a"></div></div>
+            <span class="vbar-lbl">Community<br>Manager</span>
+          </div>
+          <div class="vbar">
+            <span class="vbar-val">$<span data-pk="m_design">1,430</span></span>
+            <div class="vbar-body" style="height:122px"><div class="vbar-fill vf-a"></div></div>
+            <span class="vbar-lbl">Diseñador<br>+ Editor</span>
+          </div>
+          <div class="vbar">
+            <span class="vbar-val">$<span data-pk="m_seo">1,071</span></span>
+            <div class="vbar-body" style="height:92px"><div class="vbar-fill vf-b"></div></div>
+            <span class="vbar-lbl">Redactor<br>SEO</span>
+          </div>
+          <div class="vbar">
+            <span class="vbar-val">$<span data-pk="m_time">1,000</span></span>
+            <div class="vbar-body" style="height:86px"><div class="vbar-fill vf-b"></div></div>
+            <span class="vbar-lbl">Tu tiempo<br>(15 h/mes)</span>
+          </div>
+          <div class="vbar">
+            <span class="vbar-val" style="font-size:11px;color:var(--text3)">$<span data-pk="m_team_a">5,150</span><br><span style="font-size:10px">total</span></span>
+            <div class="vbar-body" style="height:176px"><div class="vbar-fill vf-c"></div></div>
+            <span class="vbar-lbl">Equipo<br>completo</span>
+          </div>
+          <div class="vbar">
+            <span class="vbar-val hi">$<span data-pk="a_mo">1,750</span></span>
+            <div class="vbar-body" style="height:62px"><div class="vbar-fill vf-d"></div></div>
+            <span class="vbar-lbl hi">Victor IA<br>Alcance</span>
+          </div>
+        </div>
+        <div class="vchart-row">
+          <div class="vcs">
+            <p class="vcs-t">Equipo especialista</p>
+            <p class="vcs-v">~$<span data-pk="m_team_a">5,150</span> <span class="pu">CAD</span>/mes</p>
+            <p class="vcs-d">4 personas · coordinación manual · sin analytics unificados · sin aprendizaje</p>
+          </div>
+          <div class="vcs hi">
+            <p class="vcs-t">Victor IA Plan Alcance</p>
+            <p class="vcs-v">$<span data-pk="a_mo">1,750</span> <span class="pu">CAD</span>/mes + IVA</p>
+            <p class="vcs-d">8 agentes · portal privado · 99+ piezas · mejora continua automática</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="savings-hero">
+        <span class="sh-arrow">↓66%</span>
+        <div class="sh-text">
+          <p class="sh-label">Ahorro mensual estimado</p>
+          <p class="sh-val">~$<span data-pk="m_sav_a">3,400</span> <span class="pu">CAD</span>/mes</p>
+          <p class="sh-sub">Lo que ahorras vs. contratar el mismo perfil de equipo. Al año: más de $<span data-pk="m_sav_a_yr">40,800</span> <span class="pu">CAD</span>.</p>
+        </div>
+      </div>
+
+      <div class="m-sec">
+        <p class="m-sec-h">¿Qué más incluye que un equipo humano no puede dar?</p>
+        <div class="m-grid">
+          <div class="m-card hl"><p class="m-card-tag">Tiempo de arranque</p><p class="m-card-v">18–21 días</p><p class="m-card-d">Un equipo tarda 2–4 meses para estar operando al 100%.</p></div>
+          <div class="m-card hl"><p class="m-card-tag">Disponibilidad</p><p class="m-card-v">24/7</p><p class="m-card-d">El sistema no toma vacaciones ni fines de semana.</p></div>
+          <div class="m-card hl"><p class="m-card-tag">Mejora continua</p><p class="m-card-v">Automática</p><p class="m-card-d">Cada aprobación que das calibra mejor todos los agentes.</p></div>
+        </div>
+      </div>
+      <div class="m-note"><strong>Automatizaciones incluidas:</strong> Copy por pilar → revisión de calidad → visual 4K → video con narración → SEO/AEO → programación multi-canal → publicación automática → notificación a tu correo → portal de aprobación → correcciones automáticas → analytics mensual.</div>
+    </div>
+
+    <!-- ─── ALCANCE — comparativa completa ─── -->
+    <div class="m-pane" id="m-ecosistema">
+      <p class="m-tag">Plan Alcance — comparativa real</p>
+      <h2 class="m-h">Lo que cuesta lo mismo con cualquier otra opción.</h2>
+      <p class="m-sub">4 canales activos con calidad profesional: LinkedIn, Instagram, Facebook y Blog diario con SEO/AEO. Esto es lo que pagas con cada alternativa — y lo que pagas con Victor IA.</p>
+
+      <div class="vchart-wrap">
+        <p class="vchart-label">Costo mensual por opción — cobertura equivalente (<span class="pu">CAD</span>)</p>
+        <div class="vchart">
+          <div class="vbar">
+            <span class="vbar-val" style="font-size:11px">$<span data-pk="m_agency_bc">19,643</span></span>
+            <div class="vbar-body" style="height:176px"><div class="vbar-fill vf-a"></div></div>
+            <span class="vbar-lbl">Agencia<br>BC</span>
+          </div>
+          <div class="vbar">
+            <span class="vbar-val">$<span data-pk="m_agency_mx">6,571</span></span>
+            <div class="vbar-body" style="height:79px"><div class="vbar-fill vf-a"></div></div>
+            <span class="vbar-lbl">Agencia<br>MX</span>
+          </div>
+          <div class="vbar">
+            <span class="vbar-val">$<span data-pk="m_freelance">3,929</span></span>
+            <div class="vbar-body" style="height:58px"><div class="vbar-fill vf-b"></div></div>
+            <span class="vbar-lbl">Freelancers<br>MX</span>
+          </div>
+          <div class="vbar">
+            <span class="vbar-val">$<span data-pk="m_team_e">5,143</span></span>
+            <div class="vbar-body" style="height:73px"><div class="vbar-fill vf-b"></div></div>
+            <span class="vbar-lbl">Equipo<br>interno</span>
+          </div>
+          <div class="vbar">
+            <span class="vbar-val hi">$<span data-pk="a_mo">1,750</span></span>
+            <div class="vbar-body" style="height:23px"><div class="vbar-fill vf-d"></div></div>
+            <span class="vbar-lbl hi">Victor IA<br>Alcance</span>
+          </div>
+        </div>
+        <div class="vchart-row">
+          <div class="vcs">
+            <p class="vcs-t">Promedio de alternativas</p>
+            <p class="vcs-v">~$<span data-pk="m_alt_avg">8,822</span> <span class="pu">CAD</span>/mes</p>
+            <p class="vcs-d">Sin aprendizaje continuo · Sin portal privado · Sin correcciones automáticas · Coordinación manual</p>
+          </div>
+          <div class="vcs hi">
+            <p class="vcs-t">Victor IA Alcance</p>
+            <p class="vcs-v">$<span data-pk="a_mo">1,750</span> <span class="pu">CAD</span>/mes + IVA</p>
+            <p class="vcs-d">4 canales · 8 agentes · Portal privado · Analytics mensual · Mejora continua</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="savings-hero">
+        <span class="sh-arrow">↓80%</span>
+        <div class="sh-text">
+          <p class="sh-label">Ahorro anual vs. agencia en BC</p>
+          <p class="sh-val">hasta $<span data-pk="m_roi_bc">279,000</span> <span class="pu">CAD</span>/año</p>
+          <p class="sh-sub">Mismo nivel de cobertura, calidad y consistencia — sin equipo que coordinar.</p>
+        </div>
+      </div>
+
+      <div class="m-sec">
+        <p class="m-sec-h">¿Cuándo se paga solo?</p>
+        <div class="m-grid two">
+          <div class="m-card"><p class="m-card-tag">Retainer dental típico en BC</p><p class="m-card-v">$<span data-pk="m_retainer_lo">2,000</span>–$<span data-pk="m_retainer_hi">5,000</span> <span class="pu" data-suf="/mes">CAD</span></p><p class="m-card-d">Un cliente nuevo cubre Alcance 2×+ desde el primer mes.</p></div>
+          <div class="m-card hl"><p class="m-card-tag">Punto de equilibrio</p><p class="m-card-v">1 cliente</p><p class="m-card-d">En 90 días el sistema generó suficiente autoridad para ser ROI positivo de forma indefinida.</p></div>
+        </div>
+      </div>
+
+      <div class="m-sec">
+        <p class="m-sec-h">Lo que ninguna otra opción incluye</p>
+        <div class="m-grid">
+          <div class="m-card hl"><p class="m-card-tag">Aprendizaje continuo</p><p class="m-card-d">Cada pieza que apruebas calibra mejor los 8 agentes. Mejora sola, sin intervención humana.</p></div>
+          <div class="m-card hl"><p class="m-card-tag">Portal privado</p><p class="m-card-d">Todo el contenido llega a tu panel antes de publicarse. Tú apruebas con un clic.</p></div>
+          <div class="m-card hl"><p class="m-card-tag">Correcciones automáticas</p><p class="m-card-d">Comentas en el portal, los agentes ajustan y regresan el contenido corregido — sin emails, sin llamadas.</p></div>
+        </div>
+      </div>
+
+      <div class="m-note"><strong>Opinión objetiva:</strong> Si llevas esta propuesta a cualquier IA (Claude, ChatGPT, Gemini) y preguntas si conviene — la respuesta es la misma. Por $1,750 <span class="pu">CAD</span>/mes obtienes lo que costaría $8,000–$19,000 con cualquier alternativa. <span style="color:var(--gold)">La decisión se defiende sola con los números.</span></div>
+    </div>
+
+    <!-- ─── T&C EXTRA — SLAs, incumplimientos, garantías ─── -->
+    <div class="m-pane" id="m-tc-extra">
+      <p class="m-tag">Términos completos</p>
+      <h2 class="m-h">SLAs, garantías e incumplimientos</h2>
+      <p class="m-sub">Condiciones justas para ambas partes — porque una relación de largo plazo funciona cuando las reglas son claras desde el inicio.</p>
+      <div class="m-sec">
+        <p class="m-sec-h">Niveles de servicio garantizados (SLA)</p>
+        <div class="mbar">
+          <div class="mbar-top"><span class="mbar-lbl">Respuesta a solicitudes de cambio</span><span class="mbar-val" style="color:var(--text1);font-size:14px">24 hrs hábiles</span></div>
+          <span class="mbar-note">Después de recibir tu comentario en el portal. Notificación por correo al completarse.</span>
+        </div>
+        <div class="mbar">
+          <div class="mbar-top"><span class="mbar-lbl">Soporte — Plan Alcance</span><span class="mbar-val" style="color:var(--text1);font-size:14px">24 hrs hábiles</span></div>
+          <span class="mbar-note">Tiempo de respuesta garantizado para soporte técnico y solicitudes de revisión.</span>
+        </div>
+        <div class="mbar">
+          <div class="mbar-top"><span class="mbar-lbl">Tiempo de activación del sistema</span><span class="mbar-val" style="color:var(--text1);font-size:14px">18–21 días hábiles</span></div>
+          <span class="mbar-note">Desde el pago del 50% del setup y entrega completa de activos de onboarding.</span>
+        </div>
+      </div>
+      <div class="m-sec">
+        <p class="m-sec-h">Caída de plataformas de terceros</p>
+        <div class="m-note" style="margin-top:0"><strong>Victor IA no es responsable</strong> de interrupciones en LinkedIn, Meta, WordPress, ni en plataformas de inteligencia artificial que operen como proveedores de servicio. En caso de caída prolongada (+48 hrs), se notifica al cliente y se recupera el contenido no publicado en el siguiente ciclo. Las caídas de terceros no dan lugar a devolución de mensualidades ni créditos automáticos.</div>
+      </div>
+      <div class="m-sec">
+        <p class="m-sec-h">Incumplimiento de pago por parte del cliente</p>
+        <div class="m-note" style="margin-top:0"><strong>Pago atrasado:</strong> Si la mensualidad no se recibe en los primeros 5 días hábiles del mes, el servicio entra en pausa. El contenido programado no se publica hasta regularizar.<br><br><strong>Más de 15 días sin pago:</strong> Se suspende el acceso al portal. El contenido generado queda en custodia de Victor IA hasta liquidación.<br><br><strong>Más de 30 días:</strong> Se considera terminación anticipada del contrato y aplica la penalización pactada.</div>
+      </div>
+      <div class="m-sec">
+        <p class="m-sec-h">Incumplimiento por parte de Victor IA</p>
+        <div class="m-note" style="margin-top:0">Si Victor IA no entrega el volumen de contenido pactado por causas internas (no de terceros), se aplica un crédito proporcional a la mensualidad. Si el sistema queda inactivo más de 5 días hábiles por causas atribuibles a Victor IA, el cliente puede solicitar rescisión sin penalización.</div>
+      </div>
+      <div class="m-sec">
+        <p class="m-sec-h">Lo que garantizamos</p>
+        <div class="m-grid two">
+          <div class="m-card hl"><p class="m-card-tag">Profesionalismo</p><p class="m-card-d">Cada pieza de contenido se revisa por el Agente de Calidad antes de llegar a tu portal. Cero contenido sin verificar.</p></div>
+          <div class="m-card hl"><p class="m-card-tag">Personalización</p><p class="m-card-d">El sistema aprende de tus aprobaciones. Tu voz, tu estilo, tu metodología — nunca contenido genérico.</p></div>
+          <div class="m-card hl"><p class="m-card-tag">Automatización avanzada</p><p class="m-card-d">Publicación automática, horarios inteligentes, correcciones sin intervención manual y mejora ciclo a ciclo.</p></div>
+          <div class="m-card hl"><p class="m-card-tag">Trazabilidad total</p><p class="m-card-d">Registro completo de cada pieza: qué se produjo, cuándo se aprobó, qué cambios se aplicaron y qué resultados generó.</p></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- MOBILE PLAN OVERLAY -->
+<div id="plan-ov" role="dialog" aria-modal="true" aria-labelledby="plan-ov-name">
+  <div id="plan-ov-bar">
+    <span id="plan-ov-name">Plan</span>
+    <div id="plan-ov-cur" role="group" aria-label="Seleccionar moneda">
+      <button class="ct-btn" data-cur="MXN" onclick="switchCur('MXN')" aria-label="Ver precios en pesos mexicanos">MXN</button>
+      <button class="ct-btn ct-active" data-cur="CAD" onclick="switchCur('CAD')" aria-label="Ver precios en dólares canadienses">CAD</button>
+    </div>
+    <button id="plan-ov-close" onclick="closePlanOv()" aria-label="Cerrar detalle del plan">✕ Cerrar</button>
+  </div>
+  <div id="plan-ov-body"></div>
+</div>
+
+<script>
+const N=14,slides=document.querySelectorAll('.slide'),dots=document.querySelectorAll('.dot'),prev=document.getElementById('prev'),next=document.getElementById('next'),track=document.getElementById('track');
+let c=0;
+function go(n){slides[c].classList.remove('on');c=Math.max(0,Math.min(N-1,n));slides[c].classList.add('on');track.style.transform=`translateX(-${c*100}vw)`;dots.forEach((d,i)=>{d.classList.toggle('active',i===c);d.setAttribute('aria-current',i===c?'true':'false')});prev.classList.toggle('h',c===0);next.classList.toggle('h',c===N-1)}
+prev.addEventListener('click',()=>go(c-1));
+next.addEventListener('click',()=>go(c+1));
+dots.forEach(d=>{
+  d.addEventListener('click',()=>go(+d.dataset.i));
+  d.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go(+d.dataset.i)}});
+});
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowDown')go(c+1);if(e.key==='ArrowLeft'||e.key==='ArrowUp')go(c-1)});
+
+/* improved touch — only navigate when swipe is primarily horizontal */
+let tx=0,ty=0;
+document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;ty=e.touches[0].clientY},{passive:true});
+document.addEventListener('touchend',e=>{
+  const dx=tx-e.changedTouches[0].clientX,dy=ty-e.changedTouches[0].clientY;
+  if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)*1.2)go(dx>0?c+1:c-1);
+},{passive:true});
+
+/* ambient particle canvas */
+(function(){
+  const c=document.createElement('canvas');
+  c.style.cssText='position:fixed;inset:0;pointer-events:none;z-index:2;opacity:.55';
+  document.body.appendChild(c);
+  const ctx=c.getContext('2d');
+  const pts=Array.from({length:48},()=>({x:Math.random()*window.innerWidth,y:Math.random()*window.innerHeight,vx:(Math.random()-.5)*.22,vy:(Math.random()-.5)*.22,r:Math.random()*1.4+.3,a:Math.random()*.5+.1}));
+  function resize(){c.width=window.innerWidth;c.height=window.innerHeight;}
+  window.addEventListener('resize',resize);resize();
+  function tick(){
+    ctx.clearRect(0,0,c.width,c.height);
+    pts.forEach(p=>{
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0||p.x>c.width)p.vx*=-1;
+      if(p.y<0||p.y>c.height)p.vy*=-1;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(201,168,112,${p.a})`;ctx.fill();
+    });
+    requestAnimationFrame(tick);
+  }
+  tick();
+})();
+
+/* MODAL SYSTEM */
+var _modalTrigger=null;
+function openModal(id){
+  document.querySelectorAll('.m-pane').forEach(p=>p.classList.remove('active'));
+  var pane=document.getElementById('m-'+id);
+  if(!pane)return;
+  pane.classList.add('active');
+  var ov=document.getElementById('modal-ov');
+  ov.classList.add('open');
+  ov.scrollTop=0;
+  document.body.style.overflow='hidden';
+  _modalTrigger=document.activeElement;
+  setTimeout(function(){var btn=ov.querySelector('.m-close');if(btn)btn.focus();},50);
+}
+function closeModal(){
+  document.getElementById('modal-ov').classList.remove('open');
+  if(!document.getElementById('plan-ov').classList.contains('open'))document.body.style.overflow='';
+  if(_modalTrigger){_modalTrigger.focus();_modalTrigger=null;}
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeModal();closePlanOv();}});
+
+/* LOGO — replace text with image + click to go to slide 1 */
+document.querySelectorAll('.logo').forEach(function(l){
+  l.style.cursor='pointer';
+  l.addEventListener('click',function(){window.open('https://victor-ia.xyz/','_blank');});
+  var img=document.createElement('img');
+  img.src='/assets/brand/logo-full.png';
+  img.alt='VICTOR IA';
+  img.style.cssText='height:64px;width:auto;max-width:360px;object-fit:contain;display:block;filter:brightness(1.1)';
+  img.onerror=function(){this.style.display='none';l.innerHTML='<span style="font-family:\'Instrument Serif\',serif;font-size:14px;font-weight:300;letter-spacing:.12em;color:#c9a870">VICTOR IA</span>';};
+  l.textContent='';
+  l.appendChild(img);
+});
+
+/* add luxury SVG decoration to every slide */
+(function(){
+  const SVG=`<svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g>
+      <circle cx="100" cy="100" r="88" stroke="#c9a870" stroke-width=".5" stroke-opacity=".11" stroke-dasharray="2 16"/>
+      <circle cx="100" cy="100" r="60" stroke="#c9a870" stroke-width=".3" stroke-opacity=".07"/>
+      <circle cx="100" cy="100" r="32" stroke="#c9a870" stroke-width=".3" stroke-opacity=".05"/>
+      <g style="transform-origin:100px 100px">
+        <line x1="100" y1="12" x2="100" y2="40" stroke="#c9a870" stroke-width=".7" stroke-opacity=".3"/>
+        <circle cx="100" cy="9" r="1.5" fill="#c9a870" fill-opacity=".35"/>
+        <animateTransform attributeName="transform" type="rotate" values="0;360" dur="SPEED" repeatCount="indefinite"/>
+      </g>
+      <g style="transform-origin:100px 100px">
+        <line x1="100" y1="40" x2="100" y2="60" stroke="#c9a870" stroke-width=".4" stroke-opacity=".15"/>
+        <animateTransform attributeName="transform" type="rotate" values="360;0" dur="SPEED2" repeatCount="indefinite"/>
+      </g>
+    </g>
+  </svg>`;
+  document.querySelectorAll('.slide').forEach((s,i)=>{
+    const spd=(72+i*9)+'s';
+    const spd2=(48+i*6)+'s';
+    const d=document.createElement('div');
+    d.className='dec';
+    d.innerHTML=SVG.replace('SPEED',spd).replace('SPEED2',spd2);
+    s.appendChild(d);
+  });
+})();
+
+/* ── CURRENCY TOGGLE ──────────────────────────────────────── */
+const BASE_CAD={
+  /* ── Plan prices ── */
+  a_setup:1995,a_mo:1750,a_q3:7245,a_vs0:4643,a_vs1:5714,a_exc:112,
+  v_setup:2424,v_mo:2421,v_vs:2900,v_save:265,v_exc:112,v_pkg:560,
+  e_setup:2853,e_mo:2850,e_save_mo:1029,e_vs:4093,e_save_yr:12343,e_exc:112,e_pkg:560,
+  consult:125,
+  /* ── Modal comparison values ── */
+  m_cm:1650,m_design:1430,m_seo:1071,m_time:1000,m_team_a:5150,
+  m_sav_a:3400,m_sav_a_yr:40800,
+  m_tiktok_c:786,m_tiktok_e:571,m_tiktok_tot:1357,m_vis_sep:3107,m_vis_diff:671,m_sav_v:686,
+  m_eco_diff:429,m_team_e:5143,
+  m_agency_bc:19643,m_agency_mx:6571,m_freelance:3929,m_alt_avg:8822,
+  m_sav_e_yr:71664,m_sav_bc_yr:201516,m_roi_bc:279000,
+  /* ── Market range values ── */
+  m_agency_bc_lo:14000,m_agency_bc_hi:25000,
+  m_agency_mx_lo:4600,m_agency_mx_hi:8600,
+  m_freelance_lo:2900,m_freelance_hi:5000,
+  m_retainer_lo:2000,m_retainer_hi:5000
+};
+let RATES={CAD:1,MXN:14};
+function fmtP(n){return n>=1000?new Intl.NumberFormat('en').format(Math.round(n)):String(Math.round(n));}
+function switchCur(sym){
+  const r=RATES[sym];
+  document.querySelectorAll('[data-pk]').forEach(el=>{
+    const v=BASE_CAD[el.dataset.pk];
+    if(v!==undefined)el.textContent=fmtP(v*r);
+  });
+  document.querySelectorAll('.pu').forEach(el=>{
+    el.textContent=sym+(el.dataset.suf||'');
+  });
+  document.querySelectorAll('.ct-btn').forEach(btn=>{
+    btn.classList.toggle('ct-active',btn.dataset.cur===sym);
+  });
+}
+(async function initRates(){
+  try{
+    const ctrl=new AbortController();
+    const t=setTimeout(()=>ctrl.abort(),4000);
+    const res=await fetch('https://open.er-api.com/v6/latest/CAD',{signal:ctrl.signal});
+    clearTimeout(t);
+    if(!res.ok)throw new Error(`HTTP ${res.status}`);
+    const d=await res.json();
+    if(d.rates&&d.rates.MXN)RATES.MXN=d.rates.MXN;
+  }catch(e){}
+  switchCur('CAD');
+})();
+
+/* ── MOBILE PLAN OVERLAY ──────────────────────────────────── */
+var _planTrigger=null;
+function openPlanOv(propEl){
+  const ov=document.getElementById('plan-ov');
+  const body=document.getElementById('plan-ov-body');
+  const nameEl=document.getElementById('plan-ov-name');
+  body.innerHTML='';
+  body.appendChild(propEl.cloneNode(true));
+  nameEl.textContent=propEl.querySelector('.prop-name').textContent;
+  ov.classList.add('open');
+  ov.scrollTop=0;
+  document.body.style.overflow='hidden';
+  _planTrigger=document.activeElement;
+  setTimeout(function(){var btn=document.getElementById('plan-ov-close');if(btn)btn.focus();},50);
+  const activeCur=document.querySelector('.ct-btn.ct-active');
+  switchCur(activeCur?activeCur.dataset.cur:'CAD');
+}
+function closePlanOv(){
+  document.getElementById('plan-ov').classList.remove('open');
+  document.body.style.overflow='';
+  if(_planTrigger){_planTrigger.focus();_planTrigger=null;}
+}
+
+/* ── ANIMATED COUNTERS (Slide #s5) ── */
+(function(){
+  var counters=document.querySelectorAll('#s5 .sb-n[data-target]');
+  var done=false;
+  function animateCounter(el,target){
+    var start=performance.now(),dur=1200;
+    var ease=function(t){return 1-Math.pow(1-t,3);};
+    function tick(now){
+      var p=Math.min((now-start)/dur,1);
+      el.textContent=Math.round(ease(p)*target);
+      if(p<1)requestAnimationFrame(tick);
+      else el.textContent=target;
+    }
+    requestAnimationFrame(tick);
+  }
+  function runCounters(){
+    if(done)return;
+    done=true;
+    counters.forEach(function(el){
+      var target=parseInt(el.dataset.target,10);
+      el.textContent='0';
+      animateCounter(el,target);
+    });
+  }
+  var s5=document.getElementById('s5');
+  if(!s5)return;
+  var obs=new MutationObserver(function(muts){
+    muts.forEach(function(m){
+      if(m.type==='attributes'&&s5.classList.contains('on'))runCounters();
+    });
+  });
+  obs.observe(s5,{attributes:true,attributeFilter:['class']});
+})();
+</script>
+<script src="web4.js" defer></script>
+</body>
+</html>

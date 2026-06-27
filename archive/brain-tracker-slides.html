@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Victor IA — Brain Tracker</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─── TOKENS ───────────────────────────────────────────── */
+    :root {
+      --ink:       #0E0F12;
+      --ink2:      #1A1C23;
+      --warm:      #F8F7F5;
+      --bone:      #F2EEE5;
+      --gold:      #FFAA17;
+      --gold-pale: rgba(255,170,23,0.10);
+      --muted-ink: rgba(14,15,18,0.55);
+      --muted-warm:rgba(248,247,245,0.55);
+      --rule-ink:  rgba(14,15,18,0.09);
+      --rule-warm: rgba(248,247,245,0.09);
+      --ease:      cubic-bezier(0.22, 0.61, 0.36, 1);
+      --ease-out:  cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      width: 100vw; height: 100vh;
+      overflow: hidden;
+      background: var(--ink);
+      font-family: 'Space Grotesk', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── VIEWPORT & CONTAINER ─────────────────────────────── */
+    .viewport {
+      position: relative;
+      width: 100vw; height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .deck {
+      width: 1280px;
+      height: 720px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      transform-origin: center center;
+      overflow: hidden;
+      border-radius: 8px;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.7);
+    }
+
+    /* ─── SLIDES ────────────────────────────────────────────── */
+    .slide {
+      position: absolute;
+      inset: 0;
+      padding: 80px 80px 72px;
+      display: flex;
+      flex-direction: column;
+      /* transition handled by JS classes */
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    /* States */
+    .slide { opacity: 0; transform: translateX(60px); }
+    .slide.entering { animation: slideEnter 0.55s var(--ease-out) forwards; }
+    .slide.active   { opacity: 1; transform: translateX(0); pointer-events: auto; }
+    .slide.leaving  { animation: slideLeave 0.45s var(--ease) forwards; pointer-events: none; }
+    .slide.reverse.entering { animation: slideEnterReverse 0.55s var(--ease-out) forwards; }
+    .slide.reverse.leaving  { animation: slideLeaveReverse 0.45s var(--ease) forwards; }
+
+    @keyframes slideEnter        { from { opacity:0; transform:translateX(60px);  } to { opacity:1; transform:translateX(0); } }
+    @keyframes slideLeave        { from { opacity:1; transform:translateX(0);     } to { opacity:0; transform:translateX(-50px); } }
+    @keyframes slideEnterReverse { from { opacity:0; transform:translateX(-60px); } to { opacity:1; transform:translateX(0); } }
+    @keyframes slideLeaveReverse { from { opacity:1; transform:translateX(0);     } to { opacity:0; transform:translateX(50px); } }
+
+    /* ─── SLIDE THEMES ──────────────────────────────────────── */
+    .bg-warm { background: var(--warm); color: var(--ink); }
+    .bg-ink  { background: var(--ink);  color: var(--warm); }
+    .bg-gold { background: var(--gold); color: var(--ink); }
+
+    /* ─── TYPOGRAPHY ────────────────────────────────────────── */
+    .serif { font-family: 'Instrument Serif', serif; font-weight: 400; }
+
+    .title-xl  { font-size: 96px; line-height: 0.9;  letter-spacing: -0.025em; }
+    .title-lg  { font-size: 64px; line-height: 0.95; letter-spacing: -0.02em; }
+    .title-md  { font-size: 50px; line-height: 1.0;  letter-spacing: -0.015em; }
+    .subtitle  { font-size: 18px; font-weight: 300; line-height: 1.55; opacity: 0.75; max-width: 560px; margin-top: 18px; }
+
+    .label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      opacity: 0.4;
+      margin-bottom: 18px;
+    }
+
+    /* ─── ELEMENT ANIMATIONS (content inside active slide) ─── */
+    .active [data-ani] {
+      animation: elEnter 0.6s var(--ease-out) both;
+    }
+
+    .active [data-ani="1"] { animation-delay: 0.05s; }
+    .active [data-ani="2"] { animation-delay: 0.15s; }
+    .active [data-ani="3"] { animation-delay: 0.25s; }
+    .active [data-ani="4"] { animation-delay: 0.35s; }
+    .active [data-ani="5"] { animation-delay: 0.45s; }
+
+    @keyframes elEnter {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── TOP BAR ───────────────────────────────────────────── */
+    .top-bar {
+      position: absolute;
+      top: 28px; left: 40px; right: 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 200;
+    }
+
+    .brand-logo {
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .brand-logo .gold { color: var(--gold); }
+
+    .brand-badge {
+      background: var(--gold);
+      color: var(--ink);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 7px;
+      border-radius: 3px;
+    }
+
+    .util-btns {
+      display: flex;
+      gap: 10px;
+    }
+
+    .util-btn {
+      background: transparent;
+      border: 1px solid currentColor;
+      padding: 7px 14px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-radius: 4px;
+      opacity: 0.5;
+    }
+
+    .util-btn:hover { opacity: 1; }
+
+    /* ─── BOTTOM NAV ────────────────────────────────────────── */
+    .bottom-nav {
+      position: absolute;
+      bottom: 28px; left: 40px; right: 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 200;
+    }
+
+    .slide-counter {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      opacity: 0.35;
+    }
+
+    .nav-dots {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: 0.2;
+      cursor: pointer;
+      transition: opacity 0.25s, transform 0.25s;
+    }
+
+    .dot.active { opacity: 1; transform: scale(1.4); }
+
+    .nav-arrows {
+      display: flex;
+      gap: 10px;
+    }
+
+    .arrow {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      border: 1px solid currentColor;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0.45;
+      transition: opacity 0.2s, background 0.2s;
+      background: transparent;
+    }
+
+    .arrow:hover { opacity: 1; background: currentColor; }
+    .bg-warm .arrow:hover svg { stroke: var(--warm); }
+    .bg-ink  .arrow:hover svg { stroke: var(--ink); }
+    .bg-gold .arrow:hover svg { stroke: var(--gold); }
+
+    .arrow svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* ─── PROGRESS LINE ─────────────────────────────────────── */
+    .progress-line {
+      position: absolute;
+      bottom: 0; left: 0;
+      height: 2px;
+      background: var(--gold);
+      transition: width 0.5s var(--ease);
+      z-index: 300;
+    }
+
+    /* ─── SLIDE 1: COVER ────────────────────────────────────── */
+    .cover-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      flex: 1;
+    }
+
+    .cover-tagline {
+      font-size: 22px;
+      font-weight: 300;
+      margin-top: 20px;
+      opacity: 0.7;
+      letter-spacing: -0.01em;
+    }
+
+    .cover-accent { color: var(--gold); font-style: italic; }
+
+    .cover-meta {
+      display: flex;
+      gap: 40px;
+      margin-top: 48px;
+    }
+
+    .cover-stat-val {
+      font-family: 'Instrument Serif', serif;
+      font-size: 36px;
+      line-height: 1;
+      color: var(--gold);
+    }
+
+    .cover-stat-lbl {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      opacity: 0.4;
+      margin-top: 4px;
+    }
+
+    /* ─── SLIDE 2: PROBLEM ──────────────────────────────────── */
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .problem-card {
+      background: var(--ink2);
+      border: 1px solid var(--rule-warm);
+      border-radius: 8px;
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: transform 0.3s var(--ease), border-color 0.3s;
+    }
+
+    .problem-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255,170,23,0.3);
+    }
+
+    .problem-icon {
+      width: 44px; height: 44px;
+      color: var(--gold);
+    }
+
+    .problem-card h3 {
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .problem-card p {
+      font-size: 13px;
+      line-height: 1.55;
+      opacity: 0.65;
+    }
+
+    /* ─── SLIDE 3: SOLUTION ─────────────────────────────────── */
+    .solution-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 48px;
+      align-items: center;
+      flex: 1;
+      margin-top: 24px;
+    }
+
+    .check-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      opacity: 0.85;
+    }
+
+    .check-item svg {
+      width: 18px; height: 18px;
+      flex-shrink: 0;
+      color: var(--gold);
+    }
+
+    .solution-mockup {
+      background: var(--bone);
+      border: 1px solid var(--rule-ink);
+      border-radius: 12px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      height: 340px;
+    }
+
+    .sm-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--rule-ink);
+    }
+
+    .sm-dots { display: flex; gap: 5px; }
+    .sm-dot  { width: 8px; height: 8px; border-radius: 50%; }
+
+    .sm-body {
+      display: grid;
+      grid-template-columns: 1fr 2.5fr;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .sm-sidebar {
+      background: rgba(14,15,18,0.03);
+      border-radius: 6px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .sm-bar {
+      height: 10px;
+      background: rgba(14,15,18,0.1);
+      border-radius: 3px;
+    }
+
+    .sm-bar.gold { background: var(--gold); height: 12px; }
+    .sm-bar.short { width: 60%; }
+
+    .sm-main { display: flex; flex-direction: column; gap: 10px; }
+
+    .sm-card {
+      background: white;
+      border-radius: 8px;
+      padding: 14px;
+      border-left: 3px solid var(--gold);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    .sm-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .sm-card-title { font-size: 12px; font-weight: 700; }
+
+    .sm-status {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 10px;
+      color: #10B981;
+      font-weight: 600;
+    }
+
+    .sm-pulse {
+      width: 5px; height: 5px;
+      background: #10B981;
+      border-radius: 50%;
+      animation: glow 1.5s infinite;
+    }
+
+    @keyframes glow {
+      0%,100% { transform:scale(0.8); opacity:0.5; }
+      50%      { transform:scale(1.3); opacity:1; }
+    }
+
+    .sm-timer {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .sm-sub { font-size: 10px; opacity: 0.5; margin-top: 2px; }
+
+    .sm-metrics {
+      background: white;
+      border-radius: 8px;
+      padding: 12px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .sm-metrics-title { font-size: 11px; font-weight: 700; margin-bottom: 4px; }
+
+    .sm-metric-bar {
+      height: 5px;
+      background: #E2E8F0;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .sm-metric-fill {
+      height: 100%;
+      background: var(--gold);
+      border-radius: 3px;
+      animation: fillMetric 2s var(--ease) forwards;
+      animation-delay: 0.6s;
+      width: 0;
+    }
+
+    @keyframes fillMetric { to { width: var(--w, 80%); } }
+
+    /* ─── SLIDE 4: FEATURES ─────────────────────────────────── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 16px;
+      flex: 1;
+      margin-top: 32px;
+    }
+
+    .feat-item {
+      background: var(--ink2);
+      border: 1px solid var(--rule-warm);
+      border-radius: 8px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: border-color 0.25s;
+      cursor: default;
+    }
+
+    .feat-item:hover { border-color: rgba(255,170,23,0.5); }
+
+    .feat-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+
+    .feat-icon {
+      width: 22px; height: 22px;
+      color: var(--gold);
+    }
+
+    .feat-num {
+      font-size: 10px;
+      font-weight: 700;
+      opacity: 0.25;
+      letter-spacing: 0.05em;
+    }
+
+    .feat-title { font-size: 16px; font-weight: 600; margin-bottom: 5px; }
+    .feat-desc  { font-size: 12px; line-height: 1.45; opacity: 0.6; }
+
+    /* ─── SLIDE 5: HOW IT WORKS ─────────────────────────────── */
+    .steps-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      flex: 1;
+      margin-top: 48px;
+      position: relative;
+    }
+
+    /* connecting line */
+    .steps-row::after {
+      content: '';
+      position: absolute;
+      top: 54px;
+      left: calc(33.3% + 20px);
+      right: calc(33.3% + 20px);
+      height: 1px;
+      background: linear-gradient(90deg, var(--gold) 0%, transparent 50%, var(--gold) 100%);
+      opacity: 0.25;
+    }
+
+    .step-item {
+      padding: 0 32px 0 0;
+      border-right: 1px solid var(--rule-warm);
+      padding-right: 48px;
+    }
+
+    .step-item:last-child { border-right: none; padding-right: 0; padding-left: 48px; }
+    .step-item:nth-child(2) { padding-left: 48px; }
+
+    .step-num {
+      font-family: 'Instrument Serif', serif;
+      font-size: 110px;
+      line-height: 0.8;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 24px;
+    }
+
+    .step-title { font-size: 26px; font-weight: 600; margin-bottom: 10px; }
+    .step-desc  { font-size: 14px; line-height: 1.55; opacity: 0.7; }
+
+    /* ─── SLIDE 6: METRICS ──────────────────────────────────── */
+    .metrics-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      flex: 1;
+      margin-top: 24px;
+    }
+
+    .metric-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 40px;
+      border-right: 1px solid var(--rule-warm);
+    }
+
+    .metric-item:last-child { border-right: none; }
+
+    .metric-val {
+      font-family: 'Instrument Serif', serif;
+      font-size: 120px;
+      line-height: 0.85;
+      color: var(--gold);
+    }
+
+    .metric-label {
+      font-size: 17px;
+      font-weight: 500;
+      margin-top: 16px;
+      opacity: 0.85;
+      max-width: 180px;
+    }
+
+    .metric-sub {
+      font-size: 13px;
+      opacity: 0.5;
+      margin-top: 8px;
+      max-width: 220px;
+      line-height: 1.4;
+    }
+
+    /* ─── SLIDE 7: FOR WHOM ─────────────────────────────────── */
+    .profiles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      flex: 1;
+      margin-top: 48px;
+    }
+
+    .profile-card {
+      background: var(--bone);
+      border: 1px solid var(--rule-ink);
+      border-radius: 10px;
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      transition: all 0.3s var(--ease);
+    }
+
+    .profile-card:hover {
+      border-color: var(--gold);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.07);
+      transform: translateY(-3px);
+    }
+
+    .profile-tag {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+    }
+
+    .profile-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: 30px;
+      font-weight: 400;
+      line-height: 1.1;
+    }
+
+    .profile-desc {
+      font-size: 13px;
+      line-height: 1.55;
+      opacity: 0.7;
+    }
+
+    /* ─── SLIDE 8: CTA ──────────────────────────────────────── */
+    .cta-layout {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 28px;
+      flex: 1;
+    }
+
+    .cta-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .cta-btn {
+      background: var(--gold);
+      color: var(--ink);
+      border: none;
+      padding: 14px 28px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border-radius: 4px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.2s, opacity 0.2s;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .cta-btn:hover { transform: scale(1.03); opacity: 0.9; }
+
+    /* Infographic diagram */
+    .infographic {
+      background: var(--ink2);
+      border: 1px solid var(--rule-warm);
+      border-radius: 10px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .infographic svg { max-height: 240px; }
+
+    /* animated dash */
+    @keyframes dashFlow {
+      to { stroke-dashoffset: -20; }
+    }
+
+    .flow-line {
+      stroke-dasharray: 5 4;
+      animation: dashFlow 1.2s linear infinite;
+    }
+
+    /* node pulse ring */
+    @keyframes ringPulse {
+      0%   { r: 0; opacity: 0.5; }
+      100% { r: 24; opacity: 0; }
+    }
+
+    .ring-pulse { animation: ringPulse 2s ease-out infinite; }
+
+    /* ─── PRINT ─────────────────────────────────────────────── */
+    @media print {
+      body { background: white; overflow: visible; height: auto; }
+      .viewport { position: static; display: block; }
+      .deck { position: static; transform: none; width: 100%; height: auto; box-shadow: none; border-radius: 0; }
+      .slide { position: relative; display: flex !important; opacity: 1 !important; transform: none !important; page-break-after: always; break-after: page; height: 100vh; }
+      .top-bar, .bottom-nav, .progress-line { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="viewport">
+  <div class="deck" id="deck">
+    <!-- Progress line -->
+    <div class="progress-line" id="progressLine"></div>
+
+    <!-- Top Bar (rendered by JS per slide theme) -->
+    <div class="top-bar" id="topBar">
+      <div class="brand-logo">
+        Victor <span class="gold">IA</span>
+        <span class="brand-badge">Brain Tracker</span>
+      </div>
+      <div class="util-btns">
+        <button class="util-btn" onclick="window.print()">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          Exportar PDF
+        </button>
+      </div>
+    </div>
+
+    <!-- SLIDE 1: COVER ──────────────────────────────────────── -->
+    <div class="slide bg-warm active" id="s0">
+      <div class="cover-body">
+        <div class="label" data-ani="1">Victor IA — Infraestructura para Agencias IA</div>
+        <h1 class="serif title-xl" data-ani="2">Brain<br>Tracker</h1>
+        <p class="cover-tagline" data-ani="3">
+          Tu agencia. Tu tiempo. Tu dinero.<br>
+          <span class="cover-accent">Todo bajo control.</span>
+        </p>
+        <div class="cover-meta" data-ani="4">
+          <div>
+            <div class="cover-stat-val">6</div>
+            <div class="cover-stat-lbl">Módulos integrados</div>
+          </div>
+          <div>
+            <div class="cover-stat-val">0 ms</div>
+            <div class="cover-stat-lbl">Sincronización</div>
+          </div>
+          <div>
+            <div class="cover-stat-val">100%</div>
+            <div class="cover-stat-lbl">Control operativo</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2: PROBLEM ────────────────────────────────────── -->
+    <div class="slide bg-ink" id="s1">
+      <div data-ani="1">
+        <div class="label">El Problema</div>
+        <h2 class="serif title-md">El caos invisible<br>de las agencias</h2>
+        <p class="subtitle">Tres fugas silenciosas que limitan tu escalabilidad y merman tu rentabilidad diaria.</p>
+      </div>
+      <div class="problem-grid">
+        <div class="problem-card" data-ani="2">
+          <svg class="problem-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+          <h3>Tiempo Perdido</h3>
+          <p>Horas de trabajo que se evaporan entre reuniones, reportes manuales y falta de atribución exacta.</p>
+        </div>
+        <div class="problem-card" data-ani="3">
+          <svg class="problem-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+          <h3>Clientes sin Tracking</h3>
+          <p>Entregas fuera de alcance sin facturación adicional por falta de evidencias y registros claros.</p>
+        </div>
+        <div class="problem-card" data-ani="4">
+          <svg class="problem-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+          </svg>
+          <h3>Finanzas Opacas</h3>
+          <p>Desconocimiento del margen real neto por proyecto, servicio o agente en tiempo real.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3: SOLUTION ───────────────────────────────────── -->
+    <div class="slide bg-warm" id="s2">
+      <div data-ani="1">
+        <div class="label">La Solución</div>
+        <h2 class="serif title-md">Todo en un<br>solo lugar</h2>
+      </div>
+      <div class="solution-grid">
+        <div data-ani="2">
+          <p class="subtitle" style="margin-top:0; max-width:100%;">Victor IA consolida cada interacción, tarea y flujo financiero en un cerebro centralizado.</p>
+          <div class="check-list">
+            <div class="check-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>
+              Sincronización automática de tareas
+            </div>
+            <div class="check-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>
+              Atribución inteligente de costes por agente
+            </div>
+            <div class="check-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>
+              Interfaz conversacional integrada con IA
+            </div>
+            <div class="check-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>
+              Reportes automáticos para clientes
+            </div>
+          </div>
+        </div>
+        <div class="solution-mockup" data-ani="3">
+          <div class="sm-header">
+            <div class="sm-dots">
+              <div class="sm-dot" style="background:#EF4444;"></div>
+              <div class="sm-dot" style="background:#F59E0B;"></div>
+              <div class="sm-dot" style="background:#10B981;"></div>
+            </div>
+            <div style="font-size:9px; opacity:0.4; font-weight:700; letter-spacing:0.05em;">VICTOR BRAIN TRACKER</div>
+          </div>
+          <div class="sm-body">
+            <div class="sm-sidebar">
+              <div class="sm-bar gold"></div>
+              <div class="sm-bar"></div>
+              <div class="sm-bar"></div>
+              <div class="sm-bar short"></div>
+              <div class="sm-bar short"></div>
+            </div>
+            <div class="sm-main">
+              <div class="sm-card">
+                <div class="sm-card-header">
+                  <span class="sm-card-title">Time Tracker Activo</span>
+                  <div class="sm-status"><div class="sm-pulse"></div> En progreso</div>
+                </div>
+                <div class="sm-timer">02:45:18</div>
+                <div class="sm-sub">Proyecto: Rediseño UX — Cliente Alpha</div>
+              </div>
+              <div class="sm-metrics">
+                <div class="sm-metrics-title">Métricas procesadas por IA</div>
+                <div class="sm-metric-bar"><div class="sm-metric-fill" style="--w:88%;"></div></div>
+                <div class="sm-metric-bar"><div class="sm-metric-fill" style="--w:65%; animation-delay:0.8s;"></div></div>
+                <div class="sm-metric-bar"><div class="sm-metric-fill" style="--w:42%; animation-delay:1s;"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 4: FEATURES ───────────────────────────────────── -->
+    <div class="slide bg-ink" id="s3">
+      <div data-ani="1">
+        <div class="label">Herramientas</div>
+        <h2 class="serif title-md">El motor de<br>tu crecimiento</h2>
+      </div>
+      <div class="features-grid">
+
+        <div class="feat-item" data-ani="2">
+          <div class="feat-top">
+            <svg class="feat-icon" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <path d="M12 2C6.48 2 2 6.03 2 11c0 2.5 1.06 4.77 2.78 6.41L3 21l4.06-1.36A10.5 10.5 0 0 0 12 20c5.52 0 10-4.03 10-9s-4.48-9-10-9Z"/>
+              <circle cx="8" cy="11" r="1" fill="currentColor" stroke="none"/>
+              <circle cx="12" cy="11" r="1" fill="currentColor" stroke="none"/>
+              <circle cx="16" cy="11" r="1" fill="currentColor" stroke="none"/>
+            </svg>
+            <span class="feat-num">01</span>
+          </div>
+          <div>
+            <div class="feat-title">Chat IA</div>
+            <div class="feat-desc">Interactúa con toda tu operación mediante lenguaje natural.</div>
+          </div>
+        </div>
+
+        <div class="feat-item" data-ani="2">
+          <div class="feat-top">
+            <svg class="feat-icon" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+            <span class="feat-num">02</span>
+          </div>
+          <div>
+            <div class="feat-title">CRM Pipeline</div>
+            <div class="feat-desc">Gestiona prospectos y clientes activos en tiempo real.</div>
+          </div>
+        </div>
+
+        <div class="feat-item" data-ani="3">
+          <div class="feat-top">
+            <svg class="feat-icon" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+            </svg>
+            <span class="feat-num">03</span>
+          </div>
+          <div>
+            <div class="feat-title">Time Tracker</div>
+            <div class="feat-desc">Atribución de horas exacta por proyecto y miembro.</div>
+          </div>
+        </div>
+
+        <div class="feat-item" data-ani="3">
+          <div class="feat-top">
+            <svg class="feat-icon" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+            </svg>
+            <span class="feat-num">04</span>
+          </div>
+          <div>
+            <div class="feat-title">Proyectos</div>
+            <div class="feat-desc">Gestión visual de entregas, hitos y responsabilidades.</div>
+          </div>
+        </div>
+
+        <div class="feat-item" data-ani="4">
+          <div class="feat-top">
+            <svg class="feat-icon" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+            </svg>
+            <span class="feat-num">05</span>
+          </div>
+          <div>
+            <div class="feat-title">Finanzas</div>
+            <div class="feat-desc">Ingresos, egresos y margen neto por proyecto.</div>
+          </div>
+        </div>
+
+        <div class="feat-item" data-ani="4">
+          <div class="feat-top">
+            <svg class="feat-icon" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <rect x="2" y="3" width="20" height="14" rx="2"/>
+              <path d="M8 21h8M12 17v4M7 10h2l2 2 2-4 2 2h2"/>
+            </svg>
+            <span class="feat-num">06</span>
+          </div>
+          <div>
+            <div class="feat-title">Agentes Autónomos</div>
+            <div class="feat-desc">Logs de ejecución y consumo de API en tiempo real.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SLIDE 5: HOW IT WORKS ───────────────────────────────── -->
+    <div class="slide bg-warm" id="s4">
+      <div data-ani="1">
+        <div class="label">Proceso de Implementación</div>
+        <h2 class="serif title-md">Un camino simple<br>a la eficiencia</h2>
+      </div>
+      <div class="steps-row">
+        <div class="step-item" data-ani="2">
+          <span class="step-num">01</span>
+          <div class="step-title">Implementar</div>
+          <p class="step-desc">Conectamos canales, repositorios y bases de datos en menos de 24 horas con integraciones nativas.</p>
+        </div>
+        <div class="step-item" data-ani="3">
+          <span class="step-num">02</span>
+          <div class="step-title">Trackear</div>
+          <p class="step-desc">La IA analiza tiempos, interacciones con clientes y costos operativos de forma automática en segundo plano.</p>
+        </div>
+        <div class="step-item" data-ani="4">
+          <span class="step-num">03</span>
+          <div class="step-title">Escalar</div>
+          <p class="step-desc">Usa los insights para ajustar tarifas, optimizar flujos con agentes IA y aumentar tu margen neto.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 6: METRICS ────────────────────────────────────── -->
+    <div class="slide bg-ink" id="s5">
+      <div data-ani="1">
+        <div class="label">Métricas Clave</div>
+        <h2 class="serif title-md">Por qué funciona</h2>
+      </div>
+      <div class="metrics-row">
+        <div class="metric-item" data-ani="2">
+          <div class="metric-val">100%</div>
+          <div class="metric-label">Transparencia total</div>
+          <div class="metric-sub">Cliente y equipo ven el avance y el presupuesto sin reportes manuales.</div>
+        </div>
+        <div class="metric-item" data-ani="3">
+          <div class="metric-val">0 ms</div>
+          <div class="metric-label">Latencia real-time</div>
+          <div class="metric-sub">Sincronización instantánea entre herramientas de desarrollo y dashboards.</div>
+        </div>
+        <div class="metric-item" data-ani="4">
+          <div class="metric-val">1</div>
+          <div class="metric-label">Una sola plataforma</div>
+          <div class="metric-sub">CRM, tracker, finanzas y agentes IA en un solo panel unificado.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 7: FOR WHOM ───────────────────────────────────── -->
+    <div class="slide bg-warm" id="s6">
+      <div data-ani="1">
+        <div class="label">Para Quién Es</div>
+        <h2 class="serif title-md">Diseñado para<br>agencias del futuro</h2>
+      </div>
+      <div class="profiles-grid">
+        <div class="profile-card" data-ani="2">
+          <div class="profile-tag">Perfil 01</div>
+          <div class="profile-title">Agencias<br>de Marketing IA</div>
+          <p class="profile-desc">Equipos que usan Claude, GPT u otros modelos y necesitan medir el ROI real de cada interacción automatizada.</p>
+        </div>
+        <div class="profile-card" data-ani="3">
+          <div class="profile-tag">Perfil 02</div>
+          <div class="profile-title">Estudios<br>de Diseño Digital</div>
+          <p class="profile-desc">Creativos que manejan múltiples clientes simultáneamente y pierden horas en reportes de tiempo y seguimiento de proyectos.</p>
+        </div>
+        <div class="profile-card" data-ani="4">
+          <div class="profile-tag">Perfil 03</div>
+          <div class="profile-title">Consultoras<br>de Transformación</div>
+          <p class="profile-desc">Firmas que implementan IA en empresas y necesitan demostrar resultados cuantificables a sus clientes corporativos.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 8: CTA ────────────────────────────────────────── -->
+    <div class="slide bg-ink" id="s7">
+      <div class="cta-layout">
+        <div class="cta-top">
+          <div data-ani="1">
+            <div class="label">Acceso Exclusivo</div>
+            <h2 class="serif title-md">Toma el control<br>absoluto hoy.</h2>
+            <p class="subtitle">Únete a la lista de espera. Acceso prioritario para agencias que operan con IA.</p>
+          </div>
+          <a href="mailto:hola@victor-ia.com.mx?subject=Brain Tracker — Solicitud de Acceso" class="cta-btn" data-ani="1">
+            Solicitar acceso
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <!-- Infographic: data flow diagram -->
+        <div class="infographic" data-ani="2">
+          <svg viewBox="0 0 760 230" class="infographic-svg" xmlns="http://www.w3.org/2000/svg">
+            <!-- Source nodes -->
+            <g transform="translate(30,95)">
+              <circle cx="0" cy="0" r="16" fill="#FFAA17" fill-opacity="0.12" stroke="#FFAA17" stroke-width="1.5"/>
+              <text x="0" y="4" text-anchor="middle" fill="#FFAA17" font-size="9" font-family="Space Grotesk" font-weight="600">CRM</text>
+              <!-- pulse ring -->
+              <circle cx="0" cy="0" class="ring-pulse" fill="none" stroke="#FFAA17" stroke-width="1.5" r="0" opacity="0.5"/>
+            </g>
+            <g transform="translate(30,135)">
+              <circle cx="0" cy="0" r="16" fill="#FFAA17" fill-opacity="0.12" stroke="#FFAA17" stroke-width="1.5"/>
+              <text x="0" y="4" text-anchor="middle" fill="#FFAA17" font-size="8" font-family="Space Grotesk" font-weight="600">TIME</text>
+            </g>
+            <g transform="translate(30,55)">
+              <circle cx="0" cy="0" r="16" fill="#FFAA17" fill-opacity="0.12" stroke="#FFAA17" stroke-width="1.5"/>
+              <text x="0" y="4" text-anchor="middle" fill="#FFAA17" font-size="8" font-family="Space Grotesk" font-weight="600">CHAT</text>
+            </g>
+
+            <!-- Flow lines to center -->
+            <line x1="48" y1="55" x2="280" y2="115" stroke="#FFAA17" stroke-opacity="0.3" stroke-width="1" class="flow-line"/>
+            <line x1="48" y1="95" x2="280" y2="115" stroke="#FFAA17" stroke-opacity="0.3" stroke-width="1" class="flow-line"/>
+            <line x1="48" y1="135" x2="280" y2="115" stroke="#FFAA17" stroke-opacity="0.3" stroke-width="1" class="flow-line"/>
+
+            <!-- Center: Brain -->
+            <g transform="translate(280,115)">
+              <circle cx="0" cy="0" r="52" fill="rgba(255,170,23,0.07)" stroke="#FFAA17" stroke-width="2"/>
+              <circle cx="0" cy="0" r="38" fill="rgba(255,170,23,0.05)" stroke="#FFAA17" stroke-opacity="0.3" stroke-width="1"/>
+              <text x="0" y="-8" text-anchor="middle" fill="#FFAA17" font-size="13" font-family="Instrument Serif" font-style="italic">Brain</text>
+              <text x="0" y="10" text-anchor="middle" fill="#FFAA17" font-size="10" font-family="Space Grotesk" font-weight="700">TRACKER</text>
+              <!-- pulse ring -->
+              <circle cx="0" cy="0" class="ring-pulse" fill="none" stroke="#FFAA17" stroke-width="1.5" r="0" opacity="0.4" style="animation-delay:0.5s;"/>
+            </g>
+
+            <!-- Right nodes -->
+            <g transform="translate(520,55)">
+              <circle cx="0" cy="0" r="16" fill="#FFAA17" fill-opacity="0.12" stroke="#FFAA17" stroke-width="1.5"/>
+              <text x="0" y="4" text-anchor="middle" fill="#FFAA17" font-size="7" font-family="Space Grotesk" font-weight="600">FINANZAS</text>
+            </g>
+            <g transform="translate(520,95)">
+              <circle cx="0" cy="0" r="16" fill="#FFAA17" fill-opacity="0.12" stroke="#FFAA17" stroke-width="1.5"/>
+              <text x="0" y="4" text-anchor="middle" fill="#FFAA17" font-size="7" font-family="Space Grotesk" font-weight="600">AGENTES</text>
+            </g>
+            <g transform="translate(520,135)">
+              <circle cx="0" cy="0" r="16" fill="#FFAA17" fill-opacity="0.12" stroke="#FFAA17" stroke-width="1.5"/>
+              <text x="0" y="4" text-anchor="middle" fill="#FFAA17" font-size="8" font-family="Space Grotesk" font-weight="600">KPIs</text>
+            </g>
+
+            <!-- Flow lines from center -->
+            <line x1="332" y1="115" x2="502" y2="55" stroke="#FFAA17" stroke-opacity="0.3" stroke-width="1" class="flow-line"/>
+            <line x1="332" y1="115" x2="502" y2="95" stroke="#FFAA17" stroke-opacity="0.3" stroke-width="1" class="flow-line"/>
+            <line x1="332" y1="115" x2="502" y2="135" stroke="#FFAA17" stroke-opacity="0.3" stroke-width="1" class="flow-line"/>
+
+            <!-- Far right: Dashboard -->
+            <g transform="translate(680,115)">
+              <rect x="-38" y="-28" width="76" height="56" rx="6" fill="rgba(255,170,23,0.08)" stroke="#FFAA17" stroke-width="1.5"/>
+              <text x="0" y="-8" text-anchor="middle" fill="#FFAA17" font-size="10" font-family="Space Grotesk" font-weight="700">DASH</text>
+              <text x="0" y="8" text-anchor="middle" fill="#FFAA17" font-size="8" font-family="Space Grotesk" opacity="0.7">BOARD</text>
+            </g>
+
+            <!-- Line from right cluster to dashboard -->
+            <line x1="538" y1="55"  x2="642" y2="107" stroke="#FFAA17" stroke-opacity="0.25" stroke-width="1" class="flow-line"/>
+            <line x1="538" y1="95"  x2="642" y2="110" stroke="#FFAA17" stroke-opacity="0.25" stroke-width="1" class="flow-line"/>
+            <line x1="538" y1="135" x2="642" y2="120" stroke="#FFAA17" stroke-opacity="0.25" stroke-width="1" class="flow-line"/>
+
+            <!-- Labels -->
+            <text x="30"  y="180" text-anchor="middle" fill="rgba(248,247,245,0.3)" font-size="9" font-family="Space Grotesk">Fuentes de datos</text>
+            <text x="280" y="190" text-anchor="middle" fill="rgba(248,247,245,0.3)" font-size="9" font-family="Space Grotesk">Cerebro centralizado</text>
+            <text x="520" y="180" text-anchor="middle" fill="rgba(248,247,245,0.3)" font-size="9" font-family="Space Grotesk">Módulos</text>
+            <text x="680" y="162" text-anchor="middle" fill="rgba(248,247,245,0.3)" font-size="9" font-family="Space Grotesk">Output</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Nav -->
+    <div class="bottom-nav" id="bottomNav">
+      <span class="slide-counter" id="counter">01 / 08</span>
+      <div class="nav-dots" id="navDots"></div>
+      <div class="nav-arrows">
+        <button class="arrow" id="btnPrev" aria-label="Anterior">
+          <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="arrow" id="btnNext" aria-label="Siguiente">
+          <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+    </div>
+
+  </div><!-- /deck -->
+</div><!-- /viewport -->
+
+<script>
+  /* ─── STATE ─────────────────────────────────────────────── */
+  const slides     = document.querySelectorAll('.slide');
+  const totalSlides = slides.length;
+  let current = 0;
+  let isAnimating = false;
+
+  /* ─── DOM REFS ──────────────────────────────────────────── */
+  const counter     = document.getElementById('counter');
+  const dotsEl      = document.getElementById('navDots');
+  const btnPrev     = document.getElementById('btnPrev');
+  const btnNext     = document.getElementById('btnNext');
+  const progressLine= document.getElementById('progressLine');
+  const topBar      = document.getElementById('topBar');
+  const bottomNav   = document.getElementById('bottomNav');
+
+  /* ─── BUILD DOTS ────────────────────────────────────────── */
+  slides.forEach((_, i) => {
+    const dot = document.createElement('span');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => goTo(i));
+    dotsEl.appendChild(dot);
+  });
+
+  /* ─── SCALE DECK ────────────────────────────────────────── */
+  const deck = document.getElementById('deck');
+
+  function scaleDeck() {
+    const scaleX = window.innerWidth  / 1280;
+    const scaleY = window.innerHeight / 720;
+    const scale  = Math.min(scaleX, scaleY);
+    deck.style.transform = `translate(-50%, -50%) scale(${scale})`;
+  }
+
+  scaleDeck();
+  window.addEventListener('resize', scaleDeck);
+
+  /* ─── NAVIGATION ────────────────────────────────────────── */
+  function goTo(target, reverse = false) {
+    if (isAnimating || target === current) return;
+    isAnimating = true;
+
+    const prev = current;
+    current = target;
+
+    const prevSlide = slides[prev];
+    const nextSlide = slides[current];
+
+    /* apply direction classes */
+    const dir = reverse ? 'reverse' : '';
+    prevSlide.classList.remove('active');
+    prevSlide.classList.add(dir, 'leaving');
+    nextSlide.classList.add(dir, 'entering');
+
+    /* after anim: clean up */
+    setTimeout(() => {
+      prevSlide.classList.remove('leaving', 'reverse');
+      nextSlide.classList.remove('entering', 'reverse');
+      nextSlide.classList.add('active');
+      updateUI();
+      isAnimating = false;
+    }, 560);
+  }
+
+  function goNext() { if (current < totalSlides - 1) goTo(current + 1, false); }
+  function goPrev() { if (current > 0)               goTo(current - 1, true);  }
+
+  /* ─── UPDATE UI ─────────────────────────────────────────── */
+  function updateUI() {
+    /* counter */
+    counter.textContent = String(current + 1).padStart(2, '0') + ' / ' + String(totalSlides).padStart(2, '0');
+
+    /* dots */
+    dotsEl.querySelectorAll('.dot').forEach((d, i) => {
+      d.classList.toggle('active', i === current);
+    });
+
+    /* progress line */
+    progressLine.style.width = ((current + 1) / totalSlides * 100) + '%';
+
+    /* top-bar & bottom-nav theme color */
+    const slideEl = slides[current];
+    const isInk = slideEl.classList.contains('bg-ink') || slideEl.classList.contains('bg-gold');
+    topBar.style.color = isInk ? 'rgba(248,247,245,0.8)' : 'rgba(14,15,18,0.7)';
+    bottomNav.style.color = isInk ? 'rgba(248,247,245,0.8)' : 'rgba(14,15,18,0.7)';
+  }
+
+  /* ─── EVENTS ────────────────────────────────────────────── */
+  btnNext.addEventListener('click', goNext);
+  btnPrev.addEventListener('click', goPrev);
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); goNext(); }
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')                    { e.preventDefault(); goPrev(); }
+  });
+
+  /* swipe support */
+  let touchX = 0;
+  deck.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
+  deck.addEventListener('touchend',   e => {
+    const dx = e.changedTouches[0].clientX - touchX;
+    if (Math.abs(dx) > 40) dx < 0 ? goNext() : goPrev();
+  });
+
+  /* ─── INIT ──────────────────────────────────────────────── */
+  updateUI();
+</script>
+</body>
+</html>
