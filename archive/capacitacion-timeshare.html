@@ -1,0 +1,432 @@
+﻿<!-- Victor IA — Agentes IA -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VTC Capacitación Elite</title>
+  <meta http-equiv="refresh" content="0; url=https://vtc-capacitacion-deploy.vercel.app/capacitacion.html">
+<meta name="description" content="Casi 200 agentes especializados coordinados por un supercerebro de IA. Producción, diseño, datos, estrategia y más — todo en un solo comando."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com" integrity="sha384-igm5BeiBt36UU4gqwWS7imYmelpTsZlQ45FZf+XBn9MuJbn4nQr7yx1yFydocC/K" crossorigin="anonymous"></script>
+<script>
+tailwind.config={darkMode:'class',theme:{extend:{
+  colors:{ink:'#070708',ink2:'#F5F5F5',ink3:'#FAFAFA',ink4:'#141418',cream:'#000000',muted:'#666666',faint:'#3A3834',gold:'#1A1A1A',gold2:'#CDB28C'},
+  fontFamily:{display:['Plus Jakarta Sans','sans-serif'],body:['Inter','sans-serif']},
+}}}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased;scroll-behavior:auto}
+body{background:transparent;color:#000000;font-family:'Plus Jakarta Sans',sans-serif;overflow-x:hidden;font-weight:400}
+@media(pointer:fine){html,body,*{cursor:none!important}}
+@media(prefers-contrast:more){html,body,*{cursor:auto!important}#cur-d,#cur-r{display:none!important}}
+#cur-d{position:fixed;width:5px;height:5px;background:#1A1A1A;border-radius:50%;pointer-events:none!important;z-index:2147483647;transform:translate(-50%,-50%);transition:opacity .3s}
+#cur-r{position:fixed;width:36px;height:36px;border:1px solid rgba(0,0,0,.18);border-radius:50%;pointer-events:none!important;z-index:2147483646;transform:translate(-50%,-50%);transition:width .4s cubic-bezier(.16,1,.3,1),height .4s,border-color .4s,opacity .4s}
+#cur-r.expand{width:58px;height:58px;border-color:rgba(0,0,0,.45)}
+#cur-r.shrink{width:16px;height:16px;border-color:rgba(0,0,0,.9)}
+#pbar{position:fixed;top:0;left:0;height:1px;background:#1A1A1A;z-index:100000;width:0}
+#noise{position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.024;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+header{position:fixed;top:0;left:0;right:0;z-index:500;height:68px;transition:background .5s,border-color .5s;border-bottom:1px solid transparent}
+header.scrolled{background:rgba(255,255,255,.96);border-bottom-color:rgba(0,0,0,.08);backdrop-filter:blur(18px)}
+.nav-a{position:relative;color:#666666;font-size:13px;letter-spacing:.07em;font-weight:300;transition:color .3s;text-decoration:none}
+.nav-a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:#1A1A1A;transition:width .45s cubic-bezier(.16,1,.3,1)}
+.nav-a:hover{color:#000000}.nav-a:hover::after{width:100%}
+.btn-p{display:inline-flex;align-items:center;justify-content:center;border-radius:5px;font-family:'Inter',sans-serif;font-size:13px;letter-spacing:.09em;font-weight:500;text-decoration:none;background:#000000;color:#FFFFFF;border:1px solid transparent;padding:11px 26px;transition:background .25s,transform .2s}
+.btn-p:hover{background:#fff;transform:translateY(-2px)}
+.btn-g{display:inline-flex;align-items:center;justify-content:center;border-radius:5px;font-family:'Inter',sans-serif;font-size:13px;letter-spacing:.09em;font-weight:500;text-decoration:none;background:transparent;color:#000000;border:1px solid rgba(255,255,255,.11);padding:11px 26px;transition:border-color .3s,transform .2s}
+.btn-g:hover{border-color:rgba(255,255,255,.28);transform:translateY(-2px)}
+.card{background:#FAFAFA;border:1px solid rgba(255,255,255,.054);border-radius:12px;transition:border-color .45s}
+.card:hover{border-color:rgba(0,0,0,.2)}
+.eye{display:inline-flex;align-items:center;gap:13px;font-family:'Inter',sans-serif;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:#1A1A1A}
+.eye::before{content:'';display:block;width:0;height:1px;background:#1A1A1A;transition:width 1.3s cubic-bezier(.16,1,.3,1)}
+.eye.on::before{width:26px}
+.eyec{font-family:'Inter',sans-serif;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;gap:10px}
+.eyec::before,.eyec::after{content:'';display:block;width:0;height:1px;background:rgba(0,0,0,.3);transition:width 1.3s cubic-bezier(.16,1,.3,1)}
+.eyec.on::before,.eyec.on::after{width:18px}
+.rv{opacity:0;transform:translateY(30px)}
+.hr{height:1px;background:rgba(255,255,255,.052)}
+.mag{display:inline-block}
+.gold-vr{width:1px;background:rgba(0,0,0,0);transition:background 1.2s .3s}
+.gold-vr.on{background:rgba(0,0,0,.08)}
+.deco-n{font-family:'Plus Jakarta Sans',sans-serif;font-weight:200;color:rgba(0,0,0,.04);line-height:1;pointer-events:none;user-select:none}
+/* ── Tailwind-fallback classes (minimal, no CDN needed) ── */
+.max-w-\[1200px\]{max-width:1200px}
+.mx-auto{margin-left:auto;margin-right:auto}
+.px-6{padding-left:24px;padding-right:24px}
+.w-full{width:100%}
+/* ── Responsive ───────────────────────────────────────── */
+@media(min-width:768px){.md\:px-16{padding-left:64px;padding-right:64px}}
+@media(max-width:860px){
+  #main-nav{display:none!important}
+  #login-link{display:none!important}
+  [style*="grid-template-columns:repeat(3"]{grid-template-columns:1fr!important}
+  [style*="grid-template-columns:repeat(2"]{grid-template-columns:1fr!important}
+  [style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}
+  [style*="grid-template-columns:1.4fr"]{grid-template-columns:1fr!important}
+  [style*="padding:80px 64px"]{padding:40px 24px!important}
+  [style*="padding:48px 36px"]{padding:28px 20px!important}
+  [style*="gap:64px"]{gap:32px!important}
+  [style*="gap:80px"]{gap:40px!important}
+  footer>div{padding-left:16px!important;padding-right:16px!important}
+}
+@media(max-width:640px){
+  header>div{padding-left:16px!important;padding-right:16px!important}
+  main>section{padding-left:0!important;padding-right:0!important}
+}
+
+/* ── Marble background ── */
+#bg-marble-page{position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:url('assets/marble-white/marble-agentes.webp');background-size:cover;background-position:50% 30%;opacity:1;}
+main{position:relative;z-index:1}
+</style>
+</head>
+<body>
+<div id="bg-marble-page"></div>
+<div id="noise"></div>
+<div id="pbar"></div>
+<div id="cur-d"></div>
+<div id="cur-r"></div>
+
+<!-- HEADER -->
+<header id="hdr">
+  <div style="display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto;padding:0 24px;height:100%">
+    <a href="index.html" style="font-family:'Plus Jakarta Sans',sans-serif;font-size:21px;font-weight:300;letter-spacing:.04em;color:#000000;text-decoration:none">Victor <span style="color:#1A1A1A;font-weight:500">IA</span></a>
+    <nav id="main-nav" style="display:flex;gap:36px;align-items:center">
+      <a class="nav-a" href="agentes.html" style="color:#000000">Agentes</a>
+      <a class="nav-a" href="como-funciona.html">Cómo Funciona</a>
+      <a class="nav-a" href="precios.html">Precios</a>
+      <a class="nav-a" href="blog/">Blog</a>
+      <a class="nav-a" href="telemetria.html">Eficiencia IoT</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:20px">
+      <a class="nav-a" href="app.html" id="login-link">Iniciar sesión</a>
+      <div class="mag"><a class="btn-p" href="app.html">Empezar gratis</a></div>
+    </div>
+  </div>
+</header>
+
+<main style="padding-top:68px;position:relative;z-index:10">
+
+<!-- HERO -->
+<section style="min-height:72vh;display:flex;align-items:center;padding:100px 0 80px;position:relative;overflow:hidden">
+  <div style="position:absolute;top:30%;left:50%;transform:translate(-50%,-50%);width:800px;height:400px;background:radial-gradient(ellipse,rgba(0,0,0,.04) 0%,transparent 70%);pointer-events:none"></div>
+  <div class="max-w-[1200px] mx-auto px-6 md:px-16 w-full">
+    <div class="rv" style="max-width:760px">
+      <div class="eye" style="margin-bottom:28px" data-eye>Sistema de Agentes</div>
+      <h1 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:200;font-size:clamp(52px,7vw,96px);line-height:1.02;letter-spacing:-.025em;color:#000000;margin-bottom:28px">
+        155+ Agentes IA Especializados<br/><span style="font-style:italic;color:#1A1A1A">Cada uno es un experto real.</span>
+      </h1>
+      <p style="font-size:17px;line-height:1.8;font-weight:300;color:#666666;max-width:520px;margin-bottom:44px">
+        Coordinados automáticamente. Trabajando por ti 24/7.
+      </p>
+      <div style="display:flex;flex-wrap:wrap;gap:12px">
+        <div class="mag"><a class="btn-p" href="app.html" style="padding:13px 32px;font-size:14px">Empezar gratis</a></div>
+        <div class="mag"><a class="btn-g" href="como-funciona.html" style="padding:13px 32px;font-size:14px">Ver cómo funciona →</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="hr"></div>
+
+<!-- CATEGORIES -->
+<section style="padding:120px 0;background:#F5F5F5;position:relative;overflow:hidden">
+  <div class="deco-n" style="position:absolute;right:-30px;top:40%;font-size:300px">6</div>
+  <div class="max-w-[1200px] mx-auto px-6 md:px-16">
+    <div class="rv" style="text-align:center;margin-bottom:72px">
+      <p class="eyec" style="margin-bottom:22px" data-eyec>Categorías de Agentes</p>
+      <h2 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:200;font-size:clamp(36px,4.5vw,62px);line-height:1.06;letter-spacing:-.025em">
+        8 Categorías Principales<br/><span style="font-style:italic;color:#666666">155+ expertos especializados.</span>
+      </h2>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:1px;background:rgba(255,255,255,.052)">
+
+      <div class="card rv" style="border-radius:0;border:none;padding:44px 36px;background:#F5F5F5;transition:background .3s">
+        <div style="width:42px;height:42px;border-radius:8px;background:rgba(0,0,0,.04);border:1px solid rgba(0,0,0,.08);display:flex;align-items:center;justify-content:center;margin-bottom:22px">
+          <svg width="18" height="18" fill="none" viewBox="0 0 18 18"><rect x="2" y="3" width="14" height="10" rx="1.5" stroke="#1A1A1A" stroke-width="1.2"/><path d="M6 16h6M9 13v3" stroke="#1A1A1A" stroke-width="1.2" stroke-linecap="round"/></svg>
+        </div>
+        <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:22px;font-weight:300;color:#000000;margin-bottom:12px">Producción Creativa</h3>
+        <p style="font-size:14px;line-height:1.78;color:#666666;margin-bottom:18px">Agentes especializados en generar video, imagen, animación y contenido audiovisual de nivel profesional para cualquier plataforma.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">Video</span>
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">Imagen</span>
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">Animación</span>
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">Post-producción</span>
+        </div>
+      </div>
+
+      <div class="card rv" style="border-radius:0;border:none;padding:44px 36px;background:#F5F5F5">
+        <div style="width:42px;height:42px;border-radius:8px;background:rgba(0,0,0,.04);border:1px solid rgba(0,0,0,.08);display:flex;align-items:center;justify-content:center;margin-bottom:22px">
+          <svg width="18" height="18" fill="none" viewBox="0 0 18 18"><path d="M3 4h12M3 8h9M3 12h6" stroke="#1A1A1A" stroke-width="1.2" stroke-linecap="round"/></svg>
+        </div>
+        <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:22px;font-weight:300;color:#000000;margin-bottom:12px">Contenido & Copywriting (32 agentes)</h3>
+        <p style="font-size:14px;line-height:1.78;color:#666666;margin-bottom:18px">Redactores, estrategas de contenido y expertos en comunicación que entienden la voz de tu marca y crean textos que convierten.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">Copywriting</span>
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">Blog</span>
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">Email</span>
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">Social Media</span>
+        </div>
+      </div>
+
+      <div class="card rv" style="border-radius:0;border:none;padding:44px 36px;background:#F5F5F5">
+        <div style="width:42px;height:42px;border-radius:8px;background:rgba(0,0,0,.04);border:1px solid rgba(0,0,0,.08);display:flex;align-items:center;justify-content:center;margin-bottom:22px">
+          <svg width="18" height="18" fill="none" viewBox="0 0 18 18"><path d="M9 2l1.8 5.5H17l-4.6 3.4 1.8 5.5L9 13l-5.2 3.4 1.8-5.5L1 7.5h6.2Z" stroke="#1A1A1A" stroke-width="1.1" stroke-linejoin="round"/></svg>
+        </div>
+        <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:22px;font-weight:300;color:#000000;margin-bottom:12px">Voz & Audio (18 agentes)</h3>
+        <p style="font-size:14px;line-height:1.78;color:#666666;margin-bottom:18px">Diseñadores de UI, branding e identidad que transforman conceptos en piezas visuales que comunican exactamente lo que necesitas.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">UI/UX</span>
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">Branding</span>
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">Identidad</span>
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">Creativos</span>
+        </div>
+      </div>
+
+      <div class="card rv" style="border-radius:0;border:none;padding:44px 36px;background:#F5F5F5">
+        <div style="width:42px;height:42px;border-radius:8px;background:rgba(0,0,0,.04);border:1px solid rgba(0,0,0,.08);display:flex;align-items:center;justify-content:center;margin-bottom:22px">
+          <svg width="18" height="18" fill="none" viewBox="0 0 18 18"><path d="M2 14l4-5 3.5 3 3-4 3.5 6" stroke="#1A1A1A" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><rect x="1" y="1" width="16" height="16" rx="2" stroke="#1A1A1A" stroke-width="1.1" opacity=".3"/></svg>
+        </div>
+        <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:22px;font-weight:300;color:#000000;margin-bottom:12px">Análisis & Datos (21 agentes)</h3>
+        <p style="font-size:14px;line-height:1.78;color:#666666;margin-bottom:18px">Analistas que procesan, interpretan y presentan datos en dashboards y reportes ejecutivos para que tomes decisiones con certeza.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">BI</span>
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">Reportes</span>
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">Forecasting</span>
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">KPIs</span>
+        </div>
+      </div>
+
+      <div class="card rv" style="border-radius:0;border:none;padding:44px 36px;background:#F5F5F5">
+        <div style="width:42px;height:42px;border-radius:8px;background:rgba(0,0,0,.04);border:1px solid rgba(0,0,0,.08);display:flex;align-items:center;justify-content:center;margin-bottom:22px">
+          <svg width="18" height="18" fill="none" viewBox="0 0 18 18"><circle cx="9" cy="9" r="3" stroke="#1A1A1A" stroke-width="1.2"/><path d="M9 2v3M9 13v3M2 9h3M13 9h3M4.2 4.2l2.1 2.1M11.7 11.7l2.1 2.1M4.2 13.8l2.1-2.1M11.7 6.3l2.1-2.1" stroke="#1A1A1A" stroke-width="1.1" stroke-linecap="round"/></svg>
+        </div>
+        <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:22px;font-weight:300;color:#000000;margin-bottom:12px">Automatización & Workflows (28 agentes)</h3>
+        <p style="font-size:14px;line-height:1.78;color:#666666;margin-bottom:18px">Agentes que mapean, diseñan y ejecutan flujos automáticos para eliminar tareas repetitivas, conectar sistemas y acelerar operaciones.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">Workflows</span>
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">Notificaciones</span>
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">Integraciones</span>
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">CRM</span>
+        </div>
+      </div>
+
+      <div class="card rv" style="border-radius:0;border:none;padding:44px 36px;background:#F5F5F5">
+        <div style="width:42px;height:42px;border-radius:8px;background:rgba(0,0,0,.04);border:1px solid rgba(0,0,0,.08);display:flex;align-items:center;justify-content:center;margin-bottom:22px">
+          <svg width="18" height="18" fill="none" viewBox="0 0 18 18"><path d="M9 2c-3.9 0-7 3.1-7 7s3.1 7 7 7 7-3.1 7-7" stroke="#1A1A1A" stroke-width="1.2" stroke-linecap="round"/><path d="M13 2l3 3-5 5-3-3 5-5Z" stroke="#1A1A1A" stroke-width="1.1" stroke-linejoin="round"/></svg>
+        </div>
+        <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:22px;font-weight:300;color:#000000;margin-bottom:12px">Especialistas en Plataformas (12 agentes)</h3>
+        <p style="font-size:14px;line-height:1.78;color:#666666;margin-bottom:18px">Expertos en HubSpot, Stripe, Shopify, AWS, Google Cloud y más plataformas. Integración y optimización de tu tech stack.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">HubSpot</span>
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">AWS</span>
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">Integraciones</span>
+        </div>
+      </div>
+
+      <div class="card rv" style="border-radius:0;border:none;padding:44px 36px;background:#F5F5F5">
+        <div style="width:42px;height:42px;border-radius:8px;background:rgba(0,0,0,.04);border:1px solid rgba(0,0,0,.08);display:flex;align-items:center;justify-content:center;margin-bottom:22px">
+          <svg width="18" height="18" fill="none" viewBox="0 0 18 18"><rect x="2" y="2" width="14" height="14" rx="2" stroke="#1A1A1A" stroke-width="1.1"/><path d="M5 9h8M9 5v8" stroke="#1A1A1A" stroke-width="1.2" stroke-linecap="round"/></svg>
+        </div>
+        <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:22px;font-weight:300;color:#000000;margin-bottom:12px">Desarrollo & Código (25 agentes)</h3>
+        <p style="font-size:14px;line-height:1.78;color:#666666;margin-bottom:18px">Ingenieros y desarrolladores especializados en Next.js, React, Python y arquitectura de sistemas escalables.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">Backend</span>
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">DevOps</span>
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">Frontend</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="hr"></div>
+
+<!-- ORCHESTRATION -->
+<section style="padding:120px 0;overflow:hidden">
+  <div class="max-w-[1200px] mx-auto px-6 md:px-16">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center">
+      <div class="rv">
+        <p class="eye" style="margin-bottom:28px" data-eye>Cómo Se Coordinan</p>
+        <h2 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:200;font-size:clamp(38px,4vw,58px);line-height:1.06;letter-spacing:-.022em;color:#000000;margin-bottom:28px">
+          Cómo Se Coordinan<br/><span style="font-style:italic;color:#1A1A1A">(Sin Que Tú Hagas Nada)</span>
+        </h2>
+        <p style="font-size:16px;line-height:1.82;font-weight:300;color:#666666;margin-bottom:44px">
+          1. Estratega - Diseña estrategia completa · 2. Investigador - Analiza 500+ videos · 3. Copywriter - Escribe scripts únicos · 4. Motion Designer - Diseña visuals · 5. Video Producer - Sincroniza todo · 6. Voice Artist - Voz mexicana natural · 7. Analyzer - Predice engagement. RESULTADO: 5 videos profesionales en 4 horas (vs 4 semanas + $10k con agencia)
+        </p>
+        <div style="display:flex;flex-direction:column;gap:26px">
+          <div style="display:flex;gap:18px">
+            <div class="gold-vr" style="align-self:stretch;flex-shrink:0;margin-top:3px" data-vr></div>
+            <div>
+              <p style="font-size:15px;font-weight:400;color:#000000;margin-bottom:5px">Selección automática del mejor modelo</p>
+              <p style="font-size:13.5px;line-height:1.7;color:#666666">Evalúa la tarea y asigna el modelo con el mayor rendimiento para ese tipo específico de trabajo.</p>
+            </div>
+          </div>
+          <div style="display:flex;gap:18px">
+            <div class="gold-vr" style="align-self:stretch;flex-shrink:0;margin-top:3px" data-vr></div>
+            <div>
+              <p style="font-size:15px;font-weight:400;color:#000000;margin-bottom:5px">Ejecución paralela, no secuencial</p>
+              <p style="font-size:13.5px;line-height:1.7;color:#666666">Múltiples agentes trabajan simultáneamente, reduciendo el tiempo total a una fracción de lo normal.</p>
+            </div>
+          </div>
+          <div style="display:flex;gap:18px">
+            <div class="gold-vr" style="align-self:stretch;flex-shrink:0;margin-top:3px" data-vr></div>
+            <div>
+              <p style="font-size:15px;font-weight:400;color:#000000;margin-bottom:5px">Control de calidad integrado</p>
+              <p style="font-size:13.5px;line-height:1.7;color:#666666">Cada entregable pasa por una capa de revisión antes de llegar a ti — errores detectados antes de que los veas.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Visual: radial agent diagram -->
+      <div class="rv" style="display:flex;align-items:center;justify-content:center;min-height:420px;position:relative">
+        <svg width="380" height="380" viewBox="0 0 380 380" fill="none" style="overflow:visible">
+          <!-- Center node -->
+          <circle cx="190" cy="190" r="38" fill="rgba(0,0,0,.04)" stroke="rgba(0,0,0,.18)" stroke-width="1.2"/>
+          <circle cx="190" cy="190" r="28" fill="rgba(0,0,0,.2)" stroke="rgba(0,0,0,.08)" stroke-width=".8"/>
+          <text x="190" y="187" text-anchor="middle" fill="#1A1A1A" font-family="Plus Jakarta Sans,sans-serif" font-size="13" font-weight="300">Victor</text>
+          <text x="190" y="202" text-anchor="middle" fill="rgba(0,0,0,.5)" font-family="Inter,sans-serif" font-size="9" letter-spacing=".08em">IA</text>
+          <!-- Orbit ring -->
+          <circle cx="190" cy="190" r="130" stroke="rgba(255,255,255,.04)" stroke-width="1" stroke-dasharray="4 6"/>
+          <!-- Agent nodes -->
+          <line x1="190" y1="190" x2="190" y2="60" stroke="rgba(0,0,0,.08)" stroke-width=".8"/>
+          <circle cx="190" cy="60" r="24" fill="#FAFAFA" stroke="rgba(0,0,0,.08)" stroke-width="1"/>
+          <text x="190" y="64" text-anchor="middle" fill="#666666" font-family="Inter,sans-serif" font-size="8" letter-spacing=".05em">VIDEO</text>
+          <line x1="190" y1="190" x2="317" y2="117" stroke="rgba(0,0,0,.08)" stroke-width=".8"/>
+          <circle cx="317" cy="117" r="24" fill="#FAFAFA" stroke="rgba(0,0,0,.08)" stroke-width="1"/>
+          <text x="317" y="121" text-anchor="middle" fill="#666666" font-family="Inter,sans-serif" font-size="8" letter-spacing=".05em">COPY</text>
+          <line x1="190" y1="190" x2="317" y2="263" stroke="rgba(0,0,0,.08)" stroke-width=".8"/>
+          <circle cx="317" cy="263" r="24" fill="#FAFAFA" stroke="rgba(0,0,0,.08)" stroke-width="1"/>
+          <text x="317" y="267" text-anchor="middle" fill="#666666" font-family="Inter,sans-serif" font-size="8" letter-spacing=".05em">DATOS</text>
+          <line x1="190" y1="190" x2="190" y2="320" stroke="rgba(0,0,0,.08)" stroke-width=".8"/>
+          <circle cx="190" cy="320" r="24" fill="#FAFAFA" stroke="rgba(0,0,0,.08)" stroke-width="1"/>
+          <text x="190" y="324" text-anchor="middle" fill="#666666" font-family="Inter,sans-serif" font-size="8" letter-spacing=".05em">DISEÑO</text>
+          <line x1="190" y1="190" x2="63" y2="263" stroke="rgba(0,0,0,.08)" stroke-width=".8"/>
+          <circle cx="63" cy="263" r="24" fill="#FAFAFA" stroke="rgba(0,0,0,.08)" stroke-width="1"/>
+          <text x="63" y="267" text-anchor="middle" fill="#666666" font-family="Inter,sans-serif" font-size="8" letter-spacing=".05em">AUTO</text>
+          <line x1="190" y1="190" x2="63" y2="117" stroke="rgba(0,0,0,.08)" stroke-width=".8"/>
+          <circle cx="63" cy="117" r="24" fill="#FAFAFA" stroke="rgba(0,0,0,.08)" stroke-width="1"/>
+          <text x="63" y="121" text-anchor="middle" fill="#666666" font-family="Inter,sans-serif" font-size="8" letter-spacing=".05em">ESTRAT</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="hr"></div>
+
+<!-- CTA -->
+<section style="padding:80px 24px 120px;background:#F5F5F5">
+  <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+    <div class="card rv" style="padding:80px 64px;text-align:center;position:relative;overflow:hidden">
+      <div style="position:relative">
+        <p class="eyec" style="margin-bottom:28px" data-eyec>Listo para empezar</p>
+        <h2 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:200;font-size:clamp(42px,5.5vw,80px);line-height:1.04;letter-spacing:-.03em;margin-bottom:24px">
+          155 Agentes<br/><span style="font-style:italic;color:#666666">Trabajando para Ti. Ahora.</span>
+        </h2>
+        <p style="font-size:16px;line-height:1.8;font-weight:300;color:#666666;max-width:400px;margin:0 auto 44px">Activar Tu Equipo de Agentes</p>
+        <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center">
+          <div class="mag"><a class="btn-p" href="app.html" style="padding:14px 40px;font-size:14px">Crear cuenta gratis</a></div>
+          <div class="mag"><a class="btn-g" href="como-funciona.html" style="padding:14px 40px;font-size:14px">Ver cómo funciona →</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer style="background:#040406;border-top:1px solid rgba(255,255,255,.05);padding:64px 0 40px;position:relative;z-index:10">
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px 0 64px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:48px">
+    <div>
+      <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:21px;font-weight:300;letter-spacing:.04em;color:#000000;margin-bottom:14px">Victor <span style="color:#1A1A1A">IA</span></div>
+      <p style="font-size:13.5px;line-height:1.7;font-weight:300;color:#666666;max-width:260px;margin-bottom:14px">El primer supercerebro de IA en LATAM. Redefiniendo la productividad empresarial.</p>
+      <p style="font-size:11px;letter-spacing:.10em;color:rgba(112,108,102,.3)">México · victor-ia.xyz</p>
+    </div>
+    <div>
+      <h4 style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(112,108,102,.35);margin-bottom:18px">Producto</h4>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:11px">
+        <li><a class="nav-a" href="agentes.html">Agentes IA</a></li>
+        <li><a class="nav-a" href="como-funciona.html">Cómo funciona</a></li>
+        <li><a class="nav-a" href="precios.html">Precios</a></li>
+        <li><a class="nav-a" href="app.html">App</a></li>
+        <li><a class="nav-a" href="telemetria.html">Eficiencia e IoT</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(112,108,102,.35);margin-bottom:18px">Legal</h4>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:11px">
+        <li><a class="nav-a" href="aviso-privacidad.html">Aviso de Privacidad</a></li>
+        <li><a class="nav-a" href="terminos-condiciones.html">Términos y Condiciones</a></li>
+        <li><a class="nav-a" href="politica-cookies.html">Política de Cookies</a></li>
+        <li><a class="nav-a" href="seguridad.html">Seguridad</a></li>
+      </ul>
+    </div>
+  </div>
+  <div style="max-width:1200px;margin:0 auto;padding:28px 64px 0;margin-top:48px;border-top:1px solid rgba(255,255,255,.05);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+    <p style="font-size:10.5px;letter-spacing:.09em;color:rgba(112,108,102,.28)">© 2026 INFLUENCE IA S.A. DE C.V. — Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js" integrity="sha384-O55L/6rhHr9CFvrxqv5luxOCcmVaBmETbZbJDP+Do8T0pztTACsFBD/IXCNkj7DV" crossorigin="anonymous"></script>
+<script src="/public/lenis-apple-config.js"></script>
+<script>
+(function(){
+'use strict';
+// Lenis + Cursor + Progress Bar are now initialized in lenis-apple-config.js
+// Page-specific scroll animations below
+
+/* Scroll reveals */
+gsap.utils.toArray('.rv').forEach(el=>{const rc=el.getBoundingClientRect();if(rc.top<window.innerHeight*.92){gsap.to(el,{opacity:1,y:0,duration:.8,ease:'power3.out'});}else{gsap.to(el,{opacity:1,y:0,duration:1,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 88%'}});}});
+
+/* Eyebrows */
+document.querySelectorAll('[data-eye]').forEach(el=>{const rc=el.getBoundingClientRect();if(rc.top<window.innerHeight*.92){setTimeout(()=>el.classList.add('on'),100);}else{ScrollTrigger.create({trigger:el,start:'top 88%',onEnter:()=>el.classList.add('on')});}});
+document.querySelectorAll('[data-eyec]').forEach(el=>{const rc=el.getBoundingClientRect();if(rc.top<window.innerHeight*.92){setTimeout(()=>el.classList.add('on'),100);}else{ScrollTrigger.create({trigger:el,start:'top 88%',onEnter:()=>el.classList.add('on')});}});
+document.querySelectorAll('[data-vr]').forEach(el=>ScrollTrigger.create({trigger:el,start:'top 85%',onEnter:()=>el.classList.add('on')}));
+
+/* Magnetic buttons */
+document.querySelectorAll('.mag').forEach(wrap=>{
+  const btn=wrap.querySelector('button,a')||wrap;
+  wrap.addEventListener('mousemove',e=>{const r=wrap.getBoundingClientRect();gsap.to(btn,{x:((e.clientX-r.left)/r.width-.5)*20,y:((e.clientY-r.top)/r.height-.5)*20,duration:.5,ease:'power2.out'});});
+  wrap.addEventListener('mouseleave',()=>gsap.to(btn,{x:0,y:0,duration:.8,ease:'elastic.out(1,.38)'}));
+});
+
+/* Space canvas */
+(function(){
+  const cv=document.createElement('canvas');
+  cv.id='space-bg';
+  Object.assign(cv.style,{position:'fixed',inset:'0',width:'100%',height:'100%',zIndex:'-1',pointerEvents:'none',opacity:'0',transition:'opacity 3s ease'});
+  document.body.prepend(cv);
+  const ctx=cv.getContext('2d');
+  let W=cv.width=innerWidth,H=cv.height=innerHeight,mx=W/2,my=H/2;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+  window.addEventListener('resize',()=>{W=cv.width=innerWidth;H=cv.height=innerHeight;buildStars();});
+  let stars=[],shoots=[],st=0;
+  function buildStars(){stars=[];for(let i=0;i<380;i++)stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*.7+.15,l:0,tw:Math.random()*Math.PI*2,sp:.006+Math.random()*.006});for(let i=0;i<75;i++)stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.1+.5,l:1,tw:Math.random()*Math.PI*2,sp:.009+Math.random()*.008});for(let i=0;i<20;i++)stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.5+.9,l:2,tw:Math.random()*Math.PI*2,sp:.012+Math.random()*.01});}
+  buildStars();
+  const asts=Array.from({length:4},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.13,vy:(Math.random()-.5)*.1,r:Math.random()*10+6,rot:Math.random()*Math.PI*2,drot:(Math.random()-.5)*.004,sides:Math.floor(Math.random()*4)+5,jt:Array.from({length:8},()=>.6+Math.random()*.8)}));
+  (function tick(){requestAnimationFrame(tick);ctx.clearRect(0,0,W,H);
+  const px=(mx/W-.5),py=(my/H-.5);
+  for(const s of stars){s.tw+=s.sp;const a=Math.min(.95,.25+Math.sin(s.tw)*.22+s.l*.12);const ox=px*(s.l+1)*-7,oy=py*(s.l+1)*-7;ctx.beginPath();ctx.arc(s.x+ox,s.y+oy,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(215,205,185,${a.toFixed(2)})`;ctx.fill();}
+  for(const a of asts){a.x+=a.vx;a.y+=a.vy;a.rot+=a.drot;if(a.x<-60)a.x=W+60;if(a.x>W+60)a.x=-60;if(a.y<-60)a.y=H+60;if(a.y>H+60)a.y=-60;ctx.save();ctx.translate(a.x,a.y);ctx.rotate(a.rot);ctx.beginPath();for(let i=0;i<a.sides;i++){const ang=(i/a.sides)*Math.PI*2,jr=a.jt[i%a.jt.length],rx=Math.cos(ang)*a.r*jr,ry=Math.sin(ang)*a.r*jr;i===0?ctx.moveTo(rx,ry):ctx.lineTo(rx,ry);}ctx.closePath();ctx.strokeStyle='rgba(170,150,110,.15)';ctx.lineWidth=.7;ctx.stroke();ctx.fillStyle='rgba(28,26,22,.45)';ctx.fill();ctx.restore();}
+  st++;if(st>200+Math.random()*220){st=0;shoots.push({x:Math.random()*W*.65,y:Math.random()*H*.28,vx:4.5+Math.random()*5,vy:1.8+Math.random()*2,len:100+Math.random()*120,life:1,fade:.014+Math.random()*.014});}
+  for(let i=shoots.length-1;i>=0;i--){const s=shoots[i];s.x+=s.vx;s.y+=s.vy;s.life-=s.fade;if(s.life<=0){shoots.splice(i,1);continue;}const g=ctx.createLinearGradient(s.x,s.y,s.x-s.vx*(s.len/5),s.y-s.vy*(s.len/5));g.addColorStop(0,`rgba(255,248,225,${(s.life*.9).toFixed(2)})`);g.addColorStop(1,'transparent');ctx.strokeStyle=g;ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(s.x,s.y);ctx.lineTo(s.x-s.vx*(s.len/5),s.y-s.vy*(s.len/5));ctx.stroke();}
+  })();
+  setTimeout(()=>{cv.style.opacity='1';},500);
+})();
+
+/* First section fade in */
+gsap.from('.rv:first-of-type',{opacity:0,y:40,duration:1.2,delay:.3,ease:'power3.out'});
+})();
+</script>
+</body>
+</html>
