@@ -62,6 +62,8 @@
     { "source": "/blog",           "destination": "/blog/index.html",     "permanent": false },
     { "source": "/propuestas/central-alarmas", "destination": "/propuestas/central-alarmas-eduardo-pimentel", "permanent": false },
     { "source": "/wdc", "destination": "/propuestas/wdc-propuesta", "permanent": false },
-    { "source": "/propuestas/wdc", "destination": "/propuestas/wdc-propuesta", "permanent": false }
+    { "source": "/propuestas/wdc", "destination": "/propuestas/wdc-propuesta", "permanent": false },
+    { "source": "/capacitacion-timeshare", "destination": "https://vtc-capacitacion-deploy.vercel.app/capacitacion.html", "permanent": false },
+    { "source": "/capacitacion-timeshare.html", "destination": "https://vtc-capacitacion-deploy.vercel.app/capacitacion.html", "permanent": false }
   ]
 }
