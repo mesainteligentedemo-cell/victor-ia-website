@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VTC Training Platform — VICTOR IA</title>
+  <meta name="description" content="Agenda una videollamada gratuita con el equipo de VICTOR IA. Diagnóstico sin costo, sin compromiso, en 30 minutos.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0E0F12">
+  <link rel="canonical" href="https://victor-ia.xyz/agendar-videollamada">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink:   #0E0F12;
+      --ink2:  #1a1b1f;
+      --muted: rgba(14,15,18,0.45);
+      --rule:  rgba(14,15,18,0.09);
+      --warm:  #F8F7F5;
+      --warm2: #F0EEE9;
+      --gold:  #C9A870;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--warm);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+    @media (hover: hover) and (pointer: fine) { body { cursor: none; } }
+    .bg-marble {
+      position: fixed; inset: 0;
+      background-image: url('/assets/bg-light.jpg');
+      background-size: cover;
+      background-position: 50% 0%;
+      z-index: 0;
+      filter: sepia(0.04) brightness(1.02);
+    }
+    .reveal-canvas { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
+    .cursor {
+      position: fixed; width: 5px; height: 5px;
+      background: var(--ink); border-radius: 50%;
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%,-50%); display: none;
+    }
+    .cursor-ring {
+      position: fixed; width: 28px; height: 28px;
+      border: 1px solid rgba(14,15,18,0.25); border-radius: 50%;
+      pointer-events: none; z-index: 9998;
+      transform: translate(-50%,-50%); display: none;
+      transition: width .18s, height .18s, border-color .18s;
+    }
+    @media (hover: hover) and (pointer: fine) { .cursor, .cursor-ring { display: block; } }
+
+    /* NAV */
+    nav {
+      position: fixed; inset: 0 0 auto 0; z-index: 50;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.8rem 3.5rem;
+    }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; }
+    .nav-logo img {
+      height: 28px; width: auto; mix-blend-mode: multiply; display: block;
+      image-rendering: -webkit-optimize-contrast;
+      transform: translateZ(0); backface-visibility: hidden;
+    }
+    .nav-back {
+      font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--ink); text-decoration: none; opacity: 0.5;
+      transition: opacity 0.25s; display: flex; align-items: center; gap: 0.5rem;
+    }
+    .nav-back:hover { opacity: 1; }
+    .nav-back svg { width: 14px; height: 14px; }
+
+    .content { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; }
+
+    .agenda-hero {
+      padding: clamp(5.5rem, 12vh, 8rem) clamp(1.5rem,6vw,4rem) 2.5rem;
+      max-width: 680px;
+    }
+    .agenda-eyebrow {
+      display: flex; align-items: center; gap: 1rem;
+      font-size: 0.6rem; letter-spacing: 0.38em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.8rem;
+    }
+    .agenda-eyebrow::before { content:''; display:block; width:2rem; height:1px; background:currentColor; }
+    .agenda-title {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-size: clamp(2.6rem, 6vw, 4.2rem);
+      font-weight: 400; line-height: 1.08; letter-spacing: -0.02em;
+      color: var(--ink); margin-bottom: 1.2rem;
+    }
+    .agenda-title em { font-style: italic; color: var(--ink2); }
+    .agenda-sub { font-size: 0.95rem; line-height: 1.7; color: var(--muted); max-width: 480px; }
+
+    .agenda-rule { height: 1px; background: var(--rule); margin: 0 clamp(1.5rem,6vw,4rem); position: relative; z-index: 2; }
+
+    .agenda-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+      padding: 2.5rem clamp(1.5rem,6vw,4rem) 5rem;
+    }
+    @media (max-width: 860px) { .agenda-grid { grid-template-columns: 1fr; gap: 3rem; } }
+
+    .agenda-section-label {
+      font-size: 0.58rem; letter-spacing: 0.4em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 2rem;
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .agenda-section-label::before { content:''; display:block; width:1.5rem; height:1px; background:currentColor; }
+
+    .form-field { margin-bottom: 1.8rem; }
+    .form-label { display: block; font-size: 0.6rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.65rem; }
+    .form-input, .form-select, .form-textarea {
+      width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--rule);
+      padding: 0.6rem 0; font-family: 'Space Grotesk', sans-serif; font-size: 0.95rem;
+      color: var(--ink); outline: none; transition: border-color 0.2s;
+      -webkit-appearance: none; appearance: none;
+    }
+    .form-textarea { resize: vertical; min-height: 2.6rem; line-height: 1.5; }
+    .form-input:focus, .form-select:focus, .form-textarea:focus { border-bottom-color: var(--ink); }
+    .form-input::placeholder, .form-textarea::placeholder { color: var(--muted); font-size: 0.9rem; }
+    .form-select {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%230E0F12' stroke-width='1.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 4px center; padding-right: 1.5rem;
+    }
+    .form-select option { background: var(--warm); }
+
+    .cal-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; }
+    .cal-month-label { font-family: 'Instrument Serif', Georgia, serif; font-size: 1.15rem; font-weight: 400; letter-spacing: -0.01em; }
+    .cal-arrow {
+      background: none; border: 1px solid var(--rule); color: var(--ink);
+      width: 34px; height: 34px; border-radius: 50%; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; font-size: 0.85rem; transition: all 0.2s;
+    }
+    @media (hover: hover) and (pointer: fine) { .cal-arrow { cursor: none; } }
+    .cal-arrow:hover:not(:disabled) { border-color: var(--ink); background: var(--ink); color: var(--warm); }
+    .cal-arrow:disabled { opacity: 0.25; cursor: not-allowed; }
+    .cal-weekdays { display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; margin-bottom: 0.5rem; }
+    .cal-weekday { font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); padding: 0.4rem 0; }
+    .cal-days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
+    .cal-day {
+      aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem; border-radius: 50%; cursor: pointer; transition: all 0.15s;
+      position: relative; border: 1px solid transparent; background: none;
+      font-family: 'Space Grotesk', sans-serif; color: var(--ink);
+    }
+    @media (hover: hover) and (pointer: fine) { .cal-day { cursor: none; } }
+    .cal-day.available:hover { background: var(--warm2); border-color: var(--rule); }
+    .cal-day.selected { background: var(--ink) !important; color: var(--warm) !important; border-color: var(--ink); }
+    .cal-day.past, .cal-day.weekend { color: var(--muted); pointer-events: none; opacity: 0.3; }
+    .cal-day.empty { pointer-events: none; }
+    .cal-day.today { border-color: rgba(14,15,18,0.2); font-weight: 600; }
+
+    .time-slots { margin-top: 2rem; }
+    .time-label { font-size: 0.58rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.8rem; }
+    .time-label::before { content:''; display:block; width:1.2rem; height:1px; background:currentColor; }
+    .slots-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }
+    .slot {
+      padding: 0.65rem 0; text-align: center; border: 1px solid var(--rule); border-radius: 3px;
+      font-size: 0.78rem; letter-spacing: 0.05em; cursor: pointer; transition: all 0.15s;
+      background: transparent; color: var(--ink); font-family: 'Space Grotesk', sans-serif;
+    }
+    @media (hover: hover) and (pointer: fine) { .slot { cursor: none; } }
+    .slot:hover { border-color: var(--ink); }
+    .slot.selected { background: var(--ink); color: var(--warm); border-color: var(--ink); }
+    .slot-placeholder { font-size: 0.85rem; color: var(--muted); font-style: italic; font-family: 'Instrument Serif', serif; padding: 1.5rem 0; line-height: 1.5; }
+
+    .form-submit {
+      margin-top: 2.5rem; width: 100%; padding: 1.1rem 2rem;
+      background: var(--ink); color: var(--warm); border: none; border-radius: 2px;
+      font-family: 'Space Grotesk', sans-serif; font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.22em; text-transform: uppercase; cursor: pointer; transition: all 0.2s;
+      display: flex; align-items: center; justify-content: center; gap: 1rem;
+    }
+    @media (hover: hover) and (pointer: fine) { .form-submit { cursor: none; } }
+    .form-submit:hover:not(:disabled) { background: var(--ink2); }
+    .form-submit:disabled { opacity: 0.35; cursor: not-allowed; }
+    .btn-arrow { transition: transform 0.2s; display: inline-block; }
+    .form-submit:hover:not(:disabled) .btn-arrow { transform: translateX(4px); }
+    .form-err { color: #b3261e; font-size: 0.78rem; margin-top: 0.9rem; display: none; }
+    .form-err.visible { display: block; }
+    .wa-agenda-cta {
+      display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+      margin-top: 1.1rem; width: 100%; font-size: 0.65rem; letter-spacing: 0.18em;
+      text-transform: uppercase; text-decoration: none; color: var(--ink); opacity: 0.38; transition: opacity 0.2s;
+    }
+    .wa-agenda-cta:hover { opacity: 0.75; }
+
+    .booking-summary {
+      margin-top: 1.8rem; padding: 1.2rem 1.4rem; border: 1px solid var(--rule);
+      border-radius: 3px; background: rgba(248,247,245,0.6); display: none;
+    }
+    .booking-summary.visible { display: block; }
+    .summary-row { display: flex; justify-content: space-between; align-items: baseline; padding: 0.4rem 0; border-bottom: 1px solid var(--rule); font-size: 0.82rem; }
+    .summary-row:last-child { border-bottom: none; }
+    .summary-key { color: var(--muted); font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; }
+    .summary-val { font-weight: 500; }
+
+    #success-view { display: none; position: relative; z-index: 2; padding: clamp(5.5rem,12vh,8rem) clamp(1.5rem,6vw,4rem) 4rem; max-width: 620px; margin: 0 auto; }
+    #success-view.visible { display: block; }
+    .success-check { width: 48px; height: 48px; border-radius: 50%; border: 1.5px solid var(--ink); display: flex; align-items: center; justify-content: center; margin-bottom: 2rem; }
+    .success-check svg { width: 20px; height: 20px; }
+    .success-title { font-family: 'Instrument Serif', Georgia, serif; font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 400; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1rem; }
+    .success-title em { font-style: italic; }
+    .success-sub { font-size: 0.95rem; color: var(--muted); line-height: 1.7; margin-bottom: 2.5rem; }
+    .success-detail { padding: 1.4rem 1.6rem; border: 1px solid var(--rule); border-radius: 3px; margin-bottom: 2rem; }
+    .success-detail-row { display: flex; gap: 1rem; align-items: baseline; padding: 0.5rem 0; border-bottom: 1px solid var(--rule); font-size: 0.85rem; }
+    .success-detail-row:last-child { border-bottom: none; }
+    .success-detail-key { color: var(--muted); font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; min-width: 80px; }
+    .success-cal-btn { display: inline-flex; align-items: center; gap: 0.7rem; padding: 0.8rem 1.6rem; border: 1px solid var(--ink); border-radius: 2px; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none; color: var(--ink); transition: all 0.2s; font-weight: 600; cursor: pointer; }
+    @media (hover: hover) and (pointer: fine) { .success-cal-btn { cursor: none; } }
+    .success-cal-btn:hover { background: var(--ink); color: var(--warm); }
+    .success-home { display: inline-flex; align-items: center; gap: 0.5rem; margin-left: 1rem; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .success-home:hover { color: var(--ink); }
+
+    @media (max-width: 640px) {
+      nav { padding: 1.2rem 1.4rem; }
+      .agenda-hero { padding-top: 5rem; }
+      .agenda-grid { gap: 2rem; padding-bottom: 3rem; }
+      .slots-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+  </style>
+  <meta http-equiv="refresh" content="0; url=https://vtc-capacitacion-deploy.vercel.app/capacitacion.html">
+</head>
+<body>
+  <div class="bg-marble" aria-hidden="true"></div>
+  <canvas class="reveal-canvas" id="revealCanvas" aria-hidden="true"></canvas>
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+
+  <nav>
+    <a href="/" class="nav-logo"><img src="/assets/brand/logo-full.png" alt="VICTOR IA"></a>
+    <a href="/" class="nav-back">
+      <svg viewBox="0 0 20 20" fill="none"><path d="M12 4L6 10L12 16" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Volver
+    </a>
+  </nav>
+
+  <div class="content" id="form-view">
+    <div class="agenda-hero">
+      <p class="agenda-eyebrow">Diagnóstico gratuito · 30 minutos</p>
+      <h1 class="agenda-title">Tu empresa con IA<br><em>en 30 minutos.</em></h1>
+      <p class="agenda-sub">Sin costo. Sin presión de venta. Sin PowerPoints de relleno.<br>Solo claridad absoluta sobre qué puede hacer la IA por tu empresa hoy.</p>
+    </div>
+
+    <div class="agenda-rule"></div>
+
+    <div class="agenda-grid">
+      <div>
+        <p class="agenda-section-label">Tus datos</p>
+        <div class="form-field">
+          <label class="form-label" for="f-nombre">Nombre completo *</label>
+          <input class="form-input" type="text" id="f-nombre" placeholder="Tu nombre y apellido" required autocomplete="name">
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="f-email">Correo electrónico *</label>
+          <input class="form-input" type="email" id="f-email" placeholder="correo@empresa.com" required autocomplete="email">
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="f-whatsapp">WhatsApp *</label>
+          <input class="form-input" type="tel" id="f-whatsapp" placeholder="+52 984 000 0000" required autocomplete="tel">
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="f-empresa">Empresa / Proyecto</label>
+          <input class="form-input" type="text" id="f-empresa" placeholder="Nombre de tu empresa (opcional)" autocomplete="organization">
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="f-industria">Industria / ¿Sobre qué quieres hablar? *</label>
+          <select class="form-select" id="f-industria" required>
+            <option value="" disabled selected>Selecciona un tema</option>
+            <option value="Agentes de IA con Voz y Texto">Agentes de IA con Voz y Texto</option>
+            <option value="Sitio Web Inclusivo">Sitio Web Inclusivo</option>
+            <option value="Automatización de Procesos">Automatización de Procesos</option>
+            <option value="Intelligence Architecture Inmobiliaria">Intelligence Architecture Inmobiliaria</option>
+            <option value="Video y Producción con IA">Video y Producción con IA</option>
+            <option value="Estrategia Integral 360°">Estrategia Integral 360°</option>
+            <option value="Data Analytics & Business Intelligence">Data Analytics & BI</option>
+            <option value="Otro / No estoy seguro">Otro / No estoy seguro</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="f-descripcion">Cuéntanos brevemente tu reto</label>
+          <textarea class="form-textarea" id="f-descripcion" rows="2" placeholder="¿Qué te gustaría resolver con IA? (opcional)"></textarea>
+        </div>
+
+        <div class="booking-summary" id="booking-summary">
+          <div class="summary-row"><span class="summary-key">Fecha</span><span class="summary-val" id="sum-fecha">—</span></div>
+          <div class="summary-row"><span class="summary-key">Hora</span><span class="summary-val" id="sum-hora">—</span></div>
+          <div class="summary-row"><span class="summary-key">Duración</span><span class="summary-val">30 minutos · Videollamada</span></div>
+        </div>
+
+        <button class="form-submit" id="btn-submit" type="button" onclick="submitBooking()" disabled>
+          Confirmar mi diagnóstico <span class="btn-arrow">→</span>
+        </button>
+        <p class="form-err" id="form-err">No pudimos enviar tu solicitud. Intenta de nuevo o escríbenos por WhatsApp.</p>
+        <a class="wa-agenda-cta" href="https://wa.me/5219842353159?text=Hola%2C%20quiero%20agendar%20un%20diagn%C3%B3stico%20gratuito%20con%20VICTOR%20IA" target="_blank" rel="noopener">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          O escríbenos por WhatsApp
+        </a>
+      </div>
+
+      <div>
+        <p class="agenda-section-label">Elige fecha y hora</p>
+        <div class="cal-nav">
+          <button class="cal-arrow" id="cal-prev" type="button" onclick="calPrev()" disabled>‹</button>
+          <span class="cal-month-label" id="cal-month-label"></span>
+          <button class="cal-arrow" id="cal-next" type="button" onclick="calNext()">›</button>
+        </div>
+        <div class="cal-weekdays">
+          <span class="cal-weekday">Lu</span><span class="cal-weekday">Ma</span><span class="cal-weekday">Mi</span>
+          <span class="cal-weekday">Ju</span><span class="cal-weekday">Vi</span><span class="cal-weekday">Sa</span><span class="cal-weekday">Do</span>
+        </div>
+        <div class="cal-days" id="cal-days"></div>
+
+        <div class="time-slots" id="time-slots">
+          <p class="slot-placeholder">Selecciona una fecha para ver los horarios disponibles</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="success-view">
+    <div class="success-check">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+    </div>
+    <h2 class="success-title">Confirmado.<br><em>Nos vemos pronto.</em></h2>
+    <p class="success-sub">Te enviamos la confirmación a tu correo con todos los detalles. Si necesitas cambiar la fecha, responde ese correo.</p>
+    <div class="success-detail" id="success-detail"></div>
+    <a href="#" class="success-cal-btn" id="gcal-link" target="_blank" rel="noopener">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      Agregar a Google Calendar
+    </a>
+    <a href="/" class="success-home">← Volver al sitio</a>
+  </div>
+
+  <script>
+  // CURSOR
+  (function(){
+    if (!window.matchMedia || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    const c = document.getElementById('cursor');
+    const r = document.getElementById('cursorRing');
+    let mx=0, my=0, rx=0, ry=0;
+    document.addEventListener('mousemove', e=>{ mx=e.clientX; my=e.clientY; c.style.left=mx+'px'; c.style.top=my+'px'; });
+    (function loop(){ rx+=(mx-rx)*.12; ry+=(my-ry)*.12; r.style.left=rx+'px'; r.style.top=ry+'px'; requestAnimationFrame(loop); })();
+  })();
+
+  // CANVAS REVEAL
+  (function(){
+    const canvas = document.getElementById('revealCanvas');
+    const ctx = canvas.getContext('2d');
+    let W, H, dots = [];
+    const WARM = '#F8F7F5';
+    function resize(){ W=canvas.width=window.innerWidth; H=canvas.height=window.innerHeight; drawCover(); }
+    function drawCover(){ ctx.fillStyle = WARM; ctx.fillRect(0,0,W,H); }
+    function reveal(x, y, r){
+      ctx.globalCompositeOperation = 'destination-out';
+      const g = ctx.createRadialGradient(x,y,0,x,y,r);
+      g.addColorStop(0,'rgba(0,0,0,1)'); g.addColorStop(0.5,'rgba(0,0,0,0.6)'); g.addColorStop(1,'rgba(0,0,0,0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fill();
+      ctx.globalCompositeOperation = 'source-over';
+    }
+    function fadeDot(dot){
+      const elapsed = Date.now() - dot.time; const hold = 1400, fade = 1200;
+      if(elapsed < hold) return;
+      const p = Math.min(1,(elapsed-hold)/fade);
+      ctx.fillStyle = `rgba(248,247,245,${p * 0.06})`;
+      ctx.beginPath(); ctx.arc(dot.x,dot.y,dot.r,0,Math.PI*2); ctx.fill();
+      if(p >= 1) dot.done = true;
+    }
+    function loop(){ dots = dots.filter(d=>!d.done); dots.forEach(fadeDot); requestAnimationFrame(loop); }
+    document.addEventListener('mousemove', e=>{ reveal(e.clientX, e.clientY+window.scrollY, 30); dots.push({x:e.clientX,y:e.clientY+window.scrollY,r:30,time:Date.now()}); });
+    canvas.addEventListener('touchmove', e=>{ e.preventDefault(); const t=e.touches[0]; reveal(t.clientX,t.clientY+window.scrollY,34); dots.push({x:t.clientX,y:t.clientY+window.scrollY,r:34,time:Date.now()}); },{passive:false});
+    window.addEventListener('resize', resize);
+    resize(); loop();
+  })();
+
+  // CALENDARIO
+  const MONTHS_ES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  const DAYS_ES = ['lunes','martes','miércoles','jueves','viernes','sábado','domingo'];
+  const TIMES = ['9:00', '10:00', '11:00', '12:00', '15:00', '16:00', '17:00'];
+
+  let calBase = new Date(); calBase.setDate(1);
+  let selectedDate = null, selectedTime = null;
+  const maxMonthsAhead = 2;
+  const initialMonth = new Date(calBase);
+
+  function calRender(){
+    const now = new Date();
+    document.getElementById('cal-month-label').textContent = MONTHS_ES[calBase.getMonth()] + ' ' + calBase.getFullYear();
+    const container = document.getElementById('cal-days'); container.replaceChildren();
+    const firstDay = (new Date(calBase.getFullYear(), calBase.getMonth(), 1).getDay() + 6) % 7;
+    const daysInMonth = new Date(calBase.getFullYear(), calBase.getMonth()+1, 0).getDate();
+    for(let i=0; i<firstDay; i++){ const el = document.createElement('span'); el.className = 'cal-day empty'; container.appendChild(el); }
+    for(let d=1; d<=daysInMonth; d++){
+      const date = new Date(calBase.getFullYear(), calBase.getMonth(), d);
+      const dow = date.getDay();
+      const isPast = date < new Date(now.getFullYear(), now.getMonth(), now.getDate());
+      const isWeekend = dow===0 || dow===6;
+      const isToday = date.toDateString() === now.toDateString();
+      const isSelected = selectedDate && date.toDateString() === selectedDate.toDateString();
+      const el = document.createElement('button'); el.type = 'button'; el.textContent = d;
+      let cls = 'cal-day';
+      if(isPast || isWeekend) cls += ' past';
+      if(isWeekend) cls += ' weekend';
+      if(!isPast && !isWeekend) cls += ' available';
+      if(isToday) cls += ' today';
+      if(isSelected) cls += ' selected';
+      el.className = cls;
+      if(!isPast && !isWeekend){ el.addEventListener('click', ()=>{ selectedDate = date; selectedTime = null; calRender(); renderSlots(); updateSummary(); checkSubmit(); }); }
+      container.appendChild(el);
+    }
+    const mDiff = (calBase.getFullYear()-initialMonth.getFullYear())*12 + (calBase.getMonth()-initialMonth.getMonth());
+    document.getElementById('cal-prev').disabled = mDiff <= 0;
+    document.getElementById('cal-next').disabled = mDiff >= maxMonthsAhead-1;
+  }
+  function calPrev(){ calBase.setMonth(calBase.getMonth()-1); calRender(); }
+  function calNext(){ calBase.setMonth(calBase.getMonth()+1); calRender(); }
+
+  function renderSlots(){
+    const container = document.getElementById('time-slots');
+    if(!selectedDate){ container.replaceChildren(); const p = document.createElement('p'); p.className = 'slot-placeholder'; p.textContent = 'Selecciona una fecha para ver los horarios disponibles'; container.appendChild(p); return; }
+    const ds = DAYS_ES[(selectedDate.getDay()+6)%7];
+    const fStr = selectedDate.getDate() + ' de ' + MONTHS_ES[selectedDate.getMonth()].toLowerCase();
+    container.replaceChildren();
+    const p = document.createElement('p'); p.className = 'time-label'; p.textContent = 'Horarios — ' + ds + ' ' + fStr; container.appendChild(p);
+    const grid = document.createElement('div'); grid.id = 'slots-grid'; grid.className = 'slots-grid'; container.appendChild(grid);
+    TIMES.forEach(t=>{
+      const btn = document.createElement('button'); btn.type = 'button'; btn.textContent = t;
+      btn.className = 'slot' + (selectedTime===t ? ' selected' : '');
+      btn.addEventListener('click', ()=>{ selectedTime = t; renderSlots(); updateSummary(); checkSubmit(); });
+      grid.appendChild(btn);
+    });
+  }
+
+  function updateSummary(){
+    const sum = document.getElementById('booking-summary');
+    if(selectedDate && selectedTime){
+      const ds = DAYS_ES[(selectedDate.getDay()+6)%7];
+      const fStr = ds.charAt(0).toUpperCase()+ds.slice(1)+' '+selectedDate.getDate()+' de '+MONTHS_ES[selectedDate.getMonth()]+', '+selectedDate.getFullYear();
+      document.getElementById('sum-fecha').textContent = fStr;
+      document.getElementById('sum-hora').textContent = selectedTime + ' hrs · CST (Cancún)';
+      sum.classList.add('visible');
+    } else { sum.classList.remove('visible'); }
+  }
+
+  function checkSubmit(){
+    const nombre = document.getElementById('f-nombre').value.trim();
+    const email  = document.getElementById('f-email').value.trim();
+    const wa     = document.getElementById('f-whatsapp').value.trim();
+    const ind    = document.getElementById('f-industria').value;
+    document.getElementById('btn-submit').disabled = !(nombre && email && wa && ind && selectedDate && selectedTime);
+  }
+  ['f-nombre','f-email','f-whatsapp','f-empresa','f-industria','f-descripcion'].forEach(id=>{
+    const el = document.getElementById(id);
+    el.addEventListener('input', checkSubmit); el.addEventListener('change', checkSubmit);
+  });
+
+  // SUBMIT
+  const N8N_WEBHOOK = 'https://n8n.srv1013903.hstgr.cloud/webhook/conversion';
+  async function submitBooking(){
+    const btn = document.getElementById('btn-submit');
+    const errBox = document.getElementById('form-err');
+    errBox.classList.remove('visible');
+    btn.disabled = true; btn.replaceChildren();
+    btn.appendChild(document.createTextNode('Enviando… '));
+    const span = document.createElement('span'); span.className = 'btn-arrow'; span.textContent = '·'; btn.appendChild(span);
+
+    const nombre   = document.getElementById('f-nombre').value.trim();
+    const email    = document.getElementById('f-email').value.trim();
+    const whatsapp = document.getElementById('f-whatsapp').value.trim();
+    const empresa  = document.getElementById('f-empresa').value.trim();
+    const industria= document.getElementById('f-industria').value;
+    const descripcion = document.getElementById('f-descripcion').value.trim();
+
+    const ds = DAYS_ES[(selectedDate.getDay()+6)%7];
+    const fechaDisplay = ds.charAt(0).toUpperCase()+ds.slice(1)+' '+selectedDate.getDate()+' de '+MONTHS_ES[selectedDate.getMonth()]+', '+selectedDate.getFullYear();
+    const horaDisplay  = selectedTime + ' hrs (CST · Cancún)';
+
+    const yyyy = selectedDate.getFullYear();
+    const mm   = String(selectedDate.getMonth()+1).padStart(2,'0');
+    const dd   = String(selectedDate.getDate()).padStart(2,'0');
+    const [hh, mi] = selectedTime.split(':').map(Number);
+    const startStr = `${yyyy}${mm}${dd}T${String(hh).padStart(2,'0')}${String(mi).padStart(2,'0')}00`;
+    const endStr   = `${yyyy}${mm}${dd}T${String(hh+1).padStart(2,'0')}${String(mi).padStart(2,'0')}00`;
+    const gcalUrl  = `https://www.google.com/calendar/render?action=TEMPLATE&text=Videollamada+con+VICTOR+IA&dates=${startStr}/${endStr}&ctz=America/Cancun&details=Diagn%C3%B3stico+gratuito+con+VICTOR+IA.+Tema:+${encodeURIComponent(industria)}&location=Videollamada`;
+
+    // Payload compatible con el webhook "conversion" (notificacion + confirmacion al lead)
+    const payload = {
+      tipo: 'agenda_booking',
+      source: 'agendar-videollamada · victor-ia.xyz',
+      nombre, email, whatsapp,
+      empresa: empresa || '—',
+      industria,
+      tema: industria,
+      descripcion,
+      mensaje: `Reserva de videollamada — ${fechaDisplay} · ${horaDisplay}. Industria/Tema: ${industria}.` + (descripcion ? ` Reto: ${descripcion}` : ''),
+      fecha: `${yyyy}-${mm}-${dd}`,
+      hora: selectedTime,
+      fecha_display: fechaDisplay,
+      hora_display: horaDisplay,
+      gcal_url: gcalUrl,
+      ts: new Date().toISOString(),
+      source_url: window.location.href
+    };
+
+    let ok = false;
+    try {
+      const res = await fetch(N8N_WEBHOOK, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+      ok = res.ok;
+    } catch (e) { ok = false; }
+
+    // Fallback garantizado: email directo al owner si el webhook falla
+    if (!ok) {
+      try {
+        await fetch('https://formsubmit.co/ajax/mesainteligentedemo@gmail.com', {
+          method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            _subject: `📅 Nueva cita: ${nombre} — ${fechaDisplay} ${selectedTime}`,
+            _template: 'table', _captcha: 'false',
+            Nombre: nombre, Email: email, WhatsApp: whatsapp, Empresa: empresa || '—',
+            Industria: industria, Descripcion: descripcion || '—',
+            Fecha: fechaDisplay, Hora: horaDisplay, 'Google Calendar': gcalUrl
+          })
+        });
+        ok = true;
+      } catch (e2) { ok = false; }
+    }
+
+    if (!ok) {
+      btn.disabled = false; btn.replaceChildren();
+      btn.appendChild(document.createTextNode('Confirmar mi diagnóstico '));
+      const a = document.createElement('span'); a.className = 'btn-arrow'; a.textContent = '→'; btn.appendChild(a);
+      errBox.classList.add('visible');
+      return;
+    }
+
+    document.getElementById('form-view').style.display = 'none';
+    const sv = document.getElementById('success-view'); sv.classList.add('visible');
+    const sdContainer = document.getElementById('success-detail'); sdContainer.replaceChildren();
+    const rows = [
+      { key: 'Nombre', val: nombre }, { key: 'Email', val: email }, { key: 'WhatsApp', val: whatsapp },
+      { key: 'Fecha', val: fechaDisplay }, { key: 'Hora', val: horaDisplay }, { key: 'Tema', val: industria }
+    ];
+    rows.forEach(r => {
+      const div = document.createElement('div'); div.className = 'success-detail-row';
+      const keySpan = document.createElement('span'); keySpan.className = 'success-detail-key'; keySpan.textContent = r.key;
+      const valSpan = document.createElement('span'); valSpan.textContent = r.val;
+      div.appendChild(keySpan); div.appendChild(valSpan); sdContainer.appendChild(div);
+    });
+    document.getElementById('gcal-link').href = gcalUrl;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  calRender();
+  </script>
+</body>
+</html>
