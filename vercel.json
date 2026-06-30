@@ -5,15 +5,20 @@
   "cleanUrls": false,
   "trailingSlash": false,
   "env": {},
-  "redirects": [
+  "rewrites": [
     {
       "source": "/capacitacion-timeshare",
-      "destination": "https://vtc-capacitacion-deploy.vercel.app/capacitacion.html",
-      "permanent": false
+      "destination": "https://vtc-capacitacion-deploy.vercel.app/capacitacion.html"
     },
     {
       "source": "/capacitacion-timeshare.html",
-      "destination": "https://vtc-capacitacion-deploy.vercel.app/capacitacion.html",
+      "destination": "https://vtc-capacitacion-deploy.vercel.app/capacitacion.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/propuesta",
+      "destination": "/propuesta-central-alarmas",
       "permanent": false
     }
   ]
