@@ -1,562 +1,432 @@
+﻿<!-- Victor IA — Agentes IA -->
 <!DOCTYPE html>
-<html lang="es-MX">
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Agenda tu videollamada — VICTOR IA</title>
-  <meta name="description" content="Agenda una videollamada gratuita con el equipo de VICTOR IA. Diagnóstico sin costo, sin compromiso, en 30 minutos.">
-  <meta name="robots" content="noindex">
-  <meta name="theme-color" content="#0E0F12">
-  <link rel="canonical" href="https://victor-ia.xyz/agendar-videollamada">
-  <link rel="icon" type="image/x-icon" href="/favicon.ico">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --ink:   #0E0F12;
-      --ink2:  #1a1b1f;
-      --muted: rgba(14,15,18,0.45);
-      --rule:  rgba(14,15,18,0.09);
-      --warm:  #F8F7F5;
-      --warm2: #F0EEE9;
-      --gold:  #C9A870;
-    }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Space Grotesk', sans-serif;
-      background: var(--warm);
-      color: var(--ink);
-      overflow-x: hidden;
-    }
-    @media (hover: hover) and (pointer: fine) { body { cursor: none; } }
-    .bg-marble {
-      position: fixed; inset: 0;
-      background-image: url('/assets/bg-light.jpg');
-      background-size: cover;
-      background-position: 50% 0%;
-      z-index: 0;
-      filter: sepia(0.04) brightness(1.02);
-    }
-    .reveal-canvas { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
-    .cursor {
-      position: fixed; width: 5px; height: 5px;
-      background: var(--ink); border-radius: 50%;
-      pointer-events: none; z-index: 9999;
-      transform: translate(-50%,-50%); display: none;
-    }
-    .cursor-ring {
-      position: fixed; width: 28px; height: 28px;
-      border: 1px solid rgba(14,15,18,0.25); border-radius: 50%;
-      pointer-events: none; z-index: 9998;
-      transform: translate(-50%,-50%); display: none;
-      transition: width .18s, height .18s, border-color .18s;
-    }
-    @media (hover: hover) and (pointer: fine) { .cursor, .cursor-ring { display: block; } }
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Victor IA | Agentes IA — ~200 Expertos en Paralelo</title>
+  <meta http-equiv="refresh" content="0; url=https://vtc-capacitacion-deploy.vercel.app/capacitacion.html">
+<meta name="description" content="Casi 200 agentes especializados coordinados por un supercerebro de IA. Producción, diseño, datos, estrategia y más — todo en un solo comando."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com" integrity="sha384-igm5BeiBt36UU4gqwWS7imYmelpTsZlQ45FZf+XBn9MuJbn4nQr7yx1yFydocC/K" crossorigin="anonymous"></script>
+<script>
+tailwind.config={darkMode:'class',theme:{extend:{
+  colors:{ink:'#070708',ink2:'#F5F5F5',ink3:'#FAFAFA',ink4:'#141418',cream:'#000000',muted:'#666666',faint:'#3A3834',gold:'#1A1A1A',gold2:'#CDB28C'},
+  fontFamily:{display:['Plus Jakarta Sans','sans-serif'],body:['Inter','sans-serif']},
+}}}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased;scroll-behavior:auto}
+body{background:transparent;color:#000000;font-family:'Plus Jakarta Sans',sans-serif;overflow-x:hidden;font-weight:400}
+@media(pointer:fine){html,body,*{cursor:none!important}}
+@media(prefers-contrast:more){html,body,*{cursor:auto!important}#cur-d,#cur-r{display:none!important}}
+#cur-d{position:fixed;width:5px;height:5px;background:#1A1A1A;border-radius:50%;pointer-events:none!important;z-index:2147483647;transform:translate(-50%,-50%);transition:opacity .3s}
+#cur-r{position:fixed;width:36px;height:36px;border:1px solid rgba(0,0,0,.18);border-radius:50%;pointer-events:none!important;z-index:2147483646;transform:translate(-50%,-50%);transition:width .4s cubic-bezier(.16,1,.3,1),height .4s,border-color .4s,opacity .4s}
+#cur-r.expand{width:58px;height:58px;border-color:rgba(0,0,0,.45)}
+#cur-r.shrink{width:16px;height:16px;border-color:rgba(0,0,0,.9)}
+#pbar{position:fixed;top:0;left:0;height:1px;background:#1A1A1A;z-index:100000;width:0}
+#noise{position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.024;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+header{position:fixed;top:0;left:0;right:0;z-index:500;height:68px;transition:background .5s,border-color .5s;border-bottom:1px solid transparent}
+header.scrolled{background:rgba(255,255,255,.96);border-bottom-color:rgba(0,0,0,.08);backdrop-filter:blur(18px)}
+.nav-a{position:relative;color:#666666;font-size:13px;letter-spacing:.07em;font-weight:300;transition:color .3s;text-decoration:none}
+.nav-a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:#1A1A1A;transition:width .45s cubic-bezier(.16,1,.3,1)}
+.nav-a:hover{color:#000000}.nav-a:hover::after{width:100%}
+.btn-p{display:inline-flex;align-items:center;justify-content:center;border-radius:5px;font-family:'Inter',sans-serif;font-size:13px;letter-spacing:.09em;font-weight:500;text-decoration:none;background:#000000;color:#FFFFFF;border:1px solid transparent;padding:11px 26px;transition:background .25s,transform .2s}
+.btn-p:hover{background:#fff;transform:translateY(-2px)}
+.btn-g{display:inline-flex;align-items:center;justify-content:center;border-radius:5px;font-family:'Inter',sans-serif;font-size:13px;letter-spacing:.09em;font-weight:500;text-decoration:none;background:transparent;color:#000000;border:1px solid rgba(255,255,255,.11);padding:11px 26px;transition:border-color .3s,transform .2s}
+.btn-g:hover{border-color:rgba(255,255,255,.28);transform:translateY(-2px)}
+.card{background:#FAFAFA;border:1px solid rgba(255,255,255,.054);border-radius:12px;transition:border-color .45s}
+.card:hover{border-color:rgba(0,0,0,.2)}
+.eye{display:inline-flex;align-items:center;gap:13px;font-family:'Inter',sans-serif;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:#1A1A1A}
+.eye::before{content:'';display:block;width:0;height:1px;background:#1A1A1A;transition:width 1.3s cubic-bezier(.16,1,.3,1)}
+.eye.on::before{width:26px}
+.eyec{font-family:'Inter',sans-serif;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;gap:10px}
+.eyec::before,.eyec::after{content:'';display:block;width:0;height:1px;background:rgba(0,0,0,.3);transition:width 1.3s cubic-bezier(.16,1,.3,1)}
+.eyec.on::before,.eyec.on::after{width:18px}
+.rv{opacity:0;transform:translateY(30px)}
+.hr{height:1px;background:rgba(255,255,255,.052)}
+.mag{display:inline-block}
+.gold-vr{width:1px;background:rgba(0,0,0,0);transition:background 1.2s .3s}
+.gold-vr.on{background:rgba(0,0,0,.08)}
+.deco-n{font-family:'Plus Jakarta Sans',sans-serif;font-weight:200;color:rgba(0,0,0,.04);line-height:1;pointer-events:none;user-select:none}
+/* ── Tailwind-fallback classes (minimal, no CDN needed) ── */
+.max-w-\[1200px\]{max-width:1200px}
+.mx-auto{margin-left:auto;margin-right:auto}
+.px-6{padding-left:24px;padding-right:24px}
+.w-full{width:100%}
+/* ── Responsive ───────────────────────────────────────── */
+@media(min-width:768px){.md\:px-16{padding-left:64px;padding-right:64px}}
+@media(max-width:860px){
+  #main-nav{display:none!important}
+  #login-link{display:none!important}
+  [style*="grid-template-columns:repeat(3"]{grid-template-columns:1fr!important}
+  [style*="grid-template-columns:repeat(2"]{grid-template-columns:1fr!important}
+  [style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}
+  [style*="grid-template-columns:1.4fr"]{grid-template-columns:1fr!important}
+  [style*="padding:80px 64px"]{padding:40px 24px!important}
+  [style*="padding:48px 36px"]{padding:28px 20px!important}
+  [style*="gap:64px"]{gap:32px!important}
+  [style*="gap:80px"]{gap:40px!important}
+  footer>div{padding-left:16px!important;padding-right:16px!important}
+}
+@media(max-width:640px){
+  header>div{padding-left:16px!important;padding-right:16px!important}
+  main>section{padding-left:0!important;padding-right:0!important}
+}
 
-    /* NAV */
-    nav {
-      position: fixed; inset: 0 0 auto 0; z-index: 50;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 1.8rem 3.5rem;
-    }
-    .nav-logo { display: flex; align-items: center; text-decoration: none; }
-    .nav-logo img {
-      height: 28px; width: auto; mix-blend-mode: multiply; display: block;
-      image-rendering: -webkit-optimize-contrast;
-      transform: translateZ(0); backface-visibility: hidden;
-    }
-    .nav-back {
-      font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--ink); text-decoration: none; opacity: 0.5;
-      transition: opacity 0.25s; display: flex; align-items: center; gap: 0.5rem;
-    }
-    .nav-back:hover { opacity: 1; }
-    .nav-back svg { width: 14px; height: 14px; }
-
-    .content { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; }
-
-    .agenda-hero {
-      padding: clamp(5.5rem, 12vh, 8rem) clamp(1.5rem,6vw,4rem) 2.5rem;
-      max-width: 680px;
-    }
-    .agenda-eyebrow {
-      display: flex; align-items: center; gap: 1rem;
-      font-size: 0.6rem; letter-spacing: 0.38em; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 1.8rem;
-    }
-    .agenda-eyebrow::before { content:''; display:block; width:2rem; height:1px; background:currentColor; }
-    .agenda-title {
-      font-family: 'Instrument Serif', Georgia, serif;
-      font-size: clamp(2.6rem, 6vw, 4.2rem);
-      font-weight: 400; line-height: 1.08; letter-spacing: -0.02em;
-      color: var(--ink); margin-bottom: 1.2rem;
-    }
-    .agenda-title em { font-style: italic; color: var(--ink2); }
-    .agenda-sub { font-size: 0.95rem; line-height: 1.7; color: var(--muted); max-width: 480px; }
-
-    .agenda-rule { height: 1px; background: var(--rule); margin: 0 clamp(1.5rem,6vw,4rem); position: relative; z-index: 2; }
-
-    .agenda-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
-      padding: 2.5rem clamp(1.5rem,6vw,4rem) 5rem;
-    }
-    @media (max-width: 860px) { .agenda-grid { grid-template-columns: 1fr; gap: 3rem; } }
-
-    .agenda-section-label {
-      font-size: 0.58rem; letter-spacing: 0.4em; text-transform: uppercase;
-      color: var(--muted); margin-bottom: 2rem;
-      display: flex; align-items: center; gap: 1rem;
-    }
-    .agenda-section-label::before { content:''; display:block; width:1.5rem; height:1px; background:currentColor; }
-
-    .form-field { margin-bottom: 1.8rem; }
-    .form-label { display: block; font-size: 0.6rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.65rem; }
-    .form-input, .form-select, .form-textarea {
-      width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--rule);
-      padding: 0.6rem 0; font-family: 'Space Grotesk', sans-serif; font-size: 0.95rem;
-      color: var(--ink); outline: none; transition: border-color 0.2s;
-      -webkit-appearance: none; appearance: none;
-    }
-    .form-textarea { resize: vertical; min-height: 2.6rem; line-height: 1.5; }
-    .form-input:focus, .form-select:focus, .form-textarea:focus { border-bottom-color: var(--ink); }
-    .form-input::placeholder, .form-textarea::placeholder { color: var(--muted); font-size: 0.9rem; }
-    .form-select {
-      cursor: pointer;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%230E0F12' stroke-width='1.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-      background-repeat: no-repeat; background-position: right 4px center; padding-right: 1.5rem;
-    }
-    .form-select option { background: var(--warm); }
-
-    .cal-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; }
-    .cal-month-label { font-family: 'Instrument Serif', Georgia, serif; font-size: 1.15rem; font-weight: 400; letter-spacing: -0.01em; }
-    .cal-arrow {
-      background: none; border: 1px solid var(--rule); color: var(--ink);
-      width: 34px; height: 34px; border-radius: 50%; cursor: pointer;
-      display: flex; align-items: center; justify-content: center; font-size: 0.85rem; transition: all 0.2s;
-    }
-    @media (hover: hover) and (pointer: fine) { .cal-arrow { cursor: none; } }
-    .cal-arrow:hover:not(:disabled) { border-color: var(--ink); background: var(--ink); color: var(--warm); }
-    .cal-arrow:disabled { opacity: 0.25; cursor: not-allowed; }
-    .cal-weekdays { display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; margin-bottom: 0.5rem; }
-    .cal-weekday { font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); padding: 0.4rem 0; }
-    .cal-days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
-    .cal-day {
-      aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
-      font-size: 0.8rem; border-radius: 50%; cursor: pointer; transition: all 0.15s;
-      position: relative; border: 1px solid transparent; background: none;
-      font-family: 'Space Grotesk', sans-serif; color: var(--ink);
-    }
-    @media (hover: hover) and (pointer: fine) { .cal-day { cursor: none; } }
-    .cal-day.available:hover { background: var(--warm2); border-color: var(--rule); }
-    .cal-day.selected { background: var(--ink) !important; color: var(--warm) !important; border-color: var(--ink); }
-    .cal-day.past, .cal-day.weekend { color: var(--muted); pointer-events: none; opacity: 0.3; }
-    .cal-day.empty { pointer-events: none; }
-    .cal-day.today { border-color: rgba(14,15,18,0.2); font-weight: 600; }
-
-    .time-slots { margin-top: 2rem; }
-    .time-label { font-size: 0.58rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.8rem; }
-    .time-label::before { content:''; display:block; width:1.2rem; height:1px; background:currentColor; }
-    .slots-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }
-    .slot {
-      padding: 0.65rem 0; text-align: center; border: 1px solid var(--rule); border-radius: 3px;
-      font-size: 0.78rem; letter-spacing: 0.05em; cursor: pointer; transition: all 0.15s;
-      background: transparent; color: var(--ink); font-family: 'Space Grotesk', sans-serif;
-    }
-    @media (hover: hover) and (pointer: fine) { .slot { cursor: none; } }
-    .slot:hover { border-color: var(--ink); }
-    .slot.selected { background: var(--ink); color: var(--warm); border-color: var(--ink); }
-    .slot-placeholder { font-size: 0.85rem; color: var(--muted); font-style: italic; font-family: 'Instrument Serif', serif; padding: 1.5rem 0; line-height: 1.5; }
-
-    .form-submit {
-      margin-top: 2.5rem; width: 100%; padding: 1.1rem 2rem;
-      background: var(--ink); color: var(--warm); border: none; border-radius: 2px;
-      font-family: 'Space Grotesk', sans-serif; font-size: 0.72rem; font-weight: 600;
-      letter-spacing: 0.22em; text-transform: uppercase; cursor: pointer; transition: all 0.2s;
-      display: flex; align-items: center; justify-content: center; gap: 1rem;
-    }
-    @media (hover: hover) and (pointer: fine) { .form-submit { cursor: none; } }
-    .form-submit:hover:not(:disabled) { background: var(--ink2); }
-    .form-submit:disabled { opacity: 0.35; cursor: not-allowed; }
-    .btn-arrow { transition: transform 0.2s; display: inline-block; }
-    .form-submit:hover:not(:disabled) .btn-arrow { transform: translateX(4px); }
-    .form-err { color: #b3261e; font-size: 0.78rem; margin-top: 0.9rem; display: none; }
-    .form-err.visible { display: block; }
-    .wa-agenda-cta {
-      display: flex; align-items: center; justify-content: center; gap: 0.5rem;
-      margin-top: 1.1rem; width: 100%; font-size: 0.65rem; letter-spacing: 0.18em;
-      text-transform: uppercase; text-decoration: none; color: var(--ink); opacity: 0.38; transition: opacity 0.2s;
-    }
-    .wa-agenda-cta:hover { opacity: 0.75; }
-
-    .booking-summary {
-      margin-top: 1.8rem; padding: 1.2rem 1.4rem; border: 1px solid var(--rule);
-      border-radius: 3px; background: rgba(248,247,245,0.6); display: none;
-    }
-    .booking-summary.visible { display: block; }
-    .summary-row { display: flex; justify-content: space-between; align-items: baseline; padding: 0.4rem 0; border-bottom: 1px solid var(--rule); font-size: 0.82rem; }
-    .summary-row:last-child { border-bottom: none; }
-    .summary-key { color: var(--muted); font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; }
-    .summary-val { font-weight: 500; }
-
-    #success-view { display: none; position: relative; z-index: 2; padding: clamp(5.5rem,12vh,8rem) clamp(1.5rem,6vw,4rem) 4rem; max-width: 620px; margin: 0 auto; }
-    #success-view.visible { display: block; }
-    .success-check { width: 48px; height: 48px; border-radius: 50%; border: 1.5px solid var(--ink); display: flex; align-items: center; justify-content: center; margin-bottom: 2rem; }
-    .success-check svg { width: 20px; height: 20px; }
-    .success-title { font-family: 'Instrument Serif', Georgia, serif; font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 400; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1rem; }
-    .success-title em { font-style: italic; }
-    .success-sub { font-size: 0.95rem; color: var(--muted); line-height: 1.7; margin-bottom: 2.5rem; }
-    .success-detail { padding: 1.4rem 1.6rem; border: 1px solid var(--rule); border-radius: 3px; margin-bottom: 2rem; }
-    .success-detail-row { display: flex; gap: 1rem; align-items: baseline; padding: 0.5rem 0; border-bottom: 1px solid var(--rule); font-size: 0.85rem; }
-    .success-detail-row:last-child { border-bottom: none; }
-    .success-detail-key { color: var(--muted); font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; min-width: 80px; }
-    .success-cal-btn { display: inline-flex; align-items: center; gap: 0.7rem; padding: 0.8rem 1.6rem; border: 1px solid var(--ink); border-radius: 2px; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none; color: var(--ink); transition: all 0.2s; font-weight: 600; cursor: pointer; }
-    @media (hover: hover) and (pointer: fine) { .success-cal-btn { cursor: none; } }
-    .success-cal-btn:hover { background: var(--ink); color: var(--warm); }
-    .success-home { display: inline-flex; align-items: center; gap: 0.5rem; margin-left: 1rem; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
-    .success-home:hover { color: var(--ink); }
-
-    @media (max-width: 640px) {
-      nav { padding: 1.2rem 1.4rem; }
-      .agenda-hero { padding-top: 5rem; }
-      .agenda-grid { gap: 2rem; padding-bottom: 3rem; }
-      .slots-grid { grid-template-columns: repeat(3, 1fr); }
-    }
-  </style>
+/* ── Marble background ── */
+#bg-marble-page{position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:url('assets/marble-white/marble-agentes.webp');background-size:cover;background-position:50% 30%;opacity:1;}
+main{position:relative;z-index:1}
+</style>
 </head>
 <body>
-  <div class="bg-marble" aria-hidden="true"></div>
-  <canvas class="reveal-canvas" id="revealCanvas" aria-hidden="true"></canvas>
-  <div class="cursor" id="cursor" aria-hidden="true"></div>
-  <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+<div id="bg-marble-page"></div>
+<div id="noise"></div>
+<div id="pbar"></div>
+<div id="cur-d"></div>
+<div id="cur-r"></div>
 
-  <nav>
-    <a href="/" class="nav-logo"><img src="/assets/brand/logo-full.png" alt="VICTOR IA"></a>
-    <a href="/" class="nav-back">
-      <svg viewBox="0 0 20 20" fill="none"><path d="M12 4L6 10L12 16" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      Volver
-    </a>
-  </nav>
+<!-- HEADER -->
+<header id="hdr">
+  <div style="display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto;padding:0 24px;height:100%">
+    <a href="index.html" style="font-family:'Plus Jakarta Sans',sans-serif;font-size:21px;font-weight:300;letter-spacing:.04em;color:#000000;text-decoration:none">Victor <span style="color:#1A1A1A;font-weight:500">IA</span></a>
+    <nav id="main-nav" style="display:flex;gap:36px;align-items:center">
+      <a class="nav-a" href="agentes.html" style="color:#000000">Agentes</a>
+      <a class="nav-a" href="como-funciona.html">Cómo Funciona</a>
+      <a class="nav-a" href="precios.html">Precios</a>
+      <a class="nav-a" href="blog/">Blog</a>
+      <a class="nav-a" href="telemetria.html">Eficiencia IoT</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:20px">
+      <a class="nav-a" href="app.html" id="login-link">Iniciar sesión</a>
+      <div class="mag"><a class="btn-p" href="app.html">Empezar gratis</a></div>
+    </div>
+  </div>
+</header>
 
-  <div class="content" id="form-view">
-    <div class="agenda-hero">
-      <p class="agenda-eyebrow">Diagnóstico gratuito · 30 minutos</p>
-      <h1 class="agenda-title">Tu empresa con IA<br><em>en 30 minutos.</em></h1>
-      <p class="agenda-sub">Sin costo. Sin presión de venta. Sin PowerPoints de relleno.<br>Solo claridad absoluta sobre qué puede hacer la IA por tu empresa hoy.</p>
+<main style="padding-top:68px;position:relative;z-index:10">
+
+<!-- HERO -->
+<section style="min-height:72vh;display:flex;align-items:center;padding:100px 0 80px;position:relative;overflow:hidden">
+  <div style="position:absolute;top:30%;left:50%;transform:translate(-50%,-50%);width:800px;height:400px;background:radial-gradient(ellipse,rgba(0,0,0,.04) 0%,transparent 70%);pointer-events:none"></div>
+  <div class="max-w-[1200px] mx-auto px-6 md:px-16 w-full">
+    <div class="rv" style="max-width:760px">
+      <div class="eye" style="margin-bottom:28px" data-eye>Sistema de Agentes</div>
+      <h1 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:200;font-size:clamp(52px,7vw,96px);line-height:1.02;letter-spacing:-.025em;color:#000000;margin-bottom:28px">
+        155+ Agentes IA Especializados<br/><span style="font-style:italic;color:#1A1A1A">Cada uno es un experto real.</span>
+      </h1>
+      <p style="font-size:17px;line-height:1.8;font-weight:300;color:#666666;max-width:520px;margin-bottom:44px">
+        Coordinados automáticamente. Trabajando por ti 24/7.
+      </p>
+      <div style="display:flex;flex-wrap:wrap;gap:12px">
+        <div class="mag"><a class="btn-p" href="app.html" style="padding:13px 32px;font-size:14px">Empezar gratis</a></div>
+        <div class="mag"><a class="btn-g" href="como-funciona.html" style="padding:13px 32px;font-size:14px">Ver cómo funciona →</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="hr"></div>
+
+<!-- CATEGORIES -->
+<section style="padding:120px 0;background:#F5F5F5;position:relative;overflow:hidden">
+  <div class="deco-n" style="position:absolute;right:-30px;top:40%;font-size:300px">6</div>
+  <div class="max-w-[1200px] mx-auto px-6 md:px-16">
+    <div class="rv" style="text-align:center;margin-bottom:72px">
+      <p class="eyec" style="margin-bottom:22px" data-eyec>Categorías de Agentes</p>
+      <h2 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:200;font-size:clamp(36px,4.5vw,62px);line-height:1.06;letter-spacing:-.025em">
+        8 Categorías Principales<br/><span style="font-style:italic;color:#666666">155+ expertos especializados.</span>
+      </h2>
     </div>
 
-    <div class="agenda-rule"></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:1px;background:rgba(255,255,255,.052)">
 
-    <div class="agenda-grid">
-      <div>
-        <p class="agenda-section-label">Tus datos</p>
-        <div class="form-field">
-          <label class="form-label" for="f-nombre">Nombre completo *</label>
-          <input class="form-input" type="text" id="f-nombre" placeholder="Tu nombre y apellido" required autocomplete="name">
+      <div class="card rv" style="border-radius:0;border:none;padding:44px 36px;background:#F5F5F5;transition:background .3s">
+        <div style="width:42px;height:42px;border-radius:8px;background:rgba(0,0,0,.04);border:1px solid rgba(0,0,0,.08);display:flex;align-items:center;justify-content:center;margin-bottom:22px">
+          <svg width="18" height="18" fill="none" viewBox="0 0 18 18"><rect x="2" y="3" width="14" height="10" rx="1.5" stroke="#1A1A1A" stroke-width="1.2"/><path d="M6 16h6M9 13v3" stroke="#1A1A1A" stroke-width="1.2" stroke-linecap="round"/></svg>
         </div>
-        <div class="form-field">
-          <label class="form-label" for="f-email">Correo electrónico *</label>
-          <input class="form-input" type="email" id="f-email" placeholder="correo@empresa.com" required autocomplete="email">
+        <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:22px;font-weight:300;color:#000000;margin-bottom:12px">Producción Creativa</h3>
+        <p style="font-size:14px;line-height:1.78;color:#666666;margin-bottom:18px">Agentes especializados en generar video, imagen, animación y contenido audiovisual de nivel profesional para cualquier plataforma.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">Video</span>
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">Imagen</span>
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">Animación</span>
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">Post-producción</span>
         </div>
-        <div class="form-field">
-          <label class="form-label" for="f-whatsapp">WhatsApp *</label>
-          <input class="form-input" type="tel" id="f-whatsapp" placeholder="+52 984 000 0000" required autocomplete="tel">
-        </div>
-        <div class="form-field">
-          <label class="form-label" for="f-empresa">Empresa / Proyecto</label>
-          <input class="form-input" type="text" id="f-empresa" placeholder="Nombre de tu empresa (opcional)" autocomplete="organization">
-        </div>
-        <div class="form-field">
-          <label class="form-label" for="f-industria">Industria / ¿Sobre qué quieres hablar? *</label>
-          <select class="form-select" id="f-industria" required>
-            <option value="" disabled selected>Selecciona un tema</option>
-            <option value="Agentes de IA con Voz y Texto">Agentes de IA con Voz y Texto</option>
-            <option value="Sitio Web Inclusivo">Sitio Web Inclusivo</option>
-            <option value="Automatización de Procesos">Automatización de Procesos</option>
-            <option value="Intelligence Architecture Inmobiliaria">Intelligence Architecture Inmobiliaria</option>
-            <option value="Video y Producción con IA">Video y Producción con IA</option>
-            <option value="Estrategia Integral 360°">Estrategia Integral 360°</option>
-            <option value="Data Analytics & Business Intelligence">Data Analytics & BI</option>
-            <option value="Otro / No estoy seguro">Otro / No estoy seguro</option>
-          </select>
-        </div>
-        <div class="form-field">
-          <label class="form-label" for="f-descripcion">Cuéntanos brevemente tu reto</label>
-          <textarea class="form-textarea" id="f-descripcion" rows="2" placeholder="¿Qué te gustaría resolver con IA? (opcional)"></textarea>
-        </div>
-
-        <div class="booking-summary" id="booking-summary">
-          <div class="summary-row"><span class="summary-key">Fecha</span><span class="summary-val" id="sum-fecha">—</span></div>
-          <div class="summary-row"><span class="summary-key">Hora</span><span class="summary-val" id="sum-hora">—</span></div>
-          <div class="summary-row"><span class="summary-key">Duración</span><span class="summary-val">30 minutos · Videollamada</span></div>
-        </div>
-
-        <button class="form-submit" id="btn-submit" type="button" onclick="submitBooking()" disabled>
-          Confirmar mi diagnóstico <span class="btn-arrow">→</span>
-        </button>
-        <p class="form-err" id="form-err">No pudimos enviar tu solicitud. Intenta de nuevo o escríbenos por WhatsApp.</p>
-        <a class="wa-agenda-cta" href="https://wa.me/5219842353159?text=Hola%2C%20quiero%20agendar%20un%20diagn%C3%B3stico%20gratuito%20con%20VICTOR%20IA" target="_blank" rel="noopener">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          O escríbenos por WhatsApp
-        </a>
       </div>
 
-      <div>
-        <p class="agenda-section-label">Elige fecha y hora</p>
-        <div class="cal-nav">
-          <button class="cal-arrow" id="cal-prev" type="button" onclick="calPrev()" disabled>‹</button>
-          <span class="cal-month-label" id="cal-month-label"></span>
-          <button class="cal-arrow" id="cal-next" type="button" onclick="calNext()">›</button>
+      <div class="card rv" style="border-radius:0;border:none;padding:44px 36px;background:#F5F5F5">
+        <div style="width:42px;height:42px;border-radius:8px;background:rgba(0,0,0,.04);border:1px solid rgba(0,0,0,.08);display:flex;align-items:center;justify-content:center;margin-bottom:22px">
+          <svg width="18" height="18" fill="none" viewBox="0 0 18 18"><path d="M3 4h12M3 8h9M3 12h6" stroke="#1A1A1A" stroke-width="1.2" stroke-linecap="round"/></svg>
         </div>
-        <div class="cal-weekdays">
-          <span class="cal-weekday">Lu</span><span class="cal-weekday">Ma</span><span class="cal-weekday">Mi</span>
-          <span class="cal-weekday">Ju</span><span class="cal-weekday">Vi</span><span class="cal-weekday">Sa</span><span class="cal-weekday">Do</span>
+        <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:22px;font-weight:300;color:#000000;margin-bottom:12px">Contenido & Copywriting (32 agentes)</h3>
+        <p style="font-size:14px;line-height:1.78;color:#666666;margin-bottom:18px">Redactores, estrategas de contenido y expertos en comunicación que entienden la voz de tu marca y crean textos que convierten.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">Copywriting</span>
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">Blog</span>
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">Email</span>
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">Social Media</span>
         </div>
-        <div class="cal-days" id="cal-days"></div>
+      </div>
 
-        <div class="time-slots" id="time-slots">
-          <p class="slot-placeholder">Selecciona una fecha para ver los horarios disponibles</p>
+      <div class="card rv" style="border-radius:0;border:none;padding:44px 36px;background:#F5F5F5">
+        <div style="width:42px;height:42px;border-radius:8px;background:rgba(0,0,0,.04);border:1px solid rgba(0,0,0,.08);display:flex;align-items:center;justify-content:center;margin-bottom:22px">
+          <svg width="18" height="18" fill="none" viewBox="0 0 18 18"><path d="M9 2l1.8 5.5H17l-4.6 3.4 1.8 5.5L9 13l-5.2 3.4 1.8-5.5L1 7.5h6.2Z" stroke="#1A1A1A" stroke-width="1.1" stroke-linejoin="round"/></svg>
+        </div>
+        <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:22px;font-weight:300;color:#000000;margin-bottom:12px">Voz & Audio (18 agentes)</h3>
+        <p style="font-size:14px;line-height:1.78;color:#666666;margin-bottom:18px">Diseñadores de UI, branding e identidad que transforman conceptos en piezas visuales que comunican exactamente lo que necesitas.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">UI/UX</span>
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">Branding</span>
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">Identidad</span>
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">Creativos</span>
+        </div>
+      </div>
+
+      <div class="card rv" style="border-radius:0;border:none;padding:44px 36px;background:#F5F5F5">
+        <div style="width:42px;height:42px;border-radius:8px;background:rgba(0,0,0,.04);border:1px solid rgba(0,0,0,.08);display:flex;align-items:center;justify-content:center;margin-bottom:22px">
+          <svg width="18" height="18" fill="none" viewBox="0 0 18 18"><path d="M2 14l4-5 3.5 3 3-4 3.5 6" stroke="#1A1A1A" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><rect x="1" y="1" width="16" height="16" rx="2" stroke="#1A1A1A" stroke-width="1.1" opacity=".3"/></svg>
+        </div>
+        <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:22px;font-weight:300;color:#000000;margin-bottom:12px">Análisis & Datos (21 agentes)</h3>
+        <p style="font-size:14px;line-height:1.78;color:#666666;margin-bottom:18px">Analistas que procesan, interpretan y presentan datos en dashboards y reportes ejecutivos para que tomes decisiones con certeza.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">BI</span>
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">Reportes</span>
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">Forecasting</span>
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">KPIs</span>
+        </div>
+      </div>
+
+      <div class="card rv" style="border-radius:0;border:none;padding:44px 36px;background:#F5F5F5">
+        <div style="width:42px;height:42px;border-radius:8px;background:rgba(0,0,0,.04);border:1px solid rgba(0,0,0,.08);display:flex;align-items:center;justify-content:center;margin-bottom:22px">
+          <svg width="18" height="18" fill="none" viewBox="0 0 18 18"><circle cx="9" cy="9" r="3" stroke="#1A1A1A" stroke-width="1.2"/><path d="M9 2v3M9 13v3M2 9h3M13 9h3M4.2 4.2l2.1 2.1M11.7 11.7l2.1 2.1M4.2 13.8l2.1-2.1M11.7 6.3l2.1-2.1" stroke="#1A1A1A" stroke-width="1.1" stroke-linecap="round"/></svg>
+        </div>
+        <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:22px;font-weight:300;color:#000000;margin-bottom:12px">Automatización & Workflows (28 agentes)</h3>
+        <p style="font-size:14px;line-height:1.78;color:#666666;margin-bottom:18px">Agentes que mapean, diseñan y ejecutan flujos automáticos para eliminar tareas repetitivas, conectar sistemas y acelerar operaciones.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">Workflows</span>
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">Notificaciones</span>
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">Integraciones</span>
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">CRM</span>
+        </div>
+      </div>
+
+      <div class="card rv" style="border-radius:0;border:none;padding:44px 36px;background:#F5F5F5">
+        <div style="width:42px;height:42px;border-radius:8px;background:rgba(0,0,0,.04);border:1px solid rgba(0,0,0,.08);display:flex;align-items:center;justify-content:center;margin-bottom:22px">
+          <svg width="18" height="18" fill="none" viewBox="0 0 18 18"><path d="M9 2c-3.9 0-7 3.1-7 7s3.1 7 7 7 7-3.1 7-7" stroke="#1A1A1A" stroke-width="1.2" stroke-linecap="round"/><path d="M13 2l3 3-5 5-3-3 5-5Z" stroke="#1A1A1A" stroke-width="1.1" stroke-linejoin="round"/></svg>
+        </div>
+        <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:22px;font-weight:300;color:#000000;margin-bottom:12px">Especialistas en Plataformas (12 agentes)</h3>
+        <p style="font-size:14px;line-height:1.78;color:#666666;margin-bottom:18px">Expertos en HubSpot, Stripe, Shopify, AWS, Google Cloud y más plataformas. Integración y optimización de tu tech stack.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">HubSpot</span>
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">AWS</span>
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">Integraciones</span>
+        </div>
+      </div>
+
+      <div class="card rv" style="border-radius:0;border:none;padding:44px 36px;background:#F5F5F5">
+        <div style="width:42px;height:42px;border-radius:8px;background:rgba(0,0,0,.04);border:1px solid rgba(0,0,0,.08);display:flex;align-items:center;justify-content:center;margin-bottom:22px">
+          <svg width="18" height="18" fill="none" viewBox="0 0 18 18"><rect x="2" y="2" width="14" height="14" rx="2" stroke="#1A1A1A" stroke-width="1.1"/><path d="M5 9h8M9 5v8" stroke="#1A1A1A" stroke-width="1.2" stroke-linecap="round"/></svg>
+        </div>
+        <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:22px;font-weight:300;color:#000000;margin-bottom:12px">Desarrollo & Código (25 agentes)</h3>
+        <p style="font-size:14px;line-height:1.78;color:#666666;margin-bottom:18px">Ingenieros y desarrolladores especializados en Next.js, React, Python y arquitectura de sistemas escalables.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">Backend</span>
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">DevOps</span>
+          <span style="font-size:11px;letter-spacing:.08em;color:rgba(0,0,0,.5);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:3px 10px">Frontend</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="hr"></div>
+
+<!-- ORCHESTRATION -->
+<section style="padding:120px 0;overflow:hidden">
+  <div class="max-w-[1200px] mx-auto px-6 md:px-16">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center">
+      <div class="rv">
+        <p class="eye" style="margin-bottom:28px" data-eye>Cómo Se Coordinan</p>
+        <h2 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:200;font-size:clamp(38px,4vw,58px);line-height:1.06;letter-spacing:-.022em;color:#000000;margin-bottom:28px">
+          Cómo Se Coordinan<br/><span style="font-style:italic;color:#1A1A1A">(Sin Que Tú Hagas Nada)</span>
+        </h2>
+        <p style="font-size:16px;line-height:1.82;font-weight:300;color:#666666;margin-bottom:44px">
+          1. Estratega - Diseña estrategia completa · 2. Investigador - Analiza 500+ videos · 3. Copywriter - Escribe scripts únicos · 4. Motion Designer - Diseña visuals · 5. Video Producer - Sincroniza todo · 6. Voice Artist - Voz mexicana natural · 7. Analyzer - Predice engagement. RESULTADO: 5 videos profesionales en 4 horas (vs 4 semanas + $10k con agencia)
+        </p>
+        <div style="display:flex;flex-direction:column;gap:26px">
+          <div style="display:flex;gap:18px">
+            <div class="gold-vr" style="align-self:stretch;flex-shrink:0;margin-top:3px" data-vr></div>
+            <div>
+              <p style="font-size:15px;font-weight:400;color:#000000;margin-bottom:5px">Selección automática del mejor modelo</p>
+              <p style="font-size:13.5px;line-height:1.7;color:#666666">Evalúa la tarea y asigna el modelo con el mayor rendimiento para ese tipo específico de trabajo.</p>
+            </div>
+          </div>
+          <div style="display:flex;gap:18px">
+            <div class="gold-vr" style="align-self:stretch;flex-shrink:0;margin-top:3px" data-vr></div>
+            <div>
+              <p style="font-size:15px;font-weight:400;color:#000000;margin-bottom:5px">Ejecución paralela, no secuencial</p>
+              <p style="font-size:13.5px;line-height:1.7;color:#666666">Múltiples agentes trabajan simultáneamente, reduciendo el tiempo total a una fracción de lo normal.</p>
+            </div>
+          </div>
+          <div style="display:flex;gap:18px">
+            <div class="gold-vr" style="align-self:stretch;flex-shrink:0;margin-top:3px" data-vr></div>
+            <div>
+              <p style="font-size:15px;font-weight:400;color:#000000;margin-bottom:5px">Control de calidad integrado</p>
+              <p style="font-size:13.5px;line-height:1.7;color:#666666">Cada entregable pasa por una capa de revisión antes de llegar a ti — errores detectados antes de que los veas.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Visual: radial agent diagram -->
+      <div class="rv" style="display:flex;align-items:center;justify-content:center;min-height:420px;position:relative">
+        <svg width="380" height="380" viewBox="0 0 380 380" fill="none" style="overflow:visible">
+          <!-- Center node -->
+          <circle cx="190" cy="190" r="38" fill="rgba(0,0,0,.04)" stroke="rgba(0,0,0,.18)" stroke-width="1.2"/>
+          <circle cx="190" cy="190" r="28" fill="rgba(0,0,0,.2)" stroke="rgba(0,0,0,.08)" stroke-width=".8"/>
+          <text x="190" y="187" text-anchor="middle" fill="#1A1A1A" font-family="Plus Jakarta Sans,sans-serif" font-size="13" font-weight="300">Victor</text>
+          <text x="190" y="202" text-anchor="middle" fill="rgba(0,0,0,.5)" font-family="Inter,sans-serif" font-size="9" letter-spacing=".08em">IA</text>
+          <!-- Orbit ring -->
+          <circle cx="190" cy="190" r="130" stroke="rgba(255,255,255,.04)" stroke-width="1" stroke-dasharray="4 6"/>
+          <!-- Agent nodes -->
+          <line x1="190" y1="190" x2="190" y2="60" stroke="rgba(0,0,0,.08)" stroke-width=".8"/>
+          <circle cx="190" cy="60" r="24" fill="#FAFAFA" stroke="rgba(0,0,0,.08)" stroke-width="1"/>
+          <text x="190" y="64" text-anchor="middle" fill="#666666" font-family="Inter,sans-serif" font-size="8" letter-spacing=".05em">VIDEO</text>
+          <line x1="190" y1="190" x2="317" y2="117" stroke="rgba(0,0,0,.08)" stroke-width=".8"/>
+          <circle cx="317" cy="117" r="24" fill="#FAFAFA" stroke="rgba(0,0,0,.08)" stroke-width="1"/>
+          <text x="317" y="121" text-anchor="middle" fill="#666666" font-family="Inter,sans-serif" font-size="8" letter-spacing=".05em">COPY</text>
+          <line x1="190" y1="190" x2="317" y2="263" stroke="rgba(0,0,0,.08)" stroke-width=".8"/>
+          <circle cx="317" cy="263" r="24" fill="#FAFAFA" stroke="rgba(0,0,0,.08)" stroke-width="1"/>
+          <text x="317" y="267" text-anchor="middle" fill="#666666" font-family="Inter,sans-serif" font-size="8" letter-spacing=".05em">DATOS</text>
+          <line x1="190" y1="190" x2="190" y2="320" stroke="rgba(0,0,0,.08)" stroke-width=".8"/>
+          <circle cx="190" cy="320" r="24" fill="#FAFAFA" stroke="rgba(0,0,0,.08)" stroke-width="1"/>
+          <text x="190" y="324" text-anchor="middle" fill="#666666" font-family="Inter,sans-serif" font-size="8" letter-spacing=".05em">DISEÑO</text>
+          <line x1="190" y1="190" x2="63" y2="263" stroke="rgba(0,0,0,.08)" stroke-width=".8"/>
+          <circle cx="63" cy="263" r="24" fill="#FAFAFA" stroke="rgba(0,0,0,.08)" stroke-width="1"/>
+          <text x="63" y="267" text-anchor="middle" fill="#666666" font-family="Inter,sans-serif" font-size="8" letter-spacing=".05em">AUTO</text>
+          <line x1="190" y1="190" x2="63" y2="117" stroke="rgba(0,0,0,.08)" stroke-width=".8"/>
+          <circle cx="63" cy="117" r="24" fill="#FAFAFA" stroke="rgba(0,0,0,.08)" stroke-width="1"/>
+          <text x="63" y="121" text-anchor="middle" fill="#666666" font-family="Inter,sans-serif" font-size="8" letter-spacing=".05em">ESTRAT</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="hr"></div>
+
+<!-- CTA -->
+<section style="padding:80px 24px 120px;background:#F5F5F5">
+  <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+    <div class="card rv" style="padding:80px 64px;text-align:center;position:relative;overflow:hidden">
+      <div style="position:relative">
+        <p class="eyec" style="margin-bottom:28px" data-eyec>Listo para empezar</p>
+        <h2 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:200;font-size:clamp(42px,5.5vw,80px);line-height:1.04;letter-spacing:-.03em;margin-bottom:24px">
+          155 Agentes<br/><span style="font-style:italic;color:#666666">Trabajando para Ti. Ahora.</span>
+        </h2>
+        <p style="font-size:16px;line-height:1.8;font-weight:300;color:#666666;max-width:400px;margin:0 auto 44px">Activar Tu Equipo de Agentes</p>
+        <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center">
+          <div class="mag"><a class="btn-p" href="app.html" style="padding:14px 40px;font-size:14px">Crear cuenta gratis</a></div>
+          <div class="mag"><a class="btn-g" href="como-funciona.html" style="padding:14px 40px;font-size:14px">Ver cómo funciona →</a></div>
         </div>
       </div>
     </div>
   </div>
+</section>
 
-  <div id="success-view">
-    <div class="success-check">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+</main>
+
+<!-- FOOTER -->
+<footer style="background:#040406;border-top:1px solid rgba(255,255,255,.05);padding:64px 0 40px;position:relative;z-index:10">
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px 0 64px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:48px">
+    <div>
+      <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:21px;font-weight:300;letter-spacing:.04em;color:#000000;margin-bottom:14px">Victor <span style="color:#1A1A1A">IA</span></div>
+      <p style="font-size:13.5px;line-height:1.7;font-weight:300;color:#666666;max-width:260px;margin-bottom:14px">El primer supercerebro de IA en LATAM. Redefiniendo la productividad empresarial.</p>
+      <p style="font-size:11px;letter-spacing:.10em;color:rgba(112,108,102,.3)">México · victor-ia.xyz</p>
     </div>
-    <h2 class="success-title">Confirmado.<br><em>Nos vemos pronto.</em></h2>
-    <p class="success-sub">Te enviamos la confirmación a tu correo con todos los detalles. Si necesitas cambiar la fecha, responde ese correo.</p>
-    <div class="success-detail" id="success-detail"></div>
-    <a href="#" class="success-cal-btn" id="gcal-link" target="_blank" rel="noopener">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-      Agregar a Google Calendar
-    </a>
-    <a href="/" class="success-home">← Volver al sitio</a>
+    <div>
+      <h4 style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(112,108,102,.35);margin-bottom:18px">Producto</h4>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:11px">
+        <li><a class="nav-a" href="agentes.html">Agentes IA</a></li>
+        <li><a class="nav-a" href="como-funciona.html">Cómo funciona</a></li>
+        <li><a class="nav-a" href="precios.html">Precios</a></li>
+        <li><a class="nav-a" href="app.html">App</a></li>
+        <li><a class="nav-a" href="telemetria.html">Eficiencia e IoT</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(112,108,102,.35);margin-bottom:18px">Legal</h4>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:11px">
+        <li><a class="nav-a" href="aviso-privacidad.html">Aviso de Privacidad</a></li>
+        <li><a class="nav-a" href="terminos-condiciones.html">Términos y Condiciones</a></li>
+        <li><a class="nav-a" href="politica-cookies.html">Política de Cookies</a></li>
+        <li><a class="nav-a" href="seguridad.html">Seguridad</a></li>
+      </ul>
+    </div>
   </div>
+  <div style="max-width:1200px;margin:0 auto;padding:28px 64px 0;margin-top:48px;border-top:1px solid rgba(255,255,255,.05);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+    <p style="font-size:10.5px;letter-spacing:.09em;color:rgba(112,108,102,.28)">© 2026 INFLUENCE IA S.A. DE C.V. — Todos los derechos reservados.</p>
+  </div>
+</footer>
 
-  <script>
-  // CURSOR
-  (function(){
-    if (!window.matchMedia || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-    const c = document.getElementById('cursor');
-    const r = document.getElementById('cursorRing');
-    let mx=0, my=0, rx=0, ry=0;
-    document.addEventListener('mousemove', e=>{ mx=e.clientX; my=e.clientY; c.style.left=mx+'px'; c.style.top=my+'px'; });
-    (function loop(){ rx+=(mx-rx)*.12; ry+=(my-ry)*.12; r.style.left=rx+'px'; r.style.top=ry+'px'; requestAnimationFrame(loop); })();
+<!-- SCRIPTS -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js" integrity="sha384-O55L/6rhHr9CFvrxqv5luxOCcmVaBmETbZbJDP+Do8T0pztTACsFBD/IXCNkj7DV" crossorigin="anonymous"></script>
+<script src="/public/lenis-apple-config.js"></script>
+<script>
+(function(){
+'use strict';
+// Lenis + Cursor + Progress Bar are now initialized in lenis-apple-config.js
+// Page-specific scroll animations below
+
+/* Scroll reveals */
+gsap.utils.toArray('.rv').forEach(el=>{const rc=el.getBoundingClientRect();if(rc.top<window.innerHeight*.92){gsap.to(el,{opacity:1,y:0,duration:.8,ease:'power3.out'});}else{gsap.to(el,{opacity:1,y:0,duration:1,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 88%'}});}});
+
+/* Eyebrows */
+document.querySelectorAll('[data-eye]').forEach(el=>{const rc=el.getBoundingClientRect();if(rc.top<window.innerHeight*.92){setTimeout(()=>el.classList.add('on'),100);}else{ScrollTrigger.create({trigger:el,start:'top 88%',onEnter:()=>el.classList.add('on')});}});
+document.querySelectorAll('[data-eyec]').forEach(el=>{const rc=el.getBoundingClientRect();if(rc.top<window.innerHeight*.92){setTimeout(()=>el.classList.add('on'),100);}else{ScrollTrigger.create({trigger:el,start:'top 88%',onEnter:()=>el.classList.add('on')});}});
+document.querySelectorAll('[data-vr]').forEach(el=>ScrollTrigger.create({trigger:el,start:'top 85%',onEnter:()=>el.classList.add('on')}));
+
+/* Magnetic buttons */
+document.querySelectorAll('.mag').forEach(wrap=>{
+  const btn=wrap.querySelector('button,a')||wrap;
+  wrap.addEventListener('mousemove',e=>{const r=wrap.getBoundingClientRect();gsap.to(btn,{x:((e.clientX-r.left)/r.width-.5)*20,y:((e.clientY-r.top)/r.height-.5)*20,duration:.5,ease:'power2.out'});});
+  wrap.addEventListener('mouseleave',()=>gsap.to(btn,{x:0,y:0,duration:.8,ease:'elastic.out(1,.38)'}));
+});
+
+/* Space canvas */
+(function(){
+  const cv=document.createElement('canvas');
+  cv.id='space-bg';
+  Object.assign(cv.style,{position:'fixed',inset:'0',width:'100%',height:'100%',zIndex:'-1',pointerEvents:'none',opacity:'0',transition:'opacity 3s ease'});
+  document.body.prepend(cv);
+  const ctx=cv.getContext('2d');
+  let W=cv.width=innerWidth,H=cv.height=innerHeight,mx=W/2,my=H/2;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+  window.addEventListener('resize',()=>{W=cv.width=innerWidth;H=cv.height=innerHeight;buildStars();});
+  let stars=[],shoots=[],st=0;
+  function buildStars(){stars=[];for(let i=0;i<380;i++)stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*.7+.15,l:0,tw:Math.random()*Math.PI*2,sp:.006+Math.random()*.006});for(let i=0;i<75;i++)stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.1+.5,l:1,tw:Math.random()*Math.PI*2,sp:.009+Math.random()*.008});for(let i=0;i<20;i++)stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.5+.9,l:2,tw:Math.random()*Math.PI*2,sp:.012+Math.random()*.01});}
+  buildStars();
+  const asts=Array.from({length:4},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.13,vy:(Math.random()-.5)*.1,r:Math.random()*10+6,rot:Math.random()*Math.PI*2,drot:(Math.random()-.5)*.004,sides:Math.floor(Math.random()*4)+5,jt:Array.from({length:8},()=>.6+Math.random()*.8)}));
+  (function tick(){requestAnimationFrame(tick);ctx.clearRect(0,0,W,H);
+  const px=(mx/W-.5),py=(my/H-.5);
+  for(const s of stars){s.tw+=s.sp;const a=Math.min(.95,.25+Math.sin(s.tw)*.22+s.l*.12);const ox=px*(s.l+1)*-7,oy=py*(s.l+1)*-7;ctx.beginPath();ctx.arc(s.x+ox,s.y+oy,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(215,205,185,${a.toFixed(2)})`;ctx.fill();}
+  for(const a of asts){a.x+=a.vx;a.y+=a.vy;a.rot+=a.drot;if(a.x<-60)a.x=W+60;if(a.x>W+60)a.x=-60;if(a.y<-60)a.y=H+60;if(a.y>H+60)a.y=-60;ctx.save();ctx.translate(a.x,a.y);ctx.rotate(a.rot);ctx.beginPath();for(let i=0;i<a.sides;i++){const ang=(i/a.sides)*Math.PI*2,jr=a.jt[i%a.jt.length],rx=Math.cos(ang)*a.r*jr,ry=Math.sin(ang)*a.r*jr;i===0?ctx.moveTo(rx,ry):ctx.lineTo(rx,ry);}ctx.closePath();ctx.strokeStyle='rgba(170,150,110,.15)';ctx.lineWidth=.7;ctx.stroke();ctx.fillStyle='rgba(28,26,22,.45)';ctx.fill();ctx.restore();}
+  st++;if(st>200+Math.random()*220){st=0;shoots.push({x:Math.random()*W*.65,y:Math.random()*H*.28,vx:4.5+Math.random()*5,vy:1.8+Math.random()*2,len:100+Math.random()*120,life:1,fade:.014+Math.random()*.014});}
+  for(let i=shoots.length-1;i>=0;i--){const s=shoots[i];s.x+=s.vx;s.y+=s.vy;s.life-=s.fade;if(s.life<=0){shoots.splice(i,1);continue;}const g=ctx.createLinearGradient(s.x,s.y,s.x-s.vx*(s.len/5),s.y-s.vy*(s.len/5));g.addColorStop(0,`rgba(255,248,225,${(s.life*.9).toFixed(2)})`);g.addColorStop(1,'transparent');ctx.strokeStyle=g;ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(s.x,s.y);ctx.lineTo(s.x-s.vx*(s.len/5),s.y-s.vy*(s.len/5));ctx.stroke();}
   })();
+  setTimeout(()=>{cv.style.opacity='1';},500);
+})();
 
-  // CANVAS REVEAL
-  (function(){
-    const canvas = document.getElementById('revealCanvas');
-    const ctx = canvas.getContext('2d');
-    let W, H, dots = [];
-    const WARM = '#F8F7F5';
-    function resize(){ W=canvas.width=window.innerWidth; H=canvas.height=window.innerHeight; drawCover(); }
-    function drawCover(){ ctx.fillStyle = WARM; ctx.fillRect(0,0,W,H); }
-    function reveal(x, y, r){
-      ctx.globalCompositeOperation = 'destination-out';
-      const g = ctx.createRadialGradient(x,y,0,x,y,r);
-      g.addColorStop(0,'rgba(0,0,0,1)'); g.addColorStop(0.5,'rgba(0,0,0,0.6)'); g.addColorStop(1,'rgba(0,0,0,0)');
-      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fill();
-      ctx.globalCompositeOperation = 'source-over';
-    }
-    function fadeDot(dot){
-      const elapsed = Date.now() - dot.time; const hold = 1400, fade = 1200;
-      if(elapsed < hold) return;
-      const p = Math.min(1,(elapsed-hold)/fade);
-      ctx.fillStyle = `rgba(248,247,245,${p * 0.06})`;
-      ctx.beginPath(); ctx.arc(dot.x,dot.y,dot.r,0,Math.PI*2); ctx.fill();
-      if(p >= 1) dot.done = true;
-    }
-    function loop(){ dots = dots.filter(d=>!d.done); dots.forEach(fadeDot); requestAnimationFrame(loop); }
-    document.addEventListener('mousemove', e=>{ reveal(e.clientX, e.clientY+window.scrollY, 30); dots.push({x:e.clientX,y:e.clientY+window.scrollY,r:30,time:Date.now()}); });
-    canvas.addEventListener('touchmove', e=>{ e.preventDefault(); const t=e.touches[0]; reveal(t.clientX,t.clientY+window.scrollY,34); dots.push({x:t.clientX,y:t.clientY+window.scrollY,r:34,time:Date.now()}); },{passive:false});
-    window.addEventListener('resize', resize);
-    resize(); loop();
-  })();
-
-  // CALENDARIO
-  const MONTHS_ES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-  const DAYS_ES = ['lunes','martes','miércoles','jueves','viernes','sábado','domingo'];
-  const TIMES = ['9:00', '10:00', '11:00', '12:00', '15:00', '16:00', '17:00'];
-
-  let calBase = new Date(); calBase.setDate(1);
-  let selectedDate = null, selectedTime = null;
-  const maxMonthsAhead = 2;
-  const initialMonth = new Date(calBase);
-
-  function calRender(){
-    const now = new Date();
-    document.getElementById('cal-month-label').textContent = MONTHS_ES[calBase.getMonth()] + ' ' + calBase.getFullYear();
-    const container = document.getElementById('cal-days'); container.replaceChildren();
-    const firstDay = (new Date(calBase.getFullYear(), calBase.getMonth(), 1).getDay() + 6) % 7;
-    const daysInMonth = new Date(calBase.getFullYear(), calBase.getMonth()+1, 0).getDate();
-    for(let i=0; i<firstDay; i++){ const el = document.createElement('span'); el.className = 'cal-day empty'; container.appendChild(el); }
-    for(let d=1; d<=daysInMonth; d++){
-      const date = new Date(calBase.getFullYear(), calBase.getMonth(), d);
-      const dow = date.getDay();
-      const isPast = date < new Date(now.getFullYear(), now.getMonth(), now.getDate());
-      const isWeekend = dow===0 || dow===6;
-      const isToday = date.toDateString() === now.toDateString();
-      const isSelected = selectedDate && date.toDateString() === selectedDate.toDateString();
-      const el = document.createElement('button'); el.type = 'button'; el.textContent = d;
-      let cls = 'cal-day';
-      if(isPast || isWeekend) cls += ' past';
-      if(isWeekend) cls += ' weekend';
-      if(!isPast && !isWeekend) cls += ' available';
-      if(isToday) cls += ' today';
-      if(isSelected) cls += ' selected';
-      el.className = cls;
-      if(!isPast && !isWeekend){ el.addEventListener('click', ()=>{ selectedDate = date; selectedTime = null; calRender(); renderSlots(); updateSummary(); checkSubmit(); }); }
-      container.appendChild(el);
-    }
-    const mDiff = (calBase.getFullYear()-initialMonth.getFullYear())*12 + (calBase.getMonth()-initialMonth.getMonth());
-    document.getElementById('cal-prev').disabled = mDiff <= 0;
-    document.getElementById('cal-next').disabled = mDiff >= maxMonthsAhead-1;
-  }
-  function calPrev(){ calBase.setMonth(calBase.getMonth()-1); calRender(); }
-  function calNext(){ calBase.setMonth(calBase.getMonth()+1); calRender(); }
-
-  function renderSlots(){
-    const container = document.getElementById('time-slots');
-    if(!selectedDate){ container.replaceChildren(); const p = document.createElement('p'); p.className = 'slot-placeholder'; p.textContent = 'Selecciona una fecha para ver los horarios disponibles'; container.appendChild(p); return; }
-    const ds = DAYS_ES[(selectedDate.getDay()+6)%7];
-    const fStr = selectedDate.getDate() + ' de ' + MONTHS_ES[selectedDate.getMonth()].toLowerCase();
-    container.replaceChildren();
-    const p = document.createElement('p'); p.className = 'time-label'; p.textContent = 'Horarios — ' + ds + ' ' + fStr; container.appendChild(p);
-    const grid = document.createElement('div'); grid.id = 'slots-grid'; grid.className = 'slots-grid'; container.appendChild(grid);
-    TIMES.forEach(t=>{
-      const btn = document.createElement('button'); btn.type = 'button'; btn.textContent = t;
-      btn.className = 'slot' + (selectedTime===t ? ' selected' : '');
-      btn.addEventListener('click', ()=>{ selectedTime = t; renderSlots(); updateSummary(); checkSubmit(); });
-      grid.appendChild(btn);
-    });
-  }
-
-  function updateSummary(){
-    const sum = document.getElementById('booking-summary');
-    if(selectedDate && selectedTime){
-      const ds = DAYS_ES[(selectedDate.getDay()+6)%7];
-      const fStr = ds.charAt(0).toUpperCase()+ds.slice(1)+' '+selectedDate.getDate()+' de '+MONTHS_ES[selectedDate.getMonth()]+', '+selectedDate.getFullYear();
-      document.getElementById('sum-fecha').textContent = fStr;
-      document.getElementById('sum-hora').textContent = selectedTime + ' hrs · CST (Cancún)';
-      sum.classList.add('visible');
-    } else { sum.classList.remove('visible'); }
-  }
-
-  function checkSubmit(){
-    const nombre = document.getElementById('f-nombre').value.trim();
-    const email  = document.getElementById('f-email').value.trim();
-    const wa     = document.getElementById('f-whatsapp').value.trim();
-    const ind    = document.getElementById('f-industria').value;
-    document.getElementById('btn-submit').disabled = !(nombre && email && wa && ind && selectedDate && selectedTime);
-  }
-  ['f-nombre','f-email','f-whatsapp','f-empresa','f-industria','f-descripcion'].forEach(id=>{
-    const el = document.getElementById(id);
-    el.addEventListener('input', checkSubmit); el.addEventListener('change', checkSubmit);
-  });
-
-  // SUBMIT
-  const N8N_WEBHOOK = 'https://n8n.srv1013903.hstgr.cloud/webhook/conversion';
-  async function submitBooking(){
-    const btn = document.getElementById('btn-submit');
-    const errBox = document.getElementById('form-err');
-    errBox.classList.remove('visible');
-    btn.disabled = true; btn.replaceChildren();
-    btn.appendChild(document.createTextNode('Enviando… '));
-    const span = document.createElement('span'); span.className = 'btn-arrow'; span.textContent = '·'; btn.appendChild(span);
-
-    const nombre   = document.getElementById('f-nombre').value.trim();
-    const email    = document.getElementById('f-email').value.trim();
-    const whatsapp = document.getElementById('f-whatsapp').value.trim();
-    const empresa  = document.getElementById('f-empresa').value.trim();
-    const industria= document.getElementById('f-industria').value;
-    const descripcion = document.getElementById('f-descripcion').value.trim();
-
-    const ds = DAYS_ES[(selectedDate.getDay()+6)%7];
-    const fechaDisplay = ds.charAt(0).toUpperCase()+ds.slice(1)+' '+selectedDate.getDate()+' de '+MONTHS_ES[selectedDate.getMonth()]+', '+selectedDate.getFullYear();
-    const horaDisplay  = selectedTime + ' hrs (CST · Cancún)';
-
-    const yyyy = selectedDate.getFullYear();
-    const mm   = String(selectedDate.getMonth()+1).padStart(2,'0');
-    const dd   = String(selectedDate.getDate()).padStart(2,'0');
-    const [hh, mi] = selectedTime.split(':').map(Number);
-    const startStr = `${yyyy}${mm}${dd}T${String(hh).padStart(2,'0')}${String(mi).padStart(2,'0')}00`;
-    const endStr   = `${yyyy}${mm}${dd}T${String(hh+1).padStart(2,'0')}${String(mi).padStart(2,'0')}00`;
-    const gcalUrl  = `https://www.google.com/calendar/render?action=TEMPLATE&text=Videollamada+con+VICTOR+IA&dates=${startStr}/${endStr}&ctz=America/Cancun&details=Diagn%C3%B3stico+gratuito+con+VICTOR+IA.+Tema:+${encodeURIComponent(industria)}&location=Videollamada`;
-
-    // Payload compatible con el webhook "conversion" (notificacion + confirmacion al lead)
-    const payload = {
-      tipo: 'agenda_booking',
-      source: 'agendar-videollamada · victor-ia.xyz',
-      nombre, email, whatsapp,
-      empresa: empresa || '—',
-      industria,
-      tema: industria,
-      descripcion,
-      mensaje: `Reserva de videollamada — ${fechaDisplay} · ${horaDisplay}. Industria/Tema: ${industria}.` + (descripcion ? ` Reto: ${descripcion}` : ''),
-      fecha: `${yyyy}-${mm}-${dd}`,
-      hora: selectedTime,
-      fecha_display: fechaDisplay,
-      hora_display: horaDisplay,
-      gcal_url: gcalUrl,
-      ts: new Date().toISOString(),
-      source_url: window.location.href
-    };
-
-    let ok = false;
-    try {
-      const res = await fetch(N8N_WEBHOOK, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-      ok = res.ok;
-    } catch (e) { ok = false; }
-
-    // Fallback garantizado: email directo al owner si el webhook falla
-    if (!ok) {
-      try {
-        await fetch('https://formsubmit.co/ajax/mesainteligentedemo@gmail.com', {
-          method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify({
-            _subject: `📅 Nueva cita: ${nombre} — ${fechaDisplay} ${selectedTime}`,
-            _template: 'table', _captcha: 'false',
-            Nombre: nombre, Email: email, WhatsApp: whatsapp, Empresa: empresa || '—',
-            Industria: industria, Descripcion: descripcion || '—',
-            Fecha: fechaDisplay, Hora: horaDisplay, 'Google Calendar': gcalUrl
-          })
-        });
-        ok = true;
-      } catch (e2) { ok = false; }
-    }
-
-    if (!ok) {
-      btn.disabled = false; btn.replaceChildren();
-      btn.appendChild(document.createTextNode('Confirmar mi diagnóstico '));
-      const a = document.createElement('span'); a.className = 'btn-arrow'; a.textContent = '→'; btn.appendChild(a);
-      errBox.classList.add('visible');
-      return;
-    }
-
-    document.getElementById('form-view').style.display = 'none';
-    const sv = document.getElementById('success-view'); sv.classList.add('visible');
-    const sdContainer = document.getElementById('success-detail'); sdContainer.replaceChildren();
-    const rows = [
-      { key: 'Nombre', val: nombre }, { key: 'Email', val: email }, { key: 'WhatsApp', val: whatsapp },
-      { key: 'Fecha', val: fechaDisplay }, { key: 'Hora', val: horaDisplay }, { key: 'Tema', val: industria }
-    ];
-    rows.forEach(r => {
-      const div = document.createElement('div'); div.className = 'success-detail-row';
-      const keySpan = document.createElement('span'); keySpan.className = 'success-detail-key'; keySpan.textContent = r.key;
-      const valSpan = document.createElement('span'); valSpan.textContent = r.val;
-      div.appendChild(keySpan); div.appendChild(valSpan); sdContainer.appendChild(div);
-    });
-    document.getElementById('gcal-link').href = gcalUrl;
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  calRender();
-  </script>
+/* First section fade in */
+gsap.from('.rv:first-of-type',{opacity:0,y:40,duration:1.2,delay:.3,ease:'power3.out'});
+})();
+</script>
 </body>
 </html>
