@@ -54,8 +54,8 @@
   ],
   "rewrites": [
     { "source": "/404", "destination": "/404.html" },
-    { "source": "/capacitacion-timeshare", "destination": "/capacitacion-timeshare.html" },
-    { "source": "/capacitacion-timeshare.html", "destination": "/capacitacion-timeshare.html" }
+    { "source": "/capacitacion-timeshare", "destination": "/capacitacion-timeshare-frame.html" },
+    { "source": "/capacitacion-timeshare.html", "destination": "/capacitacion-timeshare-frame.html" }
   ],
   "redirects": [
     { "source": "/propuesta", "destination": "/propuesta-central-alarmas", "permanent": false },
