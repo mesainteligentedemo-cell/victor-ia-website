@@ -204,6 +204,21 @@ details p{font-size:14.5px;line-height:1.84;color:#666666;padding-bottom:22px}
   .marquee-item{transition:color .3s}
   .marquee-track span:not(.marquee-divider):hover,.marquee-item:hover{color:#000000}
 }
+/* ── HERO HOVER BG — librerías grises (Cloudinary) ──────── */
+.hero-bg-hover{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;background:#FFFFFF}
+.hero-bg-img{position:absolute;background-size:cover;background-position:center;background-repeat:no-repeat;opacity:0;filter:blur(16px) grayscale(1);transform:scale(1.07);will-change:opacity,filter,transform;
+  transition:opacity 1.2s cubic-bezier(.16,1,.3,1),filter 1.2s cubic-bezier(.16,1,.3,1),transform 1.6s cubic-bezier(.16,1,.3,1)}
+.hero-bg-1{top:-4%;left:-3%;width:44%;height:62%;background-image:url('https://res.cloudinary.com/dxy9t8qur/image/fetch/w_1200,q_auto,f_auto,e_grayscale/https://images.unsplash.com/photo-1507842217343-583bb7270b66')}
+.hero-bg-2{top:20%;right:-4%;width:42%;height:70%;background-image:url('https://res.cloudinary.com/dxy9t8qur/image/fetch/w_1200,q_auto,f_auto,e_grayscale/https://images.unsplash.com/photo-1521587760476-6c12a4b040da');transition-delay:.08s}
+.hero-bg-3{bottom:-6%;left:22%;width:40%;height:58%;background-image:url('https://res.cloudinary.com/dxy9t8qur/image/fetch/w_1200,q_auto,f_auto,e_grayscale/https://images.unsplash.com/photo-1481627834876-b7833e8f5570');transition-delay:.16s}
+.hero-bg-veil{position:absolute;inset:0;background:
+  radial-gradient(ellipse at 28% 45%, rgba(255,255,255,.92) 0%, rgba(255,255,255,.55) 45%, rgba(255,255,255,.25) 100%),
+  linear-gradient(180deg, rgba(255,255,255,.85) 0%, rgba(255,255,255,.35) 30%, rgba(255,255,255,.35) 70%, rgba(255,255,255,.9) 100%)}
+.hero-section.bg-on .hero-bg-img{opacity:.16;filter:blur(4px) grayscale(1);transform:scale(1)}
+.hero-section .hero-container,.hero-section .glow-top-left,.hero-section .glow-bottom-right{position:relative;z-index:1}
+.hero-section .glow-top-left,.hero-section .glow-bottom-right,.hero-section .svg-rings{position:absolute;z-index:1}
+@media(hover:none){.hero-bg-hover{display:none}}
+@media(prefers-reduced-motion:reduce){.hero-bg-img{transition:opacity .6s ease;transform:none}}
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
@@ -254,6 +269,14 @@ details p{font-size:14.5px;line-height:1.84;color:#666666;padding-bottom:22px}
 <!-- ══════════════════════ HERO ══════════════════════ -->
 <section class="hero-section">
 
+  <!-- Hover background — librerías (Cloudinary CDN, grises) -->
+  <div class="hero-bg-hover" aria-hidden="true">
+    <div class="hero-bg-img hero-bg-1"></div>
+    <div class="hero-bg-img hero-bg-2"></div>
+    <div class="hero-bg-img hero-bg-3"></div>
+    <div class="hero-bg-veil"></div>
+  </div>
+
   <!-- Ambient glow -->
   <div class="glow-top-left"></div>
   <div class="glow-bottom-right"></div>
@@ -275,17 +298,17 @@ details p{font-size:14.5px;line-height:1.84;color:#666666;padding-bottom:22px}
       <!-- Badge -->
       <div class="hero-badge">
         <span class="badge-dot"></span>
-        <span class="badge-text">1,247+ empresas en México, Latinoamérica y España confían en Victor IA</span>
+        <span class="badge-text">Más de 150 agentes activos · El primer supercerebro IA en LATAM</span>
       </div>
 
       <!-- Title — split lines -->
       <h1 class="hero-headline">
-        <span class="split-line"><span class="split-item">Victor IA —</span></span>
-        <span class="split-line"><span class="split-item accent">Tu Equipo de 155+ Especialistas Trabajando 24/7</span></span>
+        <span class="split-line"><span class="split-item">La IA que</span></span>
+        <span class="split-line"><span class="split-item accent">opera tu empresa.</span></span>
       </h1>
 
       <p class="hero-subtitle">
-        Genera videos profesionales, artículos que rankean #1 en Google, y automatiza tu negocio completo — sin freelancers, sin código, sin esperas.
+        Lo que antes requería una agencia, un equipo de 12 personas y semanas de trabajo — hoy lo entrega Victor en horas. Con más de 150 agentes especializados operando en paralelo, tu empresa produce más, gasta menos y compite diferente.
       </p>
 
       <div class="hero-cta">
@@ -321,7 +344,7 @@ details p{font-size:14.5px;line-height:1.84;color:#666666;padding-bottom:22px}
             </div>
             <div class="agent-info">
               <p>Victor · <span style="color:#1A1A1A;font-weight:500">en proceso</span></p>
-              <p>6 de 200 agentes activos</p>
+              <p>6 de 150 agentes activos</p>
             </div>
           </div>
           <div class="status-dots">
@@ -777,6 +800,46 @@ document.addEventListener('mousemove', e => {
   gsap.to('#hero-copy', { x:x*-14, y:y*-9, duration:1.8, ease:'power2.out', overwrite:'auto' });
   gsap.to('.h-panel',   { x:x*20+0, y:y*14, duration:1.8, ease:'power2.out', overwrite:'auto' });
 });
+
+/* ────────────────────────────────────────────────────────────
+   HERO — HOVER BACKGROUND (librerías Cloudinary, gris + blur)
+──────────────────────────────────────────────────────────── */
+(function initHeroBG(){
+  const hero = document.querySelector('.hero-section');
+  const bgWrap = hero && hero.querySelector('.hero-bg-hover');
+  if(!hero || !bgWrap) return;
+  if(window.matchMedia('(hover: none)').matches) return; // touch: sin efecto
+
+  /* Preload — evita brinco visual en el primer hover */
+  const BG_URLS = [
+    'https://res.cloudinary.com/dxy9t8qur/image/fetch/w_1200,q_auto,f_auto,e_grayscale/https://images.unsplash.com/photo-1507842217343-583bb7270b66',
+    'https://res.cloudinary.com/dxy9t8qur/image/fetch/w_1200,q_auto,f_auto,e_grayscale/https://images.unsplash.com/photo-1521587760476-6c12a4b040da',
+    'https://res.cloudinary.com/dxy9t8qur/image/fetch/w_1200,q_auto,f_auto,e_grayscale/https://images.unsplash.com/photo-1481627834876-b7833e8f5570'
+  ];
+  BG_URLS.forEach(src => { const im = new Image(); im.src = src; });
+
+  /* Hover: CSS transitions hacen el fade — JS solo alterna la clase */
+  hero.addEventListener('mouseenter', () => hero.classList.add('bg-on'));
+  hero.addEventListener('mouseleave', () => hero.classList.remove('bg-on'));
+
+  /* Parallax sutil de las imágenes de fondo (GSAP) */
+  const imgs = bgWrap.querySelectorAll('.hero-bg-img');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduced && window.gsap){
+    hero.addEventListener('mousemove', e => {
+      const r = hero.getBoundingClientRect();
+      const x = ((e.clientX - r.left)/r.width  - .5);
+      const y = ((e.clientY - r.top) /r.height - .5);
+      imgs.forEach((img, i) => {
+        const depth = (i+1) * 6;
+        gsap.to(img, { x: x*-depth, y: y*-depth, duration: 1.6, ease: 'power2.out', overwrite: 'auto' });
+      });
+    });
+    hero.addEventListener('mouseleave', () => {
+      imgs.forEach(img => gsap.to(img, { x: 0, y: 0, duration: 1.2, ease: 'power2.out', overwrite: 'auto' }));
+    });
+  }
+})();
 
 /* ────────────────────────────────────────────────────────────
    SCROLL REVEALS — generic
