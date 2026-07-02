@@ -176,6 +176,34 @@ details p{font-size:14.5px;line-height:1.84;color:#666666;padding-bottom:22px}
   nav.hidden{display:none!important}
   #nav-desktop{display:none!important}
 }
+/* ── Hover FX inline fallback (v=fx3) — sobrevive aunque /styles/ 404 ── */
+@media(hover:hover){
+  .service-card{transition:border-color .4s cubic-bezier(.16,1,.3,1),transform .4s cubic-bezier(.16,1,.3,1)}
+  .service-card:hover{border-color:rgba(204,136,0,.28);transform:translateY(-4px)}
+  .service-link{transition:color .3s,letter-spacing .3s}
+  .service-card:hover .service-link{color:#CC8800;letter-spacing:.04em}
+  .service-icon{transition:background .3s,border-color .3s,transform .4s cubic-bezier(.16,1,.3,1)}
+  .service-card:hover .service-icon{background:rgba(204,136,0,.1);border-color:rgba(204,136,0,.3);transform:translateY(-2px)}
+  .stat-item{transition:transform .35s cubic-bezier(.16,1,.3,1)}
+  .stat-item:hover{transform:translateY(-3px)}
+  .testimonial-card{transition:border-color .4s,transform .4s cubic-bezier(.16,1,.3,1)}
+  .testimonial-card:hover{border-color:rgba(204,136,0,.22);transform:translateY(-3px)}
+  .agent-row{transition:background .3s,transform .3s cubic-bezier(.16,1,.3,1)}
+  .agent-row:hover{background:rgba(204,136,0,.05);transform:translateX(4px)}
+  .how-step{transition:transform .35s cubic-bezier(.16,1,.3,1)}
+  .how-step:hover .how-step-number{color:#CC8800}
+  .how-step-number{transition:color .3s}
+  .philosophy-point{transition:opacity .3s}
+  .philosophy-points:hover .philosophy-point:not(:hover){opacity:.5}
+  .footer-social-link{transition:opacity .3s,color .3s}
+  .footer-social-link:hover{opacity:1;color:#CC8800}
+  .footer-list a{transition:opacity .3s,color .3s}
+  .footer-list a:hover{opacity:1;color:#CC8800}
+  .card-flat{transition:border-color .4s,transform .4s cubic-bezier(.16,1,.3,1)}
+  .card-flat:hover{border-color:rgba(204,136,0,.2);transform:translateY(-3px)}
+  .marquee-item{transition:color .3s}
+  .marquee-track span:not(.marquee-divider):hover,.marquee-item:hover{color:#000000}
+}
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
